@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>財報分析實戰 — 小兔 0415</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    background: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+
+  .page {
+    width: 960px;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #1a3c6e 0%, #2c5282 50%, #3b3f8c 100%);
+    padding: 32px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: #93c5fd;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    color: #fff;
+    font-size: 26px;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .hero h1 span { color: #7dd3fc; }
+  .hero-sub {
+    color: rgba(255,255,255,0.72);
+    font-size: 13px;
+    line-height: 1.65;
+  }
+  .hero-meta { margin-top: 14px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .meta-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.88);
+    font-size: 12px;
+    padding: 5px 13px;
+    border-radius: 20px;
+  }
+
+  /* ── BODY ── */
+  .body {
+    padding: 28px 36px 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .section { display: flex; flex-direction: column; gap: 10px; }
+  .section.full { grid-column: 1 / -1; }
+
+  /* ── SECTION HEADERS ── */
+  .sec-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .bg-navy  { background: linear-gradient(90deg, #1a3c6e, #2557a7); }
+  .bg-red   { background: linear-gradient(90deg, #7b1a1a, #b83232); }
+  .bg-slate { background: linear-gradient(90deg, #374151, #4b5563); }
+
+  /* ── CARDS ── */
+  .card {
+    background: #f8fafd;
+    border-radius: 10px;
+    padding: 12px 14px;
+    border-left: 4px solid #1a3c6e;
+  }
+  .card.red   { border-left-color: #b83232; background: #fff5f5; }
+  .card.slate { border-left-color: #4b5563; background: #f8f9fa; }
+  .card.warn  { border-left-color: #d97706; background: #fffbeb; }
+
+  .card-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #1a3c6e;
+    margin-bottom: 5px;
+  }
+  .card.red   .card-title { color: #b83232; }
+  .card.slate .card-title { color: #374151; }
+  .card.warn  .card-title { color: #b45309; }
+
+  .card-body {
+    font-size: 11.5px;
+    line-height: 1.7;
+    color: #333;
+  }
+  .card-body strong { color: #1a3c6e; }
+  .card.red   .card-body strong { color: #b83232; }
+  .card.warn  .card-body strong { color: #b45309; }
+
+  /* ── FORMULA / METRIC STRIP ── */
+  .metric-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1.5px solid #c5d8f0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .metric {
+    text-align: center;
+    padding: 12px 8px;
+    border-right: 1px solid #dde8f5;
+  }
+  .metric:last-child { border-right: none; }
+  .metric .big {
+    font-size: 20px;
+    font-weight: 900;
+    display: block;
+    line-height: 1.1;
+    color: #1a3c6e;
+  }
+  .metric .big.red   { color: #b83232; }
+  .metric .big.green { color: #1a6b5e; }
+  .metric .lbl {
+    font-size: 11px;
+    color: #555;
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+  .metric-bg-l { background: #eef8f4; }
+  .metric-bg-m { background: #eef4fb; }
+  .metric-bg-r { background: #fff5f5; }
+
+  /* ── FORMULA BAR ── */
+  .formula-bar {
+    background: linear-gradient(135deg, #eef4fb, #e0eefa);
+    border: 1.5px solid #c5d8f0;
+    border-radius: 10px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .fml-item { text-align: center; }
+  .fml-num  { font-size: 14px; font-weight: 900; color: #1a3c6e; }
+  .fml-lbl  { font-size: 10px; color: #666; margin-top: 2px; }
+  .fml-op   { font-size: 20px; font-weight: 900; color: #b83232; }
+
+  /* ── TIMELINE ── */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .tl-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 8px 0;
+    border-bottom: 1px dashed #e0e8f0;
+  }
+  .tl-item:last-child { border-bottom: none; }
+  .tl-dot {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .dot-blue  { background: #eef4fb; }
+  .dot-red   { background: #fff5f5; }
+  .dot-green { background: #eef8f4; }
+  .tl-text { font-size: 11.5px; line-height: 1.65; color: #333; }
+  .tl-text strong { font-size: 12px; color: #1a3c6e; display: block; margin-bottom: 2px; }
+
+  /* ── BOTTOM 3-COL ── */
+  .three-col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .mini-card {
+    border-radius: 10px;
+    padding: 13px 13px 11px;
+    border-top: 3px solid #4b5563;
+  }
+  .mini-card.navy-top  { border-top-color: #1a3c6e; background: #f4f8fd; }
+  .mini-card.red-top   { border-top-color: #b83232; background: #fff8f8; }
+  .mini-card.amber-top { border-top-color: #d97706; background: #fffdf0; }
+
+  .mini-title {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .navy-top  .mini-title { color: #1a3c6e; }
+  .red-top   .mini-title { color: #b83232; }
+  .amber-top .mini-title { color: #b45309; }
+
+  .mini-body {
+    font-size: 11px;
+    line-height: 1.7;
+    color: #3a3a3a;
+    margin-bottom: 8px;
+  }
+
+  .tag-row { display: flex; flex-wrap: wrap; gap: 5px; }
+  .tag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    border: 1.2px solid;
+  }
+  .tag-navy  { color: #1a3c6e; border-color: #1a3c6e; background: #eef4fb; }
+  .tag-red   { color: #b83232; border-color: #b83232; background: #fff5f5; }
+  .tag-amber { color: #b45309; border-color: #d97706; background: #fffbeb; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: #f8fafd;
+    border-top: 1.5px solid #e8edf3;
+    padding: 11px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-l { font-size: 11px; color: #888; }
+  .footer-r { font-size: 11px; color: #1a3c6e; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">財報分析實戰 ✦ 2025.04.15</div>
+    <h1>讀懂財報的<span>體質訊號</span>：從個體報表到存活倒數</h1>
+    <p class="hero-sub">
+      一張財報背後藏著公司的故事——是在茁壯，還是在撐？<br>
+      本堂課用真實公司案例，教你看穿數字背後的生存邏輯。
+    </p>
+    <div class="hero-meta">
+      <div class="meta-chip">📄 個體 vs 合併財報解析</div>
+      <div class="meta-chip">📦 存貨操作的財報訊號</div>
+      <div class="meta-chip">💸 現金流量表判讀</div>
+      <div class="meta-chip">🤝 關係人交易的資金真相</div>
+      <div class="meta-chip">⏳ 公司存活時間估算</div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- LEFT: 個體 vs 合併 + 存貨 -->
+    <div class="section">
+      <div class="sec-header bg-navy">📄 財報閱讀順序：先看個體，再看合併</div>
+
+      <div class="card">
+        <div class="card-title">🔍 為什麼先看個體財報？</div>
+        <div class="card-body">
+          合併財報納入所有子公司，數字看起來可能比較好看，但母公司的真實體質會被稀釋。
+          個體財報就是母公司自己的帳，<strong>資產結構、現金消耗、關係人往來</strong>全部一覽無遺。
+          本案例：個體資產 6 億中有 5 億是「長期股權投資」→ 本質是控股公司。
+        </div>
+      </div>
+
+      <div class="card warn">
+        <div class="card-title">⚠️ 合併收入成長的陷阱</div>
+        <div class="card-body">
+          本案例合併收入從 1.14 億暴增到 3.19 億，表面看起來轉機出現——
+          但追根究柢是因為<strong>把原本就存在的印尼子公司合併進來</strong>，子公司營收直接計入。
+          這不是業務成長，是「把左手的錢算進右手」。
+        </div>
+      </div>
+
+      <div class="sec-header bg-red" style="margin-top:4px;">📦 存貨操作：最能暴露財報真相的科目</div>
+
+      <div class="card red">
+        <div class="card-title">🚨 延遲認列的教科書案例</div>
+        <div class="card-body">
+          2024 年：帳上 700 萬存貨，<strong>完全沒有提列跌價損失</strong>。<br>
+          2025 年：增資進來後，立刻將 800 萬存貨<strong>一次打掉 100%</strong>。<br><br>
+          這個軌跡說明：2024 年早就知道存貨有問題，但財務困難時先壓著不認，
+          等到有錢才清帳。2024 年的財報因此被「美化」了。
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: 現金流 + 存活估算 -->
+    <div class="section">
+      <div class="sec-header bg-navy">💸 現金流量表：公司生命跡象的晴雨表</div>
+
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot dot-blue">🏭</div>
+          <div class="tl-text">
+            <strong>營業活動現金流持續為負</strong>
+            做生意本身無法產生現金，代表公司的核心業務在「燒錢」而非「賺錢」。
+            本案例 2024 年營業活動現金流出接近 1 億元。
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot dot-red">📉</div>
+          <div class="tl-text">
+            <strong>完全靠籌資活動輸血</strong>
+            增資、向關係人借款才是公司的「收入來源」。這不是正常經營，
+            是老闆持續把錢砸進去讓員工有薪水領。
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot dot-green">✅</div>
+          <div class="tl-text">
+            <strong>看個體現金流比合併更直接</strong>
+            合併現金流包含子公司的金流進出，反而模糊母公司的燒錢速度。
+            個體現金流才是評估母公司存活能力的關鍵數字。
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-header bg-slate" style="margin-top:4px;">⏳ 存活時間估算：最簡單的財報工具</div>
+
+      <div class="formula-bar">
+        <div class="fml-item">
+          <div class="fml-num">現金餘額</div>
+          <div class="fml-lbl">年底帳上 3,000 萬</div>
+        </div>
+        <div class="fml-op">÷</div>
+        <div class="fml-item">
+          <div class="fml-num">月燒錢速度</div>
+          <div class="fml-lbl">人事 + 管銷 ≈ 500 萬 / 月</div>
+        </div>
+        <div class="fml-op">=</div>
+        <div class="fml-item">
+          <div class="fml-num" style="color:#b83232;">約 6 個月</div>
+          <div class="fml-lbl">不含任何收入的情境下</div>
+        </div>
+      </div>
+
+      <div class="metric-strip">
+        <div class="metric metric-bg-l">
+          <span class="big green">3,000萬</span>
+          <div class="lbl">帳上現金</div>
+        </div>
+        <div class="metric metric-bg-m">
+          <span class="big">500萬/月</span>
+          <div class="lbl">人事費 4,000萬<br>+勞健保年合計</div>
+        </div>
+        <div class="metric metric-bg-r">
+          <span class="big red">≈6個月</span>
+          <div class="lbl">倒數計時<br>到今年 6 月</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BOTTOM FULL: 關係人 + 查帳意見 + 核心結論 -->
+    <div class="section full">
+      <div class="sec-header bg-slate">🔗 關係人交易 × 查帳意見 × 核心結論</div>
+      <div class="three-col">
+
+        <div class="mini-card navy-top">
+          <div class="mini-title">🤝 關係人交易：誰在救這家公司？</div>
+          <div class="mini-body">
+            財報附註揭露大額應付關係人款項：<br>
+            2023 年高達 4 億多（超過原始股本），2024 年隨增資進來後降至 2.5 億。<br>
+            最大「債主」是一家開曼群島公司（TECH NOVATION），
+            雖然帳上是子公司，實際扮演的是「資金輸送母公司」的角色——
+            <strong>左手借右手，讓公司不倒。</strong>
+          </div>
+          <div class="tag-row">
+            <span class="tag tag-navy">關係人應付款</span>
+            <span class="tag tag-navy">開曼子公司</span>
+            <span class="tag tag-navy">資金輸血</span>
+          </div>
+        </div>
+
+        <div class="mini-card red-top">
+          <div class="mini-title">📋 查帳意見：事務所說了什麼？</div>
+          <div class="mini-body">
+            核心查帳意見集中在子公司的<strong>存貨跌價估計</strong>與<strong>設備減損估計</strong>。
+            這兩項都是「可高可低」的主觀判斷——事務所能要求提列，但力道強弱取決於事務所規模與談判籌碼。
+            本案例使用小型事務所，對於帳上應認未認的損失，
+            <strong>難以強硬要求提列</strong>，最終等到公司有錢才清帳。
+          </div>
+          <div class="tag-row">
+            <span class="tag tag-red">減損估計</span>
+            <span class="tag tag-red">事務所規模</span>
+            <span class="tag tag-red">查核力道</span>
+          </div>
+        </div>
+
+        <div class="mini-card amber-top">
+          <div class="mini-title">🎯 核心結論：這家公司還能撐多久？</div>
+          <div class="mini-body">
+            財報沒有亮點，營運靠老闆持續注資維持。
+            以個體現金流計算，<strong>每月燒 500 萬，帳上 3,000 萬 ≈ 剩 6 個月</strong>。<br><br>
+            唯一的「救命符」是再次私募增資成功——過去已累計私募近 3 億元。
+            如果 6 月前沒有新資金進來，公司將面臨流動性危機。
+            <strong>生命總會找到出路，但要靠的是資金，不是營運。</strong>
+          </div>
+          <div class="tag-row">
+            <span class="tag tag-amber">私募增資</span>
+            <span class="tag tag-amber">倒數計時</span>
+            <span class="tag tag-amber">流動性危機</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /body -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-l">學生：小兔　｜　授課日期：2025.04.15　｜　AI 輔助整理，僅供學習用途</div>
+    <div class="footer-r">存活時間 = 現金餘額 ÷ 月燒錢速度　｜　個體財報 > 合併財報，才看得到真實體質</div>
+  </div>
+
+</div>
+</body>
+</html>
