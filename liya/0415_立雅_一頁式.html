@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 賦能財務人 — 立雅 0415</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; background: #f0f4f8; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 24px 16px; }
+  .page { width: 960px; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
+  .hero { background: linear-gradient(135deg, #1a3c6e 0%, #1a6b5e 60%, #2d8a6a 100%); padding: 32px 40px 28px; position: relative; overflow: hidden; }
+  .hero::after { content: ''; position: absolute; right: -40px; top: -40px; width: 240px; height: 240px; border-radius: 50%; background: rgba(255,255,255,0.06); }
+  .hero-tag { display: inline-block; background: rgba(255,255,255,0.18); color: #a8ffd8; font-size: 11px; font-weight: 700; letter-spacing: 2px; padding: 4px 12px; border-radius: 20px; margin-bottom: 12px; text-transform: uppercase; }
+  .hero h1 { color: #fff; font-size: 28px; font-weight: 900; line-height: 1.3; margin-bottom: 10px; position: relative; }
+  .hero h1 span { color: #6affc4; }
+  .hero-sub { color: rgba(255,255,255,0.75); font-size: 13px; line-height: 1.6; }
+  .hero-meta { margin-top: 14px; display: flex; gap: 20px; }
+  .meta-chip { display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.9); font-size: 12px; padding: 5px 12px; border-radius: 20px; }
+  .body { padding: 28px 36px 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .section { display: flex; flex-direction: column; gap: 10px; }
+  .section.full { grid-column: 1 / -1; }
+  .sec-header { display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-radius: 10px; font-size: 14px; font-weight: 700; color: #fff; }
+  .sec-header .icon { font-size: 18px; }
+  .bg-blue  { background: linear-gradient(90deg, #1a3c6e, #2557a7); }
+  .bg-teal  { background: linear-gradient(90deg, #1a6b5e, #27967e); }
+  .bg-amber { background: linear-gradient(90deg, #a05c00, #d48000); }
+  .cards { display: flex; flex-direction: column; gap: 8px; }
+  .card { background: #f8fafd; border-radius: 10px; padding: 12px 14px; border-left: 4px solid #1a3c6e; }
+  .card.teal  { border-left-color: #1a6b5e; background: #f0faf6; }
+  .card.amber { border-left-color: #d48000; background: #fffbf0; }
+  .card-title { font-size: 13px; font-weight: 700; color: #1a3c6e; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+  .card.teal  .card-title { color: #1a6b5e; }
+  .card.amber .card-title { color: #a05c00; }
+  .card-body { font-size: 12px; line-height: 1.65; color: #3a3a3a; }
+  .formula { display: flex; align-items: center; justify-content: center; gap: 12px; background: linear-gradient(135deg, #eef4fb, #e0eefa); border-radius: 10px; padding: 14px 20px; margin: 4px 0; border: 1.5px solid #c5d8f0; }
+  .formula-item { text-align: center; }
+  .formula-num { font-size: 22px; font-weight: 900; color: #1a3c6e; line-height: 1; }
+  .formula-label { font-size: 11px; color: #555; margin-top: 2px; }
+  .formula-op { font-size: 24px; font-weight: 900; color: #1a6b5e; }
+  .formula-result .formula-num { color: #c0392b; font-size: 26px; }
+  .insight-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 4px; }
+  .insight-chip { background: #fff; border: 1.5px solid #e0e0e0; border-radius: 10px; padding: 10px 12px; text-align: center; }
+  .insight-chip .big { font-size: 20px; font-weight: 900; display: block; line-height: 1.1; }
+  .insight-chip .lbl { font-size: 10.5px; color: #555; margin-top: 3px; line-height: 1.4; }
+  .ic-blue  .big { color: #1a3c6e; }
+  .ic-green .big { color: #1a6b5e; }
+  .ic-red   .big { color: #c0392b; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .tag { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; border: 1.5px solid; }
+  .tag-amber { color: #a05c00; border-color: #d48000; background: #fff8e6; }
+  .footer { background: #f8fafd; border-top: 1.5px solid #e8edf3; padding: 12px 36px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-left { font-size: 11px; color: #888; }
+  .footer-right { font-size: 11px; color: #1a6b5e; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="hero">
+    <div class="hero-tag">財務思維 × AI 應用 ✦ 2025.04.15</div>
+    <h1>AI 賦能財務人：<span>從損益兩平到數位轉型</span></h1>
+    <p class="hero-sub">會計不只是 Key-in，而是用數字說故事、用 AI 放大判斷力。<br>本堂課從真實工具出發，串連財務核心邏輯與時代趨勢。</p>
+    <div class="hero-meta">
+      <div class="meta-chip">📊 損益兩平實戰計算</div>
+      <div class="meta-chip">🌐 AI 工具零代碼應用</div>
+      <div class="meta-chip">🌏 國際稅法基礎概念</div>
+      <div class="meta-chip">🤖 會計業的 AI 轉型</div>
+    </div>
+  </div>
+  <div class="body">
+    <div class="section">
+      <div class="sec-header bg-blue"><span class="icon">📐</span>損益兩平思維：定價決策的核心武器</div>
+      <div class="formula">
+        <div class="formula-item"><div class="formula-num">固定成本</div><div class="formula-label">每月 900 萬為例</div></div>
+        <div class="formula-op">÷</div>
+        <div class="formula-item"><div class="formula-num">毛利率</div><div class="formula-label">20% / 25% / 15%</div></div>
+        <div class="formula-op">=</div>
+        <div class="formula-item formula-result"><div class="formula-num">BEP 營收</div><div class="formula-label">需要做到這個數字才不賠</div></div>
+      </div>
+      <div class="insight-row">
+        <div class="insight-chip ic-green"><span class="big">3,600萬</span><div class="lbl">毛利 25%<br>最省力</div></div>
+        <div class="insight-chip ic-blue"><span class="big">4,500萬</span><div class="lbl">毛利 20%<br>現況基準</div></div>
+        <div class="insight-chip ic-red"><span class="big">6,000萬</span><div class="lbl">毛利 15%<br>讓利的代價</div></div>
+      </div>
+      <div class="card"><div class="card-title">⚡ 毛利率每差 1%，影響有多大？</div><div class="card-body">毛利率從 20% 降到 15%，損益兩平點暴增 <strong>1,500 萬</strong>。業務說「讓一點價」，背後是要多跑整整 1,500 萬的業績來補回來。<strong>降價前，先算清楚這個代價。</strong></div></div>
+      <div class="card"><div class="card-title">🛠 應用工具：儀表板視覺化</div><div class="card-body">用 Excel / Claude 建立互動儀表板，讓老闆、業務直接「拉滑桿」看不同毛利率下的損益兩平點，數字不再是財務部的專利，而是整個團隊的共同語言。</div></div>
+    </div>
+    <div class="section">
+      <div class="sec-header bg-teal"><span class="icon">🌐</span>AI 網頁實戰：零代碼打造個人品牌</div>
+      <div class="cards">
+        <div class="card teal"><div class="card-title">🕐 1 小時完成個人品牌官網</div><div class="card-body">只需提供 Amazing Talker 介紹、Threads 精選貼文、YouTube 頻道連結，Claude 自動整合內容、撰寫文案、生成網站，並手把手教你上傳至 GitHub Pages——<strong>永久免費託管，更新不用花錢。</strong></div></div>
+        <div class="card teal"><div class="card-title">🤖 同事的 8 個 AI 助手啟發</div><div class="card-body">投資報告自動化 → 健康記錄分析 → 行程秘書 → 策略辯論夥伴。每個助手針對一個場景深度客製，月費 $100 美元，等於擁有 8 位專屬幕僚。<strong>Cowork 是入門版起點，從這裡開始。</strong></div></div>
+        <div class="card teal"><div class="card-title">💡 財務人的 AI 切入點</div><div class="card-body">掃描憑證 → 自動辨識金額、發票號碼、稅額，輸出 Google Sheet；建立損益儀表板；AI 整理稅法新知並摘要重點。<strong>從最熟悉的會計場景開始，效益最直接。</strong></div></div>
+      </div>
+    </div>
+    <div class="section full">
+      <div class="sec-header bg-amber"><span class="icon">🌏</span>產業大趨勢：台灣發票制度 × 國際稅法 × 會計業轉型</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
+        <div class="card amber"><div class="card-title">🧾 手開發票：最後的防線</div><div class="card-body">電子發票已可自動比對（鏡像），但 <strong>B2B 手開統一發票</strong>仍大量存在。OCR 有約 3% 錯誤率，每 100 張還需人工複查。手開發票存在一天，基層會計就有其不可替代的位置。<div class="tag-list"><span class="tag tag-amber">電子發票</span><span class="tag tag-amber">鏡像比對</span><span class="tag tag-amber">3% 誤差率</span></div></div></div>
+        <div class="card amber"><div class="card-title">🏦 移轉定價：Apple 的教案</div><div class="card-body">把全球利潤「轉」到低稅率的愛爾蘭，讓其他國家的費用虛高、稅基縮小。歐盟認定違規、補繳鉅額稅款。現在 OECD <strong>全球最低稅率 15%</strong> 規定，讓這條路越走越窄。<div class="tag-list"><span class="tag tag-amber">移轉定價</span><span class="tag tag-amber">OECD 15%</span><span class="tag tag-amber">租稅實質</span></div></div></div>
+        <div class="card amber"><div class="card-title">🚀 從「輸入」到「管理」的轉型</div><div class="card-body">重複性 Key-in 將被 AI 取代，但 <strong>看懂數字、制定策略、跨部門溝通</strong>是 AI 無法完全替代的。台積電實質稅率能壓到 19%，靠的是深度理解稅法的財務人，而非機器。<div class="tag-list"><span class="tag tag-amber">財務策略</span><span class="tag tag-amber">稅務規劃</span><span class="tag tag-amber">管理角色</span></div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer-left">學生：立雅　｜　授課日期：2025.04.15　｜　由 AI 輔助整理，僅供學習用途</div>
+    <div class="footer-right">損益兩平點 = 固定成本 ÷ 毛利率　｜　毛利率每 ±1%，BEP 差距約 ±900 萬</div>
+  </div>
+</div>
+</body>
+</html>
