@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>實體通路業財報解析 — Megan 0413</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; background: #f0f4f8; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 24px 16px; }
+  .page { width: 960px; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
+  .hero { background: linear-gradient(135deg, #1a3c6e 0%, #2d5fa0 55%, #1a5c8e 100%); padding: 32px 40px 28px; position: relative; overflow: hidden; }
+  .hero::after { content: ''; position: absolute; right: -40px; top: -40px; width: 240px; height: 240px; border-radius: 50%; background: rgba(255,255,255,0.06); }
+  .hero-tag { display: inline-block; background: rgba(255,255,255,0.18); color: #a8d8ff; font-size: 11px; font-weight: 700; letter-spacing: 2px; padding: 4px 12px; border-radius: 20px; margin-bottom: 12px; text-transform: uppercase; }
+  .hero h1 { color: #fff; font-size: 28px; font-weight: 900; line-height: 1.3; margin-bottom: 10px; position: relative; }
+  .hero h1 span { color: #7dd3fc; }
+  .hero-sub { color: rgba(255,255,255,0.75); font-size: 13px; line-height: 1.6; }
+  .hero-meta { margin-top: 14px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .meta-chip { display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.9); font-size: 12px; padding: 5px 12px; border-radius: 20px; }
+  .body { padding: 28px 36px 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .section { display: flex; flex-direction: column; gap: 10px; }
+  .section.full { grid-column: 1 / -1; }
+  .sec-header { display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-radius: 10px; font-size: 14px; font-weight: 700; color: #fff; }
+  .sec-header .icon { font-size: 18px; }
+  .bg-navy  { background: linear-gradient(90deg, #1a3c6e, #2557a7); }
+  .bg-teal  { background: linear-gradient(90deg, #0f6b5e, #1a9e80); }
+  .bg-amber { background: linear-gradient(90deg, #92400e, #d97706); }
+  .card { background: #f8fafd; border-radius: 10px; padding: 12px 14px; border-left: 4px solid #1a3c6e; }
+  .card.teal  { border-left-color: #0f6b5e; background: #f0faf7; }
+  .card.amber { border-left-color: #d97706; background: #fffbf0; }
+  .card.red   { border-left-color: #b91c1c; background: #fff5f5; }
+  .card-title { font-size: 13px; font-weight: 700; color: #1a3c6e; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+  .card.teal  .card-title { color: #0f6b5e; }
+  .card.amber .card-title { color: #92400e; }
+  .card.red   .card-title { color: #b91c1c; }
+  .card-body { font-size: 12px; line-height: 1.65; color: #3a3a3a; }
+  .flow-strip { background: linear-gradient(135deg, #fef3c7, #fef9e7); border: 1.5px solid #fcd34d; border-radius: 10px; padding: 12px 16px; margin: 4px 0; }
+  .flow-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; font-size: 12px; border-bottom: 1px dashed #fcd34d; }
+  .flow-row:last-child { border-bottom: none; padding-top: 8px; font-weight: 700; }
+  .flow-row .label { color: #78350f; }
+  .flow-row .value { font-weight: 700; }
+  .flow-row .value.pos { color: #15803d; }
+  .flow-row .value.neg { color: #b91c1c; }
+  .flow-row .value.highlight { color: #1e40af; font-size: 14px; }
+  .onetime-box { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: center; background: #f8fafd; border-radius: 10px; padding: 12px; margin: 4px 0; border: 1.5px solid #dbeafe; }
+  .onetime-col { text-align: center; }
+  .onetime-col .year { font-size: 10px; color: #888; font-weight: 700; }
+  .onetime-col .num { font-size: 20px; font-weight: 900; line-height: 1.2; }
+  .onetime-col .tag { font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-top: 3px; display: inline-block; }
+  .tag-red { background: #fee2e2; color: #b91c1c; }
+  .tag-green { background: #dcfce7; color: #15803d; }
+  .tag-blue { background: #dbeafe; color: #1e40af; }
+  .arrow-col { font-size: 22px; color: #94a3b8; font-weight: 900; text-align: center; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .tag { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; border: 1.5px solid; }
+  .tag-amber { color: #92400e; border-color: #d97706; background: #fff8e6; }
+  .insight-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .insight-chip { background: #fff; border: 1.5px solid #e0e0e0; border-radius: 10px; padding: 10px 12px; text-align: center; }
+  .insight-chip .big { font-size: 20px; font-weight: 900; display: block; line-height: 1.1; }
+  .insight-chip .lbl { font-size: 10.5px; color: #555; margin-top: 3px; line-height: 1.4; }
+  .ic-blue .big  { color: #1a3c6e; }
+  .ic-green .big { color: #0f6b5e; }
+  .ic-amber .big { color: #92400e; }
+  .footer { background: #f8fafd; border-top: 1.5px solid #e8edf3; padding: 12px 36px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-left  { font-size: 11px; color: #888; }
+  .footer-right { font-size: 11px; color: #1a3c6e; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="hero">
+    <div class="hero-tag">實體通路業財報 ✦ 2025.04.13</div>
+    <h1>全家 vs 7-11：<span>看懂現金流量表背後的秘密</span></h1>
+    <p class="hero-sub">為什麼賺 22 億、現金卻進來 104 億？折舊怎麼讓淨利「變小」但現金「變大」？<br>一次性損益又如何讓你誤判公司真實表現——財報說故事的核心技巧全在這裡。</p>
+    <div class="hero-meta">
+      <div class="meta-chip">🏪 全家 vs 統一超商</div>
+      <div class="meta-chip">💰 現金流量表解析</div>
+      <div class="meta-chip">📊 一次性損益剔除技巧</div>
+      <div class="meta-chip">🔄 折舊的真實意涵</div>
+    </div>
+  </div>
+  <div class="body">
+    <div class="section">
+      <div class="sec-header bg-navy"><span class="icon">💡</span>現金流量表的「陷阱」：5 倍不是真的</div>
+      <div class="flow-strip">
+        <div class="flow-row"><span class="label">稅前淨利</span><span class="value pos">+22 億</span></div>
+        <div class="flow-row"><span class="label">➕ 加回折舊（有形固定資產）</span><span class="value pos">+29 億</span></div>
+        <div class="flow-row"><span class="label">➕ 加回使用權資產折舊（租金）</span><span class="value pos">+65 億</span></div>
+        <div class="flow-row" style="background:rgba(255,200,0,0.1); border-radius:6px; padding:6px 4px; margin-top:2px;">
+          <span class="label" style="color:#b91c1c; font-weight:700;">⚠️ 帳面營業現金流（虛胖）</span>
+          <span class="value" style="color:#b91c1c; font-size:15px;">≈ 104 億</span>
+        </div>
+        <div class="flow-row"><span class="label">➖ 籌資活動：償還租約（抵銷）</span><span class="value neg">-66 億</span></div>
+        <div class="flow-row" style="background: #dcfce7; border-radius:6px; padding:6px 4px;">
+          <span class="label" style="color:#15803d;">✅ 真實營業現金流（合理估算）</span>
+          <span class="value highlight">≈ 51 億</span>
+        </div>
+      </div>
+      <div class="card red">
+        <div class="card-title">🔍 為什麼會差這麼多？</div>
+        <div class="card-body">IFRS 16 規定：租賃店面的租金要拆成「使用權資產折舊」（加回營業現金流）和「還租約本金」（列在籌資活動扣除）。<strong>一正一負剛好相抵</strong>，所以看起來的 104 億其實是虛報，真實值是 22億＋29億＝<strong>51 億</strong>，大約是淨利的 2 倍，這才是合理的水位。</div>
+      </div>
+      <div class="card">
+        <div class="card-title">📌 記住這個口訣</div>
+        <div class="card-body">有使用權資產的公司看現金流量表，<strong>要把營業活動加回的租金折舊，對應籌資活動扣掉的租約還款，兩個一起看才算數。</strong><br>現金流 ≈ 淨利的 2 倍 → 正常；5 倍 → 先找原因。</div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="sec-header bg-teal"><span class="icon">📖</span>財報說故事：剔除一次性，才看得到真相</div>
+      <div class="card teal">
+        <div class="card-title">❓ 全家 113 vs 114 年，真的衰退了嗎？</div>
+        <div class="card-body">表面數字讓人誤判，但剔除一次性後，其實是<strong>實質成長</strong>。</div>
+      </div>
+      <div class="onetime-box">
+        <div class="onetime-col">
+          <div class="year">113 年（帳面）</div>
+          <div class="num" style="color:#b91c1c;">48 億</div>
+          <span class="tag tag-red">含一次性收益</span>
+          <div style="font-size:10px; color:#888; margin-top:2px;">（中國投資處分利得）</div>
+        </div>
+        <div class="arrow-col">→</div>
+        <div class="onetime-col">
+          <div class="year">113 年（常態）</div>
+          <div class="num" style="color:#1e40af;">20 億</div>
+          <span class="tag tag-blue">真實本業</span>
+          <div style="font-size:10px; color:#888; margin-top:2px;">（剔除一次性後）</div>
+        </div>
+      </div>
+      <div class="onetime-box" style="background: #f0fdf4; border-color: #bbf7d0;">
+        <div class="onetime-col">
+          <div class="year">113 常態</div>
+          <div class="num" style="color:#1e40af;">20 億</div>
+          <span class="tag tag-blue">基準</span>
+        </div>
+        <div class="arrow-col" style="color:#15803d;">↗</div>
+        <div class="onetime-col">
+          <div class="year">114 年</div>
+          <div class="num" style="color:#15803d;">22 億</div>
+          <span class="tag tag-green">實質成長 ✅</span>
+          <div style="font-size:10px; color:#888; margin-top:2px;">+10% 成長</div>
+        </div>
+      </div>
+      <div class="card teal">
+        <div class="card-title">💬 財報的說故事技巧</div>
+        <div class="card-body">當你看到兩年淨利差很大，<strong>第一步：問有沒有一次性損益。</strong>一次性包括：資產處分、投資收益、訴訟和解金、補貼……把這些剔除後，才能真正比較本業有沒有進步。<strong>會計師報告也用這個技巧——所以別被帳面數字嚇到。</strong></div>
+      </div>
+      <div class="insight-row">
+        <div class="insight-chip ic-blue"><span class="big">3,500億</span><div class="lbl">統一超商<br>市值</div></div>
+        <div class="insight-chip ic-green"><span class="big">1,100億</span><div class="lbl">全家<br>市值</div></div>
+        <div class="insight-chip ic-amber"><span class="big">37%</span><div class="lbl">實體通路<br>推銷費用占比</div></div>
+      </div>
+    </div>
+    <div class="section full">
+      <div class="sec-header bg-amber"><span class="icon">🏗</span>實體通路的三大護城河：物流 × 支付 × 生態圈</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
+        <div class="card amber">
+          <div class="card-title">🚚 物流：自己養才划算</div>
+          <div class="card-body">為什麼 7-11 要養黑貓宅急便？因為物流是實體通路的動脈——<strong>自有物流才能掌控補貨速度、節省外部手續費，還能幫別人賺服務費。</strong>庫帕（Coupang）進台灣，第一步也是蓋物流倉，因為沒物流就沒競爭力。<div class="tag-list"><span class="tag tag-amber">自有物流</span><span class="tag tag-amber">規模經濟</span><span class="tag tag-amber">補貨速度</span></div></div>
+        </div>
+        <div class="card amber">
+          <div class="card-title">💳 支付：手續費不給別人賺</div>
+          <div class="card-body">OpenPoint（7-11）、全支付（全聯）——每一個大通路都想自建支付。為什麼？<strong>每筆刷卡手續費 1～2%，一年幾百億的營收累積下來，自己收比給銀行賺划算。</strong>全聯的全支付現在每年仍虧 6 億，但這是「買未來」的佈局投資。<div class="tag-list"><span class="tag tag-amber">第三方支付</span><span class="tag tag-amber">手續費內化</span><span class="tag tag-amber">長期佈局</span></div></div>
+        </div>
+        <div class="card amber">
+          <div class="card-title">📱 App：實體通路的電商化</div>
+          <div class="card-body">App 讓便利商店跨入電商。<strong>存咖啡點數、跨店取貨、App 訂購——實體門店搭配 App，讓消費可以在任何地方發生，而不是非到店不可。</strong>推銷費用高達營收 37% 的原因：點數回饋、促銷折扣都算在這裡，這是搶市占的必要成本。<div class="tag-list"><span class="tag tag-amber">O2O</span><span class="tag tag-amber">顧客忠誠</span><span class="tag tag-amber">電商延伸</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer-left">學生：Megan　｜　授課日期：2025.04.13　｜　由 AI 輔助整理，僅供學習用途</div>
+    <div class="footer-right">真實現金流 ≈ 淨利 2 倍（非 5 倍）　｜　先剔除一次性，再比較年度獲利</div>
+  </div>
+</div>
+</body>
+</html>
