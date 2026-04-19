@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEN5194YPE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SEN5194YPE');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>皮克明的商業密碼 — 小魚 0418</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    background: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+
+  .page {
+    width: 960px;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #166534 0%, #15803d 50%, #16a34a 100%);
+    padding: 32px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    right: 100px; bottom: -30px;
+    width: 150px; height: 150px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    color: #bbf7d0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    color: #fff;
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .hero h1 span { color: #86efac; }
+  .hero-sub {
+    color: rgba(255,255,255,0.78);
+    font-size: 13px;
+    line-height: 1.65;
+  }
+  .hero-meta {
+    margin-top: 14px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .meta-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.14);
+    color: rgba(255,255,255,0.92);
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+
+  .body {
+    padding: 28px 36px 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .section { display: flex; flex-direction: column; gap: 10px; }
+  .section.full { grid-column: 1 / -1; }
+
+  .sec-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .sec-header .icon { font-size: 18px; }
+
+  .bg-green  { background: linear-gradient(90deg, #166534, #15803d); }
+  .bg-blue   { background: linear-gradient(90deg, #1e3a8a, #2563eb); }
+  .bg-amber  { background: linear-gradient(90deg, #92400e, #d97706); }
+  .bg-purple { background: linear-gradient(90deg, #581c87, #7c3aed); }
+
+  .card {
+    background: #f8fafd;
+    border-radius: 10px;
+    padding: 12px 14px;
+    border-left: 4px solid #166534;
+  }
+  .card.blue   { border-left-color: #2563eb; background: #eff6ff; }
+  .card.amber  { border-left-color: #d97706; background: #fffbf0; }
+  .card.red    { border-left-color: #dc2626; background: #fff5f5; }
+  .card.purple { border-left-color: #7c3aed; background: #f5f3ff; }
+
+  .card-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #166534;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .card.blue   .card-title { color: #1e3a8a; }
+  .card.amber  .card-title { color: #92400e; }
+  .card.red    .card-title { color: #dc2626; }
+  .card.purple .card-title { color: #581c87; }
+
+  .card-body { font-size: 12px; line-height: 1.65; color: #3a3a3a; }
+
+  .gym-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 4px 0;
+  }
+  .gym-box {
+    border-radius: 10px;
+    padding: 12px 14px;
+    text-align: center;
+  }
+  .gym-box.red-box { background: #fff5f5; border: 1.5px solid #fca5a5; }
+  .gym-box.green-box { background: #f0fdf4; border: 1.5px solid #86efac; }
+  .gym-box .gym-name { font-size: 13px; font-weight: 900; margin-bottom: 4px; }
+  .gym-box.red-box .gym-name { color: #dc2626; }
+  .gym-box.green-box .gym-name { color: #15803d; }
+  .gym-box .gym-key { font-size: 11px; color: #555; line-height: 1.5; }
+  .gym-box .gym-tag { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; display: inline-block; margin-bottom: 4px; }
+  .tag-red-light { background: #fee2e2; color: #dc2626; }
+  .tag-green-light { background: #dcfce7; color: #166534; }
+
+  .tax-flow {
+    background: linear-gradient(135deg, #fef3c7, #fffbeb);
+    border: 1.5px solid #fcd34d;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin: 4px 0;
+  }
+  .tax-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    font-size: 12px;
+    border-bottom: 1px dashed #fcd34d;
+  }
+  .tax-row:last-child { border-bottom: none; }
+  .tax-label { color: #78350f; font-weight: 600; }
+  .tax-val { font-weight: 800; }
+  .tax-bad { color: #dc2626; }
+  .tax-good { color: #166534; }
+  .tax-arrow { color: #d97706; font-size: 16px; font-weight: 900; }
+
+  .o2o-box {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 10px;
+    align-items: center;
+    background: #f0fdf4;
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 14px;
+    margin: 4px 0;
+  }
+  .o2o-side { text-align: center; }
+  .o2o-side .o2o-icon { font-size: 28px; }
+  .o2o-side .o2o-title { font-size: 13px; font-weight: 700; color: #166534; margin-top: 4px; }
+  .o2o-side .o2o-desc { font-size: 11px; color: #555; line-height: 1.5; margin-top: 3px; }
+  .o2o-arrow { font-size: 28px; color: #15803d; font-weight: 900; text-align: center; }
+
+  .model-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .model-chip {
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+    border: 1.5px solid;
+  }
+  .mc-green  { background: #f0fdf4; border-color: #86efac; }
+  .mc-blue   { background: #eff6ff; border-color: #93c5fd; }
+  .mc-purple { background: #f5f3ff; border-color: #c4b5fd; }
+  .model-chip .mc-num { font-size: 22px; font-weight: 900; }
+  .mc-green  .mc-num { color: #166534; }
+  .mc-blue   .mc-num { color: #1e3a8a; }
+  .mc-purple .mc-num { color: #581c87; }
+  .model-chip .mc-title { font-size: 12px; font-weight: 700; margin: 4px 0 2px; }
+  .mc-green  .mc-title { color: #166534; }
+  .mc-blue   .mc-title { color: #1e3a8a; }
+  .mc-purple .mc-title { color: #581c87; }
+  .model-chip .mc-desc { font-size: 11px; color: #555; line-height: 1.5; }
+
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .tag {
+    font-size: 11px; font-weight: 600;
+    padding: 3px 10px; border-radius: 20px; border: 1.5px solid;
+  }
+  .tag-green  { color: #166534; border-color: #166534; background: #f0fdf4; }
+  .tag-blue   { color: #1e3a8a; border-color: #2563eb; background: #eff6ff; }
+  .tag-amber  { color: #92400e; border-color: #d97706; background: #fff8e6; }
+  .tag-purple { color: #581c87; border-color: #7c3aed; background: #f5f3ff; }
+
+  .footer {
+    background: #f8fafd;
+    border-top: 1.5px solid #e8edf3;
+    padding: 12px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-left  { font-size: 11px; color: #888; }
+  .footer-right { font-size: 11px; color: #166534; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <div class="hero-tag">生活中的財商 ✦ 2025.04.18</div>
+    <h1>皮克明的商業密碼：<span>從走路遊戲看懂三種賺錢模式</span></h1>
+    <p class="hero-sub">
+      一個讓你走路、讓你出門、讓你自願付錢的遊戲——背後藏著 O2O、平台稅、零獲客成本三大商業邏輯。<br>
+      從健身房的「惰性經濟」到任天堂的「社群行銷」，商業模式就在你的日常生活裡。
+    </p>
+    <div class="hero-meta">
+      <div class="meta-chip">🎮 皮克明 × O2O</div>
+      <div class="meta-chip">💰 平台稅 30% 秘密</div>
+      <div class="meta-chip">🏋️ 健身房商業模式</div>
+      <div class="meta-chip">📣 零獲客成本</div>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <div class="section">
+      <div class="sec-header bg-green">
+        <span class="icon">🏋️</span>
+        健身房的「惰性經濟」：賭你不來
+      </div>
+
+      <div class="gym-grid">
+        <div class="gym-box red-box">
+          <span class="gym-tag tag-red-light">月費制</span>
+          <div class="gym-name">健身工廠 / 窩菌</div>
+          <div class="gym-key">
+            超收會員、不限次數<br>
+            <strong>賭你不到場</strong><br>
+            進場率越低 → 獲利越高<br>
+            你不來 = 你在贊助別人運動
+          </div>
+        </div>
+        <div class="gym-box green-box">
+          <span class="gym-tag tag-green-light">課程制</span>
+          <div class="gym-name">F45 / 小班課程</div>
+          <div class="gym-key">
+            報名即綁定出席<br>
+            <strong>固定收費、確定到場</strong><br>
+            場地成本攤薄<br>
+            社群黏著度高
+          </div>
+        </div>
+      </div>
+
+      <div class="card red">
+        <div class="card-title">💡 月費制的真實邏輯</div>
+        <div class="card-body">
+          健身房的場館就這麼大，但它的會員數遠超場館容量。
+          它靠的就是<strong>人的惰性</strong>——大多數人報名後不去，
+          所以它賺的是「你付了錢但沒用到的那份」。
+          退費拿回七八成？那是因為它本來就沒期待你會去。
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🎯 HighRox 的損益平衡邏輯</div>
+        <div class="card-body">
+          租場地＋器材 = 固定成本。報名費約 <strong>4,000 元／人</strong>，
+          台北場 9,000 人報名。只要超過約 <strong>2,500 人</strong>就達損益兩平，
+          其餘全是純利。多辦一場比賽 = 多賺一倍，
+          這就是「固定成本攤薄後規模經濟」的最佳範例。
+          <div class="tag-list">
+            <span class="tag tag-green">固定成本攤薄</span>
+            <span class="tag tag-green">損益兩平點</span>
+            <span class="tag tag-green">規模經濟</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sec-header bg-amber">
+        <span class="icon">💳</span>
+        平台稅：Apple / Google 偷偷抽了多少？
+      </div>
+
+      <div class="tax-flow">
+        <div class="tax-row">
+          <span class="tax-label">你在 App 內儲值 100 元</span>
+          <span class="tax-val">→ 遊戲商收到</span>
+        </div>
+        <div class="tax-row">
+          <span class="tax-label">⚠️ 剛開始：Apple / Google 抽成</span>
+          <span class="tax-val tax-bad">約 3%</span>
+        </div>
+        <div class="tax-row">
+          <span class="tax-label">🔴 做大之後（累積超過百萬美金）</span>
+          <span class="tax-val tax-bad">暴增到 30%！</span>
+        </div>
+        <div class="tax-row">
+          <span class="tax-label">✅ 官網自建支付抽成</span>
+          <span class="tax-val tax-good">遠低於 30%</span>
+        </div>
+        <div class="tax-row" style="padding-top: 8px; font-size: 13px;">
+          <span class="tax-label" style="color:#166534; font-weight:700;">皮克明官網儲值給你 85 折</span>
+          <span class="tax-val tax-good">省 15%，廠商還多賺 15%</span>
+        </div>
+      </div>
+
+      <div class="card amber">
+        <div class="card-title">🤔 為什麼要給你折扣？</div>
+        <div class="card-body">
+          原本在 App 按一按就好，現在要你跳出去開瀏覽器儲值，很麻煩對吧？
+          所以廠商<strong>一定要給誘因</strong>——85 折就是這個誘因。
+          對皮克明來說：省下 30% 平台稅、只讓出 15% 折扣，
+          還是<strong>淨賺 15%</strong>。這就是雙贏的設計。
+        </div>
+      </div>
+
+      <div class="card blue">
+        <div class="card-title">📌 這個現象叫什麼？</div>
+        <div class="card-body">
+          Apple / Google 對遊戲商收取的這 30%，
+          業界稱之為<strong>「平台稅（Platform Tax）」</strong>——不是國稅局收的稅，
+          而是平台用市場地位向你收的通行費。
+          你的遊戲越大、玩家越黏，它越敢收、越沒得談。
+          <div class="tag-list">
+            <span class="tag tag-blue">平台稅</span>
+            <span class="tag tag-blue">議價能力</span>
+            <span class="tag tag-blue">自建支付</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section full">
+      <div class="sec-header bg-purple">
+        <span class="icon">🎮</span>
+        皮克明三大商業模式總整理
+      </div>
+
+      <div class="model-row">
+        <div class="model-chip mc-green">
+          <div class="mc-num">① O2O</div>
+          <div class="mc-title">線上 → 線下</div>
+          <div class="mc-desc">
+            虛擬實境遊戲讓你<strong>非得走到實體地點</strong>才能拿到皮克明。
+            走到了→停留→消費。政府合作鐵路活動、
+            商家付費設蹲菇點，帶人潮等於帶生意。
+            <div class="tag-list" style="justify-content:center;">
+              <span class="tag tag-green">虛擬實境</span>
+              <span class="tag tag-green">帶客神器</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="model-chip mc-blue">
+          <div class="mc-num">② 官網儲值</div>
+          <div class="mc-title">繞開平台稅</div>
+          <div class="mc-desc">
+            Apple / Google 抽 30%，皮克明<strong>自建官網儲值</strong>，
+            給玩家 85 折誘因，引導消費者跳出 App 付款。
+            廠商省下平台稅，玩家省下 15%，
+            雙方都受益。
+            <div class="tag-list" style="justify-content:center;">
+              <span class="tag tag-blue">平台稅 30%</span>
+              <span class="tag tag-blue">85折誘因</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="model-chip mc-purple">
+          <div class="mc-num">③ 零獲客</div>
+          <div class="mc-title">社群行銷</div>
+          <div class="mc-desc">
+            皮克明<strong>沒有廣告</strong>——你是同事分享、朋友帶進來的。
+            原本不玩遊戲的走路族也成了用戶，
+            大幅擴大客群。獲客成本為零，
+            每一筆儲值都是純賺。
+            <div class="tag-list" style="justify-content:center;">
+              <span class="tag tag-purple">零廣告</span>
+              <span class="tag tag-purple">社群行銷</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 4px; background: #f0fdf4; border-left-color: #166534;">
+        <div class="card-title">🌟 今天最重要的一句話</div>
+        <div class="card-body">
+          <strong>「商業模式就在生活裡。」</strong>
+          你每次蹲菇、每次儲值、每次走到一個地標——背後都有人設計了一套讓你這樣做的邏輯。
+          會計與財務不只是看財報上的數字，而是看懂這些數字是怎麼來的。
+          從皮克明的年總收入達 1 億美元（≈30 億台幣）就能看出：
+          好的商業模式，讓消費者甘願掏錢、甚至幫你免費做行銷。
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">學生：小魚　｜　授課日期：2025.04.18　｜　由 AI 輔助整理，僅供學習用途</div>
+    <div class="footer-right">平台稅最高 30%　｜　O2O＝線上帶你去線下　｜　零獲客成本＝社群行銷的威力</div>
+  </div>
+
+</div>
+</body>
+</html>
