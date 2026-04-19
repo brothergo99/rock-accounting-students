@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEN5194YPE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SEN5194YPE');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>極限銷售四顆樹 — 好書分享 0419</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    background: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+
+  .page {
+    width: 960px;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%);
+    padding: 32px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    right: 120px; bottom: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    color: #c7d2fe;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    color: #fff;
+    font-size: 27px;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .hero h1 span { color: #a5b4fc; }
+  .hero-sub {
+    color: rgba(255,255,255,0.76);
+    font-size: 13px;
+    line-height: 1.65;
+  }
+  .hero-meta {
+    margin-top: 14px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .meta-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.14);
+    color: rgba(255,255,255,0.92);
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+
+  .body {
+    padding: 28px 36px 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .section { display: flex; flex-direction: column; gap: 10px; }
+  .section.full { grid-column: 1 / -1; }
+
+  .sec-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .sec-header .icon { font-size: 18px; }
+
+  .bg-indigo  { background: linear-gradient(90deg, #1e1b4b, #4338ca); }
+  .bg-violet  { background: linear-gradient(90deg, #4c1d95, #7c3aed); }
+  .bg-rose    { background: linear-gradient(90deg, #881337, #e11d48); }
+  .bg-teal    { background: linear-gradient(90deg, #134e4a, #0d9488); }
+
+  .card {
+    background: #f8f7ff;
+    border-radius: 10px;
+    padding: 12px 14px;
+    border-left: 4px solid #4338ca;
+  }
+  .card.violet { border-left-color: #7c3aed; background: #f5f3ff; }
+  .card.rose   { border-left-color: #e11d48; background: #fff1f2; }
+  .card.teal   { border-left-color: #0d9488; background: #f0fdfa; }
+  .card.amber  { border-left-color: #d97706; background: #fffbf0; }
+
+  .card-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #312e81;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .card.violet .card-title { color: #4c1d95; }
+  .card.rose   .card-title { color: #881337; }
+  .card.teal   .card-title { color: #134e4a; }
+  .card.amber  .card-title { color: #92400e; }
+
+  .card-body { font-size: 12px; line-height: 1.68; color: #3a3a3a; }
+
+  .wing-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 8px;
+    align-items: center;
+    margin: 4px 0;
+  }
+  .wing-box {
+    border-radius: 10px;
+    padding: 12px 14px;
+    text-align: center;
+  }
+  .wing-box.branch { background: #fff7ed; border: 1.5px solid #fed7aa; }
+  .wing-box.wing   { background: #eef2ff; border: 1.5px solid #a5b4fc; }
+  .wing-box .w-icon { font-size: 28px; }
+  .wing-box .w-name { font-size: 13px; font-weight: 900; margin: 4px 0 2px; }
+  .wing-box.branch .w-name { color: #c2410c; }
+  .wing-box.wing   .w-name { color: #3730a3; }
+  .wing-box .w-key { font-size: 11px; color: #555; line-height: 1.5; }
+  .wing-vs { font-size: 20px; font-weight: 900; color: #6366f1; text-align: center; }
+
+  .tree-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .tree-card {
+    border-radius: 10px;
+    padding: 12px 14px;
+    border: 1.5px solid;
+  }
+  .tc-indigo { background: #eef2ff; border-color: #a5b4fc; }
+  .tc-violet { background: #f5f3ff; border-color: #c4b5fd; }
+  .tc-teal   { background: #f0fdfa; border-color: #99f6e4; }
+  .tc-rose   { background: #fff1f2; border-color: #fda4af; }
+
+  .tree-card .tc-num  { font-size: 11px; font-weight: 800; letter-spacing: 1px; margin-bottom: 3px; }
+  .tc-indigo .tc-num { color: #3730a3; }
+  .tc-violet .tc-num { color: #4c1d95; }
+  .tc-teal   .tc-num { color: #134e4a; }
+  .tc-rose   .tc-num { color: #881337; }
+
+  .tree-card .tc-title { font-size: 14px; font-weight: 900; margin-bottom: 4px; }
+  .tc-indigo .tc-title { color: #312e81; }
+  .tc-violet .tc-title { color: #4c1d95; }
+  .tc-teal   .tc-title { color: #115e59; }
+  .tc-rose   .tc-title { color: #9f1239; }
+
+  .tree-card .tc-body { font-size: 11px; color: #444; line-height: 1.6; }
+
+  .formula-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #1e1b4b, #312e81);
+    border-radius: 10px;
+    padding: 14px 18px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .f-item {
+    background: rgba(255,255,255,0.15);
+    color: #e0e7ff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+  .f-op { color: #a5b4fc; font-size: 16px; font-weight: 900; }
+
+  .thirds-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin: 4px 0;
+  }
+  .third-box {
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+    border: 1.5px solid;
+  }
+  .tb-love   { background: #eef2ff; border-color: #a5b4fc; }
+  .tb-hate   { background: #fff1f2; border-color: #fda4af; }
+  .tb-meh    { background: #f8fafc; border-color: #cbd5e1; }
+  .third-box .tb-num   { font-size: 22px; font-weight: 900; }
+  .tb-love .tb-num   { color: #3730a3; }
+  .tb-hate .tb-num   { color: #9f1239; }
+  .tb-meh  .tb-num   { color: #64748b; }
+  .third-box .tb-title { font-size: 12px; font-weight: 700; margin: 3px 0 2px; }
+  .tb-love .tb-title { color: #312e81; }
+  .tb-hate .tb-title { color: #881337; }
+  .tb-meh  .tb-title { color: #475569; }
+  .third-box .tb-desc  { font-size: 11px; color: #555; line-height: 1.5; }
+
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .tag {
+    font-size: 11px; font-weight: 600;
+    padding: 3px 10px; border-radius: 20px; border: 1.5px solid;
+  }
+  .tag-indigo { color: #312e81; border-color: #4338ca; background: #eef2ff; }
+  .tag-violet { color: #4c1d95; border-color: #7c3aed; background: #f5f3ff; }
+  .tag-teal   { color: #134e4a; border-color: #0d9488; background: #f0fdfa; }
+  .tag-rose   { color: #881337; border-color: #e11d48; background: #fff1f2; }
+
+  .footer {
+    background: #f8f7ff;
+    border-top: 1.5px solid #e0e7ff;
+    padding: 12px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-left  { font-size: 11px; color: #888; }
+  .footer-right { font-size: 11px; color: #4338ca; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <div class="hero-tag">好書分享 ✦ 《極限銷售》憲哥 ✦ 2025.04.19</div>
+    <h1>極限銷售的<span>四顆樹</span>：快速取得信任的核心架構</h1>
+    <p class="hero-sub">
+      銷售不是業務員的專利——每個人都是自己的超級業務。<br>
+      憲哥謝文獻用「四顆樹」告訴你：不管走到哪裡，你都可以在短短幾秒內讓人信任你。
+    </p>
+    <div class="hero-meta">
+      <div class="meta-chip">🌳 四顆樹架構</div>
+      <div class="meta-chip">🐦 翅膀 vs 樹枝</div>
+      <div class="meta-chip">💼 可帶走的能力</div>
+      <div class="meta-chip">🚀 行動才是王道</div>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <div class="section">
+      <div class="sec-header bg-indigo">
+        <span class="icon">🐦</span>
+        你相信的是翅膀，還是樹枝？
+      </div>
+
+      <div class="wing-grid">
+        <div class="wing-box branch">
+          <div class="w-icon">🌲</div>
+          <div class="w-name">樹枝 = 公司頭銜</div>
+          <div class="w-key">
+            名片上的職稱<br>
+            公司的光環<br>
+            拿掉之後剩下什麼？<br>
+            <strong>借來的，無法帶走</strong>
+          </div>
+        </div>
+        <div class="wing-vs">VS</div>
+        <div class="wing-box wing">
+          <div class="w-icon">🦅</div>
+          <div class="w-name">翅膀 = 可惜是能力</div>
+          <div class="w-key">
+            跨領域都能用的核心技能<br>
+            <strong>哪裡都活得下去</strong><br>
+            真正屬於你自己的<br>
+            越練越強
+          </div>
+        </div>
+      </div>
+
+      <div class="card rose">
+        <div class="card-title">💡 拿掉名片，你剩下什麼？</div>
+        <div class="card-body">
+          TVBS 資深主播吳安妮、方念華離職的背後，說明了一件事：
+          你在職場上的光環，有多少是<strong>公司給的</strong>，有多少是<strong>自己長出來的</strong>？
+          憲哥的核心問題：你的能力是「只有在這公司能用」，
+          還是「帶到哪裡都能發光」？
+          <div class="tag-list">
+            <span class="tag tag-rose">可惜是能力</span>
+            <span class="tag tag-rose">終極生存法則</span>
+            <span class="tag tag-rose">個人品牌</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card teal">
+        <div class="card-title">🚗 真實案例：車禍業務的超越預期</div>
+        <div class="card-body">
+          憲哥出了小車禍，打電話給租賃車業務。業務不只教他怎麼走保險流程，
+          還主動提醒：<strong>「車禍後殘值損失，記得跟對方求償！」</strong>
+          甚至一路幫他準備，憲哥只要去出庭就好。
+          一個業務，本來只需要處理保險就夠了——但他做的遠超預期。
+          這就是「專業術」的最佳示範。
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sec-header bg-violet">
+        <span class="icon">🌳</span>
+        四顆樹：短兵相接四五秒，快速取得信任
+      </div>
+
+      <div class="tree-grid">
+        <div class="tree-card tc-indigo">
+          <div class="tc-num">樹 ①</div>
+          <div class="tc-title">🔧 專業術</div>
+          <div class="tc-body">
+            <strong>超越預期</strong>的問題解決能力<br>
+            做好該做的、再多做一層<br>
+            讓對方感覺「他比我還懂我的問題」<br><br>
+            老師例子：上完課後自動生成課後一頁式複習，讓學生一週後不忘光
+          </div>
+        </div>
+        <div class="tree-card tc-violet">
+          <div class="tc-num">樹 ②</div>
+          <div class="tc-title">🤝 溫暖術</div>
+          <div class="tc-body">
+            <strong>反直覺的同理心</strong><br>
+            不是「不要把別人課題當自己問題」<br>
+            而是：<strong>把別人的問題當自己的課題</strong>，思考能提供什麼價值<br><br>
+            站在旁邊往前看，不是面對面審判
+          </div>
+        </div>
+        <div class="tree-card tc-teal">
+          <div class="tc-num">樹 ③</div>
+          <div class="tc-title">🧠 底層思維術</div>
+          <div class="tc-body">
+            <strong>用理論駕馭現象</strong><br>
+            不要用現象解釋現象<br>
+            找底層邏輯、框架、運作規則<br><br>
+            就像學 O2O、平台稅、損益兩平——理論讓你看懂現象背後的真相
+          </div>
+        </div>
+        <div class="tree-card tc-rose">
+          <div class="tc-num">樹 ④</div>
+          <div class="tc-title">🏆 個人品牌術</div>
+          <div class="tc-body">
+            <strong>不在場的影響力與一致性</strong><br>
+            三分之一喜歡你的人，你要持續為他們努力<br><br>
+            承認不足 = 跨越信任門檻<br>
+            不需要裝作什麼都會，誠實更有力量
+          </div>
+        </div>
+      </div>
+
+      <div class="card violet">
+        <div class="card-title">⚡ 不只是業務的銷售術</div>
+        <div class="card-body">
+          憲哥說：銷售思維 = <strong>把你的想法、價值、專業推薦給別人</strong>。
+          財務老師講財報、家教老師解題、你在公司提案——全都是銷售。
+          在自媒體時代，每個人都是自己的超級業務，
+          必須學會讓陌生人在幾秒內信任你。
+        </div>
+      </div>
+    </div>
+
+    <div class="section full">
+      <div class="sec-header bg-teal">
+        <span class="icon">🚀</span>
+        行動才是王道：兩大核心公式
+      </div>
+
+      <div class="formula-bar">
+        <div class="f-item">🔧 專業術</div>
+        <div class="f-op">＋</div>
+        <div class="f-item">🤝 溫暖術</div>
+        <div class="f-op">＋</div>
+        <div class="f-item">🧠 底層思維</div>
+        <div class="f-op">✕</div>
+        <div class="f-item">🏆 個人品牌</div>
+        <div class="f-op">÷</div>
+        <div class="f-item">⏰ 失敗復原期</div>
+        <div class="f-op">=</div>
+        <div class="f-item" style="background:rgba(255,255,255,0.3); color:#fff; font-size:13px;">極限銷售力 🔥</div>
+      </div>
+
+      <div class="thirds-grid">
+        <div class="third-box tb-love">
+          <div class="tb-num">⅓</div>
+          <div class="tb-title">喜歡你</div>
+          <div class="tb-desc">進來聽你分享的人<br>認真跟著你學習<br><strong>→ 為他們全力以赴</strong></div>
+        </div>
+        <div class="third-box tb-hate">
+          <div class="tb-num">⅓</div>
+          <div class="tb-title">討厭你</div>
+          <div class="tb-desc">再努力也改變不了<br>不需要耗費心力討好<br><strong>→ 放下，繼續前進</strong></div>
+        </div>
+        <div class="third-box tb-meh">
+          <div class="tb-num">⅓</div>
+          <div class="tb-title">無所謂</div>
+          <div class="tb-desc">默默在看，但不互動<br>用短影音、文章觸達<br><strong>→ 內容放著等他來</strong></div>
+        </div>
+      </div>
+
+      <div class="card amber" style="margin-top: 4px;">
+        <div class="card-title">🌟 今天最重要的一句話</div>
+        <div class="card-body">
+          <strong>「準備 40% 就出發，行動才是王道。」</strong>
+          累積小成功，關鍵時刻一口氣爆發——就像棒球靠著每支安打累積，
+          最後打出關鍵一擊得分。雨天出門的是勇者，做別人不願做的事，
+          才能拿別人拿不到的回報。
+          <div class="tag-list">
+            <span class="tag tag-indigo">準備40%就出發</span>
+            <span class="tag tag-violet">累積小成功</span>
+            <span class="tag tag-teal">下雨天是勇者</span>
+            <span class="tag tag-rose">失敗快速復原</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">好書分享：《極限銷售》謝文獻（憲哥）　｜　分享日期：2025.04.19　｜　由 AI 輔助整理，僅供學習用途</div>
+    <div class="footer-right">翅膀 ≠ 樹枝　｜　四顆樹＝快速取得信任　｜　每個人都是自己的超級業務</div>
+  </div>
+
+</div>
+</body>
+</html>
