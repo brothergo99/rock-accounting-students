@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEN5194YPE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SEN5194YPE');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>稅務時事曆 — Cavin 0421</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; background: #f0f4f8; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 24px 16px; }
+  .page { width: 960px; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
+  .hero { background: linear-gradient(135deg, #78350f 0%, #b45309 50%, #d97706 100%); padding: 32px 40px 28px; position: relative; overflow: hidden; }
+  .hero::after { content: ''; position: absolute; right: -40px; top: -40px; width: 260px; height: 260px; border-radius: 50%; background: rgba(255,255,255,0.06); }
+  .hero::before { content: ''; position: absolute; right: 100px; bottom: -30px; width: 150px; height: 150px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+  .hero-tag { display: inline-block; background: rgba(255,255,255,0.18); color: #fde68a; font-size: 11px; font-weight: 700; letter-spacing: 2px; padding: 4px 12px; border-radius: 20px; margin-bottom: 12px; text-transform: uppercase; }
+  .hero h1 { color: #fff; font-size: 27px; font-weight: 900; line-height: 1.3; margin-bottom: 10px; position: relative; }
+  .hero h1 span { color: #fde68a; }
+  .hero-sub { color: rgba(255,255,255,0.78); font-size: 13px; line-height: 1.65; }
+  .hero-meta { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .meta-chip { display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.14); color: rgba(255,255,255,0.92); font-size: 12px; padding: 5px 12px; border-radius: 20px; }
+  .body { padding: 28px 36px 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .section { display: flex; flex-direction: column; gap: 10px; }
+  .section.full { grid-column: 1 / -1; }
+  .sec-header { display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-radius: 10px; font-size: 14px; font-weight: 700; color: #fff; }
+  .sec-header .icon { font-size: 18px; }
+  .bg-amber { background: linear-gradient(90deg, #78350f, #d97706); }
+  .bg-red   { background: linear-gradient(90deg, #7f1d1d, #dc2626); }
+  .bg-blue  { background: linear-gradient(90deg, #1e3a8a, #2563eb); }
+  .bg-green { background: linear-gradient(90deg, #14532d, #16a34a); }
+  .card { background: #fffbf0; border-radius: 10px; padding: 12px 14px; border-left: 4px solid #d97706; }
+  .card.red   { border-left-color: #dc2626; background: #fff5f5; }
+  .card.blue  { border-left-color: #2563eb; background: #eff6ff; }
+  .card.green { border-left-color: #16a34a; background: #f0fdf4; }
+  .card-title { font-size: 13px; font-weight: 700; color: #92400e; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+  .card.red  .card-title { color: #7f1d1d; }
+  .card.blue .card-title { color: #1e3a8a; }
+  .card.green .card-title { color: #14532d; }
+  .card-body { font-size: 12px; line-height: 1.68; color: #3a3a3a; }
+  .timeline { display: flex; flex-direction: column; gap: 8px; margin: 4px 0; }
+  .tl-item { display: flex; gap: 12px; align-items: flex-start; }
+  .tl-badge { flex-shrink: 0; width: 52px; text-align: center; padding: 4px 6px; border-radius: 8px; font-size: 12px; font-weight: 900; line-height: 1.3; }
+  .tb-jan  { background: #fef3c7; color: #78350f; border: 1.5px solid #fbbf24; }
+  .tb-may  { background: #fee2e2; color: #7f1d1d; border: 1.5px solid #fca5a5; }
+  .tb-may2 { background: #fce7f3; color: #831843; border: 1.5px solid #f9a8d4; }
+  .tb-etc  { background: #f1f5f9; color: #475569; border: 1.5px solid #cbd5e1; }
+  .tl-content { flex: 1; background: #fafafa; border-radius: 8px; padding: 8px 10px; border: 1px solid #e5e7eb; font-size: 12px; line-height: 1.6; color: #374151; }
+  .tl-content strong { color: #b45309; }
+  .tl-content .danger { color: #dc2626; font-weight: 700; }
+  .rate-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0; }
+  .rate-box { border-radius: 10px; padding: 12px 14px; text-align: center; }
+  .rate-box.high { background: #fff5f5; border: 1.5px solid #fca5a5; }
+  .rate-box.low  { background: #f0fdf4; border: 1.5px solid #86efac; }
+  .rate-box .rb-label { font-size: 11px; font-weight: 700; margin-bottom: 4px; }
+  .rate-box.high .rb-label { color: #dc2626; }
+  .rate-box.low  .rb-label { color: #15803d; }
+  .rate-box .rb-num { font-size: 28px; font-weight: 900; line-height: 1; }
+  .rate-box.high .rb-num { color: #dc2626; }
+  .rate-box.low  .rb-num { color: #15803d; }
+  .rate-box .rb-desc { font-size: 11px; color: #555; margin-top: 4px; line-height: 1.5; }
+  .action-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .action-card { border-radius: 10px; padding: 12px 14px; border: 1.5px solid; }
+  .ac-amber { background: #fffbf0; border-color: #fcd34d; }
+  .ac-red   { background: #fff5f5; border-color: #fca5a5; }
+  .ac-blue  { background: #eff6ff; border-color: #93c5fd; }
+  .action-card .ac-step { font-size: 22px; font-weight: 900; line-height: 1; margin-bottom: 4px; }
+  .ac-amber .ac-step { color: #b45309; }
+  .ac-red   .ac-step { color: #dc2626; }
+  .ac-blue  .ac-step { color: #1e40af; }
+  .action-card .ac-title { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .ac-amber .ac-title { color: #78350f; }
+  .ac-red   .ac-title { color: #7f1d1d; }
+  .ac-blue  .ac-title { color: #1e3a8a; }
+  .action-card .ac-body { font-size: 11px; color: #444; line-height: 1.6; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .tag { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; border: 1.5px solid; }
+  .tag-amber { color: #78350f; border-color: #d97706; background: #fffbf0; }
+  .tag-red   { color: #7f1d1d; border-color: #dc2626; background: #fff5f5; }
+  .tag-blue  { color: #1e3a8a; border-color: #2563eb; background: #eff6ff; }
+  .tag-green { color: #14532d; border-color: #16a34a; background: #f0fdf4; }
+  .footer { background: #fffbf0; border-top: 1.5px solid #fde68a; padding: 12px 36px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-left  { font-size: 11px; color: #888; }
+  .footer-right { font-size: 11px; color: #b45309; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="hero">
+    <div class="hero-tag">公司財務管理 ✦ 2025.04.21</div>
+    <h1>稅務時事曆：<span>老闆必知的四月五月危險地帶</span></h1>
+    <p class="hero-sub">
+      現在是高風險月份——2025年的費用有沒有完整申報，將決定明年五月你要繳多少稅。<br>
+      外包商沒有發票？會計人員不穩定？今天一起把風險盤點清楚，趁還來得及。
+    </p>
+    <div class="hero-meta">
+      <div class="meta-chip">📅 稅務時事曆</div>
+      <div class="meta-chip">⚠️ 五月營所稅</div>
+      <div class="meta-chip">🧾 外包商無發票策略</div>
+      <div class="meta-chip">👩‍💼 找對會計人員</div>
+    </div>
+  </div>
+  <div class="body">
+    <div class="section">
+      <div class="sec-header bg-amber"><span class="icon">📅</span>公司老闆必知：一年的稅務時事曆</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-badge tb-jan">1月底</div>
+          <div class="tl-content"><strong>各類所得申報</strong>（超重要！）<br>全年支付給員工、外包商、租金的所得，全部要向國稅局申報。<br><span class="danger">→ 這堂課的核心功課，不能拖！</span></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-badge tb-may">5月</div>
+          <div class="tl-content"><strong>個人綜合所得稅</strong><br>老闆個人的年度所得稅申報。<br>5月1日勞動節——國稅局照常上班（他們是公保，不是勞保）。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-badge tb-may2">5月</div>
+          <div class="tl-content"><strong>營利事業所得稅（營所稅）</strong>⚠️ 高風險<br>公司的年度所得稅。2026年5月報 2025年的稅。<br><span class="danger">風險：現在費用沒認，到2026年5月才發現已來不及！</span></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-badge tb-etc">其他</div>
+          <div class="tl-content">每月/雙月：<strong>營業稅</strong>（3、4月申報前一期）<br>7月、9月、11月：相對平靜，專注內部整理帳務即可。</div>
+        </div>
+      </div>
+      <div class="card red">
+        <div class="card-title">🚨 現在（四月）就是高風險點！</div>
+        <div class="card-body">
+          你有兩週時間：主動問會計師「2025年的營所稅，預計要繳多少？」<br>
+          如果數字超出預期 → 立刻檢查有沒有<strong>費用或發票沒有報進去</strong>。<br>
+          到 2026 年 5 月才發現，就只能摸摸鼻子多繳稅，什麼都改不了。
+          <div class="tag-list">
+            <span class="tag tag-red">超過3000萬→實際申報</span>
+            <span class="tag tag-red">預先估稅</span>
+            <span class="tag tag-red">費用認列</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="sec-header bg-red"><span class="icon">🧾</span>外包工班沒發票？這樣應對！</div>
+      <div class="rate-grid">
+        <div class="rate-box high">
+          <div class="rb-label">個人所得稅最高稅率</div>
+          <div class="rb-num">40%</div>
+          <div class="rb-desc">外包商以個人身分拿錢<br>若不報所得 → 你沒費用<br>你的營所稅就要多繳</div>
+        </div>
+        <div class="rate-box low">
+          <div class="rb-label">公司營所稅最高稅率</div>
+          <div class="rb-num">20%</div>
+          <div class="rb-desc">外包商去開公司、開發票<br>給你抵費用 → 雙贏<br>他自己稅率也比較低</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">💡 身分證策略：讓外包商乖乖配合</div>
+        <div class="card-body">
+          外包工班不開發票、不報所得？<br>
+          直接說：<strong>「請把身分證給我影印，我要幫你做年度所得申報。」</strong><br>
+          他一聽到個人所得最高稅 40%，自然就會去開公司、開發票了。<br>
+          這叫做「照規矩來」，不是找麻煩——政府的馬路也要有錢鋪。
+          <div class="tag-list">
+            <span class="tag tag-amber">各類所得申報</span>
+            <span class="tag tag-amber">身分證+住址</span>
+            <span class="tag tag-amber">逼他合法化</span>
+          </div>
+        </div>
+      </div>
+      <div class="card blue">
+        <div class="card-title">🔑 核心邏輯</div>
+        <div class="card-body">
+          你付了工資 → 沒有對應費用 → 公司帳面獲利虛增 → <strong>你多繳稅</strong>。<br>
+          解法很簡單：你報他的所得（幫他繳稅） → 你就有費用可以認列 → 抵稅。<br>
+          稅局想收他的稅，你幫他報 = 你也省稅，<strong>合法雙贏</strong>。
+        </div>
+      </div>
+    </div>
+    <div class="section full">
+      <div class="sec-header bg-blue"><span class="icon">✅</span>本週 Action Items + 找對會計人員的策略</div>
+      <div class="action-grid">
+        <div class="action-card ac-amber">
+          <div class="ac-step">①</div>
+          <div class="ac-title">📞 問會計阿姨（代帳）</div>
+          <div class="ac-body">目前帳做到哪個月份了？<br>預計何時提交給事務所？<br>她負責的是<strong>內帳</strong>，先確認進度是否正常。</div>
+        </div>
+        <div class="action-card ac-red">
+          <div class="ac-step">②</div>
+          <div class="ac-title">📋 問會計師（事務所）</div>
+          <div class="ac-body">2025 年的營所稅大概要繳多少？<br>如果數字不對，趁現在補齊費用發票。<br>到 2026 年 5 月就只能「驚嚇包」了。</div>
+        </div>
+        <div class="action-card ac-blue">
+          <div class="ac-step">③</div>
+          <div class="ac-title">👩‍💼 找會計助理（不是正式會計）</div>
+          <div class="ac-body">田中地區 104 人才很少 → 降低門檻找「會計助理」。<br>她做錯 → 事務所會發現並糾正。<br>重點：<strong>不拖帳、準時交資料</strong>就夠了。</div>
+        </div>
+      </div>
+      <div class="card green" style="margin-top: 4px;">
+        <div class="card-title">🌟 今天最重要的一句話</div>
+        <div class="card-body">
+          <strong>「不知道的風險，才是最大的風險。」</strong>
+          你不知道的事你當然不會注意，但你知道之後就可以行動。
+          今天你知道了：費用要完整認列、外包商要報所得、會計人員要提前佈局。
+          兩個支柱（稅務合規 + 會計人員）搞定後，再來才是提升財報實力的階段。
+          <div class="tag-list">
+            <span class="tag tag-green">費用完整認列</span>
+            <span class="tag tag-blue">預先估稅</span>
+            <span class="tag tag-amber">外包商合法化</span>
+            <span class="tag tag-red">不等到5月才發現</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer-left">學生：Cavin　｜　授課日期：2025.04.21　｜　由 AI 輔助整理，僅供學習用途</div>
+    <div class="footer-right">費用認列 → 少繳稅　｜　問會計師預估　｜　外包商拿身分證來</div>
+  </div>
+</div>
+</body>
+</html>
