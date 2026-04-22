@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEN5194YPE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SEN5194YPE');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>薪資重分類 — Mandy 0421</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; background: #f0f4f8; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 24px 16px; }
+  .page { width: 960px; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
+  .hero { background: linear-gradient(135deg, #0c4a6e 0%, #075985 50%, #0284c7 100%); padding: 32px 40px 28px; position: relative; overflow: hidden; }
+  .hero::after { content: ''; position: absolute; right: -40px; top: -40px; width: 260px; height: 260px; border-radius: 50%; background: rgba(255,255,255,0.06); }
+  .hero::before { content: ''; position: absolute; right: 100px; bottom: -30px; width: 150px; height: 150px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+  .hero-tag { display: inline-block; background: rgba(255,255,255,0.18); color: #bae6fd; font-size: 11px; font-weight: 700; letter-spacing: 2px; padding: 4px 12px; border-radius: 20px; margin-bottom: 12px; text-transform: uppercase; }
+  .hero h1 { color: #fff; font-size: 27px; font-weight: 900; line-height: 1.3; margin-bottom: 10px; position: relative; }
+  .hero-sub { color: #bae6fd; font-size: 14px; font-weight: 500; opacity: 0.9; position: relative; }
+  .hero-meta { position: absolute; top: 32px; right: 40px; text-align: right; color: rgba(255,255,255,0.7); font-size: 12px; line-height: 1.8; }
+  .hero-meta strong { color: #fff; font-size: 14px; }
+  .body { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .col { padding: 28px 32px; }
+  .col:first-child { border-right: 1px solid #f1f5f9; }
+  .section-title { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #075985; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: #bae6fd; opacity: 0.7; }
+  .key-card { background: #f0f9ff; border: 1px solid #bae6fd; border-left: 4px solid #0284c7; border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; }
+  .key-card h3 { font-size: 13.5px; font-weight: 700; color: #0c4a6e; margin-bottom: 6px; }
+  .key-card p { font-size: 12.5px; color: #334155; line-height: 1.65; }
+  .flow-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+  .flow-box h3 { font-size: 12.5px; font-weight: 700; color: #1e293b; margin-bottom: 12px; text-align: center; }
+  .flow-row { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+  .flow-node { flex: 1; border-radius: 8px; padding: 10px 8px; text-align: center; font-size: 11px; font-weight: 700; line-height: 1.4; }
+  .flow-node.before { background: #fef2f2; border: 1px solid #fca5a5; color: #991b1b; }
+  .flow-node.after-direct { background: #dcfce7; border: 1px solid #86efac; color: #166534; }
+  .flow-node.after-indirect { background: #fef9c3; border: 1px solid #fde047; color: #854d0e; }
+  .flow-arrow { font-size: 16px; color: #94a3b8; flex-shrink: 0; }
+  .flow-label { font-size: 10px; color: #6b7280; text-align: center; margin-top: 4px; }
+  .table-steps { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+  .table-step { display: flex; align-items: flex-start; gap: 10px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 14px; }
+  .ts-num { width: 24px; height: 24px; border-radius: 50%; background: #0284c7; color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .ts-title { font-size: 12.5px; font-weight: 700; color: #0c4a6e; margin-bottom: 3px; }
+  .ts-desc { font-size: 11.5px; color: #475569; line-height: 1.55; }
+  .ts-desc code { background: #e0f2fe; color: #075985; padding: 1px 5px; border-radius: 4px; font-size: 10.5px; font-family: monospace; }
+  .formula-box { background: #e0f2fe; border: 1px solid #7dd3fc; border-radius: 8px; padding: 8px 12px; margin-top: 6px; font-size: 12px; font-weight: 700; color: #0c4a6e; text-align: center; }
+  .impact-card { background: linear-gradient(135deg, #0c4a6e 0%, #075985 100%); border-radius: 14px; padding: 18px 20px; margin-bottom: 12px; color: #fff; }
+  .impact-title { font-size: 11px; letter-spacing: 2px; color: #bae6fd; font-weight: 700; margin-bottom: 12px; }
+  .impact-row { display: flex; gap: 10px; margin-bottom: 8px; }
+  .impact-item { flex: 1; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 10px 12px; text-align: center; }
+  .impact-item .ii-label { font-size: 10px; color: #bae6fd; margin-bottom: 4px; }
+  .impact-item .ii-val { font-size: 13px; font-weight: 700; color: #fff; }
+  .impact-item .ii-arrow { font-size: 14px; }
+  .impact-note { background: rgba(186,230,253,0.15); border: 1px solid rgba(186,230,253,0.3); border-radius: 8px; padding: 10px 12px; font-size: 12px; color: #e0f2fe; line-height: 1.6; margin-top: 4px; }
+  .checklist { margin-bottom: 12px; }
+  .cl-item { display: flex; gap: 10px; padding: 9px 12px; border-radius: 8px; margin-bottom: 6px; align-items: flex-start; border: 1px solid #e2e8f0; }
+  .cl-item.core { background: #f0f9ff; border-color: #bae6fd; }
+  .cl-item.opt { background: #f8fafc; }
+  .cl-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+  .cl-text { font-size: 12px; color: #334155; line-height: 1.5; flex: 1; }
+  .cl-text strong { color: #075985; }
+  .cl-badge { margin-left: auto; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 8px; flex-shrink: 0; align-self: center; }
+  .cl-badge.must { background: #0284c7; color: #fff; }
+  .cl-badge.opt-b { background: #e2e8f0; color: #475569; }
+  .bottom { background: #f0f9ff; border-top: 1px solid #bae6fd; padding: 24px 32px; }
+  .bottom-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .bottom-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; }
+  .bottom-card h3 { font-size: 12.5px; font-weight: 700; color: #0c4a6e; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px dashed #bae6fd; }
+  .mistake-item { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; font-size: 12px; color: #374151; line-height: 1.55; }
+  .quiz-item { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; font-size: 12px; color: #374151; line-height: 1.55; }
+  .quiz-item::before { content: 'Q'; display: inline-block; width: 18px; height: 18px; background: #0284c7; color: #fff; border-radius: 50%; font-size: 10px; font-weight: 700; text-align: center; line-height: 18px; margin-right: 6px; vertical-align: middle; }
+  .key-sentence { background: linear-gradient(135deg, #0c4a6e, #0284c7); color: #fff; border-radius: 10px; padding: 14px 18px; margin-top: 12px; font-size: 13px; font-weight: 700; text-align: center; line-height: 1.6; }
+  .key-sentence span { color: #bae6fd; }
+  .tag-note { display: inline-block; background: #f0fdf4; border: 1px solid #86efac; color: #166534; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-bottom: 6px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="hero">
+    <div class="hero-tag">💼 Mandy · 會計家教</div>
+    <h1>薪資重分類實作<br>從費用走進專案成本</h1>
+    <p class="hero-sub">直接人工分攤 · 三層表架構 · 毛利還原 · 告別買發票</p>
+    <div class="hero-meta"><strong>2025 / 04 / 21</strong><br>實務操作課<br>近一年的學習里程</div>
+  </div>
+  <div class="body">
+    <div class="col">
+      <div class="section-title">核心概念：薪資重分類</div>
+      <div class="key-card">
+        <h3>🎯 為什麼要做薪資重分類？</h3>
+        <p>公司最大支出是人力薪資，但全部報在「營業費用」，導致年底鏡像（進項）不足 → 被迫買發票（不合法、有成本）。<br><br>解法：把直接人工的薪資<strong>正規分攤到專案成本</strong>，還原真實毛利，合法解決鏡像問題。</p>
+      </div>
+      <div class="flow-box">
+        <h3>📊 薪資從哪裡來，去哪裡</h3>
+        <div class="flow-row">
+          <div class="flow-node before">原本<br>薪資費用<br>（全在費用）</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node after-direct">直接人工<br>→ 營業成本<br>（設計／技術／企劃）</div>
+        </div>
+        <div class="flow-row">
+          <div style="flex:1"></div>
+          <div class="flow-arrow" style="visibility:hidden">→</div>
+          <div class="flow-node after-indirect">間接人工<br>留在費用 or 分攤率＝0<br>（文書／管理）</div>
+        </div>
+        <div class="flow-label">💡 可選擇：間接人工直接放零，不進成本，作業更簡單</div>
+      </div>
+      <div class="section-title" style="margin-top:4px;">三層表架構</div>
+      <div class="table-steps">
+        <div class="table-step">
+          <div class="ts-num">1</div>
+          <div class="ts-content">
+            <div class="ts-title">📋 公司薪資表（出發點）</div>
+            <div class="ts-desc">列出每位員工年度薪資，搭配<code>勞健保扣款</code>記錄，給會計師查核的底稿。</div>
+          </div>
+        </div>
+        <div class="table-step">
+          <div class="ts-num">2</div>
+          <div class="ts-content">
+            <div class="ts-title">⏱️ 工時分攤表（序1）</div>
+            <div class="ts-desc">每個員工填投入各專案的工時，算出比例 → 乘上薪資得出各專案分攤金額。</div>
+            <div class="formula-box">月工時 = 當月工作日 × 8hr　｜　分攤比例 = 專案工時 ÷ 總工時</div>
+          </div>
+        </div>
+        <div class="table-step">
+          <div class="ts-num">3</div>
+          <div class="ts-content">
+            <div class="ts-title">📁 專案成本彙總表（序2）</div>
+            <div class="ts-desc">各專案加總直接薪資成本，可再加上間接分攤率（或放零），得出最終毛利。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="section-title">財務影響分析</div>
+      <div class="impact-card">
+        <div class="impact-title">📈 薪資重分類後的財報變化</div>
+        <div class="impact-row">
+          <div class="impact-item"><div class="ii-label">毛利</div><div class="ii-arrow">📉</div><div class="ii-val">下降</div></div>
+          <div class="impact-item"><div class="ii-label">淨利</div><div class="ii-arrow">➡️</div><div class="ii-val">不變</div></div>
+          <div class="impact-item"><div class="ii-label">營所稅</div><div class="ii-arrow">➡️</div><div class="ii-val">不變</div></div>
+        </div>
+        <div class="impact-note">薪資只是從「費用欄」移到「成本欄」，整體金額不變。<br><strong>毛利率↓</strong> = 還原真實成本結構（本來就應該這樣）<br><strong>淨利不變</strong> → 營所稅不受影響（AI說的沒錯）</div>
+      </div>
+      <div class="key-card" style="border-left-color:#16a34a;">
+        <div class="tag-note">📐 毛利計算邏輯</div>
+        <h3 style="color:#166534;">為什麼毛利率變了但淨利不變？</h3>
+        <p>收入 − 成本（含直接薪資）＝ <strong>毛利↓</strong><br>毛利 − 費用（間接薪資移走後費用↓）＝ <strong>淨利不變</strong><br><br>你只是把薪資在報表上的<strong>位置移動</strong>，總數不變，所以稅不受影響。</p>
+      </div>
+      <div class="section-title" style="margin-top:4px;">給會計師的查核文件</div>
+      <div class="checklist">
+        <div class="cl-item core"><div class="cl-icon">📄</div><div class="cl-text"><strong>薪資明細表</strong>（每位員工年薪 / 月薪）</div><div class="cl-badge must">必備</div></div>
+        <div class="cl-item core"><div class="cl-icon">🏦</div><div class="cl-text"><strong>銀行轉帳記錄</strong>（驗證薪資實際支付）</div><div class="cl-badge must">必備</div></div>
+        <div class="cl-item core"><div class="cl-icon">📋</div><div class="cl-text"><strong>工時記錄表</strong>（員工親簽 ＋ PM 確認章）</div><div class="cl-badge must">必備</div></div>
+        <div class="cl-item core"><div class="cl-icon">📑</div><div class="cl-text"><strong>勞健保扣款記錄</strong></div><div class="cl-badge must">必備</div></div>
+        <div class="cl-item opt"><div class="cl-icon">🗂️</div><div class="cl-text">出勤記錄（驗證工時合理性）</div><div class="cl-badge opt-b">選備</div></div>
+        <div class="cl-item opt"><div class="cl-icon">📃</div><div class="cl-text">專案報價單 / 合約</div><div class="cl-badge opt-b">選備</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="bottom-grid">
+      <div class="bottom-card">
+        <h3>⚠️ 易錯觀念提醒</h3>
+        <div class="mistake-item">❌ 薪資重分類可以少繳營所稅<br>✅ 不影響淨利，只還原真實毛利率，稅額不變</div>
+        <div class="mistake-item">❌ 所有薪資一定要 100% 進成本<br>✅ 間接人工可放零（留在費用），作業更簡單</div>
+        <div class="mistake-item">❌ 工時用固定 160 小時就好<br>✅ 正規做法：當月工作日 × 8hr，每月工時不同</div>
+      </div>
+      <div class="bottom-card">
+        <h3>✏️ 課後自我檢測</h3>
+        <div class="quiz-item">你公司哪些員工屬於「直接人工」？哪些是「間接人工」？各舉 2 個例子。</div>
+        <div class="quiz-item">薪資重分類後，毛利和淨利各有什麼變化？為什麼營所稅不受影響？</div>
+        <div class="quiz-item">給會計師的查核文件，最核心的 3 樣是什麼？為什麼工時表需要 PM 確認簽章？</div>
+      </div>
+      <div class="bottom-card">
+        <h3>🎯 本堂重點小結</h3>
+        <div style="font-size:12px; color:#334155; line-height:1.7; margin-bottom:8px;">① 直接人工薪資 → 分攤到專案成本<br>② 三張表串接：薪資表 → 工時表 → 彙總表<br>③ 間接人工可選擇不分攤（放零）<br>④ 每年用同一套邏輯，好維護好核查</div>
+        <div class="key-sentence">薪資不是費用，<span>是你每個專案真實的成本</span><br><small style="font-weight:400; opacity:0.85;">—— 還原毛利，告別買發票</small></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
