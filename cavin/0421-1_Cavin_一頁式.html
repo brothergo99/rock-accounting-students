@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEN5194YPE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SEN5194YPE');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>會計基礎體驗課 — Cavin 0421-1</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; background: #f0f4f8; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 24px 16px; }
+  .page { width: 960px; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
+  .hero { background: linear-gradient(135deg, #78350f 0%, #b45309 50%, #d97706 100%); padding: 32px 40px 28px; position: relative; overflow: hidden; }
+  .hero::after { content: ''; position: absolute; right: -40px; top: -40px; width: 260px; height: 260px; border-radius: 50%; background: rgba(255,255,255,0.06); }
+  .hero::before { content: ''; position: absolute; right: 100px; bottom: -30px; width: 150px; height: 150px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+  .hero-tag { display: inline-block; background: rgba(255,255,255,0.18); color: #fde68a; font-size: 11px; font-weight: 700; letter-spacing: 2px; padding: 4px 12px; border-radius: 20px; margin-bottom: 12px; text-transform: uppercase; }
+  .hero h1 { color: #fff; font-size: 27px; font-weight: 900; line-height: 1.3; margin-bottom: 10px; position: relative; }
+  .hero-sub { color: #fde68a; font-size: 14px; font-weight: 500; opacity: 0.9; position: relative; }
+  .hero-meta { position: absolute; top: 32px; right: 40px; text-align: right; color: rgba(255,255,255,0.7); font-size: 12px; line-height: 1.8; }
+  .hero-meta strong { color: #fff; font-size: 14px; }
+  .body { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .col { padding: 28px 32px; }
+  .col:first-child { border-right: 1px solid #f1f5f9; }
+  .section-title { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #b45309; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: #fde68a; opacity: 0.6; }
+  .key-card { background: #fffbeb; border: 1px solid #fde68a; border-left: 4px solid #d97706; border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; }
+  .key-card h3 { font-size: 13.5px; font-weight: 700; color: #78350f; margin-bottom: 6px; }
+  .key-card p { font-size: 12.5px; color: #44403c; line-height: 1.65; }
+  .key-card .formula { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 6px; padding: 8px 12px; margin-top: 8px; font-size: 13px; font-weight: 700; color: #c2410c; text-align: center; letter-spacing: 1px; }
+  .cost-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+  .cost-box h3 { font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 12px; text-align: center; }
+  .cost-row { display: flex; gap: 8px; margin-bottom: 8px; }
+  .cost-item { flex: 1; border-radius: 8px; padding: 10px 10px 8px; text-align: center; }
+  .cost-item.direct-mat { background: #dcfce7; border: 1px solid #86efac; }
+  .cost-item.direct-lab { background: #dbeafe; border: 1px solid #93c5fd; }
+  .cost-item.indirect { background: #fae8ff; border: 1px solid #d8b4fe; }
+  .cost-item .ci-icon { font-size: 18px; display: block; margin-bottom: 4px; }
+  .cost-item .ci-label { font-size: 10.5px; font-weight: 700; color: #374151; display: block; }
+  .cost-item .ci-eg { font-size: 10px; color: #6b7280; margin-top: 4px; line-height: 1.4; }
+  .equation-card { background: linear-gradient(135deg, #451a03 0%, #92400e 100%); border-radius: 14px; padding: 20px; margin-bottom: 12px; color: #fff; text-align: center; }
+  .equation-card .eq-title { font-size: 11px; letter-spacing: 2px; color: #fde68a; font-weight: 700; margin-bottom: 12px; }
+  .equation-visual { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+  .eq-box { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); border-radius: 8px; padding: 10px 14px; font-size: 13px; font-weight: 700; color: #fff; min-width: 72px; }
+  .eq-box.highlight { background: rgba(253,230,138,0.2); border-color: #fde68a; color: #fde68a; }
+  .eq-sign { font-size: 18px; font-weight: 900; color: #fed7aa; }
+  .equation-card .eq-plain { font-size: 12px; color: #fcd34d; font-weight: 500; margin-top: 4px; line-height: 1.6; }
+  .structure-card { border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+  .structure-card h3 { font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 10px; }
+  .bar-wrap { height: 28px; border-radius: 6px; overflow: hidden; display: flex; margin-bottom: 6px; }
+  .bar-own { background: #16a34a; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 10.5px; font-weight: 700; }
+  .bar-debt { background: #ef4444; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 10.5px; font-weight: 700; }
+  .bar-labels { display: flex; justify-content: space-between; font-size: 10.5px; color: #6b7280; margin-top: 4px; }
+  .structure-note { font-size: 11.5px; color: #44403c; margin-top: 10px; padding: 8px 10px; background: #fef9c3; border-radius: 6px; line-height: 1.55; }
+  .example-tag { display: inline-block; background: #fff7ed; border: 1px solid #fed7aa; color: #c2410c; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-bottom: 6px; }
+  .bottom { background: #fffbeb; border-top: 1px solid #fde68a; padding: 24px 32px; }
+  .bottom-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .bottom-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; }
+  .bottom-card h3 { font-size: 12.5px; font-weight: 700; color: #78350f; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px dashed #fde68a; }
+  .step-item { display: flex; gap: 10px; margin-bottom: 8px; align-items: flex-start; }
+  .step-num { width: 20px; height: 20px; border-radius: 50%; background: #d97706; color: #fff; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .step-text { font-size: 12px; color: #374151; line-height: 1.6; }
+  .step-text strong { color: #92400e; }
+  .quiz-item { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; font-size: 12px; color: #374151; line-height: 1.55; }
+  .quiz-item::before { content: 'Q'; display: inline-block; width: 18px; height: 18px; background: #b45309; color: #fff; border-radius: 50%; font-size: 10px; font-weight: 700; text-align: center; line-height: 18px; margin-right: 6px; vertical-align: middle; }
+  .key-sentence { background: linear-gradient(135deg, #78350f, #d97706); color: #fff; border-radius: 10px; padding: 14px 18px; margin-top: 12px; font-size: 13px; font-weight: 700; text-align: center; line-height: 1.6; }
+  .key-sentence span { color: #fde68a; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="hero">
+    <div class="hero-tag">📚 Cavin · 會計家教</div>
+    <h1>從零開始看財報<br>管理部的數字視角</h1>
+    <p class="hero-sub">體驗課 · 加法的表 · 成本三要素 · 會計方程式入門</p>
+    <div class="hero-meta">
+      <strong>2025 / 04 / 21</strong><br>
+      第 1 堂 · 50 分鐘<br>
+      下次：4/28（二）
+    </div>
+  </div>
+  <div class="body">
+    <div class="col">
+      <div class="section-title">今日學習重點</div>
+      <div class="key-card">
+        <h3>🔍 管理部的角色：公司的眼睛</h3>
+        <p>職務分散、難以掌握跨部門效率，管理部的核心任務是<strong>找出效率缺口</strong>。要從「知道怎麼做」升級為「知道哪裡沒效率」，需要<strong>數字化思維</strong>。</p>
+      </div>
+      <div class="section-title" style="margin-top:6px;">成本三要素（珍珠奶茶法）</div>
+      <div class="cost-box">
+        <h3>☕ 一杯珍珠奶茶的成本拆解</h3>
+        <div class="cost-row">
+          <div class="cost-item direct-mat">
+            <span class="ci-icon">🧋</span>
+            <span class="ci-label">直接材料</span>
+            <div class="ci-eg">珍珠、茶、奶<br>糖、冰、杯子<br>（可直接指定）</div>
+          </div>
+          <div class="cost-item direct-lab">
+            <span class="ci-icon">👷</span>
+            <span class="ci-label">直接人工</span>
+            <div class="ci-eg">時薪÷60分鐘<br>× 製作時間<br>（可追蹤歸屬）</div>
+          </div>
+          <div class="cost-item indirect">
+            <span class="ci-icon">🏪</span>
+            <span class="ci-label">間接費用</span>
+            <div class="ci-eg">店面租金<br>電費、裝潢<br>（難直接歸屬）</div>
+          </div>
+        </div>
+        <div class="formula">直接材料 ＋ 直接人工 ＋ 間接費用 ＝ 完整成本</div>
+      </div>
+      <div class="key-card" style="border-left-color:#16a34a;">
+        <div class="example-tag">🏗️ 建材專案套用</div>
+        <h3 style="color:#15803d;">你的公務現場就是答案</h3>
+        <p>建材 = 直接材料（只屬於這個案子）<br>工班薪水 × 在此工地比例 = 直接人工<br>辦公室費用分攤 = 間接費用<br><br><strong>當你知道成本，才知道專案是賺還是賠！</strong></p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="section-title">會計方程式入門</div>
+      <div class="equation-card">
+        <div class="eq-title">⚖️ 會計恆等式（ACCOUNTING EQUATION）</div>
+        <div class="equation-visual">
+          <div class="eq-box highlight">資　産</div>
+          <div class="eq-sign">＝</div>
+          <div class="eq-box">負　債</div>
+          <div class="eq-sign">＋</div>
+          <div class="eq-box">業主權益</div>
+        </div>
+        <div class="eq-plain">公司的錢（資產）<br>＝ <strong>借來的錢</strong>（負債）＋ <strong>老闆自己出的錢</strong>（業主權益）</div>
+      </div>
+      <div class="key-card" style="border-left-color:#3b82f6;">
+        <div class="example-tag" style="color:#1d4ed8; border-color:#bfdbfe; background:#eff6ff;">🚗 生活案例：你的車貸</div>
+        <h3 style="color:#1e40af;">用自己的車套進去</h3>
+        <div class="formula" style="color:#1d4ed8; background:#eff6ff; border-color:#bfdbfe;">車 100 萬 ＝ 車貸 80 萬 ＋ 自付 20 萬</div>
+        <p style="margin-top:8px;">房子、公司資產，全都適用同一邏輯：<br><strong>有錢 = 借來的 + 自己的</strong></p>
+      </div>
+      <div class="section-title" style="margin-top:4px;">財務結構</div>
+      <div class="structure-card">
+        <h3>📊 財務結構 = 借款比例</h3>
+        <p style="font-size:11.5px; color:#6b7280; margin-bottom:10px;">公司資產 15 萬：自己出 10 萬 vs 借來 5 萬</p>
+        <div class="bar-wrap">
+          <div class="bar-own" style="width:67%;">自己的 67%</div>
+          <div class="bar-debt" style="width:33%;">借的 33%</div>
+        </div>
+        <div class="bar-labels"><span>▲ 業主權益</span><span>負債 ▲</span></div>
+        <div class="structure-note">⚠️ <strong>借款多 ≠ 財務結構不好</strong><br>要看行業別！預售屋建商借 8 成很正常，<br>生意能轉起來才是關鍵。</div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="bottom-grid">
+      <div class="bottom-card">
+        <h3>📈 管理報表思維：找效率缺口</h3>
+        <div class="step-item"><div class="step-num">1</div><div class="step-text"><strong>設標準（預算）</strong><br>這個專案材料應該用多少？工期應該幾天？</div></div>
+        <div class="step-item"><div class="step-num">2</div><div class="step-text"><strong>看實際（執行）</strong><br>實際用了多少材料？工班超時了嗎？</div></div>
+        <div class="step-item"><div class="step-num">3</div><div class="step-text"><strong>找缺口（改善）</strong><br>材料超用 → 材料管理問題<br>工時超時 → 工班效率問題</div></div>
+        <div style="font-size:11.5px; color:#6b7280; margin-top:8px; font-style:italic;">沒有比較就沒有管理，<br>沒有標準就找不到問題。</div>
+      </div>
+      <div class="bottom-card">
+        <h3>⚠️ 易錯觀念提醒</h3>
+        <div class="quiz-item" style="background:#fff7ed; border-color:#fed7aa;">❌ 財務結構不好 = 借款多<br>✅ 要看借款能否支撐業務轉動，行業別決定合理比例</div>
+        <div class="quiz-item" style="background:#fff7ed; border-color:#fed7aa;">❌ 感覺專案有賺就沒問題<br>✅ 要有數字標準，才能知道是賺20%還是30%，差異就是效率缺口</div>
+        <div class="quiz-item" style="background:#fff7ed; border-color:#fed7aa;">❌ 直接人工 = 整月薪資<br>✅ 按工地工作比例分攤，只有「在這個專案的時間」才歸屬此案</div>
+      </div>
+      <div class="bottom-card">
+        <h3>✏️ 課後自我檢測</h3>
+        <div class="quiz-item">以你公司的一個建案為例，列出3項<strong>直接材料</strong>和1項<strong>間接費用</strong>。</div>
+        <div class="quiz-item">用你自己的車或房子，填入會計方程式：<br>資產 ＝ 負債 ＋ 業主權益。</div>
+        <div class="quiz-item">「財務結構不好」是什麼意思？為什麼借款多不一定代表不好？</div>
+        <div class="key-sentence">公司的錢，<span>不是老闆出的，就是借來的</span><br><small style="font-weight:400; opacity:0.85;">—— 會計方程式的本質</small></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
