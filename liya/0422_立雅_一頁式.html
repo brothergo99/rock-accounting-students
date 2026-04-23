@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEN5194YPE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SEN5194YPE');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>管理會計：邊際貢獻與損益兩平 — 立雅 0422</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    background: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+
+  .page {
+    width: 960px;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #4c1d95 0%, #6d28d9 50%, #7c3aed 100%);
+    padding: 32px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    right: 100px; bottom: -30px;
+    width: 150px; height: 150px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    color: #ddd6fe;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    color: #fff;
+    font-size: 27px;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .hero-sub {
+    color: #ddd6fe;
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.9;
+    position: relative;
+  }
+  .hero-meta {
+    position: absolute;
+    top: 32px; right: 40px;
+    text-align: right;
+    color: rgba(255,255,255,0.7);
+    font-size: 12px;
+    line-height: 1.8;
+  }
+  .hero-meta strong { color: #fff; font-size: 14px; }
+
+  /* ── BODY ── */
+  .body { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .col { padding: 28px 32px; }
+  .col:first-child { border-right: 1px solid #f1f5f9; }
+
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #6d28d9;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #ddd6fe;
+    opacity: 0.8;
+  }
+
+  .def-card {
+    background: #f5f3ff;
+    border: 1px solid #ddd6fe;
+    border-left: 4px solid #7c3aed;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .def-card h3 { font-size: 13.5px; font-weight: 700; color: #4c1d95; margin-bottom: 6px; }
+  .def-card p { font-size: 12.5px; color: #374151; line-height: 1.65; }
+  .def-card .formula {
+    background: #ede9fe;
+    border: 1px solid #c4b5fd;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-top: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #5b21b6;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+
+  .mc-visual {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .mc-visual h3 { font-size: 12.5px; font-weight: 700; color: #1e293b; margin-bottom: 12px; text-align: center; }
+  .mc-bars { display: flex; gap: 10px; align-items: flex-end; margin-bottom: 8px; }
+  .mc-bar-wrap { flex: 1; text-align: center; }
+  .mc-bar {
+    border-radius: 6px 6px 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    min-height: 24px;
+    padding: 4px 2px;
+    line-height: 1.3;
+  }
+  .mc-bar.price { background: #7c3aed; height: 80px; }
+  .mc-bar.var   { background: #ef4444; height: 56px; }
+  .mc-bar.mc    { background: #16a34a; height: 24px; }
+  .mc-label { font-size: 10px; color: #6b7280; margin-top: 4px; }
+  .mc-eq { text-align: center; font-size: 12px; font-weight: 700; color: #5b21b6; background: #ede9fe; border-radius: 6px; padding: 6px; }
+
+  .calc-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 10px;
+  }
+  .calc-box h4 { font-size: 12px; font-weight: 700; color: #4c1d95; margin-bottom: 8px; }
+  .calc-step {
+    display: flex;
+    gap: 8px;
+    font-size: 12px;
+    color: #374151;
+    margin-bottom: 6px;
+    align-items: flex-start;
+    line-height: 1.55;
+  }
+  .cs-arrow { color: #7c3aed; font-weight: 700; flex-shrink: 0; }
+  .calc-result {
+    background: #ede9fe;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #4c1d95;
+    margin-top: 6px;
+    text-align: center;
+  }
+
+  .bep-card {
+    background: linear-gradient(135deg, #4c1d95 0%, #6d28d9 100%);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    color: #fff;
+  }
+  .bep-title { font-size: 11px; letter-spacing: 2px; color: #ddd6fe; font-weight: 700; margin-bottom: 12px; }
+  .bep-formula {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  }
+  .bep-example { display: flex; gap: 8px; }
+  .bep-box {
+    flex: 1;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+  }
+  .bep-box .bb-label { font-size: 10px; color: #ddd6fe; margin-bottom: 4px; }
+  .bep-box .bb-val { font-size: 14px; font-weight: 700; color: #fff; }
+  .bep-note { font-size: 11.5px; color: #ddd6fe; margin-top: 10px; line-height: 1.55; }
+
+  .cashflow-card {
+    border: 1px solid #fde68a;
+    background: #fffbeb;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .cashflow-card h3 { font-size: 13px; font-weight: 700; color: #78350f; margin-bottom: 8px; }
+  .cashflow-card p { font-size: 12px; color: #44403c; line-height: 1.65; }
+
+  .ratio-section { margin-bottom: 12px; }
+  .ratio-case {
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+  }
+  .ratio-case h4 { font-size: 12.5px; font-weight: 700; color: #1e293b; margin-bottom: 6px; }
+  .ratio-case p { font-size: 12px; color: #374151; line-height: 1.6; }
+  .ratio-case .op-tag {
+    display: inline-block;
+    font-size: 9.5px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 8px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .op-tag.bad { background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; }
+  .op-tag.worse { background: #fef2f2; color: #7f1d1d; border: 1px solid #f87171; }
+  .ratio-arrow { font-size: 12px; font-weight: 700; color: #6d28d9; }
+
+  .ratio-example {
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 12px;
+  }
+  .ratio-example h4 { font-size: 12.5px; font-weight: 700; color: #0c4a6e; margin-bottom: 10px; }
+  .re-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .re-item {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 11.5px;
+    color: #334155;
+    line-height: 1.5;
+  }
+  .re-item strong { color: #075985; }
+
+  /* ── BOTTOM ── */
+  .bottom {
+    background: #f5f3ff;
+    border-top: 1px solid #ddd6fe;
+    padding: 24px 32px;
+  }
+  .bottom-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .bottom-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .bottom-card h3 {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #4c1d95;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #ddd6fe;
+  }
+  .mistake-item {
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: #374151;
+    line-height: 1.55;
+  }
+  .quiz-item {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: #374151;
+    line-height: 1.55;
+  }
+  .quiz-item::before {
+    content: 'Q';
+    display: inline-block;
+    width: 18px; height: 18px;
+    background: #7c3aed;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 18px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .key-sentence {
+    background: linear-gradient(135deg, #4c1d95, #7c3aed);
+    color: #fff;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-top: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.6;
+  }
+  .key-sentence span { color: #ddd6fe; }
+
+  .step-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 6px;
+    align-items: flex-start;
+  }
+  .sn {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: #7c3aed;
+    color: #fff;
+    font-size: 9.5px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .st { font-size: 12px; color: #374151; line-height: 1.55; }
+  .st strong { color: #4c1d95; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">📖 立雅 · 記帳師備考</div>
+    <h1>管理會計：邊際貢獻<br>損益兩平 × 財務比率操作</h1>
+    <p class="hero-sub">邊際貢獻定義 · 損益兩平公式 · 流動速動比率 · 財務數字的貓膩</p>
+    <div class="hero-meta">
+      <strong>2025 / 04 / 22</strong><br>
+      陳管快核心主題<br>考前必拿分題型
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- 左欄 -->
+    <div class="col">
+      <div class="section-title">邊際貢獻（Contribution Margin）</div>
+
+      <div class="def-card">
+        <h3>📌 核心定義</h3>
+        <p>多賣<strong>一單位</strong>，公司可以多賺的錢。<br>
+        固定成本不會因多賣一單位而改變，<strong>所以不算在裡面</strong>。</p>
+        <div class="formula">邊際貢獻 ＝ 售價 − 變動成本</div>
+      </div>
+
+      <div class="mc-visual">
+        <h3>🎯 例題：售價20元，邊際貢獻6元</h3>
+        <div class="mc-bars">
+          <div class="mc-bar-wrap">
+            <div class="mc-bar price">售價<br>20元</div>
+            <div class="mc-label">售價</div>
+          </div>
+          <div class="mc-bar-wrap">
+            <div class="mc-bar var">變動<br>成本<br>14元</div>
+            <div class="mc-label">變動成本</div>
+          </div>
+          <div class="mc-bar-wrap">
+            <div class="mc-bar mc">邊際<br>貢獻<br>6元</div>
+            <div class="mc-label">邊際貢獻</div>
+          </div>
+        </div>
+        <div class="mc-eq">20 − 14 ＝ 6元邊際貢獻　→　每多賣1個，多賺6元</div>
+      </div>
+
+      <div class="calc-box">
+        <h4>🔢 從題目推算固定成本</h4>
+        <div class="calc-step"><span class="cs-arrow">①</span>銷售3000單位，淨利3000元</div>
+        <div class="calc-step"><span class="cs-arrow">②</span>總邊際貢獻 = 3000 × 6 = <strong>18,000元</strong></div>
+        <div class="calc-step"><span class="cs-arrow">③</span>固定成本 = 總邊際貢獻 − 淨利 = 18,000 − 3,000</div>
+        <div class="calc-result">固定成本 ＝ 15,000元</div>
+      </div>
+
+      <div class="section-title" style="margin-top:4px;">損益兩平點（Break-even Point）</div>
+      <div class="bep-card">
+        <div class="bep-title">⚖️ 損益兩平公式</div>
+        <div class="bep-formula">損益兩平銷售量 ＝ 固定成本 ÷ 邊際貢獻</div>
+        <div class="bep-example">
+          <div class="bep-box">
+            <div class="bb-label">固定成本</div>
+            <div class="bb-val">15,000</div>
+          </div>
+          <div class="bep-box">
+            <div class="bb-label">÷ 邊際貢獻</div>
+            <div class="bb-val">6元</div>
+          </div>
+          <div class="bep-box">
+            <div class="bb-label">= 兩平銷售量</div>
+            <div class="bb-val">2,500件</div>
+          </div>
+        </div>
+        <div class="bep-note">
+          💡 <strong>損益兩平的意義</strong>：是否值得做這個生意的判斷指標。<br>
+          兩平點太後面 → 固定成本太高，或邊際貢獻太小。
+        </div>
+      </div>
+
+      <div class="cashflow-card">
+        <h3>💡 貓膩：賠錢公司現金流卻是正的？</h3>
+        <p>折舊費用在損益表被扣了，但<strong>沒有實際付現金</strong>，現流表加回來 → 看起來現金流是正的。<br><br>
+        真相：<strong>總邊際貢獻 &gt; 0，但 &lt; 固定成本</strong> → 賠的是折舊，不是真的賠現金。<br>
+        這就是為什麼很多製造業賠錢還活得下去。</p>
+      </div>
+    </div>
+
+    <!-- 右欄 -->
+    <div class="col">
+      <div class="section-title">財務比率分析</div>
+
+      <div class="def-card">
+        <h3>📊 流動比率 vs 速動比率</h3>
+        <p>流動比率 = 流動資產 ÷ 流動負債<br>
+        速動比率 = 速動資產 ÷ 流動負債<br><br>
+        速動資產 = 流動資產 − <strong>存貨</strong> − <strong>預付款</strong><br>
+        （存貨需要賣掉才能變現；預付款未來不是要拿來變現）</p>
+      </div>
+
+      <div class="ratio-example">
+        <h4>🧮 例題解析（考試必拿 8 分）</h4>
+        <p style="font-size:11.5px; color:#475569; margin-bottom:10px;">已知：流動負債80萬、流動比率1.5、速動比率1.2</p>
+        <div class="re-grid">
+          <div class="re-item">流動資產<br><strong>80 × 1.5 ＝ 120萬</strong></div>
+          <div class="re-item">速動資產<br><strong>80 × 1.2 ＝ 96萬</strong></div>
+          <div class="re-item">存貨<br><strong>120 − 96 ＝ 20萬</strong></div>
+          <div class="re-item">應收帳款<br><strong>96 − 20（現金）＝ 76萬</strong></div>
+        </div>
+        <div style="font-size:11px; color:#475569; margin-top:8px;">※ 題目已知現金20萬，三項資產只有現金、應收、存貨</div>
+      </div>
+
+      <div class="calc-box" style="border-left: 3px solid #7c3aed;">
+        <h4>🔄 陷阱題：用公司債還短期借款</h4>
+        <div class="calc-step"><span class="cs-arrow">→</span>借長期公司債16萬（現金增加），還短期借款16萬（流動負債↓）</div>
+        <div class="calc-step"><span class="cs-arrow">→</span>速動資產不變（96萬），流動負債從80→64萬</div>
+        <div class="calc-result">新速動比率 ＝ 96 ÷ 64 ＝ 1.5（上升了！）</div>
+      </div>
+
+      <div class="section-title" style="margin-top:4px;">財務比率的現實操作</div>
+
+      <div class="ratio-case">
+        <h4>情境一：流動比率 &gt; 1 時 <span class="op-tag bad">不合理操作</span></h4>
+        <p>提前還款（分子分母都減相同金額）<br>
+        <span class="ratio-arrow">例：3/2 (1.5) → 2/1 (2.0)，比率反而上升！</span><br>
+        犧牲了 payment term，只為了數字好看。</p>
+      </div>
+
+      <div class="ratio-case">
+        <h4>情境二：流動比率 &lt; 1 時 <span class="op-tag worse">更壞的操作</span></h4>
+        <p>提前進貨（資產＋負債同時增加）<br>
+        <span class="ratio-arrow">例：1/2 (0.5) → 2/3 (0.67)，比率也上升！</span><br>
+        本來就快撐不住，硬把貨拉進來，雪上加霜。</p>
+      </div>
+
+      <div class="ratio-case" style="background:#fef2f2; border-color:#fca5a5;">
+        <h4>情境三：最壞 <span class="op-tag worse">假預收</span></h4>
+        <p>叫客戶匯錢當「預收」（其實根本沒做這筆生意）<br>
+        資產＋負債同時增加，比率美化，但完全是假的。<br>
+        <strong>類比：你叫客戶補鏡像發票的道理是一樣的</strong> — 都是讓數字好看。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM -->
+  <div class="bottom">
+    <div class="bottom-grid">
+
+      <div class="bottom-card">
+        <h3>⚠️ 易錯觀念提醒</h3>
+        <div class="mistake-item">
+          ❌ 固定成本也要算在邊際貢獻裡<br>
+          ✅ 多賣一單位固定成本不變，所以不影響邊際貢獻
+        </div>
+        <div class="mistake-item">
+          ❌ 賠錢的公司一定現金也不夠<br>
+          ✅ 賠的可能只是折舊（非現金），總邊際貢獻仍為正
+        </div>
+        <div class="mistake-item">
+          ❌ 上下同減一個數，比率不變<br>
+          ✅ 比率大於1時，上下同減 → 比率反而增加！
+        </div>
+      </div>
+
+      <div class="bottom-card">
+        <h3>✏️ 課後自我檢測</h3>
+        <div class="quiz-item">什麼是邊際貢獻？為什麼固定成本不算在其中？請用自己的話解釋。</div>
+        <div class="quiz-item">損益兩平點的公式是什麼？固定成本15,000、邊際貢獻6元，兩平銷售量是多少？</div>
+        <div class="quiz-item">流動比率大於1的公司提前還款，比率會上升還是下降？為什麼財務人員會這樣操作？</div>
+      </div>
+
+      <div class="bottom-card">
+        <h3>🎯 本堂重點小結</h3>
+        <div class="step-row"><div class="sn">1</div><div class="st"><strong>邊際貢獻</strong> = 售價 − 變動成本，固定成本不在此列</div></div>
+        <div class="step-row"><div class="sn">2</div><div class="st"><strong>損益兩平</strong> = 固定成本 ÷ 邊際貢獻，判斷生意值不值得做</div></div>
+        <div class="step-row"><div class="sn">3</div><div class="st"><strong>速動 vs 流動</strong>：差額 = 存貨（＋預付款）</div></div>
+        <div class="step-row"><div class="sn">4</div><div class="st">比率操作是現實存在的，<strong>單看比率不夠，要看商業邏輯</strong></div></div>
+        <div class="key-sentence">
+          邊際貢獻大於零，才值得繼續做<br>
+          <span>—— 管理會計的核心判斷邏輯</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
