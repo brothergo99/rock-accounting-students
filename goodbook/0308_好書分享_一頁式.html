@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HYROX商業飛輪 — 好書分享 0308</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--red:#C0392B;--red2:#E74C3C;--red3:#F1948A;--cream:#FFF5F5;--cream2:#FFE8E8;--ink:#2C0A0A;--muted:#8A3030;--white:#fff;--border:rgba(192,57,43,.2)}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--cream);color:var(--ink)}
+.header{background:linear-gradient(135deg,#1A0000,#3A0808,#600A0A);padding:40px 48px 32px;position:relative;overflow:hidden}
+.header::before{content:'💪';position:absolute;top:-10px;right:40px;font-size:110px;opacity:.08;pointer-events:none}
+.header-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.25em;color:var(--red3);text-transform:uppercase;margin-bottom:12px}
+.header h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,40px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:8px}
+.header h1 em{color:var(--red3);font-style:italic}
+.header-sub{font-size:13px;color:rgba(255,255,255,.6);font-family:'DM Mono',monospace;margin-top:10px}
+.header-date{display:inline-flex;align-items:center;gap:8px;background:rgba(192,57,43,.25);border:1px solid rgba(241,148,138,.3);padding:5px 12px;border-radius:4px;font-family:'DM Mono',monospace;font-size:10px;color:var(--red3);margin-top:14px;letter-spacing:.1em}
+section{padding:40px 48px;border-top:2px solid var(--border)}
+.sec-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:14px}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(18px,3vw,26px);font-weight:700;color:var(--ink);margin-bottom:20px;line-height:1.2}
+/* SPEND */
+.spend-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:580px){.spend-grid{grid-template-columns:repeat(2,1fr)}}
+.spend-item{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:14px;text-align:center}
+.spend-amount{font-family:'DM Mono',monospace;font-size:15px;font-weight:700;color:var(--red)}
+.spend-label{font-size:11px;color:var(--muted);margin-top:4px}
+.spend-total{background:var(--red);color:#fff;font-family:'DM Mono',monospace;font-size:14px;font-weight:700;padding:12px 20px;border-radius:10px;text-align:center}
+/* PILLARS */
+.pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.pillar-grid{grid-template-columns:1fr}}
+.pillar{background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:20px}
+.pillar-num{width:28px;height:28px;border-radius:8px;background:var(--red);color:#fff;font-family:'DM Mono',monospace;font-size:12px;display:flex;align-items:center;justify-content:center;margin-bottom:8px;font-weight:700}
+.pillar-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.pillar-desc{font-size:12px;color:var(--muted);line-height:1.7}
+.pillar-key{font-size:11px;color:var(--red);margin-top:8px;padding:7px 10px;background:var(--cream2);border-radius:6px;font-weight:500}
+/* FLYWHEEL */
+.flywheel-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+@media(max-width:640px){.flywheel-grid{grid-template-columns:repeat(2,1fr)}}
+.fw-step{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:12px;text-align:center}
+.fw-icon{font-size:20px;margin-bottom:6px}
+.fw-title{font-size:11px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.fw-desc{font-size:10px;color:var(--muted);line-height:1.5}
+.insight{background:var(--cream2);border-left:4px solid var(--red);padding:14px 18px;border-radius:0 8px 8px 0;font-size:13px;color:var(--ink);line-height:1.75;margin-top:16px}
+.insight strong{color:var(--red)}
+.summary{background:var(--red);text-align:center;padding:40px 48px}
+.summary h2{font-family:'Playfair Display',serif;font-size:clamp(18px,3vw,26px);font-weight:900;color:#fff;margin-bottom:10px}
+.summary p{font-size:13px;color:rgba(255,255,255,.85);max-width:540px;margin:0 auto 20px;line-height:1.75}
+.pills{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.pill{background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.4);padding:7px 16px;border-radius:20px;font-family:'DM Mono',monospace;font-size:11px;color:#fff}
+footer{background:var(--ink);padding:16px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.ft-l{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.5)}
+.ft-r{font-size:10px;color:rgba(255,255,255,.35)}
+@media(max-width:640px){.header,section,.summary,footer{padding-left:24px;padding-right:24px}}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-tag">好書分享 ✦ HYROX 商業模式試讀 ✦ 2026.03.08</div>
+  <h1>將「完賽的感動」<br>變現為<em>全球印鈔機</em></h1>
+  <div class="header-sub">百億健身商機 · 固定成本槓桿 · 情緒變現 · 訂閱制飛輪</div>
+  <div class="header-date">💪 本場重點：動態定價 · 損益兩平 · 稀缺性 · LTV 生態系</div>
+</div>
+
+<section style="background:var(--white)">
+  <div class="sec-label">情緒變現 · Emotional Monetization</div>
+  <div class="sec-title">為什麼一個理性的成年人<br>會在週末衝動花 12,000元？</div>
+  <div class="spend-grid">
+    <div class="spend-item"><div class="spend-amount">NT$4,000</div><div class="spend-label">參賽門票</div></div>
+    <div class="spend-item"><div class="spend-amount">現場狂買</div><div class="spend-label">PUMA 聯名服飾</div></div>
+    <div class="spend-item"><div class="spend-amount">NT$800</div><div class="spend-label">官方預購照片</div></div>
+    <div class="spend-item"><div class="spend-amount">NT$700~800</div><div class="spend-label">退費保險</div></div>
+  </div>
+  <div class="spend-total">💸 TOTAL：~NT$12,000 / 人</div>
+  <div class="insight">💡 <strong>市場空白：</strong>跑者有馬拉松、高爾夫球友有球場，但<strong>健身房愛好者只有鏡子</strong>。成千上萬的人每週苦練三天，卻沒有一個舞台讓他們享受比賽的刺激感。HYROX 抓住了這個巨大缺口。</div>
+</section>
+
+<section style="background:var(--cream)">
+  <div class="sec-label">三大商業支柱 · Three Revenue Pillars</div>
+  <div class="sec-title">從一次性票價到<br>長期訂閱制收入</div>
+  <div class="pillar-grid">
+    <div class="pillar">
+      <div class="pillar-num">1</div>
+      <div class="pillar-title">極致固定成本槓桿</div>
+      <div class="pillar-desc">損益兩平點：1,500人。實際參賽：9,000人。場地與設備皆為固定成本，跨過門檻後，剩餘 7,500 人的報名費<strong>幾乎全數轉化為高毛利</strong>。</div>
+      <div class="pillar-key">⚡ 每多一個人就是純利潤</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">2</div>
+      <div class="pillar-title">航空業等級動態定價</div>
+      <div class="pillar-desc">越接近賽事票越貴（NT$3,000 → NT$4,000）。觀眾也要買票（NT$300早鳥 → NT$400現場）。照片包、退票保險——精準堆疊微型交易。</div>
+      <div class="pillar-key">📈 FOMO 心理推升客單價</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">3</div>
+      <div class="pillar-title">訂閱制經常性收入</div>
+      <div class="pillar-desc">單次 NT$4,000 報名費，促使參賽者加入 F45 等授權健身房備戰，延伸出<strong>每月 NT$5,000 的常態訓練支出</strong>，為官方帶來穩定授權金。</div>
+      <div class="pillar-key">♾️ 一場賽事 → 持續月費</div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--white)">
+  <div class="sec-label">商業生態系飛輪 · The Flywheel</div>
+  <div class="sec-title">不斷自我強化的<br>終身價值鎖定</div>
+  <div class="flywheel-grid">
+    <div class="fw-step"><div class="fw-icon">🏁</div><div class="fw-title">報名參賽</div><div class="fw-desc">發現自身體能弱點</div></div>
+    <div class="fw-step"><div class="fw-icon">🏋️</div><div class="fw-title">常態訓練</div><div class="fw-desc">訂閱 F45 等授權健身房</div></div>
+    <div class="fw-step"><div class="fw-icon">📊</div><div class="fw-title">追蹤數據</div><div class="fw-desc">穿戴裝置自動偵測，點燃「下次進步20分鐘」的渴望</div></div>
+    <div class="fw-step"><div class="fw-icon">👟</div><div class="fw-title">添購裝備</div><div class="fw-desc">PUMA限定＋華米手錶</div></div>
+    <div class="fw-step" style="border-color:var(--red);background:var(--cream2)"><div class="fw-icon">🔁</div><div class="fw-title">再次挑戰</div><div class="fw-desc">台北→曼谷→上海→郵輪賽，LTV無限延伸</div></div>
+  </div>
+  <div class="insight">🚛 <strong>營運效率：</strong>全球僅靠 <strong>9 台標準化卡車</strong>，實現一年 170 場賽事。極快的進退場效率，讓 HYROX 每週末在全球多地同步吸金。</div>
+</section>
+
+<section class="summary">
+  <h2>打造現象級商業模式<br>的三大核心法則</h2>
+  <p>HYROX 2026 全球商機預估約 2 億美元。僅台灣單一連鎖健身房年營收就高達百億，這個藍海才剛開始。</p>
+  <div class="pills">
+    <span class="pill">創造專屬舞台</span>
+    <span class="pill">將情緒變現</span>
+    <span class="pill">建構生態系飛輪</span>
+    <span class="pill">固定成本槓桿</span>
+    <span class="pill">稀缺性引爆購買</span>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-l">好書分享：HYROX 商業模式試讀 ｜ 分享日期：2026.03.08 ｜ 由 AI 輔助整理，僅供學習用途</div>
+  <div class="ft-r">固定成本槓桿 · 動態定價 · 訂閱制 · LTV飛輪</div>
+</footer>
+</body>
+</html>
