@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>統一超商財報透視 — 好書分享 0412</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --orange:#F5812A;--orange2:#FF9A4D;--orange3:#FFC285;
+  --cream:#FFF8F0;--cream2:#FFF0E0;--brown:#7A3B10;
+  --brown2:#A05020;--muted:#A08060;--ink:#2C1A0A;
+  --white:#FFFFFF;--border:rgba(245,129,42,.2);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,#1A0A00 0%,#3A1500 60%,#5A2500 100%);padding:40px 48px 32px;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-80px;right:-80px;width:320px;height:320px;background:radial-gradient(circle,rgba(245,129,42,.2),transparent 70%);pointer-events:none}
+.header-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.25em;color:var(--orange3);text-transform:uppercase;margin-bottom:12px;opacity:.8}
+.header h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,38px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:8px}
+.header h1 em{color:var(--orange2);font-style:italic}
+.header-sub{font-size:13px;color:rgba(255,255,255,.6);font-family:'DM Mono',monospace;margin-top:10px}
+.header-date{display:inline-flex;align-items:center;gap:8px;background:rgba(245,129,42,.15);border:1px solid rgba(245,129,42,.3);padding:5px 12px;border-radius:4px;font-family:'DM Mono',monospace;font-size:10px;color:var(--orange3);margin-top:14px;letter-spacing:.1em}
+
+/* MYTH BUSTERS */
+.myths{background:var(--white);padding:40px 48px;border-top:3px solid var(--orange3)}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--orange);text-transform:uppercase;margin-bottom:16px}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(18px,3vw,26px);font-weight:700;color:var(--ink);margin-bottom:20px;line-height:1.2}
+.myth-grid{display:grid;gap:10px}
+.myth-row{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;background:var(--cream2);border:1.5px solid var(--orange3);border-radius:10px;padding:16px 20px}
+.myth-left{font-size:13px;color:var(--brown2);line-height:1.6}
+.myth-left .label{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.1em;margin-bottom:4px}
+.myth-vs{font-family:'Playfair Display',serif;font-size:18px;color:var(--orange);font-weight:900;opacity:.4;flex-shrink:0}
+.myth-right{font-size:13px;color:var(--ink);line-height:1.6;font-weight:500}
+.myth-right .label{font-family:'DM Mono',monospace;font-size:9px;color:var(--orange);letter-spacing:.1em;margin-bottom:4px}
+.myth-right strong{color:var(--orange)}
+
+/* WATERFALL */
+.waterfall{background:linear-gradient(135deg,#FFF4E6,#FFE8CC);padding:40px 48px;border-top:2px solid var(--orange3)}
+.wf-bar{margin-bottom:14px}
+.wf-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+.wf-name{font-size:13px;font-weight:500;color:var(--ink)}
+.wf-num{font-family:'DM Mono',monospace;font-size:12px;color:var(--orange);font-weight:700}
+.wf-track{background:rgba(0,0,0,.06);border-radius:4px;height:10px;overflow:hidden}
+.wf-fill{height:100%;border-radius:4px;transition:width .8s ease}
+.wf-note{font-size:11px;color:var(--muted);margin-top:4px;font-style:italic}
+.insight-box{background:var(--white);border-left:4px solid var(--orange);padding:14px 18px;border-radius:0 8px 8px 0;margin-top:18px;font-size:13px;color:var(--brown2);line-height:1.75}
+.insight-box strong{color:var(--ink)}
+
+/* ASSET / MAGIC */
+.two-col{background:var(--white);padding:40px 48px;border-top:2px solid var(--orange3);display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:640px){.two-col{grid-template-columns:1fr}}
+.col-card{background:var(--cream2);border:1.5px solid var(--orange3);border-radius:12px;padding:22px}
+.col-card h3{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:14px}
+.stat-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px dashed var(--border);font-size:12px}
+.stat-row:last-child{border-bottom:none}
+.stat-name{color:var(--brown2)}
+.stat-val{font-family:'DM Mono',monospace;font-weight:700;color:var(--orange)}
+.stat-val.highlight{color:#cc0000;font-size:13px}
+.magic-step{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px dashed var(--border)}
+.magic-step:last-child{border-bottom:none}
+.magic-icon{width:32px;height:32px;border-radius:8px;background:var(--orange);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.magic-text{font-size:12px;color:var(--brown2);line-height:1.65}
+.magic-text strong{color:var(--ink)}
+.time-tag{font-family:'DM Mono',monospace;font-size:9px;color:var(--orange);letter-spacing:.1em}
+
+/* MOAT */
+.moat{background:linear-gradient(135deg,#1A0A00,#3A1500);padding:40px 48px;border-top:2px solid var(--orange)}
+.moat .section-label{color:var(--orange3)}
+.moat .section-title{color:#fff}
+.moat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:4px}
+@media(max-width:580px){.moat-grid{grid-template-columns:1fr}}
+.moat-card{background:rgba(255,255,255,.06);border:1px solid rgba(245,129,42,.25);border-radius:10px;padding:18px}
+.moat-icon{font-size:22px;margin-bottom:8px}
+.moat-name{font-family:'DM Mono',monospace;font-size:10px;color:var(--orange3);letter-spacing:.08em;margin-bottom:6px}
+.moat-desc{font-size:12px;color:rgba(255,255,255,.65);line-height:1.65}
+
+/* ROE SUMMARY */
+.summary{background:var(--orange);padding:36px 48px;text-align:center}
+.summary h2{font-family:'Playfair Display',serif;font-size:clamp(18px,3vw,26px);font-weight:900;color:#fff;margin-bottom:10px;line-height:1.2}
+.summary p{font-size:13px;color:rgba(255,255,255,.85);max-width:540px;margin:0 auto 20px;line-height:1.75}
+.roe-pills{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.roe-pill{background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.4);padding:7px 16px;border-radius:20px;font-family:'DM Mono',monospace;font-size:11px;color:#fff;font-weight:500}
+
+/* FOOTER */
+footer{background:var(--brown);padding:16px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.ft-l{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.5)}
+.ft-r{font-size:10px;color:rgba(255,255,255,.4)}
+
+@media(max-width:640px){
+  .header,.myths,.waterfall,.two-col,.moat,.summary,footer{padding-left:24px;padding-right:24px}
+  .myth-row{grid-template-columns:1fr;text-align:center}
+  .myth-vs{transform:rotate(90deg)}
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.header-tag{animation:fadeUp .5s ease both .1s}
+.header h1{animation:fadeUp .5s ease both .2s}
+.header-sub{animation:fadeUp .5s ease both .3s}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-tag">好書分享 ✦ 《大會計師帶你看財報》林明樟 ✦ 2026.04.12</div>
+  <h1>統一超商的<em>財報真相</em>：<br>3,500億終極印鈔機</h1>
+  <div class="header-sub">實體通路業的財報底層邏輯 · Case Study：統一超商</div>
+  <div class="header-date">📊 本場重點：應付帳款 · 使用權資產 · 自由現金流</div>
+</div>
+
+<!-- MYTH BUSTERS -->
+<section class="myths">
+  <div class="section-label">打破直覺 · Myths vs Reality</div>
+  <div class="section-title">你以為你懂便利商店，<br>財報說你不對</div>
+  <div class="myth-grid">
+    <div class="myth-row">
+      <div class="myth-left">
+        <div class="label">❌ 一般人直覺</div>
+        貨架滿滿都是商品，「存貨」一定是最大資產
+      </div>
+      <div class="myth-vs">VS</div>
+      <div class="myth-right">
+        <div class="label">✅ 財報真相</div>
+        存貨佔比<strong>不到 10%</strong>。最大資產是千億的<strong>門店空間</strong>（使用權資產）
+      </div>
+    </div>
+    <div class="myth-row">
+      <div class="myth-left">
+        <div class="label">❌ 一般人直覺</div>
+        賣這麼貴，靠「高額差價」暴利賺錢
+      </div>
+      <div class="myth-vs">VS</div>
+      <div class="myth-right">
+        <div class="label">✅ 財報真相</div>
+        毛利34%，但扣掉龐大門店維持費後，<strong>營業淨利只剩 4%</strong>
+      </div>
+    </div>
+    <div class="myth-row">
+      <div class="myth-left">
+        <div class="label">❌ 一般人直覺</div>
+        負債比極高 = 銀行借款龐大 = 財務危機
+      </div>
+      <div class="myth-vs">VS</div>
+      <div class="myth-right">
+        <div class="label">✅ 財報真相</div>
+        高負債來自<strong>未來租金義務</strong>與<strong>供應商的錢</strong>，銀行借款反而不多
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WATERFALL -->
+<section class="waterfall">
+  <div class="section-label">損益瀑布 · Revenue to Profit</div>
+  <div class="section-title">3,500億進來，最後剩多少？</div>
+
+  <div class="wf-bar">
+    <div class="wf-label"><span class="wf-name">總營收</span><span class="wf-num">3,500.7 億</span></div>
+    <div class="wf-track"><div class="wf-fill" style="width:100%;background:var(--orange)"></div></div>
+  </div>
+  <div class="wf-bar">
+    <div class="wf-label"><span class="wf-name">營業毛利（34%）</span><span class="wf-num">1,200 億</span></div>
+    <div class="wf-track"><div class="wf-fill" style="width:34%;background:var(--orange2)"></div></div>
+    <div class="wf-note">扣除商品直接成本</div>
+  </div>
+  <div class="wf-bar">
+    <div class="wf-label"><span class="wf-name">營業淨利（4%）</span><span class="wf-num">139 億</span></div>
+    <div class="wf-track"><div class="wf-fill" style="width:4%;background:#E8500A"></div></div>
+    <div class="wf-note">推銷費用（門店+行銷+Open Point 點數）大量吃掉毛利</div>
+  </div>
+  <div class="wf-bar">
+    <div class="wf-label"><span class="wf-name">本期淨利</span><span class="wf-num">133 億</span></div>
+    <div class="wf-track"><div class="wf-fill" style="width:3.8%;background:#7A3B10"></div></div>
+  </div>
+
+  <div class="insight-box">
+    💡 <strong>核心洞察：</strong>實體通路不靠「暴利」，靠的是在 3,500 億的絕對規模下，<strong>薄利仍能轉化成百億級絕對利潤</strong>。數量才是武器。
+  </div>
+</section>
+
+<!-- ASSET + MAGIC -->
+<div class="two-col">
+  <div class="col-card">
+    <h3>💰 資產結構透視</h3>
+    <div class="stat-row">
+      <span class="stat-name">使用權資產（門店空間）</span>
+      <span class="stat-val highlight">~1,000億</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-name">不動產廠房設備</span>
+      <span class="stat-val">合計 56%</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-name">應付帳款（真正的籌碼）</span>
+      <span class="stat-val highlight">714 億</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-name">銀行借款（反而不多）</span>
+      <span class="stat-val">342 億</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-name">存貨佔比</span>
+      <span class="stat-val">&lt;10%</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-name">存貨周轉天數</span>
+      <span class="stat-val highlight">20 天</span>
+    </div>
+    <div class="insight-box" style="margin-top:14px;font-size:12px">
+      走進便利商店，你看見的不是貨架商品，而是<strong>價值千億的空間資產</strong>。
+    </div>
+  </div>
+
+  <div class="col-card">
+    <h3>✨ 負營運資金魔法</h3>
+    <div class="magic-step">
+      <div class="magic-icon">⚡</div>
+      <div class="magic-text">
+        <div class="time-tag">T + 0（交易當下）</div>
+        <strong>秒收現金</strong>：消費者刷卡付款，資金立即入帳，風險由銀行承擔
+      </div>
+    </div>
+    <div class="magic-step">
+      <div class="magic-icon">🔄</div>
+      <div class="magic-text">
+        <div class="time-tag">T + 20天</div>
+        <strong>極速周轉</strong>：全台5,000間門店每個月存貨完全清空一次
+      </div>
+    </div>
+    <div class="magic-step">
+      <div class="magic-icon">⏰</div>
+      <div class="magic-text">
+        <div class="time-tag">T + 90～120天</div>
+        <strong>延遲付款</strong>：利用通路話語權，3~4個月後才需付錢給供應商
+      </div>
+    </div>
+    <div class="insight-box" style="margin-top:14px;font-size:12px">
+      結論：<strong>拿供應商的錢，來開自己的店</strong>。企業幾乎不需要自有資金就能運轉。
+    </div>
+  </div>
+</div>
+
+<!-- MOAT -->
+<section class="moat">
+  <div class="section-label">護城河 · Competitive Moat</div>
+  <div class="section-title">數字背後，對手抄不走的底層武器</div>
+  <div class="moat-grid">
+    <div class="moat-card">
+      <div class="moat-icon">🚛</div>
+      <div class="moat-name">自有物流與倉儲</div>
+      <div class="moat-desc">確保全台門店 20天 極速周轉與精準補貨的物理命脈。連「超能蛋白可可口味」這種小需求都能精準到位。</div>
+    </div>
+    <div class="moat-card">
+      <div class="moat-icon">💻</div>
+      <div class="moat-name">強大後台 IT 系統</div>
+      <div class="moat-desc">處理無數筆銅板交易，提供強悍的結帳解算與終端數據預測能力，讓每間門店都像精密儀器。</div>
+    </div>
+    <div class="moat-card">
+      <div class="moat-icon">🌐</div>
+      <div class="moat-name">多角化生態系</div>
+      <div class="moat-desc">利用康是美等副品牌作為新創產品試金石，建立高門檻壁壘——財務數字只是結果，不可複製的基礎設施才是核心。</div>
+    </div>
+  </div>
+</section>
+
+<!-- CASH FLOW -->
+<section class="waterfall" style="background:var(--white);border-top:2px solid var(--orange3)">
+  <div class="section-label">現金流量表 · 損益表的照妖鏡</div>
+  <div class="section-title">帳面賺133億，<br>實際現金流入360億？</div>
+
+  <div class="wf-bar">
+    <div class="wf-label"><span class="wf-name">帳面淨利</span><span class="wf-num">133 億</span></div>
+    <div class="wf-track"><div class="wf-fill" style="width:37%;background:var(--muted)"></div></div>
+  </div>
+  <div class="wf-bar">
+    <div class="wf-label"><span class="wf-name">＋折舊魔法（加回）</span><span class="wf-num">非現金支出</span></div>
+    <div class="wf-track"><div class="wf-fill" style="width:60%;background:var(--orange2)"></div></div>
+    <div class="wf-note">龐大店面裝潢與設備的折舊費，是會計帳的扣除，但沒有真實現金流出</div>
+  </div>
+  <div class="wf-bar">
+    <div class="wf-label"><span class="wf-name">營業活動現金流</span><span class="wf-num" style="color:#E8500A">360 億 🔥</span></div>
+    <div class="wf-track"><div class="wf-fill" style="width:100%;background:linear-gradient(90deg,var(--orange),#E8500A)"></div></div>
+  </div>
+  <div class="wf-bar">
+    <div class="wf-label"><span class="wf-name">投資活動流出（開新店）</span><span class="wf-num">169 億</span></div>
+    <div class="wf-track"><div class="wf-fill" style="width:47%;background:#A05020"></div></div>
+  </div>
+
+  <div class="insight-box">
+    💡 <strong>終極印鈔機的秘密：</strong>賺的現金遠比帳面淨利多。360億的自由現金流，是持續開店、擴張版圖的核心燃料。
+  </div>
+</section>
+
+<!-- SUMMARY -->
+<section class="summary">
+  <h2>實體零售王者的<br>ROE 三大鐵則</h2>
+  <p>財報上的每一個數字，都是這套商業法則最完美的實踐。<br>賺得有價值 × 賣得快 × 開槓桿 = 統一超商的護城河</p>
+  <div class="roe-pills">
+    <span class="roe-pill">賣得有價值（34% 毛利）</span>
+    <span class="roe-pill">賣得快（20天周轉）</span>
+    <span class="roe-pill">開槓桿（90天延遲付款）</span>
+    <span class="roe-pill">折舊魔法 → 360億現金流</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-l">好書分享：《大會計師帶你看財報》林明樟 ｜ 分享日期：2026.04.12 ｜ 由 AI 輔助整理，僅供學習用途</div>
+  <div class="ft-r">應付帳款 · 負營運資金 · 自由現金流</div>
+</footer>
+
+</body>
+</html>
