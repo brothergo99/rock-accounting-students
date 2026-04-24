@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEN5194YPE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SEN5194YPE');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>初階會計：結帳 × 信用損失 × 收現分析 — 穎祥 0423</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    background: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+
+  .page {
+    width: 960px;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%);
+    padding: 32px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    right: 100px; bottom: -30px;
+    width: 150px; height: 150px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    color: #a7f3d0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    color: #fff;
+    font-size: 27px;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .hero-sub {
+    color: #a7f3d0;
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.9;
+    position: relative;
+  }
+  .hero-meta {
+    position: absolute;
+    top: 32px; right: 40px;
+    text-align: right;
+    color: rgba(255,255,255,0.7);
+    font-size: 12px;
+    line-height: 1.8;
+  }
+  .hero-meta strong { color: #fff; font-size: 14px; }
+
+  .body { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .col { padding: 28px 32px; }
+  .col:first-child { border-right: 1px solid #f1f5f9; }
+
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #047857;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #a7f3d0;
+    opacity: 0.8;
+  }
+
+  .def-card {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-left: 4px solid #047857;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .def-card h3 { font-size: 13.5px; font-weight: 700; color: #064e3b; margin-bottom: 6px; }
+  .def-card p { font-size: 12.5px; color: #374151; line-height: 1.65; }
+  .def-card .formula {
+    background: #dcfce7;
+    border: 1px solid #86efac;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-top: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #065f46;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+
+  .closing-flow {
+    background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+    color: #fff;
+  }
+  .cf-title { font-size: 11px; letter-spacing: 2px; color: #a7f3d0; font-weight: 700; margin-bottom: 12px; }
+  .cf-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+  .cf-badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #fff;
+    white-space: nowrap;
+  }
+  .cf-arrow { color: #a7f3d0; font-weight: 700; font-size: 14px; }
+  .cf-desc { font-size: 11.5px; color: rgba(255,255,255,0.85); line-height: 1.5; }
+  .cf-note {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 11.5px;
+    color: #a7f3d0;
+    margin-top: 8px;
+    line-height: 1.55;
+  }
+
+  .calc-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 10px;
+  }
+  .calc-box h4 { font-size: 12px; font-weight: 700; color: #064e3b; margin-bottom: 8px; }
+  .calc-step {
+    display: flex;
+    gap: 8px;
+    font-size: 12px;
+    color: #374151;
+    margin-bottom: 6px;
+    align-items: flex-start;
+    line-height: 1.55;
+  }
+  .cs-num {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: #047857;
+    color: #fff;
+    font-size: 9.5px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .calc-result {
+    background: #dcfce7;
+    border: 1px solid #86efac;
+    border-radius: 6px;
+    padding: 7px 12px;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #064e3b;
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  .t-account {
+    background: #fff;
+    border: 1.5px solid #d1fae5;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  .t-account h4 { font-size: 12px; font-weight: 700; color: #064e3b; margin-bottom: 10px; text-align: center; }
+  .t-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid #d1fae5;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .t-side { padding: 8px 10px; font-size: 11.5px; }
+  .t-side:first-child { border-right: 1.5px solid #064e3b; background: #f0fdf4; }
+  .t-side:last-child { background: #fff; }
+  .t-header { font-size: 10px; font-weight: 700; letter-spacing: 1px; color: #047857; margin-bottom: 6px; text-align: center; }
+  .t-item { font-size: 11.5px; color: #374151; margin-bottom: 3px; line-height: 1.4; }
+  .t-item strong { color: #064e3b; }
+
+  .cash-card {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .cash-card h3 { font-size: 13px; font-weight: 700; color: #064e3b; margin-bottom: 10px; }
+  .cash-logic {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .cl-box {
+    background: #fff;
+    border: 1px solid #86efac;
+    border-radius: 8px;
+    padding: 8px 12px;
+    text-align: center;
+    font-size: 11.5px;
+    color: #374151;
+  }
+  .cl-box strong { display: block; font-size: 14px; color: #064e3b; }
+  .cl-op { font-size: 18px; font-weight: 700; color: #047857; }
+  .cl-result {
+    background: #064e3b;
+    color: #fff;
+    border-radius: 8px;
+    padding: 8px 16px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 8px;
+  }
+  .cash-rule {
+    font-size: 11.5px;
+    color: #374151;
+    line-height: 1.6;
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: #fff;
+    border-radius: 6px;
+    border: 1px solid #d1fae5;
+  }
+
+  .warn-card {
+    border: 1px solid #fde68a;
+    background: #fffbeb;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .warn-card h3 { font-size: 13px; font-weight: 700; color: #78350f; margin-bottom: 8px; }
+  .warn-card p { font-size: 12px; color: #44403c; line-height: 1.65; }
+
+  .bottom {
+    background: #f0fdf4;
+    border-top: 1px solid #bbf7d0;
+    padding: 24px 32px;
+  }
+  .bottom-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .bottom-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .bottom-card h3 {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #064e3b;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #bbf7d0;
+  }
+  .mistake-item {
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: #374151;
+    line-height: 1.55;
+  }
+  .quiz-item {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: #374151;
+    line-height: 1.55;
+  }
+  .quiz-item::before {
+    content: 'Q';
+    display: inline-block;
+    width: 18px; height: 18px;
+    background: #047857;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 18px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .key-sentence {
+    background: linear-gradient(135deg, #064e3b, #047857);
+    color: #fff;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-top: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.6;
+  }
+  .key-sentence span { color: #a7f3d0; }
+
+  .step-row { display: flex; gap: 8px; margin-bottom: 6px; align-items: flex-start; }
+  .sn {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: #047857;
+    color: #fff;
+    font-size: 9.5px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .st { font-size: 12px; color: #374151; line-height: 1.55; }
+  .st strong { color: #064e3b; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <div class="hero-tag">📖 穎祥 · 初階會計練習</div>
+    <h1>結帳邏輯 × 信用損失計算<br>收現金額分析 × 權責 vs 現收付</h1>
+    <p class="hero-sub">結帳分錄 · 備抵呆帳補提 · 預收佣金收現推算 · 現金收付制的盲點</p>
+    <div class="hero-meta">
+      <strong>2025 / 04 / 23</strong><br>
+      初階會計核心主題<br>考試常見計算題
+    </div>
+  </div>
+
+  <div class="body">
+
+    <div class="col">
+      <div class="section-title">結帳分錄邏輯</div>
+
+      <div class="closing-flow">
+        <div class="cf-title">⚖️ 結帳：結清哪些帳戶？</div>
+        <div class="cf-row">
+          <div class="cf-badge">收入帳戶</div>
+          <div class="cf-arrow">→</div>
+          <div class="cf-desc">借：收入　貸：本期損益<br>（收入在貸方，結清時借記）</div>
+        </div>
+        <div class="cf-row">
+          <div class="cf-badge">費損帳戶</div>
+          <div class="cf-arrow">→</div>
+          <div class="cf-desc">借：本期損益　貸：各費損<br>（費損在借方，結清時貸記）</div>
+        </div>
+        <div class="cf-note">
+          💡 <strong>只結收入與費損</strong>，資產、負債、權益不結帳。<br>
+          「貸記本期損益的帳戶」= 結清費損 ｜「借記本期損益的帳戶」= 結清收入
+        </div>
+      </div>
+
+      <div class="def-card">
+        <h3>🔧 調整後結帳前：折舊分錄</h3>
+        <p>若發現折舊漏做，調整分錄為：</p>
+        <div class="formula">借：折舊費用 ／ 貸：累計折舊</div>
+        <p style="margin-top:8px; font-size:12px; color:#6b7280;">折舊是<strong>非現金費用</strong>，不會影響現金流入，但會減少當年淨利。</p>
+      </div>
+
+      <div class="section-title" style="margin-top:4px;">預期信用損失（ECL）計算</div>
+
+      <div class="calc-box">
+        <h4>🧮 例題：應收帳款12.8萬，損失率2%，現有備抵600</h4>
+        <div class="calc-step">
+          <div class="cs-num">1</div>
+          <div>目標備抵金額 = 128,000 × 2% = <strong>2,560元</strong></div>
+        </div>
+        <div class="calc-step">
+          <div class="cs-num">2</div>
+          <div>現有備抵貸餘 = <strong>600元</strong>（已認列）</div>
+        </div>
+        <div class="calc-step">
+          <div class="cs-num">3</div>
+          <div>本期應補提 = 2,560 − 600 = <strong>1,960元</strong></div>
+        </div>
+        <div class="calc-result">分錄：借 信用損失 1,960 ／ 貸 備抵呆帳 1,960</div>
+      </div>
+
+      <div class="def-card">
+        <h3>📌 備抵補提的邏輯</h3>
+        <p>備抵呆帳要<strong>補到目標值</strong>，而不是直接認列目標值全額。<br>
+        若現有備抵已足夠甚至超過 → 本期可能不需補提，甚至要沖回。</p>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="section-title">收現金額推算技巧</div>
+
+      <div class="cash-card">
+        <h3>💰 例題：預收佣金 → 實際收現多少？</h3>
+        <p style="font-size:11.5px; color:#475569; margin-bottom:10px;">
+          已知：期初預收12,000 ／ 期末預收8,000 ／ 本期佣金收入25,000
+        </p>
+        <div class="cash-logic">
+          <div class="cl-box">佣金收入（貸）<strong>25,000</strong></div>
+          <div class="cl-op">−</div>
+          <div class="cl-box">預收減少（借）<br><strong>4,000</strong></div>
+          <div class="cl-op">=</div>
+          <div class="cl-box" style="border-color:#047857;">實際收現<strong>21,000</strong></div>
+        </div>
+        <div class="cl-result">收現金額 ＝ 21,000 元</div>
+        <div class="cash-rule">
+          <strong>判斷方向口訣：</strong><br>
+          收入在<strong>貸方</strong>；預收（負債）減少在<strong>借方</strong><br>
+          → 方向相反 → <strong>相減</strong>（25,000 − 4,000）<br><br>
+          若預收增加（負債增加在貸方）→ 與收入同方向 → 相加
+        </div>
+      </div>
+
+      <div class="section-title" style="margin-top:4px;">預收轉收入調整分錄</div>
+
+      <div class="t-account">
+        <h4>📋 預收100萬，本期實現40萬</h4>
+        <div class="t-grid">
+          <div class="t-side">
+            <div class="t-header">借 方</div>
+            <div class="t-item"><strong>預收款項 40萬</strong><br>（負債減少）</div>
+          </div>
+          <div class="t-side">
+            <div class="t-header">貸 方</div>
+            <div class="t-item"><strong>佣金收入 40萬</strong><br>（收入增加）</div>
+          </div>
+        </div>
+        <p style="font-size:11px; color:#6b7280; margin-top:8px; padding:0 4px;">
+          ✓ 收入增加在貸方　✓ 預收減少在借方　✓ 負債（預收）減少
+        </p>
+      </div>
+
+      <div class="section-title" style="margin-top:4px;">現金收付制 vs 權責基礎</div>
+
+      <div class="warn-card">
+        <h3>⚠️ 為什麼現金收付制無法正確表達當年損益？</h3>
+        <p>
+          現金收付制：<strong>收到現金才算收入、付出現金才算費用</strong>。<br><br>
+          問題在於：收錢與付錢的時間點，不等於業務實際發生的時間點。<br>
+          例：貨已交付但款未收 → 現收付制不認收入，損益被低估。<br><br>
+          <strong>正確做法：權責基礎（應計基礎）</strong><br>
+          費用發生時認列，收入賺到時認列，與現金流動無關。
+        </p>
+      </div>
+
+      <div class="def-card">
+        <h3>📌 期末調整的必要性</h3>
+        <p>決算時一定要做調整分錄，將現金收付制帳務轉回<strong>權責基礎</strong>，才能正確表達當年度損益。未調整 → 損益表與資產負債表雙雙出錯。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="bottom-grid">
+
+      <div class="bottom-card">
+        <h3>⚠️ 易錯觀念提醒</h3>
+        <div class="mistake-item">
+          ❌ 預收佣金是資產<br>
+          ✅ 預收是<strong>負債</strong>——欠的是服務，不是欠錢
+        </div>
+        <div class="mistake-item">
+          ❌ 結帳時借記本期損益 = 結清費損<br>
+          ✅ 借記本期損益結清的是<strong>收入</strong>（收入在貸方，結清借記）
+        </div>
+        <div class="mistake-item">
+          ❌ 備抵補提就是直接認列目標金額<br>
+          ✅ 只補<strong>差額</strong>（目標備抵 − 現有備抵餘額）
+        </div>
+      </div>
+
+      <div class="bottom-card">
+        <h3>✏️ 課後自我檢測</h3>
+        <div class="quiz-item">應收帳款15萬，損失率3%，現有備抵貸餘800元，本期應補提的信用損失是多少？</div>
+        <div class="quiz-item">期初預收租金18,000，期末預收10,000，本期租金收入30,000，請問實際收現金額是多少？</div>
+        <div class="quiz-item">為什麼期末一定要做調整分錄？現金收付制有何問題？請用自己的話說明。</div>
+      </div>
+
+      <div class="bottom-card">
+        <h3>🎯 本堂重點小結</h3>
+        <div class="step-row"><div class="sn">1</div><div class="st"><strong>結帳</strong>只結收入與費損；借記本期損益 = 結清收入</div></div>
+        <div class="step-row"><div class="sn">2</div><div class="st"><strong>ECL</strong> = 應收 × 損失率；補提差額，不是全額</div></div>
+        <div class="step-row"><div class="sn">3</div><div class="st">收現推算用<strong>借貸方向</strong>判斷：方向相反→相減，相同→相加</div></div>
+        <div class="step-row"><div class="sn">4</div><div class="st"><strong>權責基礎</strong>才能正確表達損益；現金收付制僅方便記帳</div></div>
+        <div class="key-sentence">
+          會計的目的是「真實反映」，不是「方便記帳」<br>
+          <span>—— 權責基礎的核心精神</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
