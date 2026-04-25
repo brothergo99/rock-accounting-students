@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEN5194YPE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SEN5194YPE');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>固定資產折舊三方法 — 柏蓁 0425</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; background: #eef2ff; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 24px 16px; }
+  .page { width: 960px; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
+  .hero { background: linear-gradient(135deg, #312e81 0%, #4338ca 55%, #6366f1 100%); padding: 32px 40px 28px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; left: -60px; bottom: -60px; width: 300px; height: 300px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+  .hero::after { content: ''; position: absolute; right: -40px; top: -40px; width: 260px; height: 260px; border-radius: 50%; background: rgba(255,255,255,0.06); }
+  .hero-inner { position: relative; z-index: 1; }
+  .hero-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .badge { background: rgba(255,255,255,0.18); color: #c7d2fe; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.05em; }
+  .badge.exam { background: #f43f5e; color: #fff; }
+  .date-label { color: rgba(255,255,255,0.6); font-size: 12px; }
+  .hero h1 { color: #fff; font-size: 26px; font-weight: 900; line-height: 1.3; margin-bottom: 6px; }
+  .hero h1 span { color: #a5b4fc; }
+  .hero-sub { color: rgba(255,255,255,0.72); font-size: 13px; line-height: 1.6; max-width: 640px; }
+  .hero-stats { display: flex; gap: 28px; margin-top: 18px; }
+  .stat { text-align: center; }
+  .stat-num { font-size: 22px; font-weight: 900; color: #c7d2fe; line-height: 1; }
+  .stat-label { font-size: 10px; color: rgba(255,255,255,0.55); margin-top: 2px; letter-spacing: 0.03em; }
+  .body { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .col { padding: 26px 26px 18px; }
+  .col:first-child { border-right: 1px solid #eef2ff; }
+  .section-title { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #4338ca; margin-bottom: 13px; display: flex; align-items: center; gap: 6px; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: #c7d2fe; }
+  .concept-card { background: linear-gradient(135deg, #312e81, #3730a3); border-radius: 12px; padding: 16px 18px; margin-bottom: 13px; color: #fff; }
+  .concept-card .card-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; color: #a5b4fc; margin-bottom: 10px; }
+  .concept-items { display: flex; flex-direction: column; gap: 7px; }
+  .concept-item { background: rgba(255,255,255,0.07); border-radius: 7px; padding: 9px 12px; display: flex; align-items: flex-start; gap: 8px; }
+  .concept-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+  .concept-text { font-size: 12px; color: rgba(255,255,255,0.85); line-height: 1.5; }
+  .concept-text strong { color: #a5b4fc; }
+  .bv-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 13px 16px; margin-bottom: 13px; }
+  .bv-title { font-size: 12px; font-weight: 700; color: #92400e; margin-bottom: 9px; }
+  .bv-formula { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .bv-item { background: #fff; border: 1px solid #fcd34d; border-radius: 6px; padding: 6px 12px; font-size: 13px; font-weight: 700; color: #78350f; text-align: center; }
+  .bv-item.result { background: #d97706; color: #fff; border-color: #d97706; }
+  .bv-op { font-size: 16px; font-weight: 900; color: #d97706; }
+  .bv-note { font-size: 11px; color: #78350f; line-height: 1.5; margin-top: 8px; background: #fef3c7; border-radius: 5px; padding: 6px 10px; }
+  .contra-card { background: #fdf4ff; border: 1px solid #e9d5ff; border-radius: 10px; padding: 13px 16px; margin-bottom: 13px; }
+  .contra-title { font-size: 12px; font-weight: 700; color: #6d28d9; margin-bottom: 9px; }
+  .contra-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .contra-item { border-radius: 7px; padding: 8px 10px; text-align: center; }
+  .contra-item.asset { background: #eff6ff; border: 1px solid #bfdbfe; }
+  .contra-item.contra { background: #fdf4ff; border: 1px solid #e9d5ff; }
+  .contra-item-label { font-size: 10px; color: #6b7280; margin-bottom: 3px; }
+  .contra-item-val { font-size: 13px; font-weight: 700; }
+  .contra-item.asset .contra-item-val { color: #1d4ed8; }
+  .contra-item.contra .contra-item-val { color: #7e22ce; }
+  .contra-note { margin-top: 8px; font-size: 11px; color: #6d28d9; line-height: 1.5; background: #f5f3ff; border-radius: 5px; padding: 6px 10px; }
+  .cf-card { background: #f0fdf4; border: 1px solid #86efac; border-radius: 10px; padding: 13px 15px; margin-bottom: 13px; }
+  .cf-title { font-size: 12px; font-weight: 700; color: #15803d; margin-bottom: 8px; }
+  .cf-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #166534; }
+  .cf-tag { background: #15803d; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; flex-shrink: 0; }
+  .cf-note { margin-top: 8px; font-size: 11px; color: #166534; line-height: 1.5; background: #dcfce7; border-radius: 5px; padding: 6px 10px; }
+  .methods-wrap { display: flex; flex-direction: column; gap: 10px; margin-bottom: 13px; }
+  .method-card { border-radius: 10px; padding: 13px 15px; border: 1px solid; }
+  .method-card.sl { background: #f0fdf4; border-color: #86efac; }
+  .method-card.ua { background: #eff6ff; border-color: #93c5fd; }
+  .method-card.ddb { background: #fdf4ff; border-color: #d8b4fe; }
+  .method-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .method-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; }
+  .method-card.sl .method-badge { background: #15803d; color: #fff; }
+  .method-card.ua .method-badge { background: #1d4ed8; color: #fff; }
+  .method-card.ddb .method-badge { background: #7e22ce; color: #fff; }
+  .method-name { font-size: 13px; font-weight: 700; }
+  .method-card.sl .method-name { color: #15803d; }
+  .method-card.ua .method-name { color: #1d4ed8; }
+  .method-card.ddb .method-name { color: #7e22ce; }
+  .method-formula { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 7px; }
+  .mf-item { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 4px; }
+  .method-card.sl .mf-item { background: #dcfce7; color: #15803d; }
+  .method-card.ua .mf-item { background: #dbeafe; color: #1d4ed8; }
+  .method-card.ddb .mf-item { background: #f3e8ff; color: #7e22ce; }
+  .mf-op { font-size: 12px; font-weight: 700; color: #6b7280; }
+  .method-example { font-size: 11px; color: #374151; line-height: 1.5; background: rgba(255,255,255,0.7); border-radius: 5px; padding: 6px 9px; }
+  .method-example strong { font-weight: 700; }
+  .ddb-alert { background: #dc2626; border-radius: 7px; padding: 9px 12px; display: flex; align-items: flex-start; gap: 8px; margin-bottom: 13px; }
+  .ddb-alert-icon { font-size: 16px; flex-shrink: 0; }
+  .ddb-alert-text { font-size: 12px; color: #fff; line-height: 1.5; font-weight: 500; }
+  .ddb-alert-text strong { color: #fcd34d; }
+  .date-card { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 10px; padding: 13px 15px; margin-bottom: 13px; }
+  .date-title { font-size: 12px; font-weight: 700; color: #c2410c; margin-bottom: 8px; }
+  .date-example { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 12px; color: #78350f; font-weight: 500; background: #fff; border-radius: 6px; padding: 7px 10px; margin-bottom: 7px; }
+  .date-tag { background: #ea580c; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; }
+  .date-note { font-size: 11px; color: #c2410c; line-height: 1.5; }
+  .linepay-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 13px 15px; }
+  .linepay-title { font-size: 12px; font-weight: 700; color: #334155; margin-bottom: 9px; display: flex; align-items: center; gap: 6px; }
+  .real-tag { background: #334155; color: #fff; font-size: 10px; padding: 2px 7px; border-radius: 4px; }
+  .linepay-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+  .lp-item { background: #fff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 7px 10px; }
+  .lp-label { font-size: 10px; color: #64748b; margin-bottom: 2px; }
+  .lp-val { font-size: 13px; font-weight: 700; color: #1e293b; }
+  .lp-val span { font-size: 10px; font-weight: 400; color: #64748b; }
+  .lp-formula { margin-top: 8px; background: #1e293b; border-radius: 6px; padding: 8px 12px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 12px; }
+  .lp-f-item { color: #94a3b8; }
+  .lp-f-item strong { color: #e2e8f0; }
+  .lp-f-op { color: #475569; font-weight: 700; }
+  .lp-f-result { color: #a5b4fc; font-weight: 700; }
+  .bottom { background: #1e1b4b; padding: 22px 26px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+  .bottom-section-title { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; color: #a5b4fc; margin-bottom: 10px; text-transform: uppercase; }
+  .bottom-item { display: flex; align-items: flex-start; gap: 7px; margin-bottom: 7px; }
+  .bottom-dot { width: 6px; height: 6px; border-radius: 50%; background: #6366f1; flex-shrink: 0; margin-top: 5px; }
+  .bottom-text { font-size: 12px; color: rgba(255,255,255,0.72); line-height: 1.5; }
+  .bottom-text strong { color: #c7d2fe; font-weight: 700; }
+  .warn-box { background: rgba(220,38,38,0.12); border: 1px solid rgba(220,38,38,0.35); border-radius: 7px; padding: 9px 12px; margin-top: 2px; }
+  .warn-box p { font-size: 11px; color: #fca5a5; line-height: 1.5; }
+  .warn-box p strong { color: #f87171; }
+  .exam-banner { background: rgba(244,63,94,0.15); border: 1px solid rgba(244,63,94,0.4); border-radius: 7px; padding: 8px 12px; margin-bottom: 8px; font-size: 12px; color: #fda4af; font-weight: 700; text-align: center; }
+  .footer-note { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,0.07); padding-top: 13px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-left { font-size: 11px; color: rgba(255,255,255,0.3); }
+  .footer-right { font-size: 11px; color: rgba(255,255,255,0.25); }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-meta">
+        <span class="badge">固定資產 Ch.9</span>
+        <span class="badge exam">小考 5/5</span>
+        <span class="date-label">2025 · 04 · 25 · 柏蓁</span>
+      </div>
+      <h1>折舊三方法：<span>直線、活動量、倍數遞減</span></h1>
+      <p class="hero-sub">折舊的本質是「估計」與「分攤」——三種方法總折舊金額相同，只是時間分布不同。掌握方法邏輯比背公式更重要。</p>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">3</div><div class="stat-label">折舊方法</div></div>
+        <div class="stat"><div class="stat-num">0</div><div class="stat-label">現金流出</div></div>
+        <div class="stat"><div class="stat-num">9/12</div><div class="stat-label">非年初購入比例</div></div>
+        <div class="stat"><div class="stat-num">一致</div><div class="stat-label">選定方法就用到底</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="body">
+    <div class="col">
+      <div class="section-title">折舊核心概念</div>
+      <div class="concept-card">
+        <div class="card-label">📌 三個必懂觀念</div>
+        <div class="concept-items">
+          <div class="concept-item"><div class="concept-icon">🔮</div><div class="concept-text"><strong>折舊是估計（Estimate）</strong>——使用年限、殘值、方法全部都是估計，不是精確數字。</div></div>
+          <div class="concept-item"><div class="concept-icon">💸</div><div class="concept-text"><strong>折舊不付現金</strong>——買資產時已付現，折舊只是成本分攤的會計動作，不再有現金流出。</div></div>
+          <div class="concept-item"><div class="concept-icon">🔄</div><div class="concept-text"><strong>一致性（Consistency）</strong>——選定折舊方法後就用到底，不能隨意更換，除非有正當理由。</div></div>
+        </div>
+      </div>
+      <div class="section-title">帳面價值（Book Value）</div>
+      <div class="bv-box">
+        <div class="bv-title">📐 期末資產負債表的表達方式</div>
+        <div class="bv-formula">
+          <div class="bv-item">取得成本<br><span style="font-size:10px">Cost</span></div>
+          <div class="bv-op">−</div>
+          <div class="bv-item">累積折舊<br><span style="font-size:10px">Accum. Depr.</span></div>
+          <div class="bv-op">=</div>
+          <div class="bv-item result">帳面價值<br><span style="font-size:10px">Book Value</span></div>
+        </div>
+        <div class="bv-note">以手機 $30,000 / 3年 / 無殘值為例：<br>第1年後：30,000 − 10,000 = <strong>$20,000</strong> ／第2年後：$10,000 ／第3年後：$0</div>
+      </div>
+      <div class="section-title">累積折舊：特殊的抵減科目</div>
+      <div class="contra-card">
+        <div class="contra-title">⚠️ 資產科目，卻在貸方增加（Contra Asset）</div>
+        <div class="contra-grid">
+          <div class="contra-item asset"><div class="contra-item-label">一般資產科目</div><div class="contra-item-val">借方 ↑<br>貸方 ↓</div></div>
+          <div class="contra-item contra"><div class="contra-item-label">累積折舊（抵減）</div><div class="contra-item-val">貸方 ↑<br>借方 ↓</div></div>
+        </div>
+        <div class="contra-note">累積折舊「設備」→ 設備的減項；累積折舊「房屋」→ 房屋的減項。<br>分錄：借 折舊費用 → 貸 累積折舊（與備抵損失概念相同）</div>
+      </div>
+      <div class="section-title">折舊與現金流量表</div>
+      <div class="cf-card">
+        <div class="cf-title">🔍 為什麼現金流量表中折舊是「加項」？</div>
+        <div class="cf-row"><span class="cf-tag">起點</span>稅前淨利（已扣除折舊費用）</div>
+        <div style="margin:5px 0 5px 28px;font-size:11px;color:#166534;">＋ 折舊（加回，因為沒有實際付現）</div>
+        <div class="cf-row"><span class="cf-tag">結果</span>還原成真實現金流</div>
+        <div class="cf-note">公司帳上可能「賠錢」，但若折舊金額夠大，現金流量仍是正的——這就是為何折舊重要。</div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="section-title">三種折舊方法（範例：卡車 $13,000，殘值 $1,000，5年）</div>
+      <div class="methods-wrap">
+        <div class="method-card sl">
+          <div class="method-head"><span class="method-badge">直線法</span><span class="method-name">Straight-Line Method</span></div>
+          <div class="method-formula"><div class="mf-item">成本 − 殘值</div><div class="mf-op">÷</div><div class="mf-item">使用年限</div><div class="mf-op">= 每年固定折舊</div></div>
+          <div class="method-example">(13,000 − 1,000) ÷ 5 = <strong>$2,400 / 年</strong>，每年金額完全相同。</div>
+        </div>
+        <div class="method-card ua">
+          <div class="method-head"><span class="method-badge">活動量法</span><span class="method-name">Units of Activity</span></div>
+          <div class="method-formula"><div class="mf-item">成本 − 殘值</div><div class="mf-op">÷</div><div class="mf-item">總預期活動量</div><div class="mf-op">= 每單位折舊率</div></div>
+          <div class="method-example">(13,000 − 1,000) ÷ 100,000英里 = <strong>$0.12 / 英里</strong><br>今年開 20,000 英里 → 折舊 <strong>$2,400</strong>；開少折少，開多折多。</div>
+        </div>
+        <div class="method-card ddb">
+          <div class="method-head"><span class="method-badge">倍數餘額遞減</span><span class="method-name">Declining Balance (Double)</span></div>
+          <div class="method-formula"><div class="mf-item">帳面價值</div><div class="mf-op">×</div><div class="mf-item">折舊率（1/年限 × 倍數）</div></div>
+          <div class="method-example">折舊率 = 1/5 × 2 = <strong>40%</strong>（Double Declining）<br>第1年：13,000 × 40% = <strong>$5,200</strong><br>第2年：7,800 × 40% = <strong>$3,120</strong><br>第3年：4,680 × 40% = <strong>$1,872</strong> ／ 第4年：<strong>$1,123</strong><br>第5年（最後）：1,685 − 1,000（殘值）= <strong>$685</strong>（擠出來）</div>
+        </div>
+      </div>
+      <div class="ddb-alert"><div class="ddb-alert-icon">⚡</div><div class="ddb-alert-text">倍數餘額遞減：<strong>計算過程不減殘值</strong>，直接用帳面價值 × 折舊率。<br>只有<strong>最後一年</strong>才停下來，用帳面價值 − 殘值 = 當年折舊（確保最終殘值正確）。</div></div>
+      <div class="section-title">非年初購入：按月比例計算</div>
+      <div class="date-card">
+        <div class="date-title">📅 購入日期不是 1/1 就要乘上比例</div>
+        <div class="date-example"><span class="date-tag">例</span>4月1日購入 → 2025年只有 <strong>9個月</strong> → 全年折舊 × <strong>9/12</strong></div>
+        <div class="date-note">直線法：$2,400 × 9/12 = <strong>$1,800</strong>（2025年）/ <strong>$600</strong>（隔年前3個月）<br>倍數遞減：先算全年折舊，再 × 月份比例，之後照帳面往下算。<br>活動量法：<strong>跟日期無關</strong>，只看實際使用量。</div>
+      </div>
+      <div class="section-title">LinePay 財報實例（附注4）</div>
+      <div class="linepay-card">
+        <div class="linepay-title"><span class="real-tag">真實財報</span>不動產廠房設備 → 機器設備</div>
+        <div class="linepay-grid">
+          <div class="lp-item"><div class="lp-label">機器設備成本</div><div class="lp-val">$287,230 <span>千元</span></div></div>
+          <div class="lp-item"><div class="lp-label">累積折舊</div><div class="lp-val">$63,624 <span>千元</span></div></div>
+        </div>
+        <div class="lp-formula">
+          <span class="lp-f-item"><strong>287,230</strong></span><span class="lp-f-op">−</span>
+          <span class="lp-f-item"><strong>63,624</strong></span><span class="lp-f-op">=</span>
+          <span class="lp-f-result">帳面價值 $223,606</span>
+          <span class="lp-f-item">（報表只揭露淨額）</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="bottom-section">
+      <div class="bottom-section-title">今日學習重點</div>
+      <div class="exam-banner">⏰ 小考範圍：9-7 ～ 9-12 ／ 5月5日</div>
+      <div class="bottom-item"><div class="bottom-dot"></div><div class="bottom-text"><strong>折舊本質</strong>：估計 + 分攤，不付現金，選定方法一致到底</div></div>
+      <div class="bottom-item"><div class="bottom-dot"></div><div class="bottom-text"><strong>帳面價值</strong> = 成本 − 累積折舊，期末必須正確表達</div></div>
+      <div class="bottom-item"><div class="bottom-dot"></div><div class="bottom-text"><strong>三種方法</strong>總折舊相同，分布不同：直線均等、活動量隨用量、倍數遞減前多後少</div></div>
+    </div>
+    <div class="bottom-section">
+      <div class="bottom-section-title">易錯觀念提醒</div>
+      <div class="warn-box">
+        <p>① 倍數餘額遞減——<strong>計算中不減殘值</strong>，最後一年才用「帳面價值 − 殘值」擠出折舊</p>
+        <p style="margin-top:6px">② 非1/1購入——<strong>直線法和倍數遞減要乘月份比例</strong>，活動量法跟日期無關</p>
+        <p style="margin-top:6px">③ 累積折舊是<strong>資產的抵減科目</strong>，正常餘額在貸方（不是費用科目）</p>
+      </div>
+    </div>
+    <div class="bottom-section">
+      <div class="bottom-section-title">課後自我檢測</div>
+      <div class="bottom-item"><div class="bottom-dot"></div><div class="bottom-text">① 機器 $25,000、殘值 $1,000、4年。直線法算第2年末的帳面價值。</div></div>
+      <div class="bottom-item"><div class="bottom-dot"></div><div class="bottom-text">② Double Declining 同上，第3年折舊費用為多少？最後一年如何計算？</div></div>
+      <div class="bottom-item"><div class="bottom-dot"></div><div class="bottom-text">③ 7月1日購入設備 $12,000，直線法5年無殘值，第一年折舊費用是多少？</div></div>
+      <div class="footer-note"><span class="footer-left">Rock 會計家教 · 課後複習一頁式</span><span class="footer-right">0425 柏蓁</span></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
