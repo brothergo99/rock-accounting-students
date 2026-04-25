@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEN5194YPE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SEN5194YPE');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>損益表加減乘除 × ROE杜邦方程式 — Cavin 0425</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; background: #fef3c7; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 24px 16px; }
+  .page { width: 960px; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
+  .hero { background: linear-gradient(135deg, #78350f 0%, #b45309 50%, #d97706 100%); padding: 32px 40px 28px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; left: -60px; bottom: -60px; width: 280px; height: 280px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+  .hero::after { content: ''; position: absolute; right: -40px; top: -40px; width: 260px; height: 260px; border-radius: 50%; background: rgba(255,255,255,0.06); }
+  .hero-inner { position: relative; z-index: 1; }
+  .hero-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .badge { background: rgba(255,255,255,0.18); color: #fde68a; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.05em; }
+  .date-label { color: rgba(255,255,255,0.65); font-size: 12px; }
+  .hero h1 { color: #fff; font-size: 26px; font-weight: 900; line-height: 1.3; margin-bottom: 6px; }
+  .hero h1 span { color: #fcd34d; }
+  .hero-sub { color: rgba(255,255,255,0.75); font-size: 13px; line-height: 1.6; max-width: 620px; }
+  .hero-stats { display: flex; gap: 24px; margin-top: 18px; }
+  .stat { text-align: center; }
+  .stat-num { font-size: 22px; font-weight: 900; color: #fcd34d; line-height: 1; }
+  .stat-label { font-size: 10px; color: rgba(255,255,255,0.6); margin-top: 2px; letter-spacing: 0.03em; }
+  .body { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .col { padding: 28px 28px 20px; }
+  .col:first-child { border-right: 1px solid #fef3c7; }
+  .section-title { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #b45309; margin-bottom: 14px; display: flex; align-items: center; gap: 6px; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: #fde68a; }
+  .framework-card { background: linear-gradient(135deg, #78350f, #92400e); border-radius: 12px; padding: 18px 20px; margin-bottom: 14px; color: #fff; }
+  .framework-card .card-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; color: #fcd34d; margin-bottom: 8px; }
+  .fw-row { display: flex; align-items: stretch; gap: 0; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); }
+  .fw-item { flex: 1; text-align: center; padding: 10px 6px; border-right: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05); }
+  .fw-item:last-child { border-right: none; }
+  .fw-op { font-size: 20px; font-weight: 900; color: #fcd34d; line-height: 1; margin-bottom: 4px; }
+  .fw-name { font-size: 11px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+  .fw-desc { font-size: 10px; color: rgba(255,255,255,0.6); }
+  .case-card { background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 14px 16px; margin-bottom: 14px; }
+  .case-title { font-size: 12px; font-weight: 700; color: #92400e; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .case-tag { background: #d97706; color: #fff; font-size: 10px; padding: 2px 7px; border-radius: 4px; }
+  .case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .case-item { background: #fff; border: 1px solid #fde68a; border-radius: 7px; padding: 8px 10px; }
+  .case-item-label { font-size: 10px; color: #a16207; margin-bottom: 2px; }
+  .case-item-val { font-size: 14px; font-weight: 700; color: #78350f; }
+  .case-item-val span { font-size: 11px; font-weight: 400; color: #92400e; }
+  .case-insight { background: #dc2626; border-radius: 6px; padding: 8px 12px; display: flex; align-items: center; gap: 8px; }
+  .case-insight-icon { font-size: 16px; flex-shrink: 0; }
+  .case-insight-text { font-size: 11px; color: #fff; font-weight: 500; line-height: 1.4; }
+  .case-insight-text strong { color: #fcd34d; }
+  .depreciation-box { background: #fff7ed; border-left: 3px solid #d97706; border-radius: 0 8px 8px 0; padding: 10px 14px; margin-bottom: 14px; font-size: 12px; color: #78350f; line-height: 1.6; }
+  .depreciation-box strong { color: #b45309; }
+  .depreciation-formula { display: flex; align-items: center; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
+  .df-item { background: #fef3c7; border: 1px solid #fcd34d; border-radius: 5px; padding: 4px 10px; font-size: 12px; font-weight: 700; color: #78350f; }
+  .df-arrow { color: #d97706; font-weight: 900; font-size: 14px; }
+  .roe-card { background: linear-gradient(135deg, #1c1917, #292524); border-radius: 12px; padding: 18px 20px; margin-bottom: 14px; }
+  .roe-card .card-label { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: #fcd34d; margin-bottom: 12px; }
+  .roe-formula { display: flex; align-items: center; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+  .roe-f-item { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); border-radius: 6px; padding: 5px 10px; font-size: 12px; font-weight: 700; color: #fcd34d; text-align: center; }
+  .roe-f-op { color: rgba(255,255,255,0.4); font-size: 14px; font-weight: 700; }
+  .roe-factors { display: flex; flex-direction: column; gap: 8px; }
+  .roe-factor { background: rgba(255,255,255,0.05); border-radius: 8px; padding: 10px 12px; display: flex; align-items: flex-start; gap: 10px; }
+  .roe-factor-num { width: 22px; height: 22px; border-radius: 50%; background: #d97706; color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .roe-factor-name { font-size: 12px; font-weight: 700; color: #fcd34d; margin-bottom: 2px; }
+  .roe-factor-name span { color: rgba(255,255,255,0.5); font-size: 10px; font-weight: 400; margin-left: 4px; }
+  .roe-factor-desc { font-size: 11px; color: rgba(255,255,255,0.65); line-height: 1.4; }
+  .leverage-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; margin-bottom: 14px; }
+  .leverage-title { font-size: 12px; font-weight: 700; color: #78350f; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .leverage-example { display: flex; align-items: center; gap: 0; margin-bottom: 10px; border-radius: 8px; overflow: hidden; }
+  .lev-box { flex: 1; padding: 10px; text-align: center; font-size: 11px; }
+  .lev-box.total { background: #78350f; color: #fcd34d; }
+  .lev-box.equity { background: #d97706; color: #fff; }
+  .lev-box.debt { background: #fef3c7; color: #78350f; }
+  .lev-box .lev-num { font-size: 16px; font-weight: 900; display: block; line-height: 1.2; }
+  .lev-box .lev-label { font-size: 10px; opacity: 0.8; }
+  .leverage-result { display: flex; gap: 8px; }
+  .lev-result-item { flex: 1; border-radius: 6px; padding: 8px; text-align: center; }
+  .lev-result-item.up { background: #dcfce7; border: 1px solid #86efac; }
+  .lev-result-item.down { background: #fee2e2; border: 1px solid #fca5a5; }
+  .lev-result-item .lev-emoji { font-size: 16px; display: block; margin-bottom: 3px; }
+  .lev-result-item .lev-r-text { font-size: 11px; font-weight: 700; }
+  .lev-result-item.up .lev-r-text { color: #15803d; }
+  .lev-result-item.down .lev-r-text { color: #dc2626; }
+  .lev-result-item .lev-r-sub { font-size: 10px; color: #6b7280; }
+  .lev-neutral { background: #fef3c7; border: 1px solid #fde68a; border-radius: 6px; padding: 7px 12px; font-size: 11px; color: #78350f; text-align: center; font-weight: 500; margin-top: 8px; }
+  .ab-card { background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 14px 16px; margin-bottom: 14px; }
+  .ab-title { font-size: 12px; font-weight: 700; color: #92400e; margin-bottom: 10px; }
+  .ab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .ab-item { border-radius: 8px; padding: 10px 12px; }
+  .ab-item.a { background: linear-gradient(135deg, #0f766e, #0d9488); color: #fff; }
+  .ab-item.b { background: linear-gradient(135deg, #1d4ed8, #3b82f6); color: #fff; }
+  .ab-item-head { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.8); margin-bottom: 4px; }
+  .ab-item-roe { font-size: 18px; font-weight: 900; color: #fff; margin-bottom: 4px; }
+  .ab-item-via { font-size: 10px; background: rgba(255,255,255,0.2); border-radius: 4px; padding: 2px 8px; display: inline-block; color: rgba(255,255,255,0.9); }
+  .ab-insight { font-size: 11px; color: #78350f; line-height: 1.5; background: #fff7ed; border-radius: 6px; padding: 8px 10px; }
+  .three-dims { display: flex; gap: 8px; margin-bottom: 14px; }
+  .dim-item { flex: 1; border-radius: 8px; padding: 12px; text-align: center; }
+  .dim-item.s { background: #eff6ff; border: 1px solid #bfdbfe; }
+  .dim-item.o { background: #f0fdf4; border: 1px solid #bbf7d0; }
+  .dim-item.p { background: #fdf4ff; border: 1px solid #e9d5ff; }
+  .dim-icon { font-size: 20px; margin-bottom: 6px; display: block; }
+  .dim-name { font-size: 12px; font-weight: 700; margin-bottom: 3px; }
+  .dim-item.s .dim-name { color: #1d4ed8; }
+  .dim-item.o .dim-name { color: #15803d; }
+  .dim-item.p .dim-name { color: #7e22ce; }
+  .dim-who { font-size: 10px; color: #6b7280; }
+  .bottom { background: #1c1917; padding: 24px 28px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+  .bottom-section-title { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; color: #fcd34d; margin-bottom: 10px; text-transform: uppercase; }
+  .bottom-item { display: flex; align-items: flex-start; gap: 7px; margin-bottom: 7px; }
+  .bottom-dot { width: 6px; height: 6px; border-radius: 50%; background: #d97706; flex-shrink: 0; margin-top: 5px; }
+  .bottom-text { font-size: 12px; color: rgba(255,255,255,0.75); line-height: 1.5; }
+  .bottom-text strong { color: #fcd34d; font-weight: 700; }
+  .warning-box { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.4); border-radius: 7px; padding: 10px 12px; margin-top: 4px; }
+  .warning-box p { font-size: 11px; color: #fca5a5; line-height: 1.5; }
+  .warning-box p strong { color: #f87171; }
+  .footer-note { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 14px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-left { font-size: 11px; color: rgba(255,255,255,0.35); }
+  .footer-right { font-size: 11px; color: rgba(255,255,255,0.3); }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-meta"><span class="badge">財報分析</span><span class="date-label">2025 · 04 · 25 · Cavin</span></div>
+      <h1>損益表 <span>加減乘除</span> × <span>ROE 杜邦方程式</span></h1>
+      <p class="hero-sub">從毛利率到股東權益報酬率，用四個運算符號讀懂一家公司的經營邏輯；以 LinePay 真實案例拆解財務警訊。</p>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">4</div><div class="stat-label">框架層次</div></div>
+        <div class="stat"><div class="stat-num">3</div><div class="stat-label">ROE 要素</div></div>
+        <div class="stat"><div class="stat-num">5×</div><div class="stat-label">槓桿倍數</div></div>
+        <div class="stat"><div class="stat-num">25%</div><div class="stat-label">費用率警訊</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="body">
+    <div class="col">
+      <div class="section-title">損益表四個運算框架</div>
+      <div class="framework-card">
+        <div class="card-label">📊 用四個符號看一家公司的經營全貌</div>
+        <div class="fw-row">
+          <div class="fw-item"><div class="fw-op">＋</div><div class="fw-name">加法</div><div class="fw-desc">收入 / 毛利<br>賣得有價值</div></div>
+          <div class="fw-item"><div class="fw-op">－</div><div class="fw-name">減法</div><div class="fw-desc">費用效率<br>花得有沒有對</div></div>
+          <div class="fw-item"><div class="fw-op">×</div><div class="fw-name">乘法</div><div class="fw-desc">ROE<br>擴大報酬</div></div>
+          <div class="fw-item"><div class="fw-op">÷</div><div class="fw-name">除法</div><div class="fw-desc">三大能力<br>比率分析</div></div>
+        </div>
+      </div>
+      <div class="section-title">LinePay 財報案例</div>
+      <div class="depreciation-box">
+        <strong>📍 折舊怎麼來？</strong> 內湖瑞光路辦公室 5 層樓，裝潢費用 <strong>1 億元</strong>，因為是租用，分 5 年攤提：
+        <div class="depreciation-formula">
+          <div class="df-item">裝潢 1 億</div><div class="df-arrow">÷</div><div class="df-item">5 年</div><div class="df-arrow">=</div><div class="df-item">折舊 2,000 萬／年</div>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="case-title"><span class="case-tag">真實財報</span>LinePay 損益表拆解</div>
+        <div class="case-grid">
+          <div class="case-item"><div class="case-item-label">毛利率</div><div class="case-item-val">32–33% <span>✅ 穩定</span></div></div>
+          <div class="case-item"><div class="case-item-label">營業費用率</div><div class="case-item-val" style="color:#dc2626">25% <span style="color:#dc2626">⚠️ 失控</span></div></div>
+          <div class="case-item"><div class="case-item-label">營業利益率</div><div class="case-item-val">~12% <span>毛利 - 費用</span></div></div>
+          <div class="case-item"><div class="case-item-label">營收成長</div><div class="case-item-val">+23% <span>63億→78億</span></div></div>
+        </div>
+        <div class="case-insight"><div class="case-insight-icon">🚨</div><div class="case-insight-text">營收 <strong>+23%</strong>，但營業競爭力 <strong>不增反減</strong>——費用花得沒有效率，這就是財報的警訊。股價上市後表現不佳，數字早有預兆。</div></div>
+      </div>
+      <div class="section-title">財務分析三大維度（除法）</div>
+      <div class="three-dims">
+        <div class="dim-item s"><span class="dim-icon">💰</span><div class="dim-name">償債能力</div><div class="dim-who">銀行 / 債權人<br>最在意</div></div>
+        <div class="dim-item o"><span class="dim-icon">⚙️</span><div class="dim-name">營運能力</div><div class="dim-who">資產周轉<br>效率高嗎</div></div>
+        <div class="dim-item p"><span class="dim-icon">📈</span><div class="dim-name">獲利能力</div><div class="dim-who">股東 / 投資人<br>最在意</div></div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="section-title">ROE 杜邦方程式（乘法）</div>
+      <div class="roe-card">
+        <div class="card-label">📐 巴菲特最愛看的指標，可以拆成三個面向</div>
+        <div class="roe-formula">
+          <div class="roe-f-item">ROE</div><div class="roe-f-op">=</div>
+          <div class="roe-f-item">利潤率<br><span style="font-size:9px;font-weight:400">Margin</span></div><div class="roe-f-op">×</div>
+          <div class="roe-f-item">周轉率<br><span style="font-size:9px;font-weight:400">Turnover</span></div><div class="roe-f-op">×</div>
+          <div class="roe-f-item">權益乘數<br><span style="font-size:9px;font-weight:400">槓桿</span></div>
+        </div>
+        <div class="roe-factors">
+          <div class="roe-factor"><div class="roe-factor-num">1</div><div class="roe-factor-body"><div class="roe-factor-name">利潤率 <span>Margin</span></div><div class="roe-factor-desc">淨利 ÷ 營收。代表產品受歡迎程度，利潤率越高 = 大家越喜歡，賣得有價值。</div></div></div>
+          <div class="roe-factor"><div class="roe-factor-num">2</div><div class="roe-factor-body"><div class="roe-factor-name">周轉率 <span>Turnover</span></div><div class="roe-factor-desc">營收 ÷ 總資產。就像餐廳的「翻桌率」——翻桌率越高代表你的東西賣得快，賺快錢。</div></div></div>
+          <div class="roe-factor"><div class="roe-factor-num">3</div><div class="roe-factor-body"><div class="roe-factor-name">權益乘數 <span>槓桿</span></div><div class="roe-factor-desc">總資產 ÷ 股東權益。用別人的錢擴大報酬，公司經營槓桿是必要的，關鍵在前兩個確定了才開槓桿。</div></div></div>
+        </div>
+      </div>
+      <div class="section-title">槓桿概念：中性工具</div>
+      <div class="leverage-card">
+        <div class="leverage-title">🚗 車貸例子：100萬的車，自備20萬</div>
+        <div class="leverage-example">
+          <div class="lev-box total"><span class="lev-num">100萬</span><span class="lev-label">資產總值</span></div>
+          <div class="lev-box equity"><span class="lev-num">20萬</span><span class="lev-label">自備款（你的錢）</span></div>
+          <div class="lev-box debt"><span class="lev-num">80萬</span><span class="lev-label">車貸（借的錢）</span></div>
+        </div>
+        <div style="text-align:center;font-size:12px;font-weight:700;color:#78350f;margin:8px 0;">→ 開了 <span style="font-size:18px;color:#d97706;font-weight:900">5 倍</span> 槓桿（100 ÷ 20）</div>
+        <div class="leverage-result">
+          <div class="lev-result-item up"><span class="lev-emoji">📈</span><div class="lev-r-text">車漲 20%</div><div class="lev-r-sub">賺 20萬 = 報酬翻倍</div></div>
+          <div class="lev-result-item down"><span class="lev-emoji">📉</span><div class="lev-r-text">車跌 20%</div><div class="lev-r-sub">賠 20萬 = 本金歸零</div></div>
+        </div>
+        <div class="lev-neutral">⚖️ 槓桿是中性工具：賺倍也賠倍。個人財務謹慎使用；公司經營，槓桿是必要的。</div>
+      </div>
+      <div class="section-title">同樣 ROE 15%，策略完全不同</div>
+      <div class="ab-card">
+        <div class="ab-title">📌 A 公司 vs B 公司——ROE 相同，路徑不同</div>
+        <div class="ab-grid">
+          <div class="ab-item a"><div class="ab-item-head">A 公司</div><div class="ab-item-roe">ROE 15%</div><div class="ab-item-via">靠 周轉率 高</div></div>
+          <div class="ab-item b"><div class="ab-item-head">B 公司</div><div class="ab-item-roe">ROE 15%</div><div class="ab-item-via">靠 利潤率 高</div></div>
+        </div>
+        <div class="ab-insight">分析重點不是看數字高低，而是要<strong>看出背後的邏輯</strong>——你哪裡做得好、哪裡做不好？這才是財務分析的精髓，也是 AI 算不了的判斷力。</div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="bottom-section">
+      <div class="bottom-section-title">今日學習重點</div>
+      <div class="bottom-item"><div class="bottom-dot"></div><div class="bottom-text"><strong>加法</strong>：毛利率高 = 產品有競爭力、定價有力氣</div></div>
+      <div class="bottom-item"><div class="bottom-dot"></div><div class="bottom-text"><strong>減法</strong>：費用花得有沒有效率，完全取決在自己</div></div>
+      <div class="bottom-item"><div class="bottom-dot"></div><div class="bottom-text"><strong>乘法（ROE）</strong>：利潤率 × 周轉率 × 槓桿，三個面向同時分析</div></div>
+      <div class="bottom-item"><div class="bottom-dot"></div><div class="bottom-text"><strong>除法</strong>：償債 / 營運 / 獲利三維度，各有不同利害關係人</div></div>
+    </div>
+    <div class="bottom-section">
+      <div class="bottom-section-title">易錯觀念提醒</div>
+      <div class="warning-box">
+        <p>① 毛利率好，不代表公司賺錢——<strong>費用失控一樣虧損</strong>（LinePay 就是例子）</p>
+        <p style="margin-top:6px">② 槓桿不是壞事——個人理財需謹慎，<strong>公司經營槓桿是必要</strong>的，關鍵是前提確定</p>
+        <p style="margin-top:6px">③ ROE 相同不代表策略相同——<strong>要看是靠哪個要素驅動</strong></p>
+      </div>
+    </div>
+    <div class="bottom-section">
+      <div class="bottom-section-title">課後自我檢測</div>
+      <div class="bottom-item"><div class="bottom-dot"></div><div class="bottom-text">① LinePay 毛利率穩定，但股價上市表現不佳，原因是什麼？</div></div>
+      <div class="bottom-item"><div class="bottom-dot"></div><div class="bottom-text">② ROE 杜邦方程式的三個要素分別代表什麼能力？用自己的話解釋。</div></div>
+      <div class="bottom-item"><div class="bottom-dot"></div><div class="bottom-text">③ 買車自備 20 萬、車貸 80 萬，車子漲了 10%——你實際的報酬率是多少？為什麼？</div></div>
+      <div class="footer-note"><span class="footer-left">Rock 會計家教 · 課後複習一頁式</span><span class="footer-right">0425 Cavin</span></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
