@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEN5194YPE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SEN5194YPE');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code 實戰：從零到有官網 × 自動化工作流 — 好書分享 0426</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; background: #0f172a; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 24px 16px; }
+  .page { width: 960px; background: #0f172a; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 60px rgba(6,182,212,0.15); border: 1px solid rgba(6,182,212,0.12); }
+  .hero { background: linear-gradient(135deg, #0c1445 0%, #0e3a5c 45%, #065f73 100%); padding: 32px 40px 28px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; left: -80px; bottom: -80px; width: 320px; height: 320px; border-radius: 50%; background: radial-gradient(circle, rgba(6,182,212,0.12) 0%, transparent 70%); }
+  .hero::after { content: ''; position: absolute; right: -40px; top: -40px; width: 280px; height: 280px; border-radius: 50%; background: radial-gradient(circle, rgba(6,182,212,0.08) 0%, transparent 70%); }
+  .hero-inner { position: relative; z-index: 1; }
+  .hero-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+  .badge { background: rgba(6,182,212,0.18); color: #67e8f9; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.05em; border: 1px solid rgba(6,182,212,0.3); }
+  .badge.live { background: rgba(239,68,68,0.2); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
+  .date-label { color: rgba(255,255,255,0.5); font-size: 12px; }
+  .hero h1 { color: #f0f9ff; font-size: 26px; font-weight: 900; line-height: 1.3; margin-bottom: 6px; }
+  .hero h1 span { color: #22d3ee; }
+  .hero-sub { color: rgba(255,255,255,0.6); font-size: 13px; line-height: 1.6; max-width: 660px; }
+  .hero-stats { display: flex; gap: 28px; margin-top: 18px; flex-wrap: wrap; }
+  .stat { text-align: center; }
+  .stat-num { font-size: 22px; font-weight: 900; color: #22d3ee; line-height: 1; }
+  .stat-label { font-size: 10px; color: rgba(255,255,255,0.45); margin-top: 2px; letter-spacing: 0.03em; }
+  .body { display: grid; grid-template-columns: 1fr 1fr; background: #111827; }
+  .col { padding: 26px 26px 18px; }
+  .col:first-child { border-right: 1px solid rgba(6,182,212,0.08); }
+  .section-title { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #22d3ee; margin-bottom: 13px; display: flex; align-items: center; gap: 6px; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: rgba(6,182,212,0.2); }
+  .timeline { display: flex; align-items: center; gap: 0; margin-bottom: 13px; border-radius: 8px; overflow: hidden; border: 1px solid rgba(6,182,212,0.15); }
+  .tl-item { flex: 1; text-align: center; padding: 8px 4px; border-right: 1px solid rgba(6,182,212,0.1); font-size: 10px; line-height: 1.4; }
+  .tl-item:last-child { border-right: none; }
+  .tl-item.past { background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.45); }
+  .tl-item.now { background: rgba(6,182,212,0.12); color: #22d3ee; font-weight: 700; }
+  .tl-icon { font-size: 14px; display: block; margin-bottom: 3px; }
+  .tl-name { font-weight: 700; }
+  .tl-use { opacity: 0.7; font-size: 9px; }
+  .modes-row { display: flex; gap: 8px; margin-bottom: 13px; }
+  .mode-item { flex: 1; border-radius: 8px; padding: 10px; text-align: center; border: 1px solid; }
+  .mode-item.chat { background: rgba(99,102,241,0.08); border-color: rgba(99,102,241,0.25); }
+  .mode-item.cowork { background: rgba(6,182,212,0.1); border-color: rgba(6,182,212,0.35); }
+  .mode-item.code { background: rgba(34,197,94,0.08); border-color: rgba(34,197,94,0.25); }
+  .mode-icon { font-size: 18px; display: block; margin-bottom: 4px; }
+  .mode-name { font-size: 12px; font-weight: 700; }
+  .mode-item.chat .mode-name { color: #a5b4fc; }
+  .mode-item.cowork .mode-name { color: #22d3ee; }
+  .mode-item.code .mode-name { color: #4ade80; }
+  .mode-desc { font-size: 10px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+  .mode-tag { display: inline-block; margin-top: 5px; font-size: 9px; font-weight: 700; padding: 1px 6px; border-radius: 10px; }
+  .mode-item.cowork .mode-tag { background: #22d3ee; color: #0f172a; }
+  .mode-item.chat .mode-tag, .mode-item.code .mode-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); }
+  .journey-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(6,182,212,0.12); border-radius: 10px; padding: 14px 15px; margin-bottom: 13px; }
+  .journey-title { font-size: 12px; font-weight: 700; color: #e2e8f0; margin-bottom: 11px; }
+  .journey-steps { display: flex; flex-direction: column; gap: 7px; }
+  .j-step { display: flex; align-items: flex-start; gap: 10px; }
+  .j-num { width: 20px; height: 20px; border-radius: 50%; background: rgba(6,182,212,0.15); border: 1px solid rgba(6,182,212,0.4); color: #22d3ee; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .j-text { font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.5; }
+  .j-text strong { color: #67e8f9; }
+  .j-text .fail { color: #f87171; font-size: 10px; }
+  .j-text .win { color: #4ade80; font-size: 10px; }
+  .outcome-card { border-radius: 10px; padding: 13px 15px; margin-bottom: 10px; border: 1px solid; }
+  .outcome-card.web { background: rgba(6,182,212,0.07); border-color: rgba(6,182,212,0.25); }
+  .outcome-card.analytics { background: rgba(168,85,247,0.07); border-color: rgba(168,85,247,0.25); }
+  .outcome-card.auto { background: rgba(34,197,94,0.07); border-color: rgba(34,197,94,0.25); }
+  .outcome-card.excel { background: rgba(251,191,36,0.07); border-color: rgba(251,191,36,0.25); }
+  .oc-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .oc-icon { font-size: 16px; }
+  .oc-title { font-size: 13px; font-weight: 700; }
+  .outcome-card.web .oc-title { color: #22d3ee; }
+  .outcome-card.analytics .oc-title { color: #c084fc; }
+  .outcome-card.auto .oc-title { color: #4ade80; }
+  .outcome-card.excel .oc-title { color: #fbbf24; }
+  .oc-body { font-size: 11px; color: rgba(255,255,255,0.65); line-height: 1.6; }
+  .oc-body strong { font-weight: 700; }
+  .outcome-card.web .oc-body strong { color: #67e8f9; }
+  .outcome-card.analytics .oc-body strong { color: #c084fc; }
+  .outcome-card.auto .oc-body strong { color: #4ade80; }
+  .outcome-card.excel .oc-body strong { color: #fbbf24; }
+  .oc-flow { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; margin-top: 7px; font-size: 11px; }
+  .oc-step { background: rgba(255,255,255,0.06); border-radius: 4px; padding: 3px 8px; color: rgba(255,255,255,0.6); }
+  .oc-step.highlight { background: rgba(34,197,94,0.15); color: #4ade80; font-weight: 700; }
+  .oc-arrow { color: rgba(255,255,255,0.25); font-size: 12px; }
+  .token-box { background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.25); border-radius: 8px; padding: 10px 13px; margin-bottom: 10px; font-size: 11px; color: rgba(255,255,255,0.7); line-height: 1.5; }
+  .token-box strong { color: #fbbf24; }
+  .quote-card { background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(6,182,212,0.1)); border: 1px solid rgba(99,102,241,0.25); border-radius: 10px; padding: 13px 15px; margin-bottom: 10px; }
+  .quote-text { font-size: 13px; color: #e2e8f0; line-height: 1.6; font-style: italic; margin-bottom: 6px; }
+  .quote-text strong { color: #22d3ee; font-style: normal; }
+  .quote-source { font-size: 11px; color: rgba(255,255,255,0.4); }
+  .bottom { background: #080f1a; padding: 22px 26px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; border-top: 1px solid rgba(6,182,212,0.1); }
+  .bottom-section-title { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; color: #22d3ee; margin-bottom: 10px; text-transform: uppercase; }
+  .bottom-item { display: flex; align-items: flex-start; gap: 7px; margin-bottom: 7px; }
+  .bottom-dot { width: 6px; height: 6px; border-radius: 50%; background: #06b6d4; flex-shrink: 0; margin-top: 5px; }
+  .bottom-text { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+  .bottom-text strong { color: #67e8f9; font-weight: 700; }
+  .action-box { background: rgba(6,182,212,0.08); border: 1px solid rgba(6,182,212,0.25); border-radius: 8px; padding: 10px 12px; }
+  .action-box p { font-size: 12px; color: rgba(255,255,255,0.65); line-height: 1.6; margin-bottom: 5px; }
+  .action-box p:last-child { margin-bottom: 0; }
+  .action-box p strong { color: #22d3ee; }
+  .spirit-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; background: rgba(255,255,255,0.03); border-radius: 7px; padding: 8px 10px; }
+  .spirit-icon { font-size: 14px; flex-shrink: 0; }
+  .spirit-text { font-size: 12px; color: rgba(255,255,255,0.65); line-height: 1.5; }
+  .spirit-text strong { color: #22d3ee; }
+  .footer-note { grid-column: 1 / -1; border-top: 1px solid rgba(6,182,212,0.08); padding-top: 13px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-left { font-size: 11px; color: rgba(255,255,255,0.2); }
+  .footer-right { font-size: 11px; color: rgba(255,255,255,0.15); }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-meta">
+        <span class="badge">週日好書分享</span>
+        <span class="badge live">LIVE 直播</span>
+        <span class="date-label">2025 · 04 · 26 · 每週分享</span>
+      </div>
+      <h1>Claude Code 實戰：<span>從零到有官網 × 自動化工作流</span></h1>
+      <p class="hero-sub">用了兩年 AI，才真正感受到「做出最終產品」的差別——Claude Code Cowork 模式讓財務會計人完成了官網、Analytics 追蹤、課後複習自動化，全部在一週內。</p>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">1週</div><div class="stat-label">完成官網時間</div></div>
+        <div class="stat"><div class="stat-num">43</div><div class="stat-label">單日流量高峰</div></div>
+        <div class="stat"><div class="stat-num">3×</div><div class="stat-label">跨界：會計→網頁→行銷</div></div>
+        <div class="stat"><div class="stat-num">$20</div><div class="stat-label">月費門檻（美金）</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="body">
+    <div class="col">
+      <div class="section-title">AI 工具演進史</div>
+      <div class="timeline">
+        <div class="tl-item past"><span class="tl-icon">🎨</span><div class="tl-name">Gamma</div><div class="tl-use">AI 簡報</div></div>
+        <div class="tl-item past"><span class="tl-icon">💬</span><div class="tl-name">ChatGPT</div><div class="tl-use">人設設定</div></div>
+        <div class="tl-item past"><span class="tl-icon">📊</span><div class="tl-name">Gemini</div><div class="tl-use">儀表板</div></div>
+        <div class="tl-item past"><span class="tl-icon">📓</span><div class="tl-name">NotebookLM</div><div class="tl-use">課後複習</div></div>
+        <div class="tl-item now"><span class="tl-icon">⚡</span><div class="tl-name">Claude Code</div><div class="tl-use">最終產品</div></div>
+      </div>
+      <div class="section-title">Claude Code 三種模式</div>
+      <div class="modes-row">
+        <div class="mode-item chat"><span class="mode-icon">💬</span><div class="mode-name">Chat</div><div class="mode-desc">一般 AI 對話</div><span class="mode-tag">一般</span></div>
+        <div class="mode-item cowork"><span class="mode-icon">🤖</span><div class="mode-name">Cowork</div><div class="mode-desc">AI 助理幫你完成任務<br>進入 Chrome 操作</div><span class="mode-tag">本次主角</span></div>
+        <div class="mode-item code"><span class="mode-icon">💻</span><div class="mode-name">Code</div><div class="mode-desc">工程師寫程式</div><span class="mode-tag">進階</span></div>
+      </div>
+      <div class="section-title">官網建置全歷程</div>
+      <div class="journey-card">
+        <div class="journey-title">🚀 從 16 份課後簡報到個人官網，一小時搞定</div>
+        <div class="journey-steps">
+          <div class="j-step"><div class="j-num">1</div><div class="j-text">把 <strong>16份課後簡報資料夾</strong> 丟給 Claude Code，問他「能幫我做什麼」</div></div>
+          <div class="j-step"><div class="j-num">2</div><div class="j-text">它建議做 <strong>Landing Page</strong>——把 AmazingTalker 評價、Tracy 課程摘要整合進去</div></div>
+          <div class="j-step"><div class="j-num">3</div><div class="j-text">先試做 <strong>PDF 版</strong> <span class="fail">✗ 太醜，放棄</span> → 改做 <strong>網頁版 HTML</strong> <span class="win">✓ 成功</span></div></div>
+          <div class="j-step"><div class="j-num">4</div><div class="j-text">開通 GitHub 帳號，上傳 index.html。<strong>踩坑</strong>：檔名不是 index 就無法顯示，改名後成功</div></div>
+          <div class="j-step"><div class="j-num">5</div><div class="j-text">官網上線！跑馬燈、YouTube 連結、課程地圖、AmazingTalker 評價，<strong>全自動連結</strong></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="section-title">四大核心應用成果</div>
+      <div class="outcome-card web">
+        <div class="oc-head"><span class="oc-icon">🌐</span><div class="oc-title">個人官網（GitHub Pages）</div></div>
+        <div class="oc-body">完全用對話生成，<strong>不需要寫任何程式</strong>。所有連結（YouTube、AmazingTalker、課程地圖）自動串好。更新官網也是用對話指令完成。</div>
+      </div>
+      <div class="outcome-card analytics">
+        <div class="oc-head"><span class="oc-icon">📊</span><div class="oc-title">Google Analytics 流量追蹤</div></div>
+        <div class="oc-body">Claude Code 協助連結 GA，可追蹤 <strong>即時訪客、流量來源</strong>（Direct / Organic Social）。<br>禮拜五主動推廣後峰值 <strong>43 人</strong>——行銷人的工具，會計人也能用。</div>
+      </div>
+      <div class="outcome-card auto">
+        <div class="oc-head"><span class="oc-icon">⚙️</span><div class="oc-title">課後複習一頁式 自動化</div></div>
+        <div class="oc-body"><strong>舊流程</strong>（繁瑣）：錄影 → 下載 → 上傳YouTube → NotebookLM 產出</div>
+        <div class="oc-flow">
+          <span class="oc-step">Whisper 讀逐字稿</span><span class="oc-arrow">→</span>
+          <span class="oc-step">一句話指令</span><span class="oc-arrow">→</span>
+          <span class="oc-step highlight">自動產出 HTML</span><span class="oc-arrow">→</span>
+          <span class="oc-step highlight">自動上傳 GitHub</span>
+        </div>
+      </div>
+      <div class="outcome-card excel">
+        <div class="oc-head"><span class="oc-icon">📋</span><div class="oc-title">Excel 底稿自動生成</div></div>
+        <div class="oc-body">用<strong>文字描述</strong>直接產出 Excel 格式（公時分攤表、查帳準備清單）。過去 ChatGPT、Gemini 都做不好，<strong>Claude Code 真的可以用</strong>。</div>
+      </div>
+      <div class="token-box">⚡ <strong>Token 使用提醒：</strong>Pro 方案（$20/月）有用量上限。善用 Cowork 模式，留意 Settings → Usage。黃仁勳：「工程師年薪 100萬，燒不到 50萬 Token 就不稱職。」</div>
+      <div class="quote-card">
+        <div class="quote-text">「你不需要學 AI，你只需要<strong>知道你想做什麼</strong>——然後用開放的心態讓 Claude Code 幫你完成它。」</div>
+        <div class="quote-source">— Rock 老師，0426 好書分享</div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="bottom-section">
+      <div class="bottom-section-title">今日三大洞見</div>
+      <div class="bottom-item"><div class="bottom-dot"></div><div class="bottom-text"><strong>跨界三連跳</strong>：會計人用 AI 完成了「網頁開發 → 行銷追蹤 → 廣告投放」，技能邊界被打破</div></div>
+      <div class="bottom-item"><div class="bottom-dot"></div><div class="bottom-text"><strong>不妥協的底氣</strong>：Claude Code 做的是「最終產品」，不是讓你將就的半成品</div></div>
+      <div class="bottom-item"><div class="bottom-dot"></div><div class="bottom-text"><strong>槓桿你現有的工作</strong>：每週分享 → 官網更新 → 流量追蹤，讓每件事都不浪費</div></div>
+    </div>
+    <div class="bottom-section">
+      <div class="bottom-section-title">立刻可以行動</div>
+      <div class="action-box">
+        <p>① <strong>下載 Claude Code 本機版</strong>（claude.ai/download）</p>
+        <p>② <strong>訂閱 Pro 方案 $20 美金</strong>，不要猶豫</p>
+        <p>③ 想清楚你<strong>最想自動化的一件事</strong>是什麼</p>
+        <p>④ 用白話對話，告訴它你要做什麼——<strong>就這樣開始</strong></p>
+      </div>
+    </div>
+    <div class="bottom-section">
+      <div class="bottom-section-title">Claude Code 使用精神</div>
+      <div class="spirit-item"><span class="spirit-icon">🎯</span><div class="spirit-text"><strong>你要知道目標</strong>——AI 執行力很強，但你要給它方向</div></div>
+      <div class="spirit-item"><span class="spirit-icon">🔥</span><div class="spirit-text"><strong>把 Token 用完</strong>——付了錢就要物盡其用，燒光才算值回票價</div></div>
+      <div class="spirit-item"><span class="spirit-icon">🔄</span><div class="spirit-text"><strong>做完就想下一步</strong>——有了官網就想 Analytics，有了流量就想廣告</div></div>
+      <div class="footer-note"><span class="footer-left">Rock 老師 · 週日好書分享 · 每週晚上 9 點</span><span class="footer-right">0426 Claude Code 應用</span></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
