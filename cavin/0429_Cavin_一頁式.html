@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEN5194YPE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SEN5194YPE');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>財報X光片 × 三家商業模式解碼 — Cavin 0429</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    background: #fef3c7;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+
+  .page {
+    width: 960px;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #78350f 0%, #b45309 50%, #d97706 100%);
+    padding: 32px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    left: -60px; bottom: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .hero-inner { position: relative; z-index: 1; }
+  .hero-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .badge { background: rgba(255,255,255,0.18); color: #fde68a; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.05em; }
+  .date-label { color: rgba(255,255,255,0.65); font-size: 12px; }
+  .hero h1 { color: #fff; font-size: 26px; font-weight: 900; line-height: 1.3; margin-bottom: 6px; }
+  .hero h1 span { color: #fcd34d; }
+  .hero-sub { color: rgba(255,255,255,0.75); font-size: 13px; line-height: 1.6; max-width: 680px; }
+  .hero-stats { display: flex; gap: 24px; margin-top: 18px; }
+  .stat { text-align: center; }
+  .stat-num { font-size: 22px; font-weight: 900; color: #fcd34d; line-height: 1; }
+  .stat-label { font-size: 10px; color: rgba(255,255,255,0.6); margin-top: 2px; letter-spacing: 0.03em; }
+
+  .body { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .col { padding: 28px 28px 20px; }
+  .col:first-child { border-right: 1px solid #fef3c7; }
+
+  .section-title { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #b45309; margin-bottom: 14px; display: flex; align-items: center; gap: 6px; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: #fde68a; }
+
+  .framework-card { background: linear-gradient(135deg, #78350f, #92400e); border-radius: 12px; padding: 18px 20px; margin-bottom: 14px; color: #fff; }
+  .framework-card .card-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; color: #fcd34d; margin-bottom: 8px; }
+  .fw-row { display: flex; align-items: stretch; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); }
+  .fw-item { flex: 1; text-align: center; padding: 10px 6px; border-right: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05); }
+  .fw-item:last-child { border-right: none; }
+  .fw-op { font-size: 20px; font-weight: 900; color: #fcd34d; line-height: 1; margin-bottom: 4px; }
+  .fw-name { font-size: 11px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+  .fw-desc { font-size: 10px; color: rgba(255,255,255,0.6); line-height: 1.4; }
+
+  .company-card { border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; border: 1px solid #fde68a; background: #fffbeb; }
+  .company-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .company-tag { background: #d97706; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
+  .company-name { font-size: 14px; font-weight: 900; color: #78350f; }
+  .company-sub { font-size: 11px; color: #92400e; margin-left: auto; }
+
+  .flow-bar { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; margin-bottom: 8px; }
+  .flow-node { background: #92400e; color: #fef3c7; font-size: 10px; font-weight: 700; padding: 4px 8px; border-radius: 6px; white-space: nowrap; }
+  .flow-node.hi { background: #d97706; color: #fff; }
+  .flow-node.warn { background: #dc2626; color: #fff; }
+  .flow-node.good { background: #059669; color: #fff; }
+  .flow-arr { color: #b45309; font-size: 12px; font-weight: 900; }
+
+  .mini-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .mini-list li { display: flex; gap: 7px; font-size: 12px; color: #44403c; line-height: 1.5; }
+  .mini-list li::before { content: '▸'; color: #d97706; font-size: 10px; margin-top: 2px; flex-shrink: 0; }
+  .mini-list li b { color: #78350f; }
+
+  .stage-bar { display: flex; border-radius: 8px; overflow: hidden; margin-bottom: 8px; height: 32px; }
+  .stage-seg { display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; color: #fff; text-align: center; padding: 0 4px; }
+
+  .ratio-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+  .ratio-chip { background: #fef3c7; border: 1px solid #fde68a; border-radius: 6px; padding: 5px 10px; text-align: center; min-width: 64px; }
+  .ratio-chip .r-num { font-size: 15px; font-weight: 900; color: #78350f; line-height: 1; }
+  .ratio-chip .r-lbl { font-size: 9px; color: #92400e; margin-top: 2px; }
+  .ratio-chip.warn .r-num { color: #dc2626; }
+  .ratio-chip.good .r-num { color: #059669; }
+
+  .divider { height: 1px; background: #fde68a; margin: 12px 0; }
+
+  .bottom { display: grid; grid-template-columns: 1fr 1fr 1fr; border-top: 2px solid #fef3c7; background: #fffbeb; }
+  .bottom-cell { padding: 18px 20px; border-right: 1px solid #fde68a; }
+  .bottom-cell:last-child { border-right: none; }
+  .bottom-title { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: #b45309; margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
+  .bottom-title::after { content: ''; flex: 1; height: 1px; background: #fde68a; }
+
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .compare-table th { background: #92400e; color: #fef3c7; padding: 5px 6px; font-weight: 700; font-size: 10px; text-align: center; }
+  .compare-table td { padding: 5px 6px; color: #44403c; border-bottom: 1px solid #fef3c7; vertical-align: top; line-height: 1.4; }
+  .compare-table tr:nth-child(even) td { background: #fffbeb; }
+  .compare-table td:first-child { font-weight: 700; color: #78350f; white-space: nowrap; }
+
+  .pyramid { display: flex; flex-direction: column; align-items: center; gap: 3px; margin-top: 6px; }
+  .pyr-row { border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: #fff; text-align: center; padding: 5px 8px; }
+
+  .quote-box { background: linear-gradient(135deg, #78350f, #b45309); border-radius: 10px; padding: 14px 16px; color: #fff; }
+  .quote-text { font-size: 12px; line-height: 1.7; color: rgba(255,255,255,0.9); font-style: italic; margin-bottom: 8px; }
+  .quote-text em { color: #fcd34d; font-style: normal; font-weight: 700; }
+  .quote-author { font-size: 10px; color: rgba(255,255,255,0.55); text-align: right; }
+
+  .alert-list { display: flex; flex-direction: column; gap: 6px; }
+  .alert-item { background: #fff7ed; border-left: 3px solid #d97706; border-radius: 0 6px 6px 0; padding: 7px 10px; font-size: 11px; color: #44403c; line-height: 1.5; }
+  .alert-item b { color: #78350f; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-meta">
+        <span class="badge">財報分析</span>
+        <span class="date-label">Cavin · 2025/04/29</span>
+      </div>
+      <h1>財報X光片：<span>看透商業模式的底層邏輯</span></h1>
+      <p class="hero-sub">從產業特性出發，用加減乘除讀懂三家公司的賺錢方式 — 中租（融資業）× 華固（營建業）× 統一超（通路業）</p>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">3家</div><div class="stat-label">產業案例</div></div>
+        <div class="stat"><div class="stat-num">80%</div><div class="stat-label">中租負債比</div></div>
+        <div class="stat"><div class="stat-num">74%</div><div class="stat-label">華固存貨比</div></div>
+        <div class="stat"><div class="stat-num">9%</div><div class="stat-label">統一超存貨比</div></div>
+        <div class="stat"><div class="stat-num">35%</div><div class="stat-label">統一超使用權資產</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="body">
+    <div class="col">
+      <div class="section-title">財報三神器</div>
+      <div class="framework-card">
+        <div class="card-label">🔬 加減乘 — 三張報表的角色分工</div>
+        <div class="fw-row">
+          <div class="fw-item"><div class="fw-op">＋</div><div class="fw-name">資產負債表</div><div class="fw-desc">錢砸在哪？<br>資金板塊異常</div></div>
+          <div class="fw-item"><div class="fw-op">－</div><div class="fw-name">損益表</div><div class="fw-desc">營收扣哪些？<br>毛利→淨利路徑</div></div>
+          <div class="fw-item"><div class="fw-op">✕</div><div class="fw-name">杜邦ROE</div><div class="fw-desc">乘數放大器<br>淨利率×周轉×槓桿</div></div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="section-title">中租控股 — 融資業</div>
+      <div class="company-card">
+        <div class="company-header">
+          <span class="company-tag">融資業</span>
+          <span class="company-name">中租控股</span>
+          <span class="company-sub">總資產 9,761億</span>
+        </div>
+        <div class="flow-bar">
+          <div class="flow-node hi">80% 低成本負債</div>
+          <div class="flow-arr">→</div>
+          <div class="flow-node hi">61% 應收帳款</div>
+          <div class="flow-arr">→</div>
+          <div class="flow-node hi">高利差放款</div>
+        </div>
+        <p style="font-size:11px;color:#78350f;font-weight:700;margin-bottom:10px;">核心邏輯：用低成本借款，放高利率貸款，賺利差</p>
+        <div class="section-title" style="margin-top:4px;">損益表拆解</div>
+        <div class="flow-bar" style="flex-direction:column;align-items:flex-start;gap:3px;">
+          <div style="display:flex;align-items:center;gap:4px;"><div class="flow-node" style="min-width:90px;">100% 營收</div></div>
+          <div style="display:flex;align-items:center;gap:4px;"><div class="flow-node warn" style="min-width:90px;">−34% 資金成本</div><span style="font-size:10px;color:#92400e;">借錢的利息費用</span></div>
+          <div style="display:flex;align-items:center;gap:4px;"><div class="flow-node hi" style="min-width:90px;">＝66% 毛利率</div></div>
+          <div style="display:flex;align-items:center;gap:4px;"><div class="flow-node warn" style="min-width:90px;">−20% 壞帳準備</div><span style="font-size:10px;color:#92400e;">放款收不回來的風險</span></div>
+          <div style="display:flex;align-items:center;gap:4px;"><div class="flow-node good" style="min-width:90px;">≈20% 營業淨利</div></div>
+        </div>
+        <div class="ratio-row">
+          <div class="ratio-chip warn"><div class="r-num">80%</div><div class="r-lbl">負債比率</div></div>
+          <div class="ratio-chip"><div class="r-num">61%</div><div class="r-lbl">應收帳款比</div></div>
+          <div class="ratio-chip good"><div class="r-num">66%</div><div class="r-lbl">毛利率</div></div>
+          <div class="ratio-chip warn"><div class="r-num">20%</div><div class="r-lbl">壞帳準備</div></div>
+        </div>
+        <div class="divider"></div>
+        <ul class="mini-list">
+          <li><b>高負債≠危險</b>：融資業靠槓桿經營，80%負債是商業模式本質，不是財務危機</li>
+          <li><b>護城河在哪</b>：取得低成本資金的能力 → 利差就是競爭壁壘</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="section-title">華固建設 — 營建業</div>
+      <div class="company-card">
+        <div class="company-header">
+          <span class="company-tag">營建業</span>
+          <span class="company-name">華固建設</span>
+          <span class="company-sub">總資產 542億</span>
+        </div>
+        <p style="font-size:11px;color:#78350f;font-weight:700;margin-bottom:8px;">🏗️ 存貨74%（398億）= 未來幾年的業績全鎖在這</p>
+        <div class="stage-bar">
+          <div class="stage-seg" style="width:20%;background:#92400e;">預付<br>土地款</div>
+          <div class="stage-seg" style="width:25%;background:#b45309;">代建<br>施工中</div>
+          <div class="stage-seg" style="width:30%;background:#d97706;">在建<br>接近完工</div>
+          <div class="stage-seg" style="width:25%;background:#f59e0b;color:#78350f;">待售<br>→交屋變現</div>
+        </div>
+        <p style="font-size:10px;color:#92400e;margin-bottom:10px;text-align:center;">存貨四階段：土地→施工→完工→交屋，全都算存貨</p>
+        <ul class="mini-list">
+          <li><b>合約負債13%（好負債）</b>：預售屋已收訂金，代表未來已鎖定業績，反而是收入保障</li>
+          <li><b>真實負債壓力約四成</b>：總負債58%，扣掉預售屋訂金（好負債），真實財務壓力≈40%</li>
+          <li><b>看存貨如看未來</b>：存貨快速增加 → 積極拿地 → 3-5年後大量交屋變現</li>
+        </ul>
+        <div class="ratio-row">
+          <div class="ratio-chip"><div class="r-num">74%</div><div class="r-lbl">存貨佔總資產</div></div>
+          <div class="ratio-chip good"><div class="r-num">13%</div><div class="r-lbl">合約負債（好）</div></div>
+          <div class="ratio-chip"><div class="r-num">58%</div><div class="r-lbl">總負債比</div></div>
+        </div>
+      </div>
+      <div class="section-title">統一超商 — 通路業</div>
+      <div class="company-card">
+        <div class="company-header">
+          <span class="company-tag">通路業</span>
+          <span class="company-name">統一超商</span>
+          <span class="company-sub">總資產 2,926億</span>
+        </div>
+        <div class="flow-bar" style="margin-bottom:8px;">
+          <div class="flow-node warn">存貨僅 9%</div>
+          <div class="flow-arr">≠</div>
+          <div class="flow-node">倉儲業的邏輯</div>
+          <div class="flow-arr">→</div>
+          <div class="flow-node good">寄銷模式</div>
+        </div>
+        <ul class="mini-list" style="margin-bottom:10px;">
+          <li><b>寄銷模式</b>：廠商把商品寄放在7-11，賣掉才結帳，超商不需要囤大量存貨 → 存貨永遠很低</li>
+          <li><b>現金17% &gt; 存貨9%</b>：現金比存貨多 → 反常識！因為通路收現金快、付廠商慢（佔款能力強）</li>
+          <li><b>使用權資產35%（1,000億）</b>：全台7,000+門市租約全入帳，租約護城河 → 光租金費用就是後進者的門檻</li>
+          <li><b>IFRS 16影響</b>：2019年起租賃入表，使用權資產暴增，是會計制度改變，非實際買資產</li>
+        </ul>
+        <div class="ratio-row">
+          <div class="ratio-chip warn"><div class="r-num">9%</div><div class="r-lbl">存貨比（低）</div></div>
+          <div class="ratio-chip good"><div class="r-num">17%</div><div class="r-lbl">現金比</div></div>
+          <div class="ratio-chip"><div class="r-num">35%</div><div class="r-lbl">使用權資產</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="bottom-cell">
+      <div class="bottom-title">📊 三家產業特性對比</div>
+      <table class="compare-table">
+        <thead><tr><th>指標</th><th>中租</th><th>華固</th><th>統一超</th></tr></thead>
+        <tbody>
+          <tr><td>最重壓資產</td><td>應收帳款61%</td><td>存貨74%</td><td>使用權35%</td></tr>
+          <tr><td>資金來源</td><td>80%借款槓桿</td><td>預售訂金13%</td><td>佔廠商款</td></tr>
+          <tr><td>獲利關鍵</td><td>利差管理</td><td>交屋時點</td><td>通路佔款力</td></tr>
+          <tr><td>最大風險</td><td>壞帳20%</td><td>景氣→存貨滯銷</td><td>租約續約成本</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bottom-cell">
+      <div class="bottom-title">🔺 財報三層金字塔</div>
+      <div class="pyramid">
+        <div class="pyr-row" style="background:#78350f;width:140px;font-size:11px;">商業條件<br><span style="font-size:9px;font-weight:400;opacity:0.8;">競爭優勢 × 護城河</span></div>
+        <div class="pyr-row" style="background:#b45309;width:180px;font-size:11px;">產業特性<br><span style="font-size:9px;font-weight:400;opacity:0.8;">賺錢模式 × 資金流向</span></div>
+        <div class="pyr-row" style="background:#d97706;width:220px;font-size:11px;color:#78350f;">財報數字<br><span style="font-size:9px;font-weight:400;opacity:0.7;">比率 × 結構 × 異常</span></div>
+      </div>
+      <p style="font-size:10px;color:#92400e;text-align:center;margin-top:8px;">看懂數字 → 推出特性 → 判斷優勢</p>
+      <div class="divider"></div>
+      <ul class="mini-list">
+        <li><b>最大異常藏最強護城河</b>：中租80%負債、統一超9%存貨，反常識才是優勢所在</li>
+      </ul>
+    </div>
+    <div class="bottom-cell">
+      <div class="bottom-title">⚡ 易錯觀念 + Rock語錄</div>
+      <div class="alert-list" style="margin-bottom:10px;">
+        <div class="alert-item"><b>❌ 負債高=危險？</b> 融資業靠槓桿，80%負債是商業模式，要看資金成本vs利差</div>
+        <div class="alert-item"><b>❌ 存貨少=管理好？</b> 通路寄銷模式天然低存貨，不同產業標準完全不同</div>
+        <div class="alert-item"><b>❌ 合約負債=壞事？</b> 預售屋訂金是已鎖定的未來業績，是「好負債」</div>
+      </div>
+      <div class="quote-box">
+        <div class="quote-text">「不要準備完美才上場，先從看懂大方向開始。<em>你公司的錢砸在哪裡，商業模式就在那裡。</em>」</div>
+        <div class="quote-author">— Rock 老師</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
