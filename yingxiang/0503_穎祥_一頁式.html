@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEN5194YPE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SEN5194YPE');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>營業稅入門 × 加值型稅制 — 穎祥 0503</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    background: #f0fdf4;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+
+  .page {
+    width: 960px;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #059669 100%);
+    padding: 32px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    left: -60px; bottom: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .hero-inner { position: relative; z-index: 1; }
+
+  .hero-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .badge {
+    background: rgba(255,255,255,0.18);
+    color: #a7f3d0;
+    font-size: 11px; font-weight: 700;
+    padding: 3px 10px; border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+  .badge.exam {
+    background: #f43f5e;
+    color: #fff;
+  }
+  .date-label { color: rgba(255,255,255,0.6); font-size: 12px; }
+
+  .hero h1 { color: #fff; font-size: 26px; font-weight: 900; line-height: 1.3; margin-bottom: 6px; }
+  .hero h1 span { color: #6ee7b7; }
+  .hero-sub { color: rgba(255,255,255,0.72); font-size: 13px; line-height: 1.6; max-width: 640px; }
+
+  /* ── BODY ── */
+  .body { padding: 32px 40px 40px; display: grid; gap: 28px; }
+
+  /* ── SECTION HEADER ── */
+  .section-title {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 15px; font-weight: 800;
+    color: #064e3b;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #d1fae5;
+  }
+  .section-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .icon-green  { background: #d1fae5; }
+  .icon-amber  { background: #fef3c7; }
+  .icon-blue   { background: #dbeafe; }
+
+  /* ── POINT CARDS ── */
+  .point-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .point-card {
+    border: 1.5px solid #d1fae5;
+    border-radius: 10px;
+    padding: 14px 16px;
+    position: relative;
+  }
+  .point-num {
+    position: absolute; top: 12px; right: 14px;
+    font-size: 28px; font-weight: 900;
+    color: #d1fae5; line-height: 1;
+  }
+  .point-label {
+    font-size: 11px; font-weight: 700; color: #059669;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+  .point-title { font-size: 14px; font-weight: 800; color: #1a1a1a; margin-bottom: 6px; }
+  .point-body  { font-size: 12.5px; color: #444; line-height: 1.65; }
+
+  /* ── COMPARE TABLE ── */
+  .compare-wrap { overflow-x: auto; }
+  .compare-table {
+    width: 100%; border-collapse: collapse; font-size: 13px;
+  }
+  .compare-table th {
+    background: #064e3b; color: #fff;
+    padding: 10px 14px; text-align: left; font-weight: 700;
+  }
+  .compare-table th:first-child { border-radius: 8px 0 0 0; }
+  .compare-table th:last-child  { border-radius: 0 8px 0 0; }
+  .compare-table td {
+    padding: 10px 14px; border-bottom: 1px solid #f0fdf4; color: #333;
+    vertical-align: top; line-height: 1.5;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table tr:nth-child(even) td { background: #f0fdf4; }
+  .tag {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    padding: 2px 8px; border-radius: 12px;
+  }
+  .tag-green  { background: #d1fae5; color: #065f46; }
+  .tag-red    { background: #fee2e2; color: #991b1b; }
+  .tag-amber  { background: #fef3c7; color: #92400e; }
+
+  /* ── FORMULA BOX ── */
+  .formula-box {
+    background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
+    border-radius: 12px;
+    padding: 20px 24px;
+    color: #fff;
+    text-align: center;
+  }
+  .formula-label { font-size: 11px; color: #6ee7b7; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 10px; }
+  .formula-main  { font-size: 20px; font-weight: 900; line-height: 1.4; }
+  .formula-main em { color: #6ee7b7; font-style: normal; }
+  .formula-note  { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 8px; line-height: 1.5; }
+
+  /* ── MISTAKE CARDS ── */
+  .mistake-list { display: grid; gap: 10px; }
+  .mistake-card {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: #fffbeb; border: 1.5px solid #fde68a;
+    border-radius: 10px; padding: 14px 16px;
+  }
+  .mistake-icon { font-size: 20px; flex-shrink: 0; line-height: 1.2; }
+  .mistake-title { font-size: 13px; font-weight: 800; color: #92400e; margin-bottom: 4px; }
+  .mistake-body  { font-size: 12.5px; color: #555; line-height: 1.65; }
+  .mistake-fix {
+    margin-top: 6px; font-size: 12px; font-weight: 700;
+    color: #059669; padding: 4px 10px;
+    background: #d1fae5; border-radius: 6px; display: inline-block;
+  }
+
+  /* ── QUIZ ── */
+  .quiz-list { display: grid; gap: 14px; }
+  .quiz-card {
+    background: #f8fafc; border: 1.5px solid #e2e8f0;
+    border-radius: 10px; padding: 16px 18px;
+  }
+  .quiz-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .quiz-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: #064e3b; color: #fff;
+    font-size: 13px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .quiz-q   { font-size: 13.5px; font-weight: 700; color: #1a1a1a; line-height: 1.5; }
+  .quiz-opts { padding-left: 38px; }
+  .quiz-opt { font-size: 13px; color: #444; padding: 3px 0; line-height: 1.5; }
+  .quiz-hint {
+    margin-top: 10px; padding: 8px 12px;
+    background: #d1fae5; border-radius: 7px;
+    font-size: 12px; color: #064e3b; font-weight: 600; line-height: 1.5;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: #f0fdf4; border-top: 1px solid #d1fae5;
+    padding: 14px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-left  { font-size: 11px; color: #6b7280; }
+  .footer-right { font-size: 11px; color: #059669; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-meta">
+        <span class="badge">稅法</span>
+        <span class="badge">營業稅</span>
+        <span class="badge exam">必考觀念</span>
+        <span class="date-label">2025 / 05 / 03</span>
+      </div>
+      <h1>營業稅入門 <span>×</span> 加值型稅制</h1>
+      <p class="hero-sub">今日首次進入稅法領域——從發票制度、加值型營業稅邏輯、銷項與進項的關係，到零稅率和免稅的本質差異，建立正確的稅務基礎觀念。</p>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- ① 今日學習重點 -->
+    <section>
+      <div class="section-title">
+        <div class="section-icon icon-green">📌</div>
+        今日學習重點
+      </div>
+      <div class="point-grid">
+
+        <div class="point-card">
+          <div class="point-num">1</div>
+          <div class="point-label">核心概念</div>
+          <div class="point-title">營業稅由誰負擔？</div>
+          <div class="point-body">
+            最終負擔者是<strong>消費者</strong>，不是業者。業者只是「待收待繳」的中介角色——收了消費者的稅，再交給政府。業者報價<strong>必須含稅</strong>，不能事後加收 5%。
+          </div>
+        </div>
+
+        <div class="point-card">
+          <div class="point-num">2</div>
+          <div class="point-label">核心公式</div>
+          <div class="point-title">銷項 − 進項 ＝ 應繳稅</div>
+          <div class="point-body">
+            賣東西收到的稅 ＝ <strong>銷項稅額</strong><br>
+            買東西付掉的稅 ＝ <strong>進項稅額</strong><br>
+            兩者相<strong>減</strong>（非相加），進項已繳過的不必重複繳。
+          </div>
+        </div>
+
+        <div class="point-card">
+          <div class="point-num">3</div>
+          <div class="point-label">稅率分類</div>
+          <div class="point-title">零稅率 vs 免稅</div>
+          <div class="point-body">
+            <strong>零稅率</strong>：外銷業者，稅率調為 0%，進項稅額<strong>可退稅</strong>。<br>
+            <strong>免稅</strong>：農漁牧等弱勢族群，本來就不課稅，進項稅額<strong>不可退、不可抵</strong>。
+          </div>
+        </div>
+
+        <div class="point-card">
+          <div class="point-num">4</div>
+          <div class="point-label">發票種類</div>
+          <div class="point-title">三聯式 vs 二聯式</div>
+          <div class="point-body">
+            <strong>三聯式</strong>（存根聯＋收執聯＋扣抵聯）：公司對公司（B2B），<strong>不可對獎</strong>。<br>
+            <strong>二聯式</strong>（存根聯＋收執聯）：公司對消費者（B2C），<strong>可對獎</strong>。
+          </div>
+        </div>
+
+        <div class="point-card">
+          <div class="point-num">5</div>
+          <div class="point-label">申報規則</div>
+          <div class="point-title">兩個月一期申報</div>
+          <div class="point-body">
+            營業稅兩個月申報一次，<strong>單數月 15 日前</strong>申報前兩個月的稅額（1、3、5、7、9、11 月）。5 月 15 日前申報 3、4 月的稅。
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 加值型公式框 -->
+    <div class="formula-box">
+      <div class="formula-label">加值型營業稅 核心公式</div>
+      <div class="formula-main">
+        應繳稅額 ＝ <em>銷項稅額</em> － <em>進項稅額</em>
+      </div>
+      <div class="formula-note">
+        銷項 ＞ 進項 → 需繳稅（賺錢代收多）｜銷項 ＜ 進項 → 留底稅額，符合條件可申請退稅
+      </div>
+    </div>
+
+    <!-- 零稅率 vs 免稅比較表 -->
+    <section>
+      <div class="section-title">
+        <div class="section-icon icon-blue">⚖️</div>
+        零稅率 vs 免稅 — 關鍵比較
+      </div>
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>項目</th>
+              <th>零稅率</th>
+              <th>免稅</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>本質</strong></td>
+              <td>政府給的優惠，原本應課稅但調為 0%</td>
+              <td>特殊身份本來就不課稅</td>
+            </tr>
+            <tr>
+              <td><strong>適用對象</strong></td>
+              <td>外銷事業（出口廠商）</td>
+              <td>農業、漁業、畜牧業等弱勢族群</td>
+            </tr>
+            <tr>
+              <td><strong>進項稅額</strong></td>
+              <td><span class="tag tag-green">可退稅 ✓</span><br><small>可向政府申請退回進項已繳稅</small></td>
+              <td><span class="tag tag-red">不可抵、不可退 ✗</span><br><small>進項稅額完全無法扣抵</small></td>
+            </tr>
+            <tr>
+              <td><strong>記憶口訣</strong></td>
+              <td>稅率＝零，進項有得退</td>
+              <td>免了稅，進項也免抵</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ② 易錯觀念 -->
+    <section>
+      <div class="section-title">
+        <div class="section-icon icon-amber">⚠️</div>
+        易錯觀念提醒
+      </div>
+      <div class="mistake-list">
+
+        <div class="mistake-card">
+          <div class="mistake-icon">❌</div>
+          <div>
+            <div class="mistake-title">誤解一：銷項 ＋ 進項 = 應繳稅額</div>
+            <div class="mistake-body">
+              最常見的錯誤！很多人直覺把兩個稅額「加起來」繳。但進項是你已經付過的稅，若再加一次等於重複繳稅。正確做法是<strong>相減</strong>，只繳差額部分。
+            </div>
+            <span class="mistake-fix">✓ 應繳 ＝ 銷項 － 進項</span>
+          </div>
+        </div>
+
+        <div class="mistake-card">
+          <div class="mistake-icon">🔀</div>
+          <div>
+            <div class="mistake-title">誤解二：零稅率 ＝ 免稅（兩個都不用繳稅就一樣）</div>
+            <div class="mistake-body">
+              兩者最關鍵的差異在進項稅額的處理：零稅率的外銷廠商買料時付的進項稅<strong>可以退稅</strong>；免稅族群的進項稅額<strong>完全不能抵扣也不能退</strong>。這是考試必考的辨別點。
+            </div>
+            <span class="mistake-fix">✓ 零稅率 → 退稅 ｜ 免稅 → 不退不抵</span>
+          </div>
+        </div>
+
+        <div class="mistake-card">
+          <div class="mistake-icon">🧾</div>
+          <div>
+            <div class="mistake-title">誤解三：三聯式發票可以對獎</div>
+            <div class="mistake-body">
+              三聯式是公司對公司（B2B）的發票，目的是讓買方公司「扣抵進項」用，而非給消費者。統一發票對獎制度設計是為了鼓勵<strong>個人消費者</strong>索取發票，因此只有二聯式可對獎。發票打了「統編」（同邊）後即視同三聯，不能對獎。
+            </div>
+            <span class="mistake-fix">✓ 二聯式（B2C）才能對獎</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ③ 課後自我檢測 -->
+    <section>
+      <div class="section-title">
+        <div class="section-icon icon-blue">✏️</div>
+        課後自我檢測
+      </div>
+      <div class="quiz-list">
+
+        <div class="quiz-card">
+          <div class="quiz-header">
+            <div class="quiz-num">1</div>
+            <div class="quiz-q">某公司本期銷項稅額 $30,000，進項稅額 $18,000，則本期應繳納之營業稅為多少？</div>
+          </div>
+          <div class="quiz-opts">
+            <div class="quiz-opt">（A）$48,000</div>
+            <div class="quiz-opt">（B）$30,000</div>
+            <div class="quiz-opt">（C）$12,000</div>
+            <div class="quiz-opt">（D）$18,000</div>
+          </div>
+          <div class="quiz-hint">💡 提示：套用公式「銷項 − 進項」，不是把兩個數字加起來。</div>
+        </div>
+
+        <div class="quiz-card">
+          <div class="quiz-header">
+            <div class="quiz-num">2</div>
+            <div class="quiz-q">下列關於「零稅率」與「免稅」的敘述，何者正確？</div>
+          </div>
+          <div class="quiz-opts">
+            <div class="quiz-opt">（A）兩者都可以申請退回進項稅額</div>
+            <div class="quiz-opt">（B）零稅率適用於農漁牧弱勢族群</div>
+            <div class="quiz-opt">（C）免稅的進項稅額不可扣抵，也不可申請退稅</div>
+            <div class="quiz-opt">（D）零稅率比免稅享有更少的優惠</div>
+          </div>
+          <div class="quiz-hint">💡 提示：零稅率 = 政府給優惠，進項可退稅；免稅 = 本身特殊身份，進項不能動。</div>
+        </div>
+
+        <div class="quiz-card">
+          <div class="quiz-header">
+            <div class="quiz-num">3</div>
+            <div class="quiz-q">下列何者為營業稅的「最終負擔者」？以及三聯式統一發票用於下列哪種交易情境？</div>
+          </div>
+          <div class="quiz-opts">
+            <div class="quiz-opt">（A）最終負擔者為業者；三聯式用於 B2C（公司對消費者）</div>
+            <div class="quiz-opt">（B）最終負擔者為消費者；三聯式用於 B2B（公司對公司）</div>
+            <div class="quiz-opt">（C）最終負擔者為政府；三聯式用於 B2C</div>
+            <div class="quiz-opt">（D）最終負擔者為消費者；二聯式用於 B2B</div>
+          </div>
+          <div class="quiz-hint">💡 提示：業者是「代收」角色；三聯式多了「扣抵聯」，是公司用來扣抵進項用的。</div>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">學生：穎祥 ｜ 課程日期：2025 / 05 / 03 ｜ 主題：營業稅入門</div>
+    <div class="footer-right">答案：1.(C)　2.(C)　3.(B)</div>
+  </div>
+
+</div>
+</body>
+</html>
