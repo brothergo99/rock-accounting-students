@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEN5194YPE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SEN5194YPE');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>庫藏股財務工程解析 — 立雅 0506</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    background: #f5f3ff;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+
+  .page {
+    width: 960px;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #3b0764 0%, #6d28d9 50%, #7c3aed 100%);
+    padding: 32px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    left: -60px; bottom: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .hero-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    position: relative; z-index: 1;
+  }
+  .hero-badge {
+    background: rgba(255,255,255,0.15);
+    color: #e9d5ff;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+  .hero-date {
+    color: rgba(255,255,255,0.7);
+    font-size: 13px;
+  }
+  .hero-title {
+    color: #fff;
+    font-size: 26px;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    position: relative; z-index: 1;
+  }
+  .hero-sub {
+    color: #ddd6fe;
+    font-size: 14px;
+    position: relative; z-index: 1;
+  }
+
+  /* ── BODY ── */
+  .body { padding: 32px 40px; }
+
+  /* Section titles */
+  .section-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #6d28d9;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #ede9fe;
+  }
+
+  /* ── LEARNING POINTS ── */
+  .points-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .point-card {
+    background: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-left: 4px solid #7c3aed;
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .point-card.full { grid-column: 1 / -1; }
+  .point-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: #7c3aed;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .point-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1e1b4b;
+    margin-bottom: 6px;
+  }
+  .point-desc {
+    font-size: 13px;
+    color: #4b5563;
+    line-height: 1.7;
+  }
+
+  /* ── FORMULA BOX ── */
+  .formula-box {
+    background: linear-gradient(135deg, #4c1d95 0%, #6d28d9 100%);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 32px;
+    color: #fff;
+  }
+  .formula-box h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #ddd6fe;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+  }
+  .formula-main {
+    font-size: 18px;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+  .formula-arrow {
+    text-align: center;
+    font-size: 22px;
+    margin: 4px 0;
+  }
+  .formula-steps {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .formula-step {
+    flex: 1;
+    background: rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 12px 14px;
+    text-align: center;
+  }
+  .formula-step .step-label {
+    font-size: 11px;
+    color: #c4b5fd;
+    margin-bottom: 4px;
+  }
+  .formula-step .step-val {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .formula-step .step-sign {
+    font-size: 11px;
+    color: #c4b5fd;
+  }
+
+  /* ── COMPARE TABLE ── */
+  .compare-wrap {
+    margin-bottom: 32px;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid #e9d5ff;
+  }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  .compare-table th {
+    background: #6d28d9;
+    color: #fff;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 700;
+  }
+  .compare-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f3e8ff;
+    color: #374151;
+    line-height: 1.6;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table tr:nth-child(even) td { background: #faf5ff; }
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 4px;
+  }
+  .tag-a { background: #ede9fe; color: #5b21b6; }
+  .tag-b { background: #dcfce7; color: #166534; }
+
+  /* ── MISTAKE CARDS ── */
+  .mistake-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .mistake-card {
+    background: #fff;
+    border: 1px solid #fecaca;
+    border-radius: 10px;
+    padding: 16px 18px;
+    position: relative;
+  }
+  .mistake-card::before {
+    content: '⚠️';
+    font-size: 18px;
+    position: absolute;
+    right: 14px; top: 14px;
+  }
+  .mistake-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #dc2626;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .mistake-wrong {
+    font-size: 13px;
+    color: #dc2626;
+    font-weight: 600;
+    margin-bottom: 4px;
+    text-decoration: line-through;
+  }
+  .mistake-right {
+    font-size: 13px;
+    color: #166534;
+    font-weight: 600;
+    line-height: 1.6;
+  }
+
+  /* ── QUIZ ── */
+  .quiz-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+  .quiz-item {
+    background: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .quiz-q {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .quiz-num {
+    background: #7c3aed;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .quiz-text {
+    font-size: 14px;
+    color: #1e1b4b;
+    font-weight: 600;
+    line-height: 1.6;
+  }
+  .quiz-hint {
+    margin-top: 10px;
+    margin-left: 34px;
+    font-size: 12px;
+    color: #7c3aed;
+    background: #ede9fe;
+    border-radius: 6px;
+    padding: 6px 10px;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: #f5f3ff;
+    border-top: 1px solid #ede9fe;
+    padding: 14px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-left { font-size: 12px; color: #8b5cf6; font-weight: 600; }
+  .footer-right { font-size: 11px; color: #a78bfa; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-top">
+      <span class="hero-badge">財報分析 × 財務工程</span>
+      <span class="hero-date">2026.05.06</span>
+    </div>
+    <div class="hero-title">庫藏股護盤解析<br>用財務工程拉抬每股淨值</div>
+    <div class="hero-sub">立雅 · 第三堂課 · 核心概念：Treasury Stock</div>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- SECTION 1: 學習重點 -->
+    <div class="section-title">📌 今日學習重點</div>
+    <div class="points-grid">
+
+      <div class="point-card">
+        <div class="point-num">POINT 01</div>
+        <div class="point-title">庫藏股 = 公司買回自己的股票</div>
+        <div class="point-desc">
+          公司用自有資金在市場上買回已發行的股票，這些股票暫時由公司持有，稱為「庫藏股」。
+          買回後股票不會立即消失，但不參與股利分配、也無投票權。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 02</div>
+        <div class="point-title">護盤的兩種機制</div>
+        <div class="point-desc">
+          <strong>① 減少市場浮籌：</strong>市場上流通股數減少，有助於穩定股價。<br>
+          <strong>② 低於帳面價值買回：</strong>股價低於每股淨值時買回，可提升剩餘股東的每股帳面價值。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 03</div>
+        <div class="point-title">為何低價買回能拉高每股淨值？</div>
+        <div class="point-desc">
+          每股淨值 ＝ 股東權益總額 ÷ 在外流通股數。買回後兩者都縮小，
+          但「花的錢比帳面少」，導致分母（股數）縮小的比例 &gt; 分子（權益）縮小的比例，
+          每股淨值因此上升。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 04</div>
+        <div class="point-title">類比減資的概念</div>
+        <div class="point-desc">
+          庫藏股等同於用「低於帳面的價格退股給股東」。
+          就像減資：退得少 → 留下來的股東分到更多 → 每股帳面價值上升。
+          這是「財務工程」手段，不代表公司本身獲利能力變好。
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FORMULA BOX -->
+    <div class="formula-box">
+      <h3>📐 核心計算邏輯：低於帳面買回的影響</h3>
+      <div class="formula-main">每股淨值 ＝ 股東權益總額 ÷ 在外流通股數</div>
+      <div class="formula-steps">
+        <div class="formula-step">
+          <div class="step-label">情境假設</div>
+          <div class="step-val">帳面每股 $20</div>
+          <div class="step-sign">每股淨值原值</div>
+        </div>
+        <div class="formula-step">
+          <div class="step-label">用 $18 買回</div>
+          <div class="step-val">花費 &lt; 帳面</div>
+          <div class="step-sign">支出 18 ÷ 帳面 20</div>
+        </div>
+        <div class="formula-step">
+          <div class="step-label">結果</div>
+          <div class="step-val">每股淨值 ↑</div>
+          <div class="step-sign">剩餘股東分得更多</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPARE TABLE -->
+    <div class="section-title">📊 庫藏股 vs 減資：概念對照</div>
+    <div class="compare-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>比較項目</th>
+            <th><span class="tag tag-a">庫藏股</span></th>
+            <th><span class="tag tag-b">減資</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>操作方式</strong></td>
+            <td>公司在市場上買回股票，自行持有</td>
+            <td>公司退還資本給股東，股票直接登出</td>
+          </tr>
+          <tr>
+            <td><strong>股票是否消失</strong></td>
+            <td>暫時不消失（可再賣出或未來註銷）</td>
+            <td>立即從市場消失</td>
+          </tr>
+          <tr>
+            <td><strong>每股淨值影響</strong></td>
+            <td>低於帳面買回 → 每股淨值上升</td>
+            <td>等比例退款 → 每股淨值通常不變</td>
+          </tr>
+          <tr>
+            <td><strong>護盤效果</strong></td>
+            <td>✅ 有（減少浮籌 + 拉高帳面值）</td>
+            <td>間接有（股本縮減，EPS 提升）</td>
+          </tr>
+          <tr>
+            <td><strong>本質</strong></td>
+            <td>財務工程手段</td>
+            <td>資本結構調整</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- MISTAKE CARDS -->
+    <div class="section-title">⚠️ 易錯觀念提醒</div>
+    <div class="mistake-grid">
+
+      <div class="mistake-card">
+        <div class="mistake-label">易錯 01</div>
+        <div class="mistake-wrong">庫藏股 = 股票消失</div>
+        <div class="mistake-right">
+          ✅ 庫藏股是「暫時持有」，公司可再賣出。
+          只有在正式「註銷」後才從帳上消除。
+          買回期間不配息、不投票，但帳上仍存在。
+        </div>
+      </div>
+
+      <div class="mistake-card">
+        <div class="mistake-label">易錯 02</div>
+        <div class="mistake-wrong">護盤成功 = 公司變好了</div>
+        <div class="mistake-right">
+          ✅ 庫藏股護盤是財務工程，是改變每股計算比率的技巧。
+          公司的獲利能力、業務競爭力並未因此改善，
+          要看本業的 ROE、EPS 成長才算真的變好。
+        </div>
+      </div>
+
+      <div class="mistake-card">
+        <div class="mistake-label">易錯 03</div>
+        <div class="mistake-wrong">任何價格買回都能提升每股淨值</div>
+        <div class="mistake-right">
+          ✅ 只有「低於帳面價值（每股淨值）」買回才有提升效果。
+          若高於帳面價值買回，每股淨值反而會下降，
+          對留存股東不利。
+        </div>
+      </div>
+
+      <div class="mistake-card">
+        <div class="mistake-label">易錯 04</div>
+        <div class="mistake-wrong">庫藏股 = 減資，兩者完全一樣</div>
+        <div class="mistake-right">
+          ✅ 概念類似（都是「讓流通股數縮小」），但操作不同。
+          減資是直接退錢給股東並登出股票；
+          庫藏股是公司先買回自行持有，可未來再流通。
+        </div>
+      </div>
+
+    </div>
+
+    <!-- QUIZ -->
+    <div class="section-title">🧠 課後自我檢測</div>
+    <div class="quiz-list">
+
+      <div class="quiz-item">
+        <div class="quiz-q">
+          <div class="quiz-num">1</div>
+          <div class="quiz-text">
+            某公司每股淨值為 $25，股價跌到 $20，決定以 $20 買回 100 萬股。
+            請問此操作對「每股淨值」的影響為何？為什麼？
+          </div>
+        </div>
+        <div class="quiz-hint">💡 提示：計算前後的股東權益 ÷ 股數，觀察分子分母縮小幅度的差異</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">
+          <div class="quiz-num">2</div>
+          <div class="quiz-text">
+            公司啟動庫藏股護盤，你作為投資人應該如何判斷這是「真的利多」還是「財務工程包裝」？
+            你會看哪些指標？
+          </div>
+        </div>
+        <div class="quiz-hint">💡 提示：財務工程改變的是比率，真正的成長要看本業（ROE、營收成長、毛利率）</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">
+          <div class="quiz-num">3</div>
+          <div class="quiz-text">
+            庫藏股和減資的共同點是什麼？最關鍵的差異又是什麼？
+            用自己的話說明。
+          </div>
+        </div>
+        <div class="quiz-hint">💡 提示：都會讓在外流通股數減少；差別在於股票是否立即消滅、資金流向</div>
+      </div>
+
+    </div>
+
+  </div><!-- /body -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">立雅 × Rock 老師 財報分析課</div>
+    <div class="footer-right">2026.05.06 ｜ 庫藏股財務工程解析</div>
+  </div>
+
+</div>
+</body>
+</html>
