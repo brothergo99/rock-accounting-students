@@ -1,1 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEN5194YPE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SEN5194YPE');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>加減乘除學財報 × ROE杜邦框架 — 佳汝 0507</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
 
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    background: #eff6ff;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+
+  .page {
+    width: 960px;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.13);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #1e3a5f 0%, #1d4ed8 55%, #3b82f6 100%);
+    padding: 32px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    left: -60px; bottom: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .hero-inner { position: relative; z-index: 1; }
+  .hero-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+  .badge {
+    background: rgba(255,255,255,0.18);
+    color: #bfdbfe;
+    font-size: 11px; font-weight: 700;
+    padding: 3px 10px; border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+  .badge.first { background: #f59e0b; color: #fff; }
+  .badge.case  { background: #10b981; color: #fff; }
+  .date-label  { color: rgba(255,255,255,0.6); font-size: 12px; }
+  .hero h1 { color: #fff; font-size: 26px; font-weight: 900; line-height: 1.3; margin-bottom: 6px; }
+  .hero h1 span { color: #93c5fd; }
+  .hero-sub { color: rgba(255,255,255,0.72); font-size: 13px; line-height: 1.6; max-width: 680px; }
+
+  /* ── BODY ── */
+  .body { padding: 32px 40px 40px; display: grid; gap: 28px; }
+
+  .section-title {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 15px; font-weight: 800;
+    color: #1e3a5f;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #dbeafe;
+  }
+  .section-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .icon-blue   { background: #dbeafe; }
+  .icon-amber  { background: #fef3c7; }
+  .icon-green  { background: #d1fae5; }
+
+  /* ── FRAMEWORK GRID ── */
+  .framework-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .fw-card {
+    border-radius: 12px; padding: 18px 16px;
+    position: relative; overflow: hidden;
+  }
+  .fw-card.add  { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1.5px solid #bfdbfe; }
+  .fw-card.sub  { background: linear-gradient(135deg, #fff7ed, #fed7aa); border: 1.5px solid #fdba74; }
+  .fw-card.mult { background: linear-gradient(135deg, #f0fdf4, #bbf7d0); border: 1.5px solid #86efac; }
+  .fw-op {
+    font-size: 36px; font-weight: 900; line-height: 1;
+    margin-bottom: 8px; opacity: 0.25;
+    position: absolute; top: 10px; right: 14px;
+  }
+  .fw-card.add  .fw-op { color: #1d4ed8; }
+  .fw-card.sub  .fw-op { color: #ea580c; }
+  .fw-card.mult .fw-op { color: #16a34a; }
+  .fw-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .fw-card.add  .fw-label { color: #1d4ed8; }
+  .fw-card.sub  .fw-label { color: #ea580c; }
+  .fw-card.mult .fw-label { color: #16a34a; }
+  .fw-title { font-size: 15px; font-weight: 900; color: #1a1a1a; margin-bottom: 6px; }
+  .fw-body  { font-size: 12.5px; color: #444; line-height: 1.65; }
+  .fw-eq {
+    margin-top: 8px; font-size: 12px; font-weight: 700;
+    padding: 5px 10px; border-radius: 6px; display: inline-block;
+  }
+  .fw-card.add  .fw-eq { background: #dbeafe; color: #1e3a5f; }
+  .fw-card.sub  .fw-eq { background: #fed7aa; color: #7c2d12; }
+  .fw-card.mult .fw-eq { background: #bbf7d0; color: #14532d; }
+
+  /* ── POINT GRID ── */
+  .point-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .point-card {
+    border: 1.5px solid #dbeafe;
+    border-radius: 10px; padding: 14px 16px;
+    position: relative;
+  }
+  .point-num {
+    position: absolute; top: 10px; right: 12px;
+    font-size: 28px; font-weight: 900;
+    color: #dbeafe; line-height: 1;
+  }
+  .point-label { font-size: 11px; font-weight: 700; color: #1d4ed8; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .point-title { font-size: 14px; font-weight: 800; color: #1a1a1a; margin-bottom: 6px; }
+  .point-body  { font-size: 12.5px; color: #444; line-height: 1.65; }
+
+  /* ── ROE BOX ── */
+  .roe-box {
+    background: linear-gradient(135deg, #1e3a5f 0%, #1d4ed8 100%);
+    border-radius: 12px; padding: 22px 28px; color: #fff;
+  }
+  .roe-label { font-size: 11px; color: #93c5fd; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 12px; }
+  .roe-formula {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 12px; margin-bottom: 12px;
+  }
+  .roe-item { text-align: center; }
+  .roe-op { font-size: 22px; font-weight: 900; color: #93c5fd; line-height: 1; margin: 4px 0; }
+  .roe-name { font-size: 16px; font-weight: 900; color: #fff; margin-bottom: 4px; }
+  .roe-sub  { font-size: 11px; color: #bfdbfe; line-height: 1.5; }
+  .roe-connect { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px; }
+  .roe-tag {
+    font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 12px;
+    background: rgba(255,255,255,0.15); color: #e0f2fe;
+  }
+  .roe-x { font-size: 16px; color: #93c5fd; font-weight: 900; }
+
+  /* ── CASE BOX ── */
+  .case-box {
+    background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 12px;
+    overflow: hidden;
+  }
+  .case-header {
+    background: #1e3a5f; color: #fff; padding: 12px 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .case-title { font-size: 14px; font-weight: 800; }
+  .case-badge { background: #10b981; color: #fff; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; }
+  .case-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+  .case-stat { padding: 16px 18px; border-right: 1px solid #e2e8f0; }
+  .case-stat:last-child { border-right: none; }
+  .case-stat-label { font-size: 11px; color: #6b7280; font-weight: 600; margin-bottom: 4px; }
+  .case-stat-val { font-size: 20px; font-weight: 900; color: #1e3a5f; margin-bottom: 2px; }
+  .case-stat-note { font-size: 11px; color: #6b7280; line-height: 1.4; }
+  .case-insight {
+    padding: 14px 18px; border-top: 1px solid #e2e8f0;
+    background: #fff; font-size: 13px; color: #374151; line-height: 1.7;
+  }
+  .case-insight strong { color: #1e3a5f; }
+
+  /* ── MISTAKE CARDS ── */
+  .mistake-list { display: grid; gap: 10px; }
+  .mistake-card {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: #fffbeb; border: 1.5px solid #fde68a;
+    border-radius: 10px; padding: 14px 16px;
+  }
+  .mistake-icon { font-size: 20px; flex-shrink: 0; line-height: 1.2; }
+  .mistake-title { font-size: 13px; font-weight: 800; color: #92400e; margin-bottom: 4px; }
+  .mistake-body  { font-size: 12.5px; color: #555; line-height: 1.65; }
+  .mistake-fix {
+    margin-top: 6px; font-size: 12px; font-weight: 700;
+    color: #1d4ed8; padding: 4px 10px;
+    background: #dbeafe; border-radius: 6px; display: inline-block;
+  }
+
+  /* ── QUIZ ── */
+  .quiz-list { display: grid; gap: 14px; }
+  .quiz-card {
+    background: #f8fafc; border: 1.5px solid #e2e8f0;
+    border-radius: 10px; padding: 16px 18px;
+  }
+  .quiz-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .quiz-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: #1d4ed8; color: #fff;
+    font-size: 13px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .quiz-q   { font-size: 13.5px; font-weight: 700; color: #1a1a1a; line-height: 1.5; }
+  .quiz-opts { padding-left: 38px; }
+  .quiz-opt { font-size: 13px; color: #444; padding: 3px 0; line-height: 1.5; }
+  .quiz-hint {
+    margin-top: 10px; padding: 8px 12px;
+    background: #dbeafe; border-radius: 7px;
+    font-size: 12px; color: #1e3a5f; font-weight: 600; line-height: 1.5;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: #eff6ff; border-top: 1px solid #dbeafe;
+    padding: 14px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-left  { font-size: 11px; color: #6b7280; }
+  .footer-right { font-size: 11px; color: #1d4ed8; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-meta">
+        <span class="badge first">第一堂課</span>
+        <span class="badge">財報分析</span>
+        <span class="badge case">中租實戰</span>
+        <span class="date-label">2025 / 05 / 07</span>
+      </div>
+      <h1>加減乘除學財報 <span>×</span> ROE 杜邦框架</h1>
+      <p class="hero-sub">從企業主視角切入財報——用加法看資本結構、減法看獲利能力、乘法看 ROE 三引擎，並以中租控股為例，感受「用借來的錢賺 2/3」的商業邏輯。</p>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- ① 加減乘除框架 -->
+    <section>
+      <div class="section-title">
+        <div class="section-icon icon-blue">📊</div>
+        加減乘除學財報——三張表的底層邏輯
+      </div>
+      <div class="framework-grid">
+
+        <div class="fw-card add">
+          <div class="fw-op">＋</div>
+          <div class="fw-label">加法的表</div>
+          <div class="fw-title">資產負債表</div>
+          <div class="fw-body">
+            反映<strong>財務結構</strong>：公司的錢從哪來、怎麼用。自己出的＋借來的＝總資產。負債不一定是壞事，善用是籌資能力。
+          </div>
+          <span class="fw-eq">資產 ＝ 負債 ＋ 股東權益</span>
+        </div>
+
+        <div class="fw-card sub">
+          <div class="fw-op">－</div>
+          <div class="fw-label">減法的表</div>
+          <div class="fw-title">損益表</div>
+          <div class="fw-body">
+            <strong>毛利率</strong>→市場競爭力（定價能力）<br>
+            <strong>營業盈利率</strong>→管理效率（花錢是否有效）<br>
+            兩者差距越大，代表費用越失控。
+          </div>
+          <span class="fw-eq">收入 − 成本 − 費用 ＝ 盈利</span>
+        </div>
+
+        <div class="fw-card mult">
+          <div class="fw-op">×</div>
+          <div class="fw-label">乘法的表</div>
+          <div class="fw-title">ROE 杜邦分析</div>
+          <div class="fw-body">
+            股東權益報酬率 ＝ 三個引擎相乘。靠<strong>能力</strong>（利潤率）、靠<strong>速度</strong>（周轉率）、靠<strong>風險</strong>（槓桿），同步發力才能極大化回報。
+          </div>
+          <span class="fw-eq">ROE ＝ 利潤率 × 周轉率 × 權益成數</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ② ROE 杜邦拆解 -->
+    <div class="roe-box">
+      <div class="roe-label">ROE 杜邦方程式 — 三引擎解析</div>
+      <div class="roe-formula">
+        <div class="roe-item">
+          <div class="roe-name">利潤率</div>
+          <div class="roe-sub">賣得貴<br>定價能力、市場競爭力<br>→ 毛利率越高越好</div>
+        </div>
+        <div class="roe-item">
+          <div class="roe-op">×</div>
+          <div class="roe-name">周轉率</div>
+          <div class="roe-sub">賣得快<br>存貨翻桌率、應收收得快<br>→ 應付帳款要慢慢付</div>
+        </div>
+        <div class="roe-item">
+          <div class="roe-op">×</div>
+          <div class="roe-name">權益成數</div>
+          <div class="roe-sub">開槓桿<br>借來的錢放大報酬<br>台灣人房貸 ＝ 5 倍槓桿</div>
+        </div>
+      </div>
+      <div class="roe-connect">
+        <span class="roe-tag">銀行在意 → 償債能力</span>
+        <span class="roe-x">｜</span>
+        <span class="roe-tag">經營團隊在意 → 營運能力（周轉率）</span>
+        <span class="roe-x">｜</span>
+        <span class="roe-tag">股東在意 → 獲利能力（ROE）</span>
+      </div>
+    </div>
+
+    <!-- ③ 今日重點 -->
+    <section>
+      <div class="section-title">
+        <div class="section-icon icon-blue">📌</div>
+        今日學習重點
+      </div>
+      <div class="point-grid">
+
+        <div class="point-card">
+          <div class="point-num">1</div>
+          <div class="point-label">增值 vs 貶值</div>
+          <div class="point-title">增值循環 > 貶值循環 → 擴張</div>
+          <div class="point-body">
+            現金→存貨→應收→現金的<strong>增值循環</strong>越大越好；固定資產折舊是<strong>貶值循環</strong>。當增值 > 貶值，經營者下一步就是擴大經營、籌資。
+          </div>
+        </div>
+
+        <div class="point-card">
+          <div class="point-num">2</div>
+          <div class="point-label">負債三來源</div>
+          <div class="point-title">跟誰借決定商業競爭力</div>
+          <div class="point-body">
+            ① <strong>跟銀行借</strong>：期間與利率確定，最穩定<br>
+            ② <strong>跟供應商借</strong>：應付帳款 120 天，拿貨先賣後付<br>
+            ③ <strong>跟客戶借</strong>：預收款（如預售屋訂金），零利率
+          </div>
+        </div>
+
+        <div class="point-card">
+          <div class="point-num">3</div>
+          <div class="point-label">毛利率解讀</div>
+          <div class="point-title">反映市場定價能力</div>
+          <div class="point-body">
+            毛利率高 ＝ 賣得貴且市場接受。LV 毛利率約 69-70%，代表每賣 100 元包包，成本只有 30 元。毛利率沒有天花板，收入卻有市場競爭力上限。
+          </div>
+        </div>
+
+        <div class="point-card">
+          <div class="point-num">4</div>
+          <div class="point-label">應收帳款判讀</div>
+          <div class="point-title">要看行業別再下判斷</div>
+          <div class="point-body">
+            一般公司應收高 ＝ 收款風險高。但對<strong>金融租賃公司</strong>（如中租），應收帳款就是放款本金，佔 61% 是本業，不代表風險高。
+          </div>
+        </div>
+
+        <div class="point-card">
+          <div class="point-num">5</div>
+          <div class="point-label">看財報步驟</div>
+          <div class="point-title">從比例最高的資產開始</div>
+          <div class="point-body">
+            Step 1：看財務結構（負債/股東權益占比）<br>
+            Step 2：找比例最高的資產項目 → 了解主要業務<br>
+            Step 3：看損益表毛利率 → 競爭力<br>
+            Step 4：看毛利與淨利差距 → 費用效率
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 中租案例 -->
+    <section>
+      <div class="section-title">
+        <div class="section-icon icon-green">🏢</div>
+        實戰案例：中租控股（5871）
+      </div>
+      <div class="case-box">
+        <div class="case-header">
+          <span class="case-title">「用借來的錢收利息，還賺了 2/3」</span>
+          <span class="case-badge">財報快速判讀</span>
+        </div>
+        <div class="case-grid">
+          <div class="case-stat">
+            <div class="case-stat-label">總資產</div>
+            <div class="case-stat-val">9,761 億</div>
+            <div class="case-stat-note">其中應收帳款占 61%（5,940 億）= 放款本金</div>
+          </div>
+          <div class="case-stat">
+            <div class="case-stat-label">負債比 / 槓桿</div>
+            <div class="case-stat-val">80% / 5倍</div>
+            <div class="case-stat-note">自有資金僅 20%，用借來的錢做生意</div>
+          </div>
+          <div class="case-stat">
+            <div class="case-stat-label">毛利率（扣信用損失後）</div>
+            <div class="case-stat-val">~46%</div>
+            <div class="case-stat-note">利息收入毛利 66%，扣壞帳損失後約 46%</div>
+          </div>
+        </div>
+        <div class="case-insight">
+          <strong>一句話總結：</strong>中租以 20% 自有資本撬動 9,761 億資產，核心業務是收取利息差（成本約 34%，利息收入達 66% 毛利）。應收帳款 61% 是本業特色，不是危險信號——判讀財報先看行業邏輯，再看數字高低。
+        </div>
+      </div>
+    </section>
+
+    <!-- ④ 易錯觀念 -->
+    <section>
+      <div class="section-title">
+        <div class="section-icon icon-amber">⚠️</div>
+        易錯觀念提醒
+      </div>
+      <div class="mistake-list">
+
+        <div class="mistake-card">
+          <div class="mistake-icon">❌</div>
+          <div>
+            <div class="mistake-title">誤解一：負債高 ＝ 公司危險</div>
+            <div class="mistake-body">
+              負債是籌資工具，不是壞事。關鍵是「借來的錢能否產生比利息更高的報酬」。中租負債 80% 卻穩定獲利——因為它借錢出去賺利差，這是商業模式，不是財務危機。
+            </div>
+            <span class="mistake-fix">✓ 看負債結構與用途，而非只看比例</span>
+          </div>
+        </div>
+
+        <div class="mistake-card">
+          <div class="mistake-icon">🔄</div>
+          <div>
+            <div class="mistake-title">誤解二：所有周轉率都要越高越好</div>
+            <div class="mistake-body">
+              存貨周轉率、應收帳款周轉率確實越高越好（賣得快、收得快）。但<strong>應付帳款周轉率</strong>要越低越好——代表你跟供應商借到的付款期越長，等於免費使用資金，是商業談判優勢。
+            </div>
+            <span class="mistake-fix">✓ 應付帳款周轉率：慢付才是贏</span>
+          </div>
+        </div>
+
+        <div class="mistake-card">
+          <div class="mistake-icon">📉</div>
+          <div>
+            <div class="mistake-title">誤解三：毛利率高就代表公司很會賺錢</div>
+            <div class="mistake-body">
+              毛利率高只代表定價能力強，還要看費用是否有效率。LINE 辦公室花 1 億裝潢，5 年租約每年折舊 2,000 萬——毛利再高，費用失控也會讓<strong>營業盈利率</strong>大幅縮水。毛利與淨利的差距才是管理效率指標。
+            </div>
+            <span class="mistake-fix">✓ 毛利率（競爭力）＋ 淨利率（管理效率）合看</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ⑤ 課後自我檢測 -->
+    <section>
+      <div class="section-title">
+        <div class="section-icon icon-blue">✏️</div>
+        課後自我檢測
+      </div>
+      <div class="quiz-list">
+
+        <div class="quiz-card">
+          <div class="quiz-header">
+            <div class="quiz-num">1</div>
+            <div class="quiz-q">ROE 杜邦方程式拆解為三個引擎，下列對應何者正確？</div>
+          </div>
+          <div class="quiz-opts">
+            <div class="quiz-opt">（A）毛利率 × 應收帳款周轉率 × 負債比</div>
+            <div class="quiz-opt">（B）利潤率 × 周轉率 × 權益成數</div>
+            <div class="quiz-opt">（C）營業利益率 × 總資產 × 股東權益</div>
+            <div class="quiz-opt">（D）毛利率 × 淨利率 × 資產報酬率</div>
+          </div>
+          <div class="quiz-hint">💡 提示：三個引擎代表「賣得貴、賣得快、開槓桿」三種賺錢方式。</div>
+        </div>
+
+        <div class="quiz-card">
+          <div class="quiz-header">
+            <div class="quiz-num">2</div>
+            <div class="quiz-q">企業主若想「跟供應商借錢」來擴大經營，在財報上對應的科目是什麼？這對應付帳款周轉率的影響是？</div>
+          </div>
+          <div class="quiz-opts">
+            <div class="quiz-opt">（A）應收帳款增加；周轉率越高越好</div>
+            <div class="quiz-opt">（B）預收款項增加；周轉率越低越好</div>
+            <div class="quiz-opt">（C）應付帳款增加；周轉率越低越好（付款期越長越有利）</div>
+            <div class="quiz-opt">（D）短期借款增加；周轉率越高越好</div>
+          </div>
+          <div class="quiz-hint">💡 提示：拿貨後 120 天才付款，就是用供應商的錢週轉，應付帳款是負債科目。</div>
+        </div>
+
+        <div class="quiz-card">
+          <div class="quiz-header">
+            <div class="quiz-num">3</div>
+            <div class="quiz-q">快速判讀一家陌生公司的主要業務，最有效的第一步是？</div>
+          </div>
+          <div class="quiz-opts">
+            <div class="quiz-opt">（A）先看損益表的營業收入項目</div>
+            <div class="quiz-opt">（B）找資產負債表中比例最高的資產項目</div>
+            <div class="quiz-opt">（C）直接看每股盈餘（EPS）高低</div>
+            <div class="quiz-opt">（D）比較負債比與同業平均</div>
+          </div>
+          <div class="quiz-hint">💡 提示：中租應收帳款占 61%，一眼就看出它是「靠放款賺利息」的公司。</div>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">學生：佳汝 ｜ 課程日期：2025 / 05 / 07 ｜ 主題：加減乘除學財報 × ROE 杜邦</div>
+    <div class="footer-right">答案：1.(B)　2.(C)　3.(B)</div>
+  </div>
+
+</div>
+</body>
+</html>
