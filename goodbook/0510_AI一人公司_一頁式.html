@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEN5194YPE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SEN5194YPE');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI時代一人公司經營學 — 好書分享 0510</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    background: #f0fdfa;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+
+  .page {
+    width: 960px;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #042f2e 0%, #0d9488 55%, #14b8a6 100%);
+    padding: 32px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    left: -60px; bottom: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .hero-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    position: relative; z-index: 1;
+  }
+  .hero-badge {
+    background: rgba(255,255,255,0.15);
+    color: #99f6e4;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+  .hero-date {
+    color: rgba(255,255,255,0.7);
+    font-size: 13px;
+  }
+  .hero-title {
+    color: #fff;
+    font-size: 26px;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    position: relative; z-index: 1;
+  }
+  .hero-sub {
+    color: #99f6e4;
+    font-size: 14px;
+    position: relative; z-index: 1;
+  }
+  .hero-book {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 13px;
+    color: #fff;
+    margin-top: 10px;
+    position: relative; z-index: 1;
+  }
+
+  /* ── BODY ── */
+  .body { padding: 32px 40px; }
+
+  .section-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0d9488;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #ccfbf1;
+  }
+
+  /* ── POINTS ── */
+  .points-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .point-card {
+    background: #f0fdfa;
+    border: 1px solid #99f6e4;
+    border-left: 4px solid #0d9488;
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .point-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: #0d9488;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .point-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #134e4a;
+    margin-bottom: 6px;
+  }
+  .point-desc {
+    font-size: 13px;
+    color: #374151;
+    line-height: 1.75;
+  }
+  .point-quote {
+    display: block;
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: #fff;
+    border-left: 3px solid #14b8a6;
+    border-radius: 4px;
+    font-size: 12.5px;
+    color: #0d9488;
+    font-style: italic;
+  }
+
+  /* ── FRAMEWORK BOX ── */
+  .framework-box {
+    background: linear-gradient(135deg, #042f2e 0%, #0d9488 100%);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 32px;
+    color: #fff;
+  }
+  .framework-box h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #99f6e4;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+  }
+  .framework-steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+  }
+  .fw-step {
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 14px;
+    text-align: center;
+  }
+  .fw-step .icon { font-size: 24px; margin-bottom: 8px; }
+  .fw-step .label {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .fw-step .desc {
+    font-size: 11.5px;
+    color: #99f6e4;
+    line-height: 1.5;
+  }
+
+  /* ── EXAMPLE BOX ── */
+  .example-box {
+    background: #fff;
+    border: 1px solid #99f6e4;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+  }
+  .example-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #134e4a;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .example-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .example-col {
+    background: #f0fdfa;
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .example-col-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #0d9488;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+  .example-col ul {
+    list-style: none;
+    padding: 0;
+  }
+  .example-col li {
+    font-size: 12.5px;
+    color: #374151;
+    padding: 4px 0;
+    border-bottom: 1px solid #ccfbf1;
+    line-height: 1.5;
+  }
+  .example-col li:last-child { border-bottom: none; }
+  .x-mark { color: #dc2626; font-weight: 700; margin-right: 4px; }
+  .o-mark { color: #059669; font-weight: 700; margin-right: 4px; }
+
+  /* ── MISTAKE CARDS ── */
+  .mistake-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .mistake-card {
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .mistake-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #ea580c;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .mistake-wrong {
+    font-size: 12.5px;
+    color: #dc2626;
+    font-weight: 600;
+    margin-bottom: 6px;
+    text-decoration: line-through;
+  }
+  .mistake-right {
+    font-size: 12.5px;
+    color: #166534;
+    font-weight: 600;
+    line-height: 1.6;
+  }
+
+  /* ── QUIZ ── */
+  .quiz-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .quiz-item {
+    background: #f0fdfa;
+    border: 1px solid #99f6e4;
+    border-radius: 10px;
+    padding: 14px 18px;
+  }
+  .quiz-q {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .quiz-num {
+    background: #0d9488;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .quiz-text {
+    font-size: 13.5px;
+    color: #134e4a;
+    font-weight: 600;
+    line-height: 1.6;
+  }
+  .quiz-hint {
+    margin-top: 8px;
+    margin-left: 34px;
+    font-size: 12px;
+    color: #0d9488;
+    background: #ccfbf1;
+    border-radius: 6px;
+    padding: 5px 10px;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: #f0fdfa;
+    border-top: 1px solid #99f6e4;
+    padding: 14px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-left { font-size: 12px; color: #0d9488; font-weight: 600; }
+  .footer-right { font-size: 11px; color: #5eead4; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-top">
+      <span class="hero-badge">📚 好書分享 × AI實戰</span>
+      <span class="hero-date">2026.05.10</span>
+    </div>
+    <div class="hero-title">AI時代的一人公司經營學<br>船長思維 × 市場驗證 × 自我不可取代</div>
+    <div class="hero-sub">Rock 老師社群分享 · 實作心得 + 書摘精華</div>
+    <span class="hero-book">📖 本書：AI時代的藝人公司經營學（台北市立圖書館借閱）</span>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- SECTION 1 -->
+    <div class="section-title">📌 今日學習重點</div>
+    <div class="points-grid">
+
+      <div class="point-card">
+        <div class="point-num">POINT 01</div>
+        <div class="point-title">你是船長，AI 是艦隊</div>
+        <div class="point-desc">
+          船長不划槳、不修船——他觀察海象、手握羅盤、下達指令。
+          AI 能補上你沒說清楚的細節，但方向由你定。
+          <em class="point-quote">「下指令的品質，決定艦隊能走多遠。」</em>
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 02</div>
+        <div class="point-title">試錯成本大幅降低</div>
+        <div class="point-desc">
+          以前創業：龐大資金 + 數月開發 + 全職投入。<br>
+          現在：每月 20 美金 AI 訂閱費 + 一台筆電 + 一個週末，就能跑出第一個試做品。
+          <em class="point-quote">「先出港才知道風向。完成是風險決策，不是品質門檻。」</em>
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 03</div>
+        <div class="point-title">殘酷的市場驗證數</div>
+        <div class="point-desc">
+          有人願意留 email 嗎？有人願意付費嗎？
+          如果沒有，毫不猶豫放棄，轉下一個。
+          驗證比說服自己重要——一人創業最大的危險就是「只有你自己決定」，容易自我催眠。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 04</div>
+        <div class="point-title">AI 是無情的加速器</div>
+        <div class="point-desc">
+          AI 讓你做事更快——但如果方向錯了，它只是讓你更快地犯錯。
+          Rock 老師親身示範：用 Claude Code 做出「Rock 好棒棒」的官網，
+          卻忘了問「新學生進來看得懂嗎？」
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 05</div>
+        <div class="point-title">讓 AI 扮演最挑剔的客戶</div>
+        <div class="point-desc">
+          核心 Prompt：「請扮演最挑剔、最沒耐心的奧客，告訴我這個網頁的價值主張與目標客戶。你的任務不是幫我優化。」
+          <em class="point-quote">AI 指出的問題：口號 ≠ 主張、沒說清楚幫誰解決什麼、跟所有人說話 = 跟沒有人說話。</em>
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 06</div>
+        <div class="point-title">你的不可取代性才是核心</div>
+        <div class="point-desc">
+          AI 能幫你補缺口、加速執行，但它無法決定「要不要做」「什麼時候喊卡」「目標客戶是誰」。
+          這些判斷力 + 你的人生經歷 + 情緒價值，才是 AI 取代不了的部分。
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FRAMEWORK BOX -->
+    <div class="framework-box">
+      <h3>⚓ 一人公司 AI 應用三步驟框架</h3>
+      <div class="framework-steps">
+        <div class="fw-step">
+          <div class="icon">🧭</div>
+          <div class="label">Step 1：定方向</div>
+          <div class="desc">你決定做什麼、目標客戶是誰、解決誰的什麼問題。AI 不能幫你決定這件事。</div>
+        </div>
+        <div class="fw-step">
+          <div class="icon">🤖</div>
+          <div class="label">Step 2：AI 執行 + 自我審查</div>
+          <div class="desc">讓 AI 做出初版，再讓 AI 扮演最挑剔的客戶來挑你的毛病。數據說話，不要自嗨。</div>
+        </div>
+        <div class="fw-step">
+          <div class="icon">📊</div>
+          <div class="label">Step 3：市場驗證</div>
+          <div class="desc">有沒有人留 email？有沒有人付費？沒有就放棄轉向。完成≠有價值，數據才是裁判。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXAMPLE BOX -->
+    <div class="example-box">
+      <div class="example-title">🔍 Rock 老師官網優化實例：AI 嗆我之前 vs. 之後</div>
+      <div class="example-row">
+        <div class="example-col">
+          <div class="example-col-label">❌ 修改前（AI 嗆我說）</div>
+          <ul>
+            <li><span class="x-mark">✗</span>「看懂數字看透商業」→ 口號，不是主張</li>
+            <li><span class="x-mark">✗</span>跟補習班、YouTube、ChatGPT 差在哪？沒講</li>
+            <li><span class="x-mark">✗</span>「我很厲害」 → 不是「我能幫你做到什麼」</li>
+            <li><span class="x-mark">✗</span>80個五星好評 → 只有數字，沒有具體評語</li>
+            <li><span class="x-mark">✗</span>跟所有人說話 = 沒跟任何人說話</li>
+          </ul>
+        </div>
+        <div class="example-col">
+          <div class="example-col-label">✅ 修改後（加入這些）</div>
+          <ul>
+            <li><span class="o-mark">✓</span>明確列出：你是哪種人？（備考生、職場人士、企業主接班人…）</li>
+            <li><span class="o-mark">✓</span>跑馬燈展示真實學生評價</li>
+            <li><span class="o-mark">✓</span>16堂課程清單 → 幫你解決什麼具體問題</li>
+            <li><span class="o-mark">✓</span>加入「AI學習輔助」定位，說清楚我是誰</li>
+            <li><span class="o-mark">✓</span>真實案例：美容師轉行、職場升主辦、投資人補財報…</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- MISTAKE CARDS -->
+    <div class="section-title">⚠️ 易錯觀念提醒</div>
+    <div class="mistake-grid">
+
+      <div class="mistake-card">
+        <div class="mistake-label">易錯 01</div>
+        <div class="mistake-wrong">AI 幫我想出點子就代表點子是好的</div>
+        <div class="mistake-right">
+          ✅ AI 擅長補你沒說的內容，你看起來「很有道理」，但方向仍要由你決定。盲目照抄 AI 企劃是常見陷阱。
+        </div>
+      </div>
+
+      <div class="mistake-card">
+        <div class="mistake-label">易錯 02</div>
+        <div class="mistake-wrong">做出產品就代表成功了</div>
+        <div class="mistake-right">
+          ✅ 「完成」是風險決策，不是品質門檻。真正重要的是：有沒有人願意為它付費？數據才是裁判。
+        </div>
+      </div>
+
+      <div class="mistake-card">
+        <div class="mistake-label">易錯 03</div>
+        <div class="mistake-wrong">努力就會有成果，堅持下去一定行</div>
+        <div class="mistake-right">
+          ✅ 沒有市場數據支持就繼續是「自我催眠」。驗證比說服自己重要，沒有回應就毫不猶豫轉向。
+        </div>
+      </div>
+
+    </div>
+
+    <!-- QUIZ -->
+    <div class="section-title">🧠 課後自我檢測</div>
+    <div class="quiz-list">
+
+      <div class="quiz-item">
+        <div class="quiz-q">
+          <div class="quiz-num">1</div>
+          <div class="quiz-text">
+            你現在正在做的某個項目（工作、副業、學習計劃），如果讓 AI 扮演「最挑剔的奧客」來評估，你認為他會提出哪三個最難回答的問題？
+          </div>
+        </div>
+        <div class="quiz-hint">💡 試著真的去問 AI：「請你扮演最挑剔的客戶，告訴我這個____的問題。你的任務不是幫我優化。」</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">
+          <div class="quiz-num">2</div>
+          <div class="quiz-text">
+            「完成是風險決策，不是品質門檻」這句話，你在自己的生活或工作中如何應用？你有沒有因為追求「完美」而遲遲沒有出發的經驗？
+          </div>
+        </div>
+        <div class="quiz-hint">💡 想想：準備好 40% 就出發 vs. 等到 100% 完美才行動，哪種更容易讓你得到真實反饋？</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">
+          <div class="quiz-num">3</div>
+          <div class="quiz-text">
+            「船長不划槳，但要知道要去哪裡。」你在使用 AI 時，扮演的是船長還是水手？你目前最需要 AI 幫你執行的一件事是什麼？
+          </div>
+        </div>
+        <div class="quiz-hint">💡 關鍵區別：你是在讓 AI 決定方向，還是你先決定方向、再讓 AI 執行？</div>
+      </div>
+
+    </div>
+
+  </div><!-- /body -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">Rock 老師社群好書分享 × AI實戰筆記</div>
+    <div class="footer-right">2026.05.10 ｜ AI時代一人公司經營學</div>
+  </div>
+
+</div>
+</body>
+</html>
