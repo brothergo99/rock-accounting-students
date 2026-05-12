@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEN5194YPE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SEN5194YPE');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>損益兩平分析 × AI船長思維 × 管理會計實作 — Megan 0511</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    background: #eff6ff;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+
+  .page {
+    width: 960px;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #0c2461 0%, #1e40af 55%, #2563eb 100%);
+    padding: 32px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    left: -60px; bottom: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .hero-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    position: relative; z-index: 1;
+  }
+  .hero-badge {
+    background: rgba(255,255,255,0.18);
+    color: #bfdbfe;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+  .hero-date { color: rgba(255,255,255,0.7); font-size: 13px; }
+  .hero-title {
+    color: #fff;
+    font-size: 26px;
+    font-weight: 900;
+    line-height: 1.35;
+    margin-bottom: 10px;
+    position: relative; z-index: 1;
+  }
+  .hero-title span { color: #93c5fd; }
+  .hero-sub {
+    color: rgba(255,255,255,0.75);
+    font-size: 14px;
+    line-height: 1.7;
+    position: relative; z-index: 1;
+  }
+
+  /* ── SECTION ── */
+  .section { padding: 28px 40px; }
+  .section + .section { border-top: 1px solid #e0f2fe; }
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #1d4ed8;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 4px; height: 14px;
+    border-radius: 2px;
+    background: #2563eb;
+  }
+
+  /* ── POINTS GRID ── */
+  .points-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .point-card {
+    border: 1.5px solid #dbeafe;
+    border-radius: 12px;
+    padding: 16px;
+    background: #f8fbff;
+    transition: box-shadow 0.2s;
+  }
+  .point-card:hover { box-shadow: 0 4px 16px rgba(37,99,235,0.1); }
+  .point-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: #2563eb;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .point-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .point-body {
+    font-size: 12.5px;
+    color: #475569;
+    line-height: 1.65;
+  }
+
+  /* ── FORMULA BOX ── */
+  .formula-box {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1.5px solid #93c5fd;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+  }
+  .formula-box + .formula-box { margin-top: 0; }
+  .formula-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .formula-title::before {
+    content: '📐';
+    font-size: 15px;
+  }
+  .formula-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .formula-row:last-child { margin-bottom: 0; }
+  .formula-label {
+    font-size: 12.5px;
+    color: #64748b;
+    min-width: 130px;
+    flex-shrink: 0;
+  }
+  .formula-eq {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1e3a8a;
+    font-family: 'Courier New', monospace;
+    background: rgba(255,255,255,0.7);
+    padding: 3px 10px;
+    border-radius: 6px;
+  }
+  .formula-note {
+    font-size: 11.5px;
+    color: #64748b;
+    font-style: italic;
+  }
+
+  /* ── EXAMPLE BOX ── */
+  .example-box {
+    background: #fff7ed;
+    border: 1.5px solid #fed7aa;
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-top: 14px;
+  }
+  .example-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #c2410c;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .example-title::before { content: '🔧'; }
+  .example-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .example-item {
+    font-size: 12.5px;
+    color: #374151;
+    line-height: 1.6;
+  }
+  .example-item strong { color: #c2410c; }
+  .example-result {
+    grid-column: 1 / -1;
+    background: #fff;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1e3a8a;
+    border-left: 4px solid #2563eb;
+    margin-top: 4px;
+  }
+
+  /* ── TABLE ── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .compare-table th {
+    background: #1e40af;
+    color: #fff;
+    padding: 10px 14px;
+    font-weight: 700;
+    text-align: left;
+    font-size: 12.5px;
+  }
+  .compare-table th:first-child { border-radius: 8px 0 0 0; }
+  .compare-table th:last-child { border-radius: 0 8px 0 0; }
+  .compare-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #e0f2fe;
+    color: #374151;
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table tr:nth-child(even) td { background: #f8fbff; }
+  .compare-table .tag-finance {
+    display: inline-block;
+    background: #e0f2fe;
+    color: #0369a1;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-right: 4px;
+  }
+  .compare-table .tag-manage {
+    display: inline-block;
+    background: #dcfce7;
+    color: #166534;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-right: 4px;
+  }
+
+  /* ── MISTAKE CARDS ── */
+  .mistake-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .mistake-card {
+    border-radius: 12px;
+    padding: 16px;
+    background: #fef2f2;
+    border: 1.5px solid #fecaca;
+  }
+  .mistake-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .mistake-icon {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: #ef4444;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .mistake-q { font-size: 13px; font-weight: 700; color: #7f1d1d; line-height: 1.4; }
+  .mistake-a {
+    font-size: 12.5px;
+    color: #374151;
+    line-height: 1.65;
+    padding-top: 6px;
+    border-top: 1px solid #fecaca;
+  }
+  .mistake-a em { color: #1e40af; font-style: normal; font-weight: 700; }
+
+  /* ── QUIZ ── */
+  .quiz-list { display: flex; flex-direction: column; gap: 14px; }
+  .quiz-item {
+    border: 1.5px solid #dbeafe;
+    border-radius: 12px;
+    padding: 16px 18px;
+    background: #f8fbff;
+  }
+  .quiz-q {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 10px;
+    line-height: 1.55;
+  }
+  .quiz-q span {
+    display: inline-block;
+    background: #2563eb;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    margin-right: 8px;
+  }
+  .quiz-answer {
+    font-size: 12.5px;
+    color: #475569;
+    background: #fff;
+    border-radius: 8px;
+    padding: 10px 14px;
+    border-left: 3px solid #2563eb;
+    line-height: 1.7;
+  }
+  .quiz-answer strong { color: #1e3a8a; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: linear-gradient(135deg, #0c2461 0%, #1e40af 100%);
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-text { color: rgba(255,255,255,0.75); font-size: 12px; }
+  .footer-logo { color: #93c5fd; font-size: 13px; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-top">
+      <span class="hero-badge">管理會計 × AI工具應用</span>
+      <span class="hero-date">2025 · 05 · 11　Megan</span>
+    </div>
+    <div class="hero-title">
+      損益兩平分析 × <span>AI船長思維</span><br>從儀表板到管理決策
+    </div>
+    <div class="hero-sub">
+      CVP分析實作 ／ 產品組合邊際貢獻 ／ 敏感性分析 ／ 管理會計 vs 財務會計 ／ AI市場驗證思維
+    </div>
+  </div>
+
+  <!-- SECTION 1: 學習重點 -->
+  <div class="section">
+    <div class="section-label">今日學習重點</div>
+    <div class="points-grid">
+
+      <div class="point-card">
+        <div class="point-num">POINT 01</div>
+        <div class="point-title">損益兩平分析（CVP）</div>
+        <div class="point-body">
+          固定成本 ÷ 每單位邊際貢獻 = 損益兩平數量。達到此數量只是打平，超過後每多賣一單位，全部都是獲利。可用於設備回本計算、月目標逆推日標。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 02</div>
+        <div class="point-title">產品組合與綜合邊際貢獻</div>
+        <div class="point-body">
+          多商品時，銷售配比（Sales Mix）決定整體的「綜合邊際貢獻率」。高毛利商品比例越高，達到損益兩平所需的總銷售數量越少，是定價決策的關鍵依據。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 03</div>
+        <div class="point-title">敏感性分析</div>
+        <div class="point-body">
+          成本上漲時，分析「若不調整售價，需額外多賣幾條才能維持原利潤」。反推得出合理漲價幅度，讓定價決策有數字依據，而非憑感覺喊價。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 04</div>
+        <div class="point-title">管理會計 vs 財務會計</div>
+        <div class="point-body">
+          財務會計是「照後鏡」——記錄已發生的交易，供外部報告用。管理會計是「導航系統」——事前模擬、預測與決策輔助，幫老闆看清方向再行動。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 05</div>
+        <div class="point-title">船長思維：你指揮 AI 艦隊</div>
+        <div class="point-body">
+          AI 是加速器，方向錯了只會跑更遠。「讓 AI 嗆你」——主動請 AI 扮演挑剔者找盲點，比只讓 AI 補強更有效。你是船長，AI 是艦隊，分工才能走遠。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 06</div>
+        <div class="point-title">互動式儀表板 → 公開網站</div>
+        <div class="point-body">
+          Gemini 生成互動儀表板程式碼 → Claude Code 部署至 GitHub Pages = 任何人都能打開的公開工具，無需登入。核心思維：讓別人「自己動手算」，比看投影片記得更牢。
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 2: 公式 -->
+  <div class="section">
+    <div class="section-label">核心公式與實作範例</div>
+
+    <div class="formula-box">
+      <div class="formula-title">損益兩平 × 目標利潤公式</div>
+      <div class="formula-row">
+        <span class="formula-label">邊際貢獻（每單位）</span>
+        <span class="formula-eq">= 售價 − 變動成本（料 + 工 + 抽成）</span>
+      </div>
+      <div class="formula-row">
+        <span class="formula-label">損益兩平數量</span>
+        <span class="formula-eq">= 固定成本 ÷ 單位邊際貢獻</span>
+      </div>
+      <div class="formula-row">
+        <span class="formula-label">目標銷售量</span>
+        <span class="formula-eq">= （固定成本 + 目標利潤）÷ 單位邊際貢獻</span>
+      </div>
+      <div class="formula-row">
+        <span class="formula-label">敏感性（成本↑ΔC）</span>
+        <span class="formula-eq">額外需多賣 = ΔC ÷ 單位邊際貢獻</span>
+        <span class="formula-note">或逆推漲價空間</span>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <div class="example-title">課堂範例：機車行輪胎損益分析</div>
+      <div class="example-grid">
+        <div class="example-item">
+          <strong>設備成本（固定）：</strong>30,000 元<br>
+          <strong>輪胎售價：</strong>1,500 元 / 條
+        </div>
+        <div class="example-item">
+          <strong>料工成本：</strong>800 元<br>
+          <strong>技師抽成：</strong>200 元
+        </div>
+        <div class="example-item">
+          <strong>單位邊際貢獻：</strong>1,500 − 800 − 200 = <strong style="color:#c2410c">500 元</strong>
+        </div>
+        <div class="example-item">
+          <strong>目標月利潤 50,000：</strong><br>需賣 (30,000 + 50,000) ÷ 500 = <strong style="color:#c2410c">160 條</strong>
+        </div>
+        <div class="example-result">
+          ✅ 損益兩平點：30,000 ÷ 500 = <strong>60 條</strong>　｜　每天 24 天工作制 = 只需賣 2.5 條/天即回本<br>
+          ⚠️ 若料成漲 100 元/條 → 額外多賣 100 ÷ 400 = 0.25 條/條漲幅，或售價相應調漲 100 元以上
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: 財務 vs 管理會計比較表 -->
+  <div class="section">
+    <div class="section-label">財務會計 vs 管理會計</div>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th style="width:22%">比較維度</th>
+          <th style="width:39%">財務會計</th>
+          <th style="width:39%">管理會計</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>時間導向</strong></td>
+          <td><span class="tag-finance">事後</span>記錄已發生的交易</td>
+          <td><span class="tag-manage">事前</span>預測、模擬、規劃決策</td>
+        </tr>
+        <tr>
+          <td><strong>使用者</strong></td>
+          <td>外部投資人、債權人、主管機關</td>
+          <td>內部管理者、老闆、各部門主管</td>
+        </tr>
+        <tr>
+          <td><strong>核心問題</strong></td>
+          <td>「上個月賺了多少？」（成績單）</td>
+          <td>「這樣定價能賺到嗎？」（導航）</td>
+        </tr>
+        <tr>
+          <td><strong>規範</strong></td>
+          <td>依 GAAP / IFRS，格式固定</td>
+          <td>因公司需求彈性設計，無固定格式</td>
+        </tr>
+        <tr>
+          <td><strong>常用工具</strong></td>
+          <td>損益表、資產負債表、現金流量表</td>
+          <td>損益兩平分析、預算、差異分析、ROI</td>
+        </tr>
+        <tr>
+          <td><strong>AI應用場景</strong></td>
+          <td>自動分類帳、報表整理、稽核比對</td>
+          <td>互動儀表板、情境模擬、敏感性試算</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 4: 易錯觀念 -->
+  <div class="section">
+    <div class="section-label">易錯觀念提醒</div>
+    <div class="mistake-grid">
+
+      <div class="mistake-card">
+        <div class="mistake-header">
+          <div class="mistake-icon">!</div>
+          <div class="mistake-q">損益兩平 = 開始賺錢了？</div>
+        </div>
+        <div class="mistake-a">
+          ❌ 損益兩平只代表<em>「剛好打平所有成本」</em>，利潤為零。
+          超過兩平點後，每多賣一單位才全數貢獻獲利。
+          常見錯誤：以為賣到兩平點就算成功，忽略了目標利潤仍需額外銷售量。
+        </div>
+      </div>
+
+      <div class="mistake-card">
+        <div class="mistake-header">
+          <div class="mistake-icon">!</div>
+          <div class="mistake-q">邊際貢獻 = 毛利？</div>
+        </div>
+        <div class="mistake-a">
+          ❌ 毛利 = 售價 − 銷貨成本（含固定製造費用）；
+          邊際貢獻 = 售價 − <em>全部變動成本</em>（含變動銷售費用）。
+          管理會計用邊際貢獻做決策，因為固定成本在短期內不隨銷量變動。
+        </div>
+      </div>
+
+      <div class="mistake-card">
+        <div class="mistake-header">
+          <div class="mistake-icon">!</div>
+          <div class="mistake-q">銷售組合不影響兩平點？</div>
+        </div>
+        <div class="mistake-a">
+          ❌ 多商品時，兩平點取決於<em>加權平均邊際貢獻</em>。
+          高毛利商品（高價胎）占比越大，加權邊際貢獻越高，整體兩平數量越少。
+          銷售配比改變，兩平點就跟著變。
+        </div>
+      </div>
+
+      <div class="mistake-card">
+        <div class="mistake-header">
+          <div class="mistake-icon">!</div>
+          <div class="mistake-q">AI會自動幫你找對方向？</div>
+        </div>
+        <div class="mistake-a">
+          ❌ AI擅長「補強」，預設會幫你把想法圓滿——這反而是盲點。
+          應主動要求 AI 扮演<em>「最挑剔的客戶」</em>來嗆你，才能發現方向錯誤。
+          AI是加速器，方向不對，只會跑得更遠更偏。
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 5: 課後自我檢測 -->
+  <div class="section">
+    <div class="section-label">課後自我檢測</div>
+    <div class="quiz-list">
+
+      <div class="quiz-item">
+        <div class="quiz-q">
+          <span>1</span>
+          某美甲工作室購入設備 48,000 元（固定成本）。每次美甲服務售價 1,200 元，材料成本 300 元，助理抽成 150 元。<br>
+          ① 每次服務的邊際貢獻為多少？② 損益兩平需服務幾次？③ 若目標月利潤 30,000 元，每月需服務幾次？
+        </div>
+        <div class="quiz-answer">
+          ① 邊際貢獻 = 1,200 − 300 − 150 = <strong>750 元 / 次</strong><br>
+          ② 損益兩平 = 48,000 ÷ 750 = <strong>64 次</strong><br>
+          ③ 目標銷售量 = (48,000 + 30,000) ÷ 750 = 78,000 ÷ 750 = <strong>104 次</strong>（每月約 26 天工作制，約 4 次/天）
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">
+          <span>2</span>
+          承上題，若材料成本因原物料上漲增加 100 元，工作室打算維持原服務次數（104 次），不想多做。<br>
+          請問售價至少應調漲多少元，才能維持原目標利潤 30,000 元？
+        </div>
+        <div class="quiz-answer">
+          材料漲 100 元 → 邊際貢獻減少 100 元 → 獲利缺口 = 100 × 104 = <strong>10,400 元</strong><br>
+          若不增加次數，售價需彌補全部缺口：10,400 ÷ 104 = <strong>每次需漲 100 元</strong><br>
+          ✅ 即材料成本漲多少，若銷量不變，售價就需漲等額金額。
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">
+          <span>3</span>
+          管理會計被稱為「導航系統」，而財務會計被比喻為「照後鏡」。<br>
+          請說明這兩個比喻代表的核心差異，並舉一個老闆可以用管理會計做決策的具體例子。
+        </div>
+        <div class="quiz-answer">
+          <strong>財務會計（照後鏡）：</strong>記錄過去已發生的交易，提供外部報告，依 GAAP 規範，告訴你「上個月結果如何」。<br>
+          <strong>管理會計（導航）：</strong>事前模擬未來情境，供內部決策，格式彈性，告訴你「這個決定做了會怎樣」。<br>
+          <strong>例子：</strong>老闆想進新設備 60,000 元，用損益兩平分析算出需多賣 80 件才回本，再對比現有產能與訂單量，決定要不要投資——這就是管理會計的應用。
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-text">Megan　0511　管理會計實作 × AI工具整合</div>
+    <div class="footer-logo">Rock 財報課 · 課後複習</div>
+  </div>
+
+</div>
+</body>
+</html>
