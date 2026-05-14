@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEN5194YPE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SEN5194YPE');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>損益兩平儀表板 × 工序定價 × 黑字倒閉 — Cavin 0512</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    background: #ecfdf5;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+
+  .page {
+    width: 960px;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #059669 100%);
+    padding: 32px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    left: -60px; bottom: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .hero-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    position: relative; z-index: 1;
+  }
+  .hero-badge {
+    background: rgba(255,255,255,0.18);
+    color: #a7f3d0;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+  .hero-date { color: rgba(255,255,255,0.7); font-size: 13px; }
+  .hero-title {
+    color: #fff;
+    font-size: 26px;
+    font-weight: 900;
+    line-height: 1.35;
+    margin-bottom: 10px;
+    position: relative; z-index: 1;
+  }
+  .hero-title span { color: #6ee7b7; }
+  .hero-sub {
+    color: rgba(255,255,255,0.75);
+    font-size: 14px;
+    line-height: 1.7;
+    position: relative; z-index: 1;
+  }
+
+  /* ── SECTION ── */
+  .section { padding: 28px 40px; }
+  .section + .section { border-top: 1px solid #d1fae5; }
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #065f46;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 4px; height: 14px;
+    border-radius: 2px;
+    background: #059669;
+  }
+
+  /* ── POINTS GRID ── */
+  .points-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .point-card {
+    border: 1.5px solid #a7f3d0;
+    border-radius: 12px;
+    padding: 16px;
+    background: #f0fdf4;
+  }
+  .point-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: #059669;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .point-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #064e3b;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .point-body {
+    font-size: 12.5px;
+    color: #475569;
+    line-height: 1.65;
+  }
+
+  /* ── FORMULA BOX ── */
+  .formula-box {
+    background: linear-gradient(135deg, #f0fdf4 0%, #d1fae5 100%);
+    border: 1.5px solid #6ee7b7;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+  }
+  .formula-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #065f46;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .formula-title::before { content: '📐'; font-size: 15px; }
+  .formula-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .formula-row:last-child { margin-bottom: 0; }
+  .formula-label {
+    font-size: 12.5px;
+    color: #64748b;
+    min-width: 145px;
+    flex-shrink: 0;
+  }
+  .formula-eq {
+    font-size: 13px;
+    font-weight: 700;
+    color: #064e3b;
+    font-family: 'Courier New', monospace;
+    background: rgba(255,255,255,0.7);
+    padding: 3px 10px;
+    border-radius: 6px;
+  }
+
+  /* ── EXAMPLE BOX ── */
+  .example-box {
+    background: #fff7ed;
+    border: 1.5px solid #fed7aa;
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-top: 14px;
+  }
+  .example-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #c2410c;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .example-title::before { content: '🔧'; }
+  .example-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .example-item {
+    font-size: 12.5px;
+    color: #374151;
+    line-height: 1.6;
+  }
+  .example-item strong { color: #c2410c; }
+  .example-result {
+    grid-column: 1 / -1;
+    background: #fff;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12.5px;
+    color: #064e3b;
+    border-left: 4px solid #059669;
+    line-height: 1.7;
+  }
+
+  /* ── TABLE ── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .compare-table th {
+    background: #065f46;
+    color: #fff;
+    padding: 10px 14px;
+    font-weight: 700;
+    text-align: left;
+    font-size: 12.5px;
+  }
+  .compare-table th:first-child { border-radius: 8px 0 0 0; }
+  .compare-table th:last-child { border-radius: 0 8px 0 0; }
+  .compare-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #d1fae5;
+    color: #374151;
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table tr:nth-child(even) td { background: #f0fdf4; }
+  .tag-high {
+    display: inline-block;
+    background: #fef3c7;
+    color: #92400e;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-right: 4px;
+  }
+  .tag-low {
+    display: inline-block;
+    background: #dbeafe;
+    color: #1e40af;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-right: 4px;
+  }
+  .tag-danger {
+    display: inline-block;
+    background: #fee2e2;
+    color: #991b1b;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+  .tag-ok {
+    display: inline-block;
+    background: #d1fae5;
+    color: #065f46;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+
+  /* ── CASHFLOW 4-BOX ── */
+  .cashflow-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .cf-card {
+    border-radius: 12px;
+    padding: 16px 18px;
+    border: 2px solid;
+  }
+  .cf-card.blue { background: #eff6ff; border-color: #93c5fd; }
+  .cf-card.red  { background: #fef2f2; border-color: #fca5a5; }
+  .cf-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .cf-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .cf-dot.blue { background: #2563eb; }
+  .cf-dot.green { background: #16a34a; }
+  .cf-dot.orange { background: #ea580c; }
+  .cf-dot.red { background: #dc2626; }
+  .cf-title { font-size: 13px; font-weight: 700; }
+  .cf-card.blue .cf-title { color: #1e40af; }
+  .cf-card.red .cf-title { color: #991b1b; }
+  .cf-body { font-size: 12.5px; color: #374151; line-height: 1.65; }
+  .cf-number { font-size: 12px; font-weight: 700; color: #475569; margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(0,0,0,0.08); }
+  .cf-number span.pos { color: #16a34a; }
+  .cf-number span.neg { color: #dc2626; }
+
+  /* ── MISTAKE CARDS ── */
+  .mistake-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .mistake-card {
+    border-radius: 12px;
+    padding: 16px;
+    background: #fef2f2;
+    border: 1.5px solid #fecaca;
+  }
+  .mistake-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .mistake-icon {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: #ef4444;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .mistake-q { font-size: 13px; font-weight: 700; color: #7f1d1d; line-height: 1.4; }
+  .mistake-a {
+    font-size: 12.5px;
+    color: #374151;
+    line-height: 1.65;
+    padding-top: 6px;
+    border-top: 1px solid #fecaca;
+  }
+  .mistake-a em { color: #065f46; font-style: normal; font-weight: 700; }
+
+  /* ── QUIZ ── */
+  .quiz-list { display: flex; flex-direction: column; gap: 14px; }
+  .quiz-item {
+    border: 1.5px solid #a7f3d0;
+    border-radius: 12px;
+    padding: 16px 18px;
+    background: #f0fdf4;
+  }
+  .quiz-q {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #064e3b;
+    margin-bottom: 10px;
+    line-height: 1.55;
+  }
+  .quiz-q span {
+    display: inline-block;
+    background: #059669;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    margin-right: 8px;
+  }
+  .quiz-answer {
+    font-size: 12.5px;
+    color: #475569;
+    background: #fff;
+    border-radius: 8px;
+    padding: 10px 14px;
+    border-left: 3px solid #059669;
+    line-height: 1.7;
+  }
+  .quiz-answer strong { color: #064e3b; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-text { color: rgba(255,255,255,0.75); font-size: 12px; }
+  .footer-logo { color: #6ee7b7; font-size: 13px; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-top">
+      <span class="hero-badge">管理會計 × 現金流量</span>
+      <span class="hero-date">2025 · 05 · 12　Cavin</span>
+    </div>
+    <div class="hero-title">
+      損益兩平儀表板 × <span>工序成本定價</span><br>× 黑字倒閉預警
+    </div>
+    <div class="hero-sub">
+      回本分析 ／ 混合商品邊際貢獻 ／ 工序工時定價 ／ 折舊非現金費用 ／ 黑字倒閉 ／ 存貨積壓現金陷阱
+    </div>
+  </div>
+
+  <!-- SECTION 1: 學習重點 -->
+  <div class="section">
+    <div class="section-label">今日學習重點</div>
+    <div class="points-grid">
+
+      <div class="point-card">
+        <div class="point-num">POINT 01</div>
+        <div class="point-title">損益兩平與目標利潤</div>
+        <div class="point-body">
+          固定成本 ÷ 每單位邊際貢獻 = 損益兩平數量。回本只是「不賠不賺」，目標利潤需再加入分子：(固定成本 + 目標利潤) ÷ 邊際貢獻 = 目標銷售量。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 02</div>
+        <div class="point-title">混合商品：加權平均邊際貢獻</div>
+        <div class="point-body">
+          多種商品的銷售配比（Sales Mix）決定整體回本速度。高毛利商品占比越高，加權平均邊際貢獻越大，達到兩平所需的總數量越少，是定價與推廣策略的核心依據。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 03</div>
+        <div class="point-title">工序成本：精算工時才能定價</div>
+        <div class="point-body">
+          工程類報價的最大陷阱：只看材料忘算工時。每個工序都要拆解累加——師傅等級 × 工時 = 真實工資成本。工序越複雜，工時越長，漏算就等於讓師傅在做賠錢的事。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 04</div>
+        <div class="point-title">折舊是非現金費用</div>
+        <div class="point-body">
+          折舊費用在「購買資產當下」錢已付出，之後每期認列只是帳面分攤，並無現金流出。因此帳面虧損的公司，現金流可能仍然健康——這正是照妖鏡（現金流量表）的價值所在。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 05</div>
+        <div class="point-title">黑字倒閉：存貨積壓的現金陷阱</div>
+        <div class="point-body">
+          「黑字」= 帳面有賺錢。倒閉 = 付不出薪水。原因：賺到的利潤全卡在存貨（機油、輪胎、材料）裡，現金無法周轉。帳面越漂亮、備貨越多，現金壓力越大，死得越快。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 06</div>
+        <div class="point-title">敏感性分析：成本漲價時的決策</div>
+        <div class="point-body">
+          上游漲價時，三種選擇：① 轉嫁給客戶（漲售價）② 吸收成本（多賣條數維持利潤）③ 超漲轉嫁（借機擴大毛利）。用儀表板即時試算，讓每個決策有數字支撐，而非憑感覺。
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 2: 公式 + 輪胎範例 -->
+  <div class="section">
+    <div class="section-label">核心公式與課堂實作範例</div>
+
+    <div class="formula-box">
+      <div class="formula-title">損益兩平 × 目標利潤公式</div>
+      <div class="formula-row">
+        <span class="formula-label">邊際貢獻（每單位）</span>
+        <span class="formula-eq">= 售價 − 變動成本（料 + 工資）</span>
+      </div>
+      <div class="formula-row">
+        <span class="formula-label">損益兩平數量</span>
+        <span class="formula-eq">= 固定成本 ÷ 單位邊際貢獻</span>
+      </div>
+      <div class="formula-row">
+        <span class="formula-label">目標銷售量</span>
+        <span class="formula-eq">= （固定成本 + 目標利潤）÷ 單位邊際貢獻</span>
+      </div>
+      <div class="formula-row">
+        <span class="formula-label">成本漲↑ΔC → 多賣數</span>
+        <span class="formula-eq">= ΔC × 銷售量 ÷ 單位邊際貢獻（調整後）</span>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <div class="example-title">課堂情境：機車行輪胎損益分析（互動儀表板）</div>
+      <div class="example-grid">
+        <div class="example-item">
+          <strong>拆胎機（固定成本）：</strong>30,000 元<br>
+          <strong>輪胎售價：</strong>1,500 元 / 條<br>
+          <strong>進貨成本：</strong>800 元；工資：200 元
+        </div>
+        <div class="example-item">
+          <strong>邊際貢獻：</strong>1,500 − 800 − 200 = <strong style="color:#c2410c">500 元 / 條</strong><br>
+          <strong>損益兩平：</strong>30,000 ÷ 500 = <strong style="color:#c2410c">60 條</strong><br>
+          <strong>目標利潤 20,000：</strong>需賣 <strong style="color:#c2410c">100 條</strong>（一天約 4 條）
+        </div>
+        <div class="example-item">
+          <strong>售價調至 1,750：</strong><br>
+          邊際貢獻→750，回本 <strong style="color:#c2410c">40 條</strong>，目標 <strong style="color:#c2410c">67 條</strong>
+        </div>
+        <div class="example-item">
+          <strong>進貨漲至 900（+100）：</strong><br>
+          邊際貢獻→400，回本 <strong style="color:#c2410c">75 條</strong>，目標 <strong style="color:#c2410c">125 條</strong>
+        </div>
+        <div class="example-result">
+          ✅ 邏輯：售價↑ = 邊際貢獻↑ = 回本更快；成本↑ = 邊際貢獻↓ = 需賣更多才能維持利潤<br>
+          💡 川普關稅情境：若進貨漲 100 但不轉嫁售價 → 需額外多賣 25 條才能維持原利潤目標
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: 工序定價比較表 -->
+  <div class="section">
+    <div class="section-label">工序成本定價分析：換氣缸 vs 修氣門</div>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th style="width:18%">項目</th>
+          <th style="width:41%">換氣缸（材料貴、工序少）</th>
+          <th style="width:41%">修氣門（材料便宜、工序多）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>材料成本</strong></td>
+          <td><span class="tag-high">高</span>氣缸材料昂貴，占成本大部分</td>
+          <td><span class="tag-low">低</span>氣門只是塑膠墊片，材料便宜</td>
+        </tr>
+        <tr>
+          <td><strong>工序複雜度</strong></td>
+          <td>工序相對簡單，師傅工時較短</td>
+          <td>工序繁多（8 步以上），師傅工時長</td>
+        </tr>
+        <tr>
+          <td><strong>真實總成本</strong></td>
+          <td>約 7,000 元（材料為主）</td>
+          <td>約 6,000 元（工時為主）</td>
+        </tr>
+        <tr>
+          <td><strong>正確報價（+15%）</strong></td>
+          <td>7,000 × 1.15 ≈ <strong>8,050 元</strong></td>
+          <td>6,000 × 1.15 ≈ <strong>6,900 元</strong></td>
+        </tr>
+        <tr>
+          <td><strong>常見錯誤報價</strong></td>
+          <td><span class="tag-danger">報太高</span> 材料 × 1.5 + 固定工資 → 約 <strong>8,750 元</strong>（超過市場行情，接不到單）</td>
+          <td><span class="tag-danger">報太低</span> 材料 × 1.5 + 固定工資 → 約 <strong>2,900 元</strong>（工時未算，越做越賠）</td>
+        </tr>
+        <tr>
+          <td><strong>後果</strong></td>
+          <td>氣缸客戶被搶走，接不到賺錢的單</td>
+          <td>全接氣門單，師傅忙到沒時間賺錢的事</td>
+        </tr>
+        <tr>
+          <td><strong>解方</strong></td>
+          <td colspan="2">逐步拆解每道工序 → 累計工時 × 師傅時薪 + 材料成本 = 真實成本 → 再加目標利潤率 = 精準報價。<br><strong>關鍵：不同工序分配不同等級師傅（避免高薪師傅做低值工序）</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 4: 現金流健康度 -->
+  <div class="section">
+    <div class="section-label">現金流健康度：四種情境判讀</div>
+    <div class="cashflow-grid">
+
+      <div class="cf-card blue">
+        <div class="cf-header">
+          <div class="cf-dot blue"></div>
+          <div class="cf-title">帳面虧損 × 現金健康 ✅ 可繼續經營</div>
+        </div>
+        <div class="cf-body">
+          損益表看起來賠錢，但折舊費用是「非現金」，錢早在買資產時就付了。現金流量表的營業活動現金反而是正的。<br><br>
+          例：帳面虧損 <strong>14萬</strong> + 折舊 40萬（非現金）→ 現金流 <strong style="color:#16a34a">+26萬</strong><br>
+          老闆不必恐慌：折舊不會讓你付不出薪水。
+        </div>
+      </div>
+
+      <div class="cf-card red">
+        <div class="cf-header">
+          <div class="cf-dot red"></div>
+          <div class="cf-title">帳面賺錢 × 現金為負 ⚠️ 黑字倒閉風險</div>
+        </div>
+        <div class="cf-body">
+          損益表顯示獲利，但資金大量卡在存貨（機油、輪胎、材料）裡，導致現金流量為負，付不出薪水或帳款。<br><br>
+          例：帳面獲利 <strong>27萬</strong> - 存貨積壓 <strong style="color:#dc2626">45萬</strong> → 現金流 <strong style="color:#dc2626">−18萬</strong><br>
+          帳面越漂亮、備貨越多，死得越快。
+        </div>
+      </div>
+
+    </div>
+
+    <div style="margin-top: 14px; background: #f0fdf4; border: 1.5px solid #6ee7b7; border-radius: 12px; padding: 14px 18px; font-size: 13px; color: #064e3b; line-height: 1.7;">
+      <strong>💡 核心記憶口訣：</strong>現金流量表是損益表的「照妖鏡」——帳面再好看，也要看錢有沒有真的流進來。<br>
+      獲利品質高的公司：營業活動現金流 ≥ 淨利；低的公司：賺的錢一直流出去（存貨↑、應收款↑）。
+    </div>
+  </div>
+
+  <!-- SECTION 5: 易錯觀念 -->
+  <div class="section">
+    <div class="section-label">易錯觀念提醒</div>
+    <div class="mistake-grid">
+
+      <div class="mistake-card">
+        <div class="mistake-header">
+          <div class="mistake-icon">!</div>
+          <div class="mistake-q">回本了 = 開始賺錢了？</div>
+        </div>
+        <div class="mistake-a">
+          ❌ 損益兩平只代表<em>「剛好打平固定成本，利潤為零」</em>。
+          超過兩平點後，每多賣一單位才全數貢獻利潤。
+          常見錯誤：以為賣到兩平點就算成功，但加入目標利潤後，實際需賣的數量通常遠多於此。
+        </div>
+      </div>
+
+      <div class="mistake-card">
+        <div class="mistake-header">
+          <div class="mistake-icon">!</div>
+          <div class="mistake-q">報價 = 材料成本 × 1.5 + 工資？</div>
+        </div>
+        <div class="mistake-a">
+          ❌ 這個公式忽略了<em>「每道工序的實際工時」</em>。
+          工序越複雜，師傅花的時間越多，真正的成本就越高。
+          正確做法：先拆解所有工序 → 累計工時 → 乘以時薪 → 再加材料 → 才是真實成本基礎。
+        </div>
+      </div>
+
+      <div class="mistake-card">
+        <div class="mistake-header">
+          <div class="mistake-icon">!</div>
+          <div class="mistake-q">帳面賺錢就代表公司安全？</div>
+        </div>
+        <div class="mistake-a">
+          ❌ 「黑字倒閉」是真實存在的危機。賺的利潤全卡在<em>存貨或應收款</em>裡，現金無法周轉，一樣付不出薪水。
+          備貨越多 = 現金壓力越大。必須同時看損益表 AND 現金流量表，才能判斷公司是否真的健康。
+        </div>
+      </div>
+
+      <div class="mistake-card">
+        <div class="mistake-header">
+          <div class="mistake-icon">!</div>
+          <div class="mistake-q">折舊費用讓現金減少了？</div>
+        </div>
+        <div class="mistake-a">
+          ❌ 折舊是<em>「非現金費用」</em>——購買資產時錢已一次付出，之後每期的折舊只是帳面分攤，不會再有任何現金流出。
+          因此，在現金流量表的間接法中，折舊要「加回」淨利，才能還原真實的現金狀況。
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 6: 課後自我檢測 -->
+  <div class="section">
+    <div class="section-label">課後自我檢測</div>
+    <div class="quiz-list">
+
+      <div class="quiz-item">
+        <div class="quiz-q">
+          <span>1</span>
+          某裝潢公司承接兩種工程：「基礎工程」售價 80,000 元，材料成本 40,000 元，工時成本 20,000 元（邊際貢獻 20,000）；「精緻工程」售價 150,000 元，材料成本 60,000 元，工時成本 30,000 元（邊際貢獻 60,000）。<br>
+          若公司固定成本為每月 300,000 元，且銷售配比為基礎：精緻 = 3:1，請問每月損益兩平需接幾件工程？各類型幾件？
+        </div>
+        <div class="quiz-answer">
+          加權平均邊際貢獻 = (20,000 × 3 + 60,000 × 1) ÷ 4 = (60,000 + 60,000) ÷ 4 = <strong>30,000 元 / 件</strong><br>
+          損益兩平總件數 = 300,000 ÷ 30,000 = <strong>10 件</strong><br>
+          基礎工程：10 × 3/4 = <strong>7.5 件</strong>；精緻工程：10 × 1/4 = <strong>2.5 件</strong>（各取整為 8 件 + 3 件）<br>
+          💡 若配比調整為 1:1，加權邊際貢獻 = 40,000 → 只需 7.5 件即可回本，精緻工程占比越高越有利。
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">
+          <span>2</span>
+          某工程師傅月薪 60,000 元，每月工作 20 天、每天 8 小時。今接一件引擎修理工程，工序如下：拆解（2小時）→ 清洗（1小時）→ 更換零件（2.5小時）→ 組裝（2小時）→ 測試（0.5小時）。<br>
+          零件材料成本為 4,200 元，目標利潤率 20%。請問正確報價應為多少？
+        </div>
+        <div class="quiz-answer">
+          師傅時薪 = 60,000 ÷ (20天 × 8小時) = <strong>375 元 / 小時</strong><br>
+          總工時 = 2 + 1 + 2.5 + 2 + 0.5 = <strong>8 小時</strong><br>
+          工時成本 = 8 × 375 = <strong>3,000 元</strong><br>
+          真實總成本 = 4,200 + 3,000 = <strong>7,200 元</strong><br>
+          正確報價 = 7,200 ÷ (1 − 20%) = 7,200 ÷ 0.8 = <strong>9,000 元</strong>（或用加成法 7,200 × 1.25 = 9,000）<br>
+          ⚠️ 若只用「材料 × 1.5 + 固定工資 1,000」= 7,300，低估約 1,700 元，實際利潤率只剩約 1.4%。
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">
+          <span>3</span>
+          某公司損益表顯示當月淨利 +15萬元，但老闆發現帳上現金比上個月少了 20萬。財務長解釋說：「公司有折舊 8萬，但本月預先備料增加了庫存 43萬。」<br>
+          請說明為何帳面賺錢但現金減少？這個公司目前屬於哪種現金流情境？
+        </div>
+        <div class="quiz-answer">
+          現金流量（間接法）：淨利 +15萬 → 加回折舊 +8萬 → 扣除存貨增加 −43萬 = <strong>營業現金流 −20萬</strong><br>
+          這就是「<strong>黑字倒閉</strong>」的情境——帳面有賺錢（黑字），但現金是負的（倒閉風險）。<br>
+          原因：賺到的利潤全轉化為存貨（備料），現金流出但還沒賣掉變回現金。<br>
+          💡 解方：控制備貨水位（Just-in-time）、縮短存貨周轉天數、或提高先收款比例，改善現金循環。
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-text">Cavin　0512　管理會計 × 工序定價 × 黑字倒閉預警</div>
+    <div class="footer-logo">Rock 財報課 · 課後複習</div>
+  </div>
+
+</div>
+</body>
+</html>
