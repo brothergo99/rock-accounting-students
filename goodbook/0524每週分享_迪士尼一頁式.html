@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>迪士尼 2026 Q2 財務摘要</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #fdf6ed;
+    --surface: #ffffff;
+    --surface2:#fff8f0;
+    --border:  #e8d9c4;
+    --border2: #f0e4d0;
+    --accent:  #e8500a;
+    --accent2: #c44008;
+    --accent3: #f47330;
+    --text:    #2a1f14;
+    --muted:   #9a7f66;
+    --up:      #2e8b57;
+    --down:    #d03a1a;
+    --tag-bg:  #fff0e6;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    min-height: 100vh;
+    padding: 32px 24px;
+    background-image:
+      radial-gradient(ellipse 70% 40% at 0% 0%, rgba(232,80,10,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 50% at 100% 100%, rgba(244,115,48,0.05) 0%, transparent 55%);
+  }
+
+  .page-wrap { max-width: 960px; margin: 0 auto; }
+
+  /* ─── HEADER ─── */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 18px;
+    margin-bottom: 24px;
+  }
+  .company-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .company-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .report-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 5px;
+    letter-spacing: 1px;
+  }
+  .ticker-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 4px 14px;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+  }
+  .exchange-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-align: right;
+  }
+
+  /* ─── KPI STRIP ─── */
+  .kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+  .kpi-cell {
+    background: var(--surface);
+    padding: 16px 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi-cell::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+  }
+  .kpi-cell.alt::before { background: var(--accent3); }
+  .kpi-cell.muted-top::before { background: var(--border); }
+  .kpi-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .kpi-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 5px;
+  }
+  .kpi-value.orange { color: var(--accent); }
+  .kpi-change {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+  }
+  .up   { color: var(--up); }
+  .down { color: var(--down); }
+
+  /* ─── LAYOUT ─── */
+  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+  .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:16px; }
+
+  /* ─── CARD ─── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 18px 18px 16px;
+  }
+  .card-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid var(--border2);
+  }
+
+  /* ─── TABLE ─── */
+  .data-table { width:100%; border-collapse:collapse; }
+  .data-table tr { border-bottom:1px solid var(--border2); }
+  .data-table tr:last-child { border-bottom:none; }
+  .data-table td {
+    padding: 7px 0;
+    font-size: 12px;
+    vertical-align: middle;
+  }
+  .data-table td:first-child {
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    width: 55%;
+  }
+  .data-table td:last-child {
+    text-align: right;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+  }
+  .data-table .total-row td {
+    padding-top: 9px;
+    border-top: 1px solid var(--accent);
+    color: var(--accent) !important;
+    font-weight: 600;
+  }
+
+  /* ─── SEGMENT BARS ─── */
+  .seg-item { margin-bottom:12px; }
+  .seg-item:last-child { margin-bottom:0; }
+  .seg-header { display:flex; justify-content:space-between; margin-bottom:4px; }
+  .seg-name { font-family:'DM Mono',monospace; font-size:11px; color:var(--muted); }
+  .seg-nums { font-family:'DM Mono',monospace; font-size:11px; color:var(--text); }
+  .seg-bar-bg { height:4px; background:var(--border2); border-radius:2px; overflow:hidden; }
+  .seg-bar-fill { height:100%; border-radius:2px; }
+
+  /* ─── CASH FLOW ─── */
+  .cf-item {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:8px 0;
+    border-bottom:1px solid var(--border2);
+    font-family:'DM Mono',monospace;
+    font-size:11px;
+  }
+  .cf-item:last-child { border-bottom:none; }
+  .cf-name { color:var(--muted); }
+
+  /* ─── BOXES ─── */
+  .alert-box {
+    border-left: 3px solid var(--down);
+    background: rgba(208,58,26,0.05);
+    padding: 11px 13px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    line-height: 1.75;
+    color: var(--text);
+  }
+  .alert-box .alert-title {
+    font-family:'DM Mono',monospace;
+    font-size:10px;
+    color:var(--down);
+    letter-spacing:2px;
+    margin-bottom:3px;
+  }
+  .insight-box {
+    border-left: 3px solid var(--accent);
+    background: rgba(232,80,10,0.04);
+    padding: 11px 13px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    line-height: 1.75;
+    color: var(--text);
+  }
+  .insight-box .insight-title {
+    font-family:'DM Mono',monospace;
+    font-size:10px;
+    color:var(--accent);
+    letter-spacing:2px;
+    margin-bottom:3px;
+  }
+
+  /* ─── RATIO ─── */
+  .ratio-item {
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:8px 0;
+    border-bottom:1px solid var(--border2);
+  }
+  .ratio-item:last-child { border-bottom:none; }
+  .ratio-label { color:var(--muted); font-family:'DM Mono',monospace; font-size:11px; }
+  .ratio-val   { font-family:'DM Mono',monospace; font-size:13px; color:var(--text); }
+
+  /* ─── TAGS ─── */
+  .tag {
+    display:inline-block;
+    font-family:'DM Mono',monospace;
+    font-size:9px;
+    letter-spacing:1px;
+    padding:2px 7px;
+    border-radius:2px;
+    margin-right:4px;
+    margin-bottom:4px;
+  }
+  .tag-orange { background:rgba(232,80,10,0.10); color:var(--accent);  border:1px solid rgba(232,80,10,0.25); }
+  .tag-green  { background:rgba(46,139,87,0.08);  color:var(--up);     border:1px solid rgba(46,139,87,0.25); }
+  .tag-red    { background:rgba(208,58,26,0.08);  color:var(--down);   border:1px solid rgba(208,58,26,0.25); }
+  .tag-muted  { background:rgba(154,127,102,0.10);color:var(--muted);  border:1px solid var(--border); }
+
+  /* ─── SECTION TITLE ─── */
+  .section-title {
+    font-family:'DM Mono',monospace;
+    font-size:9px;
+    letter-spacing:3px;
+    color:var(--accent);
+    text-transform:uppercase;
+    margin-bottom:10px;
+    margin-top:4px;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    margin-top:20px;
+    padding-top:14px;
+    border-top:1px solid var(--border);
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+  }
+  .footer-note {
+    font-family:'DM Mono',monospace;
+    font-size:9px;
+    color:var(--muted);
+    letter-spacing:1px;
+    line-height:1.9;
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div>
+      <div class="company-label">Form 10-Q · Quarterly Report</div>
+      <div class="company-name">The Walt Disney Company</div>
+      <div class="report-period">FY2026 Q2　財季截止：2026年3月28日　申報：2026年5月6日</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="ticker-badge">NYSE: DIS</div>
+      <div class="exchange-text">流通股 1,736,511,424 股（截至4月29日）</div>
+    </div>
+  </div>
+
+  <!-- KPI STRIP -->
+  <div class="kpi-strip">
+    <div class="kpi-cell">
+      <div class="kpi-label">本季總收入</div>
+      <div class="kpi-value orange">$25.2B</div>
+      <div class="kpi-change up">▲ +7% YoY</div>
+    </div>
+    <div class="kpi-cell alt">
+      <div class="kpi-label">段落營業利益</div>
+      <div class="kpi-value">$4.60B</div>
+      <div class="kpi-change up">▲ +3.8% YoY</div>
+    </div>
+    <div class="kpi-cell muted-top">
+      <div class="kpi-label">歸屬迪士尼淨利</div>
+      <div class="kpi-value">$2.25B</div>
+      <div class="kpi-change down">▼ −31% YoY *</div>
+    </div>
+    <div class="kpi-cell muted-top">
+      <div class="kpi-label">稀釋每股盈餘 EPS</div>
+      <div class="kpi-value">$1.27</div>
+      <div class="kpi-change down">▼ vs $1.81 去年同期 *</div>
+    </div>
+  </div>
+
+  <!-- ROW 1 -->
+  <div class="grid-2">
+
+    <!-- Income Statement -->
+    <div class="card">
+      <div class="card-title">損益摘要　Q2 FY2026 vs Q2 FY2025（$M）</div>
+      <table class="data-table">
+        <tr><td>服務收入</td><td>22,684 <span class="up">+7%</span></td></tr>
+        <tr><td>產品收入</td><td>2,484 <span class="up">+5%</span></td></tr>
+        <tr class="total-row"><td>總收入</td><td>25,168</td></tr>
+        <tr><td>服務成本</td><td>(14,417)</td></tr>
+        <tr><td>產品成本</td><td>(1,484)</td></tr>
+        <tr><td>銷售及行政費用</td><td>(4,073)</td></tr>
+        <tr><td>折舊及攤銷</td><td>(1,405)</td></tr>
+        <tr><td>重組及減損費用</td><td><span class="down">(239)</span></td></tr>
+        <tr><td>利息費用淨額</td><td>(240)</td></tr>
+        <tr class="total-row"><td>稅前淨利</td><td>3,367</td></tr>
+        <tr><td>所得稅費用</td><td><span class="down">(902)</span></td></tr>
+        <tr class="total-row"><td>歸屬迪士尼淨利</td><td>2,247</td></tr>
+      </table>
+    </div>
+
+    <!-- Segment -->
+    <div class="card">
+      <div class="card-title">三大業務分部　Q2 FY2026</div>
+      <div>
+        <span class="tag tag-orange">娛樂</span>
+        <span class="tag tag-muted">運動</span>
+        <span class="tag tag-green">體驗</span>
+      </div>
+
+      <div class="section-title" style="margin-top:14px;">分部收入（$M）</div>
+      <div class="seg-item">
+        <div class="seg-header"><span class="seg-name">娛樂</span><span class="seg-nums">11,715 <span class="up">+10%</span></span></div>
+        <div class="seg-bar-bg"><div class="seg-bar-fill" style="width:47%;background:var(--accent);"></div></div>
+      </div>
+      <div class="seg-item">
+        <div class="seg-header"><span class="seg-name">運動</span><span class="seg-nums">4,609 <span class="up">+2%</span></span></div>
+        <div class="seg-bar-bg"><div class="seg-bar-fill" style="width:18%;background:var(--muted);"></div></div>
+      </div>
+      <div class="seg-item">
+        <div class="seg-header"><span class="seg-name">體驗</span><span class="seg-nums">9,487 <span class="up">+7%</span></span></div>
+        <div class="seg-bar-bg"><div class="seg-bar-fill" style="width:38%;background:var(--up);"></div></div>
+      </div>
+
+      <div class="section-title" style="margin-top:16px;">分部營業利益（$M）</div>
+      <div class="seg-item">
+        <div class="seg-header"><span class="seg-name">娛樂</span><span class="seg-nums">1,336 <span class="up">+6%</span></span></div>
+        <div class="seg-bar-bg"><div class="seg-bar-fill" style="width:29%;background:var(--accent);"></div></div>
+      </div>
+      <div class="seg-item">
+        <div class="seg-header"><span class="seg-name">運動</span><span class="seg-nums">652 <span class="down">−5%</span></span></div>
+        <div class="seg-bar-bg"><div class="seg-bar-fill" style="width:14%;background:var(--muted);"></div></div>
+      </div>
+      <div class="seg-item">
+        <div class="seg-header"><span class="seg-name">體驗</span><span class="seg-nums">2,615 <span class="up">+5%</span></span></div>
+        <div class="seg-bar-bg"><div class="seg-bar-fill" style="width:57%;background:var(--up);"></div></div>
+      </div>
+
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border2);">
+        <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);">利潤率</span>
+        <div style="display:flex;gap:14px;margin-top:5px;">
+          <span style="font-family:'DM Mono',monospace;font-size:11px;">娛樂 <span class="up">11.4%</span></span>
+          <span style="font-family:'DM Mono',monospace;font-size:11px;">運動 <span class="down">14.1%</span></span>
+          <span style="font-family:'DM Mono',monospace;font-size:11px;">體驗 <span class="up">27.6%</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2 -->
+  <div class="grid-3">
+
+    <!-- Balance Sheet -->
+    <div class="card">
+      <div class="card-title">資產負債表摘要（$M）</div>
+      <table class="data-table">
+        <tr><td>現金及約當現金</td><td>5,682</td></tr>
+        <tr><td>應收帳款淨額</td><td>14,390</td></tr>
+        <tr><td>內容製作成本（非流動）</td><td>30,360</td></tr>
+        <tr><td>遊樂設施及財產淨值</td><td>44,255</td></tr>
+        <tr><td>商譽</td><td>74,682</td></tr>
+        <tr class="total-row"><td>總資產</td><td>205,217</td></tr>
+        <tr><td>短期借款</td><td>8,887</td></tr>
+        <tr><td>長期借款</td><td>38,471</td></tr>
+        <tr><td>遞延所得稅負債</td><td>5,050</td></tr>
+        <tr class="total-row"><td>迪士尼股東權益</td><td>108,708</td></tr>
+      </table>
+    </div>
+
+    <!-- Cash Flow -->
+    <div class="card">
+      <div class="card-title">現金流量　上半年度（$M）</div>
+      <div class="cf-item"><span class="cf-name">營業活動提供</span><span class="up">+7,649</span></div>
+      <div class="cf-item"><span class="cf-name">投資活動使用</span><span class="down">(5,469)</span></div>
+      <div class="cf-item"><span class="cf-name">融資活動使用</span><span class="down">(2,162)</span></div>
+      <div class="cf-item" style="border-top:1px solid var(--accent);margin-top:4px;padding-top:10px;">
+        <span style="color:var(--text);">期末現金</span>
+        <span style="color:var(--accent);font-family:'DM Mono',monospace;font-size:13px;">5,789</span>
+      </div>
+      <div class="section-title" style="margin-top:16px;">資本配置重點</div>
+      <div class="cf-item"><span class="cf-name">資本支出（園區為主）</span><span class="down">(4,986)</span></div>
+      <div class="cf-item"><span class="cf-name">股票回購</span><span class="down">(5,500)</span></div>
+      <div class="cf-item"><span class="cf-name">股息發放</span><span class="down">(1,337)</span></div>
+      <div class="cf-item"><span class="cf-name">內容支出（全年預估）</span><span class="down">~24,000</span></div>
+      <div class="cf-item"><span class="cf-name">資本支出（全年預估）</span><span class="down">~9,000</span></div>
+    </div>
+
+    <!-- Ratios -->
+    <div class="card">
+      <div class="card-title">財務指標與重點比率</div>
+      <div class="ratio-item"><span class="ratio-label">本季 EPS（稀釋）</span><span class="ratio-val">$1.27</span></div>
+      <div class="ratio-item"><span class="ratio-label">有效稅率</span><span class="ratio-val down">26.8%</span></div>
+      <div class="ratio-item"><span class="ratio-label">總資產報酬率（半年）</span><span class="ratio-val">~2.4%</span></div>
+      <div class="ratio-item"><span class="ratio-label">股東權益報酬率（半年）</span><span class="ratio-val">~4.2%</span></div>
+      <div class="ratio-item"><span class="ratio-label">負債比率（總借款/總資產）</span><span class="ratio-val down">~23%</span></div>
+      <div class="ratio-item"><span class="ratio-label">分部整體營業利益率</span><span class="ratio-val">18.3%</span></div>
+      <div class="ratio-item"><span class="ratio-label">現金/短期借款覆蓋率</span><span class="ratio-val down">0.64x</span></div>
+      <div class="ratio-item"><span class="ratio-label">股票回購（剩餘授權）</span><span class="ratio-val">~288M 股</span></div>
+      <div class="ratio-item"><span class="ratio-label">每股股息（季）</span><span class="ratio-val up">$0.75</span></div>
+    </div>
+  </div>
+
+  <!-- ROW 3 -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">★ 核心洞察</div>
+      <div class="insight-box">
+        <div class="insight-title">EXPERIENCES 是最強引擎</div>
+        體驗部門本季營業利益 $26.2億，佔全部段落利益的 57%。串流整合陣痛與稅務衝擊都沒撼動這塊——樂園與郵輪持續扮演現金牛。
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">ENTERTAINMENT 訂閱爆發</div>
+        訂閱及聯盟費 YoY +14%（含 Fubo 貢獻 +5%），院線《Zootopia 2》《Avatar: Fire and Ash》強勁。但製作成本同步暴增，半年營業利益 YoY 下滑 18%。
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">NFL + Fubo 整合紅利遞延</div>
+        兩筆交易推升收入，但帶來非現金稅費 $4.22億，直接壓低本季 EPS。長期效益（ESPN 擴大覆蓋、vMVPD 整合）尚在兌現中。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">⚠ 風險提示與特殊項目</div>
+      <div class="alert-box">
+        <div class="alert-title">淨利大幅下滑原因</div>
+        YoY −31% 非業績惡化——去年同期含 $10.16億一次性稅務利益。本期另有 A+E 投資減損 $1.47億 + 資遣費 $0.92億 + NFL 非現金稅費 $1.15億。剔除特殊項目 EPS 影響約 −$0.30。
+      </div>
+      <div class="alert-box">
+        <div class="alert-title">運動部門壓力</div>
+        UFC 版權到期（2025年12月）造成收入缺口，Sports 半年利益 YoY −10%。NBA 版權時序調整壓縮上半年，預計 Q3 回補。
+      </div>
+      <div class="alert-box">
+        <div class="alert-title">法律訴訟風險</div>
+        Disney+ 訂閱者 SEC 10(b) 案預計 2027/8 開庭；Biddle/Fendelander 串流反壟斷已部分和解；DISH 提出 Sherman Act 反訴仍待審理。
+      </div>
+      <div style="margin-top:10px;">
+        <span class="tag tag-orange">Moody's: A2 穩定</span>
+        <span class="tag tag-muted">S&amp;P: A 穩定</span>
+        <span class="tag tag-green">授信額度 $12.25B</span>
+        <span class="tag tag-red">訴訟損失未量化</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4 -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">樂園關鍵營運指標　Q2 FY2026</div>
+      <table class="data-table">
+        <tr><td></td><td style="text-align:right;color:var(--muted);font-size:10px;">國內 / 國際</td></tr>
+        <tr><td>入園人數（YoY）</td><td><span class="down">−1%</span> / <span class="up">+4%</span></td></tr>
+        <tr><td>每客消費（YoY）</td><td><span class="up">+5%</span> / <span class="up">+1%</span></td></tr>
+        <tr><td>飯店入住率</td><td>89% / 86%</td></tr>
+        <tr><td>每房消費（YoY）</td><td><span class="up">+7%</span> / 0%</td></tr>
+        <tr class="total-row"><td>遊輪業務（收入 YoY）</td><td><span class="up">+7% 船天數</span></td></tr>
+      </table>
+      <div style="margin-top:12px;font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);line-height:1.9;">
+        新船：Disney Destiny（2025/11）、Disney Adventure（2026/3）<br>
+        本季 Experiences CapEx：$4.26B（郵輪擴編 + 國際園區新設施）
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">上半年度（H1）累計對比</div>
+      <table class="data-table">
+        <tr><td></td><td style="text-align:right;font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);">H1 FY26 / H1 FY25</td></tr>
+        <tr><td>總收入</td><td>51,149 / 48,311</td></tr>
+        <tr><td>段落營業利益</td><td>9,203 / 9,496</td></tr>
+        <tr><td>歸屬淨利</td><td>4,649 / 5,829</td></tr>
+        <tr><td>稀釋 EPS</td><td>$2.61 / $3.21</td></tr>
+        <tr><td>營業現金流</td><td>7,649 / 9,958</td></tr>
+        <tr><td>資本支出</td><td>4,986 / 4,328</td></tr>
+        <tr class="total-row"><td>股票回購</td><td>5,500 / 1,785</td></tr>
+      </table>
+      <div style="margin-top:12px;font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);line-height:1.9;">
+        FY2026 全年目標回購：$80億<br>
+        FY2026 全年內容支出預估：~$240億<br>
+        FY2026 全年資本支出預估：~$90億
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-note">
+      資料來源：The Walt Disney Company · Form 10-Q · 2026年3月28日季度<br>
+      * 淨利及 EPS 下滑主因：去年同期含 $10.16億一次性稅務利益，非業務惡化<br>
+      本摘要僅供財務分析參考，所有數據以原始 10-Q 申報為準
+    </div>
+    <div class="footer-note" style="text-align:right;">
+      製作：Rock 會計分析<br>
+      2026.05.20
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
