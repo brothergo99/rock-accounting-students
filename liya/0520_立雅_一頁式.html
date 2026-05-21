@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEN5194YPE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SEN5194YPE');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>未分配盈餘稅 × 投資抵減 × 五年免稅 × 財報薪資分析 — 立雅 0520</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    background: #fdf4ff;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+
+  .page {
+    width: 960px;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #4a044e 0%, #7e22ce 52%, #a855f7 100%);
+    padding: 32px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    left: -60px; bottom: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .hero-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    position: relative; z-index: 1;
+  }
+  .hero-badge {
+    background: rgba(255,255,255,0.18);
+    color: #e9d5ff;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+  .hero-date { color: rgba(255,255,255,0.7); font-size: 13px; }
+  .hero-title {
+    color: #fff;
+    font-size: 26px;
+    font-weight: 900;
+    line-height: 1.35;
+    margin-bottom: 10px;
+    position: relative; z-index: 1;
+  }
+  .hero-title span { color: #d8b4fe; }
+  .hero-sub {
+    color: rgba(255,255,255,0.75);
+    font-size: 14px;
+    line-height: 1.7;
+    position: relative; z-index: 1;
+  }
+
+  /* ── SECTION ── */
+  .section { padding: 28px 40px; }
+  .section + .section { border-top: 1px solid #f3e8ff; }
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #7e22ce;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 4px; height: 14px;
+    border-radius: 2px;
+    background: #a855f7;
+  }
+
+  /* ── POINTS GRID ── */
+  .points-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .point-card {
+    border: 1.5px solid #e9d5ff;
+    border-radius: 12px;
+    padding: 16px;
+    background: #faf5ff;
+  }
+  .point-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: #9333ea;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .point-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #4a044e;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .point-body {
+    font-size: 12.5px;
+    color: #475569;
+    line-height: 1.65;
+  }
+
+  /* ── INFO BOX ── */
+  .info-box {
+    background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+    border: 1.5px solid #d8b4fe;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+  }
+  .info-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #7e22ce;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .info-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    align-items: flex-start;
+  }
+  .info-row:last-child { margin-bottom: 0; }
+  .info-label {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #7e22ce;
+    min-width: 130px;
+    flex-shrink: 0;
+    padding-top: 1px;
+  }
+  .info-val {
+    font-size: 12.5px;
+    color: #374151;
+    line-height: 1.65;
+  }
+  .info-val em { color: #7e22ce; font-style: normal; font-weight: 700; }
+
+  /* ── TABLE ── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .compare-table th {
+    background: #7e22ce;
+    color: #fff;
+    padding: 10px 14px;
+    font-weight: 700;
+    text-align: left;
+    font-size: 12.5px;
+  }
+  .compare-table th:first-child { border-radius: 8px 0 0 0; }
+  .compare-table th:last-child { border-radius: 0 8px 0 0; }
+  .compare-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #f3e8ff;
+    color: #374151;
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table tr:nth-child(even) td { background: #faf5ff; }
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-right: 4px;
+  }
+  .tag-tax { background: #fef3c7; color: #92400e; }
+  .tag-ok { background: #d1fae5; color: #065f46; }
+  .tag-warn { background: #fee2e2; color: #991b1b; }
+
+  /* ── FLOW STEPS ── */
+  .flow-steps {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .flow-step {
+    background: #7e22ce;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 12.5px;
+    font-weight: 700;
+    text-align: center;
+    min-width: 110px;
+  }
+  .flow-arrow {
+    font-size: 18px;
+    color: #a855f7;
+    padding: 0 6px;
+    flex-shrink: 0;
+  }
+  .flow-note {
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.6;
+    margin-top: 8px;
+  }
+
+  /* ── MISTAKE CARDS ── */
+  .mistake-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .mistake-card {
+    border-radius: 12px;
+    padding: 16px;
+    background: #fef2f2;
+    border: 1.5px solid #fecaca;
+  }
+  .mistake-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .mistake-icon {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: #ef4444;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .mistake-q { font-size: 13px; font-weight: 700; color: #7f1d1d; line-height: 1.4; }
+  .mistake-a {
+    font-size: 12.5px;
+    color: #374151;
+    line-height: 1.65;
+    padding-top: 6px;
+    border-top: 1px solid #fecaca;
+  }
+  .mistake-a em { color: #7e22ce; font-style: normal; font-weight: 700; }
+
+  /* ── QUIZ ── */
+  .quiz-list { display: flex; flex-direction: column; gap: 14px; }
+  .quiz-item {
+    border: 1.5px solid #e9d5ff;
+    border-radius: 12px;
+    padding: 16px 18px;
+    background: #faf5ff;
+  }
+  .quiz-q {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #4a044e;
+    margin-bottom: 10px;
+    line-height: 1.55;
+  }
+  .quiz-q span {
+    display: inline-block;
+    background: #9333ea;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    margin-right: 8px;
+  }
+  .quiz-answer {
+    font-size: 12.5px;
+    color: #475569;
+    background: #fff;
+    border-radius: 8px;
+    padding: 10px 14px;
+    border-left: 3px solid #9333ea;
+    line-height: 1.7;
+  }
+  .quiz-answer strong { color: #4a044e; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: linear-gradient(135deg, #4a044e 0%, #7e22ce 100%);
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-text { color: rgba(255,255,255,0.75); font-size: 12px; }
+  .footer-logo { color: #d8b4fe; font-size: 13px; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-top">
+      <span class="hero-badge">進階稅務 × 財報薪資分析</span>
+      <span class="hero-date">2025 · 05 · 20　立雅</span>
+    </div>
+    <div class="hero-title">
+      未分配盈餘稅 × <span>投資抵減</span><br>× 五年免稅 × 財報薪資判讀
+    </div>
+    <div class="hero-sub">
+      加徵5%稅制 ／ 投資抵減節稅 ／ BOT重大公共建設五年免稅 ／ 稅務訴願流程 ／ 財報人均薪資計算 ／ 薪酬委員會揭露
+    </div>
+  </div>
+
+  <!-- SECTION 1: 學習重點 -->
+  <div class="section">
+    <div class="section-label">今日學習重點</div>
+    <div class="points-grid">
+
+      <div class="point-card">
+        <div class="point-num">POINT 01</div>
+        <div class="point-title">未分配盈餘稅（加徵5%）</div>
+        <div class="point-body">
+          台灣特有稅制。公司若不將盈餘分配給股東，留在公司帳上的未分配盈餘，需額外加徵 5% 的所得稅。政策目的是避免企業長期囤積盈餘、不讓資金回流市場。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 02</div>
+        <div class="point-title">投資抵減：合法節稅工具</div>
+        <div class="point-body">
+          企業購置符合條件的固定資產（機器設備）或資安設備，可依法申請「投資抵減」，直接扣抵應繳的未分配盈餘加徵稅額。等於「花錢投資」同時「減少稅負」，是常見的稅務規劃工具。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 03</div>
+        <div class="point-title">五年免稅：重大公共建設BOT</div>
+        <div class="point-body">
+          符合「重大公共建設」條件的 BOT 案，可依《獎勵民間參與公共建設條例》申請五年免徵營利事業所得稅。但須向主管機關取得核准，且國稅局可能提出挑戰，需備好充分文件。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 04</div>
+        <div class="point-title">稅務爭議：訴願 → 行政訴訟</div>
+        <div class="point-body">
+          對國稅局裁處不服，可依序提起「訴願」→「行政訴訟」。勝訴率偏低（約 5%），但仍有機會。財務人員是稅務爭議的主要對口窗口，需熟悉稅法論據與文件準備。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 05</div>
+        <div class="point-title">財報分析：人均薪資計算</div>
+        <div class="point-body">
+          上市公司年報須揭露「員工人數」及「員工福利費用」，以此可計算人均年薪。公式：員工福利費用總額 ÷ 員工人數 = 人均年薪。面試前分析目標公司財報，可客觀評估薪酬水準。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 06</div>
+        <div class="point-title">薪酬委員會揭露制度</div>
+        <div class="point-body">
+          上市公司依法設置薪酬委員會，負責審議董事及高階主管薪酬。財報中會揭露主要管理階層薪資範圍，扣除高階主管後可更精準推算一般員工薪酬，是求職前的重要情報來源。
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 2: 未分配盈餘稅制架構 -->
+  <div class="section">
+    <div class="section-label">未分配盈餘稅制架構</div>
+
+    <div class="info-box">
+      <div class="info-title">📋 未分配盈餘稅：核心機制</div>
+      <div class="info-row">
+        <span class="info-label">課稅基礎</span>
+        <span class="info-val">當年度稅後盈餘 - 已分配股利 = <em>未分配盈餘</em>（須加徵5%）</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">申報時點</span>
+        <span class="info-val">次年度辦理，即本年度盈餘次年才決定是否分配，確定後報稅</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">投資抵減條件</span>
+        <span class="info-val">購置機器設備、資安設備、研發支出等符合特定法規的投資項目，取得抵減憑證後即可抵減加徵稅額</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">節稅邏輯</span>
+        <span class="info-val">把「本來要繳給國稅局的稅」轉為「投資自己公司的資產」——<em>錢沒有少，只是換了去向</em></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">政策目的</span>
+        <span class="info-val">避免公司長期囤積盈餘不分配；同時透過投資抵減鼓勵企業升級設備與數位轉型</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: 五年免稅 + 稅務爭議流程 -->
+  <div class="section">
+    <div class="section-label">五年免稅與稅務爭議流程</div>
+
+    <table class="compare-table" style="margin-bottom:16px">
+      <thead>
+        <tr>
+          <th style="width:20%">項目</th>
+          <th style="width:40%">五年免稅（BOT重大公共建設）</th>
+          <th style="width:40%">一般免稅 / 減稅優惠</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>法律依據</strong></td>
+          <td>獎勵民間參與公共建設條例</td>
+          <td>產業創新條例、各項租稅優惠法規</td>
+        </tr>
+        <tr>
+          <td><strong>適用對象</strong></td>
+          <td>BOT案件，符合「重大公共建設」認定標準</td>
+          <td>依各產業、投資類型不同而異</td>
+        </tr>
+        <tr>
+          <td><strong>核准機關</strong></td>
+          <td>主辦機關（如交通部）+ 財政部認可</td>
+          <td>依項目向各主管機關申請</td>
+        </tr>
+        <tr>
+          <td><strong>爭議風險</strong></td>
+          <td><span class="tag tag-warn">高</span>國稅局可能挑戰資格認定，需準備完整論述文件</td>
+          <td><span class="tag tag-ok">相對低</span>條件明確者爭議較少</td>
+        </tr>
+        <tr>
+          <td><strong>財務人員角色</strong></td>
+          <td>主要對口：準備申請文件、答覆稅局查詢、主導訴願</td>
+          <td>配合審計、準備佐證資料</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-bottom: 10px; font-size: 13px; font-weight: 700; color: #4a044e;">稅務爭議救濟流程</div>
+    <div class="flow-steps">
+      <div class="flow-step">國稅局<br>核定補稅</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">申請<br>復查</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">提起<br>訴願</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">行政<br>訴訟</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">高等行政<br>法院</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">最高行政<br>法院</div>
+    </div>
+    <div class="flow-note">
+      ⚠️ 訴願整體勝訴率約 5%，訴訟曠日廢時，但有理有據的案件仍有機會翻盤（如遠通電收 BOT 五年免稅案最終勝訴）。<br>
+      💡 關鍵：財務人員必須精通稅法論據，且在事件初期就介入蒐證、整理文件，而非等到被補稅才行動。
+    </div>
+  </div>
+
+  <!-- SECTION 4: 財報薪資分析 -->
+  <div class="section">
+    <div class="section-label">財報薪資分析：面試前的情報功課</div>
+
+    <div class="info-box">
+      <div class="info-title">💰 從財報推算目標公司薪酬</div>
+      <div class="info-row">
+        <span class="info-label">資料來源</span>
+        <span class="info-val">年報「員工福利費用」（含薪資、獎金、勞健保等）÷「員工人數」= <em>人均年薪估算</em></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">課堂範例</span>
+        <span class="info-val">某上市公司員工福利費用 ÷ 員工人數 → 人均約 <em>170萬元／年</em>（含年終、獎金）</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">薪酬委員會揭露</span>
+        <span class="info-val">上市公司財報揭露「董事及主要管理階層薪酬」。用總額扣除高階主管人數後，<em>可更精準估算中階主管薪酬區間</em></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">談薪前準備</span>
+        <span class="info-val">掌握目標公司人均薪資、同職級行情 → 有數字支撐的薪資要求更有說服力，也能判斷對方開價是否合理</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">注意事項</span>
+        <span class="info-val">人均薪資含全部員工（含基層），且包含獎金，<em>不等於月薪基準</em>。高階主管薪酬若偏高會拉高平均，需留意樣本偏差</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: 易錯觀念 -->
+  <div class="section">
+    <div class="section-label">易錯觀念提醒</div>
+    <div class="mistake-grid">
+
+      <div class="mistake-card">
+        <div class="mistake-header">
+          <div class="mistake-icon">!</div>
+          <div class="mistake-q">未分配盈餘稅 = 重複課稅？</div>
+        </div>
+        <div class="mistake-a">
+          ❌ 未分配盈餘稅是<em>「加徵」</em>，是在已繳完基本 20% 營所稅「之後」，針對未分配部分再加課 5%。
+          不是對同一筆錢課兩次 20%，而是鼓勵分配的「懲罰性」附加稅。
+          投資抵減可抵的是這額外的 5%，而非基本稅率。
+        </div>
+      </div>
+
+      <div class="mistake-card">
+        <div class="mistake-header">
+          <div class="mistake-icon">!</div>
+          <div class="mistake-q">只要買設備就能投資抵減？</div>
+        </div>
+        <div class="mistake-a">
+          ❌ 投資抵減有嚴格的<em>「適用項目」與「程序要求」</em>：需符合特定法規（如產業創新條例）、
+          購置特定類型資產、取得主管機關認可的抵減憑證。
+          隨便買設備「記帳」進去是不行的，需在採購前確認資格，否則申報後被國稅局否認，還要補稅加罰。
+        </div>
+      </div>
+
+      <div class="mistake-card">
+        <div class="mistake-header">
+          <div class="mistake-icon">!</div>
+          <div class="mistake-q">五年免稅核准後就高枕無憂？</div>
+        </div>
+        <div class="mistake-a">
+          ❌ 即使已取得核准，國稅局仍可在稽查時<em>挑戰認定資格</em>，主張不符合「重大公共建設」條件，
+          要求補稅加計利息。
+          財務人員需保存完整申請文件、與主辦機關往來函件，並在事發當下即主動準備答辯論述，
+          不能等到被補稅後再找資料。
+        </div>
+      </div>
+
+      <div class="mistake-card">
+        <div class="mistake-header">
+          <div class="mistake-icon">!</div>
+          <div class="mistake-q">財報人均薪資 = 我能拿到的月薪？</div>
+        </div>
+        <div class="mistake-a">
+          ❌ 員工福利費用包含<em>薪資、獎金、勞健保、退休金提撥</em>等，除以全體員工人數，
+          得出的是「含一切福利的人均年費用」。
+          高階主管薪資偏高會拉高平均值；基層員工多會拉低。
+          正確做法：扣除揭露的主管薪酬後，搭配職缺行情與面試結果綜合判斷。
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 6: 課後自我檢測 -->
+  <div class="section">
+    <div class="section-label">課後自我檢測</div>
+    <div class="quiz-list">
+
+      <div class="quiz-item">
+        <div class="quiz-q">
+          <span>1</span>
+          A 公司本年度稅後盈餘為 800 萬元，董事會決議分配股利 300 萬元，其餘暫不分配。<br>
+          ① 未分配盈餘稅的稅基為多少？② 應加徵稅額為多少？<br>
+          ③ 若公司本年度購置資安設備 20 萬元，符合投資抵減條件，最終應繳未分配盈餘稅為多少？
+        </div>
+        <div class="quiz-answer">
+          ① 稅基 = 800 − 300 = <strong>500 萬元</strong>（未分配盈餘）<br>
+          ② 加徵稅額 = 500 × 5% = <strong>25 萬元</strong><br>
+          ③ 可扣抵投資額 20 萬元 → 應繳 = 25 − 20 = <strong>5 萬元</strong><br>
+          💡 買 20 萬設備，直接省下 20 萬稅，等於「零成本升級設備」（前提是設備本身對公司有用）。
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">
+          <span>2</span>
+          某 BOT 公司取得「重大公共建設」五年免稅核准，第三年被國稅局認定不符合資格，補稅金額 3,000 萬元。<br>
+          請說明：① 公司可循哪些管道提出異議？② 各階段的名稱與順序為何？③ 財務部門應如何提前降低被補稅的風險？
+        </div>
+        <div class="quiz-answer">
+          ① 可提起：<strong>復查 → 訴願 → 行政訴訟</strong>三階段救濟<br>
+          ② 順序：復查（向原稽徵機關）→ 訴願（向財政部或行政院）→ 行政訴訟（高等行政法院 → 最高行政法院）<br>
+          ③ 降低風險的做法：事前取得主辦機關書面確認函、保存所有申請核准文件與往來公文、每年申報時附上佐證說明，必要時提前取得稅務機關書面意見（預先核釋）。
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">
+          <span>3</span>
+          某上市公司財報揭露：員工人數 1,200 人，員工福利費用合計 18 億元。年報另揭露 5 位主要管理階層薪酬總計 1.2 億元。<br>
+          ① 全員人均年薪估算為多少？② 扣除管理階層後，一般員工人均年薪估算為多少？③ 這個數字可以直接用來談薪水嗎？為什麼？
+        </div>
+        <div class="quiz-answer">
+          ① 全員人均 = 18億 ÷ 1,200人 = <strong>150萬元/人/年</strong><br>
+          ② 扣除管理階層：(18億 − 1.2億) ÷ (1,200 − 5) = 16.8億 ÷ 1,195 ≈ <strong>141萬元/人/年</strong>（約月薪11.7萬，含獎金）<br>
+          ③ <strong>不能直接使用</strong>。原因：①員工福利費含勞健保、退休提撥等非薪資項目；②基層員工多會拉低平均；③各職級薪資差異大。應搭配職缺薪資行情、面試中探詢同職級薪酬，三者比對才能做出合理判斷。
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-text">立雅　0520　進階稅務規劃 × 財報薪資判讀</div>
+    <div class="footer-logo">Rock 財報課 · 課後複習</div>
+  </div>
+
+</div>
+</body>
+</html>
