@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEN5194YPE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SEN5194YPE');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>迪士尼商業模式解析 — 飛輪效應 × 體驗獲利引擎 × 財報分析技巧</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    background: #f0f4ff;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+
+  .page {
+    width: 960px;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 55%, #2563eb 100%);
+    padding: 32px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '✦';
+    position: absolute;
+    left: 30px; top: 20px;
+    font-size: 80px;
+    color: rgba(251,191,36,0.08);
+    line-height: 1;
+  }
+  .hero::after {
+    content: '✦';
+    position: absolute;
+    right: 60px; bottom: -10px;
+    font-size: 120px;
+    color: rgba(251,191,36,0.06);
+    line-height: 1;
+  }
+  .hero-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    position: relative; z-index: 1;
+  }
+  .hero-badge {
+    background: rgba(251,191,36,0.2);
+    color: #fde68a;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+  .hero-date { color: rgba(255,255,255,0.65); font-size: 13px; }
+  .hero-title {
+    color: #fff;
+    font-size: 26px;
+    font-weight: 900;
+    line-height: 1.35;
+    margin-bottom: 10px;
+    position: relative; z-index: 1;
+  }
+  .hero-title span { color: #fbbf24; }
+  .hero-sub {
+    color: rgba(255,255,255,0.72);
+    font-size: 14px;
+    line-height: 1.7;
+    position: relative; z-index: 1;
+  }
+
+  /* ── SECTION ── */
+  .section { padding: 28px 40px; }
+  .section + .section { border-top: 1px solid #e0e7ff; }
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #1e40af;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 4px; height: 14px;
+    border-radius: 2px;
+    background: #2563eb;
+  }
+
+  /* ── POINTS GRID ── */
+  .points-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .point-card {
+    border: 1.5px solid #dbeafe;
+    border-radius: 12px;
+    padding: 16px;
+    background: #f8faff;
+  }
+  .point-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: #2563eb;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .point-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .point-body {
+    font-size: 12.5px;
+    color: #475569;
+    line-height: 1.65;
+  }
+
+  /* ── SEGMENT TABLE ── */
+  .seg-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .seg-table th {
+    padding: 10px 14px;
+    font-weight: 700;
+    text-align: left;
+    font-size: 12.5px;
+    color: #fff;
+  }
+  .seg-table th:first-child { border-radius: 8px 0 0 0; }
+  .seg-table th:last-child  { border-radius: 0 8px 0 0; }
+  .seg-table .th-exp  { background: #1e40af; }
+  .seg-table .th-ent  { background: #6d28d9; }
+  .seg-table .th-spt  { background: #0369a1; }
+  .seg-table .th-hdr  { background: #1e293b; width: 18%; }
+  .seg-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #e0e7ff;
+    color: #374151;
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .seg-table tr:last-child td { border-bottom: none; }
+  .seg-table tr:nth-child(even) td { background: #f8faff; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-right: 3px; }
+  .tag-star { background: #fef3c7; color: #92400e; }
+  .tag-ok   { background: #d1fae5; color: #065f46; }
+  .tag-warn { background: #fee2e2; color: #991b1b; }
+  .tag-blue { background: #dbeafe; color: #1e40af; }
+
+  /* ── FLYWHEEL ── */
+  .flywheel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: nowrap;
+    margin-bottom: 14px;
+  }
+  .fw-node {
+    border-radius: 10px;
+    padding: 12px 14px;
+    text-align: center;
+    min-width: 130px;
+    flex-shrink: 0;
+  }
+  .fw-node.n1 { background: #1e3a8a; }
+  .fw-node.n2 { background: #2563eb; }
+  .fw-node.n3 { background: #0369a1; }
+  .fw-node.n4 { background: #0f766e; }
+  .fw-node .fw-icon { font-size: 20px; margin-bottom: 4px; }
+  .fw-node .fw-title { font-size: 12.5px; font-weight: 700; color: #fff; line-height: 1.4; }
+  .fw-node .fw-sub   { font-size: 11px; color: rgba(255,255,255,0.75); margin-top: 3px; line-height: 1.4; }
+  .fw-arrow { font-size: 22px; color: #fbbf24; padding: 0 4px; flex-shrink: 0; }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight-box {
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    border: 2px solid #fbbf24;
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 14px;
+  }
+  .highlight-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #92400e;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .highlight-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    align-items: flex-start;
+  }
+  .highlight-row:last-child { margin-bottom: 0; }
+  .highlight-label {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #78350f;
+    min-width: 130px;
+    flex-shrink: 0;
+  }
+  .highlight-val {
+    font-size: 12.5px;
+    color: #374151;
+    line-height: 1.65;
+  }
+  .highlight-val em { color: #1e40af; font-style: normal; font-weight: 700; }
+  .highlight-val strong { color: #92400e; }
+
+  /* ── PROFIT ANALYSIS ── */
+  .profit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 0;
+  }
+  .profit-card {
+    border-radius: 12px;
+    padding: 16px 18px;
+    border: 1.5px solid;
+  }
+  .profit-card.wrong { background: #fef2f2; border-color: #fca5a5; }
+  .profit-card.right { background: #f0fdf4; border-color: #86efac; }
+  .profit-card-title { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+  .profit-card.wrong .profit-card-title { color: #991b1b; }
+  .profit-card.right .profit-card-title { color: #065f46; }
+  .profit-calc { font-size: 12.5px; line-height: 1.8; color: #374151; }
+  .profit-calc .num { font-weight: 700; }
+  .profit-calc .red { color: #dc2626; }
+  .profit-calc .grn { color: #16a34a; }
+  .profit-calc .blue { color: #1e40af; }
+
+  /* ── MISTAKE CARDS ── */
+  .mistake-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .mistake-card {
+    border-radius: 12px;
+    padding: 16px;
+    background: #fef2f2;
+    border: 1.5px solid #fecaca;
+  }
+  .mistake-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .mistake-icon {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: #ef4444;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .mistake-q { font-size: 13px; font-weight: 700; color: #7f1d1d; line-height: 1.4; }
+  .mistake-a { font-size: 12.5px; color: #374151; line-height: 1.65; padding-top: 6px; border-top: 1px solid #fecaca; }
+  .mistake-a em { color: #1e40af; font-style: normal; font-weight: 700; }
+
+  /* ── QUIZ ── */
+  .quiz-list { display: flex; flex-direction: column; gap: 14px; }
+  .quiz-item {
+    border: 1.5px solid #dbeafe;
+    border-radius: 12px;
+    padding: 16px 18px;
+    background: #f8faff;
+  }
+  .quiz-q {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 10px;
+    line-height: 1.55;
+  }
+  .quiz-q span {
+    display: inline-block;
+    background: #1e40af;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    margin-right: 8px;
+  }
+  .quiz-answer {
+    font-size: 12.5px;
+    color: #475569;
+    background: #fff;
+    border-radius: 8px;
+    padding: 10px 14px;
+    border-left: 3px solid #2563eb;
+    line-height: 1.7;
+  }
+  .quiz-answer strong { color: #1e3a8a; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-text { color: rgba(255,255,255,0.65); font-size: 12px; }
+  .footer-logo { color: #fbbf24; font-size: 13px; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-top">
+      <span class="hero-badge">✦ 商業模式試讀 · 好書好課分享</span>
+      <span class="hero-date">2025 · 05 · 24</span>
+    </div>
+    <div class="hero-title">
+      迪士尼商業模式解析<br><span>飛輪效應</span> × 體驗獲利引擎 × 財報分析技巧
+    </div>
+    <div class="hero-sub">
+      三大事業板塊 ／ 體驗事業 27% 利潤率 ／ 入園人數↓但每客消費↑ ／ 一次性因素排除法 ／ IP飛輪效應 ／ 郵輪擴張策略
+    </div>
+  </div>
+
+  <!-- SECTION 1: 學習重點 -->
+  <div class="section">
+    <div class="section-label">今日學習重點</div>
+    <div class="points-grid">
+
+      <div class="point-card">
+        <div class="point-num">POINT 01</div>
+        <div class="point-title">迪士尼三大事業板塊</div>
+        <div class="point-body">
+          ① <strong>娛樂</strong>：串流（Disney+）、電影、IP角色授權——吸引眼球、建立情感依附<br>
+          ② <strong>體育</strong>：ESPN、NFL等體育賽事轉播——吸引男性受眾<br>
+          ③ <strong>體驗</strong>：主題樂園、度假村、郵輪、周邊商品——現金牛，真正的利潤引擎
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 02</div>
+        <div class="point-title">體驗事業：不到4成營收 × 過半利潤</div>
+        <div class="point-body">
+          體驗事業在三大板塊中營收占比最低（不到40%），卻創造了集團過半的營業利益，利潤率高達 27%。原因：願意進場的客人已「放棄計較」，單價防守力強，是典型的高定價力 Cash Cow。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 03</div>
+        <div class="point-title">拉高單價策略：人少錢多</div>
+        <div class="point-body">
+          2025 年數據：入園人數 YOY 下降（尤其國內），但每位入園客的消費金額持續上升，飯店入住率與郵輪天數也同步增加。策略清晰：寧可少一點人，但每個人花更多。沉沒成本邏輯：來都來了，就不計較了。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 04</div>
+        <div class="point-title">IP 飛輪效應</div>
+        <div class="point-body">
+          線上內容（電影/串流）培養粉絲情感 → 粉絲出遊進入線下樂園消費 → 樂園反哺強化 IP 體驗 → 吸引更多人看電影。每一個環節都在強化下一個，形成自我驅動的飛輪，這才是迪士尼護城河的核心。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 05</div>
+        <div class="point-title">財務分析技巧：排除一次性因素</div>
+        <div class="point-body">
+          帳面淨利 YOY -31%，但原因是前一年有一次性稅務利益墊高基期。排除後，調整後淨利實際成長 9%。財務人員的職責：讓數字說真相——本業是成長的，別讓一次性項目遮蔽了實質表現。
+        </div>
+      </div>
+
+      <div class="point-card">
+        <div class="point-num">POINT 06</div>
+        <div class="point-title">無形資產 × 郵輪擴張邏輯</div>
+        <div class="point-body">
+          高無形資產佔比 = 定價能力強，預示未來現金流穩定。<br>
+          郵輪是「複製成功」的最佳解：不受限於城市地點，把迪士尼體驗帶到海上，等於把樂園裝上輪子，持續擴大體驗事業的邊界。
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 2: 三大事業板塊比較 -->
+  <div class="section">
+    <div class="section-label">三大事業板塊財務比較（2025年度）</div>
+    <table class="seg-table">
+      <thead>
+        <tr>
+          <th class="th-hdr">比較維度</th>
+          <th class="th-exp">體驗事業<br><small style="font-weight:400">Experiences</small></th>
+          <th class="th-ent">娛樂事業<br><small style="font-weight:400">Entertainment</small></th>
+          <th class="th-spt">體育事業<br><small style="font-weight:400">Sports / ESPN</small></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>核心業務</strong></td>
+          <td>主題樂園、度假村、郵輪、周邊商品、餐飲</td>
+          <td>Disney+ 串流、電影、IP角色授權、廣告</td>
+          <td>ESPN 賽事轉播、NFL 等體育版權</td>
+        </tr>
+        <tr>
+          <td><strong>營收占比</strong></td>
+          <td><span class="tag tag-blue">約40%以內</span></td>
+          <td>最高（觸及面最廣）</td>
+          <td>中等</td>
+        </tr>
+        <tr>
+          <td><strong>利潤率</strong></td>
+          <td><span class="tag tag-star">27%（最高）</span>創造過半利潤</td>
+          <td>YOY +6%，穩定成長</td>
+          <td>YOY 略有挑戰</td>
+        </tr>
+        <tr>
+          <td><strong>商業邏輯</strong></td>
+          <td>高定價、沉沒成本心理——來都來了</td>
+          <td>廣觸達、養粉絲、建立情感連結</td>
+          <td>固定受眾（體育迷）、版權壁壘</td>
+        </tr>
+        <tr>
+          <td><strong>策略角色</strong></td>
+          <td><span class="tag tag-star">Cash Cow 現金牛</span>直接變現</td>
+          <td><span class="tag tag-ok">漏斗頂端</span>吸客、洗腦</td>
+          <td>差異化布局</td>
+        </tr>
+        <tr>
+          <td><strong>成長方向</strong></td>
+          <td>郵輪擴張（不受城市限制）、拉高每客消費</td>
+          <td>訂閱增長、廣告整合、全球授權</td>
+          <td>NFL 收購、線上電視整合（Hulu / Full TV）</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 3: 飛輪效應 -->
+  <div class="section">
+    <div class="section-label">迪士尼 IP 飛輪效應</div>
+
+    <div class="flywheel">
+      <div class="fw-node n1">
+        <div class="fw-icon">🎬</div>
+        <div class="fw-title">IP 內容產出</div>
+        <div class="fw-sub">電影、串流、動畫<br>培養角色情感</div>
+      </div>
+      <div class="fw-arrow">→</div>
+      <div class="fw-node n2">
+        <div class="fw-icon">❤️</div>
+        <div class="fw-title">粉絲情感黏著</div>
+        <div class="fw-sub">線上訂閱、周邊購買<br>品牌認同建立</div>
+      </div>
+      <div class="fw-arrow">→</div>
+      <div class="fw-node n3">
+        <div class="fw-icon">🎡</div>
+        <div class="fw-title">線下體驗變現</div>
+        <div class="fw-sub">主題樂園、郵輪<br>高定價、高利潤</div>
+      </div>
+      <div class="fw-arrow">→</div>
+      <div class="fw-node n4">
+        <div class="fw-icon">🚢</div>
+        <div class="fw-title">成功複製擴張</div>
+        <div class="fw-sub">郵輪解除城市限制<br>體驗邊界無限延伸</div>
+      </div>
+    </div>
+
+    <div style="background:#f8faff; border:1.5px solid #dbeafe; border-radius:12px; padding:14px 18px; font-size:12.5px; color:#374151; line-height:1.7;">
+      <strong style="color:#1e3a8a">💡 飛輪的關鍵洞察：</strong>娛樂事業不是用來賺錢的——它是用來「養粉絲」的。真正賺錢的是體驗事業。你看的每一部迪士尼電影，都是在替未來的樂園門票舖路。<br>
+      <strong style="color:#92400e">📊 數字驗證：</strong>體驗事業營收 &lt; 40%，卻創造 &gt; 50% 利潤。娛樂事業是成本，體驗事業才是收割。
+    </div>
+  </div>
+
+  <!-- SECTION 4: 一次性因素排除法 -->
+  <div class="section">
+    <div class="section-label">財務分析技巧：排除一次性因素</div>
+
+    <div class="profit-grid">
+      <div class="profit-card wrong">
+        <div class="profit-card-title">❌ 表面數字（容易誤讀）</div>
+        <div class="profit-calc">
+          去年歸屬母公司淨利：<span class="num">3.3 億</span><br>
+          今年歸屬母公司淨利：<span class="num red">2.2 億</span><br>
+          YOY 變動：<span class="num red">−31%</span><br><br>
+          直覺判斷：「迪士尼今年很差」<br>
+          ⚠️ 這個結論是錯的
+        </div>
+      </div>
+      <div class="profit-card right">
+        <div class="profit-card-title">✅ 調整後數字（財務人員的說法）</div>
+        <div class="profit-calc">
+          去年淨利 3.3 億中，含<span class="num blue"> 一次性稅務利益</span>（基期偏高）<br>
+          去年調整後真實淨利：<span class="num">3.08 億</span><br>
+          今年淨利：<span class="num grn">2.2 → 調整後 3.36 億</span><br>
+          調整後 YOY：<span class="num grn">+9%</span>（本業實際成長）<br><br>
+          ✅ 正確結論：本業持續成長，一次性稅務項目使帳面數字失真
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:14px; background:#fffbeb; border:1.5px solid #fde68a; border-radius:12px; padding:14px 18px; font-size:12.5px; color:#374151; line-height:1.7;">
+      <strong style="color:#92400e">📌 財務人員的職責：</strong>當利潤下滑被問責時，第一步是找出「有沒有一次性影響」。稅務利益、資產出售利益、匯率影響等都屬於此類。
+      排除後若本業成長，就必須清楚說明，讓管理層和投資人看到真實的經營狀況——這不是「硬凹」，這是「揭露真相」。
+    </div>
+  </div>
+
+  <!-- SECTION 5: 易錯觀念 -->
+  <div class="section">
+    <div class="section-label">易錯觀念提醒</div>
+    <div class="mistake-grid">
+
+      <div class="mistake-card">
+        <div class="mistake-header">
+          <div class="mistake-icon">!</div>
+          <div class="mistake-q">歸屬母公司淨利下降 = 公司變差了？</div>
+        </div>
+        <div class="mistake-a">
+          ❌ 不一定。淨利受<em>一次性項目</em>（稅務利益、資產處分、匯率波動）影響很大。
+          判斷公司是否真的變差，應先看「營業利益」（本業獲利），再看是否有一次性因素扭曲了淨利。
+          迪士尼本例：帳面淨利 -31%，但調整後本業實際成長 9%。
+        </div>
+      </div>
+
+      <div class="mistake-card">
+        <div class="mistake-header">
+          <div class="mistake-icon">!</div>
+          <div class="mistake-q">入園人數下降 = 體驗事業衰退？</div>
+        </div>
+        <div class="mistake-a">
+          ❌ 迪士尼刻意走「<em>高單價、低人流</em>」策略：寧可少一點人，但每個人花更多錢。
+          入園人數下降 + 每客消費上升 + 利潤率 27% = 策略成功，而非衰退。
+          看事業好壞應看「利潤率」與「每客消費」，而非單純的人流量。
+        </div>
+      </div>
+
+      <div class="mistake-card">
+        <div class="mistake-header">
+          <div class="mistake-icon">!</div>
+          <div class="mistake-q">無形資產比例高 = 資產虛胖？</div>
+        </div>
+        <div class="mistake-a">
+          ❌ 高無形資產（品牌、IP版權、商譽）代表<em>定價能力強</em>、未來現金流穩定。
+          但確實有風險：若IP魅力下滑、票房失敗，無形資產可能需要「減損」，直接衝擊損益。
+          評估重點：IP是否仍有吸引力？品牌黏著度是否持續？目前迪士尼尚在健康範圍。
+        </div>
+      </div>
+
+      <div class="mistake-card">
+        <div class="mistake-header">
+          <div class="mistake-icon">!</div>
+          <div class="mistake-q">合併財報的高營收 = 母公司自己賺的？</div>
+        </div>
+        <div class="mistake-a">
+          ❌ 合併財報包含所有子公司業績。比較合併與個體財報的差異，才能看出<em>哪個子公司是集團的主要獲利引擎</em>。
+          如果合併 100、個體只有 20，代表 80% 靠子公司撐。
+          迪士尼部分新增營收來自收購的電視業務——是併購帶來的，不是母體自然成長。
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 6: 課後自我檢測 -->
+  <div class="section">
+    <div class="section-label">課後自我檢測</div>
+    <div class="quiz-list">
+
+      <div class="quiz-item">
+        <div class="quiz-q">
+          <span>1</span>
+          迪士尼體驗事業的營收占整體不到 40%，但卻創造了集團超過 50% 的營業利益，利潤率約 27%。<br>
+          請問：① 為什麼體驗事業能維持如此高的利潤率？② 迪士尼採取「入園人數下降但每客消費上升」的策略，這代表什麼定價邏輯？
+        </div>
+        <div class="quiz-answer">
+          ① 高利潤率的原因：<strong>進場的客人已接受高價門檻</strong>——願意花高票價的人不會在園內節省，沉沒成本心理使「來都來了」的消費意願強。加上IP情感黏著讓消費者願意付溢價。<br>
+          ② 拉高單價策略：<strong>少量高價 > 大量低價</strong>。減少低消費力客群，保留高消費意願客群，整體利潤更可觀。等同於「提高門檻，篩選優質客戶」的策略，見於精品、高端飯店等定價邏輯。
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">
+          <span>2</span>
+          某公司財報顯示：去年淨利 50 億元（含一次性土地出售利益 15 億），今年淨利 40 億元（無特殊一次性項目）。<br>
+          ① 帳面 YOY 變化為何？② 調整一次性因素後，本業淨利 YOY 實際表現為何？③ 身為財務人員，你應該如何向董事會說明？
+        </div>
+        <div class="quiz-answer">
+          ① 帳面 YOY = (40 − 50) ÷ 50 = <strong>−20%</strong>（看起來變差）<br>
+          ② 去年本業淨利 = 50 − 15 = 35 億；今年本業淨利 = 40 億<br>
+          調整後 YOY = (40 − 35) ÷ 35 ≈ <strong>+14.3%</strong>（本業實際成長）<br>
+          ③ 說明方式：「帳面淨利雖下降 20%，但去年包含一次性土地出售利益 15 億，屬非常態收益。排除後本業淨利從 35 億成長至 40 億，YOY +14.3%，<strong>本業持續健康成長</strong>。」
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">
+          <span>3</span>
+          請用「飛輪效應」的邏輯，說明迪士尼「拍電影」和「開主題樂園」這兩件事之間的商業連結。並解釋為何「郵輪」是這個飛輪模型的一個聰明延伸？
+        </div>
+        <div class="quiz-answer">
+          <strong>飛輪連結：</strong>電影 → 建立粉絲情感認同（免費/低價接觸IP）→ 粉絲旅遊時選擇迪士尼樂園（高價付費體驗）→ 體驗強化 IP 記憶，帶動更多人去看電影。兩者互為因果，形成自我增強的正循環。<br><br>
+          <strong>郵輪為何聰明：</strong>傳統樂園受限於「地理位置」——必須在特定城市才能接觸客群。郵輪打破地理限制，可以在任何航線提供迪士尼體驗，等於把體驗事業的邊界從「城市據點」擴張為「全球海洋」，<strong>同樣的 IP 資產，創造新的變現空間</strong>。
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-text">迪士尼商業模式試讀　0524　好書好課分享</div>
+    <div class="footer-logo">Rock 財報課 · 課後複習</div>
+  </div>
+
+</div>
+</body>
+</html>
