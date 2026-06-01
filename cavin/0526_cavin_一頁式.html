@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>財務分析師在忙什麼 — Cavin 0526</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, "Noto Sans TC", "Microsoft JhengHei", sans-serif; background: #f0f4f8; color: #1e293b; }
+
+  .header {
+    background: linear-gradient(135deg, #0f2744 0%, #1d4ed8 100%);
+    color: white; padding: 2rem 2rem 1.6rem;
+  }
+  .header-meta {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: .78rem; margin-bottom: .8rem; opacity: .85;
+  }
+  .tags { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .tag { background: rgba(255,255,255,.18); border-radius: 20px; padding: .2rem .7rem; font-size: .72rem; }
+  .header h1 { font-size: 1.65rem; font-weight: 800; line-height: 1.3; margin-bottom: .4rem; }
+  .header h1 span { color: #fbbf24; }
+  .header-sub { font-size: .84rem; opacity: .8; line-height: 1.6; }
+
+  .body { max-width: 980px; margin: 0 auto; padding: 1.6rem 1rem 3rem; }
+
+  .section-label {
+    font-size: .72rem; font-weight: 700; color: #1d4ed8;
+    letter-spacing: .12em; border-left: 3px solid #1d4ed8;
+    padding-left: .5rem; margin-bottom: 1rem; margin-top: 1.8rem;
+  }
+
+  /* concept strip */
+  .concept-strip {
+    background: white; border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.08);
+    padding: 1.2rem 1.5rem; margin-bottom: 1rem;
+    border-left: 4px solid #1d4ed8;
+  }
+  .concept-strip h2 { font-size: 1rem; font-weight: 700; margin-bottom: .5rem; }
+  .concept-strip p { font-size: .85rem; line-height: 1.7; color: #374151; }
+
+  /* case cards */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1rem; }
+
+  .card {
+    background: white; border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.08);
+    padding: 1.2rem 1.3rem 1.3rem;
+    border-top: 3px solid #1d4ed8;
+  }
+  .card.gogoro { border-top-color: #0891b2; }
+  .card.micron  { border-top-color: #7c3aed; }
+  .card.disney  { border-top-color: #dc2626; }
+
+  .card-label { font-size: .68rem; font-weight: 700; letter-spacing: .1em; color: #64748b; margin-bottom: .25rem; }
+  .card h2 { font-size: 1rem; font-weight: 700; margin-bottom: .75rem; color: #1e293b; line-height: 1.4; }
+
+  .metric-row {
+    display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: .7rem;
+  }
+  .metric {
+    flex: 1; min-width: 100px;
+    background: #f8fafc; border-radius: 8px; padding: .5rem .7rem;
+    border: 1px solid #e2e8f0;
+  }
+  .metric .label { font-size: .68rem; color: #64748b; margin-bottom: .15rem; }
+  .metric .val { font-size: .9rem; font-weight: 700; }
+  .metric .val.bad { color: #dc2626; }
+  .metric .val.good { color: #059669; }
+  .metric .val.neutral { color: #d97706; }
+
+  .arrow { text-align: center; font-size: 1.1rem; padding: .1rem 0; }
+
+  .story-box {
+    background: #eff6ff; border-radius: 8px;
+    padding: .7rem .9rem; margin-top: .5rem;
+    font-size: .83rem; line-height: 1.65; color: #1e40af;
+    border-left: 3px solid #3b82f6;
+  }
+  .story-box strong { color: #1e3a8a; }
+
+  .badge {
+    display: inline-block; border-radius: 4px; padding: .05rem .4rem;
+    font-size: .75rem; font-weight: 700; margin: 0 .1rem;
+  }
+  .badge-red    { background: #fee2e2; color: #b91c1c; }
+  .badge-green  { background: #d1fae5; color: #065f46; }
+  .badge-blue   { background: #dbeafe; color: #1d4ed8; }
+  .badge-yellow { background: #fef3c7; color: #92400e; }
+  .badge-purple { background: #ede9fe; color: #6d28d9; }
+
+  /* principles */
+  .principles { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: .8rem; }
+  .principle {
+    background: white; border-radius: 10px; padding: 1rem 1.1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,.07);
+    border-bottom: 3px solid #1d4ed8;
+  }
+  .principle .icon { font-size: 1.4rem; margin-bottom: .4rem; }
+  .principle h3 { font-size: .88rem; font-weight: 700; margin-bottom: .3rem; }
+  .principle p  { font-size: .8rem; color: #475569; line-height: 1.6; }
+
+  /* table */
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+  thead tr { background: #0f2744; color: white; }
+  thead th { padding: .65rem .9rem; text-align: left; font-weight: 600; }
+  tbody tr:nth-child(even) { background: #f8fafc; }
+  tbody td { padding: .6rem .9rem; border-bottom: 1px solid #e2e8f0; }
+
+  footer { text-align: center; font-size: .72rem; color: #94a3b8; padding: 1rem 0 2rem; }
+
+  @media(max-width:600px) {
+    .header h1 { font-size: 1.2rem; }
+    .header-meta { flex-direction: column; align-items: flex-start; gap: .4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-meta">
+    <div class="tags">
+      <span class="tag">財務分析</span>
+      <span class="tag">法說會技巧</span>
+      <span class="tag">家教 · Cavin</span>
+    </div>
+    <span>2026 · 05 · 26</span>
+  </div>
+  <h1>財務分析師在忙什麼？<br><span>排除雜訊 × 說故事 × 找比較基準</span></h1>
+  <div class="header-sub">
+    核心營運能力辨識 ／ 一次性因素剔除 ／ Gogoro × 美光 × 迪士尼 實例拆解
+  </div>
+</div>
+
+<div class="body">
+
+  <!-- 核心觀念 -->
+  <div class="section-label">核心觀念</div>
+
+  <div class="concept-strip">
+    <h2>💡 數字本身沒有意義，說清楚才有價值</h2>
+    <p>
+      公司賺錢 ≠ 營運好；虧錢 ≠ 營運差。財務人員的工作是把<strong>「一次性雜訊」</strong>（匯率、股價崩跌、稅務回補、一次性支出）從數字中剝離，讓投資人與經營者看到<strong>真實的核心營運能力</strong>。
+      分析必須有比較基準（去年同期 or 設定標準），孤立的數字沒有意義。
+    </p>
+  </div>
+
+  <div class="grid" style="margin-top:.5rem;">
+    <div class="concept-strip" style="margin-bottom:0">
+      <h2>🎭 雜訊的常見類型</h2>
+      <p>
+        <span class="badge badge-yellow">匯率波動</span> 戰爭或政策導致美元升貶，非公司能控制<br>
+        <span class="badge badge-red">資產減損</span> 火災、天災，一次性且與本業無關<br>
+        <span class="badge badge-purple">股權激勵</span> 股價大跌導致薪酬負債消失，帳面虛增利益<br>
+        <span class="badge badge-blue">稅務利益</span> 一次性稅務回補，不代表本業改善
+      </p>
+    </div>
+    <div class="concept-strip" style="margin-bottom:0">
+      <h2>📐 財務人員的三個動作</h2>
+      <p>
+        <strong>① 剔除雜訊</strong>——把當期一次性項目標記出來<br>
+        <strong>② 找比較基準</strong>——YoY（同比）或 QoQ（環比）都要做<br>
+        <strong>③ 說故事</strong>——用公司願景包裝，讓「壞數字」有說服力的脈絡
+      </p>
+    </div>
+  </div>
+
+  <!-- 實例 -->
+  <div class="section-label">三大實例拆解</div>
+
+  <div class="grid">
+
+    <!-- Gogoro -->
+    <div class="card gogoro">
+      <div class="card-label">CASE 01 · Gogoro</div>
+      <h2>🛵 難看數字的包裝藝術</h2>
+
+      <div class="metric-row">
+        <div class="metric"><div class="label">2024 收入</div><div class="val neutral">69,711</div></div>
+        <div class="metric"><div class="label">2025 收入</div><div class="val bad">63,621 ↓</div></div>
+      </div>
+      <div class="story-box">
+        <strong>故事：</strong>加回匯率影響後衰退幅度縮小。拆解後：賣車 <span class="badge badge-red">↓18.1%</span>（刻意授權給 Yamaha/PGO），換電訂閱 <span class="badge badge-green">↑11.1%</span>——本來就是轉型方向。
+      </div>
+
+      <div class="metric-row" style="margin-top:.7rem;">
+        <div class="metric"><div class="label">2024 毛利率</div><div class="val good">44.73%</div></div>
+        <div class="metric"><div class="label">2025 毛利率</div><div class="val bad">31.06% ↓</div></div>
+      </div>
+      <div class="story-box">
+        <strong>故事：</strong>2025年投入 <strong>8,347</strong> 一次性電池升級成本。還原後，本業毛利其實高於 2024 年。
+      </div>
+
+      <div class="metric-row" style="margin-top:.7rem;">
+        <div class="metric"><div class="label">2024 淨損</div><div class="val neutral">-13,127</div></div>
+        <div class="metric"><div class="label">2025 淨損</div><div class="val bad">-18,562</div></div>
+      </div>
+      <div class="story-box">
+        <strong>故事：</strong>2024年看起來虧少，是因為股價 $17→$1，薪酬負債縮水省了 <strong>13,198</strong>（壞事換來的假利益）。2025年排除後真實虧損 <span class="badge badge-green">10,915，大幅改善</span>。
+      </div>
+    </div>
+
+    <!-- Micron -->
+    <div class="card micron">
+      <div class="card-label">CASE 02 · 美光 Micron</div>
+      <h2>💾 EBITDA 提前傳遞翻身訊號</h2>
+
+      <div class="metric-row">
+        <div class="metric"><div class="label">2023–2024Q3</div><div class="val bad">淨利為負</div></div>
+        <div class="metric"><div class="label">2024 Q4</div><div class="val good">爆炸性成長</div></div>
+      </div>
+
+      <div class="story-box" style="margin-bottom:.7rem;">
+        <strong>關鍵工具：調整後 EBITDA</strong><br>
+        半導體廠設備折舊極高，淨利長期為負。美光利用 EBITDA（加回稅、利息、折舊）向市場提前證明：<span class="badge badge-green">2023 年 EBITDA 已轉正</span>，營運早於帳面數字觸底回升。
+      </div>
+
+      <div class="story-box">
+        <strong>為何重要：</strong>對新創或重資產公司，EBITDA ≈ 「營業活動現金流」的快速替代指標，是早期估值的核心依據。市場看懂後，股價提前反映復甦。
+      </div>
+    </div>
+
+    <!-- Disney -->
+    <div class="card disney">
+      <div class="card-label">CASE 03 · 迪士尼 Disney</div>
+      <h2>🏰 稅務雜訊導致的假衰退</h2>
+
+      <div class="metric-row">
+        <div class="metric"><div class="label">2025 Q2 淨利</div><div class="val good">33億美元</div></div>
+        <div class="metric"><div class="label">2026 Q2 淨利</div><div class="val bad">22億美元 ↓⅓</div></div>
+      </div>
+
+      <div class="story-box" style="margin-bottom:.7rem;">
+        <strong>故事：</strong>2025 Q2 含有 <span class="badge badge-yellow">12億一次性稅務利益回補</span>，這筆錢抽掉後 2026 年表現其實優於 2025 年。若不解釋，股價面臨崩盤危機。
+      </div>
+
+      <div class="story-box">
+        <strong>加分亮點：</strong>超過一半利潤來自持續成長的<span class="badge badge-blue">體驗事業</span>（樂園門票、住宿、周邊），這才是長期護城河。
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 總結 -->
+  <div class="section-label">財務分析三心法</div>
+  <div class="principles">
+    <div class="principle">
+      <div class="icon">🔍</div>
+      <h3>撥開迷霧</h3>
+      <p>找出當期一次性雜訊，誠實標記。不是說謊，而是讓真相更清楚。</p>
+    </div>
+    <div class="principle">
+      <div class="icon">📏</div>
+      <h3>一定要比較</h3>
+      <p>財務分析中沒有「絕對好」，只有「比去年好」。找基準，做對比。</p>
+    </div>
+    <div class="principle">
+      <div class="icon">🎤</div>
+      <h3>溝通的藝術</h3>
+      <p>數字是素材，說故事才是工作。把投資人最在意的願景，用數字說服他們。</p>
+    </div>
+    <div class="principle">
+      <div class="icon">⚙️</div>
+      <h3>區分本業與業外</h3>
+      <p>靠台積電股票賺的、靠匯率賺的，都不是「核心營運能力」的證明。</p>
+    </div>
+  </div>
+
+  <!-- 速查表 -->
+  <div class="section-label">常見雜訊 vs 調整工具速查</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>雜訊類型</th><th>案例</th><th>調整工具</th><th>調整方向</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>匯率波動</td><td>Gogoro 收入衰退</td><td>固定匯率還原</td><td>加回匯損</td></tr>
+        <tr><td>一次性支出</td><td>Gogoro 電池升級 8,347</td><td>Adjusted Gross Profit</td><td>排除後毛利改善</td></tr>
+        <tr><td>股權薪酬負債縮水</td><td>Gogoro 2024 淨損假低</td><td>Adjusted Net Loss</td><td>還原真實虧損</td></tr>
+        <tr><td>高額折舊</td><td>美光半導體廠設備</td><td>EBITDA</td><td>加回 D&A</td></tr>
+        <tr><td>一次性稅務利益</td><td>迪士尼 2025 Q2 +12億</td><td>Adjusted Net Income</td><td>排除稅務回補</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<footer>Cavin · 財務分析課後複習 · 2026.05.26 · 由 Claude 自動生成</footer>
+</body>
+</html>
