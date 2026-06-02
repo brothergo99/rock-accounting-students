@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>應付公司債 — 柏蓁 0530</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, "Noto Sans TC", "Microsoft JhengHei", sans-serif; background: #f0f4f8; color: #1e293b; }
+
+  .header {
+    background: linear-gradient(135deg, #1a3a2a 0%, #16a34a 100%);
+    color: white; padding: 2rem 2rem 1.6rem;
+  }
+  .header-meta { display: flex; justify-content: space-between; align-items: center; font-size: .78rem; margin-bottom: .8rem; opacity: .85; }
+  .tags { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .tag { background: rgba(255,255,255,.18); border-radius: 20px; padding: .2rem .7rem; font-size: .72rem; }
+  .header h1 { font-size: 1.65rem; font-weight: 800; line-height: 1.3; margin-bottom: .4rem; }
+  .header h1 span { color: #fde68a; }
+  .header-sub { font-size: .84rem; opacity: .8; line-height: 1.6; }
+
+  .body { max-width: 980px; margin: 0 auto; padding: 1.6rem 1rem 3rem; }
+
+  .section-label {
+    font-size: .72rem; font-weight: 700; color: #16a34a;
+    letter-spacing: .12em; border-left: 3px solid #16a34a;
+    padding-left: .5rem; margin-bottom: 1rem; margin-top: 1.8rem;
+  }
+
+  /* ── 五要素卡 ── */
+  .five-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: .7rem; margin-bottom: .5rem; }
+  .elem-card {
+    background: white; border-radius: 10px; padding: .9rem 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,.07); border-top: 3px solid #16a34a; text-align: center;
+  }
+  .elem-card .icon { font-size: 1.4rem; margin-bottom: .3rem; }
+  .elem-card h3 { font-size: .82rem; font-weight: 700; margin-bottom: .2rem; color: #1e293b; }
+  .elem-card p  { font-size: .75rem; color: #475569; line-height: 1.5; }
+
+  /* ── 折溢平三欄 ── */
+  .three-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem; }
+  @media(max-width:640px) { .three-grid { grid-template-columns: 1fr; } }
+
+  .price-card {
+    background: white; border-radius: 12px; padding: 1.1rem 1.2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,.08);
+  }
+  .price-card.discount { border-top: 3px solid #dc2626; }
+  .price-card.par      { border-top: 3px solid #2563eb; }
+  .price-card.premium  { border-top: 3px solid #16a34a; }
+
+  .price-card .tag2 { font-size: .68rem; font-weight: 700; letter-spacing: .08em; margin-bottom: .3rem; }
+  .price-card.discount .tag2 { color: #dc2626; }
+  .price-card.par      .tag2 { color: #2563eb; }
+  .price-card.premium  .tag2 { color: #16a34a; }
+  .price-card h3 { font-size: .95rem; font-weight: 700; margin-bottom: .6rem; }
+
+  .calc-row { background: #f8fafc; border-radius: 6px; padding: .45rem .7rem; margin-bottom: .35rem; font-size: .8rem; color: #374151; line-height: 1.55; }
+  .calc-row span.num { font-weight: 700; float: right; }
+
+  .result-box { border-radius: 6px; padding: .5rem .7rem; text-align: center; margin-top: .5rem; font-weight: 700; font-size: .9rem; }
+  .result-box.disc { background: #fee2e2; color: #b91c1c; }
+  .result-box.ppar { background: #dbeafe; color: #1d4ed8; }
+  .result-box.prem { background: #d1fae5; color: #065f46; }
+
+  /* ── 攤銷表 ── */
+  .table-wrap { overflow-x: auto; margin-top: .5rem; }
+  table { width: 100%; border-collapse: collapse; font-size: .81rem; }
+  thead tr { background: #1a3a2a; color: white; }
+  thead th { padding: .65rem .85rem; text-align: right; font-weight: 600; white-space: nowrap; }
+  thead th:first-child { text-align: center; }
+  tbody tr:nth-child(even) { background: #f8fafc; }
+  tbody td { padding: .55rem .85rem; border-bottom: 1px solid #e2e8f0; text-align: right; white-space: nowrap; }
+  tbody td:first-child { text-align: center; font-weight: 600; }
+  tfoot td { padding: .55rem .85rem; font-weight: 700; background: #ecfdf5; text-align: right; }
+
+  /* ── 攤銷流程 ── */
+  .flow { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: .5rem 0; }
+  .flow-step {
+    background: white; border: 1px solid #d1fae5; border-radius: 8px;
+    padding: .5rem .8rem; font-size: .8rem; text-align: center; min-width: 110px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  }
+  .flow-step .s-num { font-size: .65rem; color: #16a34a; font-weight: 700; margin-bottom: .1rem; }
+  .flow-step .s-text { color: #1e293b; line-height: 1.4; }
+  .flow-arrow { font-size: 1.1rem; color: #16a34a; }
+
+  /* ── 分錄 ── */
+  .journal { background: white; border-radius: 10px; padding: 1rem 1.2rem; box-shadow: 0 2px 8px rgba(0,0,0,.07); margin-bottom: .8rem; }
+  .journal h3 { font-size: .88rem; font-weight: 700; margin-bottom: .6rem; }
+  .je-row { display: flex; gap: .5rem; font-family: "Courier New", monospace; font-size: .8rem; line-height: 1.8; }
+  .je-row .acct { flex: 1; color: #1e293b; }
+  .je-row .acct.indent { padding-left: 1.5rem; color: #374151; }
+  .je-row .dr { color: #dc2626; font-weight: 700; min-width: 70px; text-align: right; }
+  .je-row .cr { color: #16a34a; font-weight: 700; min-width: 70px; text-align: right; margin-left: .5rem; }
+
+  /* ── 趨勢提示 ── */
+  .trend-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+  @media(max-width:500px) { .trend-grid { grid-template-columns: 1fr; } }
+  .trend-card { background: white; border-radius: 10px; padding: 1rem 1.1rem; box-shadow: 0 2px 8px rgba(0,0,0,.07); }
+  .trend-card h3 { font-size: .88rem; font-weight: 700; margin-bottom: .5rem; }
+  .trend-card p  { font-size: .82rem; color: #374151; line-height: 1.65; }
+
+  .badge { display: inline-block; border-radius: 4px; padding: .05rem .4rem; font-size: .75rem; font-weight: 700; margin: 0 .1rem; }
+  .badge-red    { background: #fee2e2; color: #b91c1c; }
+  .badge-green  { background: #d1fae5; color: #065f46; }
+  .badge-blue   { background: #dbeafe; color: #1d4ed8; }
+  .badge-yellow { background: #fef3c7; color: #92400e; }
+
+  .alert { background: #fefce8; border: 1px solid #fde047; border-left: 4px solid #eab308; border-radius: 8px; padding: .85rem 1.1rem; font-size: .83rem; line-height: 1.7; color: #374151; margin-top: .8rem; }
+  .alert strong { color: #92400e; }
+
+  footer { text-align: center; font-size: .72rem; color: #94a3b8; padding: 1rem 0 2rem; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-meta">
+    <div class="tags">
+      <span class="tag">非流動負債</span>
+      <span class="tag">應付公司債</span>
+      <span class="tag">家教 · 柏蓁</span>
+    </div>
+    <span>2026 · 05 · 30</span>
+  </div>
+  <h1>應付公司債：<span>定價 × 現值計算 × 折溢價攤銷</span></h1>
+  <div class="header-sub">
+    票面利率 vs 市場利率 ／ 複利現值 + 年金現值 ／ 攤銷表滾動邏輯 ／ 會計分錄
+  </div>
+</div>
+
+<div class="body">
+
+  <!-- 五大要素 -->
+  <div class="section-label">PART 1 · 債券五大基本要素（解題前必先萃取）</div>
+  <div class="five-grid">
+    <div class="elem-card">
+      <div class="icon">💰</div>
+      <h3>面額</h3>
+      <p>到期時還給投資人的本金，也是算票面利息的基礎</p>
+    </div>
+    <div class="elem-card" style="border-top-color:#2563eb">
+      <div class="icon">🏷️</div>
+      <h3>票面利率</h3>
+      <p>發行方自訂，唯一作用：決定每期付出多少<strong>現金利息</strong></p>
+    </div>
+    <div class="elem-card" style="border-top-color:#7c3aed">
+      <div class="icon">📅</div>
+      <h3>到期日／期間</h3>
+      <p>決定總期數 N（需再乘付息次數）</p>
+    </div>
+    <div class="elem-card" style="border-top-color:#d97706">
+      <div class="icon">🔁</div>
+      <h3>複息日</h3>
+      <p>半年付息一次 → 5年 = <strong>10期</strong>，利率也要÷2</p>
+    </div>
+    <div class="elem-card" style="border-top-color:#dc2626">
+      <div class="icon">📈</div>
+      <h3>市場利率</h3>
+      <p>投資人要求的真實報酬率，決定債券<strong>最終發行價格</strong></p>
+    </div>
+  </div>
+
+  <!-- 折溢平 -->
+  <div class="section-label">PART 2 · 折價 / 平價 / 溢價發行與現值計算</div>
+  <p style="font-size:.84rem;color:#475569;margin-bottom:.8rem;">
+    範例：面額 <strong>100,000</strong>，票面利率 <strong>10%</strong>，5年期，半年付息一次（共 10 期，每期現金利息 5,000）
+  </p>
+
+  <div class="three-grid">
+
+    <!-- 折價 -->
+    <div class="price-card discount">
+      <div class="tag2">▼ 折價發行</div>
+      <h3>票面(10%) &lt; 市場(12%)</h3>
+      <div class="calc-row">每期市場利率 12%÷2 <span class="num">= 6%</span></div>
+      <div class="calc-row">年金現值 5,000 × 7.36009 <span class="num">= 36,800</span></div>
+      <div class="calc-row">複利現值 100,000 × 0.55839 <span class="num">= 55,839</span></div>
+      <div class="result-box disc">發行價 92,639（折價 7,361）</div>
+      <p style="font-size:.76rem;color:#64748b;margin-top:.5rem;">🔑 折價 = 投資人要求更多報酬，你降價補償</p>
+    </div>
+
+    <!-- 平價 -->
+    <div class="price-card par">
+      <div class="tag2">= 平價發行</div>
+      <h3>票面(10%) = 市場(10%)</h3>
+      <div class="calc-row">每期市場利率 10%÷2 <span class="num">= 5%</span></div>
+      <div class="calc-row">年金現值 5,000 × 7.72173 <span class="num">= 38,609</span></div>
+      <div class="calc-row">複利現值 100,000 × 0.61391 <span class="num">= 61,391</span></div>
+      <div class="result-box ppar">發行價 100,000（平價）</div>
+      <p style="font-size:.76rem;color:#64748b;margin-top:.5rem;">🔑 市場與票面相等，投資人願意照面額買</p>
+    </div>
+
+    <!-- 溢價 -->
+    <div class="price-card premium">
+      <div class="tag2">▲ 溢價發行</div>
+      <h3>票面(10%) &gt; 市場(8%)</h3>
+      <div class="calc-row">每期市場利率 8%÷2 <span class="num">= 4%</span></div>
+      <div class="calc-row">年金現值 5,000 × 8.11090 <span class="num">= 40,555</span></div>
+      <div class="calc-row">複利現值 100,000 × 0.67556 <span class="num">= 67,556</span></div>
+      <div class="result-box prem">發行價 108,111（溢價 8,111）</div>
+      <p style="font-size:.76rem;color:#64748b;margin-top:.5rem;">🔑 溢價 = 你的利率更優，大家搶著買，你多收錢</p>
+    </div>
+
+  </div>
+
+  <div class="alert">
+    <strong>⚠️ 防呆技巧：</strong>
+    複利現值因子一定 &lt; 1（現在存的錢必然小於未來的錢）。算完後再對照直覺：折價 → 價格 &lt; 面額；溢價 → 價格 &gt; 面額。兩個檢核都過才算完成。
+  </div>
+
+  <!-- 攤銷表 -->
+  <div class="section-label">PART 3 · 折溢價攤銷表：滾動邏輯（以折價為例）</div>
+
+  <p style="font-size:.84rem;color:#475569;margin-bottom:.8rem;">
+    發行價 <strong>98,000</strong>，面額 100,000，市場利率（有效利率）<strong>10.5348%/年</strong>，每期付現金利息 10,000
+  </p>
+
+  <!-- 步驟流程 -->
+  <div class="flow">
+    <div class="flow-step"><div class="s-num">① 期初</div><div class="s-text">帳面價值<br>（上期期末）</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="s-num">② 利息費用</div><div class="s-text">期初 ×<br>市場利率</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="s-num">③ 支付現金</div><div class="s-text">面額 ×<br>票面利率</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="s-num">④ 攤銷數</div><div class="s-text">② − ③<br>（折價加項）</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="s-num">⑤ 期末帳面</div><div class="s-text">① + ④<br>（下期期初）</div></div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>期數</th>
+          <th>A 期初帳面</th>
+          <th>B 利息費用<br><small>(A × 市場利率)</small></th>
+          <th>C 支付現金<br><small>(票面利息)</small></th>
+          <th>D 攤銷數<br><small>(B − C)</small></th>
+          <th>折價餘額</th>
+          <th>E 期末帳面<br><small>(A + D)</small></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>98,000</td><td>10,324</td><td>10,000</td><td>324</td><td>1,676</td><td>98,324</td></tr>
+        <tr><td>2</td><td>98,324</td><td>10,358</td><td>10,000</td><td>358</td><td>1,318</td><td>98,682</td></tr>
+        <tr><td>3</td><td>98,682</td><td>10,396</td><td>10,000</td><td>396</td><td>922</td><td>99,078</td></tr>
+        <tr><td>4</td><td>99,078</td><td>10,437</td><td>10,000</td><td>437</td><td>485</td><td>99,515</td></tr>
+        <tr><td>5</td><td>99,515</td><td>10,485</td><td>10,000</td><td>485</td><td>0</td><td>100,000 ✓</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td>合計</td><td>—</td><td>52,000</td><td>50,000</td><td>2,000</td><td>—</td><td>—</td></tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div class="alert" style="margin-top:.8rem;">
+    <strong>✅ 檢驗標準：</strong>最後一期期末帳面價值必須 = 面額 100,000；折價餘額必須歸零。若不符，中間算錯了。<br>
+    <strong>📊 總借貸成本：</strong>50,000（現金利息）+ 2,000（折價）= 52,000 = 利息費用合計 ✓
+  </div>
+
+  <!-- 趨勢考點 -->
+  <div class="section-label">趨勢考點（必考選擇題）</div>
+  <div class="trend-grid">
+    <div class="trend-card">
+      <h3>📉 折價發行趨勢</h3>
+      <p>
+        帳面價值：<span class="badge badge-green">逐期遞增</span>（從 98,000 → 100,000）<br>
+        攤銷數：<span class="badge badge-green">絕對值逐期遞增</span><br>
+        利息費用：<span class="badge badge-green">逐期遞增</span>（帳面越大 × 市場利率越多）<br>
+        折價餘額：<span class="badge badge-red">逐期遞減至 0</span>
+      </p>
+    </div>
+    <div class="trend-card">
+      <h3>📈 溢價發行趨勢</h3>
+      <p>
+        帳面價值：<span class="badge badge-red">逐期遞減</span>（從 108,111 → 100,000）<br>
+        攤銷數：<span class="badge badge-green">絕對值逐期遞增</span>（規律相同！）<br>
+        利息費用：<span class="badge badge-red">逐期遞減</span>（帳面越小 × 市場利率越少）<br>
+        溢價餘額：<span class="badge badge-red">逐期遞減至 0</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- 會計分錄 -->
+  <div class="section-label">會計分錄實戰</div>
+
+  <div class="journal">
+    <h3>📕 折價發行期間分錄（以第一期為例：利息費用 10,324，付現 10,000）</h3>
+    <div class="je-row"><span class="acct">利息費用</span><span class="dr">10,324</span><span class="cr"></span></div>
+    <div class="je-row"><span class="acct indent">現金／應付利息</span><span class="dr"></span><span class="cr">10,000</span></div>
+    <div class="je-row"><span class="acct indent">應付公司債折價（攤銷）</span><span class="dr"></span><span class="cr">324</span></div>
+    <p style="font-size:.76rem;color:#64748b;margin-top:.5rem;">邏輯：費用 &gt; 現金 → 差額貸記折價（折價餘額縮小）</p>
+  </div>
+
+  <div class="journal">
+    <h3>📗 溢價發行期間分錄（利息費用 &lt; 付現，假設付現 5,000，費用 4,600）</h3>
+    <div class="je-row"><span class="acct">利息費用</span><span class="dr">4,600</span><span class="cr"></span></div>
+    <div class="je-row"><span class="acct">應付公司債溢價（攤銷）</span><span class="dr">400</span><span class="cr"></span></div>
+    <div class="je-row"><span class="acct indent">現金／應付利息</span><span class="dr"></span><span class="cr">5,000</span></div>
+    <p style="font-size:.76rem;color:#64748b;margin-top:.5rem;">邏輯：費用 &lt; 現金 → 差額借記溢價（溢價餘額縮小）</p>
+  </div>
+
+</div>
+
+<footer>柏蓁 · 應付公司債複習 · 2026.05.30 · 由 Claude 自動生成</footer>
+</body>
+</html>
