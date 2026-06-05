@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>會計考題解析 — 林立雅 0603</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, "Noto Sans TC", "Microsoft JhengHei", sans-serif; background: #f0f4f8; color: #1e293b; }
+
+  .header {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+    color: white; padding: 2rem 2rem 1.6rem;
+  }
+  .header-meta { display: flex; justify-content: space-between; align-items: center; font-size: .78rem; margin-bottom: .8rem; opacity: .85; }
+  .tags { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .tag { background: rgba(255,255,255,.18); border-radius: 20px; padding: .2rem .7rem; font-size: .72rem; }
+  .header h1 { font-size: 1.6rem; font-weight: 800; line-height: 1.3; margin-bottom: .4rem; }
+  .header h1 span { color: #fbbf24; }
+  .header-sub { font-size: .84rem; opacity: .8; line-height: 1.7; }
+
+  .body { max-width: 980px; margin: 0 auto; padding: 1.6rem 1rem 3rem; }
+
+  .section-label {
+    font-size: .72rem; font-weight: 700; color: #2563eb;
+    letter-spacing: .12em; border-left: 3px solid #2563eb;
+    padding-left: .5rem; margin-bottom: 1rem; margin-top: 1.8rem;
+  }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(285px, 1fr)); gap: 1rem; }
+
+  .card {
+    background: white; border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.08);
+    padding: 1.15rem 1.25rem 1.25rem;
+    border-top: 3px solid #2563eb;
+  }
+  .card:nth-child(2)  { border-top-color: #7c3aed; }
+  .card:nth-child(3)  { border-top-color: #0891b2; }
+  .card:nth-child(4)  { border-top-color: #d97706; }
+  .card:nth-child(5)  { border-top-color: #059669; }
+  .card:nth-child(6)  { border-top-color: #dc2626; }
+  .card:nth-child(7)  { border-top-color: #9333ea; }
+  .card:nth-child(8)  { border-top-color: #ea580c; }
+  .card:nth-child(9)  { border-top-color: #0284c7; }
+  .card:nth-child(10) { border-top-color: #16a34a; }
+
+  .card-num { font-size: .68rem; font-weight: 700; letter-spacing: .1em; color: #64748b; margin-bottom: .25rem; }
+  .card h2 { font-size: .97rem; font-weight: 700; margin-bottom: .7rem; color: #1e293b; line-height: 1.4; }
+  .card ul { padding-left: 1rem; }
+  .card li { font-size: .83rem; line-height: 1.7; color: #374151; margin-bottom: .25rem; }
+
+  .formula {
+    background: #f1f5f9; border-radius: 7px;
+    padding: .55rem .85rem; margin: .5rem 0;
+    font-family: "Courier New", monospace; font-size: .81rem;
+    color: #1e3a5f; line-height: 1.65;
+    border-left: 3px solid #2563eb;
+  }
+
+  .badge { display: inline-block; border-radius: 4px; padding: .05rem .4rem; font-size: .74rem; font-weight: 700; margin: 0 .1rem; }
+  .badge-red    { background: #fee2e2; color: #b91c1c; }
+  .badge-green  { background: #d1fae5; color: #065f46; }
+  .badge-blue   { background: #dbeafe; color: #1d4ed8; }
+  .badge-yellow { background: #fef3c7; color: #92400e; }
+  .badge-purple { background: #ede9fe; color: #6d28d9; }
+  .badge-gray   { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
+
+  .alert {
+    background: #fffbeb; border: 1px solid #fcd34d;
+    border-left: 4px solid #f59e0b; border-radius: 8px;
+    padding: .8rem 1rem; margin-top: .6rem;
+    font-size: .82rem; line-height: 1.65; color: #374151;
+  }
+  .alert strong { color: #b45309; }
+
+  /* 品質特性雙欄 */
+  .quality-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
+  .q-box { border-radius: 8px; padding: .7rem .85rem; }
+  .q-box.basic    { background: #eff6ff; border: 1px solid #bfdbfe; }
+  .q-box.enhanced { background: #f0fdf4; border: 1px solid #bbf7d0; }
+  .q-box .q-label { font-size: .7rem; font-weight: 700; letter-spacing: .08em; margin-bottom: .3rem; }
+  .q-box.basic    .q-label { color: #1d4ed8; }
+  .q-box.enhanced .q-label { color: #16a34a; }
+  .q-box p { font-size: .8rem; line-height: 1.65; color: #374151; }
+
+  /* 速查表 */
+  .table-wrap { overflow-x: auto; margin-top: .5rem; }
+  table { width: 100%; border-collapse: collapse; font-size: .81rem; }
+  thead tr { background: #1e3a5f; color: white; }
+  thead th { padding: .6rem .85rem; text-align: left; font-weight: 600; white-space: nowrap; }
+  tbody tr:nth-child(even) { background: #f8fafc; }
+  tbody td { padding: .55rem .85rem; border-bottom: 1px solid #e2e8f0; }
+
+  footer { text-align: center; font-size: .72rem; color: #94a3b8; padding: 1rem 0 2rem; }
+
+  @media(max-width:600px) {
+    .header h1 { font-size: 1.2rem; }
+    .quality-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-meta">
+    <div class="tags">
+      <span class="tag">記帳士考題</span>
+      <span class="tag">中級會計學</span>
+      <span class="tag">家教 · 林立雅</span>
+    </div>
+    <span>2026 · 06 · 03</span>
+  </div>
+  <h1>會計學科考題解析 ×10<br><span>固定資產 × 庫藏股 × 現金流 × 存貨損失</span></h1>
+  <div class="header-sub">
+    資本化判斷 ／ 訴訟負債準備 ／ 庫藏股差額處理 ／ OCI股票不重分類 ／ 毛利法推估 ／ 資產減損迴轉 ／ 利息保障倍數
+  </div>
+</div>
+
+<div class="body">
+  <div class="section-label">十大考題重點</div>
+  <div class="grid">
+
+    <!-- 1 固定資產維修 -->
+    <div class="card">
+      <div class="card-num">POINT 01 · 第7題</div>
+      <h2>🔧 固定資產大額維修與資本化</h2>
+      <ul>
+        <li>原成本 420,000；殘值 90,000；耐用 6 年 → 每年折舊 55,000</li>
+        <li>過 3 年後進行大修 120,000，<span class="badge badge-blue">延長壽命3年</span> → 資本化</li>
+        <li>資本化後重新計算折舊（剩餘帳面＋大修成本÷剩餘年限）</li>
+      </ul>
+      <div class="formula">X5年底帳面價值 = 324,500 元</div>
+      <ul>
+        <li>💡 實務：能延長年限就資本化，避免費用一次沖銷拖累損益表</li>
+      </ul>
+    </div>
+
+    <!-- 2 訴訟負債準備 -->
+    <div class="card">
+      <div class="card-num">POINT 02</div>
+      <h2>⚖️ 訴訟負債準備的認列邏輯</h2>
+      <ul>
+        <li>應認列<span class="badge badge-yellow">機率最高</span>的金額，不取中間值</li>
+        <li>機率與金額由<strong>律師</strong>提供評估</li>
+        <li>即使律師評估勝訴機率高，會計師基於<span class="badge badge-red">保守原則</span>，仍可能強制認列部分負債準備</li>
+        <li>📌 實務常見爭議：公司端覺得不合理，但會計師優先考慮財報使用者保護</li>
+      </ul>
+    </div>
+
+    <!-- 3 庫藏股 -->
+    <div class="card">
+      <div class="card-num">POINT 03 · 第9題</div>
+      <h2>📈 庫藏股買賣差額處理</h2>
+      <ul>
+        <li>庫藏股交易<span class="badge badge-red">絕不認列損益</span>（防止公司不本業只炒股）</li>
+        <li>溢價賣出（賺）→ 貸記「資本公積－庫藏股交易」</li>
+        <li>折價賣出（賠）→ 先沖資本公積；<strong>不足部分借記保留盈餘</strong></li>
+      </ul>
+      <div class="formula">
+        賠 9,000 元，資本公積僅 5,000
+        → 沖資本公積 5,000 + 沖保留盈餘 4,000
+      </div>
+    </div>
+
+    <!-- 4 現金流量表 -->
+    <div class="card">
+      <div class="card-num">POINT 04</div>
+      <h2>💵 現金流量表（間接法）調整</h2>
+      <ul>
+        <li><span class="badge badge-red">存貨增加</span> → 資金積壓，減項（－）</li>
+        <li><span class="badge badge-red">應付帳款減少</span> → 付出現金，減項（－）</li>
+        <li><span class="badge badge-green">存貨減少</span> → 資金釋放，加項（＋）</li>
+        <li><span class="badge badge-green">應付帳款增加</span> → 延遲付款，加項（＋）</li>
+        <li>📌 口訣：資產增加減，負債增加加；方向相反記</li>
+      </ul>
+    </div>
+
+    <!-- 5 品質特性 -->
+    <div class="card">
+      <div class="card-num">POINT 05</div>
+      <h2>📋 財務資訊品質特性</h2>
+      <div class="quality-grid" style="margin-bottom:.6rem;">
+        <div class="q-box basic">
+          <div class="q-label">基本品質特性</div>
+          <p><strong>攸關性</strong><br>預測價值、確認價值、重大性</p>
+          <p style="margin-top:.3rem;"><strong>忠實表達</strong><br>完整、中立、免於錯誤</p>
+        </div>
+        <div class="q-box enhanced">
+          <div class="q-label">強化性品質特性</div>
+          <p>可比性<br>可驗證性<br>時效性<br>可了解性</p>
+        </div>
+      </div>
+      <ul>
+        <li>💡 老師比喻：攸關性=講效率；忠實表達=巨細靡遺，兩者難以同時完美達到</li>
+      </ul>
+    </div>
+
+    <!-- 6 公司債折溢價 -->
+    <div class="card">
+      <div class="card-num">POINT 06</div>
+      <h2>📊 公司債折溢價與利息費用</h2>
+      <ul>
+        <li>票面 &gt; 市場 → <span class="badge badge-green">溢價發行</span>，借到更多錢 → 實質利息費用<span class="badge badge-green">減少</span></li>
+        <li>票面 &lt; 市場 → <span class="badge badge-red">折價發行</span>，借到少了錢 → 少拿的=補償投資人 → 利息費用<span class="badge badge-red">增加</span></li>
+        <li>無論折溢價，每期攤銷額均為<span class="badge badge-yellow">遞增</span></li>
+        <li>📌 記憶邏輯：折價少借→費用補上去；溢價多借→費用抵回來</li>
+      </ul>
+    </div>
+
+    <!-- 7 OCI股票 -->
+    <div class="card">
+      <div class="card-num">POINT 07 · 第13題</div>
+      <h2>💹 OCI 股票投資處分</h2>
+      <ul>
+        <li>透過其他綜合損益（OCI）衡量的<strong>股權投資</strong>：評價利益/損失 → 留在OCI</li>
+        <li>出售時：處分損益<span class="badge badge-red">絕不重分類進損益表</span>（不影響本期淨利）</li>
+        <li>差額直接轉入保留盈餘或留在權益項目</li>
+        <li>⚠️ 若是<strong>債券投資（FVOCI）</strong>：處分時需計算損益並重分類進損益表</li>
+      </ul>
+    </div>
+
+    <!-- 8 毛利法 -->
+    <div class="card">
+      <div class="card-num">POINT 08</div>
+      <h2>🔥 毛利法估計火災存貨損失</h2>
+      <ul>
+        <li>① 期初存貨 ＋ 本期進貨 ＝ 可供銷售總額</li>
+        <li>② 推估銷貨成本 ＝ 收入 × 成本率（= 1 − 毛利率）</li>
+        <li>③ 期末存貨估計值 ＝ ① − ②</li>
+        <li>④ 火災損失 ＝ 期末估計值 − 倖存存貨（<span class="badge badge-red">需還原成本價！</span>）</li>
+      </ul>
+      <div class="alert">
+        <strong>⚠️ 陷阱：</strong>倖存存貨通常以「售價」標示（如3萬），必須先 × 成本率還原為成本（2.1萬）後再扣減。實務上用售價回報會被老闆罵！
+      </div>
+    </div>
+
+    <!-- 9 資產減損迴轉 -->
+    <div class="card">
+      <div class="card-num">POINT 09</div>
+      <h2>↩️ 資產減損的迴轉規定</h2>
+      <ul>
+        <li><span class="badge badge-red">商譽減損：絕不可迴轉</span>（無例外）</li>
+        <li>可迴轉：有固定耐用年限、可攤銷的無形資產（如專利權、特許權）</li>
+        <li>迴轉上限：迴轉後帳面價值 ≤ 「若未認列減損，依原條件攤銷至迴轉日的帳面價值」</li>
+        <li>📌 簡言之：只能恢復到「假設當初沒有減損」的金額，不能超過</li>
+      </ul>
+    </div>
+
+    <!-- 10 利息保障倍數 -->
+    <div class="card">
+      <div class="card-num">POINT 10 · 第16題</div>
+      <h2>📐 利息保障倍數</h2>
+      <div class="formula">
+        利息保障倍數 =<br>
+        (稅後淨利 + 利息費用 + 所得稅費用) ÷ 利息費用
+      </div>
+      <ul>
+        <li>本題計算結果：<strong>27.5 倍</strong></li>
+        <li>意義：公司稅前息前利潤可支付利息幾次，倍數越高越安全</li>
+        <li>分子需將利息與稅額加回，還原成「稅前息前淨利（EBIT）」</li>
+        <li>⚠️ 基礎必考題，公式與加回項目不可記錯</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- 速查表 -->
+  <div class="section-label">核心考點速查</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>考題</th><th>核心判斷</th><th>常見陷阱</th><th>記憶口訣</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>大修資本化</td><td>能延長年限 → 資本化</td><td>忘記重算剩餘年折舊</td><td>延壽命才入資產</td></tr>
+        <tr><td>訴訟負債準備</td><td>取機率最高金額</td><td>誤取中間值或平均值</td><td>最高機率，非中間值</td></tr>
+        <tr><td>庫藏股折價賣出</td><td>先沖資本公積，不足沖保留盈餘</td><td>直接認列損失進損益</td><td>股票交易不進損益表</td></tr>
+        <tr><td>現金流間接法</td><td>資產增加（減）；負債增加（加）</td><td>方向搞反</td><td>資＋減、負＋加</td></tr>
+        <tr><td>OCI股票處分</td><td>差額留在權益，不重分類</td><td>當成FVPL處理進損益</td><td>股票OCI永不回損益</td></tr>
+        <tr><td>毛利法</td><td>倖存存貨須換算成本</td><td>直接用售價扣減</td><td>售價 × 成本率 = 成本</td></tr>
+        <tr><td>減損迴轉</td><td>商譽絕不迴轉；有限年限可迴轉</td><td>讓商譽也迴轉</td><td>商譽減損入地獄，無法回頭</td></tr>
+        <tr><td>利息保障倍數</td><td>分子 = 稅後淨利 + 利息 + 稅</td><td>忘記加回所得稅</td><td>淨利加回利與稅</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<footer>林立雅 · 會計考題解析複習 · 2026.06.03 · 由 Claude 自動生成</footer>
+</body>
+</html>
