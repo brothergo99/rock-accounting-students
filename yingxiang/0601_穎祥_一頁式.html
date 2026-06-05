@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7-Eleven 財報解析 × 實體 vs 虛擬通路 — 穎祥 0601</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, "Noto Sans TC", "Microsoft JhengHei", sans-serif; background: #f0f4f8; color: #1e293b; }
+
+  .header {
+    background: linear-gradient(135deg, #7f1d1d 0%, #dc2626 100%);
+    color: white; padding: 2rem 2rem 1.6rem;
+  }
+  .header-meta { display: flex; justify-content: space-between; align-items: center; font-size: .78rem; margin-bottom: .8rem; opacity: .85; }
+  .tags { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .tag { background: rgba(255,255,255,.18); border-radius: 20px; padding: .2rem .7rem; font-size: .72rem; }
+  .header h1 { font-size: 1.6rem; font-weight: 800; line-height: 1.3; margin-bottom: .4rem; }
+  .header h1 span { color: #fde68a; }
+  .header-sub { font-size: .84rem; opacity: .8; line-height: 1.7; }
+
+  .body { max-width: 980px; margin: 0 auto; padding: 1.6rem 1rem 3rem; }
+
+  .section-label {
+    font-size: .72rem; font-weight: 700; color: #dc2626;
+    letter-spacing: .12em; border-left: 3px solid #dc2626;
+    padding-left: .5rem; margin-bottom: 1rem; margin-top: 1.8rem;
+  }
+
+  /* 資產結構長條 */
+  .asset-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: .8rem; }
+  .asset-card { background: white; border-radius: 10px; padding: .95rem 1.05rem; box-shadow: 0 2px 8px rgba(0,0,0,.07); }
+  .asset-card .a-rank { font-size: .68rem; font-weight: 700; letter-spacing: .08em; margin-bottom: .25rem; }
+  .asset-card h3 { font-size: .9rem; font-weight: 700; margin-bottom: .3rem; }
+  .asset-bar-wrap { background: #f1f5f9; border-radius: 4px; height: 8px; margin: .4rem 0 .5rem; overflow: hidden; }
+  .asset-bar { height: 100%; border-radius: 4px; }
+  .asset-card p { font-size: .79rem; color: #475569; line-height: 1.6; }
+
+  /* 通用卡片 */
+  .card { background: white; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,.08); padding: 1.15rem 1.25rem 1.25rem; border-top: 3px solid #dc2626; margin-bottom: 1rem; }
+  .card.blue   { border-top-color: #2563eb; }
+  .card.green  { border-top-color: #16a34a; }
+  .card.orange { border-top-color: #d97706; }
+  .card.purple { border-top-color: #7c3aed; }
+
+  .card h3 { font-size: .97rem; font-weight: 700; margin-bottom: .65rem; }
+  .card ul { padding-left: 1rem; }
+  .card li { font-size: .83rem; line-height: 1.7; color: #374151; margin-bottom: .2rem; }
+
+  .two-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media(max-width:620px) { .two-grid { grid-template-columns: 1fr; } }
+
+  /* 利潤漏斗 */
+  .funnel { margin: .6rem 0; }
+  .funnel-row { display: flex; align-items: center; gap: .6rem; margin-bottom: .35rem; }
+  .funnel-label { font-size: .78rem; color: #374151; min-width: 80px; }
+  .funnel-bar-wrap { flex: 1; background: #f1f5f9; border-radius: 4px; height: 22px; overflow: hidden; }
+  .funnel-bar { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: .5rem; }
+  .funnel-bar span { font-size: .73rem; font-weight: 700; color: white; }
+  .funnel-note { font-size: .75rem; color: #64748b; min-width: 55px; text-align: right; }
+
+  /* momo vs 7-11 比較 */
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media(max-width:600px) { .compare-grid { grid-template-columns: 1fr; } }
+  .compare-card { background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,.08); padding: 1.1rem 1.2rem; }
+  .compare-card.physical { border-top: 3px solid #dc2626; }
+  .compare-card.digital  { border-top: 3px solid #2563eb; }
+  .compare-card .c-tag { font-size: .7rem; font-weight: 700; letter-spacing: .08em; margin-bottom: .25rem; }
+  .compare-card.physical .c-tag { color: #dc2626; }
+  .compare-card.digital  .c-tag { color: #2563eb; }
+  .compare-card h3 { font-size: .95rem; font-weight: 700; margin-bottom: .6rem; }
+  .compare-card ul { padding-left: 1rem; }
+  .compare-card li { font-size: .82rem; line-height: 1.7; color: #374151; margin-bottom: .2rem; }
+
+  /* 台灣大哥大分拆 */
+  .split-row { display: flex; gap: .6rem; margin: .6rem 0; }
+  .split-box { flex: 1; border-radius: 8px; padding: .6rem .8rem; text-align: center; }
+  .split-box .s-label { font-size: .7rem; font-weight: 700; margin-bottom: .2rem; }
+  .split-box .s-rev { font-size: .82rem; color: #374151; margin-bottom: .1rem; }
+  .split-box .s-profit { font-size: 1rem; font-weight: 800; }
+
+  /* 金句 */
+  .quote { background: #fef3c7; border-radius: 10px; padding: 1rem 1.2rem; border-left: 4px solid #f59e0b; margin-top: .8rem; }
+  .quote p { font-size: .88rem; line-height: 1.7; color: #374151; }
+  .quote strong { color: #92400e; font-size: .95rem; }
+
+  .insight { background: #eff6ff; border-radius: 8px; padding: .7rem .9rem; font-size: .83rem; line-height: 1.65; color: #1e3a8a; border-left: 3px solid #3b82f6; margin: .5rem 0; }
+
+  .badge { display: inline-block; border-radius: 4px; padding: .05rem .4rem; font-size: .74rem; font-weight: 700; margin: 0 .1rem; }
+  .badge-red    { background: #fee2e2; color: #b91c1c; }
+  .badge-green  { background: #d1fae5; color: #065f46; }
+  .badge-blue   { background: #dbeafe; color: #1d4ed8; }
+  .badge-yellow { background: #fef3c7; color: #92400e; }
+  .badge-purple { background: #ede9fe; color: #6d28d9; }
+
+  /* 速查表 */
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: .81rem; }
+  thead tr { background: #7f1d1d; color: white; }
+  thead th { padding: .6rem .85rem; text-align: left; font-weight: 600; }
+  tbody tr:nth-child(even) { background: #f8fafc; }
+  tbody td { padding: .55rem .85rem; border-bottom: 1px solid #e2e8f0; }
+
+  footer { text-align: center; font-size: .72rem; color: #94a3b8; padding: 1rem 0 2rem; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-meta">
+    <div class="tags">
+      <span class="tag">財報實戰</span>
+      <span class="tag">通路商業模式</span>
+      <span class="tag">家教 · 穎祥</span>
+    </div>
+    <span>2026 · 06 · 01</span>
+  </div>
+  <h1>統一超商財報解密 ×<br><span>實體通路 vs 電商的利潤本質</span></h1>
+  <div class="header-sub">
+    資產結構分析 ／ 買空賣空商業模式 ／ 寄銷與上架費 ／ momo vs 7-Eleven 毛利對比 ／ 台灣大哥大有面子沒裡子
+  </div>
+</div>
+
+<div class="body">
+
+  <!-- 資產結構 -->
+  <div class="section-label">統一超商資產結構（總資產 ~2,926億）</div>
+
+  <div class="asset-grid">
+    <div class="asset-card" style="border-top:3px solid #dc2626;">
+      <div class="a-rank" style="color:#dc2626;">🥇 第一大資產 · 34%</div>
+      <h3>使用權資產 ~1,000億</h3>
+      <div class="asset-bar-wrap"><div class="asset-bar" style="width:34%;background:#dc2626;"></div></div>
+      <p>全台 6,000+ 門市的租賃價值。租約未來應付租金全部認列 → 最強護城河</p>
+    </div>
+    <div class="asset-card" style="border-top:3px solid #d97706;">
+      <div class="a-rank" style="color:#d97706;">🥈 第二大資產 · 21%</div>
+      <h3>不動產廠房設備 ~614億</h3>
+      <div class="asset-bar-wrap"><div class="asset-bar" style="width:21%;background:#d97706;"></div></div>
+      <p>冷氣、冰箱、店面裝潢等設備。「店面＋裝潢」合計佔總資產 <strong>56%</strong></p>
+    </div>
+    <div class="asset-card" style="border-top:3px solid #16a34a;">
+      <div class="a-rank" style="color:#16a34a;">🥉 第三大資產 · 17%</div>
+      <h3>現金 ~500億</h3>
+      <div class="asset-bar-wrap"><div class="asset-bar" style="width:17%;background:#16a34a;"></div></div>
+      <p>零售業直接收現，顧客不能賒帳 → 現金水位極充裕</p>
+    </div>
+    <div class="asset-card" style="border-top:3px solid #7c3aed;">
+      <div class="a-rank" style="color:#7c3aed;">反直覺 · 僅 9%</div>
+      <h3>存貨 ~267億</h3>
+      <div class="asset-bar-wrap"><div class="asset-bar" style="width:9%;background:#7c3aed;"></div></div>
+      <p>商品看起來滿滿卻只佔9%！原因：周轉極快 ＋ <strong>寄銷模式</strong>（廠商的貨不算統一的存貨）</p>
+    </div>
+  </div>
+
+  <!-- 商業模式 -->
+  <div class="section-label">核心商業模式：買空賣空的資金魔法</div>
+
+  <div class="two-grid">
+    <div class="card green">
+      <h3>🔄 買空賣空運作邏輯</h3>
+      <ul>
+        <li>向廠商進貨談判 <strong>60天</strong> 付款條件</li>
+        <li>60天內商品已全數賣出並<span class="badge badge-green">收到現金</span></li>
+        <li>再拿這筆現金去付廠商貨款</li>
+        <li>結果：不動自己的本金，資金持續流動</li>
+        <li>📌 帳上 9% 存貨 ≈ 9% 應付帳款，完美對應</li>
+      </ul>
+      <div class="insight" style="margin-top:.5rem;">
+        負債81%中，租賃負債36% + 應付帳款9% = 實際財務負債只剩 <strong>~30%多</strong>，結構極健康
+      </div>
+    </div>
+
+    <div class="card blue">
+      <h3>🏪 寄銷模式 × 上架費</h3>
+      <ul>
+        <li>小品牌想進7-Eleven曝光 → 只能接受「寄銷」</li>
+        <li>貨放在貨架上，賣掉才算統一的收入</li>
+        <li>統一<span class="badge badge-blue">不承擔庫存風險</span>，不用先買斷</li>
+        <li>甚至還能向廠商收取<span class="badge badge-yellow">「上架費」</span>（零成本純利潤）</li>
+        <li>這是高毛利率的重要來源之一</li>
+      </ul>
+      <div class="insight" style="margin-top:.5rem;">
+        <strong>通路定價權：</strong>掌握通路就掌握利潤。小品牌沒有談判籌碼，只能配合統一的遊戲規則。
+      </div>
+    </div>
+  </div>
+
+  <!-- 損益漏斗 -->
+  <div class="section-label">損益表：毛利率高但營業利益率低的祕密</div>
+
+  <div class="card">
+    <h3>📉 34% 毛利 → 最後只剩 4% 的利潤漏斗</h3>
+    <div class="funnel">
+      <div class="funnel-row">
+        <div class="funnel-label">營收</div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:100%;background:#1e3a5f;"><span>100%</span></div></div>
+        <div class="funnel-note">消費100元</div>
+      </div>
+      <div class="funnel-row">
+        <div class="funnel-label">毛利</div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:34%;background:#16a34a;"><span>34%</span></div></div>
+        <div class="funnel-note">剩34元</div>
+      </div>
+      <div class="funnel-row">
+        <div class="funnel-label">推銷費用</div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:30%;background:#dc2626;"><span>−30% 消失</span></div></div>
+        <div class="funnel-note">集點/聯名卡</div>
+      </div>
+      <div class="funnel-row">
+        <div class="funnel-label">營業利益</div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:4%;background:#d97706;"><span style="font-size:.65rem;">4%</span></div></div>
+        <div class="funnel-note">實賺4元</div>
+      </div>
+    </div>
+    <ul>
+      <li>34%毛利中間蒸發 → 全部砸在集點、聯名卡、優惠活動等「推銷費用」</li>
+      <li>目的只有一個：刺激顧客<strong>「常來」且「提高客單價」</strong></li>
+    </ul>
+  </div>
+
+  <!-- 實體 vs 電商 -->
+  <div class="section-label">實體通路 vs 虛擬通路（電商）對比</div>
+
+  <div class="compare-grid">
+    <div class="compare-card physical">
+      <div class="c-tag">🏪 實體通路 · 統一超商</div>
+      <h3>高毛利 × 定價權強</h3>
+      <ul>
+        <li>毛利率：<strong style="color:#16a34a;">34%</strong></li>
+        <li>護城河：密集門市 + 寄銷 + 上架費</li>
+        <li>最大資產：使用權資產（租約）</li>
+        <li>消費者不能比價→ 接受溢價</li>
+        <li>統一補強痛點：投資日本LOPIA（鮮食強項）</li>
+      </ul>
+    </div>
+    <div class="compare-card digital">
+      <div class="c-tag">📱 虛擬通路 · momo購物</div>
+      <h3>低毛利 × 物流成本重</h3>
+      <ul>
+        <li>毛利率：<strong style="color:#dc2626;">僅13.2%</strong>（差7-11近3倍）</li>
+        <li>宿命：消費者一鍵比價 → 無定價權</li>
+        <li>競爭壓力：Coupang（酷澎）大舉入侵</li>
+        <li>物流成本高 → 侵蝕有限毛利</li>
+        <li>母公司法說會強調「恢復成長」= 近期衰退</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 台灣大哥大 -->
+  <div class="section-label">台灣大哥大：有面子沒裡子</div>
+
+  <div class="card orange">
+    <h3>📊 營收佔比 vs 獲利佔比的矛盾</h3>
+    <div class="split-row">
+      <div class="split-box" style="background:#fee2e2;">
+        <div class="s-label" style="color:#b91c1c;">零售（momo）</div>
+        <div class="s-rev">營收佔比 53%（有面子）</div>
+        <div class="s-profit" style="color:#dc2626;">EBITDA &lt;10%</div>
+      </div>
+      <div class="split-box" style="background:#d1fae5;">
+        <div class="s-label" style="color:#065f46;">電信（本業）</div>
+        <div class="s-rev">營收佔比 46%（沒面子）</div>
+        <div class="s-profit" style="color:#16a34a;">EBITDA 83% ✅</div>
+      </div>
+    </div>
+    <div class="insight" style="margin-top:.5rem;">
+      <strong>結論：</strong>電商零售為集團衝高營收數字（門面），但真正的「現金母牛」依然是電信本業。這是電商毛利宿命的最佳佐證。
+    </div>
+  </div>
+
+  <!-- 速查表 -->
+  <div class="section-label">核心財報指標速查</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>指標</th><th>統一超商</th><th>momo / 電商</th><th>背後意義</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>毛利率</td><td><strong style="color:#16a34a;">~34%</strong></td><td><strong style="color:#dc2626;">~13%</strong></td><td>通路定價權強弱的直接體現</td></tr>
+        <tr><td>營業利益率</td><td>~4%</td><td>更低</td><td>推銷/物流費用侵蝕毛利</td></tr>
+        <tr><td>存貨佔比</td><td>僅9%（反直覺）</td><td>較高</td><td>寄銷+高周轉率壓低存貨</td></tr>
+        <tr><td>現金佔比</td><td>17%（~500億）</td><td>—</td><td>零售業直接收現，不賒帳</td></tr>
+        <tr><td>負債比</td><td>表面81%，實際~30%多</td><td>—</td><td>租賃負債是帳面膨脹主因</td></tr>
+        <tr><td>最大資產</td><td>使用權資產（租約）</td><td>倉儲物流</td><td>實體通路命脈在「店面位置」</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 金句 -->
+  <div class="quote" style="margin-top:1.2rem;">
+    <p>💬 <strong>「掌握通路就掌握利潤，掌握定價權就掌握商業命脈。」</strong></p>
+    <p style="margin-top:.5rem;font-size:.83rem;color:#374151;">
+      看財報時，不只看數字大小——要看「比例的變化」與「數字之間的矛盾」。
+      有自己的想法比答對更重要；最可怕的是別人問你意見時，你說「沒有想法」。
+    </p>
+  </div>
+
+</div>
+
+<footer>穎祥 · 財報分析課後複習 · 2026.06.01 · 由 Claude 自動生成</footer>
+</body>
+</html>
