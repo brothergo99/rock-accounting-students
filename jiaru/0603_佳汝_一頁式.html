@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>現金流量表：損益表的照妖鏡 — 佳汝 0603</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, "Noto Sans TC", "Microsoft JhengHei", sans-serif; background: #f0f4f8; color: #1e293b; }
+
+  .header {
+    background: linear-gradient(135deg, #0c1a3a 0%, #1e40af 100%);
+    color: white; padding: 2rem 2rem 1.6rem;
+  }
+  .header-meta { display: flex; justify-content: space-between; align-items: center; font-size: .78rem; margin-bottom: .8rem; opacity: .85; }
+  .tags { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .tag { background: rgba(255,255,255,.18); border-radius: 20px; padding: .2rem .7rem; font-size: .72rem; }
+  .header h1 { font-size: 1.6rem; font-weight: 800; line-height: 1.3; margin-bottom: .4rem; }
+  .header h1 span { color: #fbbf24; }
+  .header-sub { font-size: .84rem; opacity: .8; line-height: 1.7; }
+
+  .body { max-width: 980px; margin: 0 auto; padding: 1.6rem 1rem 3rem; }
+
+  .section-label {
+    font-size: .72rem; font-weight: 700; color: #1e40af;
+    letter-spacing: .12em; border-left: 3px solid #1e40af;
+    padding-left: .5rem; margin-bottom: 1rem; margin-top: 1.8rem;
+  }
+
+  /* 核心概念條 */
+  .concept {
+    background: white; border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.08);
+    padding: 1.1rem 1.4rem; border-left: 4px solid #1e40af;
+    margin-bottom: .8rem;
+  }
+  .concept h2 { font-size: 1rem; font-weight: 700; margin-bottom: .45rem; }
+  .concept p  { font-size: .84rem; line-height: 1.7; color: #374151; }
+
+  /* 矛盾點雙欄 */
+  .contrast-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media(max-width:620px) { .contrast-grid { grid-template-columns: 1fr; } }
+
+  .contrast-card {
+    background: white; border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.08);
+    padding: 1.1rem 1.2rem;
+  }
+  .contrast-card.danger  { border-top: 3px solid #dc2626; }
+  .contrast-card.hidden  { border-top: 3px solid #16a34a; }
+
+  .contrast-card .c-label { font-size: .7rem; font-weight: 700; letter-spacing: .08em; margin-bottom: .3rem; }
+  .contrast-card.danger .c-label { color: #dc2626; }
+  .contrast-card.hidden .c-label { color: #16a34a; }
+  .contrast-card h3 { font-size: .97rem; font-weight: 700; margin-bottom: .65rem; }
+  .contrast-card ul { padding-left: 1rem; }
+  .contrast-card li { font-size: .83rem; line-height: 1.7; color: #374151; margin-bottom: .2rem; }
+
+  /* 案例卡片 */
+  .case-card {
+    background: white; border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.09);
+    padding: 1.15rem 1.25rem 1.25rem;
+    margin-bottom: 1rem; border-top: 3px solid #7c3aed;
+  }
+  .case-card.mos { border-top-color: #d97706; }
+  .case-card .case-tag { font-size: .68rem; font-weight: 700; letter-spacing: .1em; color: #64748b; margin-bottom: .2rem; }
+  .case-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: .7rem; }
+
+  .num-row {
+    display: flex; gap: .6rem; flex-wrap: wrap; margin-bottom: .7rem;
+  }
+  .num-box {
+    flex: 1; min-width: 110px; background: #f8fafc;
+    border-radius: 8px; padding: .5rem .75rem;
+    border: 1px solid #e2e8f0;
+  }
+  .num-box .label { font-size: .68rem; color: #64748b; margin-bottom: .1rem; }
+  .num-box .val { font-size: .92rem; font-weight: 700; }
+  .num-box .val.bad  { color: #dc2626; }
+  .num-box .val.good { color: #16a34a; }
+  .num-box .val.warn { color: #d97706; }
+
+  .insight {
+    background: #eff6ff; border-radius: 8px;
+    padding: .7rem .9rem; font-size: .83rem;
+    line-height: 1.65; color: #1e3a8a;
+    border-left: 3px solid #3b82f6; margin-top: .5rem;
+  }
+  .insight strong { color: #1e3a8a; }
+
+  /* 摩斯流程 */
+  .mos-steps { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: .6rem; margin: .7rem 0; }
+  .mos-step { background: #fffbeb; border-radius: 8px; padding: .65rem .8rem; border: 1px solid #fde68a; }
+  .mos-step .s-num { font-size: .65rem; font-weight: 700; color: #d97706; margin-bottom: .15rem; }
+  .mos-step p { font-size: .79rem; line-height: 1.55; color: #374151; }
+
+  /* 心法 */
+  .mindset-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: .8rem; }
+  .mindset-card { background: white; border-radius: 10px; padding: 1rem 1.1rem; box-shadow: 0 2px 8px rgba(0,0,0,.07); border-bottom: 3px solid #1e40af; }
+  .mindset-card .icon { font-size: 1.4rem; margin-bottom: .35rem; }
+  .mindset-card h3 { font-size: .88rem; font-weight: 700; margin-bottom: .3rem; }
+  .mindset-card p  { font-size: .8rem; color: #475569; line-height: 1.6; }
+
+  .badge { display: inline-block; border-radius: 4px; padding: .05rem .4rem; font-size: .74rem; font-weight: 700; margin: 0 .1rem; }
+  .badge-red    { background: #fee2e2; color: #b91c1c; }
+  .badge-green  { background: #d1fae5; color: #065f46; }
+  .badge-yellow { background: #fef3c7; color: #92400e; }
+  .badge-blue   { background: #dbeafe; color: #1d4ed8; }
+  .badge-purple { background: #ede9fe; color: #6d28d9; }
+
+  .alert { background: #fef2f2; border: 1px solid #fecaca; border-left: 4px solid #dc2626; border-radius: 8px; padding: .8rem 1rem; font-size: .82rem; line-height: 1.65; color: #374151; margin-top: .7rem; }
+  .alert strong { color: #b91c1c; }
+
+  footer { text-align: center; font-size: .72rem; color: #94a3b8; padding: 1rem 0 2rem; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-meta">
+    <div class="tags">
+      <span class="tag">財務分析</span>
+      <span class="tag">現金流量表</span>
+      <span class="tag">家教 · 佳汝</span>
+    </div>
+    <span>2026 · 06 · 03</span>
+  </div>
+  <h1>現金流量表：<span>損益表的照妖鏡</span></h1>
+  <div class="header-sub">
+    帳面賺錢≠真的賺 ／ 帳面虧損≠真的慘 ／ 新星網 × 南亞科 × 摩斯漢堡 實戰破解
+  </div>
+</div>
+
+<div class="body">
+
+  <!-- 核心觀念 -->
+  <div class="section-label">核心觀念</div>
+
+  <div class="concept">
+    <h2>💧 現流表 = 大水池（營業活動現金流）</h2>
+    <p>
+      企業透過「增值循環」將錢流進水池。水池滿了，多餘的水可以拿去投資擴大經營，或融資、發股利給股東。
+      財務分析精髓在於找<strong>「矛盾點」——帳面損益與實際現金流的落差</strong>。
+      看到損益表顯示某個數字，第一步反問：現金流量表說什麼？
+    </p>
+  </div>
+
+  <!-- 兩大矛盾點 -->
+  <div class="section-label">兩大矛盾點</div>
+  <div class="contrast-grid">
+
+    <div class="contrast-card danger">
+      <div class="c-label">⚠️ 危險警訊</div>
+      <h3>帳面賺錢，但現金沒回來</h3>
+      <ul>
+        <li>損益表：獲利 ✅</li>
+        <li>營業現金流：<span class="badge badge-red">負數</span> ❌</li>
+        <li>常見原因：應收帳款未收回、存貨積壓過多</li>
+        <li>代表「賺的錢卡在帳上」，流動性極差</li>
+      </ul>
+      <div style="background:#fee2e2;border-radius:8px;padding:.65rem .8rem;margin-top:.6rem;font-size:.81rem;color:#7f1d1d;line-height:1.6;">
+        <strong>案例：新星網</strong><br>
+        帳面賺 9,000萬，營業現金流卻 −1億<br>
+        一來一往現金流失 <strong>2.5億</strong><br>
+        原因：存貨大增 + 應付帳款已付清
+      </div>
+    </div>
+
+    <div class="contrast-card hidden">
+      <div class="c-label">💎 垃圾堆裡的寶物</div>
+      <h3>帳面虧損，但現金有回來</h3>
+      <ul>
+        <li>損益表：稅前淨損 ❌</li>
+        <li>營業現金流：<span class="badge badge-green">正數</span> ✅</li>
+        <li>關鍵原因：<strong>折舊費用龐大</strong>（沉沒成本攤銷）</li>
+        <li>折舊是過去已付的錢，帳面費用但不影響現金流</li>
+      </ul>
+      <div style="background:#d1fae5;border-radius:8px;padding:.65rem .8rem;margin-top:.6rem;font-size:.81rem;color:#064e3b;line-height:1.6;">
+        <strong>南亞科：</strong>虧損 55億，現金流 +30億<br>
+        <strong>群創：</strong>虧損 163億，現金流 +95億<br>
+        廠設備都在 → 需求回溫時 <span class="badge badge-green">獲利瞬間爆發</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 折舊觀念 -->
+  <div class="concept" style="border-left-color:#7c3aed;margin-top:.8rem;">
+    <h2>📱 折舊不影響現金流——買手機比喻</h2>
+    <p>
+      買手機當下付清 30,000 元（現金已流出）。之後每年折舊 10,000 元只是「帳面攤銷」，不再動到現金。
+      只要公司當前毛利能涵蓋日常人事、材料開銷，<strong>營業現金流就是正的，公司就能自給自足</strong>。
+      折舊高的重資產公司（半導體、鋼鐵、連鎖餐飲）特別容易出現「帳面虧損但現金充足」的情況。
+    </p>
+  </div>
+
+  <!-- 摩斯案例 -->
+  <div class="section-label">實戰深度破解：摩斯漢堡（1259）「能打裝不能打」</div>
+
+  <div class="case-card mos">
+    <div class="case-tag">CASE · 安心 1259 摩斯漢堡</div>
+    <h3>🍔 媒體說慘，財報說富</h3>
+
+    <div class="num-row">
+      <div class="num-box"><div class="label">年營收</div><div class="val warn">約 60億</div></div>
+      <div class="num-box"><div class="label">帳面淨損</div><div class="val bad">−1,300萬</div></div>
+      <div class="num-box"><div class="label">營業現金流</div><div class="val good">近 +8億 ✅</div></div>
+      <div class="num-box"><div class="label">年折舊攤銷</div><div class="val warn">高達 7億</div></div>
+    </div>
+
+    <div class="insight">
+      <strong>媒體報導：</strong>「上市以來首次虧損，現點現做拖慢出餐、定價策略迷航…」<br>
+      <strong>財報真相：</strong>現金流高達 8億，一間現金如此充沛的公司，絕不可能「經營不善」。
+    </div>
+
+    <div style="margin-top:.9rem;font-size:.82rem;font-weight:700;color:#92400e;margin-bottom:.4rem;">🔍 隱藏獲利的貓膩：加速折舊策略</div>
+    <div class="mos-steps">
+      <div class="mos-step">
+        <div class="s-num">STEP 1 查固定資產表</div>
+        <p>租賃改良物（店面裝潢）期初 2.3億，當年攤銷 1.25億</p>
+      </div>
+      <div class="mos-step">
+        <div class="s-num">STEP 2 算折舊年限</div>
+        <p>採用稅法允許最低年限「<strong>2年</strong>」加速折舊完畢</p>
+      </div>
+      <div class="mos-step">
+        <div class="s-num">STEP 3 理解動機</div>
+        <p>店面不可能每2年重裝，但帳面可以2年折完</p>
+      </div>
+      <div class="mos-step">
+        <div class="s-num">STEP 4 策略目的</div>
+        <p>刻意做到損益兩平或小虧 → 節稅 + 不發股利留住現金</p>
+      </div>
+    </div>
+
+    <div class="insight" style="background:#fffbeb;border-left-color:#f59e0b;color:#92400e;margin-top:.5rem;">
+      <strong>大股東邏輯（東元集團）：</strong>母公司不缺錢 → 不需要摩斯顯示高獲利來發股利 → 現金留在摩斯自己口袋。
+      此外，東元研發的點餐機等設備可賣給摩斯，透過關聯交易提列高額折舊，將獲利移轉至母公司。
+    </div>
+  </div>
+
+  <!-- 移轉訂價補充 -->
+  <div class="concept" style="border-left-color:#059669;">
+    <h2>🌐 移轉訂價 vs 國內集團操作</h2>
+    <p>
+      移轉訂價（Transfer Pricing）主要防堵<strong>跨國企業</strong>將利潤轉移到低稅率國家（稅基侵蝕）。
+      東元與摩斯都在台灣 → 台灣國稅局總體稅收不受影響 → 只要提交相關報告，通常就能過關。
+      <span class="badge badge-yellow">重點：同一稅務管轄區內的集團操作，監管寬鬆許多</span>
+    </p>
+  </div>
+
+  <!-- 實戰心法 -->
+  <div class="section-label">財報分析實戰心法</div>
+  <div class="mindset-grid">
+    <div class="mindset-card">
+      <div class="icon">🔦</div>
+      <h3>第一步查現金流</h3>
+      <p>看到財經新聞說某公司慘，先查「營業活動現金流」是正是負，再判斷是否可信。</p>
+    </div>
+    <div class="mindset-card">
+      <div class="icon">🔍</div>
+      <h3>找損益與現金的矛盾</h3>
+      <p>賺錢但現金流負 → 危險；虧損但現金流正 → 可能是折舊策略，未必是壞事。</p>
+    </div>
+    <div class="mindset-card" style="border-bottom-color:#16a34a;">
+      <div class="icon">⚙️</div>
+      <h3>看折舊年限</h3>
+      <p>固定資產變動表藏有玄機。折舊年限選最短 → 費用衝前面 → 刻意壓低獲利。</p>
+    </div>
+    <div class="mindset-card" style="border-bottom-color:#dc2626;">
+      <div class="icon">📰</div>
+      <h3>識破財經假新聞</h3>
+      <p>媒體用「現象解釋現象」，背後真相靠財報數字說話。現金流不負，就不要信虧損危機論。</p>
+    </div>
+  </div>
+
+  <div class="alert" style="margin-top:1rem;">
+    <strong>⚠️ 新星網警訊 vs 摩斯安心 對比記憶：</strong><br>
+    新星網：帳賺 + 現流負 → <strong>真的有問題</strong>，錢收不回來<br>
+    摩斯漢堡：帳虧 + 現流正 → <strong>沒問題</strong>，只是加速折舊節稅策略
+  </div>
+
+</div>
+
+<footer>佳汝 · 財報分析課後複習 · 2026.06.03 · 由 Claude 自動生成</footer>
+</body>
+</html>
