@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>現金流量表編製全解析 — 柏蓁 0606</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, "Noto Sans TC", "Microsoft JhengHei", sans-serif; background: #f0f4f8; color: #1e293b; }
+
+  .header {
+    background: linear-gradient(135deg, #064e3b 0%, #059669 100%);
+    color: white; padding: 2rem 2rem 1.6rem;
+  }
+  .header-meta { display: flex; justify-content: space-between; align-items: center; font-size: .78rem; margin-bottom: .8rem; opacity: .85; }
+  .tags { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .tag { background: rgba(255,255,255,.18); border-radius: 20px; padding: .2rem .7rem; font-size: .72rem; }
+  .header h1 { font-size: 1.6rem; font-weight: 800; line-height: 1.3; margin-bottom: .4rem; }
+  .header h1 span { color: #fde68a; }
+  .header-sub { font-size: .84rem; opacity: .8; line-height: 1.7; }
+
+  .body { max-width: 980px; margin: 0 auto; padding: 1.6rem 1rem 3rem; }
+
+  .section-label {
+    font-size: .72rem; font-weight: 700; color: #059669;
+    letter-spacing: .12em; border-left: 3px solid #059669;
+    padding-left: .5rem; margin-bottom: 1rem; margin-top: 1.8rem;
+  }
+
+  /* 三大活動 */
+  .three-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: .8rem; }
+  @media(max-width:640px) { .three-grid { grid-template-columns: 1fr; } }
+
+  .act-card { background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,.08); padding: 1rem 1.1rem; }
+  .act-card.op { border-top: 3px solid #059669; }
+  .act-card.inv { border-top: 3px solid #2563eb; }
+  .act-card.fin { border-top: 3px solid #7c3aed; }
+  .act-card .a-tag { font-size: .68rem; font-weight: 700; letter-spacing: .08em; margin-bottom: .25rem; }
+  .act-card.op  .a-tag { color: #059669; }
+  .act-card.inv .a-tag { color: #2563eb; }
+  .act-card.fin .a-tag { color: #7c3aed; }
+  .act-card h3 { font-size: .93rem; font-weight: 700; margin-bottom: .5rem; }
+  .act-card ul { padding-left: 1rem; }
+  .act-card li { font-size: .81rem; line-height: 1.7; color: #374151; }
+  .act-card .bs-note { margin-top: .5rem; font-size: .76rem; border-radius: 6px; padding: .35rem .6rem; font-weight: 600; }
+  .act-card.op  .bs-note { background: #d1fae5; color: #065f46; }
+  .act-card.inv .bs-note { background: #dbeafe; color: #1d4ed8; }
+  .act-card.fin .bs-note { background: #ede9fe; color: #6d28d9; }
+
+  /* 例外考點 */
+  .exception-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: .7rem; }
+  .exc-card { background: white; border-radius: 10px; padding: .85rem 1rem; box-shadow: 0 2px 8px rgba(0,0,0,.07); text-align: center; }
+  .exc-card .e-icon { font-size: 1.3rem; margin-bottom: .25rem; }
+  .exc-card h4 { font-size: .86rem; font-weight: 700; margin-bottom: .2rem; }
+  .exc-card .e-class { font-size: .8rem; border-radius: 12px; padding: .15rem .5rem; display: inline-block; font-weight: 600; margin-top: .1rem; }
+
+  /* 借貸基礎表 */
+  .debit-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); gap: .6rem; }
+  .debit-card { background: white; border-radius: 8px; padding: .7rem .9rem; box-shadow: 0 2px 6px rgba(0,0,0,.07); display: flex; justify-content: space-between; align-items: center; }
+  .debit-card .d-name { font-size: .83rem; font-weight: 600; }
+  .debit-card .d-dir { font-size: .78rem; border-radius: 4px; padding: .1rem .45rem; font-weight: 700; }
+  .dr { background: #fee2e2; color: #b91c1c; }
+  .cr { background: #d1fae5; color: #065f46; }
+
+  /* 間接法步驟 */
+  .step-list { display: flex; flex-direction: column; gap: .7rem; }
+  .step-row { display: flex; gap: .8rem; align-items: flex-start; }
+  .step-dot { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .8rem; font-weight: 700; color: white; flex-shrink: 0; }
+  .step-dot.s1 { background: #059669; }
+  .step-dot.s2 { background: #2563eb; }
+  .step-dot.s3 { background: #16a34a; }
+  .step-dot.s4 { background: #dc2626; }
+  .step-body { background: white; border-radius: 10px; padding: .8rem 1rem; box-shadow: 0 2px 8px rgba(0,0,0,.07); flex: 1; }
+  .step-body h4 { font-size: .88rem; font-weight: 700; margin-bottom: .4rem; }
+  .step-body ul { padding-left: 1rem; }
+  .step-body li { font-size: .81rem; line-height: 1.7; color: #374151; margin-bottom: .15rem; }
+
+  /* 例題區 */
+  .example-row { display: flex; gap: .6rem; flex-wrap: wrap; margin: .5rem 0; }
+  .ex-item { background: #f8fafc; border-radius: 8px; padding: .5rem .8rem; font-size: .8rem; flex: 1; min-width: 180px; border: 1px solid #e2e8f0; line-height: 1.65; }
+  .ex-item .ex-q { color: #374151; margin-bottom: .1rem; }
+  .ex-item .ex-a { font-weight: 700; color: #059669; }
+
+  /* 直接法配對 */
+  .pair-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+  @media(max-width:560px) { .pair-grid { grid-template-columns: 1fr; } }
+  .pair-card { background: white; border-radius: 10px; padding: .9rem 1rem; box-shadow: 0 2px 8px rgba(0,0,0,.07); border-left: 3px solid #059669; }
+  .pair-card h4 { font-size: .86rem; font-weight: 700; margin-bottom: .4rem; }
+  .pair-card p { font-size: .8rem; line-height: 1.65; color: #374151; }
+  .arrow-box { background: #ecfdf5; border-radius: 6px; padding: .35rem .65rem; font-size: .78rem; font-weight: 700; color: #065f46; margin-top: .4rem; }
+
+  .insight { background: #ecfdf5; border-radius: 8px; padding: .7rem .9rem; font-size: .83rem; line-height: 1.65; color: #064e3b; border-left: 3px solid #059669; margin: .5rem 0; }
+  .alert { background: #fef3c7; border: 1px solid #fde68a; border-left: 4px solid #f59e0b; border-radius: 8px; padding: .8rem 1rem; font-size: .82rem; line-height: 1.65; color: #374151; margin: .6rem 0; }
+  .alert strong { color: #92400e; }
+
+  .badge { display: inline-block; border-radius: 4px; padding: .05rem .4rem; font-size: .74rem; font-weight: 700; margin: 0 .1rem; }
+  .badge-red    { background: #fee2e2; color: #b91c1c; }
+  .badge-green  { background: #d1fae5; color: #065f46; }
+  .badge-blue   { background: #dbeafe; color: #1d4ed8; }
+  .badge-yellow { background: #fef3c7; color: #92400e; }
+  .badge-purple { background: #ede9fe; color: #6d28d9; }
+
+  footer { text-align: center; font-size: .72rem; color: #94a3b8; padding: 1rem 0 2rem; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-meta">
+    <div class="tags">
+      <span class="tag">現金流量表</span>
+      <span class="tag">第14章</span>
+      <span class="tag">家教 · 柏蓁</span>
+    </div>
+    <span>2026 · 06 · 06</span>
+  </div>
+  <h1>現金流量表：<span>考試導向完全解題攻略</span></h1>
+  <div class="header-sub">
+    三大活動分類 ／ 例外必背考點 ／ 間接法四步驟 ／ 直接法配對技巧 ／ 借貸方向基本盤
+  </div>
+</div>
+
+<div class="body">
+
+  <!-- 核心概念 -->
+  <div class="section-label">核心概念：可以「對答案」的報表</div>
+  <div class="insight">
+    現金流量表 = 記錄特定期間「現金變化過程」。期初現金（資產負債表）→ 期末現金（資產負債表），兩者差額 = 三大活動現金流加總。<br>
+    編製需要：<strong>① 損益表</strong> ＋ <strong>② 兩年比較式資產負債表</strong>
+  </div>
+
+  <!-- 三大活動 -->
+  <div class="section-label">三大活動分類與對應報表位置</div>
+  <div class="three-grid">
+    <div class="act-card op">
+      <div class="a-tag">① 營業活動</div>
+      <h3>🏪 日常賺錢的現金</h3>
+      <ul>
+        <li>收付貨款、付薪資</li>
+        <li>付給政府（稅）</li>
+        <li>收利息 ✅、付利息 ✅</li>
+        <li>收股利 ✅（例外！）</li>
+      </ul>
+      <div class="bs-note">對應：流動資產 + 流動負債</div>
+    </div>
+    <div class="act-card inv">
+      <div class="a-tag">② 投資活動</div>
+      <h3>🏭 買賣長期資產的現金</h3>
+      <ul>
+        <li>購買／出售固定資產</li>
+        <li>購買其他公司股票、債券</li>
+        <li>借錢給其他公司</li>
+        <li>買入→現金流出；賣出→流入</li>
+      </ul>
+      <div class="bs-note">對應：非流動資產</div>
+    </div>
+    <div class="act-card fin">
+      <div class="a-tag">③ 籌資（融資）活動</div>
+      <h3>💰 取得長期資金的現金</h3>
+      <ul>
+        <li>向銀行借款／還款</li>
+        <li>發行債券、普通股</li>
+        <li>付股利給股東 ✅（例外！）</li>
+        <li>贖回債券→現金流出</li>
+      </ul>
+      <div class="bs-note">對應：非流動負債 + 股東權益</div>
+    </div>
+  </div>
+
+  <!-- 例外考點 -->
+  <div class="section-label">⚠️ 必背例外考點（最常出選擇題）</div>
+  <div class="exception-grid">
+    <div class="exc-card">
+      <div class="e-icon">💵</div>
+      <h4>收利息</h4>
+      <p style="font-size:.75rem;color:#64748b;">直覺是投資，但...</p>
+      <span class="e-class" style="background:#d1fae5;color:#065f46;">營業活動 ✅</span>
+    </div>
+    <div class="exc-card">
+      <div class="e-icon">📈</div>
+      <h4>收股利</h4>
+      <p style="font-size:.75rem;color:#64748b;">直覺是投資，但...</p>
+      <span class="e-class" style="background:#d1fae5;color:#065f46;">營業活動 ✅</span>
+    </div>
+    <div class="exc-card">
+      <div class="e-icon">🏦</div>
+      <h4>付利息</h4>
+      <p style="font-size:.75rem;color:#64748b;">直覺是籌資，但...</p>
+      <span class="e-class" style="background:#d1fae5;color:#065f46;">營業活動 ✅</span>
+    </div>
+    <div class="exc-card">
+      <div class="e-icon">💸</div>
+      <h4>付股利</h4>
+      <p style="font-size:.75rem;color:#64748b;">發給股東的現金股利</p>
+      <span class="e-class" style="background:#ede9fe;color:#6d28d9;">籌資活動 ✅</span>
+    </div>
+    <div class="exc-card">
+      <div class="e-icon">📝</div>
+      <h4>重大非現金活動</h4>
+      <p style="font-size:.75rem;color:#64748b;">如債券轉股票、舉債購資產</p>
+      <span class="e-class" style="background:#fef3c7;color:#92400e;">附註揭露（不入本文）</span>
+    </div>
+  </div>
+
+  <!-- 借貸基礎 -->
+  <div class="section-label">借貸方向基本盤（必須極熟！）</div>
+  <div class="debit-grid">
+    <div class="debit-card"><span class="d-name">收入增加</span><span class="d-dir cr">貸方</span></div>
+    <div class="debit-card"><span class="d-name">費用增加</span><span class="d-dir dr">借方</span></div>
+    <div class="debit-card"><span class="d-name">資產增加</span><span class="d-dir dr">借方</span></div>
+    <div class="debit-card"><span class="d-name">資產減少</span><span class="d-dir cr">貸方</span></div>
+    <div class="debit-card"><span class="d-name">負債增加</span><span class="d-dir cr">貸方</span></div>
+    <div class="debit-card"><span class="d-name">負債減少</span><span class="d-dir dr">借方</span></div>
+    <div class="debit-card"><span class="d-name">淨利</span><span class="d-dir cr">貸方 ★</span></div>
+  </div>
+  <div class="alert" style="margin-top:.8rem;">
+    <strong>核心口訣：</strong>借貸方向判斷對了，間接法與直接法都靠「<strong>同向相加、反向相減</strong>」一招破解。
+  </div>
+
+  <!-- 間接法 -->
+  <div class="section-label">間接法（Indirect Method）— 四步驟解題心法</div>
+  <div class="step-list">
+
+    <div class="step-row">
+      <div class="step-dot s1">1</div>
+      <div class="step-body">
+        <h4>找「帶頭大哥」— 稅前淨利（貸方）</h4>
+        <ul>
+          <li>從損益表找到稅前淨利，記下來</li>
+          <li>淨利 = 貸方，作為後續所有科目的「比較基準」</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-dot s2">2</div>
+      <div class="step-body">
+        <h4>🟦 流動資產 & 流動負債調整（送分題）</h4>
+        <ul>
+          <li>找出所有流動資產、流動負債的期末 − 期初增減</li>
+          <li>判斷增減的借貸方向，與淨利（貸方）比較</li>
+        </ul>
+        <div class="example-row" style="margin-top:.5rem;">
+          <div class="ex-item">
+            <div class="ex-q">應收帳款減少</div>
+            <div style="font-size:.75rem;color:#64748b;">資產減少 = 貸方</div>
+            <div class="ex-a">與淨利同向 → ＋加</div>
+          </div>
+          <div class="ex-item">
+            <div class="ex-q">存貨增加</div>
+            <div style="font-size:.75rem;color:#64748b;">資產增加 = 借方</div>
+            <div class="ex-a" style="color:#dc2626;">與淨利反向 → −減</div>
+          </div>
+          <div class="ex-item">
+            <div class="ex-q">應付帳款增加</div>
+            <div style="font-size:.75rem;color:#64748b;">負債增加 = 貸方</div>
+            <div class="ex-a">與淨利同向 → ＋加</div>
+          </div>
+          <div class="ex-item">
+            <div class="ex-q">預付租金增加</div>
+            <div style="font-size:.75rem;color:#64748b;">資產增加 = 借方</div>
+            <div class="ex-a" style="color:#dc2626;">與淨利反向 → −減</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-dot s3">3</div>
+      <div class="step-body">
+        <h4>🟩 非現金費用 & 損益調整（記憶題）</h4>
+        <ul>
+          <li><strong>折舊費用</strong>：沒有現金流出，但已扣減淨利 → <span class="badge badge-green">一定加回</span>（無例外）</li>
+          <li>處分固定資產<strong>損失</strong>（無現金）→ <span class="badge badge-green">加回</span></li>
+          <li>處分固定資產<strong>利益</strong>（無現金）→ <span class="badge badge-red">減項</span></li>
+        </ul>
+        <div class="insight" style="margin-top:.4rem;">
+          折舊比喻：買手機已付清，後續每年帳面攤銷不再動現金。帳扣了，要加回來！
+        </div>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-dot s4">4</div>
+      <div class="step-body">
+        <h4>🔴 利息與所得稅的獨立處理（留最後）</h4>
+        <ul>
+          <li>帳面利息費用 ≠ 實際支付利息</li>
+          <li>處理邏輯：先將損益表利息費用加回，最後再扣除「實際支付」的利息金額</li>
+          <li>建議：此步驟最繁瑣，先做完1~3再回來處理</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 直接法 -->
+  <div class="section-label">直接法（Direct Method）— 配對技巧</div>
+  <div class="alert">
+    <strong>直接法關鍵：</strong>損益表科目要找到對應的流動資產或流動負債「配對」，再套「同向相加、反向相減」。IFRS上市公司已改採間接法，但考試必考！
+  </div>
+  <div class="pair-grid" style="margin-top:.7rem;">
+    <div class="pair-card">
+      <h4>💰 因銷貨而收到的現金</h4>
+      <p>
+        損益表：<strong>銷貨收入</strong>（貸方）<br>
+        配對：資產負債表「<strong>應收帳款</strong>」<br>
+        若應收帳款減少 = 貸方 → 同向
+      </p>
+      <div class="arrow-box">銷貨收入 ＋ 應收帳款減少 = 實收現金</div>
+    </div>
+    <div class="pair-card">
+      <h4>🏢 支付的租金現金</h4>
+      <p>
+        損益表：<strong>租金費用</strong>（借方）<br>
+        配對：資產負債表「<strong>預付租金</strong>」<br>
+        若預付租金增加 = 借方 → 同向
+      </p>
+      <div class="arrow-box">租金費用 ＋ 預付租金增加 = 實付現金</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>柏蓁 · 現金流量表解題攻略 · 2026.06.06 · 由 Claude 自動生成</footer>
+</body>
+</html>
