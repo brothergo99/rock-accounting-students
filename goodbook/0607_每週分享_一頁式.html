@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>混合商品定價與儀表板思維 — 每週分享 0607</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, "Noto Sans TC", "Microsoft JhengHei", sans-serif; background: #f0f4f8; color: #1e293b; }
+
+  .header {
+    background: linear-gradient(135deg, #1c1917 0%, #b45309 100%);
+    color: white; padding: 2rem 2rem 1.6rem;
+  }
+  .header-meta { display: flex; justify-content: space-between; align-items: center; font-size: .78rem; margin-bottom: .8rem; opacity: .85; }
+  .tags { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .tag { background: rgba(255,255,255,.18); border-radius: 20px; padding: .2rem .7rem; font-size: .72rem; }
+  .header h1 { font-size: 1.6rem; font-weight: 800; line-height: 1.3; margin-bottom: .4rem; }
+  .header h1 span { color: #fde68a; }
+  .header-sub { font-size: .84rem; opacity: .8; line-height: 1.7; }
+
+  .body { max-width: 980px; margin: 0 auto; padding: 1.6rem 1rem 3rem; }
+
+  .section-label {
+    font-size: .72rem; font-weight: 700; color: #b45309;
+    letter-spacing: .12em; border-left: 3px solid #b45309;
+    padding-left: .5rem; margin-bottom: 1rem; margin-top: 1.8rem;
+  }
+
+  /* 商品對比 */
+  .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media(max-width:560px) { .product-grid { grid-template-columns: 1fr; } }
+
+  .product-card { background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,.08); padding: 1.1rem 1.2rem; }
+  .product-card.high { border-top: 3px solid #d97706; }
+  .product-card.low  { border-top: 3px solid #64748b; }
+  .product-card .p-tag { font-size: .68rem; font-weight: 700; letter-spacing: .08em; margin-bottom: .25rem; }
+  .product-card.high .p-tag { color: #d97706; }
+  .product-card.low  .p-tag { color: #64748b; }
+  .product-card h3 { font-size: .95rem; font-weight: 700; margin-bottom: .65rem; }
+
+  .price-breakdown { display: flex; flex-direction: column; gap: .3rem; margin-bottom: .6rem; }
+  .pb-row { display: flex; justify-content: space-between; font-size: .82rem; padding: .3rem .5rem; border-radius: 5px; }
+  .pb-row.income { background: #ecfdf5; color: #065f46; }
+  .pb-row.cost   { background: #fef2f2; color: #991b1b; }
+  .pb-row.profit { background: #fef3c7; color: #92400e; font-weight: 700; font-size: .88rem; border-radius: 7px; }
+
+  /* 加權毛利計算 */
+  .weighted-box { background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,.08); padding: 1.1rem 1.4rem; margin-top: .8rem; }
+  .weighted-box h3 { font-size: .97rem; font-weight: 700; margin-bottom: .75rem; }
+  .wt-formula { background: #fef3c7; border-radius: 8px; padding: .65rem .9rem; font-family: "Courier New", monospace; font-size: .82rem; line-height: 1.8; color: #1c1917; border-left: 3px solid #d97706; margin-bottom: .7rem; }
+  .qty-row { display: flex; gap: .7rem; flex-wrap: wrap; }
+  .qty-box { flex: 1; min-width: 140px; background: #f8fafc; border-radius: 8px; padding: .55rem .8rem; border: 1px solid #e2e8f0; }
+  .qty-box .q-label { font-size: .68rem; color: #64748b; margin-bottom: .1rem; }
+  .qty-box .q-val { font-size: .9rem; font-weight: 700; color: #1e293b; }
+  .qty-box .q-sub { font-size: .72rem; color: #64748b; }
+
+  /* 三大應用 */
+  .app-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(285px, 1fr)); gap: 1rem; }
+  .app-card { background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,.08); padding: 1.1rem 1.2rem; }
+  .app-card.leverage  { border-top: 3px solid #d97706; }
+  .app-card.pressure  { border-top: 3px solid #dc2626; }
+  .app-card.inventory { border-top: 3px solid #2563eb; }
+  .app-card .a-num { font-size: .68rem; font-weight: 700; letter-spacing: .1em; margin-bottom: .25rem; }
+  .app-card.leverage  .a-num { color: #d97706; }
+  .app-card.pressure  .a-num { color: #dc2626; }
+  .app-card.inventory .a-num { color: #2563eb; }
+  .app-card h3 { font-size: .97rem; font-weight: 700; margin-bottom: .65rem; }
+  .app-card ul { padding-left: 1rem; }
+  .app-card li { font-size: .83rem; line-height: 1.7; color: #374151; margin-bottom: .2rem; }
+
+  /* 壓力測試數字 */
+  .stress-row { display: flex; gap: .6rem; margin: .6rem 0; flex-wrap: wrap; }
+  .stress-box { flex: 1; min-width: 110px; border-radius: 8px; padding: .5rem .7rem; text-align: center; }
+  .stress-box .s-label { font-size: .68rem; font-weight: 700; margin-bottom: .15rem; }
+  .stress-box .s-val { font-size: .92rem; font-weight: 800; }
+
+  /* 商業模式 */
+  .model-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; margin-top: .6rem; }
+  @media(max-width:520px) { .model-grid { grid-template-columns: 1fr; } }
+  .model-card { border-radius: 8px; padding: .75rem .9rem; }
+  .model-card.bulk  { background: #f1f5f9; border: 1px solid #cbd5e1; }
+  .model-card.value { background: #fffbeb; border: 1px solid #fde68a; }
+  .model-card h4 { font-size: .86rem; font-weight: 700; margin-bottom: .3rem; }
+  .model-card p  { font-size: .79rem; color: #475569; line-height: 1.6; }
+
+  /* 庫存三情境 */
+  .scenario-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: .6rem; margin-top: .6rem; }
+  @media(max-width:520px) { .scenario-grid { grid-template-columns: 1fr; } }
+  .scenario-card { border-radius: 8px; padding: .65rem .8rem; text-align: center; }
+  .scenario-card h4 { font-size: .82rem; font-weight: 700; margin-bottom: .2rem; }
+  .scenario-card p  { font-size: .76rem; line-height: 1.55; }
+
+  /* 金句 */
+  .quote { background: #fef3c7; border-radius: 10px; padding: 1rem 1.3rem; border-left: 4px solid #f59e0b; margin-top: .8rem; }
+  .quote p { font-size: .86rem; line-height: 1.7; color: #374151; }
+  .quote strong { color: #92400e; font-size: .9rem; }
+
+  .insight { background: #fff7ed; border-radius: 8px; padding: .7rem .9rem; font-size: .83rem; line-height: 1.65; color: #7c2d12; border-left: 3px solid #d97706; margin: .5rem 0; }
+  .alert { background: #fef2f2; border: 1px solid #fecaca; border-left: 4px solid #dc2626; border-radius: 8px; padding: .8rem 1rem; font-size: .82rem; line-height: 1.65; color: #374151; margin: .5rem 0; }
+  .alert strong { color: #b91c1c; }
+
+  .badge { display: inline-block; border-radius: 4px; padding: .05rem .4rem; font-size: .74rem; font-weight: 700; margin: 0 .1rem; }
+  .badge-red    { background: #fee2e2; color: #b91c1c; }
+  .badge-green  { background: #d1fae5; color: #065f46; }
+  .badge-blue   { background: #dbeafe; color: #1d4ed8; }
+  .badge-yellow { background: #fef3c7; color: #92400e; }
+  .badge-gray   { background: #f1f5f9; color: #475569; }
+
+  /* 速查表 */
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: .81rem; }
+  thead tr { background: #1c1917; color: white; }
+  thead th { padding: .6rem .85rem; text-align: left; font-weight: 600; }
+  tbody tr:nth-child(even) { background: #f8fafc; }
+  tbody td { padding: .55rem .85rem; border-bottom: 1px solid #e2e8f0; }
+
+  footer { text-align: center; font-size: .72rem; color: #94a3b8; padding: 1rem 0 2rem; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-meta">
+    <div class="tags">
+      <span class="tag">商業思維</span>
+      <span class="tag">損益兩平分析</span>
+      <span class="tag">每週分享</span>
+    </div>
+    <span>2026 · 06 · 07</span>
+  </div>
+  <h1>混合商品定價 × <span>儀表板思維：不靠直覺，看數字做決定</span></h1>
+  <div class="header-sub">
+    加權平均毛利 ／ 損益兩平數量 ／ 漲價壓力測試 ／ 科學庫存管理 ／ 營運瓶頸識別
+  </div>
+</div>
+
+<div class="body">
+
+  <!-- 商品拆解 -->
+  <div class="section-label">商品利潤拆解（輪胎行案例）</div>
+  <div class="product-grid">
+    <div class="product-card high">
+      <div class="p-tag">🏆 高價胎 · 佔銷量 30%</div>
+      <h3>高絕對毛利商品</h3>
+      <div class="price-breakdown">
+        <div class="pb-row income"><span>售價</span><span>2,500 元</span></div>
+        <div class="pb-row cost"><span>進價</span><span>−1,200 元</span></div>
+        <div class="pb-row cost"><span>工資成本</span><span>−300 元</span></div>
+        <div class="pb-row profit"><span>淨賺（絕對毛利）</span><span>1,000 元 🎯</span></div>
+      </div>
+      <p style="font-size:.78rem;color:#64748b;">換一條賺 1,000 元，是平價胎的 2.5 倍</p>
+    </div>
+    <div class="product-card low">
+      <div class="p-tag">💼 平價胎 · 佔銷量 70%</div>
+      <h3>走量商品</h3>
+      <div class="price-breakdown">
+        <div class="pb-row income"><span>售價</span><span>1,200 元</span></div>
+        <div class="pb-row cost"><span>進價</span><span>−600 元</span></div>
+        <div class="pb-row cost"><span>工資成本</span><span>−200 元</span></div>
+        <div class="pb-row profit"><span>淨賺（絕對毛利）</span><span>400 元</span></div>
+      </div>
+      <p style="font-size:.78rem;color:#64748b;">量大但每條利潤只有高價胎的 40%</p>
+    </div>
+  </div>
+
+  <!-- 加權毛利與達標數量 -->
+  <div class="weighted-box">
+    <h3>⚖️ 加權平均毛利與損益兩平計算（30% 高價 / 70% 平價）</h3>
+    <div class="wt-formula">
+      加權平均毛利 = 1,000 × 30% + 400 × 70% = 300 + 280 = <strong>580 元/條</strong>
+    </div>
+    <div class="qty-row">
+      <div class="qty-box">
+        <div class="q-label">回本數量（損益兩平）</div>
+        <div class="q-val">52 條/月</div>
+        <div class="q-sub">高價16 + 平價36｜平均1.4條/天</div>
+      </div>
+      <div class="qty-box">
+        <div class="q-label">目標：額外賺 2 萬元</div>
+        <div class="q-val">87 條/月</div>
+        <div class="q-sub">高價26 + 平價61</div>
+      </div>
+      <div class="qty-box">
+        <div class="q-label">目標：額外賺 10 萬元</div>
+        <div class="q-val">高68 + 平157</div>
+        <div class="q-sub">共225條，考驗產能上限</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 三大應用 -->
+  <div class="section-label">儀表板三大實務應用</div>
+  <div class="app-grid">
+
+    <!-- 應用一 -->
+    <div class="app-card leverage">
+      <div class="a-num">應用一 · 銷售組合槓桿</div>
+      <h3>🔧 為什麼要賣高價商品？</h3>
+      <ul>
+        <li>高價胎 1,000 元 vs 平價 400 元 → 推升加權毛利</li>
+        <li>若全賣平價胎達同樣獲利 → 需換 <span class="badge badge-red">125 條</span></li>
+        <li>師傅體力有限、機台有限 → <strong>營運瓶頸</strong></li>
+        <li>提升高價比例 → 達標數量下降 → 時間用在更值錢的事</li>
+      </ul>
+      <div class="model-grid">
+        <div class="model-card bulk">
+          <h4>薄利多銷型</h4>
+          <p>需要超大店面、多台頂高機、大量廉價勞力，靠規模經濟</p>
+        </div>
+        <div class="model-card value">
+          <h4>高價值服務型</h4>
+          <p>店面小 → 必須掌握高單價客群，提供輪圈保護等精緻服務</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 應用二 -->
+    <div class="app-card pressure">
+      <div class="a-num">應用二 · 進價漲價壓力測試</div>
+      <h3>📈 漲價還是自行吸收？</h3>
+      <div class="stress-row">
+        <div class="stress-box" style="background:#d1fae5;">
+          <div class="s-label" style="color:#065f46;">原本達標量</div>
+          <div class="s-val" style="color:#065f46;">87 條</div>
+        </div>
+        <div class="stress-box" style="background:#fee2e2;">
+          <div class="s-label" style="color:#b91c1c;">進價漲100元後</div>
+          <div class="s-val" style="color:#b91c1c;">105 條</div>
+        </div>
+        <div class="stress-box" style="background:#fef3c7;">
+          <div class="s-label" style="color:#92400e;">額外增加</div>
+          <div class="s-val" style="color:#92400e;">+18 條</div>
+        </div>
+      </div>
+      <ul>
+        <li>「多換18條」讓老闆立即評估：<strong>產能是否還有空間？</strong></li>
+        <li>若師傅已滿載 → 不得不漲價轉嫁給消費者</li>
+        <li>漲價有時是為了「活下去」，不是為了多賺</li>
+        <li>服務品質到位（不刮輪圈）→ 高價客群能接受合理漲幅</li>
+      </ul>
+      <div class="insight" style="margin-top:.5rem;">
+        不敢漲價往往只是老闆「心裡過不去」，數字才是真正的裁判。
+      </div>
+    </div>
+
+    <!-- 應用三 -->
+    <div class="app-card inventory">
+      <div class="a-num">應用三 · 精準庫存與現金流</div>
+      <h3>📦 錢不要卡在倉庫裡</h3>
+      <ul>
+        <li>有賺錢 ≠ 有現金 → 現金流量表是損益表的照妖鏡</li>
+        <li>盲目囤貨 = 把「現金」變成「死錢」</li>
+        <li>叫貨前置期 3~5 天 → 安全庫存：高價胎 30~35 條、平價胎 65~70 條</li>
+        <li>有錨點就不拍腦袋亂叫貨 → <strong>錨定效應</strong>的正面應用</li>
+      </ul>
+      <div class="scenario-grid">
+        <div class="scenario-card" style="background:#d1fae5;border:1px solid #6ee7b7;">
+          <h4 style="color:#065f46;">😊 樂觀版</h4>
+          <p style="color:#065f46;">暑假旺季（環島潮）↑ 備貨多</p>
+        </div>
+        <div class="scenario-card" style="background:#f1f5f9;border:1px solid #cbd5e1;">
+          <h4 style="color:#374151;">😐 中立版</h4>
+          <p style="color:#374151;">正常季節，依達標量備貨</p>
+        </div>
+        <div class="scenario-card" style="background:#fee2e2;border:1px solid #fca5a5;">
+          <h4 style="color:#b91c1c;">😟 悲觀版</h4>
+          <p style="color:#b91c1c;">景氣差，壓低庫存保現金</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 速查表 -->
+  <div class="section-label">核心數據速查（案例：輪胎行 30/70 組合）</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>情境</th><th>高價胎量</th><th>平價胎量</th><th>合計</th><th>關鍵意義</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>損益兩平（只涵蓋固定成本）</td><td>16</td><td>36</td><td>52 條</td><td>每天只需換 1.4 條</td></tr>
+        <tr><td>目標獲利 +2萬</td><td>26</td><td>61</td><td>87 條</td><td>基準達標量</td></tr>
+        <tr><td>進價漲100元，不調售價</td><td>—</td><td>—</td><td>105 條</td><td>多換18條才能維持利潤</td></tr>
+        <tr><td>目標獲利 +10萬</td><td>68</td><td>157</td><td>225 條</td><td>需評估產能是否到達極限</td></tr>
+        <tr><td>全賣平價胎達 +2萬目標</td><td>0</td><td>125</td><td>125 條</td><td>師傅體力×機台數 = 營運瓶頸</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 金句 -->
+  <div class="quote" style="margin-top:1.2rem;">
+    <p>💬 <strong>「不靠直覺，看數字做商業決定。」</strong></p>
+    <p style="margin-top:.5rem;font-size:.82rem;color:#374151;">
+      儀表板的目的不是限制你，而是幫你「想通」：你的店能做什麼樣的生意？進價漲了你能不能撐住？錢有沒有被貨品鎖死？
+      把問題數字化，答案自然浮現。
+    </p>
+  </div>
+
+  <div class="alert" style="margin-top:1rem;">
+    <strong>個人理財補充：</strong>
+    不要讓複利變利息費用，要讓它變利息收入。投資紀律：指數化投資（0050 / VT）、<strong>絕對不開槓桿</strong>——能安度危機，才是真的贏。
+  </div>
+
+</div>
+
+<footer>每週分享 · 混合商品定價與儀表板思維 · 2026.06.07 · 由 Claude 自動生成</footer>
+</body>
+</html>
