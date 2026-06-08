@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>公司債折溢價 × 抵押借款 — 柏蓁 0608</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, "Noto Sans TC", "Microsoft JhengHei", sans-serif; background: #f0f4f8; color: #1e293b; }
+
+  .header {
+    background: linear-gradient(135deg, #1e3a5f 0%, #0891b2 100%);
+    color: white; padding: 2rem 2rem 1.6rem;
+  }
+  .header-meta { display: flex; justify-content: space-between; align-items: center; font-size: .78rem; margin-bottom: .8rem; opacity: .85; }
+  .tags { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .tag { background: rgba(255,255,255,.18); border-radius: 20px; padding: .2rem .7rem; font-size: .72rem; }
+  .header h1 { font-size: 1.6rem; font-weight: 800; line-height: 1.3; margin-bottom: .4rem; }
+  .header h1 span { color: #fde68a; }
+  .header-sub { font-size: .84rem; opacity: .8; line-height: 1.7; }
+
+  .body { max-width: 980px; margin: 0 auto; padding: 1.6rem 1rem 3rem; }
+
+  .section-label {
+    font-size: .72rem; font-weight: 700; color: #0891b2;
+    letter-spacing: .12em; border-left: 3px solid #0891b2;
+    padding-left: .5rem; margin-bottom: 1rem; margin-top: 1.8rem;
+  }
+
+  /* 折溢平三欄 */
+  .compare-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: .8rem; margin-bottom: .8rem; }
+  @media(max-width:640px) { .compare-grid { grid-template-columns: 1fr; } }
+  .cmp { background: white; border-radius: 10px; padding: .9rem 1rem; box-shadow: 0 2px 8px rgba(0,0,0,.07); text-align: center; }
+  .cmp.disc { border-top: 3px solid #dc2626; }
+  .cmp.par  { border-top: 3px solid #2563eb; }
+  .cmp.prem { border-top: 3px solid #16a34a; }
+  .cmp h4 { font-size: .9rem; font-weight: 700; margin: .3rem 0 .2rem; }
+  .cmp p  { font-size: .78rem; color: #475569; line-height: 1.5; }
+
+  /* 攤銷表 */
+  .table-wrap { overflow-x: auto; margin: .5rem 0; }
+  table { width: 100%; border-collapse: collapse; font-size: .8rem; }
+  thead tr { background: #1e3a5f; color: white; }
+  thead th { padding: .55rem .8rem; text-align: right; font-weight: 600; white-space: nowrap; }
+  thead th:first-child { text-align: center; }
+  tbody tr:nth-child(even) { background: #f8fafc; }
+  tbody td { padding: .5rem .8rem; border-bottom: 1px solid #e2e8f0; text-align: right; white-space: nowrap; }
+  tbody td:first-child { text-align: center; font-weight: 600; }
+  tfoot td { padding: .5rem .8rem; font-weight: 700; background: #e0f2fe; text-align: right; }
+
+  /* 分錄區 */
+  .journal { background: white; border-radius: 10px; padding: .9rem 1.1rem; box-shadow: 0 2px 8px rgba(0,0,0,.07); margin-bottom: .7rem; }
+  .journal h4 { font-size: .86rem; font-weight: 700; margin-bottom: .5rem; color: #1e3a5f; }
+  .je { display: flex; gap: .4rem; font-family: "Courier New", monospace; font-size: .79rem; line-height: 1.85; }
+  .je .acct { flex: 1; }
+  .je .acct.indent { padding-left: 1.4rem; color: #374151; }
+  .je .dr { color: #dc2626; font-weight: 700; min-width: 75px; text-align: right; }
+  .je .cr { color: #16a34a; font-weight: 700; min-width: 75px; text-align: right; }
+
+  /* 兩欄卡片 */
+  .two-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media(max-width:600px) { .two-grid { grid-template-columns: 1fr; } }
+  .card { background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,.08); padding: 1.05rem 1.15rem; }
+  .card.disc-c { border-top: 3px solid #dc2626; }
+  .card.prem-c { border-top: 3px solid #16a34a; }
+  .card.mort-c { border-top: 3px solid #7c3aed; }
+  .card.tip-c  { border-top: 3px solid #d97706; }
+  .card h3 { font-size: .94rem; font-weight: 700; margin-bottom: .6rem; }
+  .card ul { padding-left: 1rem; }
+  .card li { font-size: .82rem; line-height: 1.7; color: #374151; margin-bottom: .2rem; }
+
+  /* 計算盒 */
+  .calc { background: #f0f9ff; border-radius: 7px; padding: .55rem .85rem; font-family: "Courier New", monospace; font-size: .8rem; line-height: 1.75; color: #0c4a6e; border-left: 3px solid #0891b2; margin: .5rem 0; }
+
+  /* 資報表達 */
+  .bs-box { background: white; border-radius: 10px; padding: .9rem 1.1rem; box-shadow: 0 2px 8px rgba(0,0,0,.07); }
+  .bs-box h4 { font-size: .86rem; font-weight: 700; margin-bottom: .5rem; }
+  .bs-row { display: flex; justify-content: space-between; font-size: .82rem; padding: .3rem .4rem; border-radius: 5px; margin-bottom: .25rem; }
+  .bs-row.current { background: #fee2e2; color: #991b1b; }
+  .bs-row.noncurr { background: #dbeafe; color: #1d4ed8; }
+  .bs-row.label   { background: #f1f5f9; font-weight: 700; color: #374151; }
+
+  /* 口訣 */
+  .rule-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: .7rem; }
+  .rule-card { background: white; border-radius: 10px; padding: .85rem 1rem; box-shadow: 0 2px 8px rgba(0,0,0,.07); border-bottom: 3px solid #0891b2; }
+  .rule-card .r-icon { font-size: 1.3rem; margin-bottom: .3rem; }
+  .rule-card h4 { font-size: .86rem; font-weight: 700; margin-bottom: .25rem; }
+  .rule-card p  { font-size: .79rem; color: #475569; line-height: 1.6; }
+
+  .insight { background: #e0f2fe; border-radius: 8px; padding: .65rem .9rem; font-size: .82rem; line-height: 1.65; color: #0c4a6e; border-left: 3px solid #0891b2; margin: .5rem 0; }
+  .alert   { background: #fef3c7; border: 1px solid #fde68a; border-left: 4px solid #f59e0b; border-radius: 8px; padding: .75rem 1rem; font-size: .82rem; line-height: 1.65; color: #374151; margin: .5rem 0; }
+  .alert strong { color: #92400e; }
+
+  .badge { display: inline-block; border-radius: 4px; padding: .05rem .4rem; font-size: .73rem; font-weight: 700; margin: 0 .1rem; }
+  .badge-red    { background: #fee2e2; color: #b91c1c; }
+  .badge-green  { background: #d1fae5; color: #065f46; }
+  .badge-blue   { background: #dbeafe; color: #1d4ed8; }
+  .badge-yellow { background: #fef3c7; color: #92400e; }
+
+  footer { text-align: center; font-size: .72rem; color: #94a3b8; padding: 1rem 0 2rem; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-meta">
+    <div class="tags">
+      <span class="tag">非流動負債</span>
+      <span class="tag">公司債 × 抵押借款</span>
+      <span class="tag">家教 · 柏蓁</span>
+    </div>
+    <span>2026 · 06 · 08</span>
+  </div>
+  <h1>折價 × 溢價公司債 ×<span>抵押借款全解析</span></h1>
+  <div class="header-sub">
+    攤銷表編製 ／ 發行 × 利息 × 贖回分錄 ／ 財報流動∕非流動拆分 ／ 抵押借款還本機制
+  </div>
+</div>
+
+<div class="body">
+
+  <!-- 三種發行判斷 -->
+  <div class="section-label">發行狀態快速判斷</div>
+  <div class="compare-grid">
+    <div class="cmp disc">
+      <div style="font-size:1.4rem;">📉</div>
+      <h4>折價發行</h4>
+      <p>票面利率 &lt; 市場利率<br>帳面價值 &lt; 面額<br>隨時間<span class="badge badge-red">逐漸增加</span>至面額</p>
+    </div>
+    <div class="cmp par">
+      <div style="font-size:1.4rem;">⚖️</div>
+      <h4>平價發行</h4>
+      <p>票面利率 = 市場利率<br>發行價格 = 面額<br>無折溢價攤銷</p>
+    </div>
+    <div class="cmp prem">
+      <div style="font-size:1.4rem;">📈</div>
+      <h4>溢價發行</h4>
+      <p>票面利率 &gt; 市場利率<br>帳面價值 &gt; 面額<br>隨時間<span class="badge badge-green">逐漸減少</span>至面額</p>
+    </div>
+  </div>
+
+  <div class="alert">
+    <strong>利率使用口訣：</strong>算現金利息（票面利息）→ 用<span class="badge badge-yellow">票面利率</span>；計算折現發行價、計算利息費用 → 全部用<span class="badge badge-blue">市場利率</span>
+  </div>
+
+  <!-- 折價案例 -->
+  <div class="section-label">折價公司債（P11-2）— 面額6,000,000 / 票面10% / 市場12% / 15年</div>
+
+  <div class="calc">
+    每期利息 = 6,000,000 × 10% = <strong>600,000 元</strong><br>
+    本金現值 = 6,000,000 × 0.18270（複利現值，12%，15期）= 1,096,200<br>
+    利息現值 = 600,000 × 6.81086（年金現值，12%，15期）= 4,086,516<br>
+    發行價格 = 1,096,200 + 4,086,516 = <strong>5,182,716 元</strong>（折價發行）
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>期</th><th>期初帳面</th><th>利息費用<br>(×12%)</th><th>支付利息<br>(固定)</th><th>折價攤銷<br>(費用−支付)</th><th>期末帳面</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>5,182,718</td><td>621,926</td><td>600,000</td><td>21,926</td><td>5,204,644</td></tr>
+        <tr><td>2</td><td>5,204,644</td><td>624,557</td><td>600,000</td><td>24,557</td><td>5,229,201</td></tr>
+        <tr><td>…</td><td colspan="4" style="text-align:center;color:#64748b;">依此類推，帳面價值逐期遞增</td><td>→ 6,000,000</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="two-grid" style="margin-top:.8rem;">
+    <div>
+      <div class="journal">
+        <h4>📅 發行日</h4>
+        <div class="je"><span class="acct">現金</span><span class="dr">5,182,718</span><span class="cr"></span></div>
+        <div class="je"><span class="acct indent">應付公司債</span><span class="dr"></span><span class="cr">5,182,718</span></div>
+      </div>
+      <div class="journal">
+        <h4>📅 年底認列（12/31，尚未付息）</h4>
+        <div class="je"><span class="acct">利息費用</span><span class="dr">621,926</span><span class="cr"></span></div>
+        <div class="je"><span class="acct indent">應付利息</span><span class="dr"></span><span class="cr">600,000</span></div>
+        <div class="je"><span class="acct indent">應付公司債（折價攤銷）</span><span class="dr"></span><span class="cr">21,926</span></div>
+      </div>
+      <div class="journal">
+        <h4>📅 次年支付（1/1）</h4>
+        <div class="je"><span class="acct">應付利息</span><span class="dr">600,000</span><span class="cr"></span></div>
+        <div class="je"><span class="acct indent">現金</span><span class="dr"></span><span class="cr">600,000</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="bs-box" style="margin-bottom:.7rem;">
+        <h4>📊 第一年底資產負債表表達</h4>
+        <div class="bs-row label"><span>科目</span><span>金額</span></div>
+        <div class="bs-row current"><span>流動負債：應付利息</span><span>600,000</span></div>
+        <div class="bs-row noncurr"><span>非流動負債：應付公司債</span><span>5,204,644</span></div>
+      </div>
+      <div class="journal">
+        <h4>📅 第二年底提前贖回（102%）</h4>
+        <div class="je"><span class="acct">應付公司債</span><span class="dr">5,229,201</span><span class="cr"></span></div>
+        <div class="je"><span class="acct">贖回損失</span><span class="dr">890,799</span><span class="cr"></span></div>
+        <div class="je"><span class="acct indent">現金（×102%）</span><span class="dr"></span><span class="cr">6,120,000</span></div>
+        <p style="font-size:.74rem;color:#64748b;margin-top:.3rem;">贖回損失 = 6,120,000 − 5,229,201 = 890,799</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 溢價案例 -->
+  <div class="section-label">溢價公司債（P11-6）— 面額2,000,000 / 票面7% / 市場6% / 10年</div>
+
+  <div class="calc">
+    每期利息 = 2,000,000 × 7% = <strong>140,000 元</strong>
+    發行價格（已知）= <strong>2,147,202 元</strong>（溢價發行，帳面 &gt; 面額）
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>期</th><th>期初帳面</th><th>利息費用<br>(×6%)</th><th>支付利息<br>(固定)</th><th>溢價攤銷<br>(支付−費用)</th><th>期末帳面</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>2,147,202</td><td>128,832</td><td>140,000</td><td>11,168</td><td>2,136,034</td></tr>
+        <tr><td>2</td><td>2,136,034</td><td>128,162</td><td>140,000</td><td>11,838</td><td>2,124,196</td></tr>
+        <tr><td>…</td><td colspan="4" style="text-align:center;color:#64748b;">帳面價值逐期遞減</td><td>→ 2,000,000</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="two-grid" style="margin-top:.8rem;">
+    <div class="journal">
+      <h4>📅 年底認列分錄（溢價關鍵差異）</h4>
+      <div class="je"><span class="acct">利息費用</span><span class="dr">128,832</span><span class="cr"></span></div>
+      <div class="je"><span class="acct">應付公司債（溢價攤銷）</span><span class="dr">11,168</span><span class="cr"></span></div>
+      <div class="je"><span class="acct indent">應付利息</span><span class="dr"></span><span class="cr">140,000</span></div>
+      <p style="font-size:.74rem;color:#dc2626;margin-top:.35rem;">⚠️ 溢價攤銷借記應付公司債（帳面要減少）</p>
+    </div>
+    <div class="bs-box">
+      <h4>📊 第二年底資產負債表表達</h4>
+      <div class="bs-row label"><span>科目</span><span>金額</span></div>
+      <div class="bs-row current"><span>流動負債：應付利息</span><span>140,000</span></div>
+      <div class="bs-row noncurr"><span>非流動負債：應付公司債</span><span>2,124,196</span></div>
+      <p style="font-size:.74rem;color:#64748b;margin-top:.4rem;">損益表→利息費用列於「其他收入與費用」</p>
+    </div>
+  </div>
+
+  <!-- 抵押借款 -->
+  <div class="section-label">抵押借款（Mortgage Notes）— 本金400,000 / 利率8% / 10年 / 每年付59,612</div>
+
+  <div class="insight">
+    抵押借款 = 固定還款額，每期同時包含利息與本金。無票面利率/市場利率之分，直接以實際利率計算。
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>期</th><th>期初本金</th><th>當期利息<br>(×8%)</th><th>固定支付</th><th>還本金額<br>(支付−利息)</th><th>期末本金</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>400,000</td><td>32,000</td><td>59,612</td><td>27,612</td><td>372,388</td></tr>
+        <tr><td>2</td><td>372,388</td><td>29,791</td><td>59,612</td><td>29,821</td><td>342,567</td></tr>
+        <tr><td>…</td><td colspan="4" style="text-align:center;color:#64748b;">利息遞減，還本遞增</td><td>→ 0</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="two-grid" style="margin-top:.8rem;">
+    <div>
+      <div class="journal">
+        <h4>📅 借款日</h4>
+        <div class="je"><span class="acct">現金</span><span class="dr">400,000</span><span class="cr"></span></div>
+        <div class="je"><span class="acct indent">應付抵押借款</span><span class="dr"></span><span class="cr">400,000</span></div>
+      </div>
+      <div class="journal">
+        <h4>📅 第一年年底付款（12/31 直接付清）</h4>
+        <div class="je"><span class="acct">利息費用</span><span class="dr">32,000</span><span class="cr"></span></div>
+        <div class="je"><span class="acct">應付抵押借款</span><span class="dr">27,612</span><span class="cr"></span></div>
+        <div class="je"><span class="acct indent">現金</span><span class="dr"></span><span class="cr">59,612</span></div>
+        <p style="font-size:.74rem;color:#16a34a;margin-top:.3rem;">✅ 年底直接付 → 不產生「應付利息」科目</p>
+      </div>
+    </div>
+    <div class="bs-box">
+      <h4>📊 第一年底資產負債表（最難考點！）</h4>
+      <p style="font-size:.8rem;color:#374151;margin-bottom:.5rem;">總欠款 372,388，依<strong>「到期時間」</strong>拆分：</p>
+      <div class="bs-row label"><span>科目</span><span>金額</span></div>
+      <div class="bs-row current"><span>流動負債：應付抵押借款（一年內還本）</span><span>29,821</span></div>
+      <div class="bs-row noncurr"><span>非流動負債：應付抵押借款（一年以上）</span><span>342,567</span></div>
+      <p style="font-size:.74rem;color:#64748b;margin-top:.4rem;">流動部分 = 第2期的還本金額（29,821）</p>
+    </div>
+  </div>
+
+  <!-- 口訣彙整 -->
+  <div class="section-label">老師口訣彙整（考試必背）</div>
+  <div class="rule-grid">
+    <div class="rule-card">
+      <div class="r-icon">🧮</div>
+      <h4>查表用哪個利率？</h4>
+      <p>算現金利息 → 票面利率<br>算折現 / 利息費用 → 市場利率</p>
+    </div>
+    <div class="rule-card">
+      <div class="r-icon">📋</div>
+      <h4>查哪張表？</h4>
+      <p>單筆本金（到期才還）→ 複利現值表<br>多筆固定利息 → 年金現值表</p>
+    </div>
+    <div class="rule-card">
+      <div class="r-icon">🔑</div>
+      <h4>攤銷表是關鍵</h4>
+      <p>先把攤銷表做對，所有分錄與財報數字都在裡面。第一期算錯，全盤皆輸。</p>
+    </div>
+    <div class="rule-card">
+      <div class="r-icon">📊</div>
+      <h4>財報流動∕非流動拆分</h4>
+      <p>公司債：應付利息（流動）+ 帳面價值（非流動）<br>抵押借款：下期還本（流動）+ 其餘（非流動）</p>
+    </div>
+    <div class="rule-card">
+      <div class="r-icon">⚖️</div>
+      <h4>折 vs 溢攤銷方向</h4>
+      <p>折價攤銷 → 貸記應付公司債（帳面增加）<br>溢價攤銷 → 借記應付公司債（帳面減少）</p>
+    </div>
+    <div class="rule-card">
+      <div class="r-icon">🏠</div>
+      <h4>抵押借款特點</h4>
+      <p>年底直接付 → 無應付利息<br>利息遞減、還本遞增<br>固定支付額不變</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>柏蓁 · 公司債 × 抵押借款複習 · 2026.06.08 · 由 Claude 自動生成</footer>
+</body>
+</html>
