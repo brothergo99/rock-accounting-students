@@ -1,0 +1,47 @@
+name: 自動更新學生專區
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'bozhen/**'
+      - 'cavin/**'
+      - 'goodbook/**'
+      - 'huimei/**'
+      - 'jiaru/**'
+      - 'jiayi/**'
+      - 'liya/**'
+      - 'mandy/**'
+      - 'megan/**'
+      - 'xiaotu/**'
+      - 'xiaoyu/**'
+      - 'yingxiang/**'
+
+jobs:
+  update-student-zone:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 取得 students repo
+        uses: actions/checkout@v3
+
+      - name: 執行 Python 腳本生成 HTML
+        run: python generate_students_page.py
+
+      - name: 取得官網 repo
+        run: |
+          git clone https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/brothergo99/rock-accounting.git official-site
+
+      - name: 複製生成的頁面到官網
+        run: |
+          mkdir -p official-site/students
+          cp output/students_index.html official-site/students/index.html
+
+      - name: 推送到官網 repo
+        run: |
+          cd official-site
+          git config user.email "brothergo99@gmail.com"
+          git config user.name "GitHub Actions"
+          git add students/index.html
+          git diff --staged --quiet || git commit -m "自動更新學生專區 $(date +'%Y-%m-%d %H:%M')"
+          git push
