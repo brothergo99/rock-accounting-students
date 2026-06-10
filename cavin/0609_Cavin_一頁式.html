@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cavin · HYROX 商業飛輪解析 · 2026.06.09</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --orange:#F5812A;--orange2:#FF9A4D;--orange3:#FFC285;
+  --cream:#FFF8F0;--cream2:#FFF0E0;--cream3:#FFE4C4;
+  --brown:#7A3B10;--brown2:#A05020;--brown3:#C07030;
+  --muted:#A08060;--ink:#2C1A0A;--white:#FFFFFF;
+  --green:#1a7a4a;--green2:#e6f5ec;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7}
+
+.page-header{background:linear-gradient(135deg,#0a1a0a,#1a2e1a,#0a1a0a);padding:48px;position:relative;overflow:hidden}
+.page-header::before{content:'';position:absolute;top:-80px;right:-80px;width:320px;height:320px;background:radial-gradient(circle,rgba(245,129,42,.15),transparent 70%)}
+.page-header::after{content:'HYROX';font-family:'Playfair Display',serif;font-size:160px;font-weight:900;color:rgba(255,255,255,.04);position:absolute;bottom:-30px;right:-10px;line-height:1;pointer-events:none}
+.header-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.25em;color:var(--orange3);text-transform:uppercase;margin-bottom:12px}
+.header-title{font-family:'Playfair Display',serif;font-size:clamp(26px,5vw,46px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:10px}
+.header-title em{color:var(--orange2);font-style:italic}
+.header-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.meta-chip{font-family:'DM Mono',monospace;font-size:10px;padding:5px 12px;border-radius:4px;background:rgba(245,129,42,.2);color:var(--orange3);border:1px solid rgba(245,129,42,.3)}
+
+.container{max-width:1100px;margin:0 auto;padding:40px 32px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+@media(max-width:720px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+.section{margin-bottom:36px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--orange);text-transform:uppercase;margin-bottom:8px}
+.section-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--orange3)}
+
+.card{background:var(--white);border:1.5px solid var(--orange3);border-radius:12px;padding:20px}
+.card-dark{background:linear-gradient(135deg,#0a1a0a,#1a2e1a);border:none;color:#fff}
+.card-orange{background:var(--orange);color:#fff;border:none}
+.card-green{background:var(--green2);border:1.5px solid #a8d5b8;border-radius:12px;padding:20px}
+.card h3{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;margin-bottom:8px}
+.card-dark h3{color:var(--orange2)}
+.card-orange h3{color:#fff}
+.card p,.card li{font-size:13px;line-height:1.75;color:var(--brown2)}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8)}
+.card-orange p,.card-orange li{color:rgba(255,255,255,.9)}
+.card-green p,.card-green li{color:#1a4a2a}
+.card ul{padding-left:16px}
+.card ul li{margin-bottom:4px}
+
+.hl{color:var(--orange);font-weight:700}
+.hl-green{color:var(--green);font-weight:700}
+
+.tag{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;padding:3px 9px;border-radius:4px;margin:2px}
+.tag-orange{background:var(--cream3);border:1px solid var(--orange3);color:var(--brown2)}
+
+/* FLYWHEEL */
+.flywheel{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin:16px 0}
+.fw-box{padding:14px 12px;text-align:center;border-radius:8px}
+.fw-box .fw-num{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;line-height:1}
+.fw-box .fw-label{font-family:'DM Mono',monospace;font-size:10px;margin-top:4px}
+.fw-box .fw-sub{font-size:11px;margin-top:3px}
+
+/* TABLE */
+.table-grid{display:grid;gap:3px;margin-top:10px}
+.tr{display:grid;grid-template-columns:1.2fr 2fr;gap:3px}
+.td{padding:9px 12px;font-size:12px;background:var(--cream2);border-radius:3px}
+.td:first-child{font-family:'DM Mono',monospace;color:var(--orange);font-weight:500;background:var(--cream3)}
+
+/* QUOTE */
+.quote-block{border-left:3px solid var(--orange);padding:10px 16px;background:var(--cream2);border-radius:0 8px 8px 0;margin:12px 0}
+.quote-block p{font-size:13px;font-style:italic;color:var(--brown2)}
+
+/* REVENUE STACK */
+.rev-row{display:flex;align-items:center;gap:10px;margin:8px 0}
+.rev-bar{height:32px;border-radius:6px;display:flex;align-items:center;padding:0 12px;font-family:'DM Mono',monospace;font-size:11px;font-weight:500;color:#fff;flex-shrink:0;white-space:nowrap}
+.rev-label{font-size:12px;color:var(--brown2)}
+
+/* STAT */
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
+.stat-box{background:var(--cream2);border:1px solid var(--orange3);border-radius:8px;padding:12px;text-align:center}
+.stat-n{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--orange)}
+.stat-l{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:2px}
+
+/* VS */
+.vs-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center}
+.vs-badge{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--muted);text-align:center}
+
+.page-footer{background:var(--brown);color:rgba(255,255,255,.7);padding:20px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:40px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:14px;color:var(--orange3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.4)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="header-label">課後複習一頁式 · Cavin</div>
+  <div class="header-title">HYROX 商業飛輪<br><em>將完賽感動變現的百億機器</em></div>
+  <div class="header-meta">
+    <span class="meta-chip">2026.06.09</span>
+    <span class="meta-chip">損益兩平 · 動態定價</span>
+    <span class="meta-chip">IP授權 · 情緒溢價</span>
+    <span class="meta-chip">Rock 老師</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- HYROX 是什麼 -->
+  <div class="section">
+    <div class="section-label">What is HYROX</div>
+    <div class="section-title">HYROX 賽事：找到運動市場的甜蜜點</div>
+    <div class="grid-2">
+      <div class="card card-dark">
+        <h3>🏆 賽事設計</h3>
+        <p>2017–2018 年由兩位德國人創立（含一位奧運金牌得主）。<br><br>
+        <span style="color:var(--orange2);font-weight:700">8 個站點 × 每站前跑 1km</span><br>
+        混合跑步 + 功能性體能訓練。</p>
+        <div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap">
+          <span class="tag" style="background:rgba(245,129,42,.2);color:var(--orange3);border:1px solid rgba(245,129,42,.3)">滑雪機</span>
+          <span class="tag" style="background:rgba(245,129,42,.2);color:var(--orange3);border:1px solid rgba(245,129,42,.3)">划船機</span>
+          <span class="tag" style="background:rgba(245,129,42,.2);color:var(--orange3);border:1px solid rgba(245,129,42,.3)">農夫走路</span>
+          <span class="tag" style="background:rgba(245,129,42,.2);color:var(--orange3);border:1px solid rgba(245,129,42,.3)">藥球深蹲</span>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:12px">
+          <h3>🎯 找到甜蜜點</h3>
+          <div class="vs-grid">
+            <div style="text-align:center;padding:12px;background:var(--cream2);border-radius:8px">
+              <div style="font-size:20px">🏃</div>
+              <div style="font-size:12px;font-weight:700;margin-top:4px">馬拉松跑者</div>
+              <div style="font-size:11px;color:var(--muted)">心肺 · 體態偏瘦</div>
+            </div>
+            <div class="vs-badge">+</div>
+            <div style="text-align:center;padding:12px;background:var(--cream2);border-radius:8px">
+              <div style="font-size:20px">💪</div>
+              <div style="font-size:12px;font-weight:700;margin-top:4px">健身房族群</div>
+              <div style="font-size:11px;color:var(--muted)">肌肉 · 雕塑</div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>🎉 零門檻 × 多巴胺</h3>
+          <p><span class="hl">無關門機制</span>——花近三小時完賽也算贏，每個人都有成就感。</p>
+          <p style="margin-top:8px"><span class="hl">夜店音樂氛圍</span>→ 完賽多巴胺爆棚 → 自發 IG 分享 → <strong>解決導客問題</strong>（零成本行銷）</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 暴力飛輪 -->
+  <div class="section">
+    <div class="section-label">Business Flywheel</div>
+    <div class="section-title">損益兩平 × 規模經濟：暴力飛輪</div>
+    <div class="grid-2">
+      <div class="card" style="background:var(--cream2)">
+        <h3>📊 報名人數增長</h3>
+        <div class="flywheel">
+          <div class="fw-box" style="background:#fff3e0">
+            <div class="fw-num" style="color:#e65100">650</div>
+            <div class="fw-label" style="color:#bf360c">2017首場</div>
+            <div class="fw-sub" style="color:#bf360c">德國 · 虧損</div>
+          </div>
+          <div class="fw-box" style="background:#fff8e1">
+            <div class="fw-num" style="color:var(--orange)">1,500</div>
+            <div class="fw-label" style="color:var(--brown2)">損益兩平點</div>
+            <div class="fw-sub" style="color:var(--muted)">跨過這條線</div>
+          </div>
+          <div class="fw-box" style="background:linear-gradient(135deg,var(--orange),var(--brown2))">
+            <div class="fw-num" style="color:#fff">9,000</div>
+            <div class="fw-label" style="color:rgba(255,255,255,.9)">台灣站</div>
+            <div class="fw-sub" style="color:rgba(255,255,255,.8)">多 7,500 人純利</div>
+          </div>
+        </div>
+        <div class="quote-block">
+          <p>跨過 1,500 人門檻後，多出的每一位報名者幾乎是<strong>純利</strong>——固定成本已攤銷完畢。</p>
+        </div>
+      </div>
+      <div class="card card-dark">
+        <h3>🚛 高度標準化降低成本</h3>
+        <p style="margin-bottom:12px">全部設備裝進 <span style="color:var(--orange2);font-weight:700">9 台大卡車</span>，全球巡迴。</p>
+        <div class="table-grid">
+          <div class="tr" style="margin-bottom:2px">
+            <div class="td" style="background:rgba(245,129,42,.15);color:var(--orange2)">亞洲</div>
+            <div class="td" style="background:rgba(255,255,255,.05);color:rgba(255,255,255,.8)">2 台卡車巡迴</div>
+          </div>
+          <div class="tr">
+            <div class="td" style="background:rgba(245,129,42,.15);color:var(--orange2)">歐洲</div>
+            <div class="td" style="background:rgba(255,255,255,.05);color:rgba(255,255,255,.8)">3 台卡車巡迴</div>
+          </div>
+        </div>
+        <p style="margin-top:12px;font-size:12px">報名秒殺 → <span style="color:var(--orange2);font-weight:700">加開隔天場次</span>，固定成本打折，獲利倍數成長。不同於迪士尼需砸重金建樂園。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 動態定價 + Upsell -->
+  <div class="section">
+    <div class="section-label">Dynamic Pricing + Upsell</div>
+    <div class="section-title">客單價堆疊（LTV）：門票只是開始</div>
+    <div class="grid-2">
+      <div>
+        <div class="card" style="margin-bottom:12px">
+          <h3>💺 動態定價機制</h3>
+          <p style="margin-bottom:10px">如同買機票，利用<span class="hl">「稀缺 × 焦慮」</span>設計：</p>
+          <div style="display:flex;align-items:center;gap:8px;margin:8px 0">
+            <div style="background:var(--green2);border:1px solid #a8d5b8;padding:8px 14px;border-radius:6px;font-family:'DM Mono',monospace;font-size:12px;color:var(--green)">早鳥 $3,000+</div>
+            <div style="color:var(--orange);font-size:18px">→</div>
+            <div style="background:var(--cream3);border:1px solid var(--orange3);padding:8px 14px;border-radius:6px;font-family:'DM Mono',monospace;font-size:12px;color:var(--brown)">賽前 $4,000+</div>
+            <div style="color:var(--orange);font-size:18px">→</div>
+            <div style="background:var(--orange);padding:8px 14px;border-radius:6px;font-family:'DM Mono',monospace;font-size:12px;color:#fff">第一天完售</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>📦 附加服務 Upselling</h3>
+          <div class="table-grid">
+            <div class="tr"><div class="td">退票保險</div><div class="td">約 $700，買了才有退票資格，不退還</div></div>
+            <div class="tr"><div class="td">AI 攝影<br>（早鳥）</div><div class="td">約 $800，AI 人臉辨識抓拍所有照片</div></div>
+            <div class="tr"><div class="td">AI 攝影<br>（現場）</div><div class="td"><strong style="color:var(--orange)">$3,000+</strong>，單張 $100，抓準「想發社群炫耀」心理</div></div>
+          </div>
+          <p style="margin-top:10px;font-size:12px;color:var(--muted)">✦ 幾乎所有人都在賽前購買了攝影套餐</p>
+        </div>
+      </div>
+      <div class="card card-orange">
+        <h3>💰 一張票變多少錢？</h3>
+        <p style="margin-bottom:16px;font-size:12px">一位參賽者的實際消費遠超門票本身：</p>
+        <div>
+          <div class="rev-row">
+            <div class="rev-bar" style="background:#2d6a2d;width:55%">門票 ~$3,500</div>
+            <div class="rev-label">基礎收入</div>
+          </div>
+          <div class="rev-row">
+            <div class="rev-bar" style="background:#4a8a4a;width:12%">$700</div>
+            <div class="rev-label">退票保險</div>
+          </div>
+          <div class="rev-row">
+            <div class="rev-bar" style="background:#6aaa6a;width:14%">$800</div>
+            <div class="rev-label">AI 攝影（早鳥）</div>
+          </div>
+          <div class="rev-row">
+            <div class="rev-bar" style="background:rgba(255,255,255,.3);width:90%">PUMA 聯名商品 $5,000+</div>
+            <div class="rev-label">現場衝動消費</div>
+          </div>
+        </div>
+        <div style="margin-top:14px;background:rgba(255,255,255,.15);border-radius:8px;padding:12px;font-family:'DM Mono',monospace;font-size:11px">
+          每人總消費可能達門票的 2～3 倍
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IP授權 + 經常性收入 -->
+  <div class="section">
+    <div class="section-label">Recurring Revenue</div>
+    <div class="section-title">IP 授權：接近 100% 毛利的護城河</div>
+    <div class="grid-3">
+      <div class="card card-green">
+        <div class="tag" style="background:#c8e6c9;border:1px solid #a5d6a7;color:#1b5e20;margin-bottom:10px">IP 授權費</div>
+        <h3 style="color:#1a4a2a">近 100% 毛利</h3>
+        <p>授權給全球健身房與教練使用 HYROX 品牌與訓練模式，<strong>幾乎沒有額外成本</strong>。</p>
+      </div>
+      <div class="card">
+        <div class="tag tag-orange" style="margin-bottom:10px">官方合作健身房</div>
+        <h3>綁定獨家場館</h3>
+        <p>HYROX 特殊器材（滑雪機、划船機）<strong>一般健身房沒有</strong>，參賽者被迫尋找授權場館（如 F45）。</p>
+        <p style="margin-top:8px;font-family:'DM Mono',monospace;font-size:11px;color:var(--orange)">F45：每週 $1,500 / 每月 $6,000</p>
+      </div>
+      <div class="card">
+        <div class="tag tag-orange" style="margin-bottom:10px">教練認證</div>
+        <h3>付費認證閉環</h3>
+        <p>想成為官方認證教練，需額外付費飛往<strong>韓國或德國</strong>考取資格，形成另一個收費閉環。</p>
+      </div>
+    </div>
+    <div class="quote-block" style="margin-top:4px">
+      <p>「辦比賽是一次性爆發收入（山峰），IP 授權是經常性收入（墊底）——兩者結合才是完整的商業飛輪。」</p>
+    </div>
+  </div>
+
+  <!-- 情緒溢價 -->
+  <div class="section">
+    <div class="section-label">Emotional Premium</div>
+    <div class="section-title">PUMA 聯名 × 情緒溢價：完賽那刻最容易掏錢</div>
+    <div class="grid-2">
+      <div class="card">
+        <h3>👟 PUMA 獨家策略（合作至 2030）</h3>
+        <ul>
+          <li>聯名商品<span class="hl">只在賽事現場販售</span>，一般專櫃買不到</li>
+          <li>台灣站早上 8 點開賣，排隊人潮滿到展覽館外</li>
+          <li>完賽多巴胺催化 → 衝動消費 → 花 $5,000+ 購入桃紅色聯名球鞋</li>
+        </ul>
+        <div class="quote-block" style="margin-top:12px">
+          <p>「飢餓行銷 + 多巴胺 = 消費者心甘情願買單」</p>
+        </div>
+      </div>
+      <div class="card card-dark">
+        <h3>🎖️ 完賽魔鬼氈：榮譽勳章</h3>
+        <p>完賽者獲得該城市專屬魔鬼氈徽章，參賽者花<span style="color:var(--orange2);font-weight:700">上萬元</span>購買 HYROX 大背包，將徽章收集貼滿。</p>
+        <p style="margin-top:10px">宛如<strong style="color:var(--orange2)">星巴克城市杯</strong>——</p>
+        <p style="font-size:12px;margin-top:6px;color:rgba(255,255,255,.65)">「情緒價值」＋「品味認同」，讓收集行為持續發生，每次參賽都是新一輪消費。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 健身房 vs 健身房 -->
+  <div class="section">
+    <div class="section-label">Business Model Comparison</div>
+    <div class="section-title">兩種健身房：截然不同的商業底層邏輯</div>
+    <div class="grid-2">
+      <div class="card" style="border-color:#e53e3e;border-width:2px">
+        <h3 style="color:#c53030">📉 賭你不去型</h3>
+        <p style="margin-bottom:8px">World Gym（窩苣）等大型連鎖健身房</p>
+        <p>靠收取<span class="hl">大量會員費</span>，但多數人不使用來獲利。人越多越好，設備越少用越省錢。</p>
+        <p style="margin-top:10px;font-size:12px;padding:8px;background:#fff5f5;border-radius:6px;color:#c53030">
+          ✦ 冷知識：台灣 World Gym 年營收 <strong>100 億</strong>，反向併購美國母公司並上市
+        </p>
+      </div>
+      <div class="card" style="border-color:#38a169;border-width:2px">
+        <h3 style="color:#276749">📈 逼你高黏著型</h3>
+        <p style="margin-bottom:8px">F45、皮拉提斯工作室、HYROX 授權場館</p>
+        <p>主打<span class="hl-green">高客單價 + 高黏著度 + 成就感</span>，每次上課都有儀式感與社群歸屬。</p>
+        <p style="margin-top:10px;font-size:12px;padding:8px;background:#e6f5ec;border-radius:6px;color:#276749">
+          ✦ 加上冰浴恢復課程（包月 $3,000–$6,000），整個備賽生態系全打包收費
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 總結 -->
+  <div class="section">
+    <div class="section-label">Key Takeaway</div>
+    <div class="section-title">用財報思維看 HYROX：四個關鍵武器</div>
+    <div class="grid-2">
+      <div class="card card-dark">
+        <h3>四大財報工具應用</h3>
+        <div class="table-grid">
+          <div class="tr"><div class="td" style="background:rgba(245,129,42,.2);color:var(--orange2)">損益兩平點</div><div class="td" style="background:rgba(255,255,255,.05);color:rgba(255,255,255,.8)">1,500 人 → 超過即純利，台灣站 9,000 人</div></div>
+          <div class="tr"><div class="td" style="background:rgba(245,129,42,.2);color:var(--orange2)">動態定價</div><div class="td" style="background:rgba(255,255,255,.05);color:rgba(255,255,255,.8)">稀缺 × 焦慮，早鳥 → 漲價 → 秒售完</div></div>
+          <div class="tr"><div class="td" style="background:rgba(245,129,42,.2);color:var(--orange2)">LTV 堆疊</div><div class="td" style="background:rgba(255,255,255,.05);color:rgba(255,255,255,.8)">門票 + 保險 + 攝影 + 聯名商品</div></div>
+          <div class="tr"><div class="td" style="background:rgba(245,129,42,.2);color:var(--orange2)">Recurring</div><div class="td" style="background:rgba(255,255,255,.05);color:rgba(255,255,255,.8)">IP 授權 ~100% 毛利 + 教練認證閉環</div></div>
+        </div>
+      </div>
+      <div class="card card-orange">
+        <h3>課程核心啟發</h3>
+        <p style="margin-bottom:12px">學習財報思維的終極目的——</p>
+        <p><strong>不再只是外行看熱鬧</strong>覺得「這生意很好」，而是能看懂背後的商業技術，並隨時應用於自己的工作場景。</p>
+        <div style="margin-top:16px;background:rgba(255,255,255,.15);border-radius:8px;padding:12px;font-style:italic;font-size:13px">
+          「用理論描述現象，而不是用現象說故事。」
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">Cavin · 課後複習一頁式 · 2026.06.09</div>
+</div>
+
+</body>
+</html>
