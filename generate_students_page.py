@@ -1,5 +1,5 @@
 """
-掃描學生資料夾，自動生成 students/index.html
+自動掃描所有學生資料夾，生成 students/index.html
 上傳位置：rock-accounting-students repo 根目錄
 """
 import os
@@ -9,8 +9,8 @@ from urllib.parse import quote
 BASE_URL = "https://brothergo99.github.io/rock-accounting-students"
 PASSWORD = "Rock"
 
-# 學生設定：資料夾名稱 → 顯示名稱、頭像文字
-STUDENTS = {
+# 已知學生的中文顯示名稱與頭像（新學生不需要修改這裡，會自動偵測）
+STUDENT_INFO = {
     "bozhen":    {"name": "Bozhen · 柏蓁",     "avatar": "B"},
     "cavin":     {"name": "Cavin",              "avatar": "C"},
     "goodbook":  {"name": "Goodbook · 好書分享", "avatar": "G"},
@@ -23,14 +23,38 @@ STUDENTS = {
     "xiaotu":    {"name": "Xiaotu · 小兔",      "avatar": "兔"},
     "xiaoyu":    {"name": "Xiaoyu · 小魚",      "avatar": "魚"},
     "yingxiang": {"name": "Yingxiang · 穎祥",   "avatar": "祥"},
+    "april":     {"name": "April",              "avatar": "A"},
 }
+
+# 排除的非學生資料夾
+EXCLUDE_FOLDERS = {".git", ".github", "output", "__pycache__", "node_modules"}
+
+
+def get_all_student_folders():
+    """自動偵測所有學生資料夾（排除系統資料夾）"""
+    folders = []
+    for item in sorted(os.listdir(".")):
+        if os.path.isdir(item) and item not in EXCLUDE_FOLDERS and not item.startswith("."):
+            folders.append(item)
+    return folders
+
+
+def get_student_info(folder_name):
+    """取得學生顯示名稱與頭像，不在設定檔中的自動產生"""
+    if folder_name in STUDENT_INFO:
+        return STUDENT_INFO[folder_name]
+    # 新學生：自動產生頭像（取第一個字母大寫）
+    return {
+        "name": folder_name.capitalize(),
+        "avatar": folder_name[0].upper()
+    }
 
 
 def parse_filename(filename):
     """從檔名解析日期與顯示名稱"""
     name = filename.replace(".html", "")
 
-    # 格式一：0425_柏蓁_一頁式  or  0421-1_Cavin_一頁式
+    # 格式一：0425_柏蓁_一頁式 or 0421-1_Cavin_一頁式
     m = re.match(r"^(\d{4}(?:-\d+)?)([_-])(.+)$", name)
     if m:
         date = m.group(1)
@@ -41,18 +65,18 @@ def parse_filename(filename):
     m2 = re.match(r"^(.+)-(\d{4}-\d{2}-\d{2})$", name)
     if m2:
         display = m2.group(1).replace("-", " ")
-        date = m2.group(2)[5:]  # 取 MM-DD
+        date = m2.group(2)[5:]
         return date, display
 
     return "", name
 
 
 def get_student_files(folder):
-    """取得某學生資料夾內所有 .html 檔案（排除 index.html），按日期排序"""
+    """取得資料夾內所有 .html 檔案（排除 index.html），按名稱排序"""
     if not os.path.isdir(folder):
         return []
-    files = [f for f in os.listdir(folder) if f.endswith(".html") and f != "index.html"]
-    # 依檔名排序（日期在最前面，自然排序即可）
+    files = [f for f in os.listdir(folder)
+             if f.endswith(".html") and f != "index.html"]
     files.sort()
     return files
 
@@ -99,7 +123,7 @@ def generate_html(sections_html):
 <style>
 *{{margin:0;padding:0;box-sizing:border-box}}
 :root{{
-  --orange:#F5812A;--orange2:#FF9A4D;--orange3:#FFC285;
+  --orange:#F5812A;--orange3:#FFC285;
   --cream:#FFF8F0;--cream2:#FFF0E0;--cream3:#FFE4C4;
   --brown:#7A3B10;--brown2:#A05020;--muted:#A08060;
   --ink:#2C1A0A;--white:#FFFFFF;
@@ -154,7 +178,6 @@ footer{{background:var(--brown);color:rgba(255,255,255,.8);padding:20px 48px;dis
   <a class="nav-brand" href="https://brothergo99.github.io/rock-accounting/">Rock <span>會計家教</span></a>
   <a class="nav-back" href="https://brothergo99.github.io/rock-accounting/">← 返回首頁</a>
 </nav>
-
 <div id="login-screen">
   <div class="login-box">
     <div class="login-icon">🎓</div>
@@ -167,7 +190,6 @@ footer{{background:var(--brown);color:rgba(255,255,255,.8);padding:20px 48px;dis
     <button class="pw-btn" onclick="checkPw()">進入學生專區 →</button>
   </div>
 </div>
-
 <div id="content">
   <div class="content-inner">
     <div class="sec-label">Student Zone · 課後複習</div>
@@ -176,12 +198,10 @@ footer{{background:var(--brown);color:rgba(255,255,255,.8);padding:20px 48px;dis
     {sections_html}
   </div>
 </div>
-
 <footer>
   <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
   <div class="ft-note">Student Zone · 學生專區</div>
 </footer>
-
 <script>
   const PASSWORD = "{PASSWORD}";
   function checkPw() {{
@@ -206,18 +226,19 @@ footer{{background:var(--brown);color:rgba(255,255,255,.8);padding:20px 48px;dis
 
 
 def main():
+    folders = get_all_student_folders()
     sections_html = ""
-    for folder_name, info in STUDENTS.items():
+    for folder_name in folders:
         files = get_student_files(folder_name)
-        if files:
+        if files:  # 有 HTML 檔案才顯示
+            info = get_student_info(folder_name)
             sections_html += render_student_section(folder_name, info, files)
 
     html = generate_html(sections_html)
-
     os.makedirs("output", exist_ok=True)
     with open("output/students_index.html", "w", encoding="utf-8") as f:
         f.write(html)
-    print("✅ 生成完成：output/students_index.html")
+    print(f"✅ 生成完成，共 {len(folders)} 個學生資料夾掃描")
 
 
 if __name__ == "__main__":
