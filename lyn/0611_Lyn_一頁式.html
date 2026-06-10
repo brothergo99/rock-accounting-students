@@ -1,1 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lyn · 瑞智精密法說會財報解析 · 2026.06.11</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --orange:#F5812A;--orange2:#FF9A4D;--orange3:#FFC285;
+  --cream:#FFF8F0;--cream2:#FFF0E0;--cream3:#FFE4C4;
+  --brown:#7A3B10;--brown2:#A05020;--muted:#A08060;
+  --ink:#2C1A0A;--white:#fff;
+  --teal:#0f4c5c;--teal2:#e0f2f7;--teal3:#7ec8dc;
+  --green:#1a7a4a;--green2:#e6f5ec;--green3:#a8d5b8;
+  --red:#c53030;--red2:#fff5f5;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7}
 
+.page-header{background:linear-gradient(135deg,#0a1f2e,#112d40,#0a1f2e);padding:48px;position:relative;overflow:hidden}
+.page-header::before{content:'';position:absolute;top:-100px;right:-100px;width:380px;height:380px;background:radial-gradient(circle,rgba(245,129,42,.1),transparent 70%)}
+.page-header::after{content:'瑞智';font-family:'Playfair Display',serif;font-size:170px;font-weight:900;color:rgba(255,255,255,.03);position:absolute;bottom:-30px;right:-10px;line-height:1;pointer-events:none}
+.header-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.25em;color:var(--orange3);text-transform:uppercase;margin-bottom:12px}
+.header-title{font-family:'Playfair Display',serif;font-size:clamp(24px,5vw,44px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:10px}
+.header-title em{color:var(--orange2);font-style:italic}
+.header-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.meta-chip{font-family:'DM Mono',monospace;font-size:10px;padding:5px 12px;border-radius:4px;background:rgba(245,129,42,.18);color:var(--orange3);border:1px solid rgba(245,129,42,.3)}
+
+.container{max-width:1100px;margin:0 auto;padding:40px 32px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:760px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+
+.section{margin-bottom:36px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--orange);text-transform:uppercase;margin-bottom:8px}
+.section-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--orange3)}
+
+.card{background:var(--white);border:1.5px solid var(--orange3);border-radius:12px;padding:20px}
+.card-dark{background:linear-gradient(135deg,#0a1f2e,#112d40);border:none;border-radius:12px;padding:20px;color:#fff}
+.card-orange{background:var(--orange);border:none;border-radius:12px;padding:20px}
+.card-teal{background:var(--teal2);border:1.5px solid var(--teal3);border-radius:12px;padding:20px}
+.card-green{background:var(--green2);border:1.5px solid var(--green3);border-radius:12px;padding:20px}
+.card h3{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;margin-bottom:10px}
+.card-dark h3{color:var(--orange2)}
+.card-orange h3,.card-orange p,.card-orange li{color:#fff}
+.card-teal h3{color:var(--teal)}
+.card-green h3{color:var(--green)}
+.card p,.card li{font-size:13px;line-height:1.8;color:var(--brown2)}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8)}
+.card-teal p,.card-teal li{color:#0a2a35}
+.card-green p,.card-green li{color:#1a4a2a}
+.card ul{padding-left:16px}
+.card ul li{margin-bottom:4px}
+
+.hl{color:var(--orange);font-weight:700}
+.hl-green{color:var(--green);font-weight:700}
+.hl-teal{color:var(--teal);font-weight:700}
+
+.quote-block{border-left:3px solid var(--orange);padding:10px 16px;background:var(--cream2);border-radius:0 8px 8px 0;margin:10px 0}
+.quote-block p{font-size:13px;font-style:italic;color:var(--brown2)}
+
+.table-grid{display:grid;gap:3px;margin-top:10px}
+.tr{display:grid;grid-template-columns:1.4fr 2fr;gap:3px}
+.td{padding:9px 12px;font-size:12px;background:var(--cream2);border-radius:3px}
+.td:first-child{font-family:'DM Mono',monospace;color:var(--orange);font-weight:500;background:var(--cream3)}
+
+/* KPI 大數字 */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}
+@media(max-width:720px){.kpi-grid{grid-template-columns:1fr 1fr}}
+.kpi-box{background:var(--white);border:1.5px solid var(--orange3);border-radius:10px;padding:14px;text-align:center}
+.kpi-n{font-family:'Playfair Display',serif;font-size:24px;font-weight:900;line-height:1.1}
+.kpi-l{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:4px}
+.kpi-delta{font-family:'DM Mono',monospace;font-size:11px;margin-top:4px;font-weight:500}
+.up{color:var(--green)}
+.down{color:var(--red)}
+
+/* 瀑布圖 */
+.waterfall{display:flex;flex-direction:column;gap:5px;margin:12px 0}
+.wf-row{display:flex;align-items:center;gap:10px}
+.wf-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);min-width:90px;text-align:right;flex-shrink:0}
+.wf-bar-wrap{flex:1;display:flex;align-items:center;gap:6px;position:relative;height:26px}
+.wf-bar{height:100%;border-radius:4px;display:flex;align-items:center;padding:0 8px;font-family:'DM Mono',monospace;font-size:11px;color:#fff;white-space:nowrap;font-weight:500}
+
+/* 地圖佈局 */
+.geo-card{display:flex;gap:12px;align-items:flex-start;padding:14px;background:var(--cream2);border:1px solid var(--orange3);border-radius:8px;margin-bottom:8px}
+.geo-flag{font-size:24px;flex-shrink:0;width:36px;text-align:center}
+.geo-content{}
+.geo-name{font-weight:700;font-size:14px;color:var(--ink);margin-bottom:3px}
+.geo-detail{font-size:12px;color:var(--brown2);line-height:1.6}
+.geo-chip{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:3px;background:var(--orange);color:#fff;margin-right:4px;margin-top:4px}
+
+/* Q&A */
+.qa-block{margin-bottom:14px;border:1.5px solid var(--orange3);border-radius:10px;overflow:hidden}
+.qa-q{background:var(--cream3);padding:10px 16px;font-size:13px;font-weight:700;color:var(--brown);display:flex;gap:10px;align-items:flex-start}
+.qa-q-badge{font-family:'DM Mono',monospace;font-size:10px;background:var(--orange);color:#fff;padding:2px 8px;border-radius:3px;flex-shrink:0;margin-top:2px}
+.qa-a{padding:12px 16px;font-size:12px;color:var(--brown2);line-height:1.8}
+.qa-a strong{color:var(--orange)}
+
+.page-footer{background:var(--brown);color:rgba(255,255,255,.7);padding:20px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:40px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:14px;color:var(--orange3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.4)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="header-label">課後複習一頁式 · Lyn</div>
+  <div class="header-title">瑞智精密 114年法說會<br><em>量縮質升——用財報讀懂護城河</em></div>
+  <div class="header-meta">
+    <span class="meta-chip">2026.06.11</span>
+    <span class="meta-chip">法說會解析</span>
+    <span class="meta-chip">毛利率提升 · EPS成長</span>
+    <span class="meta-chip">埃及 · 印度 · BLDC</span>
+    <span class="meta-chip">Rock 老師</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 核心命題 -->
+  <div class="section">
+    <div class="section-label">Core Thesis</div>
+    <div class="section-title">「質的成長」才是這份財報的真正主角</div>
+    <div class="kpi-grid">
+      <div class="kpi-box">
+        <div class="kpi-n down" style="font-size:20px">202.8億</div>
+        <div class="kpi-l">合併營收</div>
+        <div class="kpi-delta down">▼ 5.7% YoY</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-n up">16.66%</div>
+        <div class="kpi-l">毛利率</div>
+        <div class="kpi-delta up">▲ 15.73%→16.66%</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-n up">13.68億</div>
+        <div class="kpi-l">營業淨利</div>
+        <div class="kpi-delta up">▲ 7% YoY</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-n up" style="color:var(--orange)">$2.05</div>
+        <div class="kpi-l">基本 EPS</div>
+        <div class="kpi-delta up">▲ $2.02→$2.05</div>
+      </div>
+    </div>
+    <div class="quote-block">
+      <p>「在合併營收微幅下滑的逆風中，憑藉嚴格庫存去化、費用樽節與高毛利產品比重提升，繳出毛利率↑、營業淨利↑、EPS↑的成績。」</p>
+    </div>
+  </div>
+
+  <!-- 損益深解 -->
+  <div class="section">
+    <div class="section-label">P&amp;L Deep Dive</div>
+    <div class="section-title">損益表：三把刀砍出 7% 營業淨利成長</div>
+    <div class="grid-2">
+      <div class="card card-dark">
+        <h3>📊 損益表瀑布（億元）</h3>
+        <div class="waterfall">
+          <div class="wf-row">
+            <div class="wf-label">營業收入</div>
+            <div class="wf-bar-wrap"><div class="wf-bar" style="background:#1a4a7a;width:100%">202.8</div></div>
+          </div>
+          <div class="wf-row">
+            <div class="wf-label">－營業成本</div>
+            <div class="wf-bar-wrap"><div class="wf-bar" style="background:#8b1a1a;width:83.3%">169.0</div></div>
+          </div>
+          <div class="wf-row">
+            <div class="wf-label">＝毛利</div>
+            <div class="wf-bar-wrap"><div class="wf-bar" style="background:#1a6a3a;width:16.7%">33.78</div><span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--green)">16.66%</span></div>
+          </div>
+          <div class="wf-row">
+            <div class="wf-label">－營業費用</div>
+            <div class="wf-bar-wrap"><div class="wf-bar" style="background:#a05020;width:9.9%">20.10</div></div>
+          </div>
+          <div class="wf-row">
+            <div class="wf-label">＝營業淨利</div>
+            <div class="wf-bar-wrap"><div class="wf-bar" style="background:var(--orange);width:6.7%">13.68</div><span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--orange2)">↑7%</span></div>
+          </div>
+        </div>
+        <div style="margin-top:12px;font-size:11px;color:rgba(255,255,255,.5);font-family:'DM Mono',monospace">114年 vs 113年</div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:12px">
+          <h3>🔑 獲利逆轉三把刀</h3>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="background:var(--green2);border:1px solid var(--green3);border-radius:8px;padding:10px 14px">
+              <div style="font-size:12px;font-weight:700;color:var(--green)">① 產品組合優化</div>
+              <div style="font-size:12px;color:#1a4a2a;margin-top:3px">BLDC馬達收入 4.36→4.87億，高毛利產品比重提升，毛利率+0.93pp</div>
+            </div>
+            <div style="background:var(--cream2);border:1px solid var(--orange3);border-radius:8px;padding:10px 14px">
+              <div style="font-size:12px;font-weight:700;color:var(--orange)">② 費用嚴格樽節</div>
+              <div style="font-size:12px;color:var(--brown2);margin-top:3px">推銷費 5.92→5.29億、管理費 7.82→7.45億；研發費用維持7.25億（不妥協）</div>
+            </div>
+            <div style="background:var(--teal2);border:1px solid var(--teal3);border-radius:8px;padding:10px 14px">
+              <div style="font-size:12px;font-weight:700;color:var(--teal)">③ 存貨去化</div>
+              <div style="font-size:12px;color:#0a2a35;margin-top:3px">存貨 32.92→24.97億，降幅24%，減少資金積壓與跌價風險</div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>💰 業外 & 稅務亮點</h3>
+          <div class="table-grid">
+            <div class="tr"><div class="td">理財收益</div><div class="td">強制按公允價值衡量金融資產獲利 8,401萬（↑去年7,072萬）</div></div>
+            <div class="tr"><div class="td">利息收入</div><div class="td">1.17億，受惠資金配置</div></div>
+            <div class="tr"><div class="td">優惠稅率</div><div class="td">中國子公司（惠州/青島/東莞/九江）符合高新技術享 15% 優惠稅率</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 資產負債 + 現金流 -->
+  <div class="section">
+    <div class="section-label">Balance Sheet + Cash Flow</div>
+    <div class="section-title">資產負債：瘦身有術，現金依然充沛</div>
+    <div class="grid-3">
+      <div class="card">
+        <h3>📦 存貨管理</h3>
+        <div style="text-align:center;margin:12px 0">
+          <div style="display:flex;justify-content:center;align-items:flex-end;gap:16px;height:80px">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+              <div style="background:#e53e3e;width:36px;border-radius:4px 4px 0 0;height:80px;display:flex;align-items:flex-start;justify-content:center;padding-top:6px">
+                <span style="font-family:'DM Mono',monospace;font-size:10px;color:#fff">32.9</span>
+              </div>
+              <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted)">113年</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+              <div style="background:var(--green);width:36px;border-radius:4px 4px 0 0;height:60px;display:flex;align-items:flex-start;justify-content:center;padding-top:6px">
+                <span style="font-family:'DM Mono',monospace;font-size:10px;color:#fff">24.9</span>
+              </div>
+              <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted)">114年</div>
+            </div>
+          </div>
+        </div>
+        <p style="font-size:12px;text-align:center"><span class="hl-green">▼ 24%</span>，近8億資金解凍<br>搭配 JIT 生產備料精準化</p>
+      </div>
+
+      <div class="card card-teal">
+        <h3>🏦 流動性防線</h3>
+        <div style="margin:10px 0;display:flex;flex-direction:column;gap:6px">
+          <div style="background:#fff;border-radius:6px;padding:10px;text-align:center">
+            <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--teal)">42.01億</div>
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted)">帳上現金 & 約當現金</div>
+          </div>
+          <div style="background:#fff;border-radius:6px;padding:10px;text-align:center">
+            <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--green)">75.65億</div>
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted)">未動用銀行融資額度</div>
+          </div>
+        </div>
+        <p style="font-size:12px;color:#0a2a35;margin-top:4px">應對突發衝擊的極厚護城河</p>
+      </div>
+
+      <div class="card">
+        <h3>🔄 庫藏股 & 股利</h3>
+        <div style="background:var(--cream2);border-radius:8px;padding:12px;margin-bottom:10px">
+          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--orange);margin-bottom:5px">庫藏股買回</div>
+          <div style="font-size:13px;color:var(--ink)">斥資 <strong>3.58億</strong> 買回 14,300張<br>→ 管理層對內在價值強烈信心</div>
+        </div>
+        <div style="background:var(--green2);border-radius:8px;padding:12px">
+          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);margin-bottom:5px">114年股利</div>
+          <div style="font-size:13px;color:#1a4a2a">每股 <strong>$1.50</strong> 現金股利<br>配息率 <strong>73%</strong>（EPS $2.05）<br>115年6月12日股東常會通過</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 全球佈局 -->
+  <div class="section">
+    <div class="section-label">Global Strategy</div>
+    <div class="section-title">全球化三箭齊發：BLDC 垂直整合 × 埃及 × 印度</div>
+    <div class="grid-2">
+      <div>
+        <div class="geo-card">
+          <div class="geo-flag">⚙️</div>
+          <div class="geo-content">
+            <div class="geo-name">BLDC 馬達垂直整合（瑞展動能）</div>
+            <div class="geo-detail">113年4月斥資 <strong>3.12億</strong> 向台灣三洋電機、立錡科技等買入 28.77% 股權<br>持股比例：<span style="color:#c53030">65.65%</span> → <span style="color:var(--green);font-weight:700">94.42%</span></div>
+            <span class="geo-chip">完全主導研發</span><span class="geo-chip" style="background:var(--green)">壓縮機協同綜效</span>
+          </div>
+        </div>
+        <div class="geo-card">
+          <div class="geo-flag">🇪🇬</div>
+          <div class="geo-content">
+            <div class="geo-name">埃及 · COMPRA 合資公司</div>
+            <div class="geo-detail">透過 Rechi International Holdings 設立<br>業務：迴轉式壓縮機製造及銷售<br>資本額 1,000萬美元，持股 <strong>30%</strong>，已注資 235萬美元</div>
+            <span class="geo-chip" style="background:var(--teal)">歐亞非樞紐</span><span class="geo-chip" style="background:var(--teal)">中東非洲跳板</span>
+          </div>
+        </div>
+        <div class="geo-card">
+          <div class="geo-flag">🇮🇳</div>
+          <div class="geo-content">
+            <div class="geo-name">印度 · DAIKIN RECHI 合資公司</div>
+            <div class="geo-detail">與大金工業（DAIKIN）深度結盟，設立研發製造銷售公司<br>資本額 24.5億日圓，持股 <strong>49%</strong>，已注資約 5,510萬元</div>
+            <span class="geo-chip" style="background:#7b1fa2">全球一線大廠</span><span class="geo-chip" style="background:var(--green)">最大成長市場</span>
+          </div>
+        </div>
+      </div>
+      <div class="card card-dark">
+        <h3>🌐 為什麼這三步很重要？</h3>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
+          <div style="background:rgba(255,255,255,.06);border-radius:8px;padding:12px">
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--orange2);margin-bottom:4px">BLDC 垂直整合</div>
+            <p>未來家電節能減碳的關鍵零組件，<span style="color:var(--orange2);font-weight:700">94%持股</span>讓集團完全掌控研發方向，壓縮機＋馬達深度整合，提升定價能力。</p>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:8px;padding:12px">
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--teal3);margin-bottom:4px">地緣政治分散</div>
+            <p>單一生產基地的脆弱性是整個製造業難題。埃及＋印度廠建成後，有效規避<span style="color:var(--teal3);font-weight:700">關稅壁壘與供應鏈斷鏈風險</span>。</p>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:8px;padding:12px">
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:#a8d5b8;margin-bottom:4px">確定性出海口</div>
+            <p>與大金結盟，<span style="color:#a8d5b8;font-weight:700">落地即有穩定訂單</span>，印度空調市場正處爆發初期，預計 1–2 年內量產，成為下一波雙引擎。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 法說會Q&A -->
+  <div class="section">
+    <div class="section-label">Investor Q&amp;A · 法說會問答解析</div>
+    <div class="section-title">三個核心問題：分析師問什麼？財務長怎麼答？</div>
+
+    <div class="qa-block">
+      <div class="qa-q">
+        <span class="qa-q-badge">Q1 外資</span>
+        營收衰退 5.7%，為何 EPS 和淨利反而成長？
+      </div>
+      <div class="qa-a">
+        三大引擎：<strong>①產品組合優化</strong>（高毛利 BLDC 比重提升，毛利率 15.73%→16.66%）<strong>②費用嚴格控管</strong>（推銷+管理費省下 ~1億，研發維持高投入）<strong>③庫存去化8億</strong>（減少積壓與跌價損失）。三者共同作用，讓營業淨利成長 7%、EPS 逆勢突破。
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">
+        <span class="qa-q-badge">Q2 法人</span>
+        存貨下降是否回到健康水位？庫藏股背後的考量？
+      </div>
+      <div class="qa-a">
+        存貨降至 24.97億，已屬<strong>健康流動水位</strong>，未來搭配 JIT 精準備料，避免再度積壓。庫藏股方面，董事會認為股價未充分反映<strong>內在價值與海外佈局潛力</strong>，買回既護信用也提升每股盈餘，展現管理層對前景的強烈信心。
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <div class="qa-q">
+        <span class="qa-q-badge">Q3 媒體</span>
+        印度大金合資工廠，何時對營收有貢獻？
+      </div>
+      <div class="qa-a">
+        目前已注資 5,510萬元，正推進建廠與審批。考量建廠→產線調試→產品認證流程，預計 <strong>1–2 年內逐步量產</strong>，初期服務大金等核心客戶的印度本土內需（確定性高的出海口）。短期貢獻仍在醞釀，但<strong>中長期印度廠+埃及廠將成雙引擎</strong>，推動下一波營收大爆發。
+      </div>
+    </div>
+  </div>
+
+  <!-- 總結 -->
+  <div class="section">
+    <div class="section-label">Key Takeaway</div>
+    <div class="section-title">從瑞智財報讀懂四個財報分析框架</div>
+    <div class="grid-2">
+      <div class="card card-orange">
+        <h3>📌 四個核心框架</h3>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:11px 14px">
+            <div style="font-weight:700;font-size:13px">量縮質升 ≠ 衰退</div>
+            <div style="font-size:12px;opacity:.9;margin-top:2px">看 EPS、毛利率、營業淨利，不只看營收</div>
+          </div>
+          <div style="background:rgba(255,255,255,.2);border-radius:8px;padding:11px 14px">
+            <div style="font-weight:700;font-size:13px">存貨是卡住的錢</div>
+            <div style="font-size:12px;opacity:.9;margin-top:2px">-24% 存貨 = 8億資金回流 + 潛在跌價風險消除</div>
+          </div>
+          <div style="background:rgba(255,255,255,.25);border-radius:8px;padding:11px 14px">
+            <div style="font-weight:700;font-size:13px">現金流 > 利潤數字</div>
+            <div style="font-size:12px;opacity:.9;margin-top:2px">帳上42億現金＋75億未動用額度 = 真正的護城河</div>
+          </div>
+          <div style="background:rgba(255,255,255,.3);border-radius:8px;padding:11px 14px">
+            <div style="font-weight:700;font-size:13px">投資看未來故事</div>
+            <div style="font-size:12px;opacity:.9;margin-top:2px">BLDC垂直整合＋印度＋埃及 = 下一個成長曲線</div>
+          </div>
+        </div>
+      </div>
+      <div class="card card-dark">
+        <h3>核心啟發</h3>
+        <div class="table-grid">
+          <div class="tr"><div class="td" style="background:rgba(245,129,42,.2);color:var(--orange2)">毛利率管理</div><div class="td" style="background:rgba(255,255,255,.05);color:rgba(255,255,255,.8)">產品結構比絕對營收更重要</div></div>
+          <div class="tr"><div class="td" style="background:rgba(245,129,42,.2);color:var(--orange2)">費用紀律</div><div class="td" style="background:rgba(255,255,255,.05);color:rgba(255,255,255,.8)">行銷管理可砍，研發不能妥協</div></div>
+          <div class="tr"><div class="td" style="background:rgba(245,129,42,.2);color:var(--orange2)">庫藏股信號</div><div class="td" style="background:rgba(255,255,255,.05);color:rgba(255,255,255,.8)">管理層買自家股 = 對估值最強的背書</div></div>
+          <div class="tr"><div class="td" style="background:rgba(245,129,42,.2);color:var(--orange2)">高配息率</div><div class="td" style="background:rgba(255,255,255,.05);color:rgba(255,255,255,.8)">73% 配息率，顯示現金流充足且股東導向</div></div>
+          <div class="tr"><div class="td" style="background:rgba(245,129,42,.2);color:var(--orange2)">垂直整合</div><div class="td" style="background:rgba(255,255,255,.05);color:rgba(255,255,255,.8)">持股 94% = 成本、定價、研發全掌控</div></div>
+        </div>
+        <div class="quote-block" style="margin-top:14px;background:rgba(255,255,255,.04);border-left-color:var(--orange2)">
+          <p style="color:rgba(255,255,255,.7)">「讀財報不是記數字——是透過數字的變化，看懂一家公司正在打什麼戰略。」</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">Lyn · 課後複習一頁式 · 2026.06.11</div>
+</div>
+
+</body>
+</html>
