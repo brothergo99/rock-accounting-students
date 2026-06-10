@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>April · 財報商業思維與實戰解析 · 2026.06.10</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --orange:#F5812A;--orange2:#FF9A4D;--orange3:#FFC285;
+  --cream:#FFF8F0;--cream2:#FFF0E0;--cream3:#FFE4C4;
+  --brown:#7A3B10;--brown2:#A05020;--brown3:#C07030;
+  --muted:#A08060;--ink:#2C1A0A;--white:#FFFFFF;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7}
+
+/* HEADER */
+.page-header{background:linear-gradient(135deg,#1A0A00,#2E1200);padding:48px;position:relative;overflow:hidden}
+.page-header::before{content:'';position:absolute;top:-80px;right:-80px;width:320px;height:320px;background:radial-gradient(circle,rgba(245,129,42,.18),transparent 70%)}
+.header-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.25em;color:var(--orange3);text-transform:uppercase;margin-bottom:12px}
+.header-title{font-family:'Playfair Display',serif;font-size:clamp(26px,5vw,46px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:10px}
+.header-title em{color:var(--orange2);font-style:italic}
+.header-meta{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
+.meta-chip{font-family:'DM Mono',monospace;font-size:10px;padding:5px 12px;border-radius:4px;background:rgba(245,129,42,.2);color:var(--orange3);border:1px solid rgba(245,129,42,.3)}
+
+/* LAYOUT */
+.container{max-width:1100px;margin:0 auto;padding:40px 32px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+@media(max-width:720px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+/* SECTION */
+.section{margin-bottom:36px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--orange);text-transform:uppercase;margin-bottom:8px}
+.section-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--orange3)}
+
+/* CARD */
+.card{background:var(--white);border:1.5px solid var(--orange3);border-radius:12px;padding:20px}
+.card-dark{background:linear-gradient(135deg,#1A0A00,#2E1200);border:none;color:#fff}
+.card-orange{background:var(--orange);color:#fff;border:none}
+.card h3{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;margin-bottom:8px}
+.card-dark h3,.card-orange h3{color:#fff}
+.card p,.card li{font-size:13px;line-height:1.75;color:var(--brown2)}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8)}
+.card-orange p,.card-orange li{color:rgba(255,255,255,.9)}
+.card ul{padding-left:16px}
+.card ul li{margin-bottom:4px}
+
+/* FORMULA BOX */
+.formula{background:var(--cream2);border:2px solid var(--orange3);border-radius:10px;padding:16px 20px;text-align:center;margin:12px 0}
+.formula-text{font-family:'DM Mono',monospace;font-size:14px;color:var(--orange);font-weight:500;letter-spacing:.05em}
+.formula-sub{font-size:11px;color:var(--muted);margin-top:4px}
+
+/* HIGHLIGHT */
+.hl{color:var(--orange);font-weight:700}
+.hl2{color:var(--brown);font-weight:700}
+
+/* TAG */
+.tag{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;padding:3px 9px;border-radius:4px;margin:2px}
+.tag-orange{background:var(--cream3);border:1px solid var(--orange3);color:var(--brown2)}
+.tag-dark{background:rgba(245,129,42,.15);border:1px solid rgba(245,129,42,.3);color:var(--orange)}
+
+/* TABLE */
+.table-grid{display:grid;gap:2px;margin-top:8px}
+.tr{display:grid;grid-template-columns:1fr 2fr;gap:2px}
+.td{padding:8px 12px;font-size:12px;background:var(--cream2);border-radius:3px}
+.td:first-child{font-family:'DM Mono',monospace;color:var(--orange);font-weight:500;background:var(--cream3)}
+
+/* DUPONT */
+.dupont-row{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:16px 0}
+.dupont-box{background:var(--white);border:2px solid var(--orange3);border-radius:10px;padding:14px 18px;text-align:center;min-width:120px}
+.dupont-box .num{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--orange)}
+.dupont-box .label{font-size:11px;color:var(--muted);margin-top:2px}
+.dupont-box .sub{font-family:'DM Mono',monospace;font-size:10px;color:var(--brown3);margin-top:2px}
+.dupont-op{font-family:'Playfair Display',serif;font-size:24px;color:var(--orange3);font-weight:900}
+
+/* CASE */
+.case-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.case-badge{background:var(--orange);color:#fff;font-family:'DM Mono',monospace;font-size:9px;padding:4px 10px;border-radius:4px;letter-spacing:.1em;text-transform:uppercase;flex-shrink:0}
+.case-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--ink)}
+
+/* QUOTE */
+.quote-block{border-left:3px solid var(--orange);padding:10px 16px;background:var(--cream2);border-radius:0 8px 8px 0;margin:12px 0}
+.quote-block p{font-size:13px;font-style:italic;color:var(--brown2)}
+
+/* STAT ROW */
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.stat-box{background:var(--cream2);border:1px solid var(--orange3);border-radius:8px;padding:12px;text-align:center}
+.stat-n{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--orange)}
+.stat-l{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:2px}
+
+/* FOOTER */
+.page-footer{background:var(--brown);color:rgba(255,255,255,.7);padding:20px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:40px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:14px;color:var(--orange3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.4)}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="page-header">
+  <div class="header-label">課後複習一頁式 · April</div>
+  <div class="header-title">財報商業思維<br><em>與實戰解析</em></div>
+  <div class="header-meta">
+    <span class="meta-chip">2026.06.10</span>
+    <span class="meta-chip">四大報表 · 杜邦分析</span>
+    <span class="meta-chip">中租-KY 實戰案例</span>
+    <span class="meta-chip">Rock 老師</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 核心思維 -->
+  <div class="section">
+    <div class="section-label">Core Concept</div>
+    <div class="section-title">四大報表的底層運算邏輯</div>
+    <div class="grid-3">
+      <div class="card card-dark">
+        <h3>📊 資產負債表</h3>
+        <p><span style="color:var(--orange2);font-weight:700">加法的表</span><br>錢是怎麼來的？</p>
+        <div style="margin-top:10px;font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,.6)">資產 = 負債 + 股東權益</div>
+      </div>
+      <div class="card card-dark">
+        <h3>📉 損益表</h3>
+        <p><span style="color:var(--orange2);font-weight:700">減法的表</span><br>賺錢了嗎？賺多少？</p>
+        <div style="margin-top:10px;font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,.6)">收入 − 成本 − 費用 = 淨利</div>
+      </div>
+      <div class="card card-dark">
+        <h3>📐 財務比率</h3>
+        <p><span style="color:var(--orange2);font-weight:700">除法的表</span><br>效率如何？誰在乎？</p>
+        <div style="margin-top:10px;font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,.6)">ROE / 流動比率 / 周轉率</div>
+      </div>
+    </div>
+    <div class="quote-block" style="margin-top:16px">
+      <p>「這堂課的目的不是訓練你成為會計師，而是培養<strong>經營者的財報思維</strong>——看懂數字背後的商業邏輯。」</p>
+    </div>
+  </div>
+
+  <!-- 資產負債表 -->
+  <div class="section">
+    <div class="section-label">Balance Sheet</div>
+    <div class="section-title">資產負債表 · 財務結構三種資金來源</div>
+    <div class="grid-2">
+      <div>
+        <div class="card" style="margin-bottom:12px">
+          <h3>💰 三種借錢方式</h3>
+          <div class="table-grid">
+            <div class="tr"><div class="td">銀行借款</div><div class="td">額度大、利率穩定，最讓老闆睡得著覺</div></div>
+            <div class="tr"><div class="td">預收帳款</div><div class="td">客戶先付錢→拿去備貨→不動用自有資金（優質）</div></div>
+            <div class="tr"><div class="td">應付帳款</div><div class="td">跟供應商「借貨」，120天月結→買空賣空</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>🔄 商業兩大循環</h3>
+          <p style="margin-bottom:8px"><span class="hl">增值循環：</span>現金→生財器具→存貨→應收帳款→更多現金</p>
+          <p><span class="hl2">貶值循環：</span>生財器具隨時間耗損貶值</p>
+          <p style="margin-top:8px;font-size:12px;color:var(--muted)">當增值 > 貶值 → 找到賺錢模式 → 尋找更多資金擴大經營</p>
+        </div>
+      </div>
+      <div class="card" style="background:var(--cream2)">
+        <h3>📐 財務結構（開槓桿）</h3>
+        <div style="margin:16px 0;text-align:center">
+          <div style="display:inline-block;background:var(--white);border:2px solid var(--orange3);border-radius:10px;padding:20px 32px">
+            <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--orange)">總資產</div>
+            <div style="display:flex;gap:8px;margin-top:12px;justify-content:center">
+              <div style="background:var(--orange);color:#fff;padding:8px 16px;border-radius:6px;font-size:12px;font-weight:700">自有資金<br>股東權益</div>
+              <div style="background:var(--brown2);color:#fff;padding:8px 16px;border-radius:6px;font-size:12px;font-weight:700">借來的錢<br>負債</div>
+            </div>
+          </div>
+        </div>
+        <p style="font-size:12px">槓桿是<strong>中性的</strong>：資產漲→獲利放大；資產跌→本金瞬間歸零。股災時借貸買股的人會極度恐慌，原因就在這裡。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 損益表 -->
+  <div class="section">
+    <div class="section-label">Income Statement</div>
+    <div class="section-title">損益表 · 毛利率 vs 營業淨利率</div>
+    <div class="formula">
+      <div class="formula-text">收入 − 成本 = 毛利（毛利率） → 再 − 費用 = 營業淨利（營業淨利率）</div>
+      <div class="formula-sub">毛利率 = 產品底氣 ／ 營業淨利率 = 管理效率</div>
+    </div>
+    <div class="grid-2" style="margin-top:16px">
+      <div class="card">
+        <div class="case-header">
+          <div class="case-badge">案例 01</div>
+          <div class="case-title">LINE Pay 辦公室裝潢</div>
+        </div>
+        <p>內湖瑞光路六層樓辦公室，花費<span class="hl">一億元</span>裝潢（含兩層樓高熊大）。租賃改良物五年攤銷，<strong>一年還沒開始營業就先產生 2,000 萬費用</strong>。</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--muted)">✦ 這是行銷策略，創造品牌氛圍，未必是浪費</p>
+      </div>
+      <div class="card">
+        <div class="case-header">
+          <div class="case-badge">案例 02</div>
+          <div class="case-title">LV 的費用控管</div>
+        </div>
+        <div class="stat-row" style="grid-template-columns:1fr 1fr 1fr;margin-bottom:12px">
+          <div class="stat-box"><div class="stat-n">69%</div><div class="stat-l">毛利率</div></div>
+          <div class="stat-box"><div class="stat-n">49%</div><div class="stat-l">行銷費用率</div></div>
+          <div class="stat-box"><div class="stat-n">20%</div><div class="stat-l">營業淨利率</div></div>
+        </div>
+        <p style="font-size:12px">奢侈品行業費用率常年穩定，因此<strong>營收必須絕對達標</strong>，否則費用率立刻飆升。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 杜邦分析 -->
+  <div class="section">
+    <div class="section-label">DuPont Analysis</div>
+    <div class="section-title">杜邦分析法 · 拆解 ROE 三引擎</div>
+    <div class="dupont-row">
+      <div class="dupont-box">
+        <div class="num">ROE</div>
+        <div class="label">股東權益報酬率</div>
+        <div class="sub">巴菲特最看重</div>
+      </div>
+      <div class="dupont-op">=</div>
+      <div class="dupont-box">
+        <div class="num" style="font-size:16px">利潤率</div>
+        <div class="label">賣得有價值</div>
+        <div class="sub">用能力賺錢</div>
+      </div>
+      <div class="dupont-op">×</div>
+      <div class="dupont-box">
+        <div class="num" style="font-size:16px">周轉率</div>
+        <div class="label">賣得快</div>
+        <div class="sub">用速度賺錢（翻桌率）</div>
+      </div>
+      <div class="dupont-op">×</div>
+      <div class="dupont-box">
+        <div class="num" style="font-size:16px">權益乘數</div>
+        <div class="label">開槓桿</div>
+        <div class="sub">用風險賺錢</div>
+      </div>
+    </div>
+    <div class="quote-block">
+      <p>「財報數字是乘法效應——賣得有價值 × 賣得快 → 經營者自然會把槓桿開到最大（例如瘋狂開分店）。用財報理論解釋商業現象，而不是單純看現象說故事。」</p>
+    </div>
+  </div>
+
+  <!-- 反向思維 -->
+  <div class="section">
+    <div class="section-label">Reverse Thinking</div>
+    <div class="section-title">反向思維 · 資產放久是負擔，負債也能是好消息</div>
+    <div class="grid-2">
+      <div class="card" style="border-color:#e53e3e;border-width:2px">
+        <h3 style="color:#c53030">⚠️ 資產放久了是風險</h3>
+        <p style="margin-bottom:10px"><span class="hl">應收帳款：</span>某大公司第四季法說會承認 <strong>53億應收帳款收不回來</strong>，股價暴跌（兩週後又宣布收回）。應收帳款越放越像「芒刺在背」。</p>
+        <p><span class="hl">存貨：</span>東西堆在那裡，佔用資金又影響心情。核心是提升周轉率，不讓資產放太久。</p>
+      </div>
+      <div class="card" style="border-color:#38a169;border-width:2px">
+        <h3 style="color:#276749">✅ 負債也可以是好消息</h3>
+        <p><span class="hl">預收帳款：</span>客戶先付錢，公司欠的是「未來的貨品或服務」，而不是現金。大幅減輕資金壓力。</p>
+        <p style="margin-top:10px;font-size:12px;font-style:italic;color:var(--muted)">經營者應該克服「怕對方不接受」的心理，積極爭取預收的商業條件。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 中租案例 -->
+  <div class="section">
+    <div class="section-label">Real Case · 中租-KY 5871</div>
+    <div class="section-title">實戰案例 · 中租 KY 財報解讀</div>
+    <div class="grid-2">
+      <div>
+        <div class="card card-dark" style="margin-bottom:12px">
+          <h3>財務結構（超高槓桿）</h3>
+          <div class="stat-row" style="margin-top:12px">
+            <div class="stat-box" style="background:rgba(245,129,42,.15);border-color:rgba(245,129,42,.3)">
+              <div class="stat-n" style="color:var(--orange2)">9,700億</div>
+              <div class="stat-l" style="color:rgba(255,255,255,.5)">總資產</div>
+            </div>
+            <div class="stat-box" style="background:rgba(245,129,42,.15);border-color:rgba(245,129,42,.3)">
+              <div class="stat-n" style="color:var(--orange2)">20%</div>
+              <div class="stat-l" style="color:rgba(255,255,255,.5)">股東權益</div>
+            </div>
+            <div class="stat-box" style="background:rgba(245,129,42,.15);border-color:rgba(245,129,42,.3)">
+              <div class="stat-n" style="color:var(--orange2)">80%</div>
+              <div class="stat-l" style="color:rgba(255,255,255,.5)">負債（借來的）</div>
+            </div>
+          </div>
+          <p style="margin-top:12px;font-size:12px">主力資產：<span style="color:var(--orange2);font-weight:700">應收帳款 5,940億（佔61%）</span>——本業就是借錢給中小企業，應收帳款龐大是正常的。</p>
+        </div>
+        <div class="card">
+          <h3>🏦 獲利模式</h3>
+          <div class="table-grid">
+            <div class="tr"><div class="td">收入來源</div><div class="td">77% 來自利息收入</div></div>
+            <div class="tr"><div class="td">毛利率</div><div class="td"><strong style="color:var(--orange)">66%</strong>（用低利率借錢，以2-3倍利率借出去）</div></div>
+            <div class="tr"><div class="td">扣除壞帳後</div><div class="td">實際毛利率約 <strong>46%</strong></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card card-orange">
+        <h3>📋 法說會解讀重點</h3>
+        <ul style="margin-top:10px">
+          <li style="margin-bottom:10px"><strong>量（Q）× 價（P）：</strong>觀察「信用資產成長」（放款量）與「收益率」（利率），收益率遠高於資金成本，印證 66% 毛利率的秘密。</li>
+          <li style="margin-bottom:10px"><strong>營運挑戰：</strong>營收較去年下滑 → 費用成本率上升 → ROE 表現不如以往。</li>
+          <li><strong>風險訊號：</strong>延滯率與備抵損失增加，代表風險資產惡化——這些必須「跟去年的自己比、跟上一季比」才能看出端倪。</li>
+        </ul>
+        <div style="margin-top:16px;background:rgba(255,255,255,.15);border-radius:8px;padding:12px;font-family:'DM Mono',monospace;font-size:11px">
+          高負債比 ≠ 危險<br>只要獲利覆蓋率 > 風險＋利息，<br>公司依然會選擇把槓桿開滿
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 誰在乎 -->
+  <div class="section">
+    <div class="section-label">Stakeholder View</div>
+    <div class="section-title">財務比率 · 誰在乎哪些數字？</div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="tag tag-dark">銀行 · 債權人</div>
+        <h3 style="margin-top:10px">償債能力</h3>
+        <p>流動比率等。確認公司財務是否健全、借出的錢能不能收回。</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--muted)">財報不完整→無法向銀行融資→被迫找中租等，資金成本更高。</p>
+      </div>
+      <div class="card">
+        <div class="tag tag-dark">老闆 · 業務主管</div>
+        <h3 style="margin-top:10px">營運能力</h3>
+        <p>各項周轉率。關係到公司內部經營效率與業務推動速度。</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--muted)">周轉率 = 翻桌率，越快越好。</p>
+      </div>
+      <div class="card">
+        <div class="tag tag-dark">股東 · 投資人</div>
+        <h3 style="margin-top:10px">盈利能力</h3>
+        <p>EPS、本益比、ROE。菜籃族看 EPS 決定是否投資。</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--muted)">杜邦分析幫你看出公司厲害在哪一個引擎。</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">April · 課後複習一頁式 · 2026.06.10</div>
+</div>
+
+</body>
+</html>
