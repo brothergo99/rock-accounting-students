@@ -4,18 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'bozhen/**'
-      - 'cavin/**'
-      - 'goodbook/**'
-      - 'huimei/**'
-      - 'jiaru/**'
-      - 'jiayi/**'
-      - 'liya/**'
-      - 'mandy/**'
-      - 'megan/**'
-      - 'xiaotu/**'
-      - 'xiaoyu/**'
-      - 'yingxiang/**'
+      - '**/*.html'   # 任何學生資料夾新增 HTML 都會觸發
 
 jobs:
   update-student-zone:
