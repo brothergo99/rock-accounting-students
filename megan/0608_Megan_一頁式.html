@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Megan · 財務儀表板與中小企業實戰 · 2026.06.08</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --orange:#F5812A;--orange2:#FF9A4D;--orange3:#FFC285;
+  --cream:#FFF8F0;--cream2:#FFF0E0;--cream3:#FFE4C4;
+  --brown:#7A3B10;--brown2:#A05020;--muted:#A08060;
+  --ink:#2C1A0A;--white:#FFFFFF;
+  --blue:#1a3a7a;--blue2:#e6edf5;--blue3:#a8c0e0;
+  --green:#1a7a4a;--green2:#e6f5ec;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7}
+
+/* HEADER */
+.page-header{background:linear-gradient(135deg,#0f1c2e,#1a2e4a,#0f1c2e);padding:48px;position:relative;overflow:hidden}
+.page-header::before{content:'';position:absolute;top:-80px;right:-80px;width:320px;height:320px;background:radial-gradient(circle,rgba(245,129,42,.12),transparent 70%)}
+.page-header::after{content:'CFO';font-family:'Playfair Display',serif;font-size:200px;font-weight:900;color:rgba(255,255,255,.03);position:absolute;bottom:-40px;right:-10px;line-height:1;pointer-events:none}
+.header-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.25em;color:var(--orange3);text-transform:uppercase;margin-bottom:12px}
+.header-title{font-family:'Playfair Display',serif;font-size:clamp(24px,5vw,44px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:10px}
+.header-title em{color:var(--orange2);font-style:italic}
+.header-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.meta-chip{font-family:'DM Mono',monospace;font-size:10px;padding:5px 12px;border-radius:4px;background:rgba(245,129,42,.18);color:var(--orange3);border:1px solid rgba(245,129,42,.3)}
+
+.container{max-width:1100px;margin:0 auto;padding:40px 32px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+@media(max-width:720px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+.section{margin-bottom:36px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--orange);text-transform:uppercase;margin-bottom:8px}
+.section-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--orange3)}
+
+.card{background:var(--white);border:1.5px solid var(--orange3);border-radius:12px;padding:20px}
+.card-dark{background:linear-gradient(135deg,#0f1c2e,#1a2e4a);border:none;color:#fff}
+.card-orange{background:var(--orange);color:#fff;border:none;border-radius:12px;padding:20px}
+.card-blue{background:var(--blue2);border:1.5px solid var(--blue3);border-radius:12px;padding:20px}
+.card-green{background:var(--green2);border:1.5px solid #a8d5b8;border-radius:12px;padding:20px}
+.card h3{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;margin-bottom:10px}
+.card-dark h3{color:var(--orange2)}
+.card-orange h3,.card-orange p,.card-orange li{color:#fff}
+.card-blue h3{color:var(--blue)}
+.card-green h3{color:var(--green)}
+.card p,.card li{font-size:13px;line-height:1.8;color:var(--brown2)}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8)}
+.card-blue p,.card-blue li{color:#1a2e4a}
+.card-green p,.card-green li{color:#1a4a2a}
+.card ul{padding-left:16px}
+.card ul li{margin-bottom:5px}
+
+.hl{color:var(--orange);font-weight:700}
+.hl-blue{color:var(--blue);font-weight:700}
+.hl-green{color:var(--green);font-weight:700}
+
+.quote-block{border-left:3px solid var(--orange);padding:10px 16px;background:var(--cream2);border-radius:0 8px 8px 0;margin:10px 0}
+.quote-block p{font-size:13px;font-style:italic;color:var(--brown2)}
+
+.table-grid{display:grid;gap:3px;margin-top:10px}
+.tr{display:grid;grid-template-columns:1.3fr 2fr;gap:3px}
+.td{padding:9px 12px;font-size:12px;background:var(--cream2);border-radius:3px}
+.td:first-child{font-family:'DM Mono',monospace;color:var(--orange);font-weight:500;background:var(--cream3)}
+
+/* 儀表板示意 */
+.dashboard-demo{background:#0f1c2e;border-radius:12px;padding:20px;margin:12px 0}
+.dash-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+.dash-metric{background:rgba(255,255,255,.07);border:1px solid rgba(245,129,42,.25);border-radius:8px;padding:10px 12px;text-align:center}
+.dash-n{font-family:'DM Mono',monospace;font-size:18px;font-weight:500;color:var(--orange2)}
+.dash-l{font-size:10px;color:rgba(255,255,255,.5);margin-top:2px;font-family:'DM Mono',monospace}
+.dash-slider{background:rgba(255,255,255,.04);border:1px solid rgba(245,129,42,.15);border-radius:6px;padding:10px 14px;display:flex;align-items:center;gap:10px}
+.slider-track{flex:1;height:4px;background:rgba(255,255,255,.1);border-radius:2px;position:relative}
+.slider-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--orange),var(--orange2))}
+.slider-thumb{width:12px;height:12px;border-radius:50%;background:var(--orange2);position:absolute;top:-4px;right:-6px}
+.slider-label{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.5);flex-shrink:0}
+.slider-val{font-family:'DM Mono',monospace;font-size:11px;color:var(--orange2);flex-shrink:0;min-width:45px;text-align:right}
+
+/* 策略卡 */
+.strategy-badge{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:4px;margin-bottom:10px}
+
+/* 漸層進度條 */
+.progress-row{display:flex;align-items:center;gap:10px;margin:7px 0}
+.progress-bar{height:28px;border-radius:6px;display:flex;align-items:center;padding:0 10px;font-family:'DM Mono',monospace;font-size:11px;color:#fff;flex-shrink:0;white-space:nowrap}
+.progress-label{font-size:12px;color:var(--brown2)}
+
+/* IPO 流程 */
+.flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:12px 0}
+.flow-step{padding:8px 14px;border-radius:6px;font-size:12px;font-weight:500;text-align:center}
+.flow-arrow{color:var(--orange);font-size:16px;flex-shrink:0}
+
+.page-footer{background:var(--brown);color:rgba(255,255,255,.7);padding:20px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:40px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:14px;color:var(--orange3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.4)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="header-label">課後複習一頁式 · Megan</div>
+  <div class="header-title">財務儀表板 × 中小企業實戰<br><em>讓老闆看懂數字、用數字做決策</em></div>
+  <div class="header-meta">
+    <span class="meta-chip">2026.06.08</span>
+    <span class="meta-chip">財務儀表板</span>
+    <span class="meta-chip">營運瓶頸 · 動態定價</span>
+    <span class="meta-chip">IPO 總額認列</span>
+    <span class="meta-chip">Rock 老師</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 問題根源 -->
+  <div class="section">
+    <div class="section-label">Problem Statement</div>
+    <div class="section-title">中小企業的財務困境：缺的不是數字，而是解讀能力</div>
+    <div class="grid-2">
+      <div class="card card-dark">
+        <h3>😰 現實場景</h3>
+        <p>中小企業老闆<span style="color:var(--orange2);font-weight:700">沒有 CFO</span>，依賴外部記帳士。</p>
+        <div style="margin-top:14px">
+          <div class="table-grid">
+            <div class="tr"><div class="td" style="background:rgba(245,129,42,.2);color:var(--orange2)">記帳士做什麼</div><div class="td" style="background:rgba(255,255,255,.06);color:rgba(255,255,255,.8)">只負責稅務申報（營業稅、營所稅）</div></div>
+            <div class="tr"><div class="td" style="background:rgba(245,129,42,.2);color:var(--orange2)">缺什麼</div><div class="td" style="background:rgba(255,255,255,.06);color:rgba(255,255,255,.8)">經營管理分析、財務預測、預算規劃</div></div>
+            <div class="tr"><div class="td" style="background:rgba(245,129,42,.2);color:var(--orange2)">決策依據</div><div class="td" style="background:rgba(255,255,255,.06);color:rgba(255,255,255,.8)">街頭智慧 + 前人經驗，缺乏科學支持</div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:12px;border-color:#a8d5b8;background:var(--green2)">
+          <h3 style="color:var(--green)">💡 財務儀表板的解法</h3>
+          <p style="color:#1a4a2a">用 <span class="hl-green">Excel / Coda</span> 做成互動式儀表板：</p>
+          <ul style="color:#1a4a2a;margin-top:8px">
+            <li>公式圖像化，不再死背 ROI、折現率</li>
+            <li>自己試算<strong>樂觀、中立、悲觀</strong>三種版本</li>
+            <li>「拉動數值」即時看到商業變數影響</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>🎯 為什麼有效？</h3>
+          <p>非本科系老闆無法從公式建立直覺，但<span class="hl">互動操作一次</span>就能理解「調整單價 5% 對毛利的影響」——儀表板把抽象公式變成體感。</p>
+        </div>
+      </div>
+    </div>
+    <!-- 儀表板示意圖 -->
+    <div class="dashboard-demo">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.4);letter-spacing:.2em;margin-bottom:12px">DASHBOARD PREVIEW · 機車行財務模型</div>
+      <div class="dash-row">
+        <div class="dash-metric"><div class="dash-n">$68萬</div><div class="dash-l">本月毛利</div></div>
+        <div class="dash-metric"><div class="dash-n" style="color:#6aaa6a">23.4%</div><div class="dash-l">毛利率</div></div>
+        <div class="dash-metric"><div class="dash-n" style="color:#e08040">$12萬</div><div class="dash-l">淨利（悲觀）</div></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <div class="dash-slider">
+          <div class="slider-label" style="min-width:80px">高價胎比例</div>
+          <div class="slider-track"><div class="slider-fill" style="width:60%"><div class="slider-thumb"></div></div></div>
+          <div class="slider-val">60%</div>
+        </div>
+        <div class="dash-slider">
+          <div class="slider-label" style="min-width:80px">月服務客數</div>
+          <div class="slider-track"><div class="slider-fill" style="width:75%"><div class="slider-thumb"></div></div></div>
+          <div class="slider-val">480 組</div>
+        </div>
+        <div class="dash-slider">
+          <div class="slider-label" style="min-width:80px">平均客單價</div>
+          <div class="slider-track"><div class="slider-fill" style="width:45%"><div class="slider-thumb"></div></div></div>
+          <div class="slider-val">$1,420</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 三大策略 -->
+  <div class="section">
+    <div class="section-label">3 Core Strategies</div>
+    <div class="section-title">從機車行案例推演出的三大核心策略</div>
+    <div class="grid-3">
+
+      <!-- 策略一 -->
+      <div class="card" style="border-color:#e53e3e;border-width:2px">
+        <span class="strategy-badge" style="background:#fff5f5;border:1px solid #fed7d7;color:#c53030">策略一</span>
+        <h3 style="color:#c53030">認知營運瓶頸<br>極大化毛利</h3>
+        <p><span class="hl" style="color:#c53030">物理上限</span>：空間、機台、技師人數固定 → 每月最多服務客數有天花板。</p>
+        <div style="margin:12px 0;background:#fff5f5;border-radius:6px;padding:10px">
+          <div style="font-family:'DM Mono',monospace;font-size:10px;color:#c53030;margin-bottom:6px">薄利多銷 → 死路</div>
+          <div class="progress-row">
+            <div class="progress-bar" style="background:#e53e3e;width:80%">平價胎 1000元 × 480組</div>
+          </div>
+          <div class="progress-row">
+            <div class="progress-bar" style="background:#38a169;width:95%">高價胎 2500元 × 240組</div>
+          </div>
+        </div>
+        <p style="font-size:12px">產能有限時，<strong>拉高高價商品比例</strong>才能在同樣的天花板下達成獲利目標。</p>
+      </div>
+
+      <!-- 策略二 -->
+      <div class="card" style="border-color:var(--orange);border-width:2px">
+        <span class="strategy-badge" style="background:var(--cream3);border:1px solid var(--orange3);color:var(--brown2)">策略二</span>
+        <h3>克服漲價心魔<br>創造高端體驗</h3>
+        <p><span class="hl">需求彈性盲點</span>：</p>
+        <div style="margin:10px 0;display:flex;flex-direction:column;gap:6px">
+          <div style="background:var(--cream2);border-radius:6px;padding:9px 12px;font-size:12px">
+            <div style="font-weight:700;color:var(--orange)">高端客（$2,500 輪胎）</div>
+            <div style="color:var(--brown2)">漲 $100 = 4%，<strong>完全無感</strong></div>
+          </div>
+          <div style="background:var(--cream3);border-radius:6px;padding:9px 12px;font-size:12px">
+            <div style="font-weight:700;color:#c53030">平價客（$1,000 輪胎）</div>
+            <div style="color:var(--brown2)">漲 $100 = 10%，<strong>非常敏感</strong></div>
+          </div>
+        </div>
+        <div class="quote-block">
+          <p>商務艙與 LV 是「花錢買出來的體驗」——高端客群期望精良設備與不刮傷輪框的服務。</p>
+        </div>
+        <p style="font-size:12px;margin-top:8px;color:var(--muted)">✦ 摩斯漢堡：看似空間窄、上菜慢，但現金流異常充沛，甚至會「財報醜化」節稅。</p>
+      </div>
+
+      <!-- 策略三 -->
+      <div class="card card-blue">
+        <span class="strategy-badge" style="background:#dbeafe;border:1px solid var(--blue3);color:var(--blue)">策略三</span>
+        <h3>具象化預算<br>存貨管理</h3>
+        <p><span class="hl-blue">存貨 = 卡住的資金</span>，盲目囤貨壓縮現金流。</p>
+        <div style="margin:12px 0;background:#fff;border-radius:8px;padding:12px;border:1px solid var(--blue3)">
+          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);margin-bottom:8px">以終為始的採購邏輯</div>
+          <div style="display:flex;align-items:center;gap:6px;font-size:12px;flex-wrap:wrap">
+            <div style="background:#dbeafe;padding:5px 10px;border-radius:4px;color:var(--blue);font-weight:700">設定轉型方向</div>
+            <div style="color:var(--orange)">→</div>
+            <div style="background:#dbeafe;padding:5px 10px;border-radius:4px;color:var(--blue);font-weight:700">訂銷售預算</div>
+            <div style="color:var(--orange)">→</div>
+            <div style="background:#dbeafe;padding:5px 10px;border-radius:4px;color:var(--blue);font-weight:700">回推採購量</div>
+          </div>
+        </div>
+        <p style="font-size:12px">未來一年高價胎vs平價胎比例 → 精算採購數量 → 不再只憑感覺或前人經驗。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- IPO + 大企業財務 -->
+  <div class="section">
+    <div class="section-label">Advanced Finance · Corporate Level</div>
+    <div class="section-title">大企業財務實務：用會計規則合法放大帳面價值</div>
+    <div class="grid-2">
+
+      <div class="card card-dark">
+        <h3>🚀 遠通 IPO：總額認列法的威力</h3>
+        <p style="margin-bottom:14px;font-size:12px">2024 年遠通（GOG）準備上市，透過一個合約調整讓營收從 <span style="color:var(--orange2);font-weight:700">3千萬→破億</span>。</p>
+        <div class="flow" style="gap:6px">
+          <div class="flow-step" style="background:rgba(255,255,255,.07);color:rgba(255,255,255,.8)">城市車旅導客<br><span style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.5)">原利潤只有 6%</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step" style="background:rgba(245,129,42,.2);color:var(--orange2)">遠通預付停車費<br><span style="font-family:'DM Mono',monospace;font-size:10px">承擔資金風險</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step" style="background:#1a4a2a;color:#6aaa6a">以原價售出<br><span style="font-family:'DM Mono',monospace;font-size:10px">100% 總額認列</span></div>
+        </div>
+        <div style="margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div style="background:rgba(255,255,255,.05);border-radius:8px;padding:12px;text-align:center">
+            <div style="font-family:'DM Mono',monospace;font-size:22px;color:rgba(255,255,255,.3);text-decoration:line-through">$6</div>
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.4);margin-top:4px">淨額認列（原）</div>
+          </div>
+          <div style="background:rgba(245,129,42,.15);border:1px solid rgba(245,129,42,.3);border-radius:8px;padding:12px;text-align:center">
+            <div style="font-family:'DM Mono',monospace;font-size:22px;color:var(--orange2)">$100</div>
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.5);margin-top:4px">總額認列（新）</div>
+          </div>
+        </div>
+        <div class="quote-block" style="margin-top:12px;background:rgba(255,255,255,.04);border-left-color:var(--orange2)">
+          <p style="color:rgba(255,255,255,.7)">實質獲利不變，但營收暴增→成為 IPO 的重要推手。懂規則的人能合法放大帳面價值。</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="card" style="margin-bottom:12px">
+          <h3>📊 大企業預算「說故事」技巧</h3>
+          <p>老闆永遠不滿意預算數字，要求持續拉高獲利目標。解法：</p>
+          <div style="margin-top:10px;background:var(--cream2);border-radius:8px;padding:12px">
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--orange);margin-bottom:8px">⚠️ 既有業務不能瞎掰</div>
+            <p style="font-size:12px">中華電信不能突然宣稱 ARPU 超越遠傳——大家太熟悉了。</p>
+          </div>
+          <div style="margin-top:8px;background:var(--green2);border:1px solid #a8d5b8;border-radius:8px;padding:12px">
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);margin-bottom:8px">✅ 用新事業滿足期望</div>
+            <p style="font-size:12px;color:#1a4a2a">提出<strong>新事業或併購計畫</strong>，用尚未被驗證的故事去撐高數字——這也是法說會上一定要談新事業的原因。</p>
+          </div>
+        </div>
+
+        <div class="card card-blue">
+          <h3>🌍 移轉訂價（Transfer Pricing）</h3>
+          <p><span class="hl-blue">內部交易定價不能任意調整</span>——會讓毛利率劇烈波動，無法向國稅局與櫃買中心交代。</p>
+          <div style="margin-top:10px;font-size:12px;padding:10px;background:#fff;border-radius:6px;border:1px solid var(--blue3)">
+            <div style="font-weight:700;color:var(--blue);margin-bottom:4px">國際案例</div>
+            <p style="color:#1a2e4a">蘋果在北愛爾蘭、可口可樂在開曼群島 → 利用低稅率國家進行移轉訂價 → 遭歐盟、IRS 鉅額開罰</p>
+          </div>
+          <p style="margin-top:10px;font-size:12px;color:#1a2e4a">即使都在台灣境內，財務設定一開始就必須嚴謹，否則後患無窮。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 總結 -->
+  <div class="section">
+    <div class="section-label">Key Takeaway</div>
+    <div class="section-title">一張圖記住這堂課</div>
+    <div class="grid-2">
+      <div class="card card-orange">
+        <h3>📌 財務知識的三個層次</h3>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:12px;display:flex;align-items:flex-start;gap:10px">
+            <div style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;flex-shrink:0">L1</div>
+            <div><div style="font-weight:700;font-size:14px">看懂報表</div><div style="font-size:12px;opacity:.85">記帳士能做到的事</div></div>
+          </div>
+          <div style="background:rgba(255,255,255,.2);border-radius:8px;padding:12px;display:flex;align-items:flex-start;gap:10px">
+            <div style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;flex-shrink:0">L2</div>
+            <div><div style="font-weight:700;font-size:14px">用報表做決策</div><div style="font-size:12px;opacity:.85">儀表板 · 瓶頸分析 · 預算規劃</div></div>
+          </div>
+          <div style="background:rgba(255,255,255,.3);border-radius:8px;padding:12px;display:flex;align-items:flex-start;gap:10px">
+            <div style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;flex-shrink:0">L3</div>
+            <div><div style="font-weight:700;font-size:14px">用規則創造價值</div><div style="font-size:12px;opacity:.85">總額認列 · 移轉訂價 · 財報策略</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card card-dark">
+        <h3>核心啟發</h3>
+        <div class="table-grid">
+          <div class="tr"><div class="td" style="background:rgba(245,129,42,.2);color:var(--orange2)">中小企業</div><div class="td" style="background:rgba(255,255,255,.05);color:rgba(255,255,255,.8)">儀表板讓老闆自己試算、自己決策</div></div>
+          <div class="tr"><div class="td" style="background:rgba(245,129,42,.2);color:var(--orange2)">瓶頸思維</div><div class="td" style="background:rgba(255,255,255,.05);color:rgba(255,255,255,.8)">產能有上限 → 拉高毛利絕對值才是解法</div></div>
+          <div class="tr"><div class="td" style="background:rgba(245,129,42,.2);color:var(--orange2)">漲價心魔</div><div class="td" style="background:rgba(255,255,255,.05);color:rgba(255,255,255,.8)">高端客對價格不敏感，升級服務合理化</div></div>
+          <div class="tr"><div class="td" style="background:rgba(245,129,42,.2);color:var(--orange2)">IPO 手法</div><div class="td" style="background:rgba(255,255,255,.05);color:rgba(255,255,255,.8)">承擔風險 → 合法改變認列原則 → 帳面翻倍</div></div>
+          <div class="tr"><div class="td" style="background:rgba(245,129,42,.2);color:var(--orange2)">預算故事</div><div class="td" style="background:rgba(255,255,255,.05);color:rgba(255,255,255,.8)">舊業務不能瞎掰，新事業才能撐起數字</div></div>
+        </div>
+        <div class="quote-block" style="margin-top:14px;background:rgba(255,255,255,.04);border-left-color:var(--orange2)">
+          <p style="color:rgba(255,255,255,.7)">「財報不只是歷史紀錄——懂規則的人能用它預測未來、放大現在、合法影響市場認知。」</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">Megan · 課後複習一頁式 · 2026.06.08</div>
+</div>
+
+</body>
+</html>
