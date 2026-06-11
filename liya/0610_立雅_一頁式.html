@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>立雅 · 112年記帳士考題深度解析 · 2026.06.10</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --orange:#F5812A;--orange2:#FF9A4D;--orange3:#FFC285;
+  --cream:#FFF8F0;--cream2:#FFF0E0;--cream3:#FFE4C4;
+  --brown:#7A3B10;--brown2:#A05020;--muted:#A08060;
+  --ink:#2C1A0A;--white:#fff;
+  --red:#c53030;--red2:#fff5f5;--red3:#fed7d7;
+  --green:#1a7a4a;--green2:#e6f5ec;--green3:#a8d5b8;
+  --blue:#1a3a7a;--blue2:#e6edf5;--blue3:#a8c0e0;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7}
+
+.page-header{background:linear-gradient(135deg,#1a0a0a,#3a0f0f,#1a0a0a);padding:48px;position:relative;overflow:hidden}
+.page-header::before{content:'';position:absolute;top:-80px;right:-80px;width:350px;height:350px;background:radial-gradient(circle,rgba(245,129,42,.12),transparent 70%)}
+.page-header::after{content:'試';font-family:'Playfair Display',serif;font-size:200px;font-weight:900;color:rgba(255,255,255,.03);position:absolute;bottom:-40px;right:20px;line-height:1;pointer-events:none}
+.header-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.25em;color:var(--orange3);text-transform:uppercase;margin-bottom:12px}
+.header-title{font-family:'Playfair Display',serif;font-size:clamp(22px,4.5vw,42px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:10px}
+.header-title em{color:var(--orange2);font-style:italic}
+.header-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.meta-chip{font-family:'DM Mono',monospace;font-size:10px;padding:5px 12px;border-radius:4px;background:rgba(245,129,42,.18);color:var(--orange3);border:1px solid rgba(245,129,42,.3)}
+.meta-danger{background:rgba(197,48,48,.25);color:#ff9090;border-color:rgba(197,48,48,.4)}
+
+.container{max-width:1100px;margin:0 auto;padding:40px 32px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+@media(max-width:720px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+.section{margin-bottom:36px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--orange);text-transform:uppercase;margin-bottom:8px}
+.section-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--orange3)}
+
+.card{background:var(--white);border:1.5px solid var(--orange3);border-radius:12px;padding:20px}
+.card-dark{background:linear-gradient(135deg,#1a0a0a,#2a1010);border:none;border-radius:12px;padding:20px}
+.card-danger{background:var(--red2);border:2px solid var(--red3);border-radius:12px;padding:20px}
+.card-green{background:var(--green2);border:1.5px solid var(--green3);border-radius:12px;padding:20px}
+.card-blue{background:var(--blue2);border:1.5px solid var(--blue3);border-radius:12px;padding:20px}
+.card h3{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;margin-bottom:10px}
+.card-dark h3{color:var(--orange2)}
+.card-danger h3{color:var(--red)}
+.card-green h3{color:var(--green)}
+.card-blue h3{color:var(--blue)}
+.card p,.card li{font-size:13px;line-height:1.8;color:var(--brown2)}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8)}
+.card-danger p,.card-danger li{color:#7a1a1a}
+.card-green p,.card-green li{color:#1a4a2a}
+.card-blue p,.card-blue li{color:#0a1f4a}
+.card ul{padding-left:16px}
+.card ul li{margin-bottom:4px}
+
+.hl{color:var(--orange);font-weight:700}
+.hl-red{color:var(--red);font-weight:700}
+.hl-green{color:var(--green);font-weight:700}
+
+/* 考題卡片 */
+.q-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.q-badge{font-family:'DM Mono',monospace;font-size:11px;padding:4px 12px;border-radius:4px;font-weight:500;flex-shrink:0}
+.q-badge-num{background:var(--ink);color:var(--orange3)}
+.q-badge-type{background:var(--orange);color:#fff}
+.q-badge-trap{background:var(--red);color:#fff}
+
+/* 計算步驟 */
+.calc-steps{display:flex;flex-direction:column;gap:6px;margin:10px 0}
+.step{display:flex;align-items:flex-start;gap:10px;padding:9px 12px;border-radius:6px;background:var(--cream2)}
+.step-n{font-family:'DM Mono',monospace;font-size:10px;background:var(--orange);color:#fff;padding:2px 7px;border-radius:3px;flex-shrink:0;margin-top:1px}
+.step-text{font-size:12px;color:var(--brown2);line-height:1.7}
+.step-text code{font-family:'DM Mono',monospace;background:var(--cream3);padding:1px 5px;border-radius:2px;color:var(--brown);font-size:11px}
+.step-highlight{background:linear-gradient(135deg,#fff8e1,var(--cream3));border:1px solid var(--orange3)}
+.step-danger{background:var(--red2);border:1px solid var(--red3)}
+.step-danger .step-text{color:#7a1a1a}
+.step-answer{background:linear-gradient(135deg,var(--green2),#c8f0d8);border:1px solid var(--green3)}
+.step-answer .step-text{color:#1a4a2a;font-weight:700}
+
+/* 陷阱標記 */
+.trap-badge{display:inline-flex;align-items:center;gap:4px;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:3px;background:var(--red);color:#fff;margin:0 4px}
+
+/* 現金流表格 */
+.cf-table{display:grid;gap:3px;margin:10px 0}
+.cf-row{display:grid;grid-template-columns:2fr auto;gap:3px}
+.cf-item{padding:7px 12px;font-size:12px;background:var(--cream2);border-radius:3px;color:var(--brown2)}
+.cf-item.add{color:var(--green);font-weight:700}
+.cf-item.sub{color:var(--red);font-weight:700}
+.cf-sign{padding:7px 10px;font-family:'DM Mono',monospace;font-size:12px;border-radius:3px;font-weight:700;text-align:center;min-width:36px}
+.cf-sign.plus{background:var(--green2);color:var(--green)}
+.cf-sign.minus{background:var(--red2);color:var(--red)}
+
+/* 資產折舊時間軸 */
+.timeline{position:relative;padding-left:24px;margin:12px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--orange3)}
+.tl-item{position:relative;margin-bottom:12px;padding-left:16px}
+.tl-item::before{content:'';position:absolute;left:-10px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--orange);border:2px solid var(--cream)}
+.tl-date{font-family:'DM Mono',monospace;font-size:10px;color:var(--orange);font-weight:700;margin-bottom:3px}
+.tl-text{font-size:12px;color:var(--brown2);line-height:1.6}
+.tl-item.danger::before{background:var(--red)}
+.tl-item.danger .tl-date{color:var(--red)}
+.tl-item.success::before{background:var(--green)}
+.tl-item.success .tl-date{color:var(--green)}
+
+.quote-block{border-left:3px solid var(--orange);padding:10px 16px;background:var(--cream2);border-radius:0 8px 8px 0;margin:10px 0}
+.quote-block p{font-size:13px;font-style:italic;color:var(--brown2)}
+.quote-danger{border-left-color:var(--red);background:var(--red2)}
+.quote-danger p{color:#7a1a1a}
+
+.page-footer{background:var(--brown);color:rgba(255,255,255,.7);padding:20px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:40px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:14px;color:var(--orange3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.4)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="header-label">課後複習一頁式 · 立雅</div>
+  <div class="header-title">112年記帳士「會計學概要」<br><em>考題陷阱全解析 × 計算推導</em></div>
+  <div class="header-meta">
+    <span class="meta-chip">2026.06.10</span>
+    <span class="meta-chip">EPS · CVP · 現金流量</span>
+    <span class="meta-chip meta-danger">⚠️ 高陷阱密度</span>
+    <span class="meta-chip meta-danger">⚠️ 申論17分爆難</span>
+    <span class="meta-chip">Rock 老師</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Q17 + Q18 -->
+  <div class="section">
+    <div class="section-label">Question 17–18</div>
+    <div class="section-title">第17題 EPS 陷阱 × 第18題 成本混入概要</div>
+    <div class="grid-2">
+
+      <!-- Q17 -->
+      <div class="card">
+        <div class="q-header">
+          <span class="q-badge q-badge-num">第17題</span>
+          <span class="q-badge q-badge-type">EPS 計算</span>
+          <span class="q-badge q-badge-trap">🪤 定義陷阱</span>
+        </div>
+        <h3>「綜合損益」≠「本期淨利」</h3>
+        <div class="calc-steps">
+          <div class="step step-danger">
+            <div class="step-n">陷阱</div>
+            <div class="step-text">題目給<code>綜合損益 = 100萬</code>，但 EPS 分子應用<span class="hl-red">本期淨利</span>，不是綜合損益</div>
+          </div>
+          <div class="step">
+            <div class="step-n">S1</div>
+            <div class="step-text">本期淨利 = 綜合損益 − 其他綜合損益<br><code>100萬 − 20萬 = 80萬</code></div>
+          </div>
+          <div class="step">
+            <div class="step-n">S2</div>
+            <div class="step-text">加權平均股數：<br>10萬股 × 3/12 + 14萬股 × 6/12 + 12萬股 × 3/12<br><code>= 2.5 + 7 + 3 = 12.5萬 → 125,000股</code></div>
+          </div>
+          <div class="step step-answer">
+            <div class="step-n">✓</div>
+            <div class="step-text">EPS = 80萬 ÷ 125,000 = <code style="font-size:14px;color:var(--green)">6.4 元</code></div>
+          </div>
+        </div>
+        <div class="quote-block quote-danger">
+          <p>老師批評：故意用「綜合損益」這種象牙塔講法來迷惑考生——實務上大家都說「本期淨利」。</p>
+        </div>
+      </div>
+
+      <!-- Q18 -->
+      <div class="card">
+        <div class="q-header">
+          <span class="q-badge q-badge-num">第18題</span>
+          <span class="q-badge q-badge-type">料工費成本</span>
+          <span class="q-badge q-badge-trap">🪤 科目混淆</span>
+        </div>
+        <h3>成管會內容闖入「會計概要」</h3>
+        <div style="margin-bottom:10px;background:var(--cream2);border-radius:8px;padding:10px 12px">
+          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--orange);margin-bottom:6px">已知條件</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px">
+            <div style="background:#fff;border-radius:4px;padding:8px;text-align:center">
+              <div style="font-weight:700;color:var(--ink)">主要成本</div>
+              <div style="font-family:'DM Mono',monospace;color:var(--orange)">DM + DL = 9萬</div>
+            </div>
+            <div style="background:#fff;border-radius:4px;padding:8px;text-align:center">
+              <div style="font-weight:700;color:var(--ink)">加工成本</div>
+              <div style="font-family:'DM Mono',monospace;color:var(--orange)">DL + OH = 7萬</div>
+            </div>
+          </div>
+          <div style="margin-top:6px;background:#fff;border-radius:4px;padding:8px;text-align:center;font-size:12px">
+            <span style="font-weight:700">DM：OH = 5：3</span>（這比例在實務根本不存在！）
+          </div>
+        </div>
+        <div class="calc-steps">
+          <div class="step">
+            <div class="step-n">S1</div>
+            <div class="step-text">相減消去 DL：<code>9萬 − 7萬 = DM − OH = 2萬</code></div>
+          </div>
+          <div class="step">
+            <div class="step-n">S2</div>
+            <div class="step-text">5:3 差2等份 = 2萬 → 1等份 = 1萬<br><code>DM = 5萬，OH = 3萬</code></div>
+          </div>
+          <div class="step">
+            <div class="step-n">S3</div>
+            <div class="step-text">回推 DL：<code>9萬 − 5萬(DM) = 4萬</code></div>
+          </div>
+          <div class="step step-answer">
+            <div class="step-n">✓</div>
+            <div class="step-text">總製造成本 = 5萬 + 4萬 + 3萬 = <code style="color:var(--green)">12萬</code></div>
+          </div>
+        </div>
+        <div class="quote-block quote-danger">
+          <p>老師批判：這是成管會第一章內容，根本不該出現在概要！5:3比例在實務毫無意義。腦筋轉不過來可直接放棄。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q19 + Q20 -->
+  <div class="section">
+    <div class="section-label">Question 19–20</div>
+    <div class="section-title">第19題 CVP 逆向推導 × 第20題 現金流量繁雜反推</div>
+    <div class="grid-2">
+
+      <!-- Q19 -->
+      <div class="card card-blue">
+        <div class="q-header">
+          <span class="q-badge q-badge-num" style="background:#1a3a7a">第19題</span>
+          <span class="q-badge q-badge-type">CVP 分析</span>
+          <span class="q-badge q-badge-trap">🪤 最後一步陷阱</span>
+        </div>
+        <h3>算出邊際貢獻就開心作答 → 直接失分</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px">
+          <div style="background:#fff;border-radius:6px;padding:8px;text-align:center;font-size:11px">
+            <div style="font-family:'DM Mono',monospace;color:var(--blue)">固定成本</div>
+            <div style="font-size:16px;font-weight:700">5萬</div>
+          </div>
+          <div style="background:#fff;border-radius:6px;padding:8px;text-align:center;font-size:11px">
+            <div style="font-family:'DM Mono',monospace;color:var(--blue)">稅率</div>
+            <div style="font-size:16px;font-weight:700">20%</div>
+          </div>
+          <div style="background:#fff;border-radius:6px;padding:8px;text-align:center;font-size:11px">
+            <div style="font-family:'DM Mono',monospace;color:var(--blue)">變動成本</div>
+            <div style="font-size:16px;font-weight:700">60元</div>
+          </div>
+        </div>
+        <div class="calc-steps">
+          <div class="step">
+            <div class="step-n">S1</div>
+            <div class="step-text">稅後→稅前淨利還原：<code>6萬 ÷ 0.8 = 7.5萬</code></div>
+          </div>
+          <div class="step">
+            <div class="step-n">S2</div>
+            <div class="step-text">總邊際貢獻需求：<code>7.5萬 + 5萬(固定) = 12.5萬</code></div>
+          </div>
+          <div class="step">
+            <div class="step-n">S3</div>
+            <div class="step-text">單位邊際貢獻：<code>12.5萬 ÷ 3125 = 40元</code></div>
+          </div>
+          <div class="step step-danger">
+            <div class="step-n">🪤</div>
+            <div class="step-text"><span class="hl-red">40元是誘餌！</span>選項中必定有 40，題目問的是<strong>售價</strong>，不是邊際貢獻</div>
+          </div>
+          <div class="step step-answer">
+            <div class="step-n">✓</div>
+            <div class="step-text">售價 = 邊際貢獻 + 變動成本 = <code>40 + 60 = </code><code style="color:var(--green);font-size:14px">100 元</code></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q20 -->
+      <div class="card">
+        <div class="q-header">
+          <span class="q-badge q-badge-num">第20題</span>
+          <span class="q-badge q-badge-type">現金流量</span>
+          <span class="q-badge q-badge-trap">⏱️ 極耗時</span>
+        </div>
+        <h3>9 個加減項目，一錯全錯</h3>
+        <p style="font-size:12px;margin-bottom:10px;color:var(--brown2)">判斷原則：<span class="hl">「貸方方向 → +，借方方向 → −；非現金/非營業項目特別處理」</span></p>
+        <div class="cf-table">
+          <div class="cf-row"><div class="cf-item add">折舊費用（非現金支出）</div><div class="cf-sign plus">+</div></div>
+          <div class="cf-row"><div class="cf-item sub">處分資產利益（非營業項目）</div><div class="cf-sign minus">−</div></div>
+          <div class="cf-row"><div class="cf-item add">應收票據減少（貸方）</div><div class="cf-sign plus">+</div></div>
+          <div class="cf-row"><div class="cf-item sub">應收帳款增加（借方）</div><div class="cf-sign minus">−</div></div>
+          <div class="cf-row"><div class="cf-item sub">存貨增加（借方）</div><div class="cf-sign minus">−</div></div>
+          <div class="cf-row"><div class="cf-item add">預付費用減少（貸方）</div><div class="cf-sign plus">+</div></div>
+          <div class="cf-row"><div class="cf-item add">應付帳款增加（貸方）</div><div class="cf-sign plus">+</div></div>
+          <div class="cf-row"><div class="cf-item add">應付利息增加（貸方）</div><div class="cf-sign plus">+</div></div>
+          <div class="cf-row"><div class="cf-item sub">支付所得稅</div><div class="cf-sign minus">−</div></div>
+        </div>
+        <div class="quote-block quote-danger" style="margin-top:8px">
+          <p>老師親測：AI 也把「處分資產利益」反推邏輯搞錯。選擇題卻要 9 個加減，按錯一個鍵整題泡湯，零容錯空間。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 申論題 -->
+  <div class="section">
+    <div class="section-label">Essay Question · 17 分</div>
+    <div class="section-title">申論題：固定資產入帳 × SYD × DDB × 資產減損（爆難·四階段陷阱）</div>
+    <div class="card-danger" style="margin-bottom:16px;padding:16px 20px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="font-size:24px">😡</div>
+        <div style="font-size:13px;color:#7a1a1a;font-weight:500">老師評語：「爆難、完全瞎搞、沒有打算讓大家及格」。只要第一階段入帳成本算錯，後面三個階段全部 0 分。</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <!-- 第一階段 -->
+      <div class="card">
+        <div class="q-header">
+          <span class="q-badge" style="background:#5a3a00;color:#ffc285">第一階段</span>
+          <span class="q-badge q-badge-type">入帳成本認定</span>
+        </div>
+        <h3>什麼可以計入成本？</h3>
+        <div class="calc-steps">
+          <div class="step step-highlight">
+            <div class="step-n">基礎</div>
+            <div class="step-text">機器定價 60萬 × 95折 = 57萬<br>現金折扣符合條件 → 再 × 98%<br><code>57萬 × 98% = 558,600元</code></div>
+          </div>
+          <div class="step step-highlight">
+            <div class="step-n">加項</div>
+            <div class="step-text">運輸費 + 保險費 + 安裝費 → 全部<span class="hl-green">可計入</span><br><code>558,600 + 運 + 保 + 安 = 584,600元</code></div>
+          </div>
+        </div>
+        <div style="margin-top:10px;display:flex;flex-direction:column;gap:5px">
+          <div style="display:flex;align-items:flex-start;gap:8px;padding:7px 10px;background:var(--red2);border-radius:6px;font-size:12px">
+            <span style="color:var(--red);flex-shrink:0">✗</span>
+            <span style="color:#7a1a1a"><strong>運送碰撞修理費</strong>——不計入（屬意外損失）</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:8px;padding:7px 10px;background:var(--red2);border-radius:6px;font-size:12px">
+            <span style="color:var(--red);flex-shrink:0">✗</span>
+            <span style="color:#7a1a1a"><strong>舊機器拆除費</strong>——不計入（故意混淆土地建物拆除的處理方式）</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:8px;padding:7px 10px;background:var(--red2);border-radius:6px;font-size:12px">
+            <span style="color:var(--red);flex-shrink:0">✗</span>
+            <span style="color:#7a1a1a"><strong>人員操作訓練費</strong>——不計入（實務上根本包在設備款，極刻意的陷阱）</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第二到四階段：時間軸 -->
+      <div class="card card-dark">
+        <div class="q-header">
+          <span class="q-badge" style="background:rgba(245,129,42,.3);color:var(--orange3)">第二-四階段</span>
+          <span class="q-badge" style="background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)">SYD → DDB → 減損</span>
+        </div>
+        <h3>折舊地獄時間軸</h3>
+        <div class="timeline" style="margin-top:6px">
+          <div class="tl-item">
+            <div class="tl-date">X3年 7月1日</div>
+            <div class="tl-text">年中購入，使用<span style="color:var(--orange2);font-weight:700">年數合計法（SYD）</span><br>耐用8年，分母 = 1+2+…+8 = <strong style="color:var(--orange2)">36</strong><br>X3年折舊 = 584,600 × <strong>8/36</strong> × <strong>6/12</strong><br>（跨年度必須切半→除不盡→考場恐慌點）</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">X4年（全年）</div>
+            <div class="tl-text">X4年折舊分兩段：前半 8/36、後半 7/36<br>（因7/1起算，每年折舊橫跨兩個年度比率）</div>
+          </div>
+          <div class="tl-item danger">
+            <div class="tl-date">X5年 1月1日 ← 三改同時發動</div>
+            <div class="tl-text">
+              ① 殘值增加<br>
+              ② 耐用年限延長 1年<br>
+              ③ 折舊法改為<span style="color:#ff9090;font-weight:700">雙倍餘額遞減法（DDB）</span><br>
+              ─────────────────<br>
+              X5年初帳面價值 ≈ <strong style="color:var(--orange2)">404,241元</strong><br>
+              剩餘年限：原6.5年 + 1年延長 = <strong>7.5年</strong><br>
+              DDB折舊率 = <strong>2 ÷ 7.5</strong>（不考慮殘值！）<br>
+              X5折舊 = 404,241 × 2/7.5 = <strong style="color:#ff9090">107,798元</strong>
+            </div>
+          </div>
+          <div class="tl-item success">
+            <div class="tl-date">X6年底 → 資產減損測試</div>
+            <div class="tl-text">
+              算出X6年折舊後，X6底帳面價值 ≈ <strong>217,391元</strong><br>
+              可回收金額：max(市價18萬−處分成本3萬, 使用價值20萬) = <strong>200,000元</strong><br>
+              <span style="color:#6aaa6a;font-weight:700">減損損失 = 217,391 − 200,000 = 17,391元</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 總結 -->
+  <div class="section">
+    <div class="section-label">Key Takeaway</div>
+    <div class="section-title">這次考題教會我們的事</div>
+    <div class="grid-3">
+      <div class="card card-green">
+        <h3>✅ 三個計算公式要背熟</h3>
+        <div style="display:flex;flex-direction:column;gap:7px;margin-top:4px">
+          <div style="background:#fff;border-radius:6px;padding:9px 12px;font-size:12px;color:#1a4a2a">
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);margin-bottom:3px">EPS 分子</div>
+            <strong>本期淨利 = 綜合損益 − OCI</strong>
+          </div>
+          <div style="background:#fff;border-radius:6px;padding:9px 12px;font-size:12px;color:#1a4a2a">
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);margin-bottom:3px">CVP 逆推</div>
+            <strong>稅後→稅前 ÷(1−稅率)→ +固定成本 ÷ 銷量 → 邊際貢獻 → +變動成本 = 售價</strong>
+          </div>
+          <div style="background:#fff;border-radius:6px;padding:9px 12px;font-size:12px;color:#1a4a2a">
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);margin-bottom:3px">DDB 折舊率</div>
+            <strong>2 ÷ 剩餘年限（不考慮殘值）</strong>
+          </div>
+        </div>
+      </div>
+      <div class="card card-danger">
+        <h3>🪤 四大必死陷阱</h3>
+        <ul>
+          <li><span class="trap-badge">Q17</span>題目說綜合損益，先扣OCI才是EPS分子</li>
+          <li style="margin-top:6px"><span class="trap-badge">Q19</span>算出邊際貢獻 40元不是答案，要再加變動成本</li>
+          <li style="margin-top:6px"><span class="trap-badge">申論</span>訓練費、拆除費、修理費<strong>不計入</strong>入帳成本</li>
+          <li style="margin-top:6px"><span class="trap-badge">申論</span>SYD 年中購入必須跨年度切割比率</li>
+        </ul>
+      </div>
+      <div class="card card-dark">
+        <h3>🧠 現金流量速查</h3>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.4);margin-bottom:8px">間接法判斷口訣</div>
+        <div style="display:flex;flex-direction:column;gap:5px">
+          <div style="background:rgba(100,200,100,.1);border-radius:5px;padding:8px 10px;font-size:12px;color:rgba(255,255,255,.8)">
+            <span style="color:#6aaa6a;font-weight:700">+ 加回：</span>折舊 · 資產損失 · 負債增加 · 資產減少
+          </div>
+          <div style="background:rgba(200,100,100,.1);border-radius:5px;padding:8px 10px;font-size:12px;color:rgba(255,255,255,.8)">
+            <span style="color:#ff9090;font-weight:700">− 扣除：</span>資產增加 · 負債減少 · 非營業利益
+          </div>
+          <div style="background:rgba(245,129,42,.1);border-radius:5px;padding:8px 10px;font-size:12px;color:rgba(255,255,255,.8)">
+            <span style="color:var(--orange2);font-weight:700">特別記：</span>處分利益 → 移到投資活動，所以「−」
+          </div>
+        </div>
+        <div style="margin-top:10px;font-size:11px;color:rgba(255,255,255,.4);font-style:italic">老師提醒：AI 也會在此犯錯，人腦更要謹慎</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">立雅 · 課後複習一頁式 · 2026.06.10</div>
+</div>
+
+</body>
+</html>
