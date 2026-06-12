@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lyn · 瑞智精密財報深度解析 · 2026.06.11</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --orange:#F5812A;--orange2:#FF9A4D;--orange3:#FFC285;
+  --cream:#FFF8F0;--cream2:#FFF0E0;--cream3:#FFE4C4;
+  --brown:#7A3B10;--brown2:#A05020;--muted:#A08060;
+  --ink:#2C1A0A;--white:#fff;
+  --teal:#0f4c5c;--teal2:#e0f2f7;--teal3:#7ec8dc;
+  --green:#1a7a4a;--green2:#e6f5ec;--green3:#a8d5b8;
+  --red:#c53030;--red2:#fff5f5;--red3:#fed7d7;
+  --purple:#4a1a7a;--purple2:#f0e6ff;--purple3:#c0a0e8;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7}
+
+.page-header{background:linear-gradient(135deg,#061a10,#0d2a1a,#061a10);padding:48px;position:relative;overflow:hidden}
+.page-header::before{content:'';position:absolute;top:-80px;left:-80px;width:360px;height:360px;background:radial-gradient(circle,rgba(245,129,42,.1),transparent 70%)}
+.page-header::after{content:'附註';font-family:'Playfair Display',serif;font-size:160px;font-weight:900;color:rgba(255,255,255,.03);position:absolute;bottom:-30px;right:-10px;line-height:1;pointer-events:none}
+.header-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.25em;color:var(--orange3);text-transform:uppercase;margin-bottom:12px}
+.header-title{font-family:'Playfair Display',serif;font-size:clamp(22px,4.5vw,42px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:10px}
+.header-title em{color:var(--orange2);font-style:italic}
+.header-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.meta-chip{font-family:'DM Mono',monospace;font-size:10px;padding:5px 12px;border-radius:4px;background:rgba(245,129,42,.18);color:var(--orange3);border:1px solid rgba(245,129,42,.3)}
+.meta-star{background:rgba(100,200,100,.2);color:#a8d5b8;border-color:rgba(100,200,100,.3)}
+
+.container{max-width:1100px;margin:0 auto;padding:40px 32px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+@media(max-width:720px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+.section{margin-bottom:36px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--orange);text-transform:uppercase;margin-bottom:8px}
+.section-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--orange3)}
+
+.card{background:var(--white);border:1.5px solid var(--orange3);border-radius:12px;padding:20px}
+.card-dark{background:linear-gradient(135deg,#061a10,#0d2a1a);border:none;border-radius:12px;padding:20px}
+.card-orange{background:var(--orange);border:none;border-radius:12px;padding:20px}
+.card-teal{background:var(--teal2);border:1.5px solid var(--teal3);border-radius:12px;padding:20px}
+.card-green{background:var(--green2);border:1.5px solid var(--green3);border-radius:12px;padding:20px}
+.card-red{background:var(--red2);border:1.5px solid var(--red3);border-radius:12px;padding:20px}
+.card-purple{background:var(--purple2);border:1.5px solid var(--purple3);border-radius:12px;padding:20px}
+.card h3{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;margin-bottom:10px}
+.card-dark h3{color:var(--orange2)}
+.card-orange h3,.card-orange p,.card-orange li{color:#fff}
+.card-teal h3{color:var(--teal)}
+.card-green h3{color:var(--green)}
+.card-red h3{color:var(--red)}
+.card-purple h3{color:var(--purple)}
+.card p,.card li{font-size:13px;line-height:1.8;color:var(--brown2)}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8)}
+.card-teal p,.card-teal li{color:#0a2a35}
+.card-green p,.card-green li{color:#1a4a2a}
+.card-red p,.card-red li{color:#7a1a1a}
+.card-purple p,.card-purple li{color:#2a0a4a}
+.card ul{padding-left:16px}
+.card ul li{margin-bottom:5px}
+
+.hl{color:var(--orange);font-weight:700}
+.hl-red{color:var(--red);font-weight:700}
+.hl-green{color:var(--green);font-weight:700}
+.hl-teal{color:var(--teal);font-weight:700}
+
+.quote-block{border-left:3px solid var(--orange);padding:10px 16px;background:var(--cream2);border-radius:0 8px 8px 0;margin:10px 0}
+.quote-block p{font-size:13px;font-style:italic;color:var(--brown2)}
+.quote-warn{border-left-color:var(--red);background:var(--red2)}
+.quote-warn p{color:#7a1a1a}
+.quote-star{border-left-color:var(--green);background:var(--green2)}
+.quote-star p{color:#1a4a2a}
+
+/* 資產條形圖 */
+.asset-bar{display:flex;height:44px;border-radius:8px;overflow:hidden;margin:10px 0}
+.ab-seg{display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:10px;font-weight:500;color:#fff;white-space:nowrap;overflow:hidden;transition:.3s}
+.ab-label{font-size:11px;color:var(--muted);margin-top:4px;font-family:'DM Mono',monospace}
+
+/* 數字對比 */
+.vs-pair{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.vs-box{padding:10px;border-radius:8px;text-align:center}
+.vs-n{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;line-height:1}
+.vs-l{font-family:'DM Mono',monospace;font-size:10px;margin-top:4px}
+
+/* 信號燈 */
+.signal-row{display:flex;align-items:flex-start;gap:10px;padding:9px 12px;border-radius:6px;margin-bottom:6px;font-size:12px}
+.sig-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.sig-green{background:var(--green)}
+.sig-red{background:var(--red)}
+.sig-orange{background:var(--orange)}
+.sig-text{color:var(--brown2);line-height:1.7}
+
+/* 面試金句 */
+.interview-badge{display:inline-flex;align-items:center;gap:5px;font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:4px;background:var(--green);color:#fff;margin-bottom:8px}
+
+.page-footer{background:var(--brown);color:rgba(255,255,255,.7);padding:20px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:40px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:14px;color:var(--orange3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.4)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="header-label">課後複習一頁式 · Lyn（二）</div>
+  <div class="header-title">瑞智精密 84頁財報深度解析<br><em>查核意見 · 異象三連 · 附註黑盒子</em></div>
+  <div class="header-meta">
+    <span class="meta-chip">2026.06.11</span>
+    <span class="meta-chip">KAM · 流動資產76%</span>
+    <span class="meta-chip meta-star">⭐ 面試切入點 × 3</span>
+    <span class="meta-chip">自然避險 · 折舊35年</span>
+    <span class="meta-chip">Rock 老師</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 第一道防線：查核意見 -->
+  <div class="section">
+    <div class="section-label">First Gate · Auditor's Report</div>
+    <div class="section-title">第一眼看財報：會計師說什麼？</div>
+    <div class="grid-2">
+      <div class="card">
+        <h3>🔍 查核 vs 核閱</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0">
+          <div style="background:var(--green2);border:1.5px solid var(--green3);border-radius:8px;padding:12px;text-align:center">
+            <div style="font-size:18px;margin-bottom:5px">✅</div>
+            <div style="font-weight:700;font-size:13px;color:var(--green)">查核（Audited）</div>
+            <div style="font-size:12px;color:#1a4a2a;margin-top:5px">第四季年報<br>最高可信度<br><strong>從這裡做功課</strong></div>
+          </div>
+          <div style="background:var(--cream2);border:1.5px solid var(--orange3);border-radius:8px;padding:12px;text-align:center">
+            <div style="font-size:18px;margin-bottom:5px">⚠️</div>
+            <div style="font-weight:700;font-size:13px;color:var(--orange)">核閱（Reviewed）</div>
+            <div style="font-size:12px;color:var(--brown2);margin-top:5px">Q1–Q3 季報<br>把關較鬆<br>參考即可</div>
+          </div>
+        </div>
+        <div class="signal-row" style="background:var(--green2)">
+          <div class="sig-dot sig-green"></div>
+          <div class="sig-text"><span class="hl-green">無保留意見</span>——「足以允當表達」，代表財報可信</div>
+        </div>
+        <div class="signal-row" style="background:var(--red2)">
+          <div class="sig-dot sig-red"></div>
+          <div class="sig-text"><span class="hl-red">無法表示意見 / 查核受限</span>——財務極度不透明，連面試都不必考慮</div>
+        </div>
+      </div>
+      <div class="card card-teal">
+        <h3>🎯 KAM（關鍵查核事項）：外銷收入認列</h3>
+        <p>KAM = 會計師查帳時<span class="hl-teal">最害怕、最刁鑽</span>的風險點。</p>
+        <div style="margin:12px 0;background:#fff;border-radius:8px;padding:12px">
+          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--teal);margin-bottom:6px">為何外銷收入認列最敏感？</div>
+          <ul style="padding-left:16px;font-size:12px;color:#0a2a35">
+            <li>外銷比例極高，不同客戶交貨條件不同（FOB起運點 vs 目的地交貨）</li>
+            <li>收單、出貨、過港涉及大量<strong>人工判斷</strong></li>
+            <li>必須核對報關單＋船期，防止<strong>跨期認列</strong>（做假帳）</li>
+          </ul>
+        </div>
+        <div class="interview-badge">⭐ 面試切入點</div>
+        <p style="font-size:12px;color:#0a2a35">這暗示公司的<strong>全球出貨與關務流程非常複雜</strong>，是面試時能展現財報閱讀深度的專業亮點。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 資產負債表三大異象 -->
+  <div class="section">
+    <div class="section-label">Balance Sheet · 3 Anomalies</div>
+    <div class="section-title">資產負債表：製造業中的三個極端異象</div>
+
+    <!-- 資產分佈條形圖 -->
+    <div class="card" style="margin-bottom:16px">
+      <h3>總資產 283 億 · 結構分佈</h3>
+      <div class="asset-bar">
+        <div class="ab-seg" style="width:36%;background:#1a7a4a">現金&金融資產 36%</div>
+        <div class="ab-seg" style="width:29%;background:#d97706">應收帳款 29%</div>
+        <div class="ab-seg" style="width:11%;background:#a05020">存貨 11%</div>
+        <div class="ab-seg" style="width:24%;background:#4a4a4a">非流動資產 24%</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:4px">
+        <div class="ab-label" style="color:var(--green)">▮ 現金充沛</div>
+        <div class="ab-label" style="color:#d97706">▮ 應收超高⚠️</div>
+        <div class="ab-label">▮ 存貨</div>
+        <div class="ab-label">▮ 固定資產</div>
+      </div>
+      <div style="margin-top:10px;padding:8px 12px;background:var(--red2);border-radius:6px;font-size:12px;color:#7a1a1a">
+        ⚠️ 製造業竟有 <strong>76% 流動資產</strong>——正常重資產製造業應以非流動（廠房設備）為主，這是第一個異象。
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <!-- 異象一 -->
+      <div class="card card-green">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);margin-bottom:8px">異象一 · 正面</div>
+        <h3>現金超充沛</h3>
+        <div style="text-align:center;margin:12px 0">
+          <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:var(--green)">42億</div>
+          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);margin-top:4px">帳上現金 & 約當現金</div>
+        </div>
+        <p>現金佔總資產 <strong>36%</strong>。<span class="hl-green">沒有倒閉風險</span>，且公司<strong>完全沒有長期借款</strong>，短期借款僅為維持銀行關係。</p>
+      </div>
+
+      <!-- 異象二 -->
+      <div class="card card-red">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--red);margin-bottom:8px">異象二 · 警訊</div>
+        <h3>應收帳款膨脹</h3>
+        <div style="text-align:center;margin:12px 0">
+          <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:var(--red)">82億</div>
+          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--red);margin-top:4px">非關係人應收帳款（佔資產29%）</div>
+        </div>
+        <p>近<span class="hl-red">三成資產</span>卡在客戶欠款中，是非常異常且危險的訊號。也是現金流量表惡化的主因。</p>
+      </div>
+
+      <!-- 異象三 -->
+      <div class="card card-purple">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--purple);margin-bottom:8px">異象三 · 高超手腕</div>
+        <h3>應付帳款完美平衡</h3>
+        <div style="text-align:center;margin:12px 0">
+          <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:var(--purple)">78億</div>
+          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--purple);margin-top:4px">應付帳款＋票據（佔資產28%）</div>
+        </div>
+        <p>客戶欠我 82億，我欠供應商 78億。<span class="hl-purple">用供應商的錢做生意</span>——完美的營運資金調度，弭平應收壓力。</p>
+      </div>
+    </div>
+    <div class="quote-block quote-star" style="margin-top:4px">
+      <p>扣除刻意拖欠的應付帳款（28%），實質負債僅 32%，財務結構其實非常強健。</p>
+    </div>
+  </div>
+
+  <!-- 損益表 + 現金流量 -->
+  <div class="section">
+    <div class="section-label">P&amp;L + Cash Flow</div>
+    <div class="section-title">損益表「硬控」 × 現金流照妖鏡</div>
+    <div class="grid-2">
+      <div class="card card-dark">
+        <h3>📊 費用率兩年一模一樣</h3>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:12px 0">
+          <div style="text-align:center;background:rgba(255,255,255,.06);border-radius:6px;padding:10px 6px">
+            <div style="font-family:'DM Mono',monospace;font-size:16px;color:rgba(255,255,255,.3);text-decoration:line-through">84%</div>
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.4);margin-top:3px">成本率</div>
+          </div>
+          <div style="text-align:center;background:rgba(245,129,42,.15);border-radius:6px;padding:10px 6px">
+            <div style="font-family:'DM Mono',monospace;font-size:16px;color:var(--orange2)">16%</div>
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.5);margin-top:3px">毛利率</div>
+          </div>
+          <div style="text-align:center;background:rgba(255,255,255,.06);border-radius:6px;padding:10px 6px">
+            <div style="font-family:'DM Mono',monospace;font-size:16px;color:rgba(255,255,255,.6)">10%</div>
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.4);margin-top:3px">費用率</div>
+          </div>
+          <div style="text-align:center;background:rgba(100,200,100,.15);border-radius:6px;padding:10px 6px">
+            <div style="font-family:'DM Mono',monospace;font-size:16px;color:#6aaa6a">6%</div>
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.5);margin-top:3px">淨利率</div>
+          </div>
+        </div>
+        <p style="font-size:12px">兩年佔比<span style="color:var(--orange2);font-weight:700">完全相同</span>——非巧合，是管理層透過嚴格削減人員、壓低費用<span style="color:var(--orange2);font-weight:700">「硬控」</span>出來的結果。</p>
+        <div style="margin-top:12px;background:rgba(255,255,255,.05);border-radius:8px;padding:10px 12px;font-size:12px;color:rgba(255,255,255,.7)">
+          基本 EPS = 稀釋 EPS → 公司無認股權證或可轉債，不缺錢也不稀釋股權。
+        </div>
+      </div>
+
+      <div class="card card-red">
+        <h3>💡 現金流量：獲利的照妖鏡</h3>
+        <div class="vs-pair">
+          <div class="vs-box" style="background:#fff;border:1px solid var(--green3)">
+            <div class="vs-n" style="color:var(--green)">42億</div>
+            <div class="vs-l" style="color:var(--green)">113年營業現金流</div>
+          </div>
+          <div class="vs-box" style="background:#fff;border:1px solid var(--red3)">
+            <div class="vs-n" style="color:var(--red)">4.5億</div>
+            <div class="vs-l" style="color:var(--red)">114年營業現金流 ⚠️</div>
+          </div>
+        </div>
+        <div class="quote-block quote-warn">
+          <p>淨利同樣約 15億，但現金流暴跌 90%——資金全被應收帳款與存貨吃掉，這是<strong>持續追蹤的最大風險點</strong>。</p>
+        </div>
+        <div style="margin-top:10px;display:flex;flex-direction:column;gap:5px;font-size:12px">
+          <div style="padding:7px 10px;background:#fff;border-radius:5px;display:flex;justify-content:space-between">
+            <span style="color:var(--brown2)">投資活動（定存+廠房6億）</span><span style="color:var(--red);font-weight:700">流出</span>
+          </div>
+          <div style="padding:7px 10px;background:#fff;border-radius:5px;display:flex;justify-content:space-between">
+            <span style="color:var(--brown2)">籌資活動（配息7億+還款）</span><span style="color:var(--red);font-weight:700">流出</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 附註黑盒子 -->
+  <div class="section">
+    <div class="section-label">Financial Notes · Hidden Signals</div>
+    <div class="section-title">附註黑盒子：三個面試黃金切入點</div>
+    <div class="grid-3">
+
+      <div class="card card-green">
+        <div class="interview-badge">⭐ 面試切入點 1</div>
+        <h3>備抵呆帳率 1%（超低）</h3>
+        <div style="text-align:center;margin:10px 0;background:#fff;border-radius:8px;padding:12px">
+          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--green)">1%</div>
+          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted)">vs 應收帳款 35億</div>
+          <div style="font-size:11px;color:#1a4a2a;margin-top:4px">提列約 4,300萬備抵呆帳</div>
+        </div>
+        <p>帳齡分析顯示幾乎所有帳款都能收回，代表業務端<span class="hl-green">催款管理嚴格到極致</span>，是極具自信的財務表現。</p>
+      </div>
+
+      <div class="card card-teal">
+        <div class="interview-badge" style="background:var(--teal)">⭐ 面試切入點 2</div>
+        <h3>存貨跌價損失＝零</h3>
+        <div style="text-align:center;margin:10px 0;background:#fff;border-radius:8px;padding:12px">
+          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--teal)">$0</div>
+          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted)">存貨跌價損失</div>
+          <div style="font-size:11px;color:#0a2a35;margin-top:4px">製造業中「極端罕見」</div>
+        </div>
+        <p>代表沒有任何呆滯廢料，或有極強底氣說服會計師不提列。老師<span class="hl-teal">強烈建議</span>作為面試專業提問。</p>
+      </div>
+
+      <div class="card card-purple">
+        <div class="interview-badge" style="background:var(--purple)">⭐ 面試切入點 3</div>
+        <h3>折舊年限拉長至 35 年</h3>
+        <div style="margin:10px 0;background:#fff;border-radius:8px;padding:12px">
+          <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px">
+            <span style="color:#2a0a4a">資產總額</span><span style="font-weight:700">150億</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px">
+            <span style="color:#2a0a4a">年折舊費用</span><span style="font-weight:700;color:var(--green)">1.9億（折舊率 &lt;2%）</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:12px">
+            <span style="color:#2a0a4a">若照正常10年攤提</span><span style="font-weight:700;color:var(--red)">→ 淨利瞬間歸零</span>
+          </div>
+        </div>
+        <p style="font-size:12px;color:#2a0a4a">極度拉長年限 = 壓低每年折舊費用 = 維持帳面獲利 = 支撐高額配息的關鍵手段。</p>
+      </div>
+    </div>
+
+    <!-- 其他附註 -->
+    <div class="grid-2" style="margin-top:16px">
+      <div class="card">
+        <h3>🌍 自然避險策略</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0">
+          <div style="background:var(--red2);border-radius:6px;padding:10px;text-align:center">
+            <div style="font-family:'DM Mono',monospace;font-size:16px;color:var(--red);font-weight:700">36%</div>
+            <div style="font-size:11px;color:#7a1a1a;margin-top:3px">外幣收入（高匯率風險）</div>
+          </div>
+          <div style="background:var(--green2);border-radius:6px;padding:10px;text-align:center">
+            <div style="font-family:'DM Mono',monospace;font-size:16px;color:var(--green);font-weight:700">1.7%</div>
+            <div style="font-size:11px;color:#1a4a2a;margin-top:3px">外幣採購成本</div>
+          </div>
+        </div>
+        <p>幣別高度不對等，但公司選擇<span class="hl">不買衍生性金融商品</span>，以應收 vs 應付互抵做自然避險。敏感度分析：匯率變動 1% 對獲利影響僅 ~1,000萬，在可容忍範圍。</p>
+      </div>
+      <div class="card card-dark">
+        <h3>🏭 政府補助 & 其他政策</h3>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px">
+          <div style="background:rgba(255,255,255,.07);border-radius:6px;padding:9px 12px;font-size:12px">
+            <div style="color:var(--orange2);font-weight:700;margin-bottom:3px">政府補助 ~1億（IAS 20）</div>
+            <div style="color:rgba(255,255,255,.7)">直接抵銷固定資產帳面價值，而非列入業外收入 → <strong>美化營業成本</strong></div>
+          </div>
+          <div style="background:rgba(255,255,255,.07);border-radius:6px;padding:9px 12px;font-size:12px">
+            <div style="color:var(--orange2);font-weight:700;margin-bottom:3px">去料加工不認列營收</div>
+            <div style="color:rgba(255,255,255,.7)">控制權未移轉 → 防止營收虛增</div>
+          </div>
+          <div style="background:rgba(255,255,255,.07);border-radius:6px;padding:9px 12px;font-size:12px">
+            <div style="color:var(--orange2);font-weight:700;margin-bottom:3px">TCL 瑞智（惠州）持股22%</div>
+            <div style="color:rgba(255,255,255,.7)">資產 67億、營收 56億 → 公司最核心製造重鎮</div>
+          </div>
+          <div style="background:rgba(197,48,48,.15);border:1px solid rgba(197,48,48,.3);border-radius:6px;padding:9px 12px;font-size:12px">
+            <div style="color:#ff9090;font-weight:700;margin-bottom:3px">⚠️ 單一大客戶集中風險</div>
+            <div style="color:rgba(255,255,255,.7)">單一客戶貢獻 20億（>10% 營收），存在客戶集中風險</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 總結 -->
+  <div class="section">
+    <div class="section-label">Key Takeaway</div>
+    <div class="section-title">從 84 頁財報提煉的判讀框架</div>
+    <div class="grid-2">
+      <div class="card card-orange">
+        <h3>📌 閱讀財報的標準流程</h3>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:11px 14px;display:flex;gap:10px;align-items:flex-start">
+            <div style="font-family:'DM Mono',monospace;font-weight:700;flex-shrink:0">Step 1</div>
+            <div style="font-size:12px">查核意見：<strong>無保留意見才值得繼續讀</strong></div>
+          </div>
+          <div style="background:rgba(255,255,255,.2);border-radius:8px;padding:11px 14px;display:flex;gap:10px;align-items:flex-start">
+            <div style="font-family:'DM Mono',monospace;font-weight:700;flex-shrink:0">Step 2</div>
+            <div style="font-size:12px">KAM：找出會計師認為最有風險的項目</div>
+          </div>
+          <div style="background:rgba(255,255,255,.25);border-radius:8px;padding:11px 14px;display:flex;gap:10px;align-items:flex-start">
+            <div style="font-family:'DM Mono',monospace;font-weight:700;flex-shrink:0">Step 3</div>
+            <div style="font-size:12px">資產負債表：看資產結構與流動性是否健康</div>
+          </div>
+          <div style="background:rgba(255,255,255,.3);border-radius:8px;padding:11px 14px;display:flex;gap:10px;align-items:flex-start">
+            <div style="font-family:'DM Mono',monospace;font-weight:700;flex-shrink:0">Step 4</div>
+            <div style="font-size:12px">現金流量表：與淨利做對比，揪出「賺錢沒現金」陷阱</div>
+          </div>
+          <div style="background:rgba(255,255,255,.35);border-radius:8px;padding:11px 14px;display:flex;gap:10px;align-items:flex-start">
+            <div style="font-family:'DM Mono',monospace;font-weight:700;flex-shrink:0">Step 5</div>
+            <div style="font-size:12px">附註：呆帳率、存貨跌價、折舊政策才是真實底牌</div>
+          </div>
+        </div>
+      </div>
+      <div class="card card-dark">
+        <h3>核心啟發</h3>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+          <div style="background:rgba(255,255,255,.06);border-radius:8px;padding:10px 12px;font-size:12px">
+            <div style="color:var(--orange2);font-weight:700;margin-bottom:3px">賺錢 ≠ 有現金</div>
+            <div style="color:rgba(255,255,255,.7)">淨利15億，但現金流從42億→4.5億。現金流才是照妖鏡。</div>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:8px;padding:10px 12px;font-size:12px">
+            <div style="color:var(--orange2);font-weight:700;margin-bottom:3px">折舊政策決定獲利</div>
+            <div style="color:rgba(255,255,255,.7)">35年折舊 vs 10年折舊，差距足以讓獲利歸零——會計政策是盈餘管理工具。</div>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:8px;padding:10px 12px;font-size:12px">
+            <div style="color:var(--orange2);font-weight:700;margin-bottom:3px">應付帳款是護盾</div>
+            <div style="color:rgba(255,255,255,.7)">用供應商的錢做生意，是高超的資金調度能力，而非財務危機。</div>
+          </div>
+          <div style="background:rgba(100,200,100,.12);border:1px solid rgba(100,200,100,.2);border-radius:8px;padding:10px 12px;font-size:12px">
+            <div style="color:#6aaa6a;font-weight:700;margin-bottom:3px">⭐ 面試最強切入：存貨跌價損失為零</div>
+            <div style="color:rgba(255,255,255,.7)">製造業中前所未聞，問出這個問題代表你真的看懂了財報。</div>
+          </div>
+        </div>
+        <div style="margin-top:12px;padding:10px 14px;background:rgba(255,255,255,.04);border-radius:8px;font-size:12px;font-style:italic;color:rgba(255,255,255,.6)">
+          「財報附註往往隱藏公司最深層的經營邏輯——讀財報，必須讀到附註才算及格。」
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">Lyn · 財報深度解析 · 2026.06.11</div>
+</div>
+
+</body>
+</html>
