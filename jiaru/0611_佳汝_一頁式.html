@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>佳汝 · 奕力IPO財報魔術解密 · 2026.06.11</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --orange:#F5812A;--orange2:#FF9A4D;--orange3:#FFC285;
+  --cream:#FFF8F0;--cream2:#FFF0E0;--cream3:#FFE4C4;
+  --brown:#7A3B10;--brown2:#A05020;--muted:#A08060;
+  --ink:#2C1A0A;--white:#fff;
+  --red:#c53030;--red2:#fff5f5;--red3:#fed7d7;
+  --green:#1a7a4a;--green2:#e6f5ec;--green3:#a8d5b8;
+  --yellow:#92400e;--yellow2:#fffbeb;--yellow3:#fde68a;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7}
+
+/* HEADER */
+.page-header{background:linear-gradient(135deg,#0a0505,#1a0808,#0a0505);padding:48px;position:relative;overflow:hidden}
+.page-header::before{content:'';position:absolute;top:-60px;right:-60px;width:320px;height:320px;background:radial-gradient(circle,rgba(197,48,48,.15),transparent 70%)}
+.page-header::after{content:'IPO';font-family:'Playfair Display',serif;font-size:200px;font-weight:900;color:rgba(255,255,255,.03);position:absolute;bottom:-40px;right:-10px;line-height:1;pointer-events:none}
+.header-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.25em;color:var(--orange3);text-transform:uppercase;margin-bottom:12px}
+.header-title{font-family:'Playfair Display',serif;font-size:clamp(22px,4.5vw,42px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:10px}
+.header-title em{color:var(--orange2);font-style:italic}
+.header-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.meta-chip{font-family:'DM Mono',monospace;font-size:10px;padding:5px 12px;border-radius:4px;background:rgba(245,129,42,.18);color:var(--orange3);border:1px solid rgba(245,129,42,.3)}
+.meta-red{background:rgba(197,48,48,.2);color:#ff9090;border-color:rgba(197,48,48,.4)}
+
+.container{max-width:1100px;margin:0 auto;padding:40px 32px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+@media(max-width:720px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+.section{margin-bottom:36px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--orange);text-transform:uppercase;margin-bottom:8px}
+.section-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--orange3)}
+
+.card{background:var(--white);border:1.5px solid var(--orange3);border-radius:12px;padding:20px}
+.card-dark{background:linear-gradient(135deg,#0a0505,#1a0808);border:none;border-radius:12px;padding:20px}
+.card-orange{background:var(--orange);border:none;border-radius:12px;padding:20px}
+.card-red{background:var(--red2);border:1.5px solid var(--red3);border-radius:12px;padding:20px}
+.card-green{background:var(--green2);border:1.5px solid var(--green3);border-radius:12px;padding:20px}
+.card-yellow{background:var(--yellow2);border:1.5px solid var(--yellow3);border-radius:12px;padding:20px}
+.card h3{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;margin-bottom:10px}
+.card-dark h3{color:var(--orange2)}
+.card-orange h3,.card-orange p,.card-orange li{color:#fff}
+.card-red h3{color:var(--red)}
+.card-green h3{color:var(--green)}
+.card-yellow h3{color:var(--yellow)}
+.card p,.card li{font-size:13px;line-height:1.8;color:var(--brown2)}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8)}
+.card-red p,.card-red li{color:#7a1a1a}
+.card-green p,.card-green li{color:#1a4a2a}
+.card-yellow p,.card-yellow li{color:#5c2e0a}
+.card ul{padding-left:16px}
+.card ul li{margin-bottom:5px}
+
+.hl{color:var(--orange);font-weight:700}
+.hl-red{color:var(--red);font-weight:700}
+.hl-green{color:var(--green);font-weight:700}
+
+.quote-block{border-left:3px solid var(--orange);padding:10px 16px;background:var(--cream2);border-radius:0 8px 8px 0;margin:10px 0}
+.quote-block p{font-size:13px;font-style:italic;color:var(--brown2)}
+.q-red{border-left-color:var(--red);background:var(--red2)}
+.q-red p{color:#7a1a1a}
+.q-green{border-left-color:var(--green);background:var(--green2)}
+.q-green p{color:#1a4a2a}
+
+/* 訊號燈 */
+.signal{display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:11px;padding:4px 12px;border-radius:4px;margin:2px}
+.sig-green{background:var(--green2);color:var(--green);border:1px solid var(--green3)}
+.sig-red{background:var(--red2);color:var(--red);border:1px solid var(--red3)}
+.sig-yellow{background:var(--yellow2);color:var(--yellow);border:1px solid var(--yellow3)}
+
+/* 財報魔術時間軸 */
+.magic-flow{display:flex;flex-direction:column;gap:0}
+.mf-step{position:relative;padding:12px 16px 12px 48px;border-left:3px solid var(--orange3);margin-left:20px}
+.mf-step::before{content:attr(data-n);position:absolute;left:-20px;top:12px;width:36px;height:36px;border-radius:50%;background:var(--orange);color:#fff;font-family:'DM Mono',monospace;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.mf-step:last-child{border-left-color:transparent}
+.mf-title{font-weight:700;font-size:13px;color:var(--ink);margin-bottom:4px}
+.mf-text{font-size:12px;color:var(--brown2);line-height:1.7}
+.mf-step.danger{border-left-color:var(--red)}
+.mf-step.danger::before{background:var(--red)}
+.mf-step.success::before{background:var(--green)}
+
+/* 數字對比 */
+.num-compare{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin:10px 0}
+.nc-box{padding:12px;border-radius:8px;text-align:center}
+.nc-num{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;line-height:1}
+.nc-label{font-family:'DM Mono',monospace;font-size:10px;margin-top:4px}
+.nc-arrow{font-size:20px;color:var(--orange);text-align:center}
+
+/* 現金流瀑布 */
+.cf-waterfall{display:flex;flex-direction:column;gap:4px;margin:10px 0}
+.cfw-row{display:flex;align-items:center;gap:8px}
+.cfw-label{font-size:11px;color:var(--brown2);min-width:110px;flex-shrink:0;text-align:right}
+.cfw-bar{height:22px;border-radius:3px;display:flex;align-items:center;padding:0 8px;font-family:'DM Mono',monospace;font-size:10px;color:#fff;white-space:nowrap}
+
+/* 股價走勢 */
+.price-line{background:#0a0505;border-radius:10px;padding:16px;margin:10px 0}
+
+.page-footer{background:var(--brown);color:rgba(255,255,255,.7);padding:20px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:40px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:14px;color:var(--orange3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.4)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="header-label">課後複習一頁式 · 佳汝</div>
+  <div class="header-title">奕力 IPO 財報魔術解密<br><em>合法美化的 30% 毛利率背後藏了什麼？</em></div>
+  <div class="header-meta">
+    <span class="meta-chip">2026.06.11</span>
+    <span class="meta-chip">聯發科小金雞 · 2024 IPO</span>
+    <span class="meta-chip meta-red">🔴 負債準備迴轉術</span>
+    <span class="meta-chip meta-red">🔴 現金流照妖鏡</span>
+    <span class="meta-chip">Rock 老師</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 分析框架 + 背景 -->
+  <div class="section">
+    <div class="section-label">Core Framework</div>
+    <div class="section-title">現金流量表是損益表的照妖鏡</div>
+    <div class="grid-2">
+      <div class="card card-dark">
+        <h3>🔎 奕力案例背景</h3>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+          <div style="background:rgba(255,255,255,.06);border-radius:8px;padding:10px 14px">
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--orange2);margin-bottom:4px">公司定位</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.85)">聯發科「小金雞」光環，2024年準備掛牌上市<br>主業：IC設計相關</div>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:8px;padding:10px 14px">
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--orange2);margin-bottom:4px">分析工具</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.85)">① 損益表（表面數字）<br>② KAM 關鍵查核事項（警示點）<br>③ 現金流量表（照妖鏡）</div>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:8px;padding:10px 14px">
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--orange2);margin-bottom:4px">財報分析精髓</div>
+            <div style="font-size:13px;color:var(--orange2);font-weight:700">找「矛盾」——一片綠燈中的紅燈，必須停下深究</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card card-green" style="margin-bottom:12px">
+          <h3>🟢 表面綠燈（上市前財數）</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin:8px 0">
+            <span class="signal sig-green">✅ 2024前三季毛利47億 > 2023全年45億</span>
+            <span class="signal sig-green">✅ 毛利率 20%→30%</span>
+            <span class="signal sig-green">✅ 流動比率改善</span>
+            <span class="signal sig-green">✅ 存貨周轉率↑</span>
+            <span class="signal sig-green">✅ 報酬率向上</span>
+          </div>
+          <p>各項數字完美準備就緒，呈現「從低谷反彈」的成長故事——非常適合講給投資人聽。</p>
+        </div>
+        <div class="card card-red">
+          <h3>🔴 深掘後的紅燈（矛盾點）</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin:8px 0">
+            <span class="signal sig-red">⚠️ 備抵損失率反升 18%→20%</span>
+            <span class="signal sig-red">⚠️ 在製品備抵異常偏高</span>
+            <span class="signal sig-red">⚠️ 存出保證金佔資產31%</span>
+          </div>
+          <p>KAM 揭露兩大隱憂，等一下逐一解密。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 兩大紅燈 -->
+  <div class="section">
+    <div class="section-label">Red Flags × 2</div>
+    <div class="section-title">會計師KAM揭露的兩大警訊</div>
+    <div class="grid-2">
+
+      <!-- 紅燈一 -->
+      <div class="card">
+        <h3>⚠️ 紅燈一：存貨備抵損失率「逆向」上升</h3>
+        <p style="margin-bottom:12px;font-size:12px;color:var(--brown2)">科技業存貨放久 → 跌價風險高 → 會計師列為KAM</p>
+
+        <div class="num-compare">
+          <div class="nc-box" style="background:var(--green2)">
+            <div class="nc-num" style="color:var(--green)">18%</div>
+            <div class="nc-label" style="color:var(--green)">2023年底備抵率</div>
+          </div>
+          <div class="nc-arrow">→</div>
+          <div class="nc-box" style="background:var(--red2)">
+            <div class="nc-num" style="color:var(--red)">20%</div>
+            <div class="nc-label" style="color:var(--red)">2024年中備抵率 ⚠️</div>
+          </div>
+        </div>
+
+        <div style="background:var(--yellow2);border:1px solid var(--yellow3);border-radius:8px;padding:12px;margin:10px 0">
+          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--yellow);margin-bottom:6px">矛盾邏輯</div>
+          <div style="font-size:12px;color:#5c2e0a;line-height:1.8">
+            舊貨賣出後，備抵損失率應該<strong>↓降低</strong><br>
+            但實際上反而<strong style="color:var(--red)">↑升高</strong><br>
+            ↳ 追查：「在製品」備抵比例異常偏高
+          </div>
+        </div>
+
+        <div class="quote-block q-red">
+          <p>商業推論：老闆若知道做到一半的產品賣不出去，一定「停損」不再製作。這批在製品暗示公司藏著一批無價值的瑕疵或呆滯品。</p>
+        </div>
+      </div>
+
+      <!-- 紅燈二 -->
+      <div class="card card-red">
+        <h3>⚠️ 紅燈二：台積電產能保證合約</h3>
+        <p style="margin-bottom:10px">會計師第二個KAM：簽訂極不尋常的「產能保證合約」</p>
+
+        <div style="display:flex;flex-direction:column;gap:6px;margin:10px 0">
+          <div style="background:#fff;border-radius:6px;padding:9px 12px;font-size:12px">
+            <div style="color:var(--red);font-weight:700;margin-bottom:3px">一般商業慣例</div>
+            買方向賣方爭取<strong>延遲付款</strong>
+          </div>
+          <div style="text-align:center;color:var(--red);font-size:18px">↕ 完全相反</div>
+          <div style="background:#fff;border-radius:6px;padding:9px 12px;font-size:12px;border:2px solid var(--red3)">
+            <div style="color:var(--red);font-weight:700;margin-bottom:3px">台積電的要求（強勢到不可思議）</div>
+            ① 預先承諾<strong>未來兩年採購量</strong><br>
+            ② 支付非貨款性質的<strong>存出保證金</strong><br>
+            ③ 採購未達標 → <strong>合約損失、必須賠錢</strong>
+          </div>
+        </div>
+
+        <div style="margin-top:12px;text-align:center;background:#fff;border-radius:8px;padding:14px">
+          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--red);margin-bottom:4px">存出保證金 / 總資產 250億</div>
+          <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--red)">31%</div>
+          <div style="font-size:12px;color:#7a1a1a;margin-top:4px">80–90億壓死在台積電手上</div>
+        </div>
+        <div class="quote-block q-red" style="margin-top:10px">
+          <p>三成資產被鎖死，受制於人到極致——同時也是下一個財報魔術的關鍵道具。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 財報魔術核心 -->
+  <div class="section">
+    <div class="section-label">Accounting Magic · IAS 37</div>
+    <div class="section-title">財報魔術解密：20億負債準備 → 30% 毛利率假象</div>
+    <div class="grid-2">
+      <div>
+        <div class="magic-flow">
+          <div class="mf-step" data-n="①">
+            <div class="mf-title">提前認列虧損性合約損失</div>
+            <div class="mf-text">IAS 37：當合約「不可避免成本 > 預期效益」，必須<strong>提前估計認列</strong>損失，不能等真實發生。<br>奕力預見未來銷售不如預期，順勢提列 <strong style="color:var(--orange)">20億負債準備</strong>。</div>
+          </div>
+          <div class="mf-step" data-n="②">
+            <div class="mf-title">IPO前年 靜靜等待</div>
+            <div class="mf-text">這20億「坐在」資產負債表的負債準備科目，等待時機迴轉。</div>
+          </div>
+          <div class="mf-step danger" data-n="③">
+            <div class="mf-title">IPO年（2024）：9.5億華麗迴轉</div>
+            <div class="mf-text">將負債準備進行 <strong style="color:var(--red)">9.5億本期迴轉</strong>（下半年再補約1億，共10.4億）。<br>迴轉利益 → 直接<strong style="color:var(--red)">沖減當期營業成本</strong>。</div>
+          </div>
+          <div class="mf-step danger" data-n="④">
+            <div class="mf-title">毛利率從真實24%→帳面30%</div>
+            <div class="mf-text">
+              <table style="width:100%;font-size:11px;border-collapse:collapse">
+                <tr style="background:var(--cream3)"><td style="padding:5px 8px">真實營業成本</td><td style="padding:5px 8px;text-align:right;font-family:'DM Mono',monospace">約 90億</td></tr>
+                <tr><td style="padding:5px 8px">－ 負債準備迴轉</td><td style="padding:5px 8px;text-align:right;font-family:'DM Mono',monospace;color:var(--red)">－9.5億</td></tr>
+                <tr style="background:var(--cream3)"><td style="padding:5px 8px"><strong>帳面成本</strong></td><td style="padding:5px 8px;text-align:right;font-family:'DM Mono',monospace"><strong>約 78億</strong></td></tr>
+                <tr style="background:var(--orange);color:#fff"><td style="padding:5px 8px">帳面毛利率</td><td style="padding:5px 8px;text-align:right;font-family:'DM Mono',monospace"><strong>30% ✨</strong></td></tr>
+                <tr style="background:var(--red2)"><td style="padding:5px 8px;color:var(--red)">真實毛利率</td><td style="padding:5px 8px;text-align:right;font-family:'DM Mono',monospace;color:var(--red)">不到30%</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card card-dark">
+        <h3>🎭 這個手法的藝術之處</h3>
+        <p style="margin-bottom:14px;font-size:13px">老師評價：「極度高明、<span style="color:var(--orange2);font-weight:700">完全合法</span>、且順勢而為的財務規劃」</p>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:11px 14px;font-size:12px">
+            <div style="color:var(--orange2);font-weight:700;margin-bottom:4px">符合 IAS 37 準則</div>
+            <div style="color:rgba(255,255,255,.75)">虧損性合約本就應提前認列，日後景氣回升自然可迴轉，沒有違規</div>
+          </div>
+          <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:11px 14px;font-size:12px">
+            <div style="color:var(--orange2);font-weight:700;margin-bottom:4px">借力台積電的嚴苛條件</div>
+            <div style="color:rgba(255,255,255,.75)">產能合約＋保證金條件反而成為提列負債準備的「正當理由」</div>
+          </div>
+          <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:11px 14px;font-size:12px">
+            <div style="color:var(--orange2);font-weight:700;margin-bottom:4px">時機精準控制</div>
+            <div style="color:rgba(255,255,255,.75)">累積20億在帳，等到IPO年集中釋放，讓報表在最關鍵的時刻最好看</div>
+          </div>
+        </div>
+        <div style="margin-top:14px;background:rgba(197,48,48,.15);border:1px solid rgba(197,48,48,.3);border-radius:8px;padding:12px;font-size:12px;color:#ff9090">
+          ⚠️ 但「祖產」（負債準備餘額）用盡後，真實獲利能力就無所遁形了
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 現金流照妖鏡 + 匯率風險 -->
+  <div class="section">
+    <div class="section-label">Cash Flow Mirror + FX Risk</div>
+    <div class="section-title">照妖鏡：現金流戳穿獲利假象 × 匯率硬凹</div>
+    <div class="grid-2">
+      <div class="card card-red">
+        <h3>💡 現金流量表照妖鏡</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0">
+          <div style="background:#fff;border-radius:8px;padding:12px;text-align:center">
+            <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--ink)">18億</div>
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:4px">2025年稅前淨利（帳面）</div>
+          </div>
+          <div style="background:var(--red2);border:2px solid var(--red3);border-radius:8px;padding:12px;text-align:center">
+            <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--red)">2億</div>
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--red);margin-top:4px">營業活動現金流（真實）</div>
+          </div>
+        </div>
+
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:6px">那 16億去哪了？</div>
+        <div class="cf-waterfall">
+          <div class="cfw-row">
+            <div class="cfw-label">產能迴轉利益</div>
+            <div class="cfw-bar" style="background:#5a3a00;width:55%">9.6億 → 純帳面沖帳，無現金</div>
+          </div>
+          <div class="cfw-row">
+            <div class="cfw-label">存貨增加</div>
+            <div class="cfw-bar" style="background:var(--red);width:20%">－2億</div>
+          </div>
+          <div class="cfw-row">
+            <div class="cfw-label">所得稅 / 薪資股利</div>
+            <div class="cfw-bar" style="background:#8b2020;width:30%">必要現金流出</div>
+          </div>
+        </div>
+        <div class="quote-block q-red" style="margin-top:8px">
+          <p>「祖產」用盡後，近兩年本業現金流雪崩式下滑，實質上根本沒有賺到現金。</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="card card-yellow" style="margin-bottom:12px">
+          <h3>⚡ 匯率風險：荒謬的「自然避險」</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0">
+            <div style="background:#fff;border-radius:6px;padding:10px;text-align:center">
+              <div style="font-family:'DM Mono',monospace;font-size:16px;color:var(--red);font-weight:700">6.5億美元</div>
+              <div style="font-size:11px;color:#5c2e0a;margin-top:3px">外幣資產（高風險）</div>
+            </div>
+            <div style="background:#fff;border-radius:6px;padding:10px;text-align:center">
+              <div style="font-family:'DM Mono',monospace;font-size:16px;color:var(--green);font-weight:700">1.6億美元</div>
+              <div style="font-size:11px;color:#5c2e0a;margin-top:3px">外幣負債（低覆蓋）</div>
+            </div>
+          </div>
+          <div style="background:#fff;border:2px solid var(--red3);border-radius:8px;padding:10px;text-align:center;margin-top:4px">
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--red);margin-bottom:4px">淨曝險部位</div>
+            <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:var(--red)">5億美元</div>
+            <div style="font-size:11px;color:#7a1a1a;margin-top:3px">≈ 台幣 150億（超過總資產一半！）</div>
+          </div>
+          <p style="margin-top:10px;font-size:12px">台幣升值 1% → 少賺 <strong style="color:var(--red)">1億多台幣</strong>，台幣強升背景下匯損可能吃掉三分之一獲利。完全是在賭央行撐匯率。</p>
+        </div>
+
+        <!-- 股價結局 -->
+        <div class="card card-dark">
+          <h3>📉 股價的最終裁判</h3>
+          <div class="price-line">
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.3);letter-spacing:.2em;margin-bottom:10px">STOCK PRICE TRAJECTORY</div>
+            <svg viewBox="0 0 300 60" style="width:100%;height:60px" preserveAspectRatio="none">
+              <polyline points="0,50 30,45 60,32 90,15 120,8 150,18 180,30 210,38 240,48 270,54 300,56"
+                fill="none" stroke="rgba(245,129,42,.2)" stroke-width="1"/>
+              <polyline points="0,50 30,45 60,32 90,15 120,8"
+                fill="none" stroke="#6aaa6a" stroke-width="2.5"/>
+              <polyline points="120,8 150,18 180,30 210,38 240,48 270,54 300,56"
+                fill="none" stroke="#e53e3e" stroke-width="2.5"/>
+              <circle cx="120" cy="8" r="4" fill="var(--orange2)"/>
+              <text x="100" y="6" font-size="8" fill="var(--orange2)" font-family="monospace">$60+高點</text>
+              <circle cx="300" cy="56" r="3" fill="#e53e3e"/>
+              <text x="255" y="54" font-size="8" fill="#e53e3e" font-family="monospace">$29（2026.3）</text>
+            </svg>
+          </div>
+          <p style="font-size:12px;margin-top:4px">「祖產」用盡後真實獲利現形，即便大盤大漲，股價仍一路滑落至腰斬。市場終究會找到真相。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 總結 -->
+  <div class="section">
+    <div class="section-label">Key Takeaway</div>
+    <div class="section-title">分析一家 IPO 標的的完整框架</div>
+    <div class="grid-2">
+      <div class="card card-orange">
+        <h3>📌 五步拆解財報美化手法</h3>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:11px 14px">
+            <div style="font-weight:700;font-size:13px">① 先看KAM，不看損益表</div>
+            <div style="font-size:12px;opacity:.9;margin-top:2px">會計師標示的風險點 = 最可能藏貓膩的地方</div>
+          </div>
+          <div style="background:rgba(255,255,255,.2);border-radius:8px;padding:11px 14px">
+            <div style="font-weight:700;font-size:13px">② 查存貨備抵損失率（非絕對金額）</div>
+            <div style="font-size:12px;opacity:.9;margin-top:2px">比率逆向上升 = 深層問題出現</div>
+          </div>
+          <div style="background:rgba(255,255,255,.25);border-radius:8px;padding:11px 14px">
+            <div style="font-weight:700;font-size:13px">③ 拆解負債準備的科目明細</div>
+            <div style="font-size:12px;opacity:.9;margin-top:2px">突然「迴轉」的負債準備 → 操縱毛利的工具</div>
+          </div>
+          <div style="background:rgba(255,255,255,.3);border-radius:8px;padding:11px 14px">
+            <div style="font-weight:700;font-size:13px">④ 拿現金流比對淨利</div>
+            <div style="font-size:12px;opacity:.9;margin-top:2px">18億淨利只收到2億現金 = 獲利品質極差</div>
+          </div>
+          <div style="background:rgba(255,255,255,.35);border-radius:8px;padding:11px 14px">
+            <div style="font-weight:700;font-size:13px">⑤ 查外幣曝險是否真「自然避險」</div>
+            <div style="font-size:12px;opacity:.9;margin-top:2px">資產負債幣別差距過大 = 假避險、真賭匯率</div>
+          </div>
+        </div>
+      </div>
+      <div class="card card-dark">
+        <h3>核心啟發</h3>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+          <div style="background:rgba(255,255,255,.06);border-radius:8px;padding:10px 12px;font-size:12px">
+            <div style="color:var(--orange2);font-weight:700;margin-bottom:3px">合法 ≠ 真實</div>
+            <div style="color:rgba(255,255,255,.7)">負債準備迴轉完全合法，但把「帳面」當「真實」是投資人的陷阱</div>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:8px;padding:10px 12px;font-size:12px">
+            <div style="color:var(--orange2);font-weight:700;margin-bottom:3px">備抵損失率比絕對金額更重要</div>
+            <div style="color:rgba(255,255,255,.7)">存貨減少而比率上升 → 老舊的好貨賣掉，爛貨留下來了</div>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:8px;padding:10px 12px;font-size:12px">
+            <div style="color:var(--orange2);font-weight:700;margin-bottom:3px">現金流才是最後防線</div>
+            <div style="color:rgba(255,255,255,.7)">祖產終有用盡的一天，本業現金流才是公司真正的生命力</div>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:8px;padding:10px 12px;font-size:12px">
+            <div style="color:var(--orange2);font-weight:700;margin-bottom:3px">IPO時機是精心設計的</div>
+            <div style="color:rgba(255,255,255,.7)">管理層清楚知道「祖產」何時用盡，在最好看的那年掛牌是職業水準</div>
+          </div>
+        </div>
+        <div style="margin-top:12px;padding:10px 14px;background:rgba(255,255,255,.04);border-radius:8px;font-size:12px;font-style:italic;color:rgba(255,255,255,.6)">
+          「透過抽絲剝繭分析KAM與現金流量表，投資人就能看穿財務包裝的陷阱。」
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">佳汝 · 課後複習一頁式 · 2026.06.11</div>
+</div>
+
+</body>
+</html>
