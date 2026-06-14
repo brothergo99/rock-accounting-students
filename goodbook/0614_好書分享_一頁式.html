@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>好書分享 · My Money Journey · 2026.06.14</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --orange:#F5812A;--orange2:#FF9A4D;--orange3:#FFC285;
+  --cream:#FFF8F0;--cream2:#FFF0E0;--cream3:#FFE4C4;
+  --brown:#7A3B10;--brown2:#A05020;--muted:#A08060;
+  --ink:#2C1A0A;--white:#fff;
+  --slate:#2d3748;--slate2:#edf2f7;--slate3:#a0aec0;
+  --gold:#b7791f;--gold2:#fffbeb;--gold3:#fde68a;
+  --green:#1a7a4a;--green2:#e6f5ec;--green3:#a8d5b8;
+  --parch:#fdf6e3;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--parch);color:var(--ink);line-height:1.7}
+
+/* HEADER — 書籍封面感 */
+.page-header{background:linear-gradient(160deg,#1a0f00,#2c1a06,#1a0f00);padding:52px 48px;position:relative;overflow:hidden;border-bottom:4px solid var(--gold)}
+.ph-texture{position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,.015) 2px,rgba(255,255,255,.015) 4px);pointer-events:none}
+.ph-glow{position:absolute;top:-60px;right:-60px;width:300px;height:300px;background:radial-gradient(circle,rgba(183,121,31,.2),transparent 70%);pointer-events:none}
+.ph-subtitle{font-family:'Playfair Display',serif;font-style:italic;font-size:12px;letter-spacing:.15em;color:var(--gold3);opacity:.8;margin-bottom:14px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(20px,4vw,38px);font-weight:900;color:#fff;line-height:1.15;margin-bottom:8px}
+.ph-title em{color:var(--orange2);font-style:italic}
+.ph-author{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;color:var(--gold3);margin-top:6px;opacity:.9}
+.ph-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.meta-chip{font-family:'DM Mono',monospace;font-size:10px;padding:4px 12px;border-radius:3px;background:rgba(183,121,31,.2);color:var(--gold3);border:1px solid rgba(183,121,31,.35)}
+
+.container{max-width:1100px;margin:0 auto;padding:40px 32px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+
+.section{margin-bottom:36px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--orange);text-transform:uppercase;margin-bottom:8px}
+.section-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--orange3)}
+
+.card{background:var(--white);border:1.5px solid var(--orange3);border-radius:10px;padding:20px}
+.card-parch{background:var(--parch);border:1.5px solid var(--orange3);border-radius:10px;padding:20px}
+.card-dark{background:linear-gradient(135deg,#1a0f00,#2c1a06);border:1px solid rgba(183,121,31,.3);border-radius:10px;padding:20px}
+.card-orange{background:var(--orange);border:none;border-radius:10px;padding:20px}
+.card-gold{background:var(--gold2);border:1.5px solid var(--gold3);border-radius:10px;padding:20px}
+.card-green{background:var(--green2);border:1.5px solid var(--green3);border-radius:10px;padding:20px}
+.card h3{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;margin-bottom:10px}
+.card-dark h3{color:var(--orange2)}
+.card-orange h3,.card-orange p,.card-orange li{color:#fff}
+.card-gold h3{color:var(--gold)}
+.card-green h3{color:var(--green)}
+.card p,.card li{font-size:13px;line-height:1.85;color:var(--brown2)}
+.card-parch p,.card-parch li{font-size:13px;line-height:1.85;color:var(--brown2)}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8)}
+.card-gold p,.card-gold li{color:#5c3a00}
+.card-green p,.card-green li{color:#1a4a2a}
+.card ul{padding-left:16px}
+.card ul li{margin-bottom:5px}
+
+.hl{color:var(--orange);font-weight:700}
+.hl-gold{color:var(--gold);font-weight:700}
+.hl-green{color:var(--green);font-weight:700}
+
+/* 引言 */
+.pullquote{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:var(--brown);line-height:1.7;padding:14px 20px;border-left:4px solid var(--orange);background:var(--cream2);border-radius:0 8px 8px 0;margin:10px 0}
+.pullquote cite{display:block;font-family:'DM Mono',monospace;font-style:normal;font-size:10px;color:var(--muted);margin-top:6px}
+.pq-gold{border-left-color:var(--gold);background:var(--gold2)}
+.pq-gold cite{color:var(--gold)}
+
+/* 八大主題網格 */
+.theme-box{padding:12px 14px;border-radius:8px;background:var(--white);border:1.5px solid var(--orange3)}
+.theme-n{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--orange3);line-height:1;margin-bottom:4px}
+.theme-text{font-size:12px;color:var(--brown2);line-height:1.65}
+
+/* 儲蓄引爆點 */
+.tipping-track{display:flex;flex-direction:column;gap:5px;margin:12px 0}
+.tt-row{display:flex;align-items:center;gap:8px}
+.tt-year{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);min-width:60px;flex-shrink:0;text-align:right}
+.tt-bar{height:20px;border-radius:3px;display:flex;align-items:center;padding:0 8px;font-family:'DM Mono',monospace;font-size:10px;color:#fff;white-space:nowrap;transition:.3s}
+
+/* 複雜 vs 簡單 */
+.vs-split{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin:10px 0}
+.vs-badge{font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:var(--muted);text-align:center}
+
+/* 生命時鐘 */
+.life-events{display:flex;flex-direction:column;gap:6px;margin:10px 0}
+.le-row{display:flex;align-items:flex-start;gap:10px;padding:8px 12px;border-radius:6px;background:var(--cream2)}
+.le-icon{font-size:16px;flex-shrink:0;width:24px;text-align:center}
+.le-text{font-size:12px;color:var(--brown2);line-height:1.65}
+
+.page-footer{background:var(--brown);color:rgba(255,255,255,.7);padding:20px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:40px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:14px;color:var(--orange3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.4)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-texture"></div>
+  <div class="ph-glow"></div>
+  <div class="ph-subtitle">好書分享 · Book Review</div>
+  <div class="ph-title"><em>My Money Journey</em></div>
+  <div class="ph-author">Jonathan Clements · Humble Dollar</div>
+  <div style="font-size:13px;color:rgba(255,255,255,.6);margin-top:10px;font-style:italic">30 people found Financial Freedom — and you can too</div>
+  <div class="ph-meta">
+    <span class="meta-chip">2026.06.14</span>
+    <span class="meta-chip">WSJ 千篇專欄作家</span>
+    <span class="meta-chip">8大理財主題</span>
+    <span class="meta-chip">儲蓄引爆點理論</span>
+    <span class="meta-chip">Rock 老師</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 作者 + 書籍緣起 -->
+  <div class="section">
+    <div class="section-label">Author + Origin</div>
+    <div class="section-title">一個家族的興衰，成就了一位理財作家</div>
+    <div class="grid-2">
+      <div class="card card-dark">
+        <h3>📖 Jonathan Clements 是誰？</h3>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+          <div style="background:rgba(255,255,255,.06);border-radius:7px;padding:10px 14px">
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--orange2);margin-bottom:4px">WSJ 生涯</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.8)">《華爾街日報》個人理財專欄超過<strong style="color:var(--orange2)"> 1,000 篇</strong><br>自述：「把同樣的20篇文章重複寫了50遍」<br>→ 核心真理就那幾條，萬變不離其宗</div>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:7px;padding:10px 14px">
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--gold3);margin-bottom:4px">家族故事（啟蒙）</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.8)">高曾祖父曾是<strong style="color:var(--gold3)">英國首富</strong>，卻被下一代揮霍殆盡。家族就此深刻體會「節儉」與「努力工作」的無價之處。</div>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:7px;padding:10px 14px">
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--orange2);margin-bottom:4px">Humble Dollar</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.8)">2016年創辦，讓<strong>業餘投資人</strong>分享真實財務故事的社群——你是自己財務生活的專家</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card card-gold" style="margin-bottom:12px">
+          <h3>📚 這本書是怎麼來的？</h3>
+          <p><span class="hl-gold">30位撰稿人</span>（含 Charlie Ellis、Bill Bernstein），絕大多數是日常的<strong>DIY散戶投資者</strong>，幾乎不依賴理財顧問。</p>
+          <p style="margin-top:10px">最令人驚訝的是：每個人抵達「財務自由」的路徑完全不同——<span class="hl-gold">通往成功的途徑絕不只一條。</span></p>
+        </div>
+        <div class="pullquote">
+          「你或許不是個人理財的專家，但你絕對是你自己財務生活的專家。」
+          <cite>— Jonathan Clements</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 八大主題 -->
+  <div class="section">
+    <div class="section-label">8 Recurring Themes</div>
+    <div class="section-title">30個故事收斂出的八大理財主題</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:10px">
+      <div class="theme-box">
+        <div class="theme-n">01</div>
+        <div class="theme-text"><strong>父母塑造了我們的金錢信仰</strong><br>家庭教育有決定性影響</div>
+      </div>
+      <div class="theme-box">
+        <div class="theme-n">02</div>
+        <div class="theme-text"><strong>財務自由的關鍵是儲蓄習慣</strong><br>儲蓄永遠是累積財富第一步</div>
+      </div>
+      <div class="theme-box">
+        <div class="theme-n">03</div>
+        <div class="theme-text"><strong>複雜是多餘的</strong><br>投資不需艱澀難懂的策略</div>
+      </div>
+      <div class="theme-box">
+        <div class="theme-n">04</div>
+        <div class="theme-text"><strong>不需成為偉大的投資者</strong><br>平凡組合也能帶來非凡成果</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+      <div class="theme-box">
+        <div class="theme-n">05</div>
+        <div class="theme-text"><strong>成功只在事後才顯而易見</strong><br>當下難以察覺累積的進展</div>
+      </div>
+      <div class="theme-box">
+        <div class="theme-n">06</div>
+        <div class="theme-text"><strong>不要低估「運氣」的作用</strong><br>好運壞運都影響財務軌跡</div>
+      </div>
+      <div class="theme-box">
+        <div class="theme-n">07</div>
+        <div class="theme-text"><strong>我們為金錢注入了意義</strong><br>目標賦予金錢真正的價值</div>
+      </div>
+      <div class="theme-box" style="border-color:var(--orange);background:var(--cream3)">
+        <div class="theme-n" style="color:var(--orange)">08</div>
+        <div class="theme-text"><strong style="color:var(--brown)">懂得說「足夠了」</strong><br>停止無止盡追逐的關鍵智慧</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 三大核心洞見 -->
+  <div class="section">
+    <div class="section-label">3 Deep Insights</div>
+    <div class="section-title">三個最值得深記的理財洞見</div>
+    <div class="grid-3">
+
+      <!-- 儲蓄引爆點 -->
+      <div class="card">
+        <h3>💥 儲蓄引爆點理論</h3>
+        <div style="text-align:center;background:var(--cream2);border-radius:8px;padding:12px;margin-bottom:10px">
+          <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--orange)">每月存薪水的 12–15%</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:3px">持續堅持 12–15 年</div>
+        </div>
+        <div class="tipping-track">
+          <div class="tt-row"><div class="tt-year">第 1–5年</div><div class="tt-bar" style="background:#c0a0a0;width:35%">緩慢累積，看不到盡頭</div></div>
+          <div class="tt-row"><div class="tt-year">第 6–10年</div><div class="tt-bar" style="background:#c0a060;width:55%">開始感受到複利的力量</div></div>
+          <div class="tt-row"><div class="tt-year">第 12–15年</div><div class="tt-bar" style="background:var(--orange);width:75%">⚡ 引爆點：投資回報 > 每年存入本金</div></div>
+          <div class="tt-row"><div class="tt-year">之後</div><div class="tt-bar" style="background:var(--green);width:95%">組合爆炸性增長，壓力極小</div></div>
+        </div>
+        <p style="font-size:12px;margin-top:4px;color:var(--muted)">關鍵：熬過最初那看似沒有進展的12–15年</p>
+      </div>
+
+      <!-- 簡單 vs 複雜 -->
+      <div class="card">
+        <h3>🧩 簡單 > 複雜</h3>
+        <div class="vs-split">
+          <div style="background:var(--red2);border:1px solid #fed7d7;border-radius:8px;padding:12px;text-align:center">
+            <div style="font-size:18px;margin-bottom:5px">🏦</div>
+            <div style="font-size:12px;font-weight:700;color:#c53030">複雜金融產品</div>
+            <div style="font-size:11px;color:#7a1a1a;margin-top:4px;line-height:1.5">高手續費<br>不知道自己買了什麼<br>遇動盪就恐慌賣出</div>
+          </div>
+          <div class="vs-badge" style="font-size:18px">→</div>
+          <div style="background:var(--green2);border:1px solid var(--green3);border-radius:8px;padding:12px;text-align:center">
+            <div style="font-size:18px;margin-bottom:5px">📊</div>
+            <div style="font-size:12px;font-weight:700;color:var(--green)">低成本指數基金</div>
+            <div style="font-size:11px;color:#1a4a2a;margin-top:4px;line-height:1.5">廣泛市場覆蓋<br>完全理解運作邏輯<br>更能在逆境中堅持</div>
+          </div>
+        </div>
+        <div class="pullquote" style="margin-top:10px">
+          「不會讓你的股票經紀人致富，但卻能讓你致富。」
+        </div>
+        <p style="font-size:12px;margin-top:8px">Bill Bernstein 名言：<span class="hl">「你能執行的次佳組合，遠勝過你無法堅持的最佳組合。」</span></p>
+      </div>
+
+      <!-- 風險承受度 + 後悔 -->
+      <div class="card">
+        <h3>🌊 風險承受度是流動的</h3>
+        <div class="life-events">
+          <div class="le-row" style="background:var(--green2)">
+            <div class="le-icon">📈</div>
+            <div class="le-text"><strong style="color:var(--green)">牛市期間：</strong>「我風險承受度很高！」每個人都這樣說</div>
+          </div>
+          <div class="le-row" style="background:var(--red2)">
+            <div class="le-icon">📉</div>
+            <div class="le-text"><strong style="color:#c53030">熊市來臨：</strong>才發現自己的真實底線，「大膽投資人」可能突然想全買債券</div>
+          </div>
+          <div class="le-row" style="background:var(--cream2)">
+            <div class="le-icon">🧠</div>
+            <div class="le-text">40–60歲隨經歷累積，<strong>逐漸成為更勇敢的投資者</strong></div>
+          </div>
+        </div>
+        <div style="margin-top:10px;background:var(--gold2);border:1px solid var(--gold3);border-radius:8px;padding:10px 12px;font-size:12px;color:#5c3a00">
+          <strong>理性面對後悔：</strong>在未知的未來做決策時，只要盡用當時最好的資訊、深思熟慮後決定，結果不如預期也不必過度苛責自己。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 父母大聲公 + 人生衝擊 -->
+  <div class="section">
+    <div class="section-label">Parenting + Life Reset</div>
+    <div class="section-title">兩個影響財務命運的隱形力量</div>
+    <div class="grid-2">
+      <div class="card card-gold">
+        <h3>📣 父母的「大聲公」效應</h3>
+        <p>書中幾乎所有撰稿人都提到父母的影響，孩子通常有兩種極端反應：</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0">
+          <div style="background:#fff;border-radius:6px;padding:10px;text-align:center;font-size:12px">
+            <div style="font-size:20px;margin-bottom:4px">✅</div>
+            <div style="font-weight:700;color:var(--gold)">完全採納</div>
+            <div style="color:#5c3a00;margin-top:3px">複製父母的金錢觀</div>
+          </div>
+          <div style="background:#fff;border-radius:6px;padding:10px;text-align:center;font-size:12px">
+            <div style="font-size:20px;margin-bottom:4px">🔄</div>
+            <div style="font-weight:700;color:var(--gold)">徹底反抗</div>
+            <div style="color:#5c3a00;margin-top:3px">走向完全相反的路</div>
+          </div>
+        </div>
+        <p>Jonathan 自身案例：他的節儉深深影響了兩個孩子——兒子攻讀博士7年、年收僅 3萬美元，卻存下了超過 <strong>10萬美元</strong>！</p>
+        <div class="pullquote pq-gold" style="margin-top:10px">
+          「在與孩子談論金錢時，你就像是拿著『大聲公』在說話——必須謹言慎行。」
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>⚡ 人生衝擊 → 財務重置</h3>
+        <p style="margin-bottom:10px">人腦天生關注「當下」。只有強烈的衝擊才能迫使人停下來思考未來：</p>
+        <div class="life-events">
+          <div class="le-row"><div class="le-icon">💼</div><div class="le-text"><strong>突然失業</strong>——才發現沒有緊急備用金</div></div>
+          <div class="le-row"><div class="le-icon">🏥</div><div class="le-text"><strong>健康出現問題</strong>——才意識到時間的有限性</div></div>
+          <div class="le-row"><div class="le-icon">👴</div><div class="le-text"><strong>親人離世</strong>——重新審視生命中真正重要的事</div></div>
+          <div class="le-row"><div class="le-icon">💔</div><div class="le-text"><strong>離婚</strong>——財務狀況的全面重整</div></div>
+        </div>
+        <div style="margin-top:10px;background:var(--cream2);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--brown2)">
+          這類衝擊促使人們意識到「距離退休只剩15年卻毫無準備」，是走進理財顧問辦公室的<strong>最大動力</strong>。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 總結 -->
+  <div class="section">
+    <div class="section-label">Final Chapter · Legacy</div>
+    <div class="section-title">為何你應該寫下自己的金錢故事？</div>
+    <div class="grid-2">
+      <div class="card card-orange">
+        <h3>📝 寫下你的金錢故事</h3>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+          <div style="background:rgba(255,255,255,.2);border-radius:8px;padding:12px 14px">
+            <div style="font-weight:700;font-size:13px">① 個人的自我審視</div>
+            <div style="font-size:12px;opacity:.9;margin-top:3px">回顧財務生活 → 釐清做對了什麼、做錯了什麼 → 確認核心價值觀 → 指引未來方向</div>
+          </div>
+          <div style="background:rgba(255,255,255,.25);border-radius:8px;padding:12px 14px">
+            <div style="font-weight:700;font-size:13px">② 傳承給後代的無價遺產</div>
+            <div style="font-size:12px;opacity:.9;margin-top:3px">金錢決策觸及生活每一角落——<strong>寫下你的金錢故事，本質上就是在寫下你的生命故事</strong></div>
+          </div>
+          <div style="background:rgba(255,255,255,.3);border-radius:8px;padding:12px 14px">
+            <div style="font-weight:700;font-size:13px">③ 只需一兩千字</div>
+            <div style="font-size:12px;opacity:.9;margin-top:3px">記錄下財務軌跡與生命智慧，讓後世讀到你的故事</div>
+          </div>
+        </div>
+      </div>
+      <div class="card card-dark">
+        <h3>核心啟發</h3>
+        <div style="display:flex;flex-direction:column;gap:7px;margin-top:4px">
+          <div style="background:rgba(255,255,255,.06);border-radius:7px;padding:10px 12px;font-size:12px">
+            <div style="color:var(--orange2);font-weight:700;margin-bottom:3px">真理就那幾條</div>
+            <div style="color:rgba(255,255,255,.75)">1,000篇文章最終濃縮成8個主題——核心法則數量有限，重要的是執行力</div>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:7px;padding:10px 12px;font-size:12px">
+            <div style="color:var(--orange2);font-weight:700;margin-bottom:3px">故事比數據更有力</div>
+            <div style="color:rgba(255,255,255,.75)">30個平凡人的成功故事比任何統計數字都更能激勵人心，財務自由是可行的</div>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:7px;padding:10px 12px;font-size:12px">
+            <div style="color:var(--orange2);font-weight:700;margin-bottom:3px">早存、簡單、堅持</div>
+            <div style="color:rgba(255,255,255,.75)">儲蓄12–15% × 堅持12–15年 = 引爆點 + 低成本指數基金 = 最強理財公式</div>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:7px;padding:10px 12px;font-size:12px">
+            <div style="color:var(--orange2);font-weight:700;margin-bottom:3px">金錢買的是時間</div>
+            <div style="color:rgba(255,255,255,.75)">最終的財富不是數字，而是能買到與家人共度的時光，以及說「足夠了」的自由</div>
+          </div>
+        </div>
+        <div style="margin-top:14px;padding:12px 16px;background:rgba(183,121,31,.12);border:1px solid rgba(183,121,31,.25);border-radius:8px;font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:var(--gold3);line-height:1.7">
+          "There is no immortality on this earth except for the memory of others."
+          <div style="font-family:'DM Mono',monospace;font-style:normal;font-size:10px;color:rgba(255,255,255,.3);margin-top:6px">— Jonathan Clements</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">好書分享 · My Money Journey · 2026.06.14</div>
+</div>
+
+</body>
+</html>
