@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>112年記帳士考題解析 · 立雅 0617</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --crimson:#7f1d1d;--crimson2:#991b1b;--crimson3:#dc2626;
+  --rose2:#fff1f2;--rose3:#fecdd3;--rose4:#fda4af;
+  --navy:#1e1b4b;--navy2:#312e81;--navy3:#4338ca;
+  --teal:#0f766e;--teal2:#ccfbf1;--teal3:#5eead4;
+  --orange:#b45309;--orange2:#d97706;--orange3:#fde68a;--orange4:#fffbeb;
+  --green:#166534;--green2:#dcfce7;--green3:#86efac;
+  --purple:#6b21a8;--purple2:#e9d5ff;--purple3:#d8b4fe;
+  --white:#fff;--ink:#1e1b4b;--muted:#64748b;
+  --bg:#faf5f5;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+.page-header{background:linear-gradient(160deg,var(--crimson),#450a0a,#7f1d1d);padding:42px 48px 34px;position:relative;overflow:hidden;border-bottom:4px solid var(--crimson3)}
+.ph-texture{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.03) 0,rgba(255,255,255,.03) 1px,transparent 0,transparent 50%);background-size:12px 12px;pointer-events:none}
+.ph-glow{position:absolute;top:-60px;right:-60px;width:280px;height:280px;background:radial-gradient(circle,rgba(220,38,38,.25),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.2em;color:var(--rose4);opacity:.85;margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(17px,3vw,28px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:5px}
+.ph-title em{color:#fca5a5;font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.5);margin-top:4px}
+.ph-meta{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+.meta-chip{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(220,38,38,.25);color:var(--rose4);border:1px solid rgba(220,38,38,.4)}
+.meta-chip-o{background:rgba(217,119,6,.2);color:var(--orange3);border-color:rgba(217,119,6,.4)}
+.meta-chip-g{background:rgba(22,101,52,.2);color:var(--green3);border-color:rgba(22,101,52,.4)}
+
+.container{max-width:1100px;margin:0 auto;padding:32px 28px}
+.section{margin-bottom:28px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--crimson2);text-transform:uppercase;margin-bottom:6px}
+.section-title{font-family:'Playfair Display',serif;font-size:17.5px;font-weight:700;color:var(--navy);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--rose3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px}
+@media(max-width:720px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+.card{background:var(--white);border:1.5px solid var(--rose3);border-radius:10px;padding:15px}
+.card-dark{background:var(--navy);border:none;border-radius:10px;padding:15px}
+.card-crimson{background:var(--crimson);border:none;border-radius:10px;padding:15px}
+.card-rose{background:var(--rose2);border:1.5px solid var(--rose3);border-radius:10px;padding:15px}
+.card-teal{background:var(--teal2);border:1.5px solid var(--teal3);border-radius:10px;padding:15px}
+.card-orange{background:var(--orange4);border:1.5px solid var(--orange3);border-radius:10px;padding:15px}
+.card-green{background:var(--green2);border:1.5px solid var(--green3);border-radius:10px;padding:15px}
+.card-purple{background:var(--purple2);border:1.5px solid var(--purple3);border-radius:10px;padding:15px}
+.card-navy{background:var(--navy2);border:none;border-radius:10px;padding:15px}
+.card h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:8px;color:var(--navy)}
+.card-dark h3,.card-crimson h3{color:#fca5a5}
+.card-dark p,.card-dark li,.card-crimson p,.card-crimson li{color:rgba(255,255,255,.8);font-size:12.5px}
+.card-navy h3{color:var(--rose4)}
+.card-navy p,.card-navy li{color:rgba(255,255,255,.8);font-size:12.5px}
+.card-teal h3{color:var(--teal)}
+.card-orange h3{color:var(--orange)}
+.card-green h3{color:var(--green)}
+.card-purple h3{color:var(--purple)}
+.card p,.card li{font-size:12.5px;line-height:1.85;color:#374151}
+.card-rose p,.card-rose li{font-size:12.5px;line-height:1.85;color:var(--crimson)}
+.card-teal p,.card-teal li{font-size:12.5px;line-height:1.85;color:var(--teal)}
+.card-orange p,.card-orange li{font-size:12.5px;line-height:1.85;color:var(--orange)}
+.card-green p,.card-green li{font-size:12.5px;line-height:1.85;color:var(--green)}
+.card-purple p,.card-purple li{font-size:12.5px;line-height:1.85;color:var(--purple)}
+.card ul{padding-left:14px}.card ul li{margin-bottom:3px}
+.hl{color:var(--crimson2);font-weight:700}
+.hl-o{color:var(--orange2);font-weight:700}
+.hl-g{color:var(--green);font-weight:700}
+.hl-t{color:var(--teal);font-weight:700}
+.hl-p{color:var(--purple);font-weight:700}
+.hl-n{color:var(--navy3);font-weight:700}
+
+/* 陷阱警示 */
+.trap-box{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;border-radius:8px;margin-bottom:7px}
+.trap-icon{font-size:18px;flex-shrink:0;width:24px;text-align:center;margin-top:1px}
+.trap-text{font-size:12.5px;line-height:1.75}
+
+/* 計算展示 */
+.calc-row{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;border-radius:5px;font-size:12.5px;margin-bottom:4px}
+.calc-label{color:var(--muted)}
+.calc-val{font-family:'DM Mono',monospace;font-weight:700}
+
+/* 報表欄位 */
+.stmt-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.stmt-card{border-radius:8px;padding:10px 12px}
+
+/* FVTPL vs FVTOCI */
+.compare-col{border-radius:8px;padding:10px 12px}
+.compare-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;font-weight:700;margin-bottom:6px}
+
+/* 現金流量分類表 */
+.cf-section{border-radius:8px;padding:10px 14px;margin-bottom:8px}
+.cf-title{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;margin-bottom:6px}
+.cf-item{display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:4px 0;border-bottom:1px dashed rgba(0,0,0,.08)}
+.cf-item:last-child{border-bottom:none}
+.cf-tag{font-family:'DM Mono',monospace;font-size:10px;padding:2px 7px;border-radius:3px;font-weight:700}
+
+.page-footer{background:var(--crimson);color:rgba(255,255,255,.6);padding:16px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:32px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--rose4)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.35)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-texture"></div>
+  <div class="ph-glow"></div>
+  <div class="ph-eyebrow">112年記帳士考題解析 · 魔王題拆解</div>
+  <div class="ph-title"><em>第二題：金融資產投資 × 第三題：現金流量表分類</em></div>
+  <div class="ph-sub">FVTPL × FVTOCI × 手續費陷阱 × 股利認列迷思 × IFRS 反直覺分類</div>
+  <div class="ph-meta">
+    <span class="meta-chip">2026.06.17</span>
+    <span class="meta-chip">立雅</span>
+    <span class="meta-chip">三大致命陷阱</span>
+    <span class="meta-chip meta-chip-o">FVTPL「渣男」短線</span>
+    <span class="meta-chip">FVTOCI「舉棋不定」</span>
+    <span class="meta-chip meta-chip-g">四大報表項目速算</span>
+    <span class="meta-chip">Rock 老師</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 第二題：題目設定 -->
+  <div class="section">
+    <div class="section-label">第二題 · Question Setup</div>
+    <div class="section-title">第二題：金融資產投資計算 — 題目全貌</div>
+    <div class="grid-2">
+      <div class="card card-dark">
+        <h3>📋 題目設定一覽</h3>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px">
+          <div style="background:rgba(255,255,255,.07);border-radius:7px;padding:8px 12px;font-size:12.5px">
+            <div style="color:#fca5a5;font-weight:700;margin-bottom:3px">買進條件</div>
+            <div style="color:rgba(255,255,255,.8)">A公司股票共 <strong style="color:var(--rose4)">3萬股</strong>，每股 <strong style="color:var(--rose4)">20元</strong>，支付手續費 <strong style="color:var(--rose4)">1萬5千元</strong></div>
+          </div>
+          <div style="background:rgba(255,255,255,.07);border-radius:7px;padding:8px 12px;font-size:12.5px">
+            <div style="color:var(--orange3);font-weight:700;margin-bottom:3px">投資分類</div>
+            <table style="width:100%;color:rgba(255,255,255,.8);font-size:12px">
+              <tr><td>FVTPL「渣男」</td><td style="font-family:'DM Mono',monospace;text-align:right;color:var(--orange3)">2萬股（短線操作）</td></tr>
+              <tr><td>FVTOCI「舉棋不定」</td><td style="font-family:'DM Mono',monospace;text-align:right;color:#86efac">1萬股（指定選項）</td></tr>
+            </table>
+          </div>
+          <div style="background:rgba(255,255,255,.07);border-radius:7px;padding:8px 12px;font-size:12.5px">
+            <div style="color:var(--teal3);font-weight:700;margin-bottom:3px">市價走勢</div>
+            <div style="color:rgba(255,255,255,.8)">X1年底：<strong style="color:var(--rose4)">10元</strong>（跌）→ X2年底：<strong style="color:#86efac">30元</strong>（升）<br>兩年均發放現金股利每股 <strong style="color:var(--orange3)">1元</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FVTPL vs FVTOCI 特性對比 -->
+      <div class="card">
+        <h3>🔍 FVTPL vs FVTOCI 核心差異</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px">
+          <div class="compare-col" style="background:#fff7ed;border:1.5px solid var(--orange3)">
+            <div class="compare-label" style="color:var(--orange)">FVTPL「渣男」</div>
+            <div style="font-size:12px;line-height:1.7;color:var(--orange)">
+              手續費 → <strong>當期費用</strong><br>
+              評價損益 → <strong>本期損益</strong><br>
+              股利 → 股利收入<br>
+              累積未實現 → <strong>無</strong>（立即入損益）
+            </div>
+          </div>
+          <div class="compare-col" style="background:var(--green2);border:1.5px solid var(--green3)">
+            <div class="compare-label" style="color:var(--green)">FVTOCI「舉棋不定」</div>
+            <div style="font-size:12px;line-height:1.7;color:var(--green)">
+              手續費 → <strong>計入成本</strong><br>
+              評價損益 → <strong>OCI（其他綜合損益）</strong><br>
+              股利 → 股利收入<br>
+              累積未實現 → <strong>其他權益</strong>揭露
+            </div>
+          </div>
+        </div>
+        <div style="background:var(--purple2);border:1.5px solid var(--purple3);border-radius:7px;padding:8px 11px;margin-top:8px;font-size:12px;color:var(--purple)">
+          ⚠ 股利認列原則：兩種分類的現金股利<strong>一律認列為「股利收入」進入本期損益</strong>。唯獨「權益法」下，股利才視為本金返還（貸記投資帳戶）。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 三大陷阱 -->
+  <div class="section">
+    <div class="section-label">3 Deadly Traps</div>
+    <div class="section-title">三大致命陷阱 — 考場上的滅頂之災</div>
+    <div class="grid-3">
+      <div class="card card-rose">
+        <h3>🪤 陷阱一：手續費分攤方式</h3>
+        <p style="margin-bottom:8px">手續費 $15,000 需依<span class="hl">股數比例</span>分攤，不能全部歸入同一類。</p>
+        <div style="display:flex;flex-direction:column;gap:5px">
+          <div style="background:var(--white);border-radius:7px;padding:8px 10px;font-size:12.5px">
+            <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+              <span style="color:var(--orange);font-weight:700">FVTPL（2萬股）</span>
+              <span style="font-family:'DM Mono',monospace;color:var(--orange)">$10,000</span>
+            </div>
+            <div style="color:var(--crimson);font-size:12px">→ <strong>直接當期費用</strong>，不入成本<br>（放入損益表立即吃掉利潤）</div>
+          </div>
+          <div style="background:var(--white);border-radius:7px;padding:8px 10px;font-size:12.5px">
+            <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+              <span style="color:var(--green);font-weight:700">FVTOCI（1萬股）</span>
+              <span style="font-family:'DM Mono',monospace;color:var(--green)">$5,000</span>
+            </div>
+            <div style="color:var(--crimson);font-size:12px">→ <strong>計入投資成本</strong><br>（成本基礎 = $20 × 10,000 + $5,000 = $205,000）</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-rose">
+        <h3>🪤 陷阱二：現金股利的認列迷思</h3>
+        <p style="margin-bottom:8px">高頻錯誤：誤以為 FVTOCI 的股利要放入 OCI。<span class="hl">完全錯誤！</span></p>
+        <div style="display:flex;flex-direction:column;gap:5px">
+          <div class="trap-box" style="background:var(--white)">
+            <div class="trap-icon">✅</div>
+            <div class="trap-text"><strong style="color:var(--green)">正確：</strong>FVTPL 股利 → <strong>股利收入（本期損益）</strong></div>
+          </div>
+          <div class="trap-box" style="background:var(--white)">
+            <div class="trap-icon">✅</div>
+            <div class="trap-text"><strong style="color:var(--green)">正確：</strong>FVTOCI 股利 → <strong>股利收入（本期損益）</strong></div>
+          </div>
+          <div class="trap-box" style="background:var(--white)">
+            <div class="trap-icon">❌</div>
+            <div class="trap-text"><strong style="color:var(--crimson)">例外：</strong>「權益法」才是股利 = 投資本金返還，貸記投資帳戶，不認列收入</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-rose">
+        <h3>🪤 陷阱三：X2年評價的計算基礎</h3>
+        <p style="margin-bottom:8px">最不直覺的陷阱：<span class="hl">第二年評價不能用原始成本 $20 起算！</span></p>
+        <div style="background:var(--white);border-radius:8px;padding:10px 12px;font-size:12.5px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+            <span>X1 年底市價（已評價）</span>
+            <span style="font-family:'DM Mono',monospace;color:var(--crimson);font-weight:700">$10</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+            <span>X2 年底市價</span>
+            <span style="font-family:'DM Mono',monospace;color:var(--green);font-weight:700">$30</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;border-top:1px solid var(--rose3);padding-top:5px;margin-top:3px">
+            <span style="font-weight:700">X2年每股評價利益</span>
+            <span style="font-family:'DM Mono',monospace;font-weight:700;color:var(--navy2)">$30 - $10 = <strong style="color:var(--green)">$20</strong></span>
+          </div>
+        </div>
+        <div style="background:var(--white);border-radius:7px;padding:7px 10px;margin-top:6px;font-size:12px;color:var(--crimson)">
+          ⚠ 用 $30 - $20 = $10 是大錯特錯！每年必須以<strong>上年底公允價值</strong>為比較基礎。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 四大報表項目速算（X2年） -->
+  <div class="section">
+    <div class="section-label">4 Statement Items · X2 Year</div>
+    <div class="section-title">四大報表項目速算（以X2年為例）</div>
+    <div class="grid-2">
+      <div>
+        <div class="stmt-grid">
+          <!-- 本期損益 -->
+          <div class="stmt-card" style="background:var(--teal2);border:1.5px solid var(--teal3);grid-column:1/-1">
+            <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--teal);margin-bottom:7px">① 本期損益（P&L）</div>
+            <div class="calc-row" style="background:rgba(255,255,255,.7)">
+              <span class="calc-label">股利收入（3萬股 × $1 × 兩年都有）</span>
+              <span class="calc-val" style="color:var(--green)">+$30,000</span>
+            </div>
+            <div class="calc-row" style="background:rgba(255,255,255,.7);margin-top:3px">
+              <span class="calc-label">FVTPL 評價利益（2萬股 × $20）</span>
+              <span class="calc-val" style="color:var(--green)">+$400,000</span>
+            </div>
+            <div class="calc-row" style="background:var(--teal);border-radius:5px;margin-top:4px">
+              <span style="color:#fff;font-weight:700">X2年本期損益合計</span>
+              <span style="font-family:'DM Mono',monospace;color:#fff;font-weight:700;font-size:15px">$430,000</span>
+            </div>
+          </div>
+          <!-- OCI -->
+          <div class="stmt-card" style="background:var(--purple2);border:1.5px solid var(--purple3)">
+            <div style="font-family:'Playfair Display',serif;font-size:12.5px;font-weight:700;color:var(--purple);margin-bottom:7px">② 其他綜合損益 OCI</div>
+            <div class="calc-row" style="background:rgba(255,255,255,.7)">
+              <span class="calc-label">FVTOCI 評價回升（1萬股 × $20）</span>
+              <span class="calc-val" style="color:var(--purple)">+$200,000</span>
+            </div>
+            <div style="background:var(--purple);border-radius:5px;padding:6px 10px;display:flex;justify-content:space-between;margin-top:4px">
+              <span style="color:#fff;font-weight:700;font-size:12px">X2年 OCI</span>
+              <span style="font-family:'DM Mono',monospace;color:#fff;font-weight:700">$200,000</span>
+            </div>
+          </div>
+          <!-- 其他權益 -->
+          <div class="stmt-card" style="background:var(--orange4);border:1.5px solid var(--orange3)">
+            <div style="font-family:'Playfair Display',serif;font-size:12.5px;font-weight:700;color:var(--orange);margin-bottom:7px">④ 其他權益（累計）</div>
+            <div class="calc-row" style="background:rgba(255,255,255,.7)">
+              <span class="calc-label">FVTOCI 總市值（1萬 × $30）</span>
+              <span class="calc-val" style="color:var(--green)">$300,000</span>
+            </div>
+            <div class="calc-row" style="background:rgba(255,255,255,.7)">
+              <span class="calc-label">原始含手費成本（20萬+5千）</span>
+              <span class="calc-val" style="color:var(--crimson)">-$205,000</span>
+            </div>
+            <div style="background:var(--orange2);border-radius:5px;padding:6px 10px;display:flex;justify-content:space-between;margin-top:4px">
+              <span style="color:#fff;font-weight:700;font-size:12px">累計其他權益</span>
+              <span style="font-family:'DM Mono',monospace;color:#fff;font-weight:700">$95,000</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 保留盈餘速算 -->
+      <div>
+        <div class="card card-navy" style="margin-bottom:12px">
+          <h3>③ 保留盈餘（最難）— 宏觀速算法</h3>
+          <p style="margin-bottom:8px">不要逐年計算！用總量法一次到位：</p>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <div class="calc-row" style="background:rgba(255,255,255,.08)">
+              <span style="color:rgba(255,255,255,.7)">FVTPL 期末總市值（2萬 × $30）</span>
+              <span class="calc-val" style="color:#86efac">+$600,000</span>
+            </div>
+            <div class="calc-row" style="background:rgba(255,255,255,.08)">
+              <span style="color:rgba(255,255,255,.7)">減：FVTPL 原始成本（2萬 × $20）</span>
+              <span class="calc-val" style="color:var(--rose4)">-$400,000</span>
+            </div>
+            <div class="calc-row" style="background:rgba(255,255,255,.08)">
+              <span style="color:rgba(255,255,255,.7)">減：X1年手續費費用（一次性認列）</span>
+              <span class="calc-val" style="color:var(--rose4)">-$10,000</span>
+            </div>
+            <div style="border-top:1px dashed rgba(255,255,255,.2);padding-top:4px;margin-top:2px" class="calc-row" style="background:rgba(255,255,255,.08)">
+              <span style="color:rgba(255,255,255,.7)">小計：資本利得</span>
+              <span class="calc-val" style="color:#86efac">$190,000</span>
+            </div>
+            <div class="calc-row" style="background:rgba(255,255,255,.08)">
+              <span style="color:rgba(255,255,255,.7)">加：兩年累計股利收入（3萬 × $1 × 2）</span>
+              <span class="calc-val" style="color:#86efac">+$60,000</span>
+            </div>
+            <div style="background:var(--navy3);border-radius:7px;padding:8px 12px;display:flex;justify-content:space-between;margin-top:6px">
+              <span style="color:#fff;font-weight:700">累計保留盈餘增加</span>
+              <span style="font-family:'DM Mono',monospace;color:#fca5a5;font-weight:700;font-size:16px">$250,000</span>
+            </div>
+          </div>
+        </div>
+        <div style="background:var(--rose2);border:1.5px solid var(--rose3);border-radius:9px;padding:11px 14px">
+          <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--crimson2);margin-bottom:6px">⚡ 速算核心邏輯</div>
+          <div style="font-size:12px;color:var(--crimson);line-height:1.75">
+            保留盈餘 = <strong>FVTPL（期末市值 − 原始成本 − 手續費）+ 全部股利</strong><br>
+            不需逐年加減，直接用「現在有多少 vs 最初花了多少」的<span class="hl">宏觀差額法</span>，最後加上股利兩年合計，一次搞定！
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第三題：現金流量表 -->
+  <div class="section">
+    <div class="section-label">第三題 · Cash Flow Classification</div>
+    <div class="section-title">第三題：現金流量表分類 — 送分題中的 IFRS 反直覺陷阱</div>
+    <div class="grid-2">
+      <div class="card">
+        <h3>📌 解題策略：只要分類，不用計算</h3>
+        <p>這題已給定各項目的現金絕對數值，考生<span class="hl">不需自行推算現金變動</span>。只要正確分類到三大活動即可。</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:10px">
+          <div style="background:var(--teal2);border:1px solid var(--teal3);border-radius:7px;padding:9px;text-align:center">
+            <div style="font-size:14px;margin-bottom:4px">🏭</div>
+            <div style="font-size:11.5px;font-weight:700;color:var(--teal)">營業活動</div>
+            <div style="font-size:11px;color:var(--teal);margin-top:3px">本業相關現金流量</div>
+          </div>
+          <div style="background:var(--purple2);border:1px solid var(--purple3);border-radius:7px;padding:9px;text-align:center">
+            <div style="font-size:14px;margin-bottom:4px">📦</div>
+            <div style="font-size:11.5px;font-weight:700;color:var(--purple)">投資活動</div>
+            <div style="font-size:11px;color:var(--purple);margin-top:3px">長期資產、投資</div>
+          </div>
+          <div style="background:var(--orange4);border:1px solid var(--orange3);border-radius:7px;padding:9px;text-align:center">
+            <div style="font-size:14px;margin-bottom:4px">🏦</div>
+            <div style="font-size:11.5px;font-weight:700;color:var(--orange)">籌資活動</div>
+            <div style="font-size:11px;color:var(--orange);margin-top:3px">舉債、還款、發股</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 反直覺分類表 -->
+      <div class="card card-dark">
+        <h3>💣 IFRS 反直覺分類 — 必背死記</h3>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px">
+          <div class="cf-section" style="background:rgba(20,120,110,.2);border:1px solid rgba(94,234,212,.2)">
+            <div class="cf-title" style="color:var(--teal3)">🏭 營業活動（以下違反直覺！）</div>
+            <div class="cf-item">
+              <span style="color:rgba(255,255,255,.8)">收到利息</span>
+              <span class="cf-tag" style="background:rgba(20,120,110,.3);color:var(--teal3)">營業</span>
+            </div>
+            <div class="cf-item">
+              <span style="color:rgba(255,255,255,.8)">收到股利</span>
+              <span class="cf-tag" style="background:rgba(20,120,110,.3);color:var(--teal3)">營業</span>
+            </div>
+            <div class="cf-item">
+              <span style="color:rgba(255,255,255,.8)">支付利息</span>
+              <span class="cf-tag" style="background:rgba(20,120,110,.3);color:var(--teal3)">營業</span>
+            </div>
+            <div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:5px">⚠ 後來改制，非常死板，只能硬背！台積電財報亦如此揭露。</div>
+          </div>
+          <div class="cf-section" style="background:rgba(107,33,168,.2);border:1px solid rgba(216,180,254,.2)">
+            <div class="cf-title" style="color:var(--purple3)">🏦 籌資活動</div>
+            <div class="cf-item">
+              <span style="color:rgba(255,255,255,.8)">支付（發放）現金股利</span>
+              <span class="cf-tag" style="background:rgba(107,33,168,.3);color:var(--purple3)">籌資</span>
+            </div>
+            <div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:5px">收到股利（營業）≠ 支付股利（籌資）— 方向不同，分類完全相反！</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 分類對照全表 -->
+    <div class="card" style="margin-top:12px">
+      <h3>📊 現金流量分類速查對照表（IFRS規範）</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:8px">
+        <div>
+          <div style="background:var(--teal);color:#fff;border-radius:6px 6px 0 0;padding:7px 12px;font-size:12.5px;font-weight:700">🏭 營業活動</div>
+          <div style="border:1px solid var(--teal3);border-top:none;border-radius:0 0 6px 6px;padding:8px 12px">
+            <div style="font-size:12px;color:#374151;line-height:1.9">
+              銷貨收到現金<br>支付供應商<br>員工薪資支出<br>所得稅付現<br>✅ <strong>收到利息</strong><br>✅ <strong>收到股利</strong><br>✅ <strong>支付利息</strong>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="background:var(--purple);color:#fff;border-radius:6px 6px 0 0;padding:7px 12px;font-size:12.5px;font-weight:700">📦 投資活動</div>
+          <div style="border:1px solid var(--purple3);border-top:none;border-radius:0 0 6px 6px;padding:8px 12px">
+            <div style="font-size:12px;color:#374151;line-height:1.9">
+              購買/出售不動產廠房設備<br>購買/出售投資性不動產<br>購買/出售長期股權投資<br>購買/到期短期投資<br>放款/收回貸款
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="background:var(--orange2);color:#fff;border-radius:6px 6px 0 0;padding:7px 12px;font-size:12.5px;font-weight:700">🏦 籌資活動</div>
+          <div style="border:1px solid var(--orange3);border-top:none;border-radius:0 0 6px 6px;padding:8px 12px">
+            <div style="font-size:12px;color:#374151;line-height:1.9">
+              發行股票收現<br>舉借長短期借款<br>償還借款本金<br>支付租賃負債本金<br>✅ <strong>支付（發放）現金股利</strong><br>買回庫藏股
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="background:var(--rose2);border:1px solid var(--rose3);border-radius:7px;padding:8px 14px;margin-top:10px;font-size:12px;color:var(--crimson)">
+        💡 <strong>Rock 老師建置的「學生專區」</strong>有圖解記憶表可下載，以台積電財報為例，「利息收入」與「股利收入」都直接包在營業活動中揭露，可作為真實財報的佐證。
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">立雅 · 112年記帳士考題解析 · 2026.06.17</div>
+</div>
+
+</body>
+</html>
