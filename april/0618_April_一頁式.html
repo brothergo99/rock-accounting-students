@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>慧康生活科技 · 法說會財報解析 · April 0618</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --teal:#0d6e6e;--teal2:#14a89a;--teal3:#7dd9d0;--teal4:#e0f7f5;
+  --navy:#0f2744;--navy2:#1e3a5f;--navy3:#2d5282;
+  --orange:#F5812A;--orange2:#FF9A4D;--orange3:#FFD0A0;
+  --green:#1a7a4a;--green2:#e6f5ec;--green3:#a8d5b8;
+  --red:#9b1c1c;--red2:#fff5f5;--red3:#feb2b2;
+  --gold:#b7791f;--gold2:#fffbeb;--gold3:#fde68a;
+  --white:#fff;--ink:#0f2744;--muted:#5a7a9a;
+  --bg:#f0f8ff;--bg2:#e8f4fd;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+.page-header{background:linear-gradient(160deg,var(--navy),#0a3d5c,var(--teal));padding:46px 48px 38px;position:relative;overflow:hidden;border-bottom:4px solid var(--teal2)}
+.ph-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:32px 32px;pointer-events:none}
+.ph-glow{position:absolute;top:-80px;right:-80px;width:320px;height:320px;background:radial-gradient(circle,rgba(20,168,154,.25),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.2em;color:var(--teal3);opacity:.85;margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(18px,3.5vw,32px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:5px}
+.ph-title em{color:var(--teal3);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.6);margin-top:4px;font-style:italic}
+.ph-meta{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+.meta-chip{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(20,168,154,.2);color:var(--teal3);border:1px solid rgba(20,168,154,.35)}
+.meta-chip-warn{background:rgba(245,129,42,.15);color:var(--orange2);border-color:rgba(245,129,42,.35)}
+
+.container{max-width:1100px;margin:0 auto;padding:34px 30px}
+.section{margin-bottom:30px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--teal);text-transform:uppercase;margin-bottom:6px}
+.section-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy);margin-bottom:13px;padding-bottom:7px;border-bottom:2px solid var(--teal3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+
+.card{background:var(--white);border:1.5px solid var(--teal3);border-radius:10px;padding:16px}
+.card-navy{background:var(--navy);border:none;border-radius:10px;padding:16px}
+.card-teal{background:var(--teal4);border:1.5px solid var(--teal3);border-radius:10px;padding:16px}
+.card-orange{background:var(--orange);border:none;border-radius:10px;padding:16px}
+.card-gold{background:var(--gold2);border:1.5px solid var(--gold3);border-radius:10px;padding:16px}
+.card-green{background:var(--green2);border:1.5px solid var(--green3);border-radius:10px;padding:16px}
+.card-red{background:var(--red2);border:1.5px solid var(--red3);border-radius:10px;padding:16px}
+.card h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:8px;color:var(--navy)}
+.card-navy h3{color:var(--teal3)}
+.card-navy p,.card-navy li{color:rgba(255,255,255,.8)}
+.card-teal h3{color:var(--teal)}
+.card-gold h3{color:var(--gold)}
+.card-green h3{color:var(--green)}
+.card-red h3{color:var(--red)}
+.card-orange h3,.card-orange p,.card-orange li{color:#fff}
+.card p,.card li{font-size:12.5px;line-height:1.85;color:#2d5282}
+.card-teal p,.card-teal li{font-size:12.5px;line-height:1.85;color:var(--teal)}
+.card-gold p,.card-gold li{font-size:12.5px;line-height:1.85;color:#5c3a00}
+.card-green p,.card-green li{font-size:12.5px;line-height:1.85;color:#1a4a2a}
+.card-red p,.card-red li{font-size:12.5px;line-height:1.85;color:#7a1a1a}
+.card ul{padding-left:14px}.card ul li{margin-bottom:3px}
+.hl{color:var(--teal);font-weight:700}
+.hl-o{color:var(--orange);font-weight:700}
+.hl-g{color:var(--green);font-weight:700}
+.hl-r{color:var(--red);font-weight:700}
+.hl-gold{color:var(--gold);font-weight:700}
+
+/* KPI 卡片 */
+.kpi{text-align:center;padding:14px 10px}
+.kpi-val{font-family:'Playfair Display',serif;font-size:clamp(20px,2.5vw,28px);font-weight:900;line-height:1.1}
+.kpi-label{font-size:11px;color:var(--muted);margin-top:3px}
+.kpi-sub{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:4px}
+.kpi-delta{font-size:11px;font-weight:700;margin-top:5px}
+.delta-up{color:var(--green)}
+.delta-dn{color:var(--red)}
+
+/* 收入拆解 bar */
+.rev-bar{margin:6px 0}
+.rev-bar-label{display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:2px;color:var(--navy2)}
+.rev-bar-track{height:14px;background:#e2edf8;border-radius:3px;overflow:hidden}
+.rev-bar-fill{height:100%;border-radius:3px;display:flex;align-items:center;padding:0 6px;font-family:'DM Mono',monospace;font-size:9px;color:#fff;white-space:nowrap}
+
+/* 地區 */
+.geo-row{display:flex;align-items:center;gap:8px;margin:5px 0}
+.geo-flag{font-size:16px;flex-shrink:0;width:24px;text-align:center}
+.geo-name{font-size:12px;color:var(--navy2);min-width:60px;flex-shrink:0}
+.geo-bar{flex:1;height:16px;background:#e2edf8;border-radius:3px;overflow:hidden}
+.geo-fill{height:100%;border-radius:3px;display:flex;align-items:center;padding:0 6px;font-family:'DM Mono',monospace;font-size:9px;color:#fff}
+.geo-val{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);min-width:65px;text-align:right}
+
+/* 資本重組流程 */
+.reorg-flow{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+.rf-step{display:flex;align-items:flex-start;gap:10px;padding:8px 11px;border-radius:7px}
+.rf-num{font-family:'Playfair Display',serif;font-size:18px;font-weight:900;line-height:1;flex-shrink:0;width:24px}
+.rf-text{font-size:12px;line-height:1.7}
+
+/* 費用結構 */
+.exp-row{display:flex;align-items:center;gap:8px;margin:5px 0}
+.exp-label{font-size:11.5px;color:var(--navy2);min-width:72px;flex-shrink:0}
+.exp-bar{flex:1;height:16px;background:#e2edf8;border-radius:3px;overflow:hidden}
+.exp-fill{height:100%;border-radius:3px;display:flex;align-items:center;padding:0 7px;font-family:'DM Mono',monospace;font-size:9.5px;color:#fff}
+.exp-val{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);min-width:58px;text-align:right}
+
+/* 展望卡 */
+.outlook-item{display:flex;align-items:flex-start;gap:9px;padding:8px 11px;border-radius:7px;margin-bottom:6px}
+
+.page-footer{background:var(--navy);color:rgba(255,255,255,.6);padding:16px 30px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:34px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--teal3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.35)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-grid"></div>
+  <div class="ph-glow"></div>
+  <div class="ph-eyebrow">法說會財報解析 · Investor Day Report</div>
+  <div class="ph-title"><em>慧康生活科技 Health2Sync</em> 2025 年度法說會</div>
+  <div class="ph-sub">數位慢性病照護 · 興櫃 7851 · CFO 財務長逐字稿解析</div>
+  <div class="ph-meta">
+    <span class="meta-chip">2026.06.18</span>
+    <span class="meta-chip">April</span>
+    <span class="meta-chip">興櫃 7851</span>
+    <span class="meta-chip">特別股→普通股 資本重組</span>
+    <span class="meta-chip">日本市場翻倍</span>
+    <span class="meta-chip meta-chip-warn">IFRS 特別股負債歸零關鍵</span>
+    <span class="meta-chip">Rock 老師</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- KPI 一覽 -->
+  <div class="section">
+    <div class="section-label">2025 Key Metrics</div>
+    <div class="section-title">2025 年度四大核心 KPI</div>
+    <div class="grid-4">
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--teal)">$178,623K</div>
+        <div class="kpi-label">合併營業收入（仟元）</div>
+        <div class="kpi-sub">vs 2024: $128,458K</div>
+        <div class="kpi-delta delta-up">▲ +39% YoY</div>
+      </div>
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--green)">$114,730K</div>
+        <div class="kpi-label">毛利（仟元）</div>
+        <div class="kpi-sub">毛利率 ≈ 64.2%</div>
+        <div class="kpi-delta delta-up">▲ vs 2024: $88,581K</div>
+      </div>
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--red)">-$2.52</div>
+        <div class="kpi-label">基本 EPS（每股虧損）</div>
+        <div class="kpi-sub">vs 2024: -$15.26</div>
+        <div class="kpi-delta delta-up">▲ 大幅收斂（資本重組效果）</div>
+      </div>
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--teal)">81%</div>
+        <div class="kpi-label">現金佔總資產比</div>
+        <div class="kpi-sub">$258,865K 現金</div>
+        <div class="kpi-delta" style="color:var(--teal);font-weight:700">零銀行借款 ✓</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 營收拆解 + 地區別 -->
+  <div class="section">
+    <div class="section-label">Revenue Breakdown</div>
+    <div class="section-title">營收結構：業務板塊 × 地區別</div>
+    <div class="grid-2">
+      <div class="card">
+        <h3>📦 四大業務板塊（仟元）</h3>
+        <div style="margin:8px 0">
+          <div class="rev-bar">
+            <div class="rev-bar-label"><span>🏥 健保組合專案</span><span style="font-family:'DM Mono',monospace;font-size:10.5px">67,983 (+159% ↑↑)</span></div>
+            <div class="rev-bar-track"><div class="rev-bar-fill" style="width:100%;background:var(--teal)">最高成長板塊</div></div>
+          </div>
+          <div class="rev-bar" style="margin-top:8px">
+            <div class="rev-bar-label"><span>💊 藥廠合作（雲端照護）</span><span style="font-family:'DM Mono',monospace;font-size:10.5px">57,914 (+19%)</span></div>
+            <div class="rev-bar-track"><div class="rev-bar-fill" style="width:85%;background:var(--navy3)">穩健成長</div></div>
+          </div>
+          <div class="rev-bar" style="margin-top:8px">
+            <div class="rev-bar-label"><span>⌚ 醫材銷售（CGM/血壓計）</span><span style="font-family:'DM Mono',monospace;font-size:10.5px">45,897 (+30%)</span></div>
+            <div class="rev-bar-track"><div class="rev-bar-fill" style="width:67%;background:#5a8fc2">CGM+血壓計+試紙</div></div>
+          </div>
+          <div class="rev-bar" style="margin-top:8px">
+            <div class="rev-bar-label"><span>其他</span><span style="font-family:'DM Mono',monospace;font-size:10.5px">6,829</span></div>
+            <div class="rev-bar-track"><div class="rev-bar-fill" style="width:10%;background:#aac7e0"></div></div>
+          </div>
+        </div>
+        <div style="background:var(--bg2);border-radius:7px;padding:8px 11px;margin-top:10px;font-size:11.5px;color:var(--navy2)">
+          <strong>會計政策：收入認列時點</strong><br>
+          某一時點（產品交付控制移轉）→ <span class="hl">$145,419K</span>（醫材銷售）<br>
+          隨時間逐步（合約服務期間）→ <span class="hl">$33,204K</span>（雲端平台服務）
+        </div>
+      </div>
+      <div class="card">
+        <h3>🌏 地區別營收（仟元）</h3>
+        <div style="margin:8px 0">
+          <div class="geo-row">
+            <div class="geo-flag">🇯🇵</div>
+            <div class="geo-name" style="font-weight:700;color:var(--teal)">日本</div>
+            <div class="geo-bar"><div class="geo-fill" style="width:100%;background:var(--teal)">最大海外市場</div></div>
+            <div class="geo-val">80,480K</div>
+          </div>
+          <div style="font-size:11px;color:var(--green);margin-left:110px;margin-bottom:4px">▲ +97%（近翻倍！vs 2024: 40,954K）</div>
+          <div class="geo-row">
+            <div class="geo-flag">🇹🇼</div>
+            <div class="geo-name">台灣</div>
+            <div class="geo-bar"><div class="geo-fill" style="width:80%;background:var(--navy3)">母市場</div></div>
+            <div class="geo-val">64,183K</div>
+          </div>
+          <div class="geo-row">
+            <div class="geo-flag">🇩🇰</div>
+            <div class="geo-name" style="color:var(--orange)">丹麥（新）</div>
+            <div class="geo-bar"><div class="geo-fill" style="width:24%;background:var(--orange)">新進歐洲</div></div>
+            <div class="geo-val" style="color:var(--orange)">19,351K</div>
+          </div>
+          <div style="font-size:11px;color:var(--orange);margin-left:110px;margin-bottom:4px">2025 年新進入市場，前十大客戶新面孔</div>
+          <div class="geo-row">
+            <div class="geo-flag">🌐</div>
+            <div class="geo-name">其他</div>
+            <div class="geo-bar"><div class="geo-fill" style="width:18%;background:#aac7e0"></div></div>
+            <div class="geo-val">14,609K</div>
+          </div>
+        </div>
+        <div style="background:var(--teal4);border-radius:7px;padding:7px 10px;margin-top:8px;font-size:11.5px;color:var(--teal)">
+          💡 日本已成第一大市場，台灣反退居第二。丹麥新市場開拓是歐洲策略布局訊號。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 費用結構 + P&L 摘要 -->
+  <div class="section">
+    <div class="section-label">P&L Analysis</div>
+    <div class="section-title">費用結構 × 損益改善路徑</div>
+    <div class="grid-2">
+      <div class="card">
+        <h3>💼 營業費用結構（仟元）</h3>
+        <div style="margin:8px 0">
+          <div class="exp-row">
+            <div class="exp-label">推銷費用</div>
+            <div class="exp-bar"><div class="exp-fill" style="width:100%;background:var(--teal)">126,766（最大）</div></div>
+            <div class="exp-val">126,766</div>
+          </div>
+          <div class="exp-row">
+            <div class="exp-label">研發費用</div>
+            <div class="exp-bar"><div class="exp-fill" style="width:59%;background:var(--navy3)">74,944</div></div>
+            <div class="exp-val" style="color:var(--green)">74,944 ↓</div>
+          </div>
+          <div class="exp-row">
+            <div class="exp-label">管理費用</div>
+            <div class="exp-bar"><div class="exp-fill" style="width:46%;background:#5a8fc2">58,405</div></div>
+            <div class="exp-val">58,405</div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--navy2);padding:6px 0;border-top:1px solid var(--teal3);margin-top:6px">
+          <span>合計</span><span style="font-family:'DM Mono',monospace;font-weight:700">259,940K</span>
+        </div>
+        <div style="background:var(--gold2);border:1px solid var(--gold3);border-radius:7px;padding:8px 11px;margin-top:8px;font-size:11.5px;color:#5c3a00">
+          🔍 研發費用 74,944K（2024: 77,761K）略降，顯示研發效率提升，而非縮減投入。<br>推銷費用最高占比反映積極拓展海外（日本+丹麥）的策略決心。
+        </div>
+        <div style="background:var(--bg2);border-radius:7px;padding:8px 11px;margin-top:8px;font-size:11.5px;color:var(--navy2)">
+          🏦 股份基礎給付（SBP）：認股權加速既得，認列 <span class="hl">19,119K</span>（一次性費用，非現金）
+        </div>
+      </div>
+      <div class="card-navy">
+        <h3>📊 P&L 損益改善路徑</h3>
+        <div style="display:flex;flex-direction:column;gap:5px">
+          <div style="background:rgba(255,255,255,.07);border-radius:7px;padding:8px 12px;font-size:12px">
+            <div style="display:flex;justify-content:space-between"><span style="color:var(--teal3)">合併營業收入</span><span style="font-family:'DM Mono',monospace;color:#fff">+178,623K</span></div>
+          </div>
+          <div style="background:rgba(255,255,255,.05);border-radius:7px;padding:8px 12px;font-size:12px">
+            <div style="display:flex;justify-content:space-between"><span style="color:rgba(255,255,255,.7)">減：營業成本</span><span style="font-family:'DM Mono',monospace;color:var(--red3)">-63,893K</span></div>
+          </div>
+          <div style="background:rgba(20,168,154,.12);border-radius:7px;padding:8px 12px;font-size:12px;border:1px solid rgba(20,168,154,.2)">
+            <div style="display:flex;justify-content:space-between"><span style="color:var(--teal3);font-weight:700">毛利</span><span style="font-family:'DM Mono',monospace;color:var(--teal3);font-weight:700">+114,730K（64.2%）</span></div>
+          </div>
+          <div style="background:rgba(255,255,255,.05);border-radius:7px;padding:8px 12px;font-size:12px">
+            <div style="display:flex;justify-content:space-between"><span style="color:rgba(255,255,255,.7)">減：營業費用</span><span style="font-family:'DM Mono',monospace;color:var(--red3)">-259,940K</span></div>
+          </div>
+          <div style="background:rgba(255,255,255,.05);border-radius:7px;padding:8px 12px;font-size:12px">
+            <div style="display:flex;justify-content:space-between"><span style="color:rgba(255,255,255,.7)">加：營業外淨收益</span><span style="font-family:'DM Mono',monospace;color:var(--teal3)">+25,652K</span></div>
+            <div style="font-size:10.5px;color:rgba(255,255,255,.45);margin-top:2px">利息收入6,745K + 外幣兌換利益18,298K（美金+日幣）</div>
+          </div>
+          <div style="background:rgba(155,28,28,.2);border:1px solid rgba(254,178,178,.2);border-radius:7px;padding:8px 12px;font-size:12px">
+            <div style="display:flex;justify-content:space-between"><span style="color:var(--red3);font-weight:700">本期淨損</span><span style="font-family:'DM Mono',monospace;color:var(--red3);font-weight:700">-119,672K</span></div>
+            <div style="font-size:10.5px;color:rgba(255,255,255,.5);margin-top:2px">vs 2024: -146,860K → <span style="color:#86efac">虧損收斂 $27,188K</span></div>
+          </div>
+        </div>
+        <div style="margin-top:10px;padding:9px 12px;background:rgba(183,121,31,.12);border:1px solid rgba(183,121,31,.2);border-radius:7px;font-size:11.5px;color:var(--gold3)">
+          EPS -2.52（vs -15.26）— 改善幅度極大，主因是特別股→普通股轉換後<strong>分母股數暴增</strong>，而非獲利大幅改善，閱讀時需注意。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 資本重組 — 核心重點 -->
+  <div class="section">
+    <div class="section-label">★ Core Highlight · IFRS Capital Restructuring</div>
+    <div class="section-title">★ 最重要核心：特別股負債歸零 → 淨值由負轉正</div>
+    <div class="grid-2">
+      <div class="card">
+        <h3>📐 為何特別股被列為「負債」？</h3>
+        <p>依 IFRS，金融工具分類依<span class="hl">「合約義務」</span>而非法律形式。慧康各系列特別股（種子/A/B/B-2/B Plus/C）具備：</p>
+        <ul style="margin:8px 0 0 14px;font-size:12.5px;color:var(--navy2)">
+          <li>特定條件下的<strong>強制贖回義務</strong></li>
+          <li>清算時優先分配的<strong>固定回收特徵</strong></li>
+        </ul>
+        <p style="margin-top:8px">→ 這些特徵使其符合<span class="hl">金融負債定義</span>，帳上列為「特別股負債」，而非「權益」。</p>
+        <div style="background:var(--red2);border:1px solid var(--red3);border-radius:7px;padding:9px 12px;margin-top:10px;font-size:12px;color:var(--red)">
+          <strong>2024 年底帳上狀況：</strong><br>
+          特別股負債 $1,032,243K（超過10億！）→ 導致淨值 <strong>-632,925K</strong>（技術破產狀態）
+        </div>
+      </div>
+      <div>
+        <div class="reorg-flow">
+          <div class="rf-step" style="background:var(--red2);border:1px solid var(--red3)">
+            <div class="rf-num" style="color:var(--red)">①</div>
+            <div class="rf-text"><strong style="color:var(--red)">2025.04.11 贖回 B-2 系列</strong><br>提前支付 <span style="font-family:'DM Mono',monospace">$25,371K</span> 現金，贖回並註銷國發基金認購的 B-2 系列特別股（疫情紓困股）。</div>
+          </div>
+          <div class="rf-step" style="background:var(--teal4);border:1px solid var(--teal3)">
+            <div class="rf-num" style="color:var(--teal)">②</div>
+            <div class="rf-text"><strong style="color:var(--teal)">2025.05.02 全數轉換為普通股</strong><br>58,155,409 股特別股按 <span style="font-family:'DM Mono',monospace">1:1</span> 全數轉為普通股。<br>→ 股本 +232,622K、資本公積 +683,937K<br>→ 特別股負債瞬間歸零</div>
+          </div>
+          <div class="rf-step" style="background:var(--gold2);border:1px solid var(--gold3)">
+            <div class="rf-num" style="color:var(--gold)">③</div>
+            <div class="rf-text"><strong style="color:var(--gold)">2025.06.02 股票反分割</strong><br>股東會通過 1.25:1 反分割，票面值從美金 0.0001 元改為<span style="font-family:'DM Mono',monospace">新台幣 5 元</span>（符合台灣市場慣例）。</div>
+          </div>
+          <div class="rf-step" style="background:var(--green2);border:1px solid var(--green3)">
+            <div class="rf-num" style="color:var(--green)">④</div>
+            <div class="rf-text"><strong style="color:var(--green)">結果：淨值 -632,925K → +257,864K</strong><br>負債 1,095,670K → 61,854K。資產負債表煥然一新，邁向興櫃資本市場。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 前後對比 -->
+    <div class="grid-2" style="margin-top:12px">
+      <div class="card-red">
+        <h3>2024 年底（重組前）</h3>
+        <div style="font-size:12.5px;display:flex;flex-direction:column;gap:5px">
+          <div style="display:flex;justify-content:space-between"><span>資產總計</span><span style="font-family:'DM Mono',monospace">—</span></div>
+          <div style="display:flex;justify-content:space-between"><span>負債總計</span><span style="font-family:'DM Mono',monospace;color:var(--red)">1,095,670K</span></div>
+          <div style="display:flex;justify-content:space-between"><span>（含特別股負債）</span><span style="font-family:'DM Mono',monospace;color:var(--red)">1,032,243K</span></div>
+          <div style="display:flex;justify-content:space-between;border-top:1px solid var(--red3);padding-top:5px;margin-top:3px"><span><strong>歸屬母公司淨值</strong></span><span style="font-family:'DM Mono',monospace;color:var(--red);font-weight:700">-632,925K ⚠</span></div>
+        </div>
+      </div>
+      <div class="card-green">
+        <h3>2025 年底（重組後）</h3>
+        <div style="font-size:12.5px;display:flex;flex-direction:column;gap:5px">
+          <div style="display:flex;justify-content:space-between"><span>資產總計</span><span style="font-family:'DM Mono',monospace;color:var(--green)">319,718K</span></div>
+          <div style="display:flex;justify-content:space-between"><span>負債總計</span><span style="font-family:'DM Mono',monospace;color:var(--green)">61,854K（↓94%）</span></div>
+          <div style="display:flex;justify-content:space-between"><span>現金（佔資產81%）</span><span style="font-family:'DM Mono',monospace;color:var(--teal)">258,865K</span></div>
+          <div style="display:flex;justify-content:space-between;border-top:1px solid var(--green3);padding-top:5px;margin-top:3px"><span><strong>歸屬母公司淨值</strong></span><span style="font-family:'DM Mono',monospace;color:var(--green);font-weight:700">+257,864K ✓</span></div>
+        </div>
+        <div style="margin-top:8px;font-size:11.5px;color:var(--green)">零銀行借款 ✓ 無短期償債壓力 ✓</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 現金流量 + 稅務 + 2026 展望 -->
+  <div class="section">
+    <div class="section-label">Cash Flow + Tax + Outlook 2026</div>
+    <div class="section-title">現金流量、稅務遞延資產與 2026 擴張布局</div>
+    <div class="grid-3">
+      <div class="card">
+        <h3>💧 現金流量三表</h3>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:12px">
+          <div style="background:var(--red2);border-radius:6px;padding:8px 10px">
+            <div style="display:flex;justify-content:space-between"><span style="color:var(--red)">營業活動</span><span style="font-family:'DM Mono',monospace;color:var(--red)">-79,355K</span></div>
+            <div style="color:#7a1a1a;font-size:11px;margin-top:2px">vs 2024: -119,723K → 現金消耗明顯改善</div>
+          </div>
+          <div style="background:var(--bg2);border-radius:6px;padding:8px 10px">
+            <div style="display:flex;justify-content:space-between"><span style="color:var(--navy2)">投資活動</span><span style="font-family:'DM Mono',monospace">-1,136K</span></div>
+            <div style="color:var(--muted);font-size:11px;margin-top:2px">購置軟硬體設備與無形資產</div>
+          </div>
+          <div style="background:var(--bg2);border-radius:6px;padding:8px 10px">
+            <div style="display:flex;justify-content:space-between"><span style="color:var(--navy2)">籌資活動</span><span style="font-family:'DM Mono',monospace">-11,188K</span></div>
+            <div style="color:var(--muted);font-size:11px;margin-top:2px">租賃本金-7,271K、贖回B-2-25,371K<br>員工執行認股權+21,454K</div>
+          </div>
+          <div style="background:var(--teal4);border:1px solid var(--teal3);border-radius:6px;padding:8px 10px">
+            <div style="display:flex;justify-content:space-between"><span style="color:var(--teal);font-weight:700">期末現金</span><span style="font-family:'DM Mono',monospace;color:var(--teal);font-weight:700">258,865K</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>📋 稅務遞延資產：未來子彈</h3>
+        <p>目前仍累積虧損，遞延所得稅資產<strong>尚未認列</strong>，待轉虧為盈時將大幅降低實質稅率。</p>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:8px;font-size:12px">
+          <div style="background:var(--bg2);border-radius:6px;padding:7px 10px">
+            <div style="display:flex;justify-content:space-between"><span>🇹🇼 台灣（母+子）</span><span style="font-family:'DM Mono',monospace">392,548K</span></div>
+            <div style="color:var(--muted);font-size:10.5px;margin-top:1px">可扣抵至 2035 年</div>
+          </div>
+          <div style="background:var(--bg2);border-radius:6px;padding:7px 10px">
+            <div style="display:flex;justify-content:space-between"><span>🇯🇵 日本子公司</span><span style="font-family:'DM Mono',monospace">213,792K</span></div>
+          </div>
+          <div style="background:var(--bg2);border-radius:6px;padding:7px 10px">
+            <div style="display:flex;justify-content:space-between"><span>🇸🇬 新加坡子公司</span><span style="font-family:'DM Mono',monospace">678K（無期限）</span></div>
+          </div>
+        </div>
+        <div style="background:var(--gold2);border:1px solid var(--gold3);border-radius:7px;padding:7px 10px;margin-top:8px;font-size:11.5px;color:#5c3a00">
+          📌 財報附註重點：會計政策上保守不認列，但未來轉盈時是實質「稅盾」。
+        </div>
+      </div>
+      <div class="card-navy">
+        <h3>🚀 2026 三大擴張布局</h3>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <div class="outlook-item" style="background:rgba(20,168,154,.12);border:1px solid rgba(20,168,154,.2)">
+            <span style="font-size:18px">🇯🇵</span>
+            <div style="font-size:12px">
+              <div style="color:var(--teal3);font-weight:700">日本子公司增資</div>
+              <div style="color:rgba(255,255,255,.75)">¥306,767K（母公司全額認購）<br>2026.02.26 董事會決議</div>
+            </div>
+          </div>
+          <div class="outlook-item" style="background:rgba(255,255,255,.06)">
+            <span style="font-size:18px">🇹🇼</span>
+            <div style="font-size:12px">
+              <div style="color:var(--orange2);font-weight:700">台灣醫材子公司增資</div>
+              <div style="color:rgba(255,255,255,.75)">+$80,000K 深化醫療應用與醫材整合<br>2026.02.26 同日決議</div>
+            </div>
+          </div>
+          <div class="outlook-item" style="background:rgba(183,121,31,.1);border:1px solid rgba(183,121,31,.2)">
+            <span style="font-size:18px">🇰🇷</span>
+            <div style="font-size:12px">
+              <div style="color:var(--gold3);font-weight:700">韓國子公司正式成立</div>
+              <div style="color:rgba(255,255,255,.75)">Health2Sync Co.,LTD<br>2026.03.23 核准 → 04.10 注資 ₩100,000K（≈NT$2,112K）<br>複製日本成功模式</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">April · 慧康 Health2Sync 法說會財報解析 · 2026.06.18</div>
+</div>
+
+</body>
+</html>
