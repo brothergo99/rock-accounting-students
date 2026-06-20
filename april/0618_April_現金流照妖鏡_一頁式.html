@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>現金流照妖鏡 · 面子vs裡子 · April 0618</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#0f172a;--muted:#64748b;--bg:#f8fafc;--white:#fff;
+  --slate:#1e293b;--slate2:#334155;--slate3:#e2e8f0;
+  --teal:#0f766e;--teal2:#ccfbf1;--teal3:#5eead4;--teal4:#f0fdfa;
+  --amber:#b45309;--amber2:#fffbeb;--amber3:#fde68a;--amber4:#f59e0b;
+  --red:#991b1b;--red2:#fff1f2;--red3:#fecdd3;
+  --green:#15803d;--green2:#f0fdf4;--green3:#86efac;
+  --blue:#1d4ed8;--blue2:#eff6ff;--blue3:#93c5fd;
+  --purple:#6b21a8;--purple2:#faf5ff;--purple3:#d8b4fe;
+  --orange:#c2410c;--orange2:#fff7ed;--orange3:#fdba74;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+/* HEADER — 面子/裡子雙色分割 */
+.page-header{position:relative;overflow:hidden;border-bottom:4px solid var(--teal)}
+.ph-left{position:absolute;inset:0 50% 0 0;background:linear-gradient(135deg,#0f172a,#1e3a5f)}
+.ph-right{position:absolute;inset:0 0 0 50%;background:linear-gradient(135deg,var(--teal),#065f46)}
+.ph-content{position:relative;z-index:2;padding:42px 48px 36px;display:flex;flex-direction:column;gap:8px}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.2em;color:rgba(255,255,255,.55)}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(16px,2.8vw,26px);font-weight:900;color:#fff;line-height:1.2}
+.ph-title em{color:var(--teal3);font-style:normal}
+.ph-duality{display:flex;gap:16px;margin-top:6px;align-items:center}
+.ph-face{padding:6px 16px;border-radius:5px;font-size:13px;font-weight:700;font-family:'Playfair Display',serif}
+.ph-face-a{background:rgba(255,255,255,.15);color:#fca5a5;border:1px solid rgba(252,165,165,.3)}
+.ph-face-b{background:rgba(255,255,255,.15);color:var(--teal3);border:1px solid rgba(94,234,212,.3)}
+.ph-vs{color:rgba(255,255,255,.35);font-size:16px;font-weight:700}
+.ph-meta{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
+.meta-chip{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.15)}
+.meta-chip-t{background:rgba(20,184,166,.2);color:var(--teal3);border-color:rgba(20,184,166,.3)}
+
+.container{max-width:1100px;margin:0 auto;padding:32px 28px}
+.section{margin-bottom:28px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--teal);text-transform:uppercase;margin-bottom:6px}
+.section-title{font-family:'Playfair Display',serif;font-size:17.5px;font-weight:700;color:var(--slate);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--teal3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px}
+@media(max-width:720px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+.card{background:var(--white);border:1.5px solid var(--slate3);border-radius:10px;padding:15px}
+.card-teal{background:var(--teal4);border:1.5px solid var(--teal3);border-radius:10px;padding:15px}
+.card-amber{background:var(--amber2);border:1.5px solid var(--amber3);border-radius:10px;padding:15px}
+.card-red{background:var(--red2);border:1.5px solid var(--red3);border-radius:10px;padding:15px}
+.card-green{background:var(--green2);border:1.5px solid var(--green3);border-radius:10px;padding:15px}
+.card-dark{background:var(--slate);border:none;border-radius:10px;padding:15px}
+.card-blue{background:var(--blue2);border:1.5px solid var(--blue3);border-radius:10px;padding:15px}
+.card-purple{background:var(--purple2);border:1.5px solid var(--purple3);border-radius:10px;padding:15px}
+.card-orange{background:var(--orange2);border:1.5px solid var(--orange3);border-radius:10px;padding:15px}
+
+.card h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:8px}
+.card-teal h3{color:var(--teal)}
+.card-amber h3{color:var(--amber)}
+.card-red h3{color:var(--red)}
+.card-green h3{color:var(--green)}
+.card-dark h3{color:var(--teal3)}
+.card-blue h3{color:var(--blue)}
+.card-purple h3{color:var(--purple)}
+.card-orange h3{color:var(--orange)}
+.card h3{color:var(--slate)}
+.card p,.card li{font-size:12.5px;line-height:1.85;color:#374151}
+.card-teal p,.card-teal li{font-size:12.5px;line-height:1.85;color:var(--teal)}
+.card-amber p,.card-amber li{font-size:12.5px;line-height:1.85;color:var(--amber)}
+.card-red p,.card-red li{font-size:12.5px;line-height:1.85;color:var(--red)}
+.card-green p,.card-green li{font-size:12.5px;line-height:1.85;color:var(--green)}
+.card-dark p,.card-dark li{font-size:12.5px;line-height:1.85;color:rgba(255,255,255,.8)}
+.card-blue p,.card-blue li{font-size:12.5px;line-height:1.85;color:var(--blue)}
+.card-purple p,.card-purple li{font-size:12.5px;line-height:1.85;color:var(--purple)}
+.card-orange p,.card-orange li{font-size:12.5px;line-height:1.85;color:var(--orange)}
+.card ul{padding-left:14px}.card ul li{margin-bottom:3px}
+.hl{color:var(--teal);font-weight:700}
+.hl-a{color:var(--amber);font-weight:700}
+.hl-r{color:var(--red);font-weight:700}
+.hl-g{color:var(--green);font-weight:700}
+
+/* 水池圖示 */
+.pool-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.pool-tap{border-radius:9px;padding:12px;text-align:center}
+.pool-icon{font-size:22px;margin-bottom:5px}
+.pool-name{font-family:'Playfair Display',serif;font-size:12px;font-weight:700;margin-bottom:3px}
+.pool-desc{font-size:11.5px;line-height:1.6}
+
+/* 案例對比行 */
+.case-row{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;border-radius:6px;margin-bottom:5px;font-size:12.5px}
+.case-label{color:var(--muted)}
+.case-val{font-family:'DM Mono',monospace;font-weight:700}
+
+/* 折舊圖解 */
+.dep-bar{height:22px;border-radius:4px;display:flex;align-items:center;padding:0 10px;font-family:'DM Mono',monospace;font-size:10.5px;color:#fff;margin:5px 0}
+
+/* 慧康操作清單 */
+.op-step{display:flex;align-items:flex-start;gap:9px;padding:8px 12px;border-radius:7px;margin-bottom:6px}
+.op-num{font-family:'Playfair Display',serif;font-size:18px;font-weight:900;flex-shrink:0;width:22px;line-height:1}
+.op-text{font-size:12.5px;line-height:1.75}
+
+.page-footer{background:var(--slate);color:rgba(255,255,255,.55);padding:16px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:32px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--teal3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.3)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-left"></div>
+  <div class="ph-right"></div>
+  <div class="ph-content">
+    <div class="ph-eyebrow">財務報表深度解讀 · 商業思維課</div>
+    <div class="ph-title">現金流量表：獲利的<em>照妖鏡</em></div>
+    <div class="ph-duality">
+      <div class="ph-face ph-face-a">損益表＝面子</div>
+      <div class="ph-vs">≠</div>
+      <div class="ph-face ph-face-b">現金流量表＝裡子</div>
+    </div>
+    <div class="ph-meta">
+      <span class="meta-chip">2026.06.18</span>
+      <span class="meta-chip">April</span>
+      <span class="meta-chip meta-chip-t">新星網 電商案例</span>
+      <span class="meta-chip meta-chip-t">摩斯漢堡 折舊戰略</span>
+      <span class="meta-chip">慧康生活 資本重組</span>
+      <span class="meta-chip">診所服務業財務</span>
+      <span class="meta-chip">Rock 老師</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 核心框架：大水池 + 服務業 -->
+  <div class="section">
+    <div class="section-label">Framework · Cash Flow Model</div>
+    <div class="section-title">現金流「大水池」模型 × 服務業（診所）財務核心</div>
+    <div class="grid-2">
+      <div class="card">
+        <h3>💧 現金流量表三大水龍頭</h3>
+        <div class="pool-grid">
+          <div class="pool-tap" style="background:var(--teal4);border:1.5px solid var(--teal3)">
+            <div class="pool-icon">🏭</div>
+            <div class="pool-name" style="color:var(--teal)">營業活動</div>
+            <div class="pool-desc" style="color:var(--teal)"><strong>最重要</strong>。本業增值循環扣除貶值循環後，真實流入的現金。這條龍頭健不健壯，決定企業體質。</div>
+          </div>
+          <div class="pool-tap" style="background:var(--purple2);border:1.5px solid var(--purple3)">
+            <div class="pool-icon">📦</div>
+            <div class="pool-name" style="color:var(--purple)">投資活動</div>
+            <div class="pool-desc" style="color:var(--purple)">營業現金滿出來時，往下一個成長高峰投資：R&D、設備、台積電買機台、診所開新分店。</div>
+          </div>
+          <div class="pool-tap" style="background:var(--amber2);border:1.5px solid var(--amber3)">
+            <div class="pool-icon">🏦</div>
+            <div class="pool-name" style="color:var(--amber)">籌資活動</div>
+            <div class="pool-desc" style="color:var(--amber)">與股東/銀行往來：借錢進水、還款出水、發股利出水。反映財務槓桿策略。</div>
+          </div>
+        </div>
+        <div style="background:var(--slate);color:rgba(255,255,255,.8);border-radius:8px;padding:9px 13px;margin-top:10px;font-size:12px">
+          <strong style="color:var(--teal3)">照妖鏡原理：</strong>損益表看帳面賺不賺，現金流量表看<span style="color:var(--teal3)">「錢有沒有真實流回來」</span>。兩者背離，就有故事。
+        </div>
+      </div>
+      <div class="card card-blue">
+        <h3>🏥 服務業（診所）財務管理重點</h3>
+        <p style="margin-bottom:8px">無存貨、無傳統應收帳款 → 財務核心不是現金周轉，而是：</p>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="background:var(--white);border-radius:7px;padding:9px 12px;font-size:12.5px">
+            <div style="font-weight:700;color:var(--blue);margin-bottom:3px">① 前期建置成本如何「賺回來」</div>
+            <div style="color:#374151">裝潢、設備的折舊攤提 = 每月必須賺夠的最低標。管理者先設定目標：<span class="hl">積極型 5年回本 / 保守型 8~10年回本</span>，再以此檢視月營收是否達標。</div>
+          </div>
+          <div style="background:var(--white);border-radius:7px;padding:9px 12px;font-size:12.5px">
+            <div style="font-weight:700;color:var(--blue);margin-bottom:3px">② 固定成本撐起後的「邊際紅利」</div>
+            <div style="color:#374151">老診所設施折舊攤完後，人員編制即為固定成本 → 多接一位客人 = 多賺一份純利。這是成熟服務業最甜蜜的狀態。</div>
+          </div>
+          <div style="background:var(--white);border-radius:7px;padding:9px 12px;font-size:12.5px">
+            <div style="font-weight:700;color:var(--blue);margin-bottom:3px">③ 財務重心 ≠ 現金流</div>
+            <div style="color:#374151">服務業建置現金早已支付，日常現金流風險較低。核心問題是：折舊年限內，本業能否穩定覆蓋折舊費用？</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 雙案例對比 -->
+  <div class="section">
+    <div class="section-label">Case Study 1 vs 2 · Mirror Contrast</div>
+    <div class="section-title">照妖鏡的兩種極端：帳面賺錢但缺現金 ↔ 帳面虧損但現金充盈</div>
+    <div class="grid-2">
+
+      <!-- 新星網 -->
+      <div>
+        <div class="card card-red" style="margin-bottom:10px">
+          <h3>📦 案例一：新星網（電商）— 帳面賺錢，錢卻不見了</h3>
+          <p style="margin-bottom:8px">營收約57億，毛利率僅 <span class="hl-r">10%</span>（靠快速周轉賺規模，非高毛利），資產結構：存貨32% + 應收帳款29%</p>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div class="case-row" style="background:var(--white)">
+              <span class="case-label">113年帳面稅前淨利</span>
+              <span class="case-val" style="color:var(--green)">+$1.2億</span>
+            </div>
+            <div class="case-row" style="background:var(--white)">
+              <span class="case-label">113年營業活動現金流</span>
+              <span class="case-val" style="color:var(--red)">-$8,500萬 ⚠</span>
+            </div>
+          </div>
+          <div style="background:var(--white);border-radius:7px;padding:8px 11px;margin-top:8px;font-size:12px;color:var(--red)">
+            <strong>原因：</strong>迎戰雙11砸錢備貨（存貨↑）、應收帳款未收回、同時提早付貨款（應付↑） → 三項同時失血，必須靠借款補現金缺口。
+          </div>
+        </div>
+        <div class="card card-green">
+          <h3>✅ 114年逆轉：應付帳款調度的藝術</h3>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div class="case-row" style="background:var(--white)">
+              <span class="case-label">114年帳面稅前淨利</span>
+              <span class="case-val" style="color:var(--green)">+$1.3億</span>
+            </div>
+            <div class="case-row" style="background:var(--white)">
+              <span class="case-label">114年營業活動現金流</span>
+              <span class="case-val" style="color:var(--green)">+$9,200萬 ✓</span>
+            </div>
+            <div class="case-row" style="background:var(--white)">
+              <span class="case-label">關鍵：應付帳款增加</span>
+              <span class="case-val" style="color:var(--green)">+$1.39億</span>
+            </div>
+          </div>
+          <div style="background:var(--white);border-radius:7px;padding:8px 11px;margin-top:6px;font-size:12px;color:var(--green)">
+            <strong>邏輯：</strong>貨已賣掉收到錢，但<strong>還沒付給供應商</strong> → 借用供應商的錢周轉。現金流管理的最高境界：<span class="hl-g">「收錢比付錢快」</span>。
+          </div>
+        </div>
+      </div>
+
+      <!-- 摩斯漢堡 -->
+      <div>
+        <div class="card card-amber" style="margin-bottom:10px">
+          <h3>🍔 案例二：摩斯漢堡 安心食品 1259 — 帳面虧損，現金卻暴富</h3>
+          <p style="margin-bottom:8px">媒體大標：「上市以來首次本業虧損！」實際上兩年營業額各約60億，損益近乎<span class="hl-a">持平</span>。</p>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div class="case-row" style="background:var(--white)">
+              <span class="case-label">113年營業損益</span>
+              <span class="case-val" style="color:var(--green)">+$1,100萬（小賺）</span>
+            </div>
+            <div class="case-row" style="background:var(--white)">
+              <span class="case-label">114年營業損失</span>
+              <span class="case-val" style="color:var(--red)">-$1,300萬（小賠）</span>
+            </div>
+            <div class="case-row" style="background:var(--white)">
+              <span class="case-label">但！營業活動淨現金流入</span>
+              <span class="case-val" style="color:var(--amber);font-size:14px">+7億多 💥</span>
+            </div>
+          </div>
+          <div style="background:var(--white);border-radius:7px;padding:7px 10px;margin-top:6px;font-size:12px;color:var(--amber)">
+            媒體看「面子」罵虧損，財報「裡子」卻說現金多到花不完。
+          </div>
+        </div>
+        <div class="card card-dark">
+          <h3>🔍 謎團解開：折舊策略 × 三重商業動機</h3>
+          <div style="margin-bottom:8px">
+            <div style="font-size:11px;font-family:'DM Mono',monospace;color:var(--teal3);margin-bottom:5px">租賃改良物（店面裝潢）折舊加速</div>
+            <div class="dep-bar" style="width:100%;background:#374151">
+              <span>正常年限可使用很久</span>
+            </div>
+            <div class="dep-bar" style="width:50%;background:var(--amber4)">
+              <span>摩斯選擇：2年極速攤提 → 1.2億/2年</span>
+            </div>
+            <div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:3px">折舊重分類至「營業成本」→ 毛利率被壓縮至22%（失真）</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="background:rgba(255,255,255,.07);border-radius:6px;padding:7px 10px;font-size:12px">
+              <span style="color:var(--teal3);font-weight:700">① 合法避稅：</span><span style="color:rgba(255,255,255,.75)">折舊↑ → 帳面利潤↓ → 所得稅↓ → 真實現金留在公司</span>
+            </div>
+            <div style="background:rgba(255,255,255,.07);border-radius:6px;padding:7px 10px;font-size:12px">
+              <span style="color:var(--amber3);font-weight:700">② 壓低股利：</span><span style="color:rgba(255,255,255,.75)">帳面利潤低 → 大股東（東元集團）名正言順少發股利，資金留在手中</span>
+            </div>
+            <div style="background:rgba(255,255,255,.07);border-radius:6px;padding:7px 10px;font-size:12px">
+              <span style="color:var(--purple3);font-weight:700">③ 集團移轉訂價：</span><span style="color:rgba(255,255,255,.75)">設備、數位系統由集團內其他公司供應，高折舊率 = 資金不斷流入集團口袋，肥水不落外人田</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 慧康生活資本操作 -->
+  <div class="section">
+    <div class="section-label">Case Study 3 · Capital Engineering</div>
+    <div class="section-title">慧康生活：「能打裝不能打」的資本市場佈局藝術</div>
+    <div class="grid-2">
+      <div class="card">
+        <h3>🧩 四大財務操作解密</h3>
+        <div style="display:flex;flex-direction:column;gap:5px">
+          <div class="op-step" style="background:var(--red2);border:1px solid var(--red3)">
+            <div class="op-num" style="color:var(--red)">①</div>
+            <div class="op-text"><strong style="color:var(--red)">EPS 大幅改善之謎</strong><br>-15元 → -2.5元 並非虧損大幅縮減，而是<strong>普通股股數暴增</strong>，稀釋了分母 → 每股虧損看起來好看很多</div>
+          </div>
+          <div class="op-step" style="background:var(--amber2);border:1px solid var(--amber3)">
+            <div class="op-num" style="color:var(--amber)">②</div>
+            <div class="op-text"><strong style="color:var(--amber)">特別股 → 普通股（國發基金退場）</strong><br>疫情紓困期間國發基金買入「特別股」（無投票權、不賺不發股利的籌資工具）。公司上興櫃前將特別股1:1轉換為普通股 → 國發基金取得公開市場退場管道（套現解套）</div>
+          </div>
+          <div class="op-step" style="background:var(--purple2);border:1px solid var(--purple3)">
+            <div class="op-num" style="color:var(--purple)">③</div>
+            <div class="op-text"><strong style="color:var(--purple)">股票反分割（較罕見操作）</strong><br>原始每股金額過低，進行反分割（多股合一），拉高每股絕對股價 → 提升公開市場形象，利於興櫃流通與投資人觀感</div>
+          </div>
+          <div class="op-step" style="background:var(--teal4);border:1px solid var(--teal3)">
+            <div class="op-num" style="color:var(--teal)">④</div>
+            <div class="op-text"><strong style="color:var(--teal)">員工認股權費用化（留才 + 報表壓低）</strong><br>「十年磨一劍」的認股權依會計準則認列為當期薪資成本 → 無實際現金流出，卻大幅壓低帳面利潤。興櫃後員工持股可能翻升6~8倍，雙贏佈局</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card card-teal" style="margin-bottom:10px">
+          <h3>📈 業務基本面：裡子其實穩健</h3>
+          <p style="margin-bottom:8px">會計操作之外，慧康的本業實際持續成長：</p>
+          <ul>
+            <li>健保組合專案 +159%（最高速成長）</li>
+            <li>日本市場營收幾乎翻倍（最大海外市場）</li>
+            <li>丹麥新市場開拓（歐洲布局訊號）</li>
+            <li>無銀行借款、現金佔資產81%</li>
+          </ul>
+          <div style="background:var(--white);border-radius:7px;padding:7px 10px;margin-top:8px;font-size:12px;color:var(--teal)">
+            <strong>結論：</strong>帳面虧損是資本操作的副產品，業務本身具強大實質支撐。
+          </div>
+        </div>
+        <div class="card card-dark">
+          <h3>💡 與摩斯漢堡的關鍵差異</h3>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="background:rgba(255,255,255,.07);border-radius:7px;padding:8px 11px;font-size:12px">
+              <div style="color:var(--amber3);font-weight:700;margin-bottom:2px">摩斯漢堡：主動選擇</div>
+              <div style="color:rgba(255,255,255,.75)">刻意運用折舊政策壓低帳面利潤，是財報的<strong style="color:var(--amber3)">戰略性選擇</strong></div>
+            </div>
+            <div style="background:rgba(255,255,255,.07);border-radius:7px;padding:8px 11px;font-size:12px">
+              <div style="color:var(--teal3);font-weight:700;margin-bottom:2px">群創/南亞科：結構性需求</div>
+              <div style="color:rgba(255,255,255,.75)">面板、記憶體天生需要巨大固定資產，折舊高是行業本質，非刻意操作</div>
+            </div>
+            <div style="background:rgba(255,255,255,.07);border-radius:7px;padding:8px 11px;font-size:12px">
+              <div style="color:var(--purple3);font-weight:700;margin-bottom:2px">慧康生活：資本市場佈局</div>
+              <div style="color:rgba(255,255,255,.75)">帳面虧損是多年前資本操作（特別股/認股權）的延遲顯現，業務實質持續成長</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 商業思維總結 -->
+  <div class="section">
+    <div class="section-label">Business Insight · Final Synthesis</div>
+    <div class="section-title">閱讀財報的最高境界：「看別人，想自己」</div>
+    <div class="grid-3">
+      <div class="card card-orange">
+        <h3>📰 媒體（只看面子）</h3>
+        <p>看損益表說故事：「摩斯本業虧損，數位轉型失敗，現點現做效率低⋯」</p>
+        <p style="margin-top:8px;color:var(--orange)">→ 停留在表面數字，無法看到背後的資金佈局與商業邏輯。</p>
+      </div>
+      <div class="card card-teal">
+        <h3>🔍 財報高手（看裡子）</h3>
+        <p>看現金流量表 + 折舊政策 + 附註：「摩斯營業活動進帳7億，正在合法避稅並替集團移轉獲利。」</p>
+        <p style="margin-top:8px">→ <span class="hl">看透企業真實的保留實力與戰略目的。</span></p>
+      </div>
+      <div class="card card-dark">
+        <h3>🎯 三維財報閱讀框架</h3>
+        <div style="display:flex;flex-direction:column;gap:5px">
+          <div style="background:rgba(255,255,255,.07);border-radius:6px;padding:7px 10px;font-size:12px">
+            <span style="color:#fca5a5;font-weight:700">損益表（面子）</span><br>
+            <span style="color:rgba(255,255,255,.7)">看方向：賺或賠？趨勢向上還是向下？</span>
+          </div>
+          <div style="background:rgba(255,255,255,.07);border-radius:6px;padding:7px 10px;font-size:12px">
+            <span style="color:var(--teal3);font-weight:700">現金流量表（裡子）</span><br>
+            <span style="color:rgba(255,255,255,.7)">看真實：錢有沒有真的回來？三大活動是否健康？</span>
+          </div>
+          <div style="background:rgba(255,255,255,.07);border-radius:6px;padding:7px 10px;font-size:12px">
+            <span style="color:var(--amber3);font-weight:700">附註（靈魂）</span><br>
+            <span style="color:rgba(255,255,255,.7)">看動機：折舊年限、會計政策選擇背後的戰略意圖</span>
+          </div>
+        </div>
+        <div style="margin-top:9px;font-family:'Playfair Display',serif;font-style:italic;font-size:12px;color:rgba(255,255,255,.5);padding-top:8px;border-top:1px solid rgba(255,255,255,.1)">
+          「財報操作都是企業吃飯的傢伙與核心商業思維。這種學習方式，補足了工作十幾年中未曾留意的商業思維盲區。」
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">April · 現金流照妖鏡 · 2026.06.18</div>
+</div>
+
+</body>
+</html>
