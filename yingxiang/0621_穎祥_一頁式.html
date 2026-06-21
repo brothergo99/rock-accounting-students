@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>損益表判斷競爭力 · 穎祥 0621</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0f1e3d;--navy2:#1e3a6e;--navy3:#2d5282;--navy4:#ebf4ff;
+  --gold:#92680a;--gold2:#fffbeb;--gold3:#fde68a;--gold4:#f59e0b;
+  --teal:#0f766e;--teal2:#ccfbf1;--teal3:#5eead4;
+  --green:#15803d;--green2:#f0fdf4;--green3:#86efac;
+  --red:#991b1b;--red2:#fff1f2;--red3:#fecdd3;
+  --purple:#6b21a8;--purple2:#faf5ff;--purple3:#d8b4fe;
+  --rose:#be185d;--rose2:#fff1f7;--rose3:#fbcfe8;
+  --slate:#334155;--slate2:#e2e8f0;
+  --white:#fff;--ink:#0f1e3d;--muted:#64748b;--bg:#f7f9fc;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+.page-header{background:linear-gradient(155deg,var(--navy),#0f2d5e,#162d5a);padding:44px 48px 36px;position:relative;overflow:hidden;border-bottom:4px solid var(--gold4)}
+.ph-rule{position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(255,255,255,.025) 60px,rgba(255,255,255,.025) 61px);pointer-events:none}
+.ph-glow{position:absolute;bottom:-60px;right:-60px;width:300px;height:300px;background:radial-gradient(circle,rgba(245,158,11,.18),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.2em;color:var(--gold3);opacity:.8;margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(17px,2.8vw,28px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:5px}
+.ph-title em{color:var(--gold3);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.5);margin-top:4px}
+.ph-meta{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}
+.meta-chip{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(245,158,11,.18);color:var(--gold3);border:1px solid rgba(245,158,11,.3)}
+.meta-chip-g{background:rgba(21,128,61,.18);color:#86efac;border-color:rgba(21,128,61,.3)}
+.meta-chip-t{background:rgba(20,184,166,.15);color:var(--teal3);border-color:rgba(20,184,166,.3)}
+
+.container{max-width:1100px;margin:0 auto;padding:32px 28px}
+.section{margin-bottom:28px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--navy2);text-transform:uppercase;margin-bottom:6px}
+.section-title{font-family:'Playfair Display',serif;font-size:17.5px;font-weight:700;color:var(--navy);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--gold3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+
+.card{background:var(--white);border:1.5px solid var(--slate2);border-radius:10px;padding:15px}
+.card-navy{background:var(--navy);border:none;border-radius:10px;padding:15px}
+.card-gold{background:var(--gold2);border:1.5px solid var(--gold3);border-radius:10px;padding:15px}
+.card-teal{background:var(--teal2);border:1.5px solid var(--teal3);border-radius:10px;padding:15px}
+.card-green{background:var(--green2);border:1.5px solid var(--green3);border-radius:10px;padding:15px}
+.card-red{background:var(--red2);border:1.5px solid var(--red3);border-radius:10px;padding:15px}
+.card-purple{background:var(--purple2);border:1.5px solid var(--purple3);border-radius:10px;padding:15px}
+.card-rose{background:var(--rose2);border:1.5px solid var(--rose3);border-radius:10px;padding:15px}
+.card-navy4{background:var(--navy4);border:1.5px solid #bee3f8;border-radius:10px;padding:15px}
+
+.card h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:8px;color:var(--navy)}
+.card-navy h3{color:var(--gold3)}
+.card-navy p,.card-navy li{color:rgba(255,255,255,.8);font-size:12.5px;line-height:1.85}
+.card-gold h3{color:var(--gold)}
+.card-gold p,.card-gold li{font-size:12.5px;line-height:1.85;color:#5c3a00}
+.card-teal h3{color:var(--teal)}
+.card-teal p,.card-teal li{font-size:12.5px;line-height:1.85;color:var(--teal)}
+.card-green h3{color:var(--green)}
+.card-green p,.card-green li{font-size:12.5px;line-height:1.85;color:var(--green)}
+.card-red h3{color:var(--red)}
+.card-red p,.card-red li{font-size:12.5px;line-height:1.85;color:var(--red)}
+.card-purple h3{color:var(--purple)}
+.card-purple p,.card-purple li{font-size:12.5px;line-height:1.85;color:var(--purple)}
+.card-rose h3{color:var(--rose)}
+.card-rose p,.card-rose li{font-size:12.5px;line-height:1.85;color:var(--rose)}
+.card-navy4 h3{color:var(--navy2)}
+.card p,.card li{font-size:12.5px;line-height:1.85;color:#374151}
+.card ul{padding-left:14px}.card ul li{margin-bottom:3px}
+.hl{color:var(--navy2);font-weight:700}
+.hl-g{color:var(--gold);font-weight:700}
+.hl-gr{color:var(--green);font-weight:700}
+.hl-t{color:var(--teal);font-weight:700}
+.hl-r{color:var(--red);font-weight:700}
+
+/* 毛利率視覺對比 */
+.gm-bar-wrap{margin:6px 0}
+.gm-bar-label{display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:2px}
+.gm-bar-track{height:18px;background:var(--slate2);border-radius:4px;overflow:hidden}
+.gm-bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding:0 9px;font-family:'DM Mono',monospace;font-size:10px;color:#fff;white-space:nowrap}
+
+/* 雲豹營收時間軸 */
+.rev-timeline{display:flex;align-items:flex-end;gap:8px;height:110px;margin:10px 0;padding:0 4px}
+.rev-bar-col{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1}
+.rev-col-bar{width:100%;border-radius:4px 4px 0 0;display:flex;align-items:flex-end;justify-content:center;padding-bottom:4px;font-family:'DM Mono',monospace;font-size:10px;color:#fff;font-weight:700}
+.rev-col-year{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted)}
+.rev-col-tag{font-size:10px;color:var(--muted);text-align:center;margin-top:2px}
+
+/* 費用率圓餅感 */
+.exp-row{display:flex;align-items:center;gap:10px;margin:5px 0}
+.exp-label{font-size:12px;min-width:60px;flex-shrink:0}
+.exp-track{flex:1;height:16px;background:var(--slate2);border-radius:3px;overflow:hidden}
+.exp-fill{height:100%;border-radius:3px;display:flex;align-items:center;padding:0 7px;font-family:'DM Mono',monospace;font-size:9.5px;color:#fff}
+.exp-val{font-family:'DM Mono',monospace;font-size:11px;min-width:36px;text-align:right;color:var(--muted)}
+
+/* 杜邦公式 */
+.dupont-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:8px 0}
+.dp-box{border-radius:6px;padding:8px 12px;text-align:center;flex:1;min-width:80px}
+.dp-op{font-size:18px;color:var(--muted);flex-shrink:0}
+.dp-val{font-family:'Playfair Display',serif;font-size:16px;font-weight:900;line-height:1}
+.dp-label{font-size:10.5px;margin-top:3px}
+
+.page-footer{background:var(--navy);color:rgba(255,255,255,.55);padding:16px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:32px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--gold3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.3)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-rule"></div>
+  <div class="ph-glow"></div>
+  <div class="ph-eyebrow">損益表競爭力分析 · P&L Intelligence</div>
+  <div class="ph-title">從損益表看穿企業的<em>結構性護城河</em></div>
+  <div class="ph-sub">毛利率穩定性 × 費用管控紀律 × ROE vs EPS × 法說會簡報 DNA</div>
+  <div class="ph-meta">
+    <span class="meta-chip">2026.06.21</span>
+    <span class="meta-chip">穎祥</span>
+    <span class="meta-chip">LVMH 69%</span>
+    <span class="meta-chip">台積電 53%</span>
+    <span class="meta-chip meta-chip-g">雲豹 ROE 30%</span>
+    <span class="meta-chip meta-chip-t">龍巖 本業66%</span>
+    <span class="meta-chip">Rock 老師</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 一、營收成長性：雲豹能源 -->
+  <div class="section">
+    <div class="section-label">Revenue Growth · 競爭力訊號一</div>
+    <div class="section-title">營收成長性與穩定性：企業競爭力的第一面鏡子</div>
+    <div class="grid-2">
+      <div class="card">
+        <h3>⚡ 雲豹能源：爆發性成長 + 版圖轉換力</h3>
+        <div class="rev-timeline">
+          <div class="rev-bar-col">
+            <div class="rev-col-bar" style="height:35%;background:#93c5fd">21億</div>
+            <div class="rev-col-year">2021</div>
+            <div class="rev-col-tag">☀️ 太陽能</div>
+          </div>
+          <div class="rev-bar-col">
+            <div class="rev-col-bar" style="height:95%;background:var(--navy2)">63億</div>
+            <div class="rev-col-year">2022</div>
+            <div class="rev-col-tag">☀️→🔋 轉型</div>
+          </div>
+          <div class="rev-bar-col">
+            <div class="rev-col-bar" style="height:100%;background:var(--gold4)">67億</div>
+            <div class="rev-col-year">2023</div>
+            <div class="rev-col-tag">🔋 儲能</div>
+          </div>
+        </div>
+        <div style="background:var(--navy4);border-radius:7px;padding:8px 11px;font-size:12.5px;color:var(--navy2)">
+          兩年翻三倍，且成功將主力從太陽能切換為儲能事業 → 展現<span class="hl">事業版圖調整能力</span>，而非只是市場紅利的被動受惠者。
+        </div>
+      </div>
+      <div class="card card-rose">
+        <h3>🌸 弘帆：傳產穩定底氣（女性髮飾）</h3>
+        <p>看似不起眼的傳統產業，卻具備令人驚嘆的長期穩定性：</p>
+        <div style="display:flex;flex-direction:column;gap:5px;margin:8px 0">
+          <div style="background:var(--white);border-radius:7px;padding:8px 10px;font-size:12.5px">
+            <div style="display:flex;justify-content:space-between"><span style="color:var(--rose)">2023年營收</span><span style="font-family:'DM Mono',monospace;font-weight:700;color:var(--rose)">31億</span></div>
+          </div>
+          <div style="background:var(--white);border-radius:7px;padding:8px 10px;font-size:12.5px">
+            <div style="display:flex;justify-content:space-between"><span style="color:var(--rose)">自2011年起</span><span style="font-family:'DM Mono',monospace;font-weight:700;color:var(--rose)">每年 ≥ 20億</span></div>
+          </div>
+        </div>
+        <p>廠區橫跨東莞與越南，大量自動化產線。簡報<strong>粉紅底色 × 48頁</strong>秀肌肉 → 這正是傳產企業的自信宣言。</p>
+        <div style="background:var(--white);border-radius:7px;padding:7px 10px;margin-top:8px;font-size:12px;color:var(--rose)">
+          💡 不需要爆發性成長，<strong>「穩定」本身就是護城河</strong>。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 二、毛利率：四大競爭力來源 -->
+  <div class="section">
+    <div class="section-label">Gross Margin Stability · 競爭力訊號二</div>
+    <div class="section-title">毛利率穩定性：看透企業定價權與護城河來源</div>
+    <div class="grid-4">
+      <div class="card card-purple">
+        <h3>💊 專利優勢</h3>
+        <div style="text-align:center;margin:8px 0">
+          <div style="font-family:'Playfair Display',serif;font-size:34px;font-weight:900;color:var(--purple)">100%</div>
+          <div style="font-size:11px;color:var(--muted)">生技公司藥品 IP 授權</div>
+        </div>
+        <p>純授權商業模式，零生產成本 → 每一塊收入幾乎全是毛利。專利=壟斷性定價權。</p>
+      </div>
+      <div class="card card-gold">
+        <h3>👜 品牌優勢 LVMH</h3>
+        <div style="text-align:center;margin:8px 0">
+          <div style="font-family:'Playfair Display',serif;font-size:34px;font-weight:900;color:var(--gold)">69%</div>
+          <div style="font-size:11px;color:var(--muted)">「像印鈔票」般穩定</div>
+        </div>
+        <p>2024H1 營收 416億歐元（全年上看861億）。消費者買的是<strong>「階級提升感」</strong>，而非商品本身。</p>
+      </div>
+      <div class="card card-teal">
+        <h3>🔬 技術優勢 台積電</h3>
+        <div style="text-align:center;margin:8px 0">
+          <div style="font-family:'Playfair Display',serif;font-size:34px;font-weight:900;color:var(--teal)">53%</div>
+          <div style="font-size:11px;color:var(--muted)">高技術門檻護持</div>
+        </div>
+        <p>法說會直言「AI 是真的」，看好未來五年財務表現。技術壁壘 = 無可取代的定價主導權。</p>
+      </div>
+      <div class="card card-navy4">
+        <h3>🏭 傳產優勢 弘帆</h3>
+        <div style="text-align:center;margin:8px 0">
+          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--navy2)">穩定</div>
+          <div style="font-size:11px;color:var(--muted)">特定領域強大底氣</div>
+        </div>
+        <p>價格堅持 + 自動化產線 + 特定品類主導 → 傳產不需高毛利，穩定周轉率亦是護城河。</p>
+      </div>
+    </div>
+    <!-- 毛利率對比長條 -->
+    <div class="card" style="margin-top:12px">
+      <h3>📊 四大護城河毛利率對比</h3>
+      <div style="margin-top:8px">
+        <div class="gm-bar-wrap">
+          <div class="gm-bar-label"><span style="color:var(--purple)">💊 生技 IP 授權</span><span style="font-family:'DM Mono',monospace;color:var(--purple)">100%</span></div>
+          <div class="gm-bar-track"><div class="gm-bar-fill" style="width:100%;background:var(--purple)">毛利即淨利，零製造成本</div></div>
+        </div>
+        <div class="gm-bar-wrap" style="margin-top:7px">
+          <div class="gm-bar-label"><span style="color:var(--gold)">👜 LVMH 精品</span><span style="font-family:'DM Mono',monospace;color:var(--gold)">69%</span></div>
+          <div class="gm-bar-track"><div class="gm-bar-fill" style="width:69%;background:var(--gold4)">品牌溢價 × 消費者身份認同</div></div>
+        </div>
+        <div class="gm-bar-wrap" style="margin-top:7px">
+          <div class="gm-bar-label"><span style="color:var(--navy2)">🏺 龍巖（生命禮儀）</span><span style="font-family:'DM Mono',monospace;color:var(--navy2)">66%</span></div>
+          <div class="gm-bar-track"><div class="gm-bar-fill" style="width:66%;background:var(--navy2)">本業高毛利 + 業外投資雙引擎</div></div>
+        </div>
+        <div class="gm-bar-wrap" style="margin-top:7px">
+          <div class="gm-bar-label"><span style="color:var(--teal)">🔬 台積電</span><span style="font-family:'DM Mono',monospace;color:var(--teal)">53%</span></div>
+          <div class="gm-bar-track"><div class="gm-bar-fill" style="width:53%;background:var(--teal)">技術壁壘 × AI 需求加速</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 三、費用管控 -->
+  <div class="section">
+    <div class="section-label">Operating Expense Control · 競爭力訊號三</div>
+    <div class="section-title">三項費用控管紀律：看透企業的管理 DNA</div>
+    <div class="grid-3">
+      <div class="card card-gold">
+        <h3>📢 推銷費用 — 品牌投資強度</h3>
+        <p style="margin-bottom:8px">以 LVMH 為例：</p>
+        <div style="background:var(--white);border-radius:8px;padding:10px 12px;margin-bottom:8px">
+          <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:var(--gold);text-align:center">36%</div>
+          <div style="font-size:11px;color:var(--muted);text-align:center">半年約投入 150億歐元行銷</div>
+        </div>
+        <p>這不是浪費，而是<strong>塑造品牌壁壘的必要成本</strong>。且費控極度嚴格，比率固定不輕易波動——這本身就是強大紀律的表現。</p>
+      </div>
+      <div class="card card-navy4">
+        <h3>🏢 管理費用 — 企業內控強度</h3>
+        <p style="margin-bottom:8px">以 LVMH 為例：</p>
+        <div style="background:var(--white);border-radius:8px;padding:10px 12px;margin-bottom:8px">
+          <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:var(--navy2);text-align:center">7%</div>
+          <div style="font-size:11px;color:var(--muted);text-align:center">精準控制，沒有妥協空間</div>
+        </div>
+        <p>對比某些剛上市就<strong>「忘記自己是誰」</strong>、管理費用暴增失控的公司 → 管理費比率穩定 = 企業治理紀律的直接證明。</p>
+      </div>
+      <div class="card card-teal">
+        <h3>🔬 研發費用 — 未來投資力度</h3>
+        <p style="margin-bottom:8px">以台積電為例：</p>
+        <div style="background:var(--white);border-radius:8px;padding:10px 12px;margin-bottom:8px">
+          <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:var(--teal);text-align:center">460億/季</div>
+          <div style="font-size:11px;color:var(--muted);text-align:center">≈ 月均150億 · 占營收約 8%</div>
+        </div>
+        <p>龐大研發支出轉化為<strong>開發文件與智慧財產</strong>。願意砸重金 = 公司體質健康且明確看好未來趨勢（AI浪潮）。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 四、獲利來源 + ROE + 法說會DNA -->
+  <div class="section">
+    <div class="section-label">Profit Source + ROE + Company DNA</div>
+    <div class="section-title">獲利來源、ROE 核心指標與法說會 DNA 解讀</div>
+    <div class="grid-2">
+      <div>
+        <!-- 龍巖雙引擎 -->
+        <div class="card" style="margin-bottom:12px">
+          <h3>⚰️ 龍巖：本業 + 業外雙引擎獲利</h3>
+          <div style="display:flex;gap:10px;margin:8px 0">
+            <div style="flex:1;background:var(--navy4);border-radius:8px;padding:10px;text-align:center">
+              <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--navy2)">66%</div>
+              <div style="font-size:11px;color:var(--muted)">本業毛利率（生命禮儀）</div>
+            </div>
+            <div style="display:flex;align-items:center;font-size:20px;color:var(--muted)">+</div>
+            <div style="flex:1;background:var(--gold2);border-radius:8px;padding:10px;text-align:center">
+              <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--gold)">16億</div>
+              <div style="font-size:11px;color:var(--muted)">2023年投資台積電等股票未實現獲利</div>
+            </div>
+          </div>
+          <div style="background:var(--navy4);border-radius:7px;padding:8px 11px;font-size:12.5px;color:var(--navy2)">
+            💡 <strong>股價的真正驅動力</strong>：現在的 EPS 只是參考值，市場真正定價的是<span class="hl">「預期未來的稅後淨利與 EPS」</span>的心理預期。
+          </div>
+        </div>
+        <!-- ROE 杜邦 -->
+        <div class="card card-navy">
+          <h3>📐 ROE 比 EPS 更能反映經營能力（巴菲特最愛）</h3>
+          <div style="font-size:11px;font-family:'DM Mono',monospace;color:rgba(255,255,255,.4);margin-bottom:8px">杜邦方程式：能力 × 速度 × 風險</div>
+          <div class="dupont-row">
+            <div class="dp-box" style="background:rgba(255,255,255,.07)">
+              <div class="dp-val" style="color:var(--teal3)">淨利率</div>
+              <div class="dp-label" style="color:rgba(255,255,255,.5)">能力</div>
+            </div>
+            <div class="dp-op">×</div>
+            <div class="dp-box" style="background:rgba(255,255,255,.07)">
+              <div class="dp-val" style="color:var(--gold3)">資產周轉</div>
+              <div class="dp-label" style="color:rgba(255,255,255,.5)">速度</div>
+            </div>
+            <div class="dp-op">×</div>
+            <div class="dp-box" style="background:rgba(255,255,255,.07)">
+              <div class="dp-val" style="color:var(--rose3)">財務槓桿</div>
+              <div class="dp-label" style="color:rgba(255,255,255,.5)">風險</div>
+            </div>
+            <div class="dp-op">=</div>
+            <div class="dp-box" style="background:rgba(245,158,11,.2);border:1px solid rgba(245,158,11,.3)">
+              <div class="dp-val" style="color:var(--gold3)">ROE</div>
+              <div class="dp-label" style="color:rgba(255,255,255,.5)">股東報酬</div>
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,.07);border-radius:7px;padding:9px 12px;margin-top:8px">
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:4px">
+              <span style="color:rgba(255,255,255,.75)">雲豹能源 2023 ROE</span>
+              <span style="font-family:'DM Mono',monospace;color:var(--gold3);font-weight:700;font-size:15px">30%</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:12.5px">
+              <span style="color:rgba(255,255,255,.75)">股利發放率（現金控管極度精準）</span>
+              <span style="font-family:'DM Mono',monospace;color:var(--teal3);font-weight:700;font-size:15px">70%</span>
+            </div>
+            <div style="font-size:11.5px;color:rgba(255,255,255,.45);margin-top:6px">能擠出70%發放率 = 各事業部業績嚴格達標 + 現金預算控管強悍</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 法說會 DNA -->
+      <div class="card">
+        <h3>🧬 法說會簡報風格：看透企業 DNA</h3>
+        <p style="margin-bottom:10px;font-size:12.5px;color:var(--muted)">經營團隊的背景，直接反映在法說會的視覺語言與說故事方式：</p>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="background:var(--rose2);border:1.5px solid var(--rose3);border-radius:9px;padding:12px 14px">
+            <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--rose);margin-bottom:5px">🌸 弘帆（傳產導向）</div>
+            <div style="font-size:12.5px;color:#7f1d5e;line-height:1.75">
+              <strong>粉紅底色</strong>（配合女性消費者定位）× <strong>48頁</strong>厚重簡報<br>
+              主秀：東莞/越南廠區、產線自動化照片<br>
+              → 「我有實體，我有規模，我是真實的製造業」的底氣展示
+            </div>
+          </div>
+          <div style="background:var(--navy4);border:1.5px solid #bee3f8;border-radius:9px;padding:12px 14px">
+            <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--navy2);margin-bottom:5px">📊 雲豹能源（財會數據導向）</div>
+            <div style="font-size:12.5px;color:var(--navy2);line-height:1.75">
+              <strong>總經理 + 財務長均具備會計師/事務所背景</strong><br>
+              數位儀表板風格 × 各種財務比率 × 強打 ROE 數據<br>
+              直接引用「移轉訂價」對標國際同業中位數<br>
+              → 「成為我的股東，你能獲得30% ROE」的精確說服力
+            </div>
+          </div>
+        </div>
+        <div style="background:var(--gold2);border:1.5px solid var(--gold3);border-radius:8px;padding:9px 12px;margin-top:10px;font-size:12.5px;color:#5c3a00">
+          💡 <strong>閱讀法說會的隱藏技巧：</strong>看簡報設計風格與強調重點，往往能在兩分鐘內判斷出這家公司的核心競爭力來源，以及管理層的思維框架。
+        </div>
+        <div style="margin-top:10px;background:var(--navy);border-radius:8px;padding:10px 13px;font-size:12px;color:rgba(255,255,255,.7)">
+          ⚠ <span style="color:var(--gold3)">免責聲明：</span>以上財報分析僅供教學分享，非投資買賣建議。
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">穎祥 · 損益表判斷結構性競爭力 · 2026.06.21</div>
+</div>
+
+</body>
+</html>
