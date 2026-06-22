@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>財報解剖：家族建設公司三表異常全解析 · 玉 0622</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#1a1208;--bg:#faf8f5;--white:#fff;--muted:#78716c;
+  --amber:#92400e;--amber2:#fffbeb;--amber3:#fde68a;--amber4:#f59e0b;
+  --red:#991b1b;--red2:#fff1f2;--red3:#fecdd3;--red4:#ef4444;
+  --or:#c2410c;--or2:#fff7ed;--or3:#fdba74;--or4:#f97316;
+  --em:#065f46;--em2:#059669;--em3:#6ee7b7;--em4:#ecfdf5;
+  --navy:#0f1e3d;--navy2:#1e3a6e;--navy4:#ebf4ff;
+  --slate:#334155;--slate2:#e2e8f0;
+  --purple:#6b21a8;--purple2:#faf5ff;--purple3:#d8b4fe;
+  --stone:#44403c;--stone2:#f5f5f4;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+.page-header{background:linear-gradient(155deg,#0a0a0a,#1a1208,#2d1000,#3d1800);padding:42px 48px 36px;position:relative;overflow:hidden;border-bottom:3px solid var(--or4)}
+.ph-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(249,115,22,.1) 1px,transparent 1px);background-size:20px 20px;pointer-events:none}
+.ph-glow{position:absolute;top:-60px;right:-60px;width:320px;height:320px;background:radial-gradient(circle,rgba(239,68,68,.15),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(253,186,116,.75);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(16px,2.5vw,25px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:5px}
+.ph-title em{color:var(--or3);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.42);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.meta-chip{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(249,115,22,.15);color:var(--or3);border:1px solid rgba(249,115,22,.3)}
+.meta-chip-r{background:rgba(239,68,68,.15);color:#fca5a5;border-color:rgba(239,68,68,.3)}
+.meta-chip-g{background:rgba(5,150,105,.15);color:var(--em3);border-color:rgba(5,150,105,.3)}
+.meta-chip-y{background:rgba(245,158,11,.15);color:var(--amber3);border-color:rgba(245,158,11,.3)}
+
+.container{max-width:1100px;margin:0 auto;padding:30px 26px}
+.section{margin-bottom:26px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--or);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:11px;padding-bottom:6px;border-bottom:2px solid var(--or3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:720px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+.card{background:var(--white);border:1.5px solid var(--or3);border-radius:10px;padding:14px}
+.card-dark{background:var(--navy);border:none;border-radius:10px;padding:14px}
+.card-amber{background:var(--amber2);border:1.5px solid var(--amber3);border-radius:10px;padding:14px}
+.card-red{background:var(--red2);border:1.5px solid var(--red3);border-radius:10px;padding:14px}
+.card-or{background:var(--or2);border:1.5px solid var(--or3);border-radius:10px;padding:14px}
+.card-em{background:var(--em4);border:1.5px solid var(--em3);border-radius:10px;padding:14px}
+.card-purple{background:var(--purple2);border:1.5px solid var(--purple3);border-radius:10px;padding:14px}
+.card-stone{background:var(--stone2);border:1.5px solid #d6d3d1;border-radius:10px;padding:14px}
+.card h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--navy)}
+.card-dark h3{color:var(--or3)}
+.card-amber h3{color:var(--amber)}
+.card-red h3{color:var(--red)}
+.card-or h3{color:var(--or)}
+.card-em h3{color:var(--em)}
+.card-purple h3{color:var(--purple)}
+.card p,.card li{font-size:12.5px;line-height:1.85;color:#374151}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.78);font-size:12.5px;line-height:1.85}
+.card-amber p,.card-amber li{font-size:12.5px;line-height:1.85;color:var(--amber)}
+.card-red p,.card-red li{font-size:12.5px;line-height:1.85;color:var(--red)}
+.card-or p,.card-or li{font-size:12.5px;line-height:1.85;color:var(--or)}
+.card-em p,.card-em li{font-size:12.5px;line-height:1.85;color:var(--em)}
+.card-purple p,.card-purple li{font-size:12.5px;line-height:1.85;color:var(--purple)}
+.card ul{padding-left:14px}.card ul li{margin-bottom:3px}
+.hl-r{color:var(--red);font-weight:700}
+.hl-g{color:var(--em);font-weight:700}
+.hl-o{color:var(--or);font-weight:700}
+.hl-n{color:var(--navy2);font-weight:700}
+
+/* 水池圖示 */
+.pool-row{display:flex;gap:9px;margin-top:7px}
+.pool-item{flex:1;border-radius:8px;padding:8px 10px;text-align:center;font-size:12px}
+.pool-val{font-family:'Playfair Display',serif;font-size:16px;font-weight:900;line-height:1.1}
+.pool-lbl{font-size:11px;margin-top:2px;opacity:.8}
+
+/* 資金追蹤 */
+.trail-row{display:flex;align-items:center;gap:6px;margin-bottom:5px;font-size:12.5px}
+.trail-box{border-radius:6px;padding:5px 10px;flex:1}
+.trail-arrow{color:var(--muted);font-size:14px;flex-shrink:0}
+
+/* 警示等級 */
+.alarm{display:flex;align-items:flex-start;gap:8px;padding:8px 11px;border-radius:7px;margin-bottom:5px;font-size:12.5px}
+.alarm-icon{font-size:15px;flex-shrink:0;margin-top:1px}
+
+.page-footer{background:var(--navy);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--or3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-dots"></div>
+  <div class="ph-glow"></div>
+  <div class="ph-eyebrow">FINANCIAL FORENSICS · 財報解剖實戰 · 家族建設公司三表全解析</div>
+  <div class="ph-title">水池見底的警報：<em>現金流 × 資產負債 × 損益</em>三表異常地圖</div>
+  <div class="ph-sub">現金流「水龍頭」比喻 × 730萬黑洞 × 啦啦隊養小狼狗 × 負責人惡意掏空</div>
+  <div class="ph-meta">
+    <span class="meta-chip">2026.06.22</span>
+    <span class="meta-chip">玉</span>
+    <span class="meta-chip meta-chip-r">營運現金 -6200萬</span>
+    <span class="meta-chip meta-chip-r">其他流動資產 5500萬</span>
+    <span class="meta-chip meta-chip-y">損益費用僅 18萬</span>
+    <span class="meta-chip meta-chip-g">Rock 老師</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 現金流量表 -->
+  <div class="section">
+    <div class="section-label">Cash Flow Statement · 現金流量表</div>
+    <div class="section-title">水池與水龍頭：三大活動的現金解剖</div>
+    <div class="grid-2">
+      <div>
+        <div class="card" style="margin-bottom:11px">
+          <h3>🪣 水池比喻：三大活動對應圖</h3>
+          <div class="pool-row">
+            <div class="pool-item" style="background:var(--em4);border:1.5px solid var(--em3)">
+              <div class="pool-val" style="color:var(--em)">進水</div>
+              <div class="pool-lbl" style="color:var(--em)">營運活動<br>日常業務現金</div>
+            </div>
+            <div class="pool-item" style="background:var(--navy4);border:1.5px solid #bee3f8">
+              <div class="pool-val" style="color:var(--navy2)">水龍頭①</div>
+              <div class="pool-lbl" style="color:var(--navy2)">投資活動<br>買地買機器</div>
+            </div>
+            <div class="pool-item" style="background:var(--amber2);border:1.5px solid var(--amber3)">
+              <div class="pool-val" style="color:var(--amber)">水龍頭②</div>
+              <div class="pool-lbl" style="color:var(--amber)">籌資活動<br>借款還款發股</div>
+            </div>
+          </div>
+          <div style="background:var(--stone2);border-radius:7px;padding:8px 10px;margin-top:8px;font-size:12.5px;color:var(--stone)">
+            <strong>籌資活動包含：</strong>股東出資、向外借款（流入）；支付股利、償還本金與利息（流出）
+          </div>
+        </div>
+        <div class="card card-dark">
+          <h3>🔍 這間公司的現金流輪廓</h3>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:2px">
+            <div style="background:rgba(239,68,68,.15);border-radius:6px;padding:8px 10px">
+              <div style="color:#fca5a5;font-weight:700;font-size:12.5px;margin-bottom:2px">① 營運活動：嚴重失血</div>
+              <div style="color:rgba(255,255,255,.75);font-size:12.5px">淨現金流出 <strong style="color:#fca5a5">約 6200 萬</strong>——核心業務不僅沒賺錢，水池的水反而大量流失</div>
+            </div>
+            <div style="background:rgba(255,255,255,.07);border-radius:6px;padding:8px 10px">
+              <div style="color:rgba(255,255,255,.6);font-weight:700;font-size:12.5px;margin-bottom:2px">② 投資活動：完全停滯</div>
+              <div style="color:rgba(255,255,255,.65);font-size:12.5px">現金流為 <strong style="color:rgba(255,255,255,.9)">0</strong>，沒有購置資產也沒有出售</div>
+            </div>
+            <div style="background:rgba(245,158,11,.12);border-radius:6px;padding:8px 10px">
+              <div style="color:var(--amber3);font-weight:700;font-size:12.5px;margin-bottom:2px">③ 籌資活動：異常龐大</div>
+              <div style="color:rgba(255,255,255,.75);font-size:12.5px">淨流入 <strong style="color:var(--amber3)">4875 萬</strong>——但損益表如此難看，銀行絕不可能放款！幾乎確定是來自「關係人」或「民間金主」</div>
+            </div>
+          </div>
+          <div style="background:rgba(249,115,22,.15);border-radius:7px;padding:8px 10px;margin-top:7px;font-size:12px;color:var(--or3)">
+            <strong>金流總結：</strong>營運把錢吸乾 → 必須仰賴民間借款不斷灌水維持。這是一個靠外部輸血才能存活的公司。
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>💡 Rock 老師提點：讀現金流的邏輯順序</h3>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px">
+          <div style="background:var(--em4);border:1px solid var(--em3);border-radius:7px;padding:8px 10px;font-size:12.5px">
+            <div style="color:var(--em);font-weight:700;margin-bottom:2px">第一步：看營運活動</div>
+            <div style="color:#374151">正常公司 = 正數，代表本業有在賺現金。若是負數，要問為什麼——是成長期大量出貨、還是業務根本賺不到錢？</div>
+          </div>
+          <div style="background:var(--navy4);border:1px solid #bee3f8;border-radius:7px;padding:8px 10px;font-size:12.5px">
+            <div style="color:var(--navy2);font-weight:700;margin-bottom:2px">第二步：看投資活動</div>
+            <div style="color:#374151">負數通常是好事（買設備、擴廠）；若持續是正數（賣資產），要問公司是在瘦身還是在變賣家產？</div>
+          </div>
+          <div style="background:var(--amber2);border:1px solid var(--amber3);border-radius:7px;padding:8px 10px;font-size:12.5px">
+            <div style="color:var(--amber);font-weight:700;margin-bottom:2px">第三步：看籌資活動</div>
+            <div style="color:#374151">大量流入 + 本業現金流為負 → 這間公司靠借錢撐著。借款來源若說不清楚（非銀行），就是財務紅旗。</div>
+          </div>
+          <div style="background:var(--red2);border:1px solid var(--red3);border-radius:7px;padding:8px 10px;font-size:12.5px">
+            <div style="color:var(--red);font-weight:700;margin-bottom:2px">⚠ 本案警示</div>
+            <div style="color:var(--red)">損益表虧損 + 籌資活動天文數字 + 借款來源為民間 = 財務危機公司的典型特徵，學生後來確認借款確實來自有合作關係的民間機構。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 資產負債表 -->
+  <div class="section">
+    <div class="section-label">Balance Sheet · 資產負債表</div>
+    <div class="section-title">730萬黑洞 × 啦啦隊養小狼狗：資金去向的偵探推理</div>
+    <div class="grid-3">
+      <div class="card card-or">
+        <h3>💰 資金從 1500 萬到 170 萬</h3>
+        <div style="display:flex;flex-direction:column;gap:4px;margin-top:5px">
+          <div style="background:var(--white);border-radius:6px;padding:7px 10px;font-size:12.5px;display:flex;justify-content:space-between">
+            <span>初始股本</span><span style="font-family:'DM Mono',monospace;font-weight:700;color:var(--em)">+1,500 萬</span>
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:7px 10px;font-size:12.5px;display:flex;justify-content:space-between">
+            <span>存貨（建材＋在建）</span><span style="font-family:'DM Mono',monospace;color:var(--or)">-500 萬</span>
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:7px 10px;font-size:12.5px;display:flex;justify-content:space-between">
+            <span>預付款項（工程費）</span><span style="font-family:'DM Mono',monospace;color:var(--or)">-169 萬</span>
+          </div>
+          <div style="background:var(--amber2);border:1px solid var(--amber3);border-radius:6px;padding:7px 10px;font-size:12.5px;display:flex;justify-content:space-between">
+            <span>理應剩餘</span><span style="font-family:'DM Mono',monospace;font-weight:700;color:var(--amber)">≈ 900 萬</span>
+          </div>
+          <div style="background:var(--red2);border:1px solid var(--red3);border-radius:6px;padding:7px 10px;font-size:12.5px;display:flex;justify-content:space-between">
+            <span>帳上實際現金</span><span style="font-family:'DM Mono',monospace;font-weight:700;color:var(--red)">僅 170 萬</span>
+          </div>
+          <div style="background:var(--red2);border:1px dashed var(--red4);border-radius:6px;padding:8px 10px;font-size:13px;text-align:center">
+            <span style="font-family:'Playfair Display',serif;font-weight:900;color:var(--red);font-size:17px">730萬</span><br>
+            <span style="color:var(--red);font-size:12px">不翼而飛的黑洞</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-red">
+        <h3>😂 啦啦隊養小狼狗：5500萬「其他流動資產」</h3>
+        <div style="background:var(--white);border-radius:7px;padding:8px 10px;margin-bottom:8px;font-size:12.5px;color:var(--red);line-height:1.75">
+          「這間公司就像一個啦啦隊員，被粉絲<strong>抖內了 4875 萬</strong>（籌資借款），結果自己卻拿了 <strong>5500 萬去養了一個小狼狗</strong>（其他流動資產）。」
+        </div>
+        <div style="display:flex;flex-direction:column;gap:5px">
+          <div style="background:var(--white);border-radius:6px;padding:7px 10px;font-size:12.5px;color:var(--red)">
+            <strong>負債</strong>是欠別人的錢；<strong>資產</strong>是別人欠你的（理應拿得回來）。借了 4000 多萬的負債，卻又把 5000 多萬流到別人家——邏輯極度不合理！
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:7px 10px;font-size:12.5px;color:var(--red)">
+            <strong>真相：</strong>民間機構把錢先撥給家族另一公司「全城區」，再一點一點轉回建設公司；另外有錢跑到「模板公司」，被以<strong>「同業往來」</strong>名義入帳。
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:7px 10px;font-size:12.5px;color:var(--red)">
+            這間建設公司實際上是家族資金的<strong>中繼站與過水帳戶</strong>，不斷代收代付。
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-purple">
+        <h3>💣 最大地雷：股東往來放錯位置</h3>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
+          <div style="background:var(--white);border-radius:6px;padding:7px 10px;font-size:12.5px;color:var(--purple)">
+            <strong>事實：</strong>老闆（父親）不喜歡把錢死放帳上，把 1330 萬股本拿出來，掛在「股東往來」科目。
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:7px 10px;font-size:12.5px;color:var(--purple)">
+            <strong>正確會計位置：</strong>股東把公司的錢拿走 → 應列在「股東權益的<em>減項</em>」（右下）
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:7px 10px;font-size:12.5px;color:var(--purple)">
+            <strong>這份財報的做法：</strong>列在「資產」端（左側）→ 掩蓋了「資本被拿走」的事實
+          </div>
+          <div style="background:#4c1d95;border-radius:7px;padding:9px 10px;font-size:12.5px;color:var(--purple3);line-height:1.7">
+            📰 一旦放在正確的減項位置，財報就會赤裸呈現：<br><strong style="color:#fff">「負責人惡意掏空公司」</strong><br>這就是會計師不敢這樣放的真正原因。
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:7px 10px;font-size:12px;color:var(--muted)">
+            🛡 風險緩解：全家族私人持股，無外部投資人，目前無法律危機，屬內部帳務混亂問題。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 損益表 + 會計師困境 -->
+  <div class="section">
+    <div class="section-label">Income Statement + Risks · 損益表與核心財務隱患</div>
+    <div class="section-title">空殼公司疑慮 × 「其他」科目的垃圾桶效應 × 零利率稅務炸彈</div>
+    <div class="grid-2">
+      <div>
+        <div class="card card-amber" style="margin-bottom:11px">
+          <h3>👻 損益表：公司沒有人煙</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+            <div style="background:var(--white);border-radius:7px;padding:9px 10px;text-align:center">
+              <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--red)">18萬</div>
+              <div style="font-size:11px;color:var(--muted)">全年營業費用</div>
+              <div style="font-size:11px;color:var(--red)">光薪資就不可能只有 18 萬</div>
+            </div>
+            <div style="background:var(--white);border-radius:7px;padding:9px 10px;font-size:12px;color:var(--amber)">
+              <strong>問題根源：</strong><br>所有員工的勞健保都掛在「模板公司」，導致建設公司帳上<strong>零人事費用</strong>。
+            </div>
+          </div>
+          <div style="background:var(--em4);border:1px solid var(--em3);border-radius:7px;padding:8px 10px;font-size:12.5px;color:var(--em)">
+            <strong>✅ 解決方案：管理服務費</strong><br>
+            A公司的人員實際幫建設公司跑銀行、處理幾千萬金流 → 建設公司支付「管理服務費」給A公司並開立發票，即可解決損益表空殼問題。前提：A公司的統一編號「營業項目」須包含相關服務項目。
+          </div>
+        </div>
+        <div class="card card-stone">
+          <h3>🗑 「其他」科目：會計師的垃圾桶</h3>
+          <p style="margin-bottom:7px">記帳士每月收 3000 元或每份財報 2 萬，目標是<strong>「數字能兜平、自己不會有問題」</strong>，而非解決客戶的內部資金挪用。</p>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <div style="background:var(--white);border-radius:6px;padding:6px 10px;font-size:12.5px;display:flex;gap:8px;align-items:center">
+              <span style="font-size:14px">🗂</span><span>來路不明的流出 → 丟入「<strong>其他費用</strong>」</span>
+            </div>
+            <div style="background:var(--white);border-radius:6px;padding:6px 10px;font-size:12.5px;display:flex;gap:8px;align-items:center">
+              <span style="font-size:14px">🗂</span><span>說不清的負債 → 列為「<strong>其他非流動負債</strong>」</span>
+            </div>
+            <div style="background:var(--white);border-radius:6px;padding:6px 10px;font-size:12.5px;display:flex;gap:8px;align-items:center">
+              <span style="font-size:14px">🗂</span><span>借出去的不明款項 → 列為「<strong>其他流動資產</strong>」</span>
+            </div>
+            <div style="background:var(--white);border-radius:6px;padding:6px 10px;font-size:12.5px;display:flex;gap:8px;align-items:center">
+              <span style="font-size:14px">🗂</span><span>無攤還表的借款 → 連「長期借款」都不敢寫，只寫「<strong>其他非流動負債</strong>」</span>
+            </div>
+          </div>
+          <div style="background:var(--amber2);border-radius:7px;padding:7px 10px;margin-top:7px;font-size:12px;color:var(--amber)">
+            「其他」科目出現越多、金額越大，代表財報越不透明。這是閱讀財報時最重要的警戒訊號。
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card card-red" style="margin-bottom:11px">
+          <h3>💥 零利率借款：稅務局的設算利息炸彈</h3>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-top:5px">
+            <div style="background:var(--white);border-radius:6px;padding:8px 10px;font-size:12.5px;color:var(--red)">
+              <strong>常見操作：</strong>家族間資金借貸，通常不計利息（圖方便）。
+            </div>
+            <div style="background:var(--white);border-radius:6px;padding:8px 10px;font-size:12.5px;color:var(--red)">
+              <strong>稅務局的反應：</strong>針對零利率借貸<strong>「設算利息」</strong>——強迫「借出資金」的那間公司認列「利息收入」，藉此對其課徵更多所得稅。
+            </div>
+            <div style="background:var(--white);border-radius:6px;padding:8px 10px;font-size:12.5px;color:var(--red)">
+              <strong>真實目的：</strong>稅務局不是要懲罰借款公司，而是要讓原本就賺錢的那間公司<strong>多繳一筆利息收入稅</strong>。
+            </div>
+          </div>
+          <div style="background:var(--white);border:1px dashed var(--red4);border-radius:7px;padding:8px 10px;margin-top:6px;font-size:12px;color:var(--red)">
+            <strong>實務對策：</strong>關係人借貸應簽訂借款合約並設定合理利率（參照銀行基準利率），避免被設算。
+          </div>
+        </div>
+        <div class="card card-dark">
+          <h3>📋 後續行動建議</h3>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:2px">
+            <div style="background:rgba(239,68,68,.15);border-radius:6px;padding:8px 10px;font-size:12.5px">
+              <div style="color:#fca5a5;font-weight:700;margin-bottom:2px">🥇 最優先：準備資金移轉說詞</div>
+              <div style="color:rgba(255,255,255,.75)">資產負債表的龐大不明資金流動是最大風險。若遭查帳，須能解釋那數千萬的「同業往來」與「其他流動資產」。</div>
+            </div>
+            <div style="background:rgba(245,158,11,.12);border-radius:6px;padding:8px 10px;font-size:12.5px">
+              <div style="color:var(--amber3);font-weight:700;margin-bottom:2px">📄 向事務所索取「稅報」</div>
+              <div style="color:rgba(255,255,255,.75)">國稅局主要看損益表算稅，財報與稅報可能長得完全不一樣。比對兩份報表，確認記帳士的申報策略與實際入帳邏輯。</div>
+            </div>
+            <div style="background:rgba(255,255,255,.07);border-radius:6px;padding:8px 10px;font-size:12.5px">
+              <div style="color:var(--or3);font-weight:700;margin-bottom:2px">💬 直接問會計師的關鍵問題</div>
+              <div style="color:rgba(255,255,255,.75)">「<em>為什麼『其他流動資產－股東往來』沒有放在股東權益的減項，是有什麼考量嗎？</em>」透過這個提問，了解事務所迴避風險的策略與當初作帳的難處。</div>
+            </div>
+            <div style="background:rgba(255,255,255,.07);border-radius:6px;padding:8px 10px;font-size:12.5px">
+              <div style="color:rgba(255,255,255,.6);font-weight:700;margin-bottom:2px">📌 損益表空殼屬次要</div>
+              <div style="color:rgba(255,255,255,.65)">人事費用為 0 的問題相對較小；管理服務費發票方案可稍後處理，不需最優先。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">玉 · 家族建設公司財報解剖 · 2026.06.22</div>
+</div>
+
+</body>
+</html>
