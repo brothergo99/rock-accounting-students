@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>遊戲×電商行銷數據指標 · Cavin 0620</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --em:#065f46;--em2:#059669;--em3:#6ee7b7;--em4:#ecfdf5;
+  --lime:#365314;--lime2:#f7fee7;--lime3:#bef264;
+  --navy:#0f1e3d;--navy2:#1e3a6e;--navy4:#ebf4ff;
+  --orange:#c2410c;--orange2:#fff7ed;--orange3:#fdba74;--orange4:#f97316;
+  --red:#991b1b;--red2:#fff1f2;--red3:#fecdd3;
+  --gold:#92680a;--gold2:#fffbeb;--gold3:#fde68a;
+  --purple:#6b21a8;--purple2:#faf5ff;--purple3:#d8b4fe;
+  --slate:#334155;--slate2:#e2e8f0;
+  --white:#fff;--ink:#0f1e3d;--muted:#64748b;--bg:#f0fdf8;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+.page-header{background:linear-gradient(155deg,var(--navy),#0a3d2e,#065f46);padding:44px 48px 36px;position:relative;overflow:hidden;border-bottom:4px solid var(--em2)}
+.ph-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(110,231,183,.12) 1px,transparent 1px);background-size:22px 22px;pointer-events:none}
+.ph-glow{position:absolute;top:-60px;right:-60px;width:280px;height:280px;background:radial-gradient(circle,rgba(5,150,105,.25),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.2em;color:var(--em3);opacity:.85;margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(17px,2.8vw,28px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:5px}
+.ph-title em{color:var(--em3);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.5);margin-top:4px}
+.ph-meta{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}
+.meta-chip{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(5,150,105,.2);color:var(--em3);border:1px solid rgba(5,150,105,.35)}
+.meta-chip-o{background:rgba(249,115,22,.15);color:var(--orange3);border-color:rgba(249,115,22,.3)}
+.meta-chip-g{background:rgba(245,158,11,.15);color:var(--gold3);border-color:rgba(245,158,11,.3)}
+
+.container{max-width:1100px;margin:0 auto;padding:32px 28px}
+.section{margin-bottom:28px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--em);text-transform:uppercase;margin-bottom:6px}
+.section-title{font-family:'Playfair Display',serif;font-size:17.5px;font-weight:700;color:var(--navy);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--em3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+
+.card{background:var(--white);border:1.5px solid var(--em3);border-radius:10px;padding:15px}
+.card-dark{background:var(--navy);border:none;border-radius:10px;padding:15px}
+.card-em{background:var(--em4);border:1.5px solid var(--em3);border-radius:10px;padding:15px}
+.card-orange{background:var(--orange2);border:1.5px solid var(--orange3);border-radius:10px;padding:15px}
+.card-red{background:var(--red2);border:1.5px solid var(--red3);border-radius:10px;padding:15px}
+.card-gold{background:var(--gold2);border:1.5px solid var(--gold3);border-radius:10px;padding:15px}
+.card-purple{background:var(--purple2);border:1.5px solid var(--purple3);border-radius:10px;padding:15px}
+.card-lime{background:var(--lime2);border:1.5px solid var(--lime3);border-radius:10px;padding:15px}
+.card-navy4{background:var(--navy4);border:1.5px solid #bee3f8;border-radius:10px;padding:15px}
+
+.card h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:8px;color:var(--navy)}
+.card-dark h3{color:var(--em3)}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8);font-size:12.5px;line-height:1.85}
+.card-em h3{color:var(--em)}
+.card-em p,.card-em li{font-size:12.5px;line-height:1.85;color:var(--em)}
+.card-orange h3{color:var(--orange)}
+.card-orange p,.card-orange li{font-size:12.5px;line-height:1.85;color:var(--orange)}
+.card-red h3{color:var(--red)}
+.card-red p,.card-red li{font-size:12.5px;line-height:1.85;color:var(--red)}
+.card-gold h3{color:var(--gold)}
+.card-gold p,.card-gold li{font-size:12.5px;line-height:1.85;color:#5c3a00}
+.card-purple h3{color:var(--purple)}
+.card-purple p,.card-purple li{font-size:12.5px;line-height:1.85;color:var(--purple)}
+.card-lime h3{color:var(--lime)}
+.card-lime p,.card-lime li{font-size:12.5px;line-height:1.85;color:var(--lime)}
+.card-navy4 h3{color:var(--navy2)}
+.card p,.card li{font-size:12.5px;line-height:1.85;color:#374151}
+.card ul{padding-left:14px}.card ul li{margin-bottom:3px}
+.hl{color:var(--em);font-weight:700}
+.hl-o{color:var(--orange4);font-weight:700}
+.hl-g{color:var(--gold);font-weight:700}
+.hl-r{color:var(--red);font-weight:700}
+.hl-p{color:var(--purple);font-weight:700}
+.hl-n{color:var(--navy2);font-weight:700}
+
+/* KPI 卡 */
+.kpi{text-align:center;padding:12px 8px}
+.kpi-val{font-family:'Playfair Display',serif;font-size:clamp(22px,2.5vw,30px);font-weight:900;line-height:1.1}
+.kpi-label{font-size:11px;color:var(--muted);margin-top:3px}
+.kpi-sub{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:3px}
+
+/* 漏斗 */
+.funnel{display:flex;flex-direction:column;align-items:center;gap:2px;margin:6px 0}
+.funnel-step{border-radius:5px;display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;padding:6px 12px;color:#fff}
+.funnel-arrow{font-size:12px;color:var(--em3);margin:0 auto}
+
+/* 漏斗出血 */
+.leak{display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:5px;background:var(--red2);margin:3px 0;font-size:11.5px;color:var(--red)}
+
+/* O2O 流程 */
+.o2o-step{display:flex;align-items:flex-start;gap:9px;padding:8px 11px;border-radius:7px;margin-bottom:5px}
+.o2o-num{font-family:'Playfair Display',serif;font-size:17px;font-weight:900;flex-shrink:0;width:22px;line-height:1}
+.o2o-text{font-size:12.5px;line-height:1.7}
+
+/* 比較表 */
+.cmp-row{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;border-radius:5px;font-size:12.5px;margin-bottom:4px}
+
+.page-footer{background:var(--navy);color:rgba(255,255,255,.55);padding:16px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:32px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--em3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.3)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-dots"></div>
+  <div class="ph-glow"></div>
+  <div class="ph-eyebrow">遊戲 × 電商 行銷數據指標</div>
+  <div class="ph-title">CAC × LTV × MAU：<em>獲客數據</em>拆解皮克敏商業奇蹟</div>
+  <div class="ph-sub">獲客漏斗 × 藍海定位 × O2O 實體導流 × 平台稅 25%</div>
+  <div class="ph-meta">
+    <span class="meta-chip">2026.06.20</span>
+    <span class="meta-chip">Cavin</span>
+    <span class="meta-chip">CAC ≈ 零</span>
+    <span class="meta-chip">MAU 50萬</span>
+    <span class="meta-chip meta-chip-o">平台稅 25%</span>
+    <span class="meta-chip meta-chip-g">累積 $1億美金</span>
+    <span class="meta-chip">Rock 老師</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 核心指標三連發 -->
+  <div class="section">
+    <div class="section-label">Core Metrics · 三大關鍵指標</div>
+    <div class="section-title">遊戲 × 電商 × 直播業的共同語言</div>
+    <div class="grid-3">
+      <div class="card kpi" style="border-color:var(--red3)">
+        <div style="font-size:22px;margin-bottom:6px">🎯</div>
+        <div class="kpi-val" style="color:var(--red)">CAC</div>
+        <div class="kpi-label">Customer Acquisition Cost</div>
+        <div class="kpi-sub">獲客成本</div>
+        <div style="background:var(--red2);border-radius:6px;padding:7px 10px;margin-top:8px;font-size:12px;color:var(--red)">
+          取得一位新客的總花費。<strong>越低越好。</strong>產品跑不起來，高 CAC 就是錢丟水裡。
+        </div>
+      </div>
+      <div class="card kpi" style="border-color:var(--em3)">
+        <div style="font-size:22px;margin-bottom:6px">💎</div>
+        <div class="kpi-val" style="color:var(--em)">LTV</div>
+        <div class="kpi-label">Life Time Value</div>
+        <div class="kpi-sub">客戶終生價值</div>
+        <div style="background:var(--em4);border-radius:6px;padding:7px 10px;margin-top:8px;font-size:12px;color:var(--em)">
+          客戶在生命週期帶來的總收益。<strong>商業鐵律：LTV ＞ CAC</strong> 才能獲利，這是一切商業模式的根本。
+        </div>
+      </div>
+      <div class="card kpi" style="border-color:var(--purple3)">
+        <div style="font-size:22px;margin-bottom:6px">📊</div>
+        <div class="kpi-val" style="color:var(--purple)">MAU</div>
+        <div class="kpi-label">Monthly Active Users</div>
+        <div class="kpi-sub">月活躍用戶</div>
+        <div style="background:var(--purple2);border-radius:6px;padding:7px 10px;margin-top:8px;font-size:12px;color:var(--purple)">
+          營收的領先指標。台灣頂級直播（如17直播）能有<strong>2~3萬 MAU 已是頂級水準</strong>。
+        </div>
+      </div>
+    </div>
+    <div class="card card-dark" style="margin-top:12px">
+      <h3>💡 LTV &gt; CAC 是一切商業獲利的起點</h3>
+      <div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap">
+        <div style="text-align:center;padding:10px 20px;background:rgba(255,255,255,.07);border-radius:8px">
+          <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--red3)">CAC</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.5)">廣告 + 行銷 + 人力<br>取得一位客戶的總成本</div>
+        </div>
+        <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--em3)">≪</div>
+        <div style="text-align:center;padding:10px 20px;background:rgba(5,150,105,.15);border-radius:8px;border:1px solid rgba(110,231,183,.2)">
+          <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--em3)">LTV</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.5)">客戶消費 × 購買頻率 × 留存時長<br>客戶終生貢獻的全部價值</div>
+        </div>
+        <div style="font-size:18px;color:rgba(255,255,255,.3)">→</div>
+        <div style="text-align:center;padding:10px 20px;background:rgba(245,158,11,.15);border-radius:8px">
+          <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--gold3)">獲利</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.5)">差額越大，商業模式越健康</div>
+        </div>
+      </div>
+      <p style="margin-top:10px;font-size:12px;color:rgba(255,255,255,.5)">⚠ 遊戲、直播、電商、自媒體，所有數位產品的商業邏輯都指向同一個鐵律。客群輪廓（Customer Persona）越精準，這個等式就越容易成立。</p>
+    </div>
+  </div>
+
+  <!-- 獲客漏斗 + 皮克敏藍海 -->
+  <div class="section">
+    <div class="section-label">Funnel + Blue Ocean · 漏斗與藍海</div>
+    <div class="section-title">獲客漏斗機制 × 皮克敏的藍海突破</div>
+    <div class="grid-2">
+      <div class="card">
+        <h3>🔽 傳統遊戲獲客漏斗（層層流失）</h3>
+        <div class="funnel">
+          <div class="funnel-step" style="background:#1e3a6e;width:100%">👁 看到廣告（IG / FB 來源追蹤）</div>
+          <div class="funnel-arrow">▼ <span style="font-size:10px;color:var(--red)">大量流失</span></div>
+          <div class="funnel-step" style="background:#2d5282;width:78%">🖱 點擊連結</div>
+          <div class="funnel-arrow">▼ <span style="font-size:10px;color:var(--red)">再次流失</span></div>
+          <div class="funnel-step" style="background:#3d6cb3;width:55%">📱 下載安裝 App</div>
+          <div class="funnel-arrow">▼ <span style="font-size:10px;color:var(--red)">再次流失</span></div>
+          <div class="funnel-step" style="background:var(--em2);width:35%">🎮 領取道具體驗遊玩</div>
+          <div class="funnel-arrow">▼ <span style="font-size:10px;color:var(--red)">大量流失</span></div>
+          <div class="funnel-step" style="background:var(--orange4);width:15%">💳 氪金付費消費</div>
+        </div>
+        <div style="background:var(--red2);border:1px solid var(--red3);border-radius:7px;padding:8px 11px;margin-top:8px;font-size:12px;color:var(--red)">
+          <strong>核心難題：</strong>漏斗底端的付費用戶必須撐起漏斗頂端的龐大廣告成本。CAC 高、回收難，是傳統遊戲業最大的財務痛點。
+        </div>
+      </div>
+      <div>
+        <div class="card card-em" style="margin-bottom:10px">
+          <h3>🌊 皮克敏：紅海→藍海的受眾重新定義</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0">
+            <div style="background:var(--red2);border:1px solid var(--red3);border-radius:7px;padding:9px;font-size:12px">
+              <div style="font-weight:700;color:var(--red);margin-bottom:4px">🔴 紅海：傳統玩家</div>
+              <div style="color:#7a1a1a;line-height:1.6">所有遊戲搶同一群人<br>削價 + 廣告戰<br>高 CAC、難回收</div>
+            </div>
+            <div style="background:var(--em4);border:1px solid var(--em3);border-radius:7px;padding:9px;font-size:12px">
+              <div style="font-weight:700;color:var(--em);margin-bottom:4px">🟢 藍海：走路的人</div>
+              <div style="color:var(--em);line-height:1.6">本來就會走路出門<br>瞎走→有目的地走<br>CAC ≈ 零！</div>
+            </div>
+          </div>
+          <p><strong>結合剛需：</strong>智慧手環計步、帶小孩出門、通勤族散步 → 枯燥的「走路」被賦予養成遊戲的意義與情緒價值。</p>
+        </div>
+        <div class="card card-lime">
+          <h3>🔁 社群裂變（Virality）：零成本的獲客飛輪</h3>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
+            <div style="background:var(--white);border-radius:6px;padding:7px 10px;font-size:12.5px">
+              <span style="font-weight:700;color:var(--lime)">① 朋友約出門走路</span> → 順道帶入遊戲
+            </div>
+            <div style="background:var(--white);border-radius:6px;padding:7px 10px;font-size:12.5px">
+              <span style="font-weight:700;color:var(--lime)">② 幫忙拿手機代走</span> → 讓朋友替自己刷步數
+            </div>
+            <div style="background:var(--white);border-radius:6px;padding:7px 10px;font-size:12.5px">
+              <span style="font-weight:700;color:var(--lime)">③ 明信片社交</span> → 台北101、日本限定地點、偏僻校區，滿足收集癖與打卡心理
+            </div>
+          </div>
+          <div style="background:var(--white);border-radius:7px;padding:7px 10px;margin-top:6px;font-size:12px;color:var(--lime)">
+            基於真實人際連結的口碑推廣，<strong>轉換動力遠比廣告強</strong>。不打廣告，CAC 趨近於零。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 皮克敏 KPI + O2O -->
+  <div class="section">
+    <div class="section-label">Pikmin KPI + O2O · 數據成果與實體導流</div>
+    <div class="section-title">皮克敏的驚人 KPI × O2O 實體行銷完美閉環</div>
+    <div class="grid-2">
+      <div>
+        <div class="grid-2" style="margin-bottom:12px;gap:10px">
+          <div class="card kpi" style="border-color:var(--em3)">
+            <div class="kpi-val" style="color:var(--em)">50萬</div>
+            <div class="kpi-label">台灣月活躍用戶 MAU</div>
+            <div class="kpi-sub">vs 頂級直播 2~3萬</div>
+          </div>
+          <div class="card kpi" style="border-color:var(--gold3)">
+            <div class="kpi-val" style="color:var(--gold)">$1億</div>
+            <div class="kpi-label">累積營收（2025.12）</div>
+            <div class="kpi-sub">≈ 台幣 31 億元</div>
+          </div>
+          <div class="card kpi" style="border-color:var(--purple3)">
+            <div class="kpi-val" style="color:var(--purple)">36歲</div>
+            <div class="kpi-label">玩家平均年齡</div>
+            <div class="kpi-sub">女性比例極高</div>
+          </div>
+          <div class="card kpi" style="border-color:var(--red3)">
+            <div class="kpi-val" style="color:var(--em)">≈ 0</div>
+            <div class="kpi-label">獲客成本 CAC</div>
+            <div class="kpi-sub">口碑裂變，幾乎不打廣告</div>
+          </div>
+        </div>
+        <div class="card card-dark">
+          <h3>💥 高 LTV 的財務根本：低變動成本</h3>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="background:rgba(255,255,255,.07);border-radius:6px;padding:8px 10px;font-size:12.5px">
+              <div style="color:var(--em3);font-weight:700;margin-bottom:2px">虛擬道具 = 零邊際成本</div>
+              <div style="color:rgba(255,255,255,.75)">道具已寫入程式碼，新用戶消費不需製造，幾乎沒有額外成本</div>
+            </div>
+            <div style="background:rgba(255,255,255,.07);border-radius:6px;padding:8px 10px;font-size:12.5px">
+              <div style="color:var(--em3);font-weight:700;margin-bottom:2px">跨越損益兩平點後</div>
+              <div style="color:rgba(255,255,255,.75)">不像實體場館有容納限制，新用戶的每一筆消費幾乎全是<strong style="color:var(--em3)">純利</strong> → 倍數成長的暴利特質</div>
+            </div>
+            <div style="background:rgba(255,255,255,.07);border-radius:6px;padding:8px 10px;font-size:12.5px">
+              <div style="color:var(--gold3);font-weight:700;margin-bottom:2px">「想花就花」的客群</div>
+              <div style="color:rgba(255,255,255,.75)">36歲上班族有工作、有收入，為了擴充容量或搶資源，LTV 極高，遠超年輕玩家</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- O2O -->
+      <div class="card">
+        <h3>🗺 O2O 實體導流：完美的獲客閉環</h3>
+        <p style="font-size:12.5px;color:var(--muted);margin-bottom:8px">皮克敏不只是遊戲，更是實體商家零成本的引流工具：</p>
+        <div>
+          <div class="o2o-step" style="background:var(--em4);border:1px solid var(--em3)">
+            <div class="o2o-num" style="color:var(--em)">①</div>
+            <div class="o2o-text"><strong style="color:var(--em)">遊戲資源點生成於實體位置</strong><br>蘑菇點/大花朵出現在特定店面（如信義區A11任天堂專賣店、咖啡廳、廟宇）</div>
+          </div>
+          <div class="o2o-step" style="background:#f0fdf4;border:1px solid #86efac">
+            <div class="o2o-num" style="color:var(--em2)">②</div>
+            <div class="o2o-text"><strong style="color:var(--em2)">玩家主動改變路線前往</strong><br>為了打蘑菇或獲取特殊飾品皮克敏，特地前往原本不認識的店面</div>
+          </div>
+          <div class="o2o-step" style="background:var(--gold2);border:1px solid var(--gold3)">
+            <div class="o2o-num" style="color:var(--gold)">③</div>
+            <div class="o2o-text"><strong style="color:var(--gold)">店家付費植入成為蘑菇點</strong><br>商家（疑似付費）向遊戲申請成為資源點，等於購買了精準導流服務</div>
+          </div>
+          <div class="o2o-step" style="background:var(--orange2);border:1px solid var(--orange3)">
+            <div class="o2o-num" style="color:var(--orange)">④</div>
+            <div class="o2o-text"><strong style="color:var(--orange)">「來都來了」心理促成消費</strong><br>玩家聚集 → 羊群效應 → 帶動路人加入，高消費力人群自然流向實體店</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+          <div style="background:var(--em4);border-radius:7px;padding:8px 10px;font-size:12px;color:var(--em)">
+            <strong>🇹🇼 嘉義勞動節週末</strong><br>塞爆棒球場 + 帶動二軍棒球觀賽人潮
+          </div>
+          <div style="background:var(--navy4);border-radius:7px;padding:8px 10px;font-size:12px;color:var(--navy2)">
+            <strong>🇯🇵 JR鐵路合作</strong><br>鼓勵玩家前往冷門車站，活化地方鐵路周邊經濟
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 平台稅 + 總結 -->
+  <div class="section">
+    <div class="section-label">Platform Tax + Summary · 平台稅與通用邏輯</div>
+    <div class="section-title">25% 平台稅的隱形成本 × 行銷指標的通用底層邏輯</div>
+    <div class="grid-3">
+      <div class="card card-red">
+        <h3>🍎 平台稅：養套殺的抽成機制</h3>
+        <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin:10px 0">
+          <div style="text-align:center">
+            <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:#7a1a1a">100元</div>
+            <div style="font-size:11px;color:var(--muted)">玩家消費</div>
+          </div>
+          <div style="font-size:20px;color:var(--red)">→</div>
+          <div>
+            <div style="font-size:12px;color:var(--red);margin-bottom:3px">Apple/Google 抽走 <strong>25元</strong></div>
+            <div style="font-size:12px;color:var(--em);font-weight:700">遊戲公司實得 75元</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--red);line-height:1.7;margin-bottom:8px">
+          <strong>養套殺三步驟：</strong><br>
+          上架初期 → 免費或 2~3% 手續費（養）<br>
+          累積營收超 $10萬美金/300萬台幣（套）<br>
+          平台抽成暴增至 25%（殺）
+        </div>
+        <div style="background:var(--white);border-radius:7px;padding:8px 10px;font-size:12px;color:var(--em)">
+          <strong>企業對策：</strong>官網另設儲值商城，給玩家 25% 折扣，吸引跳出 App 在網頁端結帳 → 繞過平台壟斷
+        </div>
+      </div>
+
+      <div class="card card-em">
+        <h3>🔄 指標通用性：舉一反三</h3>
+        <p style="margin-bottom:8px">遊戲業的 CAC/LTV/MAU，完全可套用到：</p>
+        <div style="display:flex;flex-direction:column;gap:5px">
+          <div style="background:var(--white);border-radius:6px;padding:7px 10px;font-size:12.5px">
+            <span style="font-weight:700;color:var(--em)">🛒 電商：</span>廣告費 / 轉換率 / 客單價 × 回購率
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:7px 10px;font-size:12.5px">
+            <span style="font-weight:700;color:var(--em)">📱 直播業：</span>流量成本 / 打賞率 / 月活躍留存
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:7px 10px;font-size:12.5px">
+            <span style="font-weight:700;color:var(--em)">🎬 自媒體：</span>內容曝光 / 訂閱轉換 / 粉絲終生價值
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:7px 10px;font-size:12.5px">
+            <span style="font-weight:700;color:var(--em)">🏪 實體店面：</span>獲客廣告 / 客單價 / 回客週期
+          </div>
+        </div>
+        <div style="background:var(--white);border-radius:7px;padding:7px 10px;margin-top:8px;font-size:12px;color:var(--em)">
+          任何產品再好，無法解決<strong>「被看見（獲客）」</strong>的問題，都難以成功。
+        </div>
+      </div>
+
+      <div class="card card-dark">
+        <h3>🤖 AI 工具降低個人 CAC</h3>
+        <p style="margin-bottom:8px">老師實際應用案例：</p>
+        <div style="display:flex;flex-direction:column;gap:5px">
+          <div style="background:rgba(255,255,255,.07);border-radius:6px;padding:8px 10px;font-size:12.5px">
+            <div style="color:var(--em3);font-weight:700;margin-bottom:2px">AI 自動剪輯短影音</div>
+            <div style="color:rgba(255,255,255,.75)">大幅降低內容產出成本 → 社群平台曝光增加 → 個人品牌 CAC 下降</div>
+          </div>
+          <div style="background:rgba(255,255,255,.07);border-radius:6px;padding:8px 10px;font-size:12.5px">
+            <div style="color:var(--gold3);font-weight:700;margin-bottom:2px">底層邏輯相同</div>
+            <div style="color:rgba(255,255,255,.75)">個人自媒體與企業行銷的 CAC 邏輯完全一致——降低獲客成本 = 提升商業可行性</div>
+          </div>
+          <div style="background:rgba(5,150,105,.15);border:1px solid rgba(110,231,183,.2);border-radius:6px;padding:8px 10px;font-size:12px;margin-top:4px">
+            <span style="color:var(--em3);font-weight:700">本課最終啟示：</span><br>
+            <span style="color:rgba(255,255,255,.7)">CAC、LTV、MAU 不只是「業界術語」，而是所有商業人都應掌握的<strong style="color:var(--em3)">基礎財務思維語言</strong>。</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">Cavin · 遊戲×電商行銷指標 · 2026.06.20</div>
+</div>
+
+</body>
+</html>
