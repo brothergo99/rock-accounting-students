@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LVMH 2025 法說會財務解析 · 穎祥 0622</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#92680a;--gold2:#fffbeb;--gold3:#fde68a;--gold4:#f59e0b;
+  --cog:#7c4a00;--cog2:#fff7ed;--cog3:#fdba74;
+  --navy:#0f1e3d;--navy2:#1e3a6e;--navy4:#ebf4ff;
+  --em:#065f46;--em2:#059669;--em3:#6ee7b7;--em4:#ecfdf5;
+  --red:#991b1b;--red2:#fff1f2;--red3:#fecdd3;
+  --cham:#6b4f00;--cham2:#fef9ee;--cham3:#fde68a;
+  --stone:#44403c;--stone2:#f5f5f4;
+  --ink:#1a1208;--muted:#78716c;--bg:#fdfaf4;--white:#fff;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+/* HEADER */
+.page-header{background:linear-gradient(155deg,#0f0a04,#1a1208,#2d1e00,#3d2a00);padding:44px 48px 38px;position:relative;overflow:hidden;border-bottom:3px solid var(--gold4)}
+.ph-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(253,230,138,.08) 1px,transparent 1px);background-size:20px 20px;pointer-events:none}
+.ph-glow{position:absolute;top:-80px;right:-80px;width:340px;height:340px;background:radial-gradient(circle,rgba(245,158,11,.18),transparent 65%);pointer-events:none}
+.ph-stripe{position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold4),transparent)}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(253,230,138,.7);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(16px,2.5vw,26px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:5px}
+.ph-title em{color:var(--gold3);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.45);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.meta-chip{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(245,158,11,.15);color:var(--gold3);border:1px solid rgba(245,158,11,.3)}
+.meta-chip-r{background:rgba(239,68,68,.12);color:#fca5a5;border-color:rgba(239,68,68,.25)}
+.meta-chip-g{background:rgba(5,150,105,.15);color:var(--em3);border-color:rgba(5,150,105,.3)}
+
+/* LAYOUT */
+.container{max-width:1100px;margin:0 auto;padding:30px 26px}
+.section{margin-bottom:26px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:11px;padding-bottom:6px;border-bottom:2px solid var(--gold3)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.grid-5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-4,.grid-5{grid-template-columns:1fr}}
+
+/* CARDS */
+.card{background:var(--white);border:1.5px solid var(--gold3);border-radius:10px;padding:14px}
+.card-dark{background:var(--navy);border:none;border-radius:10px;padding:14px}
+.card-gold{background:var(--gold2);border:1.5px solid var(--gold3);border-radius:10px;padding:14px}
+.card-cog{background:var(--cog2);border:1.5px solid var(--cog3);border-radius:10px;padding:14px}
+.card-em{background:var(--em4);border:1.5px solid var(--em3);border-radius:10px;padding:14px}
+.card-red{background:var(--red2);border:1.5px solid var(--red3);border-radius:10px;padding:14px}
+.card-stone{background:var(--stone2);border:1.5px solid #d6d3d1;border-radius:10px;padding:14px}
+.card-navy4{background:var(--navy4);border:1.5px solid #bee3f8;border-radius:10px;padding:14px}
+.card h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--navy)}
+.card-dark h3{color:var(--gold3)}
+.card-gold h3{color:var(--cham)}
+.card-cog h3{color:var(--cog)}
+.card-em h3{color:var(--em)}
+.card-red h3{color:var(--red)}
+.card p,.card li{font-size:12.5px;line-height:1.85;color:#374151}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.78);font-size:12.5px;line-height:1.85}
+.card-gold p,.card-gold li{font-size:12.5px;line-height:1.85;color:var(--cham)}
+.card-cog p,.card-cog li{font-size:12.5px;line-height:1.85;color:var(--cog)}
+.card-em p,.card-em li{font-size:12.5px;line-height:1.85;color:var(--em)}
+.card-red p,.card-red li{font-size:12.5px;line-height:1.85;color:var(--red)}
+.card ul{padding-left:14px}.card ul li{margin-bottom:3px}
+.hl{color:var(--gold);font-weight:700}
+.hl-g{color:var(--em);font-weight:700}
+.hl-r{color:var(--red);font-weight:700}
+.hl-n{color:var(--navy2);font-weight:700}
+.hl-c{color:var(--cog);font-weight:700}
+
+/* KPI 卡 */
+.kpi{text-align:center;padding:11px 7px}
+.kpi-val{font-family:'Playfair Display',serif;font-size:clamp(20px,2.4vw,28px);font-weight:900;line-height:1.1}
+.kpi-label{font-size:11px;color:var(--muted);margin-top:3px}
+.kpi-sub{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:3px}
+.badge{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:3px;margin-top:4px}
+.badge-g{background:var(--em4);color:var(--em);border:1px solid var(--em3)}
+.badge-r{background:var(--red2);color:var(--red);border:1px solid var(--red3)}
+.badge-y{background:var(--gold2);color:var(--gold);border:1px solid var(--gold3)}
+
+/* 事業群條狀圖 */
+.seg-bar{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.seg-label{font-size:11.5px;width:100px;flex-shrink:0;color:var(--stone)}
+.seg-track{flex:1;height:20px;background:#f5f5f4;border-radius:4px;overflow:hidden;position:relative}
+.seg-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-right:6px;justify-content:flex-end}
+.seg-pct{font-family:'DM Mono',monospace;font-size:10px;color:var(--white);font-weight:700}
+.seg-val{font-family:'DM Mono',monospace;font-size:11px;width:65px;text-align:right;flex-shrink:0;color:var(--stone)}
+
+/* 現金流瀑布 */
+.waterfall-item{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-radius:6px;margin-bottom:4px;font-size:12.5px}
+
+/* 表格 */
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{background:var(--navy);color:var(--gold3);padding:6px 8px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.06em;text-align:left}
+.tbl td{padding:6px 8px;border-bottom:1px solid var(--gold3);color:#374151}
+.tbl tr:nth-child(even) td{background:var(--gold2)}
+
+/* 幣別分佈 */
+.curr-row{display:flex;height:22px;border-radius:6px;overflow:hidden;margin:8px 0}
+.curr-seg{display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:10px;font-weight:700;color:var(--white)}
+
+/* Footer */
+.page-footer{background:var(--navy);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--gold3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-dots"></div>
+  <div class="ph-glow"></div>
+  <div class="ph-stripe"></div>
+  <div class="ph-eyebrow">LVMH GROUP · 2025 ANNUAL RESULTS · CFO PRESENTATION</div>
+  <div class="ph-title">奢侈品帝國的韌性財務學：<em>LVMH 2025</em> 法說會深度解析</div>
+  <div class="ph-sub">Cécile Cabanis CFO · 五大事業群 × 資產負債表 × 現金流 × 競爭力指標</div>
+  <div class="ph-meta">
+    <span class="meta-chip">2026.06.22</span>
+    <span class="meta-chip">穎祥</span>
+    <span class="meta-chip">營收 €808億</span>
+    <span class="meta-chip meta-chip-g">自由現金流 +8%</span>
+    <span class="meta-chip meta-chip-r">有機衰退 -1%</span>
+    <span class="meta-chip">每股股息 €13</span>
+    <span class="meta-chip">Rock 老師</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 財務亮點 KPI -->
+  <div class="section">
+    <div class="section-label">2025 Financial Highlights · 核心財務亮點</div>
+    <div class="section-title">強逆風下的穩健成績單：六大 KPI 一眼看穿集團體質</div>
+    <div class="grid-3" style="margin-bottom:11px">
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--navy2)">€808億</div>
+        <div class="kpi-label">合併營收</div>
+        <div class="kpi-sub">Consolidated Revenue</div>
+        <div class="badge badge-r">呈報 -5%</div>
+        <div class="badge badge-y" style="margin-left:4px">有機 -1%</div>
+      </div>
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--gold)">€177.6億</div>
+        <div class="kpi-label">經常性營業利潤</div>
+        <div class="kpi-sub">Recurring Operating Profit</div>
+        <div class="badge badge-y">利潤率 22.0%</div>
+      </div>
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--em)">€113.3億</div>
+        <div class="kpi-label">營運自由現金流</div>
+        <div class="kpi-sub">Operating Free Cash Flow</div>
+        <div class="badge badge-g">+8% ↑ 亮點</div>
+      </div>
+    </div>
+    <div class="grid-3">
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--navy2)">€108.8億</div>
+        <div class="kpi-label">集團歸屬淨利</div>
+        <div class="kpi-sub">Net Profit (Group share)</div>
+        <div class="badge badge-y">佔營收 13.5%</div>
+      </div>
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--em)">€68.6億</div>
+        <div class="kpi-label">淨金融負債</div>
+        <div class="kpi-sub">Net Financial Debt</div>
+        <div class="badge badge-g">↓ €23.7億 大幅削減</div>
+      </div>
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--gold)">€13.00</div>
+        <div class="kpi-label">每股全年股息</div>
+        <div class="kpi-sub">DPS（中期€5.5+末期€7.5）</div>
+        <div class="badge badge-y">股票回購 €16億</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 損益表解析 + 匯率衝擊 -->
+  <div class="section">
+    <div class="section-label">P&amp;L Deep Dive · 損益表深度解析</div>
+    <div class="section-title">毛利 66%：奢侈品的護城河數字 × 匯率才是真正的敵人</div>
+    <div class="grid-2">
+      <div class="card">
+        <h3>📊 損益表結構（佔營收 %）</h3>
+        <div style="display:flex;flex-direction:column;gap:4px;margin-top:6px">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:var(--navy);border-radius:6px">
+            <span style="color:var(--gold3);font-size:12.5px;font-weight:700">合併營收</span>
+            <span style="font-family:'DM Mono',monospace;font-size:13px;color:var(--white);font-weight:700">100%　€808億</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:var(--gold2);border-radius:6px">
+            <span style="color:var(--cham);font-size:12.5px">毛利（Gross Profit）</span>
+            <span style="font-family:'DM Mono',monospace;font-size:12.5px;color:var(--cham);font-weight:700">66.2%　€535億</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 10px;background:var(--stone2);border-radius:6px">
+            <span style="color:var(--stone);font-size:12.5px">行銷與銷售費用</span>
+            <span style="font-family:'DM Mono',monospace;font-size:12.5px;color:var(--stone)">-37.0%</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 10px;background:var(--stone2);border-radius:6px">
+            <span style="color:var(--stone);font-size:12.5px">廣告促銷費用（其中）</span>
+            <span style="font-family:'DM Mono',monospace;font-size:12.5px;color:var(--stone)">-11.4%</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 10px;background:var(--stone2);border-radius:6px">
+            <span style="color:var(--stone);font-size:12.5px">一般及行政費用</span>
+            <span style="font-family:'DM Mono',monospace;font-size:12.5px;color:var(--stone)">-7.3%</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:var(--em4);border:1px solid var(--em3);border-radius:6px">
+            <span style="color:var(--em);font-size:12.5px;font-weight:700">經常性營業利潤率</span>
+            <span style="font-family:'DM Mono',monospace;font-size:13px;color:var(--em);font-weight:700">22.0%　€177.6億</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:var(--navy4);border-radius:6px">
+            <span style="color:var(--navy2);font-size:12.5px">淨利率（Group share）</span>
+            <span style="font-family:'DM Mono',monospace;font-size:12.5px;color:var(--navy2);font-weight:700">13.5%　€108.8億</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card card-red" style="margin-bottom:11px">
+          <h3>⚡ 匯率是最大黑手：-€10.65億衝擊</h3>
+          <p>表面上呈報 -5%，實際有機只有 -1%。這 <strong>4% 的差距幾乎全是匯率造成的</strong>，不是業務問題。</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:7px">
+            <div style="background:var(--white);border-radius:6px;padding:7px 9px;font-size:12px;color:var(--red)">
+              <div style="font-weight:700;margin-bottom:2px">主要弱勢貨幣</div>
+              <div>美元、人民幣、韓元、日圓兌歐元均走弱</div>
+            </div>
+            <div style="background:var(--white);border-radius:6px;padding:7px 9px;font-size:12px;color:var(--red)">
+              <div style="font-weight:700;margin-bottom:2px">利潤影響</div>
+              <div>匯率對<strong>經常性營業利潤</strong>負面衝擊 €10.65億，非歐元子公司折算損失</div>
+            </div>
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:7px 9px;margin-top:6px;font-size:12px;color:var(--red)">
+            <strong>Rock 老師提點：</strong>閱讀法說會先分離「有機成長」vs「呈報成長」，匯率噪音會讓你錯殺好公司。
+          </div>
+        </div>
+        <div class="card card-stone">
+          <h3>🌍 營收地理分佈變化（2025 vs 2024）</h3>
+          <div style="margin-top:4px">
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:5px;padding:0 4px">
+              <span>地區</span><span>2025佔比</span><span>YoY 變動</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 8px;background:var(--red2);border-radius:5px;margin-bottom:3px;font-size:12.5px">
+              <span>亞洲（不含日本）</span><span style="font-family:'DM Mono',monospace;font-weight:700">26%</span><span style="color:var(--red)">↓ 2ppt</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 8px;background:var(--red2);border-radius:5px;margin-bottom:3px;font-size:12.5px">
+              <span>日本</span><span style="font-family:'DM Mono',monospace;font-weight:700">8%</span><span style="color:var(--red)">↓ 1ppt</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 8px;background:var(--em4);border-radius:5px;margin-bottom:3px;font-size:12.5px">
+              <span>美國</span><span style="font-family:'DM Mono',monospace;font-weight:700">26%</span><span style="color:var(--em)">↑ 上升</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 8px;background:var(--em4);border-radius:5px;margin-bottom:3px;font-size:12.5px">
+              <span>歐洲（不含法國）</span><span style="font-family:'DM Mono',monospace;font-weight:700">18%</span><span style="color:var(--em)">↑ 上升</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 8px;background:var(--stone2);border-radius:5px;font-size:12.5px">
+              <span>法國 + 其他</span><span style="font-family:'DM Mono',monospace;font-weight:700">22%</span><span style="color:var(--muted)">穩定</span>
+            </div>
+          </div>
+          <div style="background:#fef9ee;border-radius:6px;padding:7px 9px;margin-top:7px;font-size:12px;color:var(--cham)">
+            <strong>洞見：</strong>亞洲萎縮、美國撐場 → 中產消費疲弱 vs 美國高淨值客群韌性強，地理分散化保護了集團。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 五大事業群 -->
+  <div class="section">
+    <div class="section-label">5 Business Groups · 五大事業群比較</div>
+    <div class="section-title">從利潤率看競爭力：時裝皮件 35% 是護城河的最高表達</div>
+    <div class="card" style="margin-bottom:12px">
+      <h3>📈 各事業群有機成長 × 利潤率 × 規模一覽</h3>
+      <div style="margin-top:8px">
+        <div class="seg-bar">
+          <div class="seg-label" style="font-size:11px">時裝皮件 👜</div>
+          <div class="seg-track">
+            <div class="seg-fill" style="width:82%;background:linear-gradient(90deg,var(--navy),var(--navy2))">
+              <span class="seg-pct">35.0%</span>
+            </div>
+          </div>
+          <div class="seg-val">€377億 <span style="color:var(--red)">-5%有機</span></div>
+        </div>
+        <div class="seg-bar">
+          <div class="seg-label" style="font-size:11px">鐘錶珠寶 💎</div>
+          <div class="seg-track">
+            <div class="seg-fill" style="width:37%;background:linear-gradient(90deg,#6b21a8,#9333ea)">
+              <span class="seg-pct">14.4%</span>
+            </div>
+          </div>
+          <div class="seg-val">€105億 <span style="color:var(--em)">+3%有機</span></div>
+        </div>
+        <div class="seg-bar">
+          <div class="seg-label" style="font-size:11px">精品零售 🏪</div>
+          <div class="seg-track">
+            <div class="seg-fill" style="width:27%;background:linear-gradient(90deg,var(--em),var(--em2))">
+              <span class="seg-pct">9.7%</span>
+            </div>
+          </div>
+          <div class="seg-val">€183億 <span style="color:var(--em)">+4%有機</span></div>
+        </div>
+        <div class="seg-bar">
+          <div class="seg-label" style="font-size:11px">香水化妝 💄</div>
+          <div class="seg-track">
+            <div class="seg-fill" style="width:24%;background:linear-gradient(90deg,#be185d,#db2777)">
+              <span class="seg-pct">8.9%</span>
+            </div>
+          </div>
+          <div class="seg-val">€82億 <span style="color:var(--gold)">±0%有機</span></div>
+        </div>
+        <div class="seg-bar">
+          <div class="seg-label" style="font-size:11px">葡萄酒烈酒 🍾</div>
+          <div class="seg-track">
+            <div class="seg-fill" style="width:50%;background:linear-gradient(90deg,var(--gold),var(--cog))">
+              <span class="seg-pct">19.0%</span>
+            </div>
+          </div>
+          <div class="seg-val">€54億 <span style="color:var(--red)">-5%有機</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="grid-3">
+      <div class="card card-dark">
+        <h3>👜 時裝皮件：護城河最高 35%</h3>
+        <ul>
+          <li>LV：村上隆聯名回歸、上海遊輪空間、Formula 1® 合作；推出 <strong style="color:var(--gold3)">La Beauté LV</strong> 化妝品線</li>
+          <li>Dior：Jonathan Anderson 接任創意總監，首兩場大秀獲極高讚譽</li>
+          <li>Loro Piana 表現出色；LVMH 斥資 <strong style="color:var(--gold3)">€10億增購 9% 股權</strong></li>
+          <li>Celine、Fendi、Loewe 均有新任設計師或百年紀念重大事件</li>
+        </ul>
+        <div style="background:rgba(245,158,11,.12);border-radius:6px;padding:7px 9px;margin-top:6px;font-size:12px;color:var(--gold3)">
+          利潤率 35% = 品牌定價力的財務化體現。沒有護城河就沒有這個數字。
+        </div>
+      </div>
+      <div class="card card-em">
+        <h3>🏪 精品零售：利潤率飆升 28%</h3>
+        <ul>
+          <li>Sephora 是首功：歐洲、中東、拉美強勁；北美持續擴張</li>
+          <li>全球開設 ~100 家新店</li>
+          <li>獨家引入 Hailey Bieber 的 Rhode 品牌，創 Sephora 史上最成功新品發布</li>
+          <li>DFS 已恢復收支平衡；但 <strong>大中華 T Galleria 出售</strong>，損失 ~€5億</li>
+          <li>DFS 相關資產 €12億重分類為「持有待售」</li>
+        </ul>
+        <div style="background:var(--white);border-radius:6px;padding:7px 9px;margin-top:6px;font-size:12px;color:var(--em)">
+          洞見：DFS 認損出售是<strong>主動斷尾求生</strong>，聚焦更高效的通路。
+        </div>
+      </div>
+      <div class="card card-cog">
+        <h3>🍾 葡萄酒烈酒：最痛的一塊</h3>
+        <ul>
+          <li>Hennessy 260週年，但美、中市場疲弱 + 中國反傾銷限制</li>
+          <li>Dom Pérignon × 村上隆限量版；Moët × F1 合作夥伴</li>
+          <li>香檳全球市占 22%，相對穩定</li>
+          <li>已啟動<strong>效率提升與降成本</strong>計畫</li>
+        </ul>
+        <div class="card card-gold" style="margin-top:6px;padding:7px 9px">
+          <p style="font-size:12px"><strong>關稅風險：</strong>美國關稅 + 中國對歐洲烈酒的反制措施，2026年仍是最大尾端風險。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 資產負債表 + 現金流 -->
+  <div class="section">
+    <div class="section-label">Balance Sheet + Cash Flow · 資產負債表與現金流</div>
+    <div class="section-title">現金流成長 8%：才是讀穿奢侈品帝國體質的照妖鏡</div>
+    <div class="grid-2">
+      <div>
+        <div class="card" style="margin-bottom:11px">
+          <h3>🏛 資產負債表亮點（2025.12.31）</h3>
+          <div style="display:flex;flex-direction:column;gap:4px;margin-top:5px">
+            <div class="waterfall-item" style="background:var(--navy4)">
+              <span style="color:var(--navy2);font-size:12.5px">總資產</span>
+              <span style="font-family:'DM Mono',monospace;font-weight:700;color:var(--navy2)">€1,420億</span>
+            </div>
+            <div class="waterfall-item" style="background:var(--stone2)">
+              <span style="font-size:12.5px">無形資產（品牌商譽）</span>
+              <span style="font-family:'DM Mono',monospace;color:var(--stone)">€414億　↓ €51億</span>
+            </div>
+            <div style="font-size:11px;color:var(--muted);padding:2px 10px">→ 其中美元貶值匯兌 -€22億，DFS 重分類 -€15億</div>
+            <div class="waterfall-item" style="background:var(--stone2)">
+              <span style="font-size:12.5px">存貨</span>
+              <span style="font-family:'DM Mono',monospace;color:var(--stone)">€227億　↓ €10億（含匯率 -€13億）</span>
+            </div>
+            <div class="waterfall-item" style="background:var(--gold2)">
+              <span style="color:var(--cham);font-size:12.5px;font-weight:700">股東權益（Equity）</span>
+              <span style="font-family:'DM Mono',monospace;font-weight:700;color:var(--cham)">€689億</span>
+            </div>
+            <div class="waterfall-item" style="background:var(--em4);border:1px solid var(--em3)">
+              <span style="color:var(--em);font-size:12.5px;font-weight:700">淨金融負債</span>
+              <span style="font-family:'DM Mono',monospace;font-weight:700;color:var(--em)">€68.6億　↓ €23.7億</span>
+            </div>
+            <div class="waterfall-item" style="background:var(--em4)">
+              <span style="color:var(--em);font-size:12.5px">負債率（Net Debt / Equity）</span>
+              <span style="font-family:'DM Mono',monospace;font-weight:700;color:var(--em)">9.9%（↓ 3.4ppt）</span>
+            </div>
+            <div class="waterfall-item" style="background:var(--gold2)">
+              <span style="color:var(--cham);font-size:12.5px">現金+約當+流動資產</span>
+              <span style="font-family:'DM Mono',monospace;color:var(--cham)">€135億</span>
+            </div>
+            <div class="waterfall-item" style="background:var(--gold2)">
+              <span style="color:var(--cham);font-size:12.5px">未動用信貸額度</span>
+              <span style="font-family:'DM Mono',monospace;color:var(--cham)">€108億</span>
+            </div>
+          </div>
+          <div style="background:var(--em4);border-radius:7px;padding:7px 10px;margin-top:7px;font-size:12px;color:var(--em)">
+            <strong>核心洞見：</strong>負債率從 13.3% → 9.9%，現金 + 信貸額度合計 €243億，LVMH 的財務長期安全邊際無庸置疑。
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card card-dark" style="margin-bottom:11px">
+          <h3>💧 現金流瀑布圖（2025）</h3>
+          <div style="display:flex;flex-direction:column;gap:4px;margin-top:5px">
+            <div class="waterfall-item" style="background:rgba(255,255,255,.1)">
+              <span style="color:rgba(255,255,255,.8)">營業活動淨現金流</span>
+              <span style="font-family:'DM Mono',monospace;font-weight:700;color:var(--gold3)">+€188.7億</span>
+            </div>
+            <div class="waterfall-item" style="background:rgba(255,255,255,.06)">
+              <span style="color:rgba(255,255,255,.7)">資本支出（CAPEX）</span>
+              <span style="font-family:'DM Mono',monospace;color:var(--red3)">-€45.7億（↓ vs 去年 -€55.3億）</span>
+            </div>
+            <div class="waterfall-item" style="background:rgba(5,150,105,.15);border:1px solid rgba(110,231,183,.2)">
+              <span style="color:var(--em3);font-weight:700">營運自由現金流</span>
+              <span style="font-family:'DM Mono',monospace;font-weight:700;color:var(--em3)">+€113.3億 ↑ +8%</span>
+            </div>
+          </div>
+          <div style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:6px">
+            <div style="background:rgba(255,255,255,.07);border-radius:6px;padding:7px 9px;font-size:12px">
+              <div style="color:var(--gold3);font-weight:700;margin-bottom:2px">CAPEX 投向</div>
+              <div style="color:rgba(255,255,255,.7)">LV、Dior、Tiffany 零售翻新；香水化妝生產設備；香檳酒莊</div>
+            </div>
+            <div style="background:rgba(255,255,255,.07);border-radius:6px;padding:7px 9px;font-size:12px">
+              <div style="color:var(--gold3);font-weight:700;margin-bottom:2px">债券管理</div>
+              <div style="color:rgba(255,255,255,.7)">發行 €20億新債（2029/2032到期）<br>償還 €25億到期債</div>
+            </div>
+          </div>
+          <div style="background:rgba(245,158,11,.15);border-radius:7px;padding:8px 10px;margin-top:7px;font-size:12px;color:var(--gold3)">
+            <strong>財報閱讀法：</strong>淨利 €108億，但營業現金流 €188億，相差 €80億 = 折舊攤銷等非現金費用回加。奢侈品的高無形資產規模，讓這個差距永遠存在。
+          </div>
+        </div>
+        <div class="card card-gold">
+          <h3>💰 資本回報策略（2025）</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px">
+            <div style="background:var(--white);border-radius:7px;padding:8px 10px;text-align:center">
+              <div style="font-family:'Playfair Display',serif;font-size:19px;font-weight:900;color:var(--cham)">€13.00</div>
+              <div style="font-size:11px;color:var(--muted)">全年每股股息</div>
+              <div style="font-size:11px;color:var(--cog)">中期 €5.5 + 末期 €7.5</div>
+            </div>
+            <div style="background:var(--white);border-radius:7px;padding:8px 10px;text-align:center">
+              <div style="font-family:'Playfair Display',serif;font-size:19px;font-weight:900;color:var(--cham)">€16億</div>
+              <div style="font-size:11px;color:var(--muted)">淨股票回購</div>
+              <div style="font-size:11px;color:var(--cog)">189.9萬股已回購</div>
+            </div>
+          </div>
+          <p style="font-size:12px;color:var(--cham);margin-top:7px">穩定的股息 + 積極回購 = 管理層對未來現金流信心的雙重訊號。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESG + 2026展望 -->
+  <div class="section">
+    <div class="section-label">ESG + Outlook · 非財務指標與展望</div>
+    <div class="section-title">ESG 不只是形象：CDP AAA 評級背後的財務邏輯 × 2026 年關鍵看點</div>
+    <div class="grid-2">
+      <div class="card card-em">
+        <h3>🌿 LIFE 360 計畫：ESG 是品牌護城河的組成</h3>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
+          <div style="background:var(--white);border-radius:6px;padding:7px 9px;font-size:12.5px">
+            <span style="font-weight:700;color:var(--em)">回收材料佔比 41%</span>（+8% YoY）→ 產品 + 包裝雙線推進
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:7px 9px;font-size:12.5px">
+            <span style="font-weight:700;color:var(--em)">棉花 84% / 羊毛 76% 已認證</span>；葡萄 + 鑽石 ≈ 100% 認證
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:7px 9px;font-size:12.5px">
+            <span style="font-weight:700;color:var(--em)">用水量較 2019 年減 19%</span>（2030 目標 -30%）
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:7px 9px;font-size:12.5px">
+            <span style="font-weight:700;color:var(--em)">CDP 評級 AAA</span>，全球最高等級，連續多年上榜
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:7px 9px;font-size:12.5px">
+            <span style="font-weight:700;color:var(--em)">繳納企業所得稅 €55億</span>（法國最大企業稅貢獻者），法國員工 4萬+，每職位帶動 4.4 個間接就業
+          </div>
+        </div>
+        <div style="background:var(--white);border-radius:7px;padding:7px 9px;margin-top:6px;font-size:12px;color:var(--em)">
+          <strong>Rock 老師視角：</strong>ESG 評級對 LVMH 的意義 = 品牌高溢價的道德基礎。消費者願意為「有良知的奢侈」多付錢。
+        </div>
+      </div>
+      <div class="card card-dark">
+        <h3>🔭 2026 年三大風險 × 三大看點</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:5px">
+          <div>
+            <div style="color:var(--red3);font-size:11px;font-family:'DM Mono',monospace;letter-spacing:.08em;margin-bottom:5px">⚠ 三大風險</div>
+            <div style="background:rgba(239,68,68,.1);border-radius:6px;padding:7px 9px;font-size:12px;color:#fca5a5;margin-bottom:5px">
+              <div style="font-weight:700">關稅戰</div>美國關稅 + 中國對歐洲烈酒反制，干邑白蘭地首當其衝
+            </div>
+            <div style="background:rgba(239,68,68,.1);border-radius:6px;padding:7px 9px;font-size:12px;color:#fca5a5;margin-bottom:5px">
+              <div style="font-weight:700">匯率</div>美元、人民幣若續貶，呈報數字將再受壓
+            </div>
+            <div style="background:rgba(239,68,68,.1);border-radius:6px;padding:7px 9px;font-size:12px;color:#fca5a5">
+              <div style="font-weight:700">地緣政治</div>中國消費信心、中東局勢、法國/歐洲政局不穩
+            </div>
+          </div>
+          <div>
+            <div style="color:var(--em3);font-size:11px;font-family:'DM Mono',monospace;letter-spacing:.08em;margin-bottom:5px">✅ 三大看點</div>
+            <div style="background:rgba(5,150,105,.12);border-radius:6px;padding:7px 9px;font-size:12px;color:var(--em3);margin-bottom:5px">
+              <div style="font-weight:700">Dior 新時代</div>Jonathan Anderson 首季商品正式上市，最受期待的設計師接班
+            </div>
+            <div style="background:rgba(5,150,105,.12);border-radius:6px;padding:7px 9px;font-size:12px;color:var(--em3);margin-bottom:5px">
+              <div style="font-weight:700">LV 130週年</div>Monogram 帆布 130年，預計大型行銷事件推動品牌熱度
+            </div>
+            <div style="background:rgba(5,150,105,.12);border-radius:6px;padding:7px 9px;font-size:12px;color:var(--em3)">
+              <div style="font-weight:700">Sephora 擴張</div>克羅埃西亞新市場開拓 + My Sephora 忠誠計畫全球上線
+            </div>
+          </div>
+        </div>
+        <div style="background:rgba(245,158,11,.15);border-radius:7px;padding:8px 10px;margin-top:7px;font-size:12px;color:var(--gold3)">
+          <strong>總結：</strong>多角化 × 品牌護城河 × 強現金流 → 這三根柱子讓 LVMH 在逆風中仍是奢侈品帝國首選標的。
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">穎祥 · LVMH 2025 法說會財務解析 · 2026.06.22</div>
+</div>
+
+</body>
+</html>
