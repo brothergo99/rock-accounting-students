@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>折舊×資產交換×餘額調節 · 立雅 0624</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --tl:#0f4c75;--tl2:#1b6ca8;--tl3:#63b3ed;--tl4:#ebf8ff;
+  --cy:#065f46;--cy2:#059669;--cy3:#6ee7b7;--cy4:#ecfdf5;
+  --red:#991b1b;--red2:#fff1f2;--red3:#fecdd3;--red4:#ef4444;
+  --or:#c2410c;--or2:#fff7ed;--or3:#fdba74;--or4:#f97316;
+  --gold:#92680a;--gold2:#fffbeb;--gold3:#fde68a;
+  --purple:#6b21a8;--purple2:#faf5ff;--purple3:#d8b4fe;
+  --slate:#334155;--slate2:#e2e8f0;
+  --ink:#0f1e3d;--muted:#64748b;--bg:#f0f7ff;--white:#fff;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+.page-header{background:linear-gradient(155deg,#050d1a,#0a1628,#0f2d52,#0f4c75);padding:42px 48px 36px;position:relative;overflow:hidden;border-bottom:3px solid var(--tl3)}
+.ph-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(99,179,237,.1) 1px,transparent 1px);background-size:20px 20px;pointer-events:none}
+.ph-glow{position:absolute;top:-60px;right:-60px;width:300px;height:300px;background:radial-gradient(circle,rgba(27,108,168,.25),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(99,179,237,.75);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(16px,2.5vw,25px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:5px}
+.ph-title em{color:var(--tl3);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.42);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.meta-chip{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(99,179,237,.15);color:var(--tl3);border:1px solid rgba(99,179,237,.3)}
+.meta-chip-r{background:rgba(239,68,68,.15);color:#fca5a5;border-color:rgba(239,68,68,.3)}
+.meta-chip-g{background:rgba(5,150,105,.15);color:var(--cy3);border-color:rgba(5,150,105,.3)}
+.meta-chip-y{background:rgba(245,158,11,.15);color:var(--gold3);border-color:rgba(245,158,11,.3)}
+
+.container{max-width:1100px;margin:0 auto;padding:30px 26px}
+.section{margin-bottom:26px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--tl);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--tl);margin-bottom:11px;padding-bottom:6px;border-bottom:2px solid var(--tl3)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:720px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+.card{background:var(--white);border:1.5px solid var(--tl3);border-radius:10px;padding:14px}
+.card-dark{background:var(--tl);border:none;border-radius:10px;padding:14px}
+.card-tl{background:var(--tl4);border:1.5px solid var(--tl3);border-radius:10px;padding:14px}
+.card-cy{background:var(--cy4);border:1.5px solid var(--cy3);border-radius:10px;padding:14px}
+.card-red{background:var(--red2);border:1.5px solid var(--red3);border-radius:10px;padding:14px}
+.card-or{background:var(--or2);border:1.5px solid var(--or3);border-radius:10px;padding:14px}
+.card-gold{background:var(--gold2);border:1.5px solid var(--gold3);border-radius:10px;padding:14px}
+.card-purple{background:var(--purple2);border:1.5px solid var(--purple3);border-radius:10px;padding:14px}
+.card-slate{background:var(--slate2);border:1.5px solid #cbd5e1;border-radius:10px;padding:14px}
+
+.card h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--tl)}
+.card-dark h3{color:var(--tl3)}
+.card-tl h3{color:var(--tl)}
+.card-cy h3{color:var(--cy)}
+.card-red h3{color:var(--red)}
+.card-or h3{color:var(--or)}
+.card-gold h3{color:var(--gold)}
+.card-purple h3{color:var(--purple)}
+.card p,.card li{font-size:12.5px;line-height:1.85;color:#374151}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.78);font-size:12.5px;line-height:1.85}
+.card-tl p,.card-tl li{font-size:12.5px;line-height:1.85;color:var(--tl)}
+.card-cy p,.card-cy li{font-size:12.5px;line-height:1.85;color:var(--cy)}
+.card-red p,.card-red li{font-size:12.5px;line-height:1.85;color:var(--red)}
+.card-or p,.card-or li{font-size:12.5px;line-height:1.85;color:var(--or)}
+.card-gold p,.card-gold li{font-size:12.5px;line-height:1.85;color:var(--gold)}
+.card-purple p,.card-purple li{font-size:12.5px;line-height:1.85;color:var(--purple)}
+.card ul{padding-left:14px}.card ul li{margin-bottom:3px}
+
+/* 計算步驟 */
+.calc-row{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-radius:6px;margin-bottom:4px;font-size:12.5px}
+.calc-eq{font-family:'DM Mono',monospace;font-size:11.5px;color:var(--muted)}
+.calc-val{font-family:'Playfair Display',serif;font-size:15px;font-weight:700}
+
+/* 分錄表 */
+.je{width:100%;border-collapse:collapse;font-size:12px;margin-top:6px}
+.je th{background:var(--tl);color:var(--tl3);padding:5px 8px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.05em;text-align:left}
+.je td{padding:5px 8px;border-bottom:1px solid var(--slate2);color:#374151}
+.je tr:nth-child(even) td{background:var(--tl4)}
+.je .dr{font-weight:700;color:var(--tl)}
+.je .cr{color:var(--muted);padding-left:18px}
+.je .amt{font-family:'DM Mono',monospace;text-align:right}
+.je .loss{color:var(--red);font-weight:700}
+
+/* 年數合計分解條 */
+.yr-bar{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.yr-lbl{font-size:11.5px;width:60px;flex-shrink:0;color:var(--slate)}
+.yr-track{flex:1;height:18px;background:var(--slate2);border-radius:4px;overflow:hidden}
+.yr-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-right:6px;justify-content:flex-end}
+.yr-pct{font-family:'DM Mono',monospace;font-size:10px;color:var(--white);font-weight:700}
+.yr-val{font-family:'DM Mono',monospace;font-size:11px;width:55px;text-align:right;flex-shrink:0}
+
+.page-footer{background:var(--tl);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--tl3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-dots"></div>
+  <div class="ph-glow"></div>
+  <div class="ph-eyebrow">固定資產 × 資產交換 × 銀行調節 × 應收帳款融資</div>
+  <div class="ph-title">會計師考試實戰解題：<em>折舊 × 資產交換 × 餘額調節</em> 四大主題全攻略</div>
+  <div class="ph-sub">年數合計法 × 直線法變更 × 商業實質 × 未兌現支票陷阱 × 無追索權融資</div>
+  <div class="ph-meta">
+    <span class="meta-chip">2026.06.24</span>
+    <span class="meta-chip">立雅</span>
+    <span class="meta-chip">折舊第3年變更直線法</span>
+    <span class="meta-chip meta-chip-r">甲公司損失 11萬</span>
+    <span class="meta-chip meta-chip-y">未兌現支票陷阱</span>
+    <span class="meta-chip meta-chip-g">Rock 老師</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 折舊計算 -->
+  <div class="section">
+    <div class="section-label">Depreciation · 折舊計算</div>
+    <div class="section-title">年數合計法 + 中途改直線法：「將錯就錯往下算」的實務哲學</div>
+    <div class="grid-2">
+      <div>
+        <div class="card card-tl" style="margin-bottom:11px">
+          <h3>📋 題目設定</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:4px">
+            <div style="background:var(--white);border-radius:6px;padding:7px 10px;font-size:12.5px;color:var(--tl)">
+              <div style="font-weight:700;margin-bottom:2px">取得資訊</div>
+              7月1日購入<br>成本 <strong>30萬</strong><br>耐用年限 <strong>5年</strong>
+            </div>
+            <div style="background:var(--white);border-radius:6px;padding:7px 10px;font-size:12.5px;color:var(--red)">
+              <div style="font-weight:700;margin-bottom:2px">⚠ 殘值設定</div>
+              殘值 <strong>15萬（50%）</strong><br>真實世界極度不合理！<br>出題老師的怪設計
+            </div>
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:7px 10px;margin-top:6px;font-size:12.5px;color:var(--tl)">
+            <strong>可折舊金額</strong> = 30萬 - 15萬 = <strong>15萬</strong><br>
+            年數合計 = 5+4+3+2+1 = <strong>15</strong><br>
+            每年折舊率：Y1=5/15, Y2=4/15, Y3=3/15, Y4=2/15, Y5=1/15
+          </div>
+        </div>
+        <div class="card card-dark">
+          <h3>📐 年數合計法折舊比例圖</h3>
+          <div style="margin-top:6px">
+            <div class="yr-bar">
+              <div class="yr-lbl">第1年</div>
+              <div class="yr-track"><div class="yr-fill" style="width:100%;background:linear-gradient(90deg,var(--tl2),var(--tl3))"><span class="yr-pct">5/15</span></div></div>
+              <div class="yr-val" style="color:var(--tl3)">最多 ↑</div>
+            </div>
+            <div class="yr-bar">
+              <div class="yr-lbl">第2年</div>
+              <div class="yr-track"><div class="yr-fill" style="width:80%;background:linear-gradient(90deg,var(--tl2),var(--tl3))"><span class="yr-pct">4/15</span></div></div>
+              <div class="yr-val" style="color:var(--tl3)">遞減</div>
+            </div>
+            <div class="yr-bar">
+              <div class="yr-lbl">第3年 ⚡</div>
+              <div class="yr-track"><div class="yr-fill" style="width:60%;background:linear-gradient(90deg,var(--cy2),var(--cy3))"><span class="yr-pct">改直線</span></div></div>
+              <div class="yr-val" style="color:var(--cy3)">方法變</div>
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,.08);border-radius:7px;padding:8px 10px;margin-top:7px;font-size:12px;color:rgba(255,255,255,.75)">
+            <strong style="color:var(--tl3)">Rock 老師哲學：</strong>折舊本質是「估計」，非精確科學。方法變更時，不追溯調整前期，直接用剩餘帳面價值往下重新估計即可——「將錯就錯」。
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🧮 逐年折舊計算過程</h3>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
+          <!-- 第一年 -->
+          <div style="background:var(--tl4);border:1px solid var(--tl3);border-radius:8px;padding:9px 11px">
+            <div style="font-family:'Playfair Display',serif;font-weight:700;color:var(--tl);font-size:13px;margin-bottom:4px">第一年（半個年度，7/1~12/31）</div>
+            <div class="calc-row" style="background:var(--white)">
+              <span>15萬 × 5/15 × <strong>6/12</strong></span>
+              <span class="calc-val" style="color:var(--tl)">= 2.5萬</span>
+            </div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px">※ 7月1日購入，當年只算半年</div>
+          </div>
+          <!-- 第二年 -->
+          <div style="background:var(--tl4);border:1px solid var(--tl3);border-radius:8px;padding:9px 11px">
+            <div style="font-family:'Playfair Display',serif;font-weight:700;color:var(--tl);font-size:13px;margin-bottom:4px">第二年（跨年度計算）</div>
+            <div class="calc-row" style="background:var(--white);margin-bottom:3px">
+              <span>15萬 × 5/15 × 6/12（第1年後半）</span>
+              <span class="calc-val" style="color:var(--tl)">2.5萬</span>
+            </div>
+            <div class="calc-row" style="background:var(--white)">
+              <span>15萬 × 4/15 × 6/12（第2年前半）</span>
+              <span class="calc-val" style="color:var(--tl)">2萬</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:5px 10px;background:var(--tl);border-radius:5px;margin-top:3px">
+              <span style="color:var(--tl3);font-size:12.5px;font-weight:700">第二年合計</span>
+              <span style="font-family:'Playfair Display',serif;font-size:15px;font-weight:900;color:#fff">4.5萬</span>
+            </div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px">累計折舊 = 2.5 + 4.5 = <strong>7萬</strong></div>
+          </div>
+          <!-- 第三年 -->
+          <div style="background:var(--cy4);border:1px solid var(--cy3);border-radius:8px;padding:9px 11px">
+            <div style="font-family:'Playfair Display',serif;font-weight:700;color:var(--cy);font-size:13px;margin-bottom:4px">第三年起 → 改用直線法</div>
+            <div style="font-size:12px;color:var(--cy);margin-bottom:5px">剩餘帳面價值 = 30萬 - 7萬 = <strong>23萬</strong><br>剩餘年限縮短為 <strong>2年</strong></div>
+            <div class="calc-row" style="background:var(--white)">
+              <span>（23萬 - 15萬殘值）÷ 2年</span>
+              <span class="calc-val" style="color:var(--cy)">= 4萬/年</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 資產交換 -->
+  <div class="section">
+    <div class="section-label">Asset Exchange · 資產交換</div>
+    <div class="section-title">獅子林換手機的商業邏輯：具商業實質 = 用市價入帳、認列損益</div>
+    <div class="grid-2">
+      <div>
+        <div class="card card-or" style="margin-bottom:11px">
+          <h3>💡 商業實質觀念：為何幾乎都「具實質」？</h3>
+          <p>「具商業實質」= 換入的資產未來會被實際使用 → 應用<strong>公允價值（市價）</strong>入帳，並認列交換損益。</p>
+          <div style="background:var(--white);border-radius:7px;padding:8px 10px;margin-top:7px;font-size:12.5px;color:var(--or)">
+            <strong>Rock 老師笑點：</strong>如果資產不具商業實質，根本沒有交換的必要！真實人生中幾乎沒見過不具實質的交換——這是出題老師的考試設計，現實不存在。
+          </div>
+          <div style="background:var(--white);border-radius:7px;padding:8px 10px;margin-top:6px;font-size:12.5px;color:var(--or)">
+            <strong>獅子林比喻：</strong>Rock 老師年輕時在西門町獅子林，拿 Ericsson T18/T28 舊手機「貼錢」換更好的二手機——這就是資產交換的日常版本：評估雙方資產價值，誰吃虧誰貼錢。
+          </div>
+        </div>
+        <div class="card card-dark">
+          <h3>📊 甲、乙雙方資產狀況對照</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:5px">
+            <div style="background:rgba(255,255,255,.08);border-radius:7px;padding:9px 10px">
+              <div style="color:var(--tl3);font-weight:700;margin-bottom:5px;font-size:12.5px">🔵 甲公司（換出方）</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.75);line-height:1.8">
+                舊設備成本 30萬<br>
+                累計折舊 11萬<br>
+                <strong style="color:#fff">帳面價值 19萬</strong><br>
+                支付現金 3萬<br>
+                換入設備公允值 11萬<br>
+                <span style="color:var(--tl3)">∴ 舊機市價 = 11-3 = <strong>8萬</strong></span>
+              </div>
+            </div>
+            <div style="background:rgba(255,255,255,.08);border-radius:7px;padding:9px 10px">
+              <div style="color:var(--cy3);font-weight:700;margin-bottom:5px;font-size:12.5px">🟢 乙公司（換入方）</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.75);line-height:1.8">
+                舊設備成本 20萬<br>
+                累計折舊 5萬<br>
+                <strong style="color:#fff">帳面價值 15萬</strong><br>
+                收取現金 3萬<br>
+                自身設備公允值 11萬<br>
+                <span style="color:var(--cy3)">∴ 損失 = 15-11 = <strong>4萬</strong></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card card-red" style="margin-bottom:11px">
+          <h3>🔴 甲公司分錄：損失高達 11 萬！</h3>
+          <div style="background:var(--white);border-radius:6px;padding:7px 10px;margin-bottom:7px;font-size:12.5px;color:var(--red)">
+            甲的舊設備帳面 19萬，但實際市價只有 8萬（11萬 - 支付3萬現金）<br>
+            <strong>處分損失 = 19萬 - 8萬 = 11萬</strong>
+          </div>
+          <table class="je">
+            <tr><th>科目</th><th>借</th><th>貸</th></tr>
+            <tr><td class="dr">新設備（公允價值入帳）</td><td class="amt dr">110,000</td><td class="amt">—</td></tr>
+            <tr><td class="dr loss">處分損失</td><td class="amt loss">110,000</td><td class="amt">—</td></tr>
+            <tr><td class="dr">累計折舊</td><td class="amt dr">110,000</td><td class="amt">—</td></tr>
+            <tr><td class="cr">　舊設備（成本沖銷）</td><td class="amt">—</td><td class="amt">300,000</td></tr>
+            <tr><td class="cr">　現金（支付）</td><td class="amt">—</td><td class="amt">30,000</td></tr>
+          </table>
+          <div style="background:var(--white);border-radius:6px;padding:6px 10px;margin-top:6px;font-size:11.5px;color:var(--red)">
+            借方合計 = 貸方合計 = 33萬 ✓（借貸平衡）
+          </div>
+        </div>
+        <div class="card card-cy">
+          <h3>🟢 乙公司分錄：最容易出錯！</h3>
+          <div style="background:var(--white);border-radius:6px;padding:7px 10px;margin-bottom:7px;font-size:12.5px;color:var(--cy)">
+            乙換入的是甲的舊設備，市價 = 11萬 - 3萬（收到現金）= <strong>8萬</strong><br>
+            <strong>⚠ 寫分錄時最容易把 8萬 vs 11萬 搞混！</strong>
+          </div>
+          <table class="je">
+            <tr><th>科目</th><th>借</th><th>貸</th></tr>
+            <tr><td class="dr">現金（收到）</td><td class="amt dr">30,000</td><td class="amt">—</td></tr>
+            <tr><td class="dr">新設備（8萬入帳）</td><td class="amt dr">80,000</td><td class="amt">—</td></tr>
+            <tr><td class="dr loss">處分損失</td><td class="amt loss">40,000</td><td class="amt">—</td></tr>
+            <tr><td class="dr">累計折舊</td><td class="amt dr">50,000</td><td class="amt">—</td></tr>
+            <tr><td class="cr">　舊設備（成本沖銷）</td><td class="amt">—</td><td class="amt">200,000</td></tr>
+          </table>
+          <div style="background:var(--white);border-radius:6px;padding:6px 10px;margin-top:6px;font-size:11.5px;color:var(--cy)">
+            借方 = 3+8+4+5 = 20萬 = 貸方 20萬 ✓
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 餘額調節表 + 品質特性 + 應收融資 -->
+  <div class="section">
+    <div class="section-label">Bank Rec + Quality + AR · 三大考點速攻</div>
+    <div class="section-title">未兌現支票陷阱 × 財報品質特性 × 無追索權應收融資</div>
+    <div class="grid-3">
+      <div class="card card-gold">
+        <h3>🏦 銀行餘額調節表：文字陷阱題</h3>
+        <div style="font-size:12px;color:var(--gold);margin-bottom:8px">題目：公司開出120萬支票；銀行已支付84萬（含11月未兌現支票9.6萬）</div>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <div style="background:var(--white);border-radius:6px;padding:6px 10px;font-size:12.5px;color:var(--gold)">
+            <div style="font-weight:700;margin-bottom:2px">Step 1：剔除上月遺留</div>
+            84萬 - 9.6萬 = <strong>74.4萬</strong>（12月真正被兌現）
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:6px 10px;font-size:12.5px;color:var(--gold)">
+            <div style="font-weight:700;margin-bottom:2px">Step 2：算出本月未兌現</div>
+            120萬 - 74.4萬 = <strong>45.6萬</strong>（12月未兌現支票）
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:6px 10px;font-size:12.5px;color:var(--gold)">
+            <div style="font-weight:700;margin-bottom:2px">Step 3：調整銀行餘額</div>
+            300萬 - 45.6萬 = <strong>254.4萬</strong>（調整後正確餘額）
+          </div>
+        </div>
+        <div style="background:var(--white);border-radius:7px;padding:7px 10px;margin-top:7px;font-size:12px;color:var(--gold)">
+          <strong>Rock 老師評語：</strong>文字遊戲成分居多，難度約高二會計檢定水準。核心陷阱：那 9.6 萬是「上月的舊帳」，不能當成 12 月的未兌現。
+        </div>
+      </div>
+
+      <div class="card card-purple">
+        <h3>📚 財報品質特性快速整理</h3>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
+          <div style="background:var(--white);border-radius:6px;padding:8px 10px;font-size:12.5px;color:var(--purple)">
+            <div style="font-weight:700;margin-bottom:3px">兩大基本品質特性</div>
+            <div>① <strong>攸關性</strong>（Relevance）<br>② <strong>忠實表達</strong>（Faithful representation）</div>
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:8px 10px;font-size:12.5px;color:var(--purple)">
+            <div style="font-weight:700;margin-bottom:3px">忠實表達的三要素</div>
+            中立性 × 免於錯誤 × 完整性
+          </div>
+          <div style="background:var(--red2);border:1px solid var(--red3);border-radius:6px;padding:8px 10px;font-size:12.5px;color:var(--red)">
+            <div style="font-weight:700;margin-bottom:2px">❌ 常見陷阱</div>
+            「審慎性」≠ 正確的品質特性用語！考試不可寫此答案。
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:8px 10px;font-size:12.5px;color:var(--purple)">
+            <div style="font-weight:700;margin-bottom:3px">長期 vs 短期償債指標</div>
+            <div><span style="color:var(--red)">❌ 流動比率</span> = 短期指標，無法衡量長期償債</div>
+            <div><span style="color:var(--cy)">✅ 負債比率</span>、<span style="color:var(--cy)">利息保障倍數</span> = 長期指標</div>
+          </div>
+        </div>
+        <div style="background:var(--white);border-radius:7px;padding:7px 10px;margin-top:6px;font-size:12px;color:var(--purple)">
+          <strong>實務洞見：</strong>老闆不在意償債比率，真正在意的是銀行——而且只要獲利好或股價漂亮，銀行甚至主動降低標準。
+        </div>
+      </div>
+
+      <div class="card card-dark">
+        <h3>💳 無追索權應收帳款融資</h3>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:2px">
+          <div style="background:rgba(255,255,255,.08);border-radius:6px;padding:8px 10px;font-size:12.5px">
+            <div style="color:var(--tl3);font-weight:700;margin-bottom:2px">「無追索權」的含意</div>
+            <div style="color:rgba(255,255,255,.75)">帳款賣斷給銀行，風險<strong style="color:#fff">完全轉移</strong>。公司帳上應收帳款必須<strong style="color:#fff">全數除列（沖銷）</strong>。</div>
+          </div>
+          <div style="background:rgba(255,255,255,.08);border-radius:6px;padding:8px 10px;font-size:12.5px">
+            <div style="color:var(--tl3);font-weight:700;margin-bottom:2px">vs 有追索權</div>
+            <div style="color:rgba(255,255,255,.75)">屬於中級會計學，應收帳款<strong style="color:#fff">不能除列</strong>，處理非常複雜，為借款而非賣斷。</div>
+          </div>
+          <div style="background:rgba(5,150,105,.12);border-radius:6px;padding:8px 10px;font-size:12.5px">
+            <div style="color:var(--cy3);font-weight:700;margin-bottom:2px">🔍 聯發科實務洞察</div>
+            <div style="color:rgba(255,255,255,.75)">不缺錢的大公司財報也有應收融資——目的不是籌資，是為了與銀行<strong style="color:#fff">「維持關係、做業績」</strong>的短借手段。</div>
+          </div>
+          <div style="background:rgba(245,158,11,.12);border-radius:6px;padding:8px 10px;font-size:12.5px">
+            <div style="color:var(--gold3);font-weight:700;margin-bottom:2px">⏳ 資產老化思維</div>
+            <div style="color:rgba(255,255,255,.75)">資產是好的，但<strong style="color:#fff">「放久了就變不好」</strong>。應收帳款放久 = 收不回來；存貨放久 = 失去價值。財報閱讀的核心思辨。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">立雅 · 折舊×資產交換×銀行調節×應收融資 · 2026.06.24</div>
+</div>
+
+</body>
+</html>
