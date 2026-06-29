@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>浪凡114年度法說會財務深度解析 · 穎祥 0629-2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ind:#312e81;--ind2:#eef2ff;--ind3:#a5b4fc;--ind4:#4f46e5;
+  --amb:#92400e;--amb2:#fffbeb;--amb3:#fde68a;--amb4:#f59e0b;
+  --em:#065f46;--em2:#ecfdf5;--em3:#6ee7b7;--em4:#d1fae5;
+  --red:#991b1b;--red2:#fff1f2;--red3:#fecdd3;
+  --cy:#0e7490;--cy2:#ecfeff;--cy3:#67e8f9;
+  --pk:#be185d;--pk2:#fdf2f8;--pk3:#f9a8d4;
+  --slate:#334155;--slate2:#f1f5f9;--slate3:#e2e8f0;
+  --navy:#0f1e3d;--white:#fff;--ink:#1a1a2e;--muted:#64748b;--bg:#f8f7ff;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+/* Header */
+.page-header{background:linear-gradient(150deg,#0a0a1f,#0f1040,#1a1060,#0f0a30,#050515);padding:44px 50px 36px;position:relative;overflow:hidden;border-bottom:3px solid var(--ind3)}
+.ph-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(165,180,252,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(165,180,252,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
+.ph-glow1{position:absolute;top:-80px;right:-60px;width:320px;height:320px;background:radial-gradient(circle,rgba(79,70,229,.2),transparent 65%);pointer-events:none}
+.ph-glow2{position:absolute;bottom:-60px;left:-40px;width:260px;height:260px;background:radial-gradient(circle,rgba(245,158,11,.12),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(165,180,252,.7);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(16px,2.4vw,24px);font-weight:900;color:#fff;line-height:1.25;margin-bottom:4px}
+.ph-title em{color:var(--amb3);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.4);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mc{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(165,180,252,.13);color:var(--ind3);border:1px solid rgba(165,180,252,.28)}
+.mc-y{background:rgba(245,158,11,.15);color:var(--amb3);border-color:rgba(245,158,11,.3)}
+.mc-g{background:rgba(5,150,105,.15);color:var(--em3);border-color:rgba(5,150,105,.3)}
+.mc-r{background:rgba(239,68,68,.15);color:#fca5a5;border-color:rgba(239,68,68,.3)}
+
+.container{max-width:1100px;margin:0 auto;padding:30px 26px}
+.section{margin-bottom:26px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--ind4);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--ind3)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.grid-5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-4,.grid-5{grid-template-columns:1fr}}
+
+.card{background:var(--white);border:1.5px solid var(--ind3);border-radius:10px;padding:14px}
+.card-ind{background:var(--ind2);border:1.5px solid var(--ind3);border-radius:10px;padding:14px}
+.card-amb{background:var(--amb2);border:1.5px solid var(--amb3);border-radius:10px;padding:14px}
+.card-em{background:var(--em4);border:1.5px solid var(--em3);border-radius:10px;padding:14px}
+.card-dark{background:var(--navy);border:none;border-radius:10px;padding:14px}
+.card-slate{background:var(--slate2);border:1.5px solid var(--slate3);border-radius:10px;padding:14px}
+.card-cy{background:var(--cy2);border:1.5px solid var(--cy3);border-radius:10px;padding:14px}
+.card-pk{background:var(--pk2);border:1.5px solid var(--pk3);border-radius:10px;padding:14px}
+.card h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--navy)}
+.card-ind h3{color:var(--ind4)}
+.card-amb h3{color:var(--amb)}
+.card-em h3{color:var(--em)}
+.card-dark h3{color:var(--amb3)}
+.card-cy h3{color:var(--cy)}
+.card-pk h3{color:var(--pk)}
+.card p,.card li{font-size:12.5px;line-height:1.85;color:#374151}
+.card-ind p,.card-ind li{color:var(--ind4);font-size:12.5px;line-height:1.85}
+.card-amb p,.card-amb li{color:var(--amb);font-size:12.5px;line-height:1.85}
+.card-em p,.card-em li{color:var(--em);font-size:12.5px;line-height:1.85}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.78);font-size:12.5px;line-height:1.85}
+.card-cy p,.card-cy li{color:var(--cy);font-size:12.5px;line-height:1.85}
+.card-pk p,.card-pk li{color:var(--pk);font-size:12.5px;line-height:1.85}
+.card ul{padding-left:14px}.card ul li{margin-bottom:3px}
+
+/* KPI */
+.kpi{text-align:center;padding:10px 7px}
+.kpi-val{font-family:'Playfair Display',serif;font-size:clamp(18px,2.2vw,26px);font-weight:900;line-height:1.1}
+.kpi-lbl{font-size:11px;color:var(--muted);margin-top:3px}
+.kpi-sub{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px}
+.badge{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:3px;margin-top:4px}
+.bg{background:var(--em4);color:var(--em);border:1px solid var(--em3)}
+.br{background:var(--red2);color:var(--red);border:1px solid var(--red3)}
+.by{background:var(--amb2);color:var(--amb);border:1px solid var(--amb3)}
+.bp{background:var(--pk2);color:var(--pk);border:1px solid var(--pk3)}
+.bi{background:var(--ind2);color:var(--ind4);border:1px solid var(--ind3)}
+
+/* 進度條 */
+.bar-row{margin-bottom:7px}
+.bar-label{display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:3px}
+.bar-track{background:#e2e8f0;border-radius:4px;height:8px;overflow:hidden}
+.bar-fill{border-radius:4px;height:100%}
+
+/* 現金流量瀑布 */
+.cf-row{display:flex;align-items:center;justify-content:space-between;padding:7px 11px;border-radius:7px;margin-bottom:5px;font-size:12.5px}
+.cf-label{font-size:12px;color:#374151}
+.cf-val{font-family:'DM Mono',monospace;font-size:12px;font-weight:500}
+
+/* 費用明細 */
+.exp-row{display:flex;align-items:center;gap:10px;padding:6px 10px;border-radius:6px;margin-bottom:4px;background:var(--slate2)}
+
+.page-footer{background:var(--navy);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--amb3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-grid"></div>
+  <div class="ph-glow1"></div>
+  <div class="ph-glow2"></div>
+  <div class="ph-eyebrow">浪凡網路科技 114年度法說會 · 財務長深度報告</div>
+  <div class="ph-title"><em>浪凡114年度：EPS 4.02元，營業利益成長760%</em><br>從直播平台到虛實整合娛樂集團的蛻變</div>
+  <div class="ph-sub">合併營收 32.18億（+13%）× 電商成長 23倍 × 現金突破 10億 × 資本支出近 7億</div>
+  <div class="ph-meta">
+    <span class="mc">2026.06.29</span>
+    <span class="mc">穎祥</span>
+    <span class="mc mc-y">EPS 4.02元 × 去年 1.04元</span>
+    <span class="mc mc-g">稅後淨利 +295%</span>
+    <span class="mc mc-g">毛利率 29.47% ↑5.8pts</span>
+    <span class="mc">Rock 老師</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: 損益亮點 KPI -->
+  <div class="section">
+    <div class="section-label">Part 1 · Income Statement · 損益表核心數字</div>
+    <div class="section-title">營運槓桿發威：毛利率暴升5.8pts，費用不增反降，獲利呈現倍數增長</div>
+    <div class="grid-5" style="margin-bottom:11px">
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--ind4)">32.18億</div>
+        <div class="kpi-lbl">合併營收</div>
+        <div class="kpi-sub">去年 28.48億</div>
+        <div class="badge bg">+13% YoY</div>
+      </div>
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--amb)">9.48億</div>
+        <div class="kpi-lbl">營業毛利</div>
+        <div class="kpi-sub">毛利率 29.47%</div>
+        <div class="badge by">去年 23.69%</div>
+      </div>
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--pk)">3.54億</div>
+        <div class="kpi-lbl">營業淨利</div>
+        <div class="kpi-sub">去年僅 4,110萬</div>
+        <div class="badge bp">+760% 🚀</div>
+      </div>
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--em)">3.16億</div>
+        <div class="kpi-lbl">稅後淨利</div>
+        <div class="kpi-sub">去年 7,998萬</div>
+        <div class="badge bg">+295%</div>
+      </div>
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--ind4)">4.02元</div>
+        <div class="kpi-lbl">基本 EPS</div>
+        <div class="kpi-sub">稀釋 3.59元</div>
+        <div class="badge bi">去年 1.04元</div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="card card-ind">
+        <h3>🧮 費用結構：管控精準，費用率顯著改善</h3>
+        <div class="bar-row">
+          <div class="bar-label"><span>推銷費用</span><span style="font-family:'DM Mono',monospace">1.66億 → <strong style="color:var(--em)">↓20%</strong></span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:77%;background:#4f46e5"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>管理費用</span><span style="font-family:'DM Mono',monospace">2.99億 → <strong style="color:var(--amb)">持平</strong></span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:100%;background:#f59e0b"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>研發費用</span><span style="font-family:'DM Mono',monospace">1.33億 → <strong style="color:var(--em)">穩定</strong></span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:44%;background:#10b981"></div></div>
+        </div>
+        <div style="background:var(--white);border-radius:7px;padding:9px 11px;margin-top:8px;font-size:12.5px;color:var(--ind4)">
+          總費用 <strong>5.94億</strong>，較去年 6.34億 <strong>下降 6.2%</strong><br>
+          推銷費用↓20% = 精準行銷取代廣撒補貼，品牌自然流量崛起
+        </div>
+      </div>
+      <div>
+        <div class="card card-amb" style="margin-bottom:11px">
+          <h3>⚡ 營運槓桿（Operating Leverage）教科書案例</h3>
+          <div style="display:flex;gap:8px;margin-bottom:8px">
+            <div style="flex:1;background:var(--white);border-radius:7px;padding:9px;text-align:center">
+              <div style="font-size:10px;color:var(--muted);margin-bottom:3px">113年度</div>
+              <div style="font-family:'DM Mono',monospace;font-size:13px;color:var(--red)">1.4%</div>
+              <div style="font-size:10px;color:var(--muted)">營業利益率</div>
+            </div>
+            <div style="display:flex;align-items:center;font-size:18px;color:var(--amb4)">→</div>
+            <div style="flex:1;background:var(--white);border-radius:7px;padding:9px;text-align:center">
+              <div style="font-size:10px;color:var(--muted);margin-bottom:3px">114年度</div>
+              <div style="font-family:'DM Mono',monospace;font-size:13px;color:var(--em)">11.0%</div>
+              <div style="font-size:10px;color:var(--muted)">營業利益率</div>
+            </div>
+          </div>
+          <div style="font-size:12.5px;color:var(--amb)">當固定成本已被吸收，每增加一元營收帶來的邊際利潤遠高於平均利潤——這就是規模化後的威力。毛利率+5.8pts × 費用率下降 = 獲利爆炸。</div>
+        </div>
+        <div class="card card-slate">
+          <h3>📊 稅務觀察：所得稅費用結構</h3>
+          <p>114年度所得稅費用 <strong>4,556萬元</strong>；113年度因遞延所得稅資產認列，呈現所得稅<strong style="color:var(--em)">利益</strong>（負 1,411萬）。本期回歸正常稅費，有效稅率約 12.6%，顯示子公司結構、研發費用加成扣抵等節稅規劃仍發揮作用。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: 營收結構 -->
+  <div class="section">
+    <div class="section-label">Part 2 · Revenue Mix · 營收結構解析</div>
+    <div class="section-title">金牛直播穩健發展，電商「第二引擎」23倍爆發，地區版圖台灣優先</div>
+    <div class="grid-3">
+      <div class="card">
+        <h3>🎯 業務線拆解：三引擎各司其職</h3>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px">
+          <div style="background:var(--ind2);border-radius:7px;padding:9px 11px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <span style="font-size:12.5px;color:var(--ind4);font-weight:700">直播平台（金牛）</span>
+              <span class="badge bi">89.7%營收</span>
+            </div>
+            <div style="font-family:'DM Mono',monospace;font-size:13px;color:var(--ind4);margin-top:3px">28.86億</div>
+            <div style="font-size:11.5px;color:var(--muted)">去年 28.37億，穩健 +1.7%，穩定現金流基石</div>
+          </div>
+          <div style="background:var(--em4);border-radius:7px;padding:9px 11px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <span style="font-size:12.5px;color:var(--em);font-weight:700">商品銷售（電商超引擎）</span>
+              <span class="badge bg">+2,279%</span>
+            </div>
+            <div style="font-family:'DM Mono',monospace;font-size:13px;color:var(--em);margin-top:3px">2.49億</div>
+            <div style="font-size:11.5px;color:var(--muted)">去年僅 1,045萬→子公司向浩發揮關鍵作用</div>
+          </div>
+          <div style="background:var(--amb2);border-radius:7px;padding:9px 11px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <span style="font-size:12.5px;color:var(--amb);font-weight:700">其他收入（新版圖）</span>
+              <span class="badge by">全新</span>
+            </div>
+            <div style="font-family:'DM Mono',monospace;font-size:13px;color:var(--amb);margin-top:3px">8,283萬</div>
+            <div style="font-size:11.5px;color:var(--muted)">去年為 0，轉投資初步成果</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-dark">
+        <h3>🌏 地區別營收：台灣為大本營</h3>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
+          <div style="background:rgba(255,255,255,.1);border-radius:6px;padding:8px 10px">
+            <div style="display:flex;justify-content:space-between">
+              <span style="color:rgba(255,255,255,.9);font-size:12.5px">🇹🇼 台灣</span>
+              <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--amb3)">29.28億</span>
+            </div>
+            <div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:2px">去年 24.55億，+19% ↑</div>
+          </div>
+          <div style="background:rgba(255,255,255,.07);border-radius:6px;padding:8px 10px">
+            <div style="display:flex;justify-content:space-between">
+              <span style="color:rgba(255,255,255,.9);font-size:12.5px">🇨🇳 中國</span>
+              <span style="font-family:'DM Mono',monospace;font-size:12px;color:#fca5a5">2.29億</span>
+            </div>
+            <div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:2px">去年 3.92億，收縮 ↓</div>
+          </div>
+          <div style="background:rgba(255,255,255,.07);border-radius:6px;padding:8px 10px">
+            <div style="display:flex;justify-content:space-between">
+              <span style="color:rgba(255,255,255,.9);font-size:12.5px">🌐 海外其他</span>
+              <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--em3)">5,950萬</span>
+            </div>
+            <div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:2px">去年為 0，全新版圖</div>
+          </div>
+        </div>
+        <div style="background:rgba(245,158,11,.15);border-radius:6px;padding:8px 10px;margin-top:6px;font-size:12px;color:rgba(255,255,255,.8)">
+          <strong style="color:var(--amb3)">洞見：</strong>台灣市場集中度高（91%），避免外幣匯損風險；中國市場主動收縮，聚焦可控市場。
+        </div>
+      </div>
+
+      <div class="card card-pk">
+        <h3>📦 電商成長 23 倍背後的邏輯</h3>
+        <div style="background:var(--white);border-radius:7px;padding:9px 11px;margin-bottom:8px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);text-decoration:line-through">1,045萬</span>
+            <span style="font-size:16px;color:var(--pk)">→</span>
+            <span style="font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--pk)">2.49億</span>
+          </div>
+          <div style="font-size:10px;color:var(--muted);margin-top:2px">+2,279% (23倍)</div>
+        </div>
+        <ul>
+          <li>子公司<strong>向浩股份有限公司</strong>（100%持股）為主要推手</li>
+          <li>存貨由 146萬 → <strong>9,735萬</strong>，為供應鏈備貨支撐</li>
+          <li>「直播帶貨」模式：粉絲在平台上看直播，同時導購商品消費</li>
+          <li>KOL聯名、限定周邊、直播主代言，強化情緒消費驅動</li>
+          <li>將線上粉絲的注意力，轉化為<strong>實際購買力</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: 資產負債 + 現金流 -->
+  <div class="section">
+    <div class="section-label">Part 3 &amp; 4 · Balance Sheet + Cash Flow · 資產負債與現金流量</div>
+    <div class="section-title">總資產擴張40%，現金超10億，資本支出近7億布局未來，籌資結構健康</div>
+    <div class="grid-2">
+      <div>
+        <div class="card" style="margin-bottom:11px">
+          <h3>📊 資產負債表：擴張期的結構性變化</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+            <div style="background:var(--ind2);border-radius:7px;padding:10px">
+              <div style="font-size:10px;color:var(--ind4);font-family:'DM Mono',monospace;margin-bottom:4px">流動資產</div>
+              <div style="display:flex;flex-direction:column;gap:4px;font-size:12px;color:#374151">
+                <div style="display:flex;justify-content:space-between"><span>現金及約當</span><span style="font-family:'DM Mono',monospace;color:var(--em)"><strong>10.04億</strong></span></div>
+                <div style="display:flex;justify-content:space-between"><span>應收帳款淨額</span><span style="font-family:'DM Mono',monospace">1.54億</span></div>
+                <div style="display:flex;justify-content:space-between"><span>存貨</span><span style="font-family:'DM Mono',monospace;color:var(--pk)">9,735萬↑</span></div>
+                <div style="display:flex;justify-content:space-between;border-top:1px solid var(--ind3);padding-top:4px"><span><strong>流動資產合計</strong></span><span style="font-family:'DM Mono',monospace"><strong>14.40億</strong></span></div>
+              </div>
+            </div>
+            <div style="background:var(--amb2);border-radius:7px;padding:10px">
+              <div style="font-size:10px;color:var(--amb);font-family:'DM Mono',monospace;margin-bottom:4px">非流動資產</div>
+              <div style="display:flex;flex-direction:column;gap:4px;font-size:12px;color:#374151">
+                <div style="display:flex;justify-content:space-between"><span>PP&amp;E</span><span style="font-family:'DM Mono',monospace;color:var(--amb)"><strong>14.27億↑</strong></span></div>
+                <div style="display:flex;justify-content:space-between"><span>無形資產</span><span style="font-family:'DM Mono',monospace">1.49億</span></div>
+                <div style="display:flex;justify-content:space-between"><span>金融資產投資</span><span style="font-family:'DM Mono',monospace">1.40億</span></div>
+                <div style="display:flex;justify-content:space-between;border-top:1px solid var(--amb3);padding-top:4px"><span><strong>總資產</strong></span><span style="font-family:'DM Mono',monospace"><strong>33.01億</strong></span></div>
+              </div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <div style="background:var(--red2);border-radius:7px;padding:10px">
+              <div style="font-size:10px;color:var(--red);font-family:'DM Mono',monospace;margin-bottom:4px">負債</div>
+              <div style="display:flex;flex-direction:column;gap:4px;font-size:12px;color:#374151">
+                <div style="display:flex;justify-content:space-between"><span>短期借款</span><span style="font-family:'DM Mono',monospace">3.14億</span></div>
+                <div style="display:flex;justify-content:space-between"><span>長期借款</span><span style="font-family:'DM Mono',monospace">5.00億</span></div>
+                <div style="display:flex;justify-content:space-between"><span>應付公司債</span><span style="font-family:'DM Mono',monospace">2.79億</span></div>
+                <div style="display:flex;justify-content:space-between"><span style="color:var(--em)">合約負債 ★</span><span style="font-family:'DM Mono',monospace;color:var(--em)">1.55億</span></div>
+                <div style="display:flex;justify-content:space-between;border-top:1px solid var(--red3);padding-top:4px"><span><strong>總負債</strong></span><span style="font-family:'DM Mono',monospace"><strong>16.89億</strong></span></div>
+              </div>
+            </div>
+            <div style="background:var(--em4);border-radius:7px;padding:10px">
+              <div style="font-size:10px;color:var(--em);font-family:'DM Mono',monospace;margin-bottom:4px">財務健康指標</div>
+              <div style="display:flex;flex-direction:column;gap:4px;font-size:12px;color:#374151">
+                <div style="display:flex;justify-content:space-between"><span>負債比</span><span style="font-family:'DM Mono',monospace;color:var(--amb)">49%（去年39%）</span></div>
+                <div style="display:flex;justify-content:space-between"><span>流動比率</span><span style="font-family:'DM Mono',monospace;color:var(--em)">173% ✅</span></div>
+                <div style="display:flex;justify-content:space-between"><span>長借利率</span><span style="font-family:'DM Mono',monospace">2.35%</span></div>
+                <div style="display:flex;justify-content:space-between"><span>到期日</span><span style="font-family:'DM Mono',monospace">129/5 月</span></div>
+                <div style="display:flex;justify-content:space-between;border-top:1px solid var(--em3);padding-top:4px"><span><strong>股東權益</strong></span><span style="font-family:'DM Mono',monospace"><strong>15.59億</strong></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card card-dark" style="margin-bottom:11px">
+          <h3>💰 現金流量瀑布：造血強勁，積極投資</h3>
+          <div class="cf-row" style="background:rgba(16,185,129,.15)">
+            <div class="cf-label">🟢 營業活動 <span style="font-size:11px;color:rgba(255,255,255,.5)">（獲利+折舊4,703萬）</span></div>
+            <div class="cf-val" style="color:var(--em3)">+2.65億</div>
+          </div>
+          <div class="cf-row" style="background:rgba(239,68,68,.12)">
+            <div class="cf-label">🔴 投資活動</div>
+            <div class="cf-val" style="color:#fca5a5">-4.66億</div>
+          </div>
+          <div style="background:rgba(255,255,255,.05);border-radius:6px;padding:7px 11px;margin:-2px 0 5px;font-size:11.5px;color:rgba(255,255,255,.6)">
+            主要流出：取得 PP&amp;E <span style="color:#fca5a5;font-weight:700">-6.88億</span>（資本支出）<br>
+            回收：處分金融資產 +2.08億
+          </div>
+          <div class="cf-row" style="background:rgba(245,158,11,.12)">
+            <div class="cf-label">🟡 籌資活動</div>
+            <div class="cf-val" style="color:var(--amb3)">+5.95億</div>
+          </div>
+          <div style="background:rgba(255,255,255,.05);border-radius:6px;padding:7px 11px;margin:-2px 0 6px;font-size:11.5px;color:rgba(255,255,255,.6)">
+            流入：短期 +3.14億、長期 +5億<br>
+            流出：庫藏股 -2.95億、股利 -4,585萬
+          </div>
+          <div class="cf-row" style="background:rgba(99,102,241,.2)">
+            <div class="cf-label" style="color:var(--ind3);font-weight:700">📈 現金淨增加</div>
+            <div class="cf-val" style="color:#fff;font-weight:700">+3.82億</div>
+          </div>
+          <div style="background:rgba(245,158,11,.12);border-radius:6px;padding:8px 11px;margin-top:6px;font-size:12.5px;color:rgba(255,255,255,.8)">
+            <strong style="color:var(--amb3)">結論：</strong>即便資本支出 6.88億 + 庫藏股 2.95億，期末現金仍達 <strong style="color:#fff">10.04億元</strong>。
+          </div>
+        </div>
+        <div class="card card-amb">
+          <h3>🏢 資本支出 6.88億的戰略意義</h3>
+          <p style="margin-bottom:6px">PP&amp;E 由 7.61億→14.27億，幾乎翻倍。推測三大用途：</p>
+          <ul>
+            <li>擴建升級<strong>VIP旗艦直播攝影棚</strong>（頂配設備吸引頂級直播主）</li>
+            <li>建置更強大的<strong>伺服器與數據中心</strong>（支撐 MAU 成長）</li>
+            <li>電商業務所需的<strong>倉儲設施</strong>（存貨管理與物流效率）</li>
+          </ul>
+          <div style="background:var(--white);border-radius:6px;padding:7px 10px;margin-top:7px;font-size:12px;color:var(--amb)">長期借款 5億（利率 2.35%，129年到期）→ 銀行願意以極低利率提供長天期資金，等於業界對浪凡未來現金流的高度認可。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: 股東回報 + 生態圈 -->
+  <div class="section">
+    <div class="section-label">Part 5 · Shareholder Returns + Ecosystem · 股東回報與生態圈佈局</div>
+    <div class="section-title">庫藏股近3億、股利增派、員工深度綁定、子公司多角化成形</div>
+    <div class="grid-2">
+      <div class="grid-2" style="align-content:start">
+        <div class="card card-ind">
+          <h3>📈 股利政策</h3>
+          <div style="text-align:center;padding:4px 0 8px">
+            <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:var(--ind4)">每股 0.6元</div>
+            <div style="font-size:11px;color:var(--muted)">去年 0.4元（+50%）</div>
+            <div class="badge bi" style="margin-top:5px">現金股利 4,585萬</div>
+          </div>
+        </div>
+        <div class="card card-em">
+          <h3>🔄 庫藏股計畫</h3>
+          <div style="font-size:12.5px;color:var(--em);margin-top:2px">
+            買回 <strong>6,120千股</strong><br>
+            斥資 <strong>2.95億元</strong><br>
+            已轉讓員工 <strong>2,953千股</strong><br>
+            <span style="font-size:11.5px;color:var(--muted)">1.39億轉讓給員工認購</span>
+          </div>
+        </div>
+        <div class="card card-slate" style="grid-column:span 2">
+          <h3>👥 員工深度綁定機制</h3>
+          <p>庫藏股轉讓計畫合約期 1年（114/7/28 – 115/7/27）；同步認列<strong>股份基礎給付酬勞 1,137萬元</strong>（限制性員工股票等）。讓核心人才與股東同坐一艘船，人才流失風險大幅降低。管理層買回庫藏股 = 對股價及未來獲利能力<strong>強烈信心表態</strong>。</p>
+        </div>
+      </div>
+
+      <div class="card card-dark">
+        <h3>🌐 浪凡生態圈：從直播到虛實整合娛樂集團</h3>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
+          <div style="background:rgba(165,180,252,.15);border-radius:7px;padding:9px 11px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <span style="color:var(--ind3);font-weight:700;font-size:12.5px">浪凡網路科技（母公司）</span>
+              <span style="font-size:11px;color:rgba(255,255,255,.5)">直播核心平台</span>
+            </div>
+          </div>
+          <div style="padding-left:12px;display:flex;flex-direction:column;gap:4px">
+            <div style="background:rgba(16,185,129,.15);border-radius:6px;padding:8px 11px">
+              <div style="font-size:12.5px;color:var(--em3);font-weight:700">向浩股份有限公司（100%）</div>
+              <div style="font-size:11.5px;color:rgba(255,255,255,.6)">電子商務主力，直播帶貨核心，營收 23倍爆發</div>
+            </div>
+            <div style="background:rgba(245,158,11,.12);border-radius:6px;padding:8px 11px">
+              <div style="font-size:12.5px;color:var(--amb3);font-weight:700">旭瑞文化傳媒（100%）</div>
+              <div style="font-size:11.5px;color:rgba(255,255,255,.6)">文化創意核心，掌握多家孫公司</div>
+              <div style="padding-left:10px;margin-top:5px;display:flex;flex-direction:column;gap:3px">
+                <div style="font-size:11.5px;color:rgba(255,255,255,.75)">├ <strong>新睦美生醫</strong>（69.34%）— 醫療設備租賃，穩定現金流</div>
+                <div style="font-size:11.5px;color:rgba(255,255,255,.75)">├ <strong>完美駕馭</strong>（100%）— 汽車銷售，流量導購高單價</div>
+                <div style="font-size:11.5px;color:rgba(255,255,255,.75)">└ <strong>博塏/卜卜文化傳媒</strong>— 內容製造，留住用戶</div>
+              </div>
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:6px;padding:8px 11px;font-size:12px;color:rgba(255,255,255,.75)">
+            <strong style="color:var(--amb3)">戰略邏輯：</strong>直播匯聚流量 → 電商/醫療/汽車/電影等多場景變現 → 粉絲經濟最大化。
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:6px;padding:8px 11px;font-size:12px;color:rgba(255,255,255,.75)">
+            <strong style="color:#fca5a5">合約負債 1.55億 = 好負債：</strong>用戶預購鑽石尚未消費，屬先收錢的遞延收入，未來自動轉為認列營收。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">穎祥 · 浪凡114年度法說會財務深度解析 · 2026.06.29</div>
+</div>
+
+</body>
+</html>
