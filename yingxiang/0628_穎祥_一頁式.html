@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>商業模式變遷與稅局因應之道 · 穎祥 0628</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cy:#0891b2;--cy2:#0e7490;--cy3:#67e8f9;--cy4:#ecfeff;
+  --em:#065f46;--em2:#059669;--em3:#6ee7b7;--em4:#ecfdf5;
+  --navy:#0f1e3d;--navy2:#1e3a6e;--navy4:#ebf4ff;
+  --red:#991b1b;--red2:#fff1f2;--red3:#fecdd3;--red4:#ef4444;
+  --gold:#92680a;--gold2:#fffbeb;--gold3:#fde68a;--gold4:#f59e0b;
+  --or:#c2410c;--or2:#fff7ed;--or3:#fdba74;
+  --purple:#6b21a8;--purple2:#faf5ff;--purple3:#d8b4fe;
+  --slate:#334155;--slate2:#e2e8f0;
+  --ink:#061020;--muted:#64748b;--bg:#f0fbff;--white:#fff;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+.page-header{background:linear-gradient(155deg,#020d18,#041428,#061e3d,#0a2d52,#0e3d6b);padding:42px 48px 36px;position:relative;overflow:hidden;border-bottom:3px solid var(--cy3)}
+.ph-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(103,232,249,.09) 1px,transparent 1px);background-size:20px 20px;pointer-events:none}
+.ph-glow{position:absolute;top:-60px;right:-60px;width:300px;height:300px;background:radial-gradient(circle,rgba(8,145,178,.2),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(103,232,249,.75);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(16px,2.5vw,25px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:5px}
+.ph-title em{color:var(--cy3);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.42);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.meta-chip{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(103,232,249,.13);color:var(--cy3);border:1px solid rgba(103,232,249,.28)}
+.meta-chip-r{background:rgba(239,68,68,.15);color:#fca5a5;border-color:rgba(239,68,68,.3)}
+.meta-chip-g{background:rgba(5,150,105,.15);color:var(--em3);border-color:rgba(5,150,105,.3)}
+.meta-chip-y{background:rgba(245,158,11,.15);color:var(--gold3);border-color:rgba(245,158,11,.3)}
+
+.container{max-width:1100px;margin:0 auto;padding:30px 26px}
+.section{margin-bottom:26px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--cy2);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:11px;padding-bottom:6px;border-bottom:2px solid var(--cy3)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:720px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+.card{background:var(--white);border:1.5px solid var(--cy3);border-radius:10px;padding:14px}
+.card-dark{background:var(--navy);border:none;border-radius:10px;padding:14px}
+.card-cy{background:var(--cy4);border:1.5px solid var(--cy3);border-radius:10px;padding:14px}
+.card-em{background:var(--em4);border:1.5px solid var(--em3);border-radius:10px;padding:14px}
+.card-red{background:var(--red2);border:1.5px solid var(--red3);border-radius:10px;padding:14px}
+.card-gold{background:var(--gold2);border:1.5px solid var(--gold3);border-radius:10px;padding:14px}
+.card-or{background:var(--or2);border:1.5px solid var(--or3);border-radius:10px;padding:14px}
+.card-purple{background:var(--purple2);border:1.5px solid var(--purple3);border-radius:10px;padding:14px}
+.card-slate{background:var(--slate2);border:1.5px solid #cbd5e1;border-radius:10px;padding:14px}
+.card-navy4{background:var(--navy4);border:1.5px solid #bee3f8;border-radius:10px;padding:14px}
+
+.card h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--navy)}
+.card-dark h3{color:var(--cy3)}
+.card-cy h3{color:var(--cy2)}
+.card-em h3{color:var(--em)}
+.card-red h3{color:var(--red)}
+.card-gold h3{color:var(--gold)}
+.card-or h3{color:var(--or)}
+.card-purple h3{color:var(--purple)}
+.card p,.card li{font-size:12.5px;line-height:1.85;color:#374151}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.78);font-size:12.5px;line-height:1.85}
+.card-cy p,.card-cy li{font-size:12.5px;line-height:1.85;color:var(--cy2)}
+.card-em p,.card-em li{font-size:12.5px;line-height:1.85;color:var(--em)}
+.card-red p,.card-red li{font-size:12.5px;line-height:1.85;color:var(--red)}
+.card-gold p,.card-gold li{font-size:12.5px;line-height:1.85;color:var(--gold)}
+.card-or p,.card-or li{font-size:12.5px;line-height:1.85;color:var(--or)}
+.card-purple p,.card-purple li{font-size:12.5px;line-height:1.85;color:var(--purple)}
+.card ul{padding-left:14px}.card ul li{margin-bottom:3px}
+
+/* 流程步驟 */
+.step{display:flex;align-items:flex-start;gap:9px;padding:8px 11px;border-radius:7px;margin-bottom:5px}
+.step-num{font-family:'Playfair Display',serif;font-size:17px;font-weight:900;flex-shrink:0;width:22px;line-height:1.1}
+.step-txt{font-size:12.5px;line-height:1.7}
+
+/* 平台標籤雲 */
+.platform-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.plat-tag{font-family:'DM Mono',monospace;font-size:11px;padding:4px 10px;border-radius:4px;font-weight:500}
+
+.page-footer{background:var(--navy);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--cy3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-dots"></div>
+  <div class="ph-glow"></div>
+  <div class="ph-eyebrow">商業模式變遷 × 稅局的因應之道 × 數位經濟課稅</div>
+  <div class="ph-title">稅局<em>放長線釣大魚</em>：從夾娃娃機到 YouTube，國稅局如何一石二鳥</div>
+  <div class="ph-sub">選物販賣機娛樂稅 × 屬地主義 × IP位址 × 境外電商 60 萬門檻 × TikTok/Google/Meta 全數就範</div>
+  <div class="ph-meta">
+    <span class="meta-chip">2026.06.28</span>
+    <span class="meta-chip">穎祥</span>
+    <span class="meta-chip meta-chip-y">擋板高度 → 娛樂稅</span>
+    <span class="meta-chip meta-chip-r">境外平台 60萬門檻</span>
+    <span class="meta-chip meta-chip-g">外銷零稅率反將稅局</span>
+    <span class="meta-chip">Rock 老師</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- YouTuber + 夾娃娃機 -->
+  <div class="section">
+    <div class="section-label">New Economy + Tax · 新興商業與稅務因應</div>
+    <div class="section-title">從 YouTuber 到夾娃娃機：稅局如何追上商業模式的演進</div>
+    <div class="grid-2">
+      <div>
+        <div class="card card-cy" style="margin-bottom:11px">
+          <h3>🎬 注意力經濟的結構性轉變</h3>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
+            <div style="background:var(--white);border-radius:6px;padding:8px 10px;font-size:12.5px;color:var(--cy2)">
+              <strong>職業憧憬位移：</strong>老師→消防員→警察 ✖ 　YouTuber / 網紅 ✔<br>反映注意力分配與變現機制的根本改變。
+            </div>
+            <div style="background:var(--white);border-radius:6px;padding:8px 10px;font-size:12.5px;color:var(--cy2)">
+              <strong>注意力稀缺：</strong>觀看內容越多 → 注意力越薄弱 → 長影片看不完 → 收視習慣轉向<strong>短影音 Reels</strong>
+            </div>
+            <div style="background:var(--white);border-radius:6px;padding:8px 10px;font-size:12.5px;color:var(--cy2)">
+              <strong>YouTuber 獲利模式（舊）：</strong>固定時間等上架 → 點閱累積 → 廣告分潤 + 業配 + 置入<br>
+              <strong>現況：</strong>難度大增，早期明星（如聖結石）減產，轉型為投資人或幣圈。
+            </div>
+          </div>
+        </div>
+        <div class="card card-dark">
+          <h3>🕹 夾娃娃機（選物販賣機）：稅務生態全解析</h3>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:2px">
+            <div style="background:rgba(255,255,255,.08);border-radius:6px;padding:8px 10px;font-size:12.5px">
+              <div style="color:var(--cy3);font-weight:700;margin-bottom:2px">基本稅務規範</div>
+              <div style="color:rgba(255,255,255,.75)">正式分類：<strong style="color:#fff">選物販賣機</strong>。機台須貼登記證。營業額達 <strong style="color:var(--cy3)">8 萬元</strong>起徵點 → 必須辦營業登記、繳 5% 營業稅 + 繳納營利事業所得稅。</div>
+            </div>
+            <div style="background:rgba(255,255,255,.08);border-radius:6px;padding:8px 10px;font-size:12.5px">
+              <div style="color:var(--gold3);font-weight:700;margin-bottom:2px">同業競爭（打台）惡性循環</div>
+              <div style="color:rgba(255,255,255,.75)">台主從淘寶/蝦皮進誘人商品 → 其他台主低成本夾走（打台）→ 被迫<strong style="color:#fff">加高擋板、改夾子</strong> → 嚇跑純娛樂客人</div>
+            </div>
+            <div style="background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.25);border-radius:6px;padding:8px 10px;font-size:12.5px">
+              <div style="color:#fca5a5;font-weight:700;margin-bottom:2px">⚠ 意想不到的娛樂稅！</div>
+              <div style="color:rgba(255,255,255,.75)">選物販賣機本屬商品販售，<strong style="color:#fff">理應無娛樂稅</strong>。但加高擋板 → 需要「技術」才能夾取 → 稅局認定具「娛樂性質」→ <strong style="color:#fca5a5">強制課娛樂稅</strong>。稅局人員會實際到場測量擋板高度，絕不客氣。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🌐 網紅稅務難題：從匯款到 IP 位址</h3>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px">
+          <div style="background:var(--red2);border:1px solid var(--red3);border-radius:7px;padding:9px 11px">
+            <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--red);margin-bottom:4px">早期稅局困境</div>
+            <div style="font-size:12.5px;color:var(--red)">YouTube 是美國公司 → 廣告分潤匯入外幣帳戶 → 被視為<strong>境外所得</strong> → 美國公司不配合提供台灣創作者收入資料 → 稅局抓不到。</div>
+          </div>
+          <div style="background:var(--cy4);border:1px solid var(--cy3);border-radius:7px;padding:9px 11px">
+            <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--cy2);margin-bottom:4px">關鍵突破：屬地主義</div>
+            <div style="font-size:12.5px;color:var(--cy2)">課稅核心不是「所得稅」，而是<strong>「營業稅」</strong>。營業稅看的是<strong>消費行為發生地</strong>——只要觀眾在台灣境內觀看影片或打賞，這筆交易就在台灣發生，應課台灣的 5% 營業稅。</div>
+          </div>
+          <div style="background:var(--em4);border:1px solid var(--em3);border-radius:7px;padding:9px 11px">
+            <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--em);margin-bottom:4px">判定武器：IP 位址</div>
+            <div style="font-size:12.5px;color:var(--em)">觀眾的網路<strong> IP 位址</strong>決定課稅地。IG / YouTube 後台洞察報告可精準顯示粉絲來源。銀行收到 YouTube 匯款超過 <strong>5 萬元</strong> → 主動詢問資金來源 → 稅局有權調閱金融機構收款資料。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 稅局一石二鳥 + 境外電商 -->
+  <div class="section">
+    <div class="section-label">Tax Strategy · 國稅局的終極戰略</div>
+    <div class="section-title">放長線釣大魚：網紅節稅數據反成稅局的精準武器</div>
+    <div class="grid-2">
+      <div>
+        <div class="card card-gold" style="margin-bottom:11px">
+          <h3>🎣 一石二鳥：外銷零稅率反將稅局一軍的迴旋棒</h3>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
+            <div class="step" style="background:var(--white)">
+              <div class="step-num" style="color:var(--gold)">①</div>
+              <div class="step-txt"><strong style="color:var(--gold)">稅率結構：</strong>境內收入課 <strong>5% 營業稅</strong>；境外收入適用「外銷<strong>零稅率（0%）</strong>」。</div>
+            </div>
+            <div class="step" style="background:var(--white)">
+              <div class="step-num" style="color:var(--gold)">②</div>
+              <div class="step-txt"><strong style="color:var(--gold)">大網紅的節稅動機：</strong>為了少繳稅，主動向 YouTube 申請「境內 vs 境外 IP 收入占比」詳細數據，向稅局申報以扣除境外部分。</div>
+            </div>
+            <div class="step" style="background:var(--white)">
+              <div class="step-num" style="color:var(--gold)">③</div>
+              <div class="step-txt"><strong style="color:var(--gold)">稅局反將一軍：</strong>當眾多網紅紛紛將 YouTube 的境內收入數據交出，國稅局把所有人的境內收入<strong>加總</strong>，精準算出 YouTube 在台灣的「總銷售額」——<strong>證據確鑿！</strong></div>
+            </div>
+            <div class="step" style="background:var(--em4);border:1px solid var(--em3)">
+              <div class="step-num" style="color:var(--em)">④</div>
+              <div class="step-txt" style="color:var(--em)"><strong>境外平台就範：</strong>年銷售額超 <strong>60萬台幣</strong> → 必須在台辦稅籍登記、繳納 5% 營業稅。掌握營業稅 = 收入所得再也跑不掉。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card card-dark" style="margin-bottom:11px">
+          <h3>🌍 境外電商全數就範：稅局戰果</h3>
+          <p style="margin-bottom:8px;font-size:12.5px">根據「境外電商課稅專區」，以下國際巨頭全數在台設立統編、乖乖繳稅：</p>
+          <div class="platform-grid">
+            <span class="plat-tag" style="background:rgba(103,232,249,.15);color:var(--cy3);border:1px solid rgba(103,232,249,.25)">📱 TikTok</span>
+            <span class="plat-tag" style="background:rgba(245,158,11,.15);color:var(--gold3);border:1px solid rgba(245,158,11,.25)">🔍 Google</span>
+            <span class="plat-tag" style="background:rgba(107,33,168,.2);color:var(--purple3);border:1px solid rgba(107,33,168,.25)">📘 Meta (FB/IG)</span>
+            <span class="plat-tag" style="background:rgba(5,150,105,.15);color:var(--em3);border:1px solid rgba(5,150,105,.25)">🎵 YouTube</span>
+            <span class="plat-tag" style="background:rgba(239,68,68,.12);color:#fca5a5;border:1px solid rgba(239,68,68,.2)">🚗 Uber</span>
+            <span class="plat-tag" style="background:rgba(239,68,68,.12);color:#fca5a5;border:1px solid rgba(239,68,68,.2)">🎬 Netflix</span>
+            <span class="plat-tag" style="background:rgba(255,160,60,.15);color:var(--or3);border:1px solid rgba(255,160,60,.25)">🏠 Airbnb</span>
+          </div>
+          <div style="background:rgba(103,232,249,.12);border-radius:7px;padding:9px 10px;margin-top:10px;font-size:12.5px;color:var(--cy3);line-height:1.7">
+            <strong>關鍵門檻：</strong>境外平台在台年銷售額 <span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:900;color:#fff"> &gt; 60萬</span> 台幣 → 強制在台設稅籍 → 繳 5% 營業稅 → 收入與所得無所遁形。
+          </div>
+        </div>
+        <div class="card card-em">
+          <h3>💡 這節課的真正收穫：商業洞察力</h3>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
+            <div style="background:var(--white);border-radius:6px;padding:8px 10px;font-size:12.5px;color:var(--em)">
+              <strong>稅局 = 與時俱進的組織：</strong>傳統官僚機構透過年輕世代新思維，成功找出針對新興網路商業模式的課稅方法。
+            </div>
+            <div style="background:var(--white);border-radius:6px;padding:8px 10px;font-size:12.5px;color:var(--em)">
+              <strong>學稅法的目的不是算稅：</strong>而是看懂<strong>「商業邏輯」與國家機器的運作方式</strong>，理解做生意的不易之處。
+            </div>
+            <div style="background:var(--white);border-radius:6px;padding:8px 10px;font-size:12.5px;color:var(--em)">
+              <strong>日常觀察 = 商業啟蒙：</strong>夾娃娃機、網紅經濟 → 都是活生生的商業模型。當屬於自己的機會來臨，才能<strong>準確把握先機</strong>。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 三大核心稅務概念速查 -->
+  <div class="section">
+    <div class="section-label">Quick Reference · 三大核心概念速查</div>
+    <div class="section-title">屬地主義 × 零稅率 × 起徵門檻：三個數字記住就能看懂新聞</div>
+    <div class="grid-3">
+      <div class="card card-cy">
+        <h3>📍 屬地主義（消費地課稅）</h3>
+        <p style="margin-bottom:8px">課稅看的是<strong>「消費行為在哪裡發生」</strong>，不是看服務提供者在哪裡。</p>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <div style="background:var(--white);border-radius:6px;padding:7px 9px;font-size:12.5px;color:var(--cy2)">
+            台灣觀眾在台灣用台灣網路看 YouTube → <strong>消費在台灣</strong> → 課台灣 5% 營業稅
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:7px 9px;font-size:12.5px;color:var(--cy2)">
+            台灣觀眾出國後看 YouTube → IP 顯示境外 → 外銷 0% 稅率
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:7px 9px;font-size:12px;color:var(--cy2)">
+            <strong>判定工具：</strong>網路 IP 位址 + 社群後台洞察數據
+          </div>
+        </div>
+      </div>
+      <div class="card card-gold">
+        <h3>0️⃣ 外銷零稅率 vs 境內 5%</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:6px 0">
+          <div style="background:var(--white);border-radius:7px;padding:8px 10px;text-align:center">
+            <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:var(--cy2)">5%</div>
+            <div style="font-size:11px;color:var(--muted)">境內營業稅</div>
+          </div>
+          <div style="background:var(--white);border-radius:7px;padding:8px 10px;text-align:center">
+            <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:var(--em)">0%</div>
+            <div style="font-size:11px;color:var(--muted)">外銷零稅率</div>
+          </div>
+        </div>
+        <p>網紅節稅動機 = 將更多收入歸類為「境外」→ 反而將境內收入數據<strong>主動提交</strong>給稅局 → 成為稅局計算境外平台銷售額的最佳工具。</p>
+      </div>
+      <div class="card card-red">
+        <h3>🔢 兩個關鍵門檻數字</h3>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px">
+          <div style="background:var(--white);border-radius:7px;padding:9px 10px">
+            <div style="font-family:'Playfair Display',serif;font-size:19px;font-weight:900;color:var(--cy2)">8萬元</div>
+            <div style="font-size:12px;color:var(--muted)">一般營業人（如夾娃娃機台主）起徵點 → 超過須辦登記、繳 5% 營業稅</div>
+          </div>
+          <div style="background:var(--white);border-radius:7px;padding:9px 10px">
+            <div style="font-family:'Playfair Display',serif;font-size:19px;font-weight:900;color:var(--red)">60萬元</div>
+            <div style="font-size:12px;color:var(--muted)">境外電商（如 Google / TikTok）在台年銷售額門檻 → 超過須在台設稅籍登記</div>
+          </div>
+          <div style="background:var(--white);border-radius:7px;padding:6px 10px;font-size:11.5px;color:var(--red)">
+            銀行收款加碼：YouTube 匯款 <strong>&gt; 5萬元</strong> → 銀行主動詢問資金來源
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">穎祥 · 商業模式變遷與稅局因應之道 · 2026.06.28</div>
+</div>
+
+</body>
+</html>
