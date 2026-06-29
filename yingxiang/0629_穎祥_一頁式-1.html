@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>浪Live財報解析×粉絲經濟 · 穎祥 0629</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --pk:#be185d;--pk2:#fdf2f8;--pk3:#f9a8d4;--pk4:#ec4899;
+  --mg:#7e22ce;--mg2:#faf5ff;--mg3:#d8b4fe;
+  --cy:#0891b2;--cy2:#0e7490;--cy3:#67e8f9;--cy4:#ecfeff;
+  --em:#065f46;--em2:#059669;--em3:#6ee7b7;--em4:#ecfdf5;
+  --navy:#0f1e3d;--navy2:#1e3a6e;--navy4:#ebf4ff;
+  --red:#991b1b;--red2:#fff1f2;--red3:#fecdd3;
+  --gold:#92680a;--gold2:#fffbeb;--gold3:#fde68a;--gold4:#f59e0b;
+  --or:#c2410c;--or2:#fff7ed;--or3:#fdba74;
+  --slate:#334155;--slate2:#e2e8f0;
+  --ink:#1a0014;--muted:#78716c;--bg:#fdf4fb;--white:#fff;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+.page-header{background:linear-gradient(155deg,#0d0010,#1a0028,#2d0042,#1a0038,#0f0025);padding:42px 48px 36px;position:relative;overflow:hidden;border-bottom:3px solid var(--pk3)}
+.ph-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(249,168,212,.08) 1px,transparent 1px);background-size:20px 20px;pointer-events:none}
+.ph-glow-l{position:absolute;top:-60px;left:-40px;width:280px;height:280px;background:radial-gradient(circle,rgba(190,24,93,.2),transparent 65%);pointer-events:none}
+.ph-glow-r{position:absolute;bottom:-40px;right:-40px;width:240px;height:240px;background:radial-gradient(circle,rgba(126,34,206,.18),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(249,168,212,.7);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(16px,2.5vw,25px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:5px}
+.ph-title em{color:var(--pk3);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.42);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.meta-chip{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(249,168,212,.13);color:var(--pk3);border:1px solid rgba(249,168,212,.28)}
+.meta-chip-g{background:rgba(5,150,105,.15);color:var(--em3);border-color:rgba(5,150,105,.3)}
+.meta-chip-y{background:rgba(245,158,11,.15);color:var(--gold3);border-color:rgba(245,158,11,.3)}
+.meta-chip-r{background:rgba(239,68,68,.15);color:#fca5a5;border-color:rgba(239,68,68,.3)}
+
+.container{max-width:1100px;margin:0 auto;padding:30px 26px}
+.section{margin-bottom:26px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--pk);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:11px;padding-bottom:6px;border-bottom:2px solid var(--pk3)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+
+.card{background:var(--white);border:1.5px solid var(--pk3);border-radius:10px;padding:14px}
+.card-dark{background:var(--navy);border:none;border-radius:10px;padding:14px}
+.card-pk{background:var(--pk2);border:1.5px solid var(--pk3);border-radius:10px;padding:14px}
+.card-mg{background:var(--mg2);border:1.5px solid var(--mg3);border-radius:10px;padding:14px}
+.card-cy{background:var(--cy4);border:1.5px solid var(--cy3);border-radius:10px;padding:14px}
+.card-em{background:var(--em4);border:1.5px solid var(--em3);border-radius:10px;padding:14px}
+.card-gold{background:var(--gold2);border:1.5px solid var(--gold3);border-radius:10px;padding:14px}
+.card-or{background:var(--or2);border:1.5px solid var(--or3);border-radius:10px;padding:14px}
+.card-slate{background:var(--slate2);border:1.5px solid #cbd5e1;border-radius:10px;padding:14px}
+
+.card h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--navy)}
+.card-dark h3{color:var(--pk3)}
+.card-pk h3{color:var(--pk)}
+.card-mg h3{color:var(--mg)}
+.card-cy h3{color:var(--cy2)}
+.card-em h3{color:var(--em)}
+.card-gold h3{color:var(--gold)}
+.card-or h3{color:var(--or)}
+.card p,.card li{font-size:12.5px;line-height:1.85;color:#374151}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.78);font-size:12.5px;line-height:1.85}
+.card-pk p,.card-pk li{font-size:12.5px;line-height:1.85;color:var(--pk)}
+.card-mg p,.card-mg li{font-size:12.5px;line-height:1.85;color:var(--mg)}
+.card-cy p,.card-cy li{font-size:12.5px;line-height:1.85;color:var(--cy2)}
+.card-em p,.card-em li{font-size:12.5px;line-height:1.85;color:var(--em)}
+.card-gold p,.card-gold li{font-size:12.5px;line-height:1.85;color:var(--gold)}
+.card-or p,.card-or li{font-size:12.5px;line-height:1.85;color:var(--or)}
+.card ul{padding-left:14px}.card ul li{margin-bottom:3px}
+
+/* KPI */
+.kpi{text-align:center;padding:10px 7px}
+.kpi-val{font-family:'Playfair Display',serif;font-size:clamp(18px,2.2vw,26px);font-weight:900;line-height:1.1}
+.kpi-label{font-size:11px;color:var(--muted);margin-top:3px}
+.kpi-sub{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px}
+.badge{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:3px;margin-top:4px}
+.badge-g{background:var(--em4);color:var(--em);border:1px solid var(--em3)}
+.badge-r{background:var(--red2);color:var(--red);border:1px solid var(--red3)}
+.badge-p{background:var(--pk2);color:var(--pk);border:1px solid var(--pk3)}
+.badge-y{background:var(--gold2);color:var(--gold);border:1px solid var(--gold3)}
+
+/* 現金流瀑布 */
+.wf{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-radius:6px;margin-bottom:4px;font-size:12.5px}
+
+/* 成長箭頭卡 */
+.growth-row{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:7px;margin-bottom:5px;font-size:12.5px;background:var(--white)}
+.growth-from{color:var(--muted);font-family:'DM Mono',monospace;font-size:11px;text-decoration:line-through}
+.growth-arrow{color:var(--pk);font-size:14px;flex-shrink:0}
+.growth-to{font-family:'Playfair Display',serif;font-size:16px;font-weight:900}
+
+.page-footer{background:var(--navy);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--pk3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-dots"></div>
+  <div class="ph-glow-l"></div>
+  <div class="ph-glow-r"></div>
+  <div class="ph-eyebrow">浪Live 2025 H1 財報試讀 × 粉絲經濟解析</div>
+  <div class="ph-title"><em>浪Live</em>：從 43,000 元到 1.8 億，直播業「先收錢」模式的財務奇蹟</div>
+  <div class="ph-sub">抖內九成營收 × 商品 28萬→1.16億 × 買辦公室 6億 × 啦啦隊流量紅利 × 鑽石合約負債</div>
+  <div class="ph-meta">
+    <span class="meta-chip">2026.06.29</span>
+    <span class="meta-chip">穎祥</span>
+    <span class="meta-chip meta-chip-g">營業利潤 +4,186倍</span>
+    <span class="meta-chip meta-chip-y">商品銷售爆增 414倍</span>
+    <span class="meta-chip">MAU 500萬 +22%</span>
+    <span class="meta-chip">Rock 老師</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 財務 KPI 亮點 -->
+  <div class="section">
+    <div class="section-label">2025 H1 Financial Highlights · 核心財務亮點</div>
+    <div class="section-title">強勁的獲利躍升：六大 KPI 解讀浪Live的結構性轉變</div>
+    <div class="grid-3" style="margin-bottom:11px">
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--navy2)">15.8億</div>
+        <div class="kpi-label">合併營收（2025 H1）</div>
+        <div class="kpi-sub">較去年同期 ~14億</div>
+        <div class="badge badge-g">+10.5% YoY</div>
+      </div>
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--pk)">1.8億</div>
+        <div class="kpi-label">營業淨利</div>
+        <div class="kpi-sub">去年同期僅 43,000元</div>
+        <div class="badge badge-p">+4,186倍 🚀</div>
+      </div>
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--em)">1.6億</div>
+        <div class="kpi-label">上半年淨利</div>
+        <div class="kpi-sub">EPS 2.12元</div>
+        <div class="badge badge-g">強勁獲利</div>
+      </div>
+    </div>
+    <div class="grid-4">
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--pk)">90%</div>
+        <div class="kpi-label">抖內占營收比</div>
+        <div class="kpi-sub">約 14億來自虛擬禮物</div>
+      </div>
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--gold)">500萬</div>
+        <div class="kpi-label">活躍用戶 MAU</div>
+        <div class="kpi-sub">年增 22%</div>
+        <div class="badge badge-g">留存率 85%</div>
+      </div>
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--mg)">1.16億</div>
+        <div class="kpi-label">商品銷售額</div>
+        <div class="kpi-sub">去年僅 28萬</div>
+        <div class="badge badge-p">+414倍 💥</div>
+      </div>
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--or)">+18%</div>
+        <div class="kpi-label">直播主平均收入</div>
+        <div class="kpi-sub">你好→我也好正向循環</div>
+        <div class="badge badge-y">平台共贏</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 商業模式 + vs 17LIVE -->
+  <div class="section">
+    <div class="section-label">Business Model + Comparison · 商業模式與競品比較</div>
+    <div class="section-title">鑽石先收錢的現金流奇蹟 × 浪Live vs 17LIVE 策略分野</div>
+    <div class="grid-2">
+      <div>
+        <div class="card card-dark" style="margin-bottom:11px">
+          <h3>💎 直播業最強現金流：先收錢模式</h3>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
+            <div style="background:rgba(255,255,255,.08);border-radius:6px;padding:9px 10px;font-size:12.5px">
+              <div style="color:var(--pk3);font-weight:700;margin-bottom:3px">運作邏輯</div>
+              <div style="color:rgba(255,255,255,.8)">粉絲先儲值（買鑽石）→ 之後才抖內給直播主 → 這些「預收款」在會計上屬於<strong style="color:#fff">「合約負債」</strong>——等於跟粉絲先借錢，是一門先收錢的絕佳生意。</div>
+            </div>
+            <div style="background:rgba(255,255,255,.08);border-radius:6px;padding:9px 10px;font-size:12.5px">
+              <div style="color:var(--em3);font-weight:700;margin-bottom:3px">費用結構</div>
+              <div style="color:rgba(255,255,255,.8)">主要支出落在<strong style="color:#fff">銷售費用</strong>（行銷推廣）。無需大量固定資產，輕資產模式，現金流天生健康。</div>
+            </div>
+            <div style="background:rgba(249,168,212,.15);border-radius:6px;padding:9px 10px;font-size:12.5px">
+              <div style="color:var(--pk3);font-weight:700;margin-bottom:2px">情緒價值驅動消費</div>
+              <div style="color:rgba(255,255,255,.8)">粉絲大量抖內與買周邊，是因為直播主/啦啦隊提供了強大的<strong style="color:#fff">「情緒價值」</strong>——這是粉絲經濟的本質，也是護城河所在。</div>
+            </div>
+          </div>
+        </div>
+        <div class="card card-mg">
+          <h3>📦 商品銷售的驚人爆發：28萬→1.16億</h3>
+          <div class="growth-row" style="margin-bottom:8px">
+            <span class="growth-from">28萬</span>
+            <span class="growth-arrow">→→→</span>
+            <span class="growth-to" style="color:var(--mg)">1.16億</span>
+            <span style="font-size:12px;color:var(--mg)">（+414倍）</span>
+          </div>
+          <ul>
+            <li>存貨增加 <strong>3800萬</strong>，主要是應付粉絲需求的周邊商品（毛巾、立牌等）</li>
+            <li>Rock 老師親赴富邦新莊主場，親眼見證周邊商品部的盛況，才意識到粉絲消費力有多驚人</li>
+            <li>業務多角化：參與投資電影（啦啦隊電影）、未來可能涉及汽車銷售等領域</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <div class="card" style="margin-bottom:11px">
+          <h3>⚔ 浪Live vs 17LIVE：策略的兩條路</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+            <div style="background:var(--pk2);border:1.5px solid var(--pk3);border-radius:8px;padding:10px">
+              <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--pk);letter-spacing:.1em;margin-bottom:5px">浪Live</div>
+              <div style="font-size:12px;color:var(--pk);line-height:1.7">
+                營收 <strong>~15.8億</strong><br>
+                完全深耕<strong>台灣市場</strong><br>
+                無外幣匯率風險<br>
+                獲利爆發中<br>
+                周邊商品大成功
+              </div>
+            </div>
+            <div style="background:var(--mg2);border:1.5px solid var(--mg3);border-radius:8px;padding:10px">
+              <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--mg);letter-spacing:.1em;margin-bottom:5px">17LIVE</div>
+              <div style="font-size:12px;color:var(--mg);line-height:1.7">
+                營收 <strong>~24億</strong>（8100萬USD）<br>
+                主攻<strong>日本海外市場</strong><br>
+                毛利率 44%<br>
+                受匯損影響<br>
+                老大哥地位
+              </div>
+            </div>
+          </div>
+          <div style="background:var(--slate2);border-radius:7px;padding:8px 10px;font-size:12.5px;color:var(--slate)">
+            <strong>洞見：</strong>浪Live 以小博大，完全聚焦台灣，沒有匯率風險，且正在走陡峭的獲利成長曲線。17LIVE 國際化但承受海外市場與匯率的雙重不確定性。
+          </div>
+        </div>
+        <div class="card card-cy">
+          <h3>🤖 AI工具加速學習：Gemini + NotebookLM</h3>
+          <ul style="margin-bottom:7px">
+            <li>利用 Gemini（AI工具）將影片內容轉換為<strong>練習題庫與學習卡</strong></li>
+            <li>靈感來自幫小孩複習英文，應用到幫社群朋友複習財報知識</li>
+            <li>學習最佳路徑：<strong>輸入（聽講）→ 輸出（做題、教別人）</strong>，輸出的人收穫最多</li>
+          </ul>
+          <div style="background:var(--white);border-radius:7px;padding:8px 10px;font-size:12.5px;color:var(--cy2)">
+            <strong>職場建議：</strong>用 NotebookLM 等工具理解文件並生成測驗題，驗證自己是否真正理解——而非只是聽過而已。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 資產負債 + 粉絲經濟 -->
+  <div class="section">
+    <div class="section-label">Balance Sheet + Fan Economy · 財務結構與粉絲經濟洞察</div>
+    <div class="section-title">買辦公室 6億的戰略意義 × 啦啦隊流量紅利 × 「有人在乎就是生意」</div>
+    <div class="grid-3">
+      <div class="card card-or">
+        <h3>🏢 資產負債表：買辦公室 6億的邏輯</h3>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
+          <div style="background:var(--white);border-radius:6px;padding:8px 10px;font-size:12.5px;color:var(--or)">
+            <strong>事件：</strong>2025年4月，從內湖遷至<strong>士林</strong>（士林官邸附近）購置辦公室，花費 <strong>6億元</strong>。
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:8px 10px;font-size:12.5px;color:var(--or)">
+            <strong>推測動機：</strong>擴建更多 <strong>VIP 旗艦直播室</strong>，讓熱門直播主享有更好設備與環境，不必侷限於自家播出。
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:8px 10px;font-size:12.5px;color:var(--or)">
+            <strong>財報影響：</strong><br>
+            投資活動現金流出 <strong>5.5億</strong><br>
+            籌資活動（房貸）流入 <strong>6億</strong><br>
+            → 負債比率較過去提升<br>
+            → 非流動資產大幅增加
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:8px 10px;font-size:12.5px;color:var(--or)">
+            <strong>庫藏股計畫：</strong>2025年7月預計買回庫藏股 → 供員工認購，作為<strong>員工獎勵計畫</strong>，反映管理層對公司未來的信心。
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-pk">
+        <h3>📱 新媒體流量：啦啦隊改寫行銷邏輯</h3>
+        <p style="margin-bottom:8px">直播已成為繼 YouTuber 之後的新型態媒體，行銷流量正大量轉移至：</p>
+        <div style="display:flex;flex-direction:column;gap:5px">
+          <div style="background:var(--white);border-radius:6px;padding:7px 10px;font-size:12.5px;color:var(--pk)">
+            <strong>富邦三本柱：</strong>李雅英、南珉貞、李晧禎<br>
+            自帶龐大粉絲流量，代言效益精準
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:7px 10px;font-size:12.5px;color:var(--pk)">
+            <strong>兄弟加盟：</strong>邊荷律<br>
+            跨隊移動帶動話題與周邊商機
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:7px 10px;font-size:12.5px;color:var(--pk)">
+            企業找<strong>自帶流量的直播主</strong>代言，比傳統廣告更精準觸達目標族群
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:7px 10px;font-size:12px;color:var(--pk)">
+            <strong>平台正向循環：</strong><br>
+            直播主收入提升 18% → 更多優質直播主加入 → 粉絲留存率 85% → 平台吸引更多廣告與業配
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-dark">
+        <h3>💡 粉絲經濟的本質洞察</h3>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:2px">
+          <div style="background:rgba(255,255,255,.08);border-radius:6px;padding:9px 10px;font-size:12.5px">
+            <div style="color:var(--pk3);font-weight:700;margin-bottom:2px">最核心的一句話</div>
+            <div style="color:rgba(255,255,255,.85);font-size:13px;font-family:'Playfair Display',serif;font-style:italic">「只要有人在乎，就是生意。」</div>
+          </div>
+          <div style="background:rgba(255,255,255,.08);border-radius:6px;padding:9px 10px;font-size:12.5px">
+            <div style="color:var(--gold3);font-weight:700;margin-bottom:2px">儀表板 vs 傳統簡報</div>
+            <div style="color:rgba(255,255,255,.75)">用「儀表板」而非傳統 PPT 呈現財報 → 短時間內抓住眼球、快速呈現數字故事，這本身也是一種商業溝通能力。</div>
+          </div>
+          <div style="background:rgba(255,255,255,.08);border-radius:6px;padding:9px 10px;font-size:12.5px">
+            <div style="color:var(--em3);font-weight:700;margin-bottom:2px">財報閱讀的真實收穫</div>
+            <div style="color:rgba(255,255,255,.75)">若非親自研究財報 + 親赴球場感受，很難相信毛巾、立牌這類周邊商品，能從 28萬一年之內暴增到 <strong style="color:#fff">1.16億</strong>。數字才是最有說服力的故事。</div>
+          </div>
+          <div style="background:rgba(249,168,212,.12);border-radius:6px;padding:9px 10px;font-size:12.5px">
+            <div style="color:var(--pk3);font-weight:700;margin-bottom:2px">與 YouTuber 時代的差異</div>
+            <div style="color:rgba(255,255,255,.75)">YouTuber 靠影片廣告分潤 → 直播靠<strong style="color:#fff">即時情緒連結</strong>的打賞，兩者都是注意力變現，但直播的黏著度與現金流健康程度更強。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">穎祥 · 浪Live財報試讀×粉絲經濟解析 · 2026.06.29</div>
+</div>
+
+</body>
+</html>
