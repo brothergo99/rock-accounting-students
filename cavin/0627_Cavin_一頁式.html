@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>損益表護城河×IP毛利×勞力士品牌學 · Cavin 0627</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --rg:#7c2d42;--rg2:#fff1f4;--rg3:#fbb6c4;--rg4:#e11d48;
+  --gold:#92680a;--gold2:#fffbeb;--gold3:#fde68a;--gold4:#f59e0b;
+  --navy:#0f1e3d;--navy2:#1e3a6e;--navy4:#ebf4ff;
+  --cy:#065f46;--cy2:#059669;--cy3:#6ee7b7;--cy4:#ecfdf5;
+  --red:#991b1b;--red2:#fff1f2;--red3:#fecdd3;
+  --purple:#6b21a8;--purple2:#faf5ff;--purple3:#d8b4fe;
+  --slate:#44403c;--slate2:#f5f5f4;
+  --ink:#1a0a10;--muted:#78716c;--bg:#fdf8fb;--white:#fff;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+.page-header{background:linear-gradient(155deg,#0a0511,#14062a,#1a0f3d,#0f1e3d,#2d0a18);padding:42px 48px 36px;position:relative;overflow:hidden;border-bottom:3px solid var(--rg3)}
+.ph-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(251,182,196,.08) 1px,transparent 1px);background-size:20px 20px;pointer-events:none}
+.ph-glow-l{position:absolute;top:-60px;left:-60px;width:280px;height:280px;background:radial-gradient(circle,rgba(124,45,66,.25),transparent 65%);pointer-events:none}
+.ph-glow-r{position:absolute;top:-60px;right:-60px;width:280px;height:280px;background:radial-gradient(circle,rgba(245,158,11,.15),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(251,182,196,.7);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(16px,2.5vw,25px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:5px}
+.ph-title em{color:var(--rg3);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.42);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.meta-chip{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(251,182,196,.15);color:var(--rg3);border:1px solid rgba(251,182,196,.3)}
+.meta-chip-g{background:rgba(5,150,105,.15);color:var(--cy3);border-color:rgba(5,150,105,.3)}
+.meta-chip-y{background:rgba(245,158,11,.15);color:var(--gold3);border-color:rgba(245,158,11,.3)}
+.meta-chip-r{background:rgba(239,68,68,.15);color:#fca5a5;border-color:rgba(239,68,68,.3)}
+
+.container{max-width:1100px;margin:0 auto;padding:30px 26px}
+.section{margin-bottom:26px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--rg);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:11px;padding-bottom:6px;border-bottom:2px solid var(--rg3)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:720px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+.card{background:var(--white);border:1.5px solid var(--rg3);border-radius:10px;padding:14px}
+.card-dark{background:var(--navy);border:none;border-radius:10px;padding:14px}
+.card-rg{background:var(--rg2);border:1.5px solid var(--rg3);border-radius:10px;padding:14px}
+.card-gold{background:var(--gold2);border:1.5px solid var(--gold3);border-radius:10px;padding:14px}
+.card-cy{background:var(--cy4);border:1.5px solid var(--cy3);border-radius:10px;padding:14px}
+.card-red{background:var(--red2);border:1.5px solid var(--red3);border-radius:10px;padding:14px}
+.card-purple{background:var(--purple2);border:1.5px solid var(--purple3);border-radius:10px;padding:14px}
+.card-slate{background:var(--slate2);border:1.5px solid #d6d3d1;border-radius:10px;padding:14px}
+.card-navy4{background:var(--navy4);border:1.5px solid #bee3f8;border-radius:10px;padding:14px}
+
+.card h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--navy)}
+.card-dark h3{color:var(--rg3)}
+.card-rg h3{color:var(--rg)}
+.card-gold h3{color:var(--gold)}
+.card-cy h3{color:var(--cy)}
+.card-red h3{color:var(--red)}
+.card-purple h3{color:var(--purple)}
+.card p,.card li{font-size:12.5px;line-height:1.85;color:#374151}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.78);font-size:12.5px;line-height:1.85}
+.card-rg p,.card-rg li{font-size:12.5px;line-height:1.85;color:var(--rg)}
+.card-gold p,.card-gold li{font-size:12.5px;line-height:1.85;color:var(--gold)}
+.card-cy p,.card-cy li{font-size:12.5px;line-height:1.85;color:var(--cy)}
+.card-red p,.card-red li{font-size:12.5px;line-height:1.85;color:var(--red)}
+.card-purple p,.card-purple li{font-size:12.5px;line-height:1.85;color:var(--purple)}
+.card ul{padding-left:14px}.card ul li{margin-bottom:3px}
+.hl-r{color:var(--rg);font-weight:700}
+.hl-g{color:var(--cy);font-weight:700}
+.hl-y{color:var(--gold);font-weight:700}
+.hl-n{color:var(--navy2);font-weight:700}
+
+/* 流程箭頭 */
+.flow{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin:6px 0}
+.flow-box{border-radius:6px;padding:5px 10px;font-size:12px;font-weight:500}
+.flow-arrow{color:var(--muted);font-size:14px}
+
+/* 毛利條 */
+.margin-bar{display:flex;height:28px;border-radius:7px;overflow:hidden;margin:8px 0;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.mb-seg{display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:10px;font-weight:700;color:var(--white)}
+
+.page-footer{background:var(--navy);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--rg3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-dots"></div>
+  <div class="ph-glow-l"></div>
+  <div class="ph-glow-r"></div>
+  <div class="ph-eyebrow">損益表護城河 × IP毛利 × 奢侈品品牌策略</div>
+  <div class="ph-title">從<em>雲豹到勞力士</em>：護城河的四種形態 × IP百分百毛利 × 配錶與黑名單</div>
+  <div class="ph-sub">Curry 成長延續性 × 漁電共生 × 清算順位 × 授權金 ≈ 100% 毛利率 × AP 王陽明事件</div>
+  <div class="ph-meta">
+    <span class="meta-chip">2026.06.27</span>
+    <span class="meta-chip">Cavin</span>
+    <span class="meta-chip meta-chip-g">雲豹三階成長</span>
+    <span class="meta-chip meta-chip-r">森崴 2億 vs 台電 200億</span>
+    <span class="meta-chip meta-chip-y">勞力士配錶機制</span>
+    <span class="meta-chip">Rock 老師</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 損益表解析 + 好公司定義 -->
+  <div class="section">
+    <div class="section-label">P&L Moat · 損益表與護城河</div>
+    <div class="section-title">Curry 成長哲學 × 損益表兩層判讀：毛利看商模、淨利看紀律</div>
+    <div class="grid-2">
+      <div>
+        <div class="card card-dark" style="margin-bottom:11px">
+          <h3>🏀 Curry 比喻：好公司的成長延續性</h3>
+          <p style="margin-bottom:8px">評估好球員，不只看第一季——更要看第二季、第三季能否持續成長。</p>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="background:rgba(255,255,255,.08);border-radius:6px;padding:8px 10px;font-size:12.5px">
+              <div style="color:var(--rg3);font-weight:700;margin-bottom:2px">問題一：只會投三分</div>
+              <div style="color:rgba(255,255,255,.75)">對手很快找到防守策略 → 必須開發切入、中距離等多元得分手段。</div>
+            </div>
+            <div style="background:rgba(255,255,255,.08);border-radius:6px;padding:8px 10px;font-size:12.5px">
+              <div style="color:var(--gold3);font-weight:700;margin-bottom:2px">商業版本：酒吧雨後春筍</div>
+              <div style="color:rgba(255,255,255,.75)">大安區某家酒吧賺錢 → 競爭者湧入瓜分市場。<strong style="color:#fff">企業必須找「多元收入管道」</strong>才能持續成長，否則只是曇花一現。</div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>📊 損益表兩層護城河判讀</h3>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
+            <div style="background:var(--rg2);border:1px solid var(--rg3);border-radius:7px;padding:9px 11px">
+              <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--rg);margin-bottom:4px">LAYER 1 · 毛利率</div>
+              <div style="font-size:12.5px;color:var(--rg)"><strong>毛利高 = 商業模式好</strong>——代表產品有定價力、商模設計優良。競爭對手難以複製的「結構性」優勢。</div>
+            </div>
+            <div style="background:var(--navy4);border:1px solid #bee3f8;border-radius:7px;padding:9px 11px">
+              <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--navy2);margin-bottom:4px">LAYER 2 · 營業淨利率</div>
+              <div style="font-size:12.5px;color:var(--navy2)"><strong>淨利高 = 費用控管能力佳</strong>——代表管理層紀律嚴謹，不燒多餘的行銷費或管理費。</div>
+            </div>
+            <div style="background:var(--slate2);border-radius:7px;padding:9px 11px;font-size:12.5px;color:var(--slate)">
+              <strong>⚠ 高毛利 ≠ 高淨利：</strong>研發費、管銷費若龐大，頂端的毛利優勢會在底部被消耗殆盡（IP/生技公司常見）。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card card-cy">
+          <h3>⚡ 雲豹能源：三階段成長引擎解剖</h3>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-top:5px">
+            <div style="background:var(--white);border-radius:8px;padding:9px 11px">
+              <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--cy);margin-bottom:4px">PHASE 1 · 太陽能建置</div>
+              <div style="font-size:12.5px;color:#374151">漁電共生模式：南部養魚場上架太陽能板<br>
+                <span style="color:var(--cy)">魚農</span>多一份電費收入、
+                <span style="color:var(--navy2)">政府</span>達成綠能目標、
+                <span style="color:var(--cy)">雲豹</span>賺建置費 = <strong>Win³</strong>
+              </div>
+              <div style="background:var(--red2);border-radius:5px;padding:5px 9px;margin-top:5px;font-size:12px;color:var(--red)">
+                ⚠ 痛點：建置是<strong>一次性生意</strong>，完成後沒有後續的大幅經常性收入。
+              </div>
+            </div>
+            <div style="background:var(--white);border-radius:8px;padding:9px 11px">
+              <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--cy);margin-bottom:4px">PHASE 2 · 儲能貨櫃站</div>
+              <div style="font-size:12.5px;color:#374151">火力發電瞬間量大但難以精準控制、多餘電力只能浪費（上海街道打燈）→ 台灣同樣痛點 → 雲豹順勢跨入<strong>貨櫃型儲能站</strong>建置。</div>
+            </div>
+            <div style="background:var(--white);border-radius:8px;padding:9px 11px">
+              <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--gold);margin-bottom:4px">PHASE 3 · 資本市場操作</div>
+              <div style="font-size:12.5px;color:#374151">財務長兼發言人賴品妤（三孩之母會計師），法說會簡報極度出色。上市前<strong>財務數字精心包裝 + 極高股利發放率</strong> → 創造上市轟動。</div>
+            </div>
+          </div>
+          <div style="background:var(--white);border-radius:7px;padding:7px 10px;margin-top:6px;font-size:12px;color:var(--cy)">
+            <strong>延伸：</strong>Google × Gogoro 換電站構想 = 微型儲能雙向交易（低峰存電、高峰回流）——與雲豹大型儲能邏輯相通，資源充分利用才是終極護城河。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 倒閉風險 + IP毛利 -->
+  <div class="section">
+    <div class="section-label">Risk + IP Margin · 風險與IP毛利率</div>
+    <div class="section-title">2億資本接200億合約的下場 × 無限責任陷阱 × IP授權的百分百毛利</div>
+    <div class="grid-3">
+      <div class="card card-red">
+        <h3>💥 森崴能源：槓桿失控的教訓</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:8px">
+          <div style="background:var(--white);border-radius:6px;padding:8px 10px;text-align:center">
+            <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:var(--red)">2億</div>
+            <div style="font-size:11px;color:var(--muted)">公司資本額</div>
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:8px 10px;text-align:center">
+            <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:var(--red)">200億</div>
+            <div style="font-size:11px;color:var(--muted)">台電合約金額</div>
+          </div>
+        </div>
+        <ul>
+          <li>財報「或有事項」揭露了異常訊號</li>
+          <li>台電是穩定國企，但<strong>自身履約能力不足</strong> → 交不出貨</li>
+          <li>背後有郭台強（郭台銘之弟）光環，市場原以為「大到不倒」</li>
+          <li>現實：賠不出來，最終倒閉下市</li>
+        </ul>
+        <div style="background:var(--white);border-radius:7px;padding:8px 10px;margin-top:7px;font-size:12px;color:var(--red)">
+          <strong>清算順位鐵律：</strong>銀行 > 廠商 > 員工 > <strong>股東（拿壁紙）</strong>。股份有限公司有限責任的代價：最多賠光出資額，但幾乎注定一毛拿不回來。
+        </div>
+      </div>
+
+      <div class="card card-purple">
+        <h3>⚠ 會計師的無限責任困境</h3>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
+          <div style="background:var(--white);border-radius:6px;padding:8px 10px;font-size:12.5px">
+            <span style="font-weight:700;color:var(--purple)">表面光環：</span>千萬年薪的「三師」之一
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:8px 10px;font-size:12.5px">
+            <span style="font-weight:700;color:var(--purple)">真實風險：</span>查帳/簽證疏失 → 求償以「億」計算
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:8px 10px;font-size:12.5px">
+            <span style="font-weight:700;color:var(--purple)">無限責任：</span>一年賺 1500 萬，一次賠償讓人傾家蕩產
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:8px 10px;font-size:12.5px">
+            <span style="font-weight:700;color:var(--purple)">合法內線：</span>身處企業資訊核心，但壓力與風險極高
+          </div>
+        </div>
+        <div style="background:var(--white);border-radius:7px;padding:8px 10px;margin-top:6px;font-size:12px;color:var(--purple)">
+          <strong>Rock 老師結語：</strong>賺錢固然重要，但「晚上能睡得著覺」才是最健康的人生追求。
+        </div>
+      </div>
+
+      <div class="card card-gold">
+        <h3>💡 IP授權：毛利率趨近 100% 的秘密</h3>
+        <div style="margin:8px 0">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:4px">毛利率結構對比</div>
+          <div class="margin-bar">
+            <div class="mb-seg" style="width:15%;background:#ef4444">成本</div>
+            <div class="mb-seg" style="width:85%;background:var(--cy2)">毛利 85%（製造業高水準）</div>
+          </div>
+          <div class="margin-bar">
+            <div class="mb-seg" style="width:2%;background:#ef4444"></div>
+            <div class="mb-seg" style="width:98%;background:linear-gradient(90deg,var(--gold4),#fbbf24)">毛利 ≈ 100%（IP授權）</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <div style="background:var(--white);border-radius:6px;padding:7px 9px;font-size:12.5px;color:var(--gold)">
+            <strong>核心原理：</strong>將技術/專利授權給他人製造，收取權利金 — 每一塊收入幾乎<strong>零製造成本</strong>。
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:7px 9px;font-size:12.5px;color:var(--gold)">
+            <strong>⚠ 高毛利 ≠ 高淨利：</strong>背後可能隱藏龐大研發費（生技公司尤其如此）。
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:7px 9px;font-size:12.5px;color:var(--gold)">
+            <strong>教育IP化：</strong>Rock 老師案例 — 線上課程錄製一次、無限次販售，知識「槓桿化」。不需反覆耗時講解，這就是個人版 IP 授權。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 品牌護城河 奢侈品 -->
+  <div class="section">
+    <div class="section-label">Brand Moat · 品牌護城河</div>
+    <div class="section-title">勞力士配錶機制 × 二手比全新貴 × AP 封殺王陽明：品牌控制權的最高境界</div>
+    <div class="grid-2">
+      <div>
+        <div class="card card-rg" style="margin-bottom:11px">
+          <h3>⌚ 勞力士：總量管制 × 配錶的商業極意</h3>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
+            <div style="background:var(--white);border-radius:6px;padding:8px 10px;font-size:12.5px;color:var(--rg)">
+              <strong>迷思破解：</strong>買不到熱門款（黑水鬼）並非產能不足，不鏽鋼熱門款與半金冷門款產量相近——一切都是<strong>「總量管制」策略</strong>。
+            </div>
+            <div style="background:var(--white);border-radius:6px;padding:8px 10px;font-size:12.5px;color:var(--rg)">
+              <strong>Bundle Sales 配錶機制：</strong>走進 AD 店（如信義區金生儀）→ 不可能直接用定價買到熱門款 → 必須先買 Tudor 帝舵或半金冷門款，累積「消費額度」後才能排隊購買熱門款。
+            </div>
+            <div style="background:var(--white);border-radius:6px;padding:8px 10px;font-size:12.5px;color:var(--rg)">
+              <strong>利潤最大化的極致：</strong>消費者對熱門單品的極度渴望，成功驅動店內所有難賣庫存一併清空——<strong>零庫存 + 最大化利潤</strong>，同時製造。
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>💹 二手比全新貴：溢價現象打破消費邏輯</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+            <div style="background:var(--slate2);border-radius:7px;padding:9px 10px;text-align:center">
+              <div style="font-size:11px;color:var(--muted);margin-bottom:3px">日本中野二手報價</div>
+              <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:var(--rg)">38萬</div>
+              <div style="font-size:11px;color:var(--muted)">6年前無曆黑水鬼（二手）</div>
+            </div>
+            <div style="background:var(--cy4);border-radius:7px;padding:9px 10px;text-align:center">
+              <div style="font-size:11px;color:var(--muted);margin-bottom:3px">官方定價（全新）</div>
+              <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:var(--cy)">34萬</div>
+              <div style="font-size:11px;color:var(--muted)">現行款官方售價</div>
+            </div>
+          </div>
+          <div style="background:var(--rg2);border-radius:7px;padding:8px 10px;font-size:12.5px;color:var(--rg)">
+            <strong>品牌價值的最高境界：</strong>消費者明知道遊戲規則不合理——二手比全新貴、必須配買冷門款——卻依然心甘情願「跟著玩」，甚至向他人推廣。官方定價只是參考，真正的價格由二級市場的<strong>稀缺性</strong>決定。
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card card-dark" style="margin-bottom:11px">
+          <h3>👑 AP（愛彼）：直營策略 × 品牌控制的極致</h3>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
+            <div style="background:rgba(255,255,255,.08);border-radius:6px;padding:9px 10px;font-size:12.5px">
+              <div style="color:var(--rg3);font-weight:700;margin-bottom:2px">取消經銷商，全面直營</div>
+              <div style="color:rgba(255,255,255,.75)">避免經銷商將熱門款分配給特定客戶或黃牛 → AP 在信義區設立多家直營專櫃，<strong style="color:#fff">親自篩選「誰是好客人」</strong>，嚴格控管手錶流向。</div>
+            </div>
+            <div style="background:rgba(255,255,255,.08);border-radius:6px;padding:9px 10px;font-size:12.5px">
+              <div style="color:var(--gold3);font-weight:700;margin-bottom:2px">🎭 王陽明黑名單事件</div>
+              <div style="color:rgba(255,255,255,.75)">約3年前，藝人王陽明在公開市場<strong style="color:#fff">轉售</strong>從 AP 專櫃取得的手錶 → 觸犯品牌大忌 → AP 官方震怒，將其列入<strong style="color:#fff">黑名單</strong> → 王陽明氣得將手上所有 AP 全數出清。</div>
+            </div>
+          </div>
+          <div style="background:rgba(251,182,196,.15);border-radius:7px;padding:8px 10px;margin-top:7px;font-size:12px;color:var(--rg3)">
+            頂級品牌的護城河 = 對「控制權」的極度捍衛。不只控制產品，更要控制<strong>誰能擁有</strong>這個產品，以及<strong>它的下一個去向</strong>。
+          </div>
+        </div>
+        <div class="card card-slate">
+          <h3>🗺 四種護城河：從損益表到品牌的全光譜</h3>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
+            <div style="display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--white);border-radius:6px;font-size:12.5px">
+              <span style="font-size:16px">🔬</span>
+              <div><span style="font-weight:700;color:var(--cy)">技術/專利護城河</span> → 毛利率趨近100%（生技、IP授權）</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--white);border-radius:6px;font-size:12.5px">
+              <span style="font-size:16px">⚡</span>
+              <div><span style="font-weight:700;color:var(--cy)">產業轉型護城河</span> → 從生態圈延伸（雲豹：太陽能→儲能）</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--white);border-radius:6px;font-size:12.5px">
+              <span style="font-size:16px">👑</span>
+              <div><span style="font-weight:700;color:var(--rg)">品牌護城河</span> → 稀缺性 + 控制權（勞力士、AP）</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--white);border-radius:6px;font-size:12.5px">
+              <span style="font-size:16px">📚</span>
+              <div><span style="font-weight:700;color:var(--gold)">知識IP護城河</span> → 個人版授權（線上課程�槓桿化）</div>
+            </div>
+          </div>
+          <div style="background:var(--white);border-radius:7px;padding:8px 10px;margin-top:7px;font-size:12px;color:var(--slate)">
+            <strong>底層邏輯：</strong>所有護城河的本質都是「讓競爭者難以複製」。複製成本越高，護城河就越深，毛利率也就越能維持在高位。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">Cavin · 損益表護城河×IP毛利×奢侈品品牌學 · 2026.06.27</div>
+</div>
+
+</body>
+</html>
