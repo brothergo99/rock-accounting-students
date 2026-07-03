@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>直播財報×稅法三種×網紅稅×國稅局終極戰略 · Cavin 0630</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ch:#1c1c2e;--ch2:#f0f0f5;--ch3:#9090b8;--ch4:#4040a0;
+  --go:#854d0e;--go2:#fefce8;--go3:#fde047;--go4:#ca8a04;
+  --or:#c2410c;--or2:#fff7ed;--or3:#fed7aa;--or4:#ea580c;
+  --em:#065f46;--em2:#ecfdf5;--em3:#6ee7b7;--em4:#d1fae5;
+  --red:#991b1b;--red2:#fff1f2;--red3:#fecdd3;
+  --sky:#0c4a6e;--sky2:#f0f9ff;--sky3:#7dd3fc;
+  --vi:#4c1d95;--vi2:#f5f3ff;--vi3:#c4b5fd;
+  --navy:#0a0a18;--navy2:#12122a;
+  --white:#fff;--ink:#0a0a1e;--muted:#5c5c7a;--bg:#f4f4f8;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+.page-header{background:linear-gradient(150deg,#06060e,#0e0e1e,#16162e,#0c0c20,#06060e);padding:42px 50px 36px;position:relative;overflow:hidden;border-bottom:3px solid var(--go3)}
+.ph-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(253,224,71,.06) 1px,transparent 1px);background-size:24px 24px;pointer-events:none}
+.ph-g1{position:absolute;top:-60px;right:-50px;width:280px;height:280px;background:radial-gradient(circle,rgba(202,138,4,.18),transparent 65%);pointer-events:none}
+.ph-g2{position:absolute;bottom:-40px;left:-30px;width:220px;height:220px;background:radial-gradient(circle,rgba(64,64,160,.15),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(253,224,71,.7);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(15px,2.3vw,23px);font-weight:900;color:#fff;line-height:1.25;margin-bottom:4px}
+.ph-title em{color:var(--go3);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.4);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mc{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(253,224,71,.12);color:var(--go3);border:1px solid rgba(253,224,71,.28)}
+.mc-r{background:rgba(234,88,12,.15);color:var(--or3);border-color:rgba(234,88,12,.3)}
+.mc-g{background:rgba(5,150,105,.15);color:var(--em3);border-color:rgba(5,150,105,.3)}
+.mc-v{background:rgba(76,29,149,.2);color:var(--vi3);border-color:rgba(76,29,149,.3)}
+
+.container{max-width:1100px;margin:0 auto;padding:30px 26px}
+.section{margin-bottom:26px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--go4);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--go3)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+
+.card{background:var(--white);border:1.5px solid var(--go3);border-radius:10px;padding:14px}
+.card-go{background:var(--go2);border:1.5px solid var(--go3);border-radius:10px;padding:14px}
+.card-or{background:var(--or2);border:1.5px solid var(--or3);border-radius:10px;padding:14px}
+.card-em{background:var(--em4);border:1.5px solid var(--em3);border-radius:10px;padding:14px}
+.card-dark{background:var(--navy);border:none;border-radius:10px;padding:14px}
+.card-vi{background:var(--vi2);border:1.5px solid var(--vi3);border-radius:10px;padding:14px}
+.card-sky{background:var(--sky2);border:1.5px solid var(--sky3);border-radius:10px;padding:14px}
+.card-ch{background:var(--ch2);border:1.5px solid var(--ch3);border-radius:10px;padding:14px}
+
+.card h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--navy)}
+.card-go h3{color:var(--go)}
+.card-or h3{color:var(--or)}
+.card-em h3{color:var(--em)}
+.card-dark h3{color:var(--go3)}
+.card-vi h3{color:var(--vi)}
+.card-sky h3{color:var(--sky)}
+.card-ch h3{color:var(--ch4)}
+.card p,.card li{font-size:12.5px;line-height:1.85;color:#374151}
+.card-go p,.card-go li{color:var(--go);font-size:12.5px;line-height:1.85}
+.card-or p,.card-or li{color:var(--or);font-size:12.5px;line-height:1.85}
+.card-em p,.card-em li{color:var(--em);font-size:12.5px;line-height:1.85}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.78);font-size:12.5px;line-height:1.85}
+.card-vi p,.card-vi li{color:var(--vi);font-size:12.5px;line-height:1.85}
+.card-sky p,.card-sky li{color:var(--sky);font-size:12.5px;line-height:1.85}
+.card-ch p,.card-ch li{color:var(--ch4);font-size:12.5px;line-height:1.85}
+.card ul{padding-left:14px}.card ul li{margin-bottom:3px}
+
+.badge{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:3px;margin:2px 2px 0 0}
+.bg{background:var(--em4);color:var(--em);border:1px solid var(--em3)}
+.br{background:var(--red2);color:var(--red);border:1px solid var(--red3)}
+.by{background:var(--go2);color:var(--go4);border:1px solid var(--go3)}
+.bv{background:var(--vi2);color:var(--vi);border:1px solid var(--vi3)}
+.bo{background:var(--or2);color:var(--or);border:1px solid var(--or3)}
+
+/* KPI */
+.kpi{text-align:center;padding:10px 7px}
+.kpi-val{font-family:'Playfair Display',serif;font-size:clamp(18px,2vw,24px);font-weight:900;line-height:1.1}
+.kpi-lbl{font-size:11px;color:var(--muted);margin-top:3px}
+.kpi-sub{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px}
+
+/* 稅種對比 */
+.tax-card{border-radius:8px;padding:10px 13px;margin-bottom:6px}
+.tax-title{font-size:12.5px;font-weight:700;margin-bottom:3px}
+.tax-body{font-size:12px;line-height:1.7}
+
+/* 戰略步驟 */
+.step{display:flex;gap:10px;align-items:flex-start;padding:9px 11px;border-radius:7px;margin-bottom:5px;background:rgba(255,255,255,.06)}
+.step-num{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--go3);flex-shrink:0;min-width:20px}
+.step-text{font-size:12.5px;color:rgba(255,255,255,.82);line-height:1.7}
+.step-text strong{color:#fff}
+
+.page-footer{background:var(--navy);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--go3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-dots"></div>
+  <div class="ph-g1"></div>
+  <div class="ph-g2"></div>
+  <div class="ph-eyebrow">L公司直播財報 × 稅法三種 × 娛樂稅 × 網紅稅 × 國稅局終極戰略</div>
+  <div class="ph-title">國稅局不是要收<em>網紅的稅</em>，<br>它要用網紅的數據把 <em>YouTube、TikTok 逼上岸</em></div>
+  <div class="ph-sub">L公司營業利潤翻7倍 × 稅法任性本質 × 娃娃機擋板高度定生死 × 靠行解法 × 草船借箭收網行動</div>
+  <div class="ph-meta">
+    <span class="mc">2026.06.30</span>
+    <span class="mc">Cavin</span>
+    <span class="mc mc-g">L公司毛利率 24%→30%</span>
+    <span class="mc mc-r">網紅稅 月5萬起課</span>
+    <span class="mc mc-v">境外電商60萬落地門檻</span>
+    <span class="mc">Rock 老師</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: 直播財報 -->
+  <div class="section">
+    <div class="section-label">Part 1 · Live Streaming P&amp;L · L公司財報解析：低邊際成本+費用控制=獲利爆發</div>
+    <div class="section-title">推銷費砍20%、通路改官網儲值、避開蘋果Google抽成——營業利潤從4千萬翻至3.5億（7倍）</div>
+    <div class="grid-4" style="margin-bottom:12px">
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--ch4)">28～32億</div>
+        <div class="kpi-lbl">合併營收（2025年）</div>
+        <div class="kpi-sub">幾乎全來自台灣抖內</div>
+      </div>
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--go4)">~30%</div>
+        <div class="kpi-lbl">營業毛利率</div>
+        <div class="kpi-sub">去年 23.69%（+6pts）</div>
+        <div class="badge by" style="margin-top:5px">大幅改善</div>
+      </div>
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--em)">3.5億</div>
+        <div class="kpi-lbl">營業淨利</div>
+        <div class="kpi-sub">去年僅 4,000萬</div>
+        <div class="badge bg" style="margin-top:5px">+7倍 🚀</div>
+      </div>
+      <div class="card kpi">
+        <div class="kpi-val" style="color:var(--or)">−20%</div>
+        <div class="kpi-lbl">推銷費用</div>
+        <div class="kpi-sub">省下~4千萬</div>
+        <div class="badge bo" style="margin-top:5px">直轉純利潤</div>
+      </div>
+    </div>
+    <div class="grid-3">
+      <div class="card card-go">
+        <h3>📱 通路抽成優化：蘋果Google的25%怪獸</h3>
+        <ul>
+          <li>用戶原本透過 App Store / Google Play 儲值，平台被抽 <strong>25%</strong> 通路費</li>
+          <li>平台引導用戶改至「<strong>官方網站</strong>」儲值，成功繞開高額抽成</li>
+          <li>同步優化對經紀公司的分潤機制，使整體營業成本大幅下降</li>
+          <li>推銷費、管理費、研發費：後兩者持平，唯有推銷費主動砍了20%</li>
+        </ul>
+        <div class="badge by" style="margin-top:7px">省下的4千萬 = 100%純利</div>
+      </div>
+      <div class="card card-em">
+        <h3>⚡ 直播業的低邊際成本護城河</h3>
+        <ul>
+          <li>平台一旦建置完成，大量用戶湧入<strong>不成比例增加成本</strong>（僅需維持基本伺服器流量）</li>
+          <li>核心驅動力是「<strong>人</strong>」：找到能吸金的主播辦活動，營收無限堆疊</li>
+          <li>低成本 × 高槓桿 = 規模化後的獲利爆炸（Operating Leverage）</li>
+        </ul>
+        <div style="background:var(--white);border-radius:7px;padding:8px 11px;margin-top:7px;font-size:12px;color:var(--em)">
+          <strong>直播帶貨：</strong>新變現管道，但非全新商業模式，後續效益仍待觀察。
+        </div>
+      </div>
+      <div class="card card-dark">
+        <h3>💡 為何「人」是直播最大的成本與護城河？</h3>
+        <p style="margin-bottom:6px">直播與 SaaS 最大的不同：軟體可以無限複製，但「能讓粉絲心甘情願砸錢的魅力型主播」無法複製。</p>
+        <div style="background:rgba(255,255,255,.08);border-radius:6px;padding:8px 10px;font-size:12px;color:rgba(255,255,255,.82)">
+          → 主播是平台的核心資產，也是最大的流失風險。平台必須用<strong style="color:#fff">分潤機制 + 生態系黏著度</strong>留住頂級主播。這就是為什麼 L 公司斥重金建置 VIP 旗艦直播室（見資本支出6億）。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: 稅法三種 + 娃娃機 -->
+  <div class="section">
+    <div class="section-label">Part 2 + 3 · Tax Basics + Claw Machine · 稅法三種觀念 × 娃娃機擋板高度定性娛樂稅</div>
+    <div class="section-title">稅法本質就是「政府任性收錢」：所得稅 × 營業稅 × 娛樂稅——三種完全不同的課稅邏輯</div>
+    <div class="grid-2">
+      <div>
+        <div class="card" style="margin-bottom:12px">
+          <h3>🏛 三大稅種的本質差異</h3>
+          <div class="tax-card" style="background:var(--em4);border:1.5px solid var(--em3)">
+            <div class="tax-title" style="color:var(--em)">① 所得稅 / 營所稅：針對「淨利」課稅</div>
+            <div class="tax-body" style="color:var(--em)">有賺才課。企業：營收 − 成本費用 = 淨利 × 稅率。個人：薪資、執業所得等各類收入申報綜所稅。<strong>有賺錢才需要繳。</strong></div>
+          </div>
+          <div class="tax-card" style="background:var(--sky2);border:1.5px solid var(--sky3)">
+            <div class="tax-title" style="color:var(--sky)">② 營業稅：針對「銷售行為」課稅（屬地主義）</div>
+            <div class="tax-body" style="color:var(--sky)">只要在台灣境內有銷售貨物或勞務，就要開發票繳5%。<strong>實質負擔者是買方（消費者）</strong>；賣方只是代收代付角色，向消費者預收稅款後轉交政府。</div>
+          </div>
+          <div class="tax-card" style="background:var(--or2);border:1.5px solid var(--or3)">
+            <div class="tax-title" style="color:var(--or)">③ 娛樂稅：針對「休閒娛樂消費」課稅</div>
+            <div class="tax-body" style="color:var(--or)">在特定實體娛樂場所發生的消費課稅。常見於KTV、遊樂場、電動玩具等——並延伸至夾娃娃機。</div>
+          </div>
+          <div style="background:var(--ch2);border-radius:7px;padding:8px 11px;margin-top:5px;font-size:12px;color:var(--ch4)">
+            <strong>Rock 老師核心觀念：</strong>稅法本質是「政府向人民收錢的手段」。解釋權完全在官方，國稅局說了算——稅制常常是<strong>任性</strong>的。
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-or">
+        <h3>🪆 娃娃機實戰：擋板高度如何定義稅種</h3>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px">
+          <div style="background:var(--white);border-radius:7px;padding:9px 11px">
+            <div style="font-size:12px;color:var(--muted);margin-bottom:2px">「二房東」商業模式</div>
+            <div style="font-size:12.5px;color:#374151">大老闆承租場地購台 → 個別台主租機台（二房東），自主決定商品、難度、保夾金額。法律上稱「<strong>選物販賣機</strong>」，小規模免發票。</div>
+          </div>
+          <div style="background:var(--white);border-radius:7px;padding:9px 11px">
+            <div style="font-size:12px;color:var(--or);font-weight:700;margin-bottom:2px">⚔️ 產業內卷（Involution）</div>
+            <div style="font-size:12.5px;color:var(--or)">老鳥台主找菜鳥台主的「槍位」，花50元把成本200元的公仔夾走放自己機台。<br>菜鳥現虧150元 → 被迫調高擋板難度。</div>
+          </div>
+          <div style="background:var(--or2);border-radius:7px;padding:9px 11px;border:1.5px solid var(--or3)">
+            <div style="font-size:12.5px;color:var(--or);font-weight:700;margin-bottom:4px">🔍 國稅局裁定邏輯（關鍵！）</div>
+            <div style="display:flex;gap:7px">
+              <div style="flex:1;background:var(--white);border-radius:6px;padding:7px 9px;font-size:12px;color:var(--em)">
+                <strong>擋板低→容易夾</strong><br>= 選物販賣機 ✅<br>免課娛樂稅
+              </div>
+              <div style="display:flex;align-items:center;font-size:14px;color:var(--or4)">→</div>
+              <div style="flex:1;background:var(--white);border-radius:6px;padding:7px 9px;font-size:12px;color:var(--red)">
+                <strong>擋板高→需要技術</strong><br>= 娛樂/博弈性質 ❌<br>補繳娛樂稅！
+              </div>
+            </div>
+          </div>
+          <div style="background:var(--white);border-radius:7px;padding:8px 11px;font-size:12px;color:var(--or)">
+            <strong>洞見：</strong>機台擋板的「高度」，就是國稅局判定稅種的唯一標準。這完美詮釋了稅局如何找到各種名目擴展稅收範圍。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: 網紅稅 + 靠行 + 終極戰略 -->
+  <div class="section">
+    <div class="section-label">Part 4 + 5 + 6 · Influencer Tax + Agency + Ultimate Strategy · 網紅稅×靠行解法×草船借箭收網行動</div>
+    <div class="section-title">網紅稅的真正目標不是網紅——是用網紅數據把 Google、Apple、TikTok 全部逼上岸繳稅</div>
+    <div class="grid-3">
+      <div>
+        <div class="card card-vi" style="margin-bottom:12px">
+          <h3>📲 網紅稅：核心是「營業稅」而非所得稅</h3>
+          <ul style="margin-bottom:8px">
+            <li>網紅已申報個人「執行業務所得 / 稿費」，為何還被追稅？</li>
+            <li>稅局新追討的是<strong>營業稅</strong>：提供勞務、直播表演、販售線上課程 = 銷售行為 = 需課5%</li>
+          </ul>
+          <div style="background:var(--white);border-radius:7px;padding:9px 11px;margin-bottom:7px">
+            <div style="text-align:center">
+              <div style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--vi)">月 NT$ 50,000</div>
+              <div style="font-size:11.5px;color:var(--muted);margin-top:2px">網紅營業稅起徵門檻</div>
+              <div class="badge bv" style="margin-top:4px">超過即需稅籍登記</div>
+            </div>
+          </div>
+          <div style="font-size:12px;color:var(--vi)">每月分潤超過5萬，就必須主動辦稅籍登記、定期申報——對「魅力值滿、財務知識趨近零」的素人主播是行政災難。</div>
+        </div>
+        <div class="card card-em">
+          <h3>🤝 靠行解法：經紀公司如何化解稅務地雷</h3>
+          <ul style="margin-bottom:7px">
+            <li>主播加入<strong>經紀公司</strong>，由公司出面與平台簽約</li>
+            <li>平台撥款給公司（企業開發票），主播個人僅申報薪資或執業所得</li>
+            <li>完美避開個人開立發票與稅籍登記的義務</li>
+          </ul>
+          <div style="background:var(--white);border-radius:7px;padding:8px 11px;font-size:12px;color:var(--em)">
+            <strong>議價附加價值：</strong>「我手上有幾位超級大主播，你要大主播，就必須連同50個小主播一起簽，且要給更高分潤。」<br>——等同NBA球員的超級經紀人策略，中間人反而帶來超額報酬。
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-dark" style="grid-column:span 2">
+        <h3>♟ 國稅局的終極棋局：草船借箭，逼境外巨頭落地</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+          <div>
+            <div style="font-size:11px;color:rgba(255,255,255,.45);font-family:'DM Mono',monospace;margin-bottom:7px">四步收網行動</div>
+            <div class="step">
+              <div class="step-num">01</div>
+              <div class="step-text">對網紅實施<strong>月5萬</strong>超低起徵點，製造焦慮感，逼迫所有創作者主動申報</div>
+            </div>
+            <div class="step">
+              <div class="step-num">02</div>
+              <div class="step-text">網紅為了爭取<strong>境外0%稅率</strong>，主動向 YouTube、TikTok 索取「抖內國家來源數據」</div>
+            </div>
+            <div class="step">
+              <div class="step-num">03</div>
+              <div class="step-text">全台灣創作者提交境內/境外銷售明細 → 稅局<strong>免費取得</strong>大量底層真實數據</div>
+            </div>
+            <div class="step">
+              <div class="step-num">04</div>
+              <div class="step-text">AI大數據交叉比對 → 精確算出 YouTube、TikTok <strong>在台灣的真實年度總銷售額</strong></div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:11px;color:rgba(255,255,255,.45);font-family:'DM Mono',monospace;margin-bottom:7px">結果：境外電商全數落地</div>
+            <div style="background:rgba(253,224,71,.1);border-radius:8px;padding:11px 13px;margin-bottom:8px">
+              <div style="font-size:12.5px;color:var(--go3);font-weight:700;margin-bottom:4px">境外電商落地門檻</div>
+              <div style="font-family:'DM Mono',monospace;font-size:18px;color:#fff;font-weight:700">年銷售額 60萬 NTD</div>
+              <div style="font-size:11.5px;color:rgba(255,255,255,.55);margin-top:3px">超過即須辦稅籍登記並繳納5%營業稅<br>TikTok的60萬可能只是一小時的營收</div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px">
+              <span class="badge by">Google ✅</span>
+              <span class="badge by">Apple ✅</span>
+              <span class="badge by">Meta ✅</span>
+              <span class="badge by">OpenAI ✅</span>
+              <span class="badge by">Uber ✅</span>
+              <span class="badge by">Netflix ✅</span>
+              <span class="badge by">YouTube ✅</span>
+              <span class="badge by">TikTok ✅</span>
+            </div>
+            <div style="background:rgba(255,255,255,.07);border-radius:7px;padding:9px 11px;font-size:12.5px;color:rgba(255,255,255,.82)">
+              以上境外巨頭，目前全數乖乖在台灣取得統一編號並開立發票。
+            </div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div style="background:rgba(255,255,255,.06);border-radius:7px;padding:9px 11px;font-size:12.5px;color:rgba(255,255,255,.82)">
+            <strong style="color:var(--go3)">境內 vs 境外稅率差異：</strong><br>
+            台灣IP消費抖內 → 屬境內交易 → <strong style="color:#fff">5%</strong> 營業稅<br>
+            日本/美國IP消費 → 屬境外 → <strong style="color:var(--em3)">0%</strong> 稅率<br>
+            網紅無法「外加」稅金，5%直接從利潤扣——是真實痛點。
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:7px;padding:9px 11px;font-size:12.5px;color:rgba(255,255,255,.82)">
+            <strong style="color:var(--go3)">Rock 老師最終洞見：</strong><br>
+            國稅局根本不是要向幾千個網紅收那微薄的稅（行政成本不划算）。它是用網紅作「草船」，借到了精確的境外電商台灣銷售數據，把數十億規模的稅收一次收回來。這是<strong style="color:#fff">教科書級別的行政策略</strong>。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">Cavin · 直播財報×稅法三種×網紅稅×國稅局終極戰略 · 2026.06.30</div>
+</div>
+
+</body>
+</html>
