@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>診所財報架構×群創折舊案例×現金流直接法 · April 0701</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --tl:#0f4c6e;--tl2:#e8f4fa;--tl3:#7bc4e2;--tl4:#1a7aab;
+  --co:#b94040;--co2:#fdf0f0;--co3:#f4a0a0;--co4:#e06060;
+  --em:#065f46;--em2:#ecfdf5;--em3:#6ee7b7;--em4:#d1fae5;
+  --amb:#92400e;--amb2:#fffbeb;--amb3:#fde68a;--amb4:#f59e0b;
+  --plum:#5b2c6f;--plum2:#f5eef8;--plum3:#c39bd3;
+  --sky:#164e63;--sky2:#ecfeff;--sky3:#67e8f9;
+  --navy:#0a1628;--navy2:#132540;
+  --white:#fff;--ink:#0d2137;--muted:#5e7a8a;--bg:#f0f7fb;
+  --slate:#334155;--slate2:#f1f5f9;--slate3:#e2e8f0;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+.page-header{background:linear-gradient(150deg,#030d14,#081828,#0a2035,#071525,#030a12);padding:42px 50px 36px;position:relative;overflow:hidden;border-bottom:3px solid var(--tl3)}
+.ph-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(123,196,226,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(123,196,226,.05) 1px,transparent 1px);background-size:32px 32px;pointer-events:none}
+.ph-g1{position:absolute;top:-60px;right:-50px;width:280px;height:280px;background:radial-gradient(circle,rgba(26,122,171,.22),transparent 65%);pointer-events:none}
+.ph-g2{position:absolute;bottom:-40px;left:-30px;width:220px;height:220px;background:radial-gradient(circle,rgba(176,56,56,.12),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(123,196,226,.7);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(15px,2.3vw,23px);font-weight:900;color:#fff;line-height:1.25;margin-bottom:4px}
+.ph-title em{color:var(--amb3);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.4);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mc{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(123,196,226,.13);color:var(--tl3);border:1px solid rgba(123,196,226,.28)}
+.mc-y{background:rgba(245,158,11,.15);color:var(--amb3);border-color:rgba(245,158,11,.3)}
+.mc-r{background:rgba(185,64,64,.15);color:var(--co3);border-color:rgba(185,64,64,.3)}
+.mc-g{background:rgba(5,150,105,.15);color:var(--em3);border-color:rgba(5,150,105,.3)}
+
+.container{max-width:1100px;margin:0 auto;padding:30px 26px}
+.section{margin-bottom:26px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--tl4);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--tl3)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+
+.card{background:var(--white);border:1.5px solid var(--tl3);border-radius:10px;padding:14px}
+.card-tl{background:var(--tl2);border:1.5px solid var(--tl3);border-radius:10px;padding:14px}
+.card-co{background:var(--co2);border:1.5px solid var(--co3);border-radius:10px;padding:14px}
+.card-em{background:var(--em4);border:1.5px solid var(--em3);border-radius:10px;padding:14px}
+.card-amb{background:var(--amb2);border:1.5px solid var(--amb3);border-radius:10px;padding:14px}
+.card-dark{background:var(--navy);border:none;border-radius:10px;padding:14px}
+.card-plum{background:var(--plum2);border:1.5px solid var(--plum3);border-radius:10px;padding:14px}
+.card-slate{background:var(--slate2);border:1.5px solid var(--slate3);border-radius:10px;padding:14px}
+.card h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--navy)}
+.card-tl h3{color:var(--tl)}
+.card-co h3{color:var(--co)}
+.card-em h3{color:var(--em)}
+.card-amb h3{color:var(--amb)}
+.card-dark h3{color:var(--amb3)}
+.card-plum h3{color:var(--plum)}
+.card p,.card li{font-size:12.5px;line-height:1.85;color:#374151}
+.card-tl p,.card-tl li{color:var(--tl);font-size:12.5px;line-height:1.85}
+.card-co p,.card-co li{color:var(--co);font-size:12.5px;line-height:1.85}
+.card-em p,.card-em li{color:var(--em);font-size:12.5px;line-height:1.85}
+.card-amb p,.card-amb li{color:var(--amb);font-size:12.5px;line-height:1.85}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.78);font-size:12.5px;line-height:1.85}
+.card-plum p,.card-plum li{color:var(--plum);font-size:12.5px;line-height:1.85}
+.card ul{padding-left:14px}.card ul li{margin-bottom:3px}
+
+.badge{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:3px;margin:2px 2px 0 0}
+.bt{background:var(--tl2);color:var(--tl4);border:1px solid var(--tl3)}
+.br{background:var(--co2);color:var(--co);border:1px solid var(--co3)}
+.bg{background:var(--em4);color:var(--em);border:1px solid var(--em3)}
+.by{background:var(--amb2);color:var(--amb);border:1px solid var(--amb3)}
+.bp{background:var(--plum2);color:var(--plum);border:1px solid var(--plum3)}
+
+/* 數字對比 */
+.vs-row{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:8px;margin-bottom:5px}
+.vs-from{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);text-decoration:line-through}
+.vs-arrow{font-size:15px;flex-shrink:0}
+.vs-to{font-family:'Playfair Display',serif;font-size:18px;font-weight:900}
+
+/* 現金流量方塊 */
+.cf-block{border-radius:8px;padding:10px 13px;margin-bottom:5px}
+.cf-label{font-size:12px;color:#374151;font-weight:500}
+.cf-val{font-family:'DM Mono',monospace;font-size:14px;font-weight:700;margin-top:2px}
+.cf-note{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* 折舊時間軸 */
+.timeline{position:relative;padding-left:18px}
+.timeline::before{content:'';position:absolute;left:6px;top:4px;bottom:4px;width:2px;background:var(--tl3);border-radius:2px}
+.tl-item{position:relative;margin-bottom:8px}
+.tl-item::before{content:'';position:absolute;left:-14px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--tl4);border:2px solid var(--white)}
+.tl-text{font-size:12.5px;color:#374151;line-height:1.7}
+
+/* 診所資產三分法 */
+.asset-pill{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:8px;margin-bottom:5px}
+
+.page-footer{background:var(--navy);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--amb3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-lines"></div>
+  <div class="ph-g1"></div>
+  <div class="ph-g2"></div>
+  <div class="ph-eyebrow">診所財務架構 × 群創折舊案例 × 現金流直接法實戰</div>
+  <div class="ph-title">賠錢但現金有回來？<em>折舊的本質</em> × 診所財報如何向老闆說一個好故事</div>
+  <div class="ph-sub">年報查核 vs 季報核閱 × 群創163億虧損卻正現金流 × 診所三大資產 × 直接法重構現金流量表</div>
+  <div class="ph-meta">
+    <span class="mc">2026.07.01</span>
+    <span class="mc">April</span>
+    <span class="mc mc-y">群創 3481 × 年報全年財報</span>
+    <span class="mc mc-g">折舊≠現金流出</span>
+    <span class="mc mc-r">損益兩平點 Break-even</span>
+    <span class="mc">Rock 老師</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: 財報季別 + 群創案例 -->
+  <div class="section">
+    <div class="section-label">Part 1 + 2 · Audit Basics + 群創 3481 · 財報基礎與重資產業折舊解析</div>
+    <div class="section-title">年報才是最完整的：查核 vs 核閱強度差異 × 群創163億虧損，現金流卻正95億</div>
+    <div class="grid-3">
+      <div class="card card-tl">
+        <h3>📋 財報季別與查核強度</h3>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px">
+          <div style="background:var(--white);border-radius:7px;padding:9px 11px">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px">
+              <span style="font-size:12.5px;color:var(--tl);font-weight:700">年報（第四季）</span>
+              <span class="badge bt">★★★ 最強</span>
+            </div>
+            <div style="font-size:12px;color:var(--tl)">採「<strong>會計師查核報告</strong>（Audit）」，金管會嚴格要求，資訊揭露最完整，優先閱讀。</div>
+          </div>
+          <div style="background:var(--white);border-radius:7px;padding:9px 11px">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px">
+              <span style="font-size:12.5px;color:var(--muted);font-weight:700">季報（Q1-Q3）</span>
+              <span class="badge" style="background:#f8fafc;color:var(--muted);border:1px solid #cbd5e1">★☆☆ 核閱</span>
+            </div>
+            <div style="font-size:12px;color:var(--muted)">採「<strong>核閱報告（Review）</strong>」，上市公司每季出報表時程趕，強度較低，僅供過程參考。</div>
+          </div>
+        </div>
+        <div style="background:var(--tl2);border-radius:7px;padding:8px 11px;margin-top:7px;font-size:12px;color:var(--tl)">
+          <strong>Rock 老師習慣：</strong>先看完整年度的第四季合併財報——揭露最詳盡、查核最嚴謹。
+        </div>
+      </div>
+
+      <div class="card card-co">
+        <h3>🏭 群創 (3481)：帳面鉅虧 vs 正現金流</h3>
+        <div style="background:var(--white);border-radius:8px;padding:10px 12px;margin-bottom:8px">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:5px">112年度 財報數字對比</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #fee2e2">
+            <span style="font-size:12.5px;color:var(--co)">損益表淨損</span>
+            <span style="font-family:'DM Mono',monospace;font-size:14px;font-weight:700;color:var(--co)">-163億</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0">
+            <span style="font-size:12.5px;color:var(--em)">營業現金流量</span>
+            <span style="font-family:'DM Mono',monospace;font-size:14px;font-weight:700;color:var(--em)">+95億</span>
+          </div>
+          <div style="background:#f0fdf4;border-radius:5px;padding:6px 9px;margin-top:5px;font-size:12px;color:var(--em)">落差超過 200億——這就是「賠錢但現金有回來」的教科書案例。</div>
+        </div>
+        <div style="font-size:12.5px;color:var(--co)"><strong>核心原因：</strong>高達 <strong>~300億元</strong> 的折舊與攤銷費用拉低了損益表，但折舊不牽涉當期現金流出。</div>
+      </div>
+
+      <div class="card card-dark">
+        <h3>🔍 折舊的本質：三個關鍵認知</h3>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
+          <div style="background:rgba(255,255,255,.08);border-radius:6px;padding:9px 11px">
+            <div style="color:var(--tl3);font-weight:700;font-size:12.5px;margin-bottom:2px">① 折舊 ≠ 現金流出</div>
+            <div style="color:rgba(255,255,255,.78);font-size:12px">折舊是將「過去建廠時已付出的現金」，在未來分期認列為費用。當下不涉及新的現金流出。</div>
+          </div>
+          <div style="background:rgba(255,255,255,.08);border-radius:6px;padding:9px 11px">
+            <div style="color:var(--amb3);font-weight:700;font-size:12.5px;margin-bottom:2px">② 群創的規模邏輯</div>
+            <div style="color:rgba(255,255,255,.78);font-size:12px">總資產 3,500億 → PP&amp;E 佔42-43%（約1,500億）→ 5年攤提 → 每年自然產生 <strong style="color:#fff">~300億折舊</strong>。</div>
+          </div>
+          <div style="background:rgba(255,255,255,.08);border-radius:6px;padding:9px 11px">
+            <div style="color:var(--em3);font-weight:700;font-size:12.5px;margin-bottom:2px">③ 折舊年限是「估計」</div>
+            <div style="color:rgba(255,255,255,.78);font-size:12px">群創揭露耐用年限為 2到65年不等，這是「估計」而非精確。當預期改變，年限可合理調整，連會計師也認可。</div>
+          </div>
+          <div style="background:rgba(123,196,226,.1);border-radius:6px;padding:9px 11px">
+            <div style="color:var(--tl3);font-weight:700;font-size:12.5px;margin-bottom:2px">④ 折舊完後的爆發期</div>
+            <div style="color:rgba(255,255,255,.78);font-size:12px">設備5年攤提完畢後，若設備仍運作，省下每年300億折舊包袱 → 獲利呈現爆發。114年PP&amp;E已降至約<strong style="color:#fff">1,125億</strong>，印證此軌跡。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card card-amb" style="margin-top:12px">
+      <h3>🔄 群創的特殊資本操作：虧損公司照樣退錢給股東</h3>
+      <div class="grid-3" style="margin-top:6px">
+        <div style="background:var(--white);border-radius:7px;padding:9px 11px">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:3px">113年度</div>
+          <div style="font-size:13px;color:var(--amb);font-weight:700">現金減資 108億</div>
+          <div style="font-size:12px;color:#374151;margin-top:3px">非股利而是「退還資本」——無課稅問題，滿足股東資金需求。</div>
+        </div>
+        <div style="background:var(--white);border-radius:7px;padding:9px 11px">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:3px">114年度</div>
+          <div style="font-size:13px;color:var(--amb);font-weight:700">動用資本公積配息 21億</div>
+          <div style="font-size:12px;color:#374151;margin-top:3px">本業保留盈餘不足 → 動用資本公積彌補發放，維持股東回報。</div>
+        </div>
+        <div style="background:var(--white);border-radius:7px;padding:9px 11px">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:3px">核心洞見</div>
+          <div style="font-size:13px;color:var(--amb);font-weight:700">公司虧損 ≠ 無法退錢</div>
+          <div style="font-size:12px;color:#374151;margin-top:3px">透過現金減資或資本公積，仍能維持股東關係。看懂此操作，才能真正讀懂科技重資產業的財報。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: 診所財務架構 -->
+  <div class="section">
+    <div class="section-label">Part 3 · Clinic Financial Structure · 新設立診所的財務架構</div>
+    <div class="section-title">三大資產歸類 × 關係人移轉訂價 × 折舊年限設定 × 固定/變動成本與損益兩平點</div>
+    <div class="grid-2">
+      <div>
+        <div class="card" style="margin-bottom:12px">
+          <h3>🏥 診所初創期：三大投資項目正確歸類</h3>
+          <div class="asset-pill" style="background:var(--tl2);border:1.5px solid var(--tl3)">
+            <span style="font-size:16px">🎨</span>
+            <div>
+              <div style="font-size:12.5px;color:var(--tl);font-weight:700">裝潢與改良（租賃改良物 Leasehold Improvements）</div>
+              <div style="font-size:11.5px;color:var(--muted)">租賃而非自有，此費用應資本化。攤提年限：跟租約走（20年）或跟重裝週期走（5年），取較短者。</div>
+            </div>
+          </div>
+          <div class="asset-pill" style="background:var(--em4);border:1.5px solid var(--em3)">
+            <span style="font-size:16px">🔬</span>
+            <div>
+              <div style="font-size:12.5px;color:var(--em);font-weight:700">醫療設備（機器與設備）</div>
+              <div style="font-size:11.5px;color:var(--muted)">如超音波機等。稅局規定最低年限 7年，內部抓 10年攤提完全合法合理。</div>
+            </div>
+          </div>
+          <div class="asset-pill" style="background:var(--plum2);border:1.5px solid var(--plum3)">
+            <span style="font-size:16px">📄</span>
+            <div>
+              <div style="font-size:12.5px;color:var(--plum);font-weight:700">長期租約（使用權資產 Right-of-use Asset）</div>
+              <div style="font-size:11.5px;color:var(--muted)">現代會計準則：長期租約折現後認列為資產。對外報表需揭露；對於未上市診所，內部可簡化為當期費用處理。</div>
+            </div>
+          </div>
+          <div style="background:var(--slate2);border-radius:7px;padding:8px 11px;margin-top:3px;font-size:12px;color:var(--slate)">
+            <strong>參考依據：</strong>國稅局「固定資產耐用年數表」——客觀基準，設定折舊前先查閱。
+          </div>
+        </div>
+        <div class="card card-co">
+          <h3>🔗 集團內部盲點：關係人交易與移轉訂價</h3>
+          <p style="margin-bottom:7px"><strong>問題：</strong>上層控股公司收取管理費（Operation fee）再轉介給新診所，導致現金流與資產負債表不對稱。</p>
+          <div style="background:var(--white);border-radius:7px;padding:9px 11px;font-size:12.5px;color:var(--co)">
+            <strong>正確做法（移轉訂價規範）：</strong><br>
+            ① 財報中設立「應收關係人」與「應付關係人」明確科目<br>
+            ② 母子公司間進銷貨與資金調度必須清楚記錄<br>
+            ③ 帳務邏輯清晰後，現金流向才能合乎邏輯、真實呈現
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-dark">
+        <h3>📊 管理會計精髓：固定成本 vs 變動成本 → 損益兩平點</h3>
+        <div style="background:rgba(255,255,255,.07);border-radius:7px;padding:11px 13px;margin-bottom:9px">
+          <div style="font-size:11px;color:rgba(255,255,255,.45);font-family:'DM Mono',monospace;margin-bottom:6px">成本動因（Cost Driver）拆解</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">
+            <div style="background:rgba(123,196,226,.12);border-radius:6px;padding:9px 10px">
+              <div style="color:var(--tl3);font-weight:700;font-size:12.5px;margin-bottom:4px">🔄 變動成本</div>
+              <div style="color:rgba(255,255,255,.78);font-size:12px">多看一個病人就增加的成本：<br>耗材、檢查用品等</div>
+            </div>
+            <div style="background:rgba(245,158,11,.1);border-radius:6px;padding:9px 10px">
+              <div style="color:var(--amb3);font-weight:700;font-size:12.5px;margin-bottom:4px">🔒 固定成本</div>
+              <div style="color:rgba(255,255,255,.78);font-size:12px">不管幾個病人都不變：<br>底薪、租金、折舊</div>
+            </div>
+          </div>
+        </div>
+        <div style="background:rgba(6,95,70,.2);border-radius:7px;padding:11px 13px;margin-bottom:8px">
+          <div style="color:var(--em3);font-weight:700;font-size:13px;margin-bottom:4px">🎯 損益兩平點（Break-even Point）</div>
+          <div style="color:rgba(255,255,255,.85);font-size:12.5px">固定成本 ÷（客單價 − 單位變動成本）= 需要多少就診人次才能打平。這是診所營運儀表板最核心的一個數字。</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:5px">
+          <div style="background:rgba(255,255,255,.06);border-radius:6px;padding:8px 11px;font-size:12px;color:rgba(255,255,255,.78)">
+            <strong style="color:var(--tl3)">製造業 vs 服務業差異：</strong>群創等科技廠有龐大「製造成本」（工廠薪資、廠房折舊）；診所無製造部門，費用集中在「管銷費用」中的管理費與推銷費。
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:6px;padding:8px 11px;font-size:12px;color:rgba(255,255,255,.78)">
+            <strong style="color:var(--amb3)">ROI 不等於折舊年限：</strong>醫療設備帳面折舊10年，≠ 診所需10年回本。若客流量、客單價、複合成長率達標，可能 <strong style="color:#fff">3到5年</strong> 就能回收全部期初投資（實際現金流入 > 期初投資總額）。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: 向老闆說好故事 + 直接法 -->
+  <div class="section">
+    <div class="section-label">Part 4 + 5 · Storytelling + Direct Method · 向老闆說好故事 × 直接法現金流量表</div>
+    <div class="section-title">拯救損益表 × Day 1 兩階段架構 × 直接法讓老闆一眼看懂現金流向</div>
+    <div class="grid-2">
+      <div>
+        <div class="card card-em" style="margin-bottom:12px">
+          <h3>📈 拯救損益表：資本化裝潢費用的魔法</h3>
+          <div style="background:var(--white);border-radius:8px;padding:10px 12px;margin-bottom:8px">
+            <div style="font-size:11px;color:var(--muted);margin-bottom:5px">裝潢費 vs 帳面費用認列比較</div>
+            <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #d1fae5">
+              <span style="font-size:12.5px;color:var(--co)">錯誤做法：一次費用化</span>
+              <span style="font-family:'DM Mono',monospace;color:var(--co);font-size:12px">當年度全額認列</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:5px 0">
+              <span style="font-size:12.5px;color:var(--em)">正確做法：20年資本化攤提</span>
+              <span style="font-family:'DM Mono',monospace;color:var(--em);font-size:12px">每月僅認列 5%</span>
+            </div>
+          </div>
+          <div style="background:var(--white);border-radius:7px;padding:9px 11px;font-size:12.5px;color:var(--em)">損益表帳面費用瞬間「<strong>減少 95%</strong>」，讓老闆看到真實的月度營運體質，而非被期初投資拖累的失真數字。</div>
+        </div>
+        <div class="card card-plum">
+          <h3>🗂 Day 1 兩階段資產負債表概念</h3>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px">
+            <div style="background:var(--white);border-radius:7px;padding:9px 11px">
+              <div style="font-size:12.5px;color:var(--plum);font-weight:700">📍 Day 1：期初呈現</div>
+              <div style="font-size:12px;color:#374151;margin-top:3px">龐大設備與裝潢整包放在資產負債表左側「資產」，作為「期初投資」——告訴所有人這是主動佈局，非消耗性支出。</div>
+            </div>
+            <div style="background:var(--white);border-radius:7px;padding:9px 11px">
+              <div style="font-size:12.5px;color:var(--plum);font-weight:700">📉 後續每月：有感折舊</div>
+              <div style="font-size:12px;color:#374151;margin-top:3px">透過每月折舊讓老闆看到資產穩步下降，清楚理解：「目前帳面虧損 = 過往投資攤提，而非日常營運不善。」</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card card-dark">
+          <h3>💡 直接法 vs 間接法：讓老闆一眼看懂</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px">
+            <div style="background:rgba(185,64,64,.15);border-radius:7px;padding:10px">
+              <div style="color:var(--co3);font-weight:700;font-size:12px;margin-bottom:5px">😵 間接法（外部報表）</div>
+              <div style="color:rgba(255,255,255,.75);font-size:11.5px">從「本期淨利」出發，加減折舊等一堆非現金項目。這是會計師查核用的標準格式，老闆看了一頭霧水。</div>
+            </div>
+            <div style="background:rgba(6,95,70,.2);border-radius:7px;padding:10px">
+              <div style="color:var(--em3);font-weight:700;font-size:12px;margin-bottom:5px">✅ 直接法（內部管理王牌）</div>
+              <div style="color:rgba(255,255,255,.75);font-size:11.5px">只看兩件事：從客戶收到多少現金 <strong style="color:#fff">減去</strong> 支付給廠商與員工多少現金。結果為正 = 自給自足、有賺頭。</div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div class="cf-block" style="background:rgba(6,95,70,.2)">
+              <div class="cf-label" style="color:rgba(255,255,255,.9)">🟢 營業活動現金流 <span style="font-size:11px;color:rgba(255,255,255,.5)">（日常診所收支）</span></div>
+              <div class="cf-val" style="color:var(--em3)">收診費 − 耗材/薪資 = 正數</div>
+              <div class="cf-note">→ 向老闆證明：日常營運是健康的，每月都有實際現金進來。</div>
+            </div>
+            <div class="cf-block" style="background:rgba(185,64,64,.15)">
+              <div class="cf-label" style="color:rgba(255,255,255,.9)">🔴 投資活動現金流 <span style="font-size:11px;color:rgba(255,255,255,.5)">（設備裝潢投入）</span></div>
+              <div class="cf-val" style="color:var(--co3)">− 超音波機 − 裝潢 − 設備</div>
+              <div class="cf-note">→ 向老闆說明：這筆大流出是為未來佈局的投資，不是燒錢。</div>
+            </div>
+            <div class="cf-block" style="background:rgba(245,158,11,.12)">
+              <div class="cf-label" style="color:rgba(255,255,255,.9)">🟡 籌資活動現金流 <span style="font-size:11px;color:rgba(255,255,255,.5)">（股東出資/借款）</span></div>
+              <div class="cf-val" style="color:var(--amb3)">股東投入 + 銀行借款</div>
+              <div class="cf-note">→ 說明資金從哪裡來，凝聚衝刺派與踩剎車派老闆的共識。</div>
+            </div>
+          </div>
+          <div style="background:rgba(123,196,226,.1);border-radius:7px;padding:9px 11px;margin-top:7px;font-size:12.5px;color:rgba(255,255,255,.85)">
+            <strong style="color:var(--tl3)">核心訊息：</strong>「我們日常營運是健康的（正的營業現金流），那筆鉅額流出是我們正在為2027年擴點做準備（投資活動）。」——這才是對老闆說的好故事。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">April · 診所財報架構×群創折舊案例×直接法現金流 · 2026.07.01</div>
+</div>
+
+</body>
+</html>
