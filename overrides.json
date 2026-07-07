@@ -1,0 +1,7 @@
+{
+  "_說明": "key = goodbook 裡的檔名。skip 跳過不顯示、yt 補影片連結、title 覆寫標題。",
+
+  "0524_迪士尼商業模式_試讀.html": {
+    "skip": true
+  }
+}
