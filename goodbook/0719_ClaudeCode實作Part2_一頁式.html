@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code 實作 Part 2 · 0719 每週分享</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --vi:#5b21b6;--vi2:#f5f3ff;--vi3:#a78bfa;--vi4:#7c3aed;
+  --cy:#0e7490;--cy2:#ecfeff;--cy3:#67e8f9;--cy4:#06b6d4;
+  --em:#065f46;--em2:#ecfdf5;--em3:#6ee7b7;--em4:#d1fae5;
+  --go:#92400e;--go2:#fffbeb;--go3:#fde68a;--go4:#f59e0b;
+  --co:#991b1b;--co2:#fff1f2;--co3:#fecdd3;
+  --sk:#1e3a5f;--sk2:#eff6ff;--sk3:#93c5fd;
+  --night:#0a0a14;--night2:#12122a;
+  --white:#fff;--ink:#0a0a1e;--muted:#5c5c88;--bg:#f4f3ff;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+.page-header{background:linear-gradient(150deg,#050508,#0a0a18,#100a22,#0a0820,#050508);padding:42px 50px 36px;position:relative;overflow:hidden;border-bottom:3px solid var(--vi3)}
+.ph-code{position:absolute;inset:0;font-family:'DM Mono',monospace;font-size:11px;color:rgba(167,139,250,.04);padding:12px;overflow:hidden;line-height:1.5;pointer-events:none;word-break:break-all}
+.ph-g1{position:absolute;top:-60px;right:-50px;width:280px;height:280px;background:radial-gradient(circle,rgba(124,58,237,.22),transparent 65%);pointer-events:none}
+.ph-g2{position:absolute;bottom:-40px;left:-30px;width:220px;height:220px;background:radial-gradient(circle,rgba(6,182,212,.12),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(167,139,250,.7);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(15px,2.3vw,23px);font-weight:900;color:#fff;line-height:1.25;margin-bottom:4px}
+.ph-title em{color:var(--cy3);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.4);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mc{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(167,139,250,.13);color:var(--vi3);border:1px solid rgba(167,139,250,.28)}
+.mc-c{background:rgba(6,182,212,.13);color:var(--cy3);border-color:rgba(6,182,212,.28)}
+.mc-g{background:rgba(5,150,105,.13);color:var(--em3);border-color:rgba(5,150,105,.28)}
+.mc-y{background:rgba(245,158,11,.13);color:var(--go3);border-color:rgba(245,158,11,.28)}
+
+.container{max-width:1100px;margin:0 auto;padding:30px 26px}
+.section{margin-bottom:26px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--vi4);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--night);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--vi3)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+
+.card{background:var(--white);border:1.5px solid var(--vi3);border-radius:10px;padding:14px}
+.card-vi{background:var(--vi2);border:1.5px solid var(--vi3);border-radius:10px;padding:14px}
+.card-cy{background:var(--cy2);border:1.5px solid var(--cy3);border-radius:10px;padding:14px}
+.card-em{background:var(--em4);border:1.5px solid var(--em3);border-radius:10px;padding:14px}
+.card-go{background:var(--go2);border:1.5px solid var(--go3);border-radius:10px;padding:14px}
+.card-co{background:var(--co2);border:1.5px solid var(--co3);border-radius:10px;padding:14px}
+.card-sk{background:var(--sk2);border:1.5px solid var(--sk3);border-radius:10px;padding:14px}
+.card-dark{background:var(--night);border:none;border-radius:10px;padding:14px}
+
+.card h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--night)}
+.card-vi h3{color:var(--vi)}
+.card-cy h3{color:var(--cy)}
+.card-em h3{color:var(--em)}
+.card-go h3{color:var(--go)}
+.card-co h3{color:var(--co)}
+.card-sk h3{color:var(--sk)}
+.card-dark h3{color:var(--cy3)}
+.card p,.card li{font-size:12.5px;line-height:1.85;color:#374151}
+.card-vi p,.card-vi li{color:var(--vi);font-size:12.5px;line-height:1.85}
+.card-cy p,.card-cy li{color:var(--cy);font-size:12.5px;line-height:1.85}
+.card-em p,.card-em li{color:var(--em);font-size:12.5px;line-height:1.85}
+.card-go p,.card-go li{color:var(--go);font-size:12.5px;line-height:1.85}
+.card-co p,.card-co li{color:var(--co);font-size:12.5px;line-height:1.85}
+.card-sk p,.card-sk li{color:var(--sk);font-size:12.5px;line-height:1.85}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.78);font-size:12.5px;line-height:1.85}
+.card ul{padding-left:14px}.card ul li{margin-bottom:3px}
+
+.badge{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:3px;margin:2px 2px 0 0}
+.bv{background:var(--vi2);color:var(--vi4);border:1px solid var(--vi3)}
+.bc{background:var(--cy2);color:var(--cy);border:1px solid var(--cy3)}
+.bg{background:var(--em4);color:var(--em);border:1px solid var(--em3)}
+.by{background:var(--go2);color:var(--go);border:1px solid var(--go3)}
+.br{background:var(--co2);color:var(--co);border:1px solid var(--co3)}
+
+/* 工作流圖 */
+.flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:8px 0}
+.flow-node{background:var(--vi2);border:1.5px solid var(--vi3);border-radius:6px;padding:5px 10px;font-size:11.5px;color:var(--vi4);font-weight:500}
+.flow-arrow{color:var(--vi3);font-size:14px;flex-shrink:0}
+.flow-node-g{background:var(--em4);border:1.5px solid var(--em3);color:var(--em)}
+
+/* 職場專案 */
+.proj{border-radius:8px;padding:10px 13px;margin-bottom:6px}
+.proj-header{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.proj-num{font-family:'DM Mono',monospace;font-size:11px;font-weight:700;background:var(--vi4);color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0}
+.proj-title{font-size:13px;font-weight:700;color:var(--night)}
+.proj-body{font-size:12px;color:#374151;line-height:1.7}
+.proj-win{font-size:11.5px;margin-top:5px;padding:5px 8px;border-radius:5px;background:rgba(124,58,237,.1);color:var(--vi4);font-weight:500}
+
+/* Quote */
+.quote{background:linear-gradient(135deg,var(--night),var(--night2));border-radius:10px;padding:16px 22px;position:relative;overflow:hidden;margin-bottom:20px}
+.qm{font-family:'Playfair Display',serif;font-size:80px;color:rgba(167,139,250,.1);position:absolute;top:-10px;left:8px;line-height:1}
+.qt{font-family:'Playfair Display',serif;font-size:14px;color:#fff;line-height:1.65;position:relative;z-index:1}
+.qt em{color:var(--cy3);font-style:normal}
+.qs{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.4);margin-top:7px;position:relative;z-index:1}
+
+.page-footer{background:var(--night);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--cy3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-code">const claude = new AI(); claude.build("official_website"); claude.generate("student_zone"); claude.write("internal_control_policy"); claude.analyze("P&L_variance"); claude.create("monthly_close_tracker"); claude.draft("tax_calendar");</div>
+  <div class="ph-g1"></div>
+  <div class="ph-g2"></div>
+  <div class="ph-eyebrow">0719 每週分享 · Claude Code 實作 Part 2 · 新任會計主管的 8 天 AI 大挑戰</div>
+  <div class="ph-title">穿上<em>超人背事</em>的感覺：<br>Claude 讓不會寫程式的會計主管，8天完成5個不可能的任務</div>
+  <div class="ph-sub">官網自動化 × Token小資省法 × 稅務行事曆 × 月結控管Excel × 佣金內控辦法3小時速成 × 毛利率紅字抓出</div>
+  <div class="ph-meta">
+    <span class="mc">2026.07.19</span>
+    <span class="mc">每週分享</span>
+    <span class="mc mc-c">Claude Code 實作 Part 2</span>
+    <span class="mc mc-g">上市櫃公司會計主管 上任第 8 天</span>
+    <span class="mc mc-y">NotebookLM + Claude 混合工作流</span>
+    <span class="mc">Rock 老師</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 金句 -->
+  <div class="quote">
+    <div class="qm">"</div>
+    <div class="qt">以前受限於時間與能力，痛點只能擺爛；現在有了 Claude，就像穿上了超人背心——<br><em>只要耐著性子跟它聊，總能得到一個超越想像的解決方案。</em></div>
+    <div class="qs">Rock 老師 / 上市櫃公司會計主管 / 接觸 Claude 3個月 / 驚呼「Claude 太神了，變成產品的能力真的太強了」</div>
+  </div>
+
+  <!-- SECTION 1: 官網自動化 + Token策略 -->
+  <div class="section">
+    <div class="section-label">Part 1 + 2 · Personal Website + Token Strategy · 官網自動化 × 小資族 Token 省錢心法</div>
+    <div class="section-title">不懂架站的會計人，靠截圖問 Claude 建出官網 + 學生專區 + GitHub 自動更新工作流</div>
+    <div class="grid-2">
+      <div>
+        <div class="card card-vi" style="margin-bottom:12px">
+          <h3>🌐 個人官網與學生專區：從痛點到解法</h3>
+          <div style="background:var(--white);border-radius:7px;padding:9px 11px;margin-bottom:8px">
+            <div style="font-size:11px;color:var(--muted);margin-bottom:5px">過去的困境</div>
+            <div style="font-size:12.5px;color:var(--co)">① NotebookLM 匯入影片 → 產出簡報廢話多，無法用於正式場合<br>② 課後複習網頁分散各處 → 發送給學生、自己查找都極不方便</div>
+          </div>
+          <div style="background:var(--white);border-radius:7px;padding:9px 11px">
+            <div style="font-size:11px;color:var(--muted);margin-bottom:5px">Claude Code 解決方案</div>
+            <div style="font-size:12.5px;color:var(--vi)">① 不斷截圖問 Claude 取得指令 → 成功架設個人官網（完全不懂程式）<br>② Claude 建議並協助建立「密碼保護學生專區」，整合所有課後複習<br>③ 與 Claude 討論出 GitHub 自動更新工作流 → 上傳即自動刷新官網</div>
+          </div>
+        </div>
+        <div class="card card-cy">
+          <h3>⚙️ GitHub 自動化工作流（核心亮點）</h3>
+          <div class="flow">
+            <div class="flow-node">NotebookLM<br>影片逐字稿</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">Claude Code<br>整理成一頁式</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node flow-node-g">手動上傳<br>GitHub</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node flow-node-g" style="background:var(--vi2);border-color:var(--vi3);color:var(--vi4)">官網<br>自動更新 ✨</div>
+          </div>
+          <div style="background:var(--white);border-radius:7px;padding:8px 11px;margin-top:5px;font-size:12px;color:var(--cy)">「這是我從未想過的功能——等同於有一位網頁專家在幫忙規劃最佳方案。」</div>
+        </div>
+      </div>
+
+      <div class="card card-dark">
+        <h3>💰 Token 小資省錢心法：$20 方案的精打細算</h3>
+        <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:11px 13px;margin-bottom:9px">
+          <div style="font-size:11px;color:rgba(255,255,255,.45);font-family:'DM Mono',monospace;margin-bottom:6px">AI 工具分工策略</div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="display:flex;gap:8px;align-items:center;padding:7px 10px;background:rgba(255,255,255,.07);border-radius:6px">
+              <span style="font-size:14px">🗑</span>
+              <div>
+                <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.9)">「垃圾事」→ NotebookLM（免費）</div>
+                <div style="font-size:11.5px;color:rgba(255,255,255,.6)">從影片讀取、萃取逐字稿等耗時但低價值的操作</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center;padding:7px 10px;background:rgba(124,58,237,.18);border-radius:6px">
+              <span style="font-size:14px">⚡</span>
+              <div>
+                <div style="font-size:12px;font-weight:700;color:var(--vi3)">「高價值事」→ Claude Code（$20/月）</div>
+                <div style="font-size:11.5px;color:rgba(255,255,255,.6)">貼入純文字 → 重點整理 + 程式碼撰寫 + 視覺化</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <div style="background:rgba(255,255,255,.06);border-radius:6px;padding:8px 11px;font-size:12px;color:rgba(255,255,255,.82)">
+            <strong style="color:var(--cy3)">關鍵決策：</strong>手動上傳 GitHub（而非讓 Claude 自動執行），省下大量 Token，避免 Claude 燒穿上限。
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:6px;padding:8px 11px;font-size:12px;color:rgba(255,255,255,.82)">
+            <strong style="color:var(--go3)">每日追蹤：</strong>每天開心確認「今天的 Token 是否用在刀口上」——這就是 AI 時代的小資族生存心法。
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:6px;padding:8px 11px;font-size:12px;color:rgba(255,255,255,.82)">
+            <strong style="color:var(--em3)">Cwork 功能警示：</strong>具讀取電腦+排程+上傳權限的 Cwork 功能雖然極強，但 Token 燒得最快——需謹慎使用。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: 5大職場專案 -->
+  <div class="section">
+    <div class="section-label">Part 3 · Workplace Projects · 新任會計主管 8 天完成 5 個職場不可能任務</div>
+    <div class="section-title">上任 8 個工作日（扣除颱風假與體檢日），Claude Code 讓新任主管的「第一印象」直接滿分</div>
+    <div class="grid-2">
+      <div>
+        <div class="proj" style="background:var(--vi2);border:1.5px solid var(--vi3)">
+          <div class="proj-header">
+            <div class="proj-num">01</div>
+            <div class="proj-title">稅務行事曆 + 工作行事曆一頁式</div>
+          </div>
+          <div class="proj-body"><strong>痛點：</strong>首次擔任上市櫃會計主管，對申報時程與合規事項不熟悉。<br><strong>解法：</strong>Claude 快速整理出「稅務行事曆」與「工作行事曆」的一頁式報表。</div>
+          <div class="proj-win">⭐ 透過 LINE 發送給 70 幾歲不諳電腦的老董事長，瞬間展現專業度與掌控力。</div>
+        </div>
+        <div class="proj" style="background:var(--cy2);border:1.5px solid var(--cy3)">
+          <div class="proj-header">
+            <div class="proj-num" style="background:var(--cy4)">02</div>
+            <div class="proj-title">新櫃轉上櫃交辦事項整合</div>
+          </div>
+          <div class="proj-body"><strong>痛點：</strong>櫃買中心提供的繁雜 Excel 資料表，難以隨時查閱。<br><strong>解法：</strong>Claude 整合成一頁式待辦事項，可在手機任何場合隨時查看。</div>
+          <div class="proj-win" style="background:rgba(6,182,212,.1);color:var(--cy)">⭐ 複雜合規事項一頁搞定，再也不用翻 Excel 找資料。</div>
+        </div>
+        <div class="proj" style="background:var(--em4);border:1.5px solid var(--em3)">
+          <div class="proj-header">
+            <div class="proj-num" style="background:var(--em)">03</div>
+            <div class="proj-title">全自動月結進度控管 Excel 表</div>
+          </div>
+          <div class="proj-body"><strong>痛點：</strong>Excel 能力不佳、公司底稿亂七八糟、月結卡關責任難歸因。<br><strong>解法：</strong>Claude 完全代勞撰寫 Excel 公式，追蹤各項目完成日、卡關原因及卡關部門。</div>
+          <div class="proj-win" style="background:rgba(5,150,105,.1);color:var(--em)">⭐ 自動生成「給董事長的一句話報告」：總結帳項目、準時率、延遲天數、主要延遲原因——一鍵匯報。</div>
+        </div>
+      </div>
+      <div>
+        <div class="proj" style="background:var(--go2);border:1.5px solid var(--go3)">
+          <div class="proj-header">
+            <div class="proj-num" style="background:var(--go4)">04</div>
+            <div class="proj-title">佣金管理辦法（內控）3~4 小時速成</div>
+          </div>
+          <div class="proj-body"><strong>痛點：</strong>轉上櫃需撰寫諸多內控辦法；向券商或會計師索取公版，通常需等半天到一兩個月。<br><strong>解法：</strong>燒完半天 Token，與 Claude 反覆確認，產出可用的佣金管理辦法。</div>
+          <div class="proj-win" style="background:rgba(245,158,11,.12);color:var(--go)">⭐ Claude 同步兼顧：所得稅查核準則第80條（居間介紹認定）、會計師對佣金要求、核決權限，並精簡公版廢話，避免條文卡死公司。會計師審查後幾乎沒有意見。</div>
+        </div>
+        <div class="proj" style="background:var(--co2);border:1.5px solid var(--co3)" style="margin-top:6px">
+          <div class="proj-header">
+            <div class="proj-num" style="background:var(--co)">05</div>
+            <div class="proj-title">視覺化財務分析：抓出毛利率紅字警訊</div>
+          </div>
+          <div class="proj-body"><strong>痛點：</strong>原有財報「遠古時期」密密麻麻數字，令人頭痛。<br><strong>解法：</strong>產出視覺化財報，清楚對比「實際 vs 預算」與「YoY 今年 vs 去年」。</div>
+          <div class="proj-win" style="background:rgba(153,27,27,.1);color:var(--co)">⭐ 瞬間抓出：<strong>營收 +30% 但成本 +53%</strong> → 毛利率下降警訊！歸因：產品組合改變（高毛利產品賣少 → 正常毛利賣多）。讓高層一目了然。</div>
+        </div>
+        <div class="card card-dark" style="margin-top:13px">
+          <h3>🦸 核心心法：把 Claude 當作你的 PM</h3>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
+            <div style="background:rgba(255,255,255,.07);border-radius:6px;padding:8px 11px;font-size:12.5px;color:rgba(255,255,255,.85)">「學習 Claude」是假議題——每個人使用情境不同，<strong style="color:#fff">跟它聊就對了</strong>。把它當作你的 PM（專案經理）。</div>
+            <div style="background:rgba(103,232,249,.08);border-radius:6px;padding:8px 11px;font-size:12px;color:rgba(255,255,255,.82)">只要有想法但不知道做法，Claude 就能幫忙變出來——甚至給出<strong style="color:var(--cy3)">超越想像的選項</strong>。</div>
+            <div style="background:rgba(255,255,255,.07);border-radius:6px;padding:8px 11px;font-size:12px;color:rgba(255,255,255,.82)">現在的 Claude 執行力極強，產出的成果是「<strong style="color:#fff">可以直接上場</strong>」的專業等級。不再只是草稿，是真正可用的交付物。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">每週分享 · Claude Code 實作 Part 2 · 2026.07.19</div>
+</div>
+
+</body>
+</html>
