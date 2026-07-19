@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>解決問題的人 See, Solve, Scale — 好書分享 0726</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12283f;        /* 藍圖深藍 */
+    --ink-soft:#3a5570;
+    --paper:#f5f7f4;      /* 圖紙白 */
+    --card:#ffffff;
+    --line:#c9d4dc;
+    --accent:#e8620c;     /* 工程安全橘 */
+    --accent-soft:#fdeadd;
+    --blue-tint:#e7eef4;
+    --ok:#1d7a4f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans TC',sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.85;
+    font-size:16px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:0 20px}
+
+  /* ── Header：藍圖圖框 ── */
+  header{
+    background:var(--ink);
+    color:#f2f6fa;
+    padding:52px 0 44px;
+    position:relative;
+    overflow:hidden;
+  }
+  header::before{
+    content:"";
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px);
+    background-size:36px 36px;
+    pointer-events:none;
+  }
+  .kicker{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;letter-spacing:.22em;
+    color:#9fb6c9;
+    display:flex;align-items:center;gap:12px;
+    margin-bottom:18px;
+  }
+  .kicker::before{content:"";width:34px;height:1px;background:var(--accent)}
+  h1{
+    font-family:'Noto Serif TC',serif;
+    font-weight:900;
+    font-size:clamp(30px,5.4vw,46px);
+    line-height:1.3;
+    position:relative;
+  }
+  h1 .en{
+    display:block;
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;
+    font-size:clamp(15px,2.4vw,20px);
+    color:var(--accent);
+    letter-spacing:.14em;
+    margin-top:10px;
+  }
+  .head-meta{
+    margin-top:22px;
+    font-size:14.5px;
+    color:#c4d3df;
+    position:relative;
+  }
+  .head-meta strong{color:#fff}
+  .thesis{
+    margin-top:26px;
+    border-left:3px solid var(--accent);
+    padding:6px 0 6px 18px;
+    font-family:'Noto Serif TC',serif;
+    font-size:clamp(17px,2.6vw,21px);
+    font-weight:600;
+    color:#fff;
+    position:relative;
+  }
+
+  /* ── 章節骨架 ── */
+  section{padding:46px 0 8px}
+  .sec-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;letter-spacing:.2em;
+    color:var(--accent);
+    margin-bottom:8px;
+  }
+  h2{
+    font-family:'Noto Serif TC',serif;
+    font-weight:900;
+    font-size:clamp(22px,3.6vw,28px);
+    margin-bottom:18px;
+    line-height:1.4;
+  }
+  p{margin-bottom:14px;color:var(--ink-soft)}
+  p strong,li strong{color:var(--ink)}
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:26px 26px 16px;
+    margin-bottom:22px;
+  }
+  .card h3{
+    font-size:18px;font-weight:700;
+    margin-bottom:12px;
+    display:flex;align-items:baseline;gap:10px;
+  }
+  .card h3 .tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;font-weight:600;
+    color:var(--accent);
+    letter-spacing:.12em;
+    flex-shrink:0;
+  }
+
+  /* ── 3S 橋樑圖：本頁招牌 ── */
+  .bridge{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:30px 22px 26px;
+    margin:6px 0 26px;
+  }
+  .bridge-flow{
+    display:flex;align-items:stretch;gap:0;
+  }
+  .pier{flex:1;text-align:center;position:relative;padding:0 6px}
+  .pier .s{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;font-size:22px;
+    color:var(--accent);
+  }
+  .pier .zh{
+    font-family:'Noto Serif TC',serif;
+    font-weight:900;font-size:19px;
+    margin:2px 0 8px;
+  }
+  .pier .desc{font-size:13.5px;color:var(--ink-soft);line-height:1.7;text-align:left}
+  .span-line{
+    align-self:flex-start;
+    margin-top:34px;
+    width:40px;flex-shrink:0;
+    height:2px;
+    background:repeating-linear-gradient(90deg,var(--ink) 0 6px,transparent 6px 11px);
+    position:relative;
+  }
+  .span-line::after{
+    content:"▸";position:absolute;right:-7px;top:-11px;
+    color:var(--ink);font-size:13px;
+  }
+  @media (max-width:640px){
+    .bridge-flow{flex-direction:column;gap:18px}
+    .span-line{transform:rotate(90deg);margin:4px auto;width:30px}
+    .pier .desc{text-align:center}
+  }
+
+  /* ── 案例框 ── */
+  .case{
+    background:var(--blue-tint);
+    border:1px solid var(--line);
+    border-left:4px solid var(--ink);
+    border-radius:8px;
+    padding:20px 22px 8px;
+    margin:4px 0 22px;
+  }
+  .case .case-title{
+    font-weight:700;font-size:15.5px;
+    margin-bottom:10px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .case .case-title::before{
+    content:"CASE";
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;letter-spacing:.15em;
+    background:var(--ink);color:#fff;
+    padding:2px 8px;border-radius:3px;
+  }
+  .case p{font-size:14.5px;margin-bottom:10px}
+
+  .steps{list-style:none;margin:0 0 14px}
+  .steps li{
+    position:relative;
+    padding:0 0 14px 30px;
+    font-size:14.5px;color:var(--ink-soft);
+  }
+  .steps li::before{
+    content:"";
+    position:absolute;left:9px;top:9px;bottom:-2px;
+    width:1px;background:var(--line);
+  }
+  .steps li:last-child::before{display:none}
+  .steps li::after{
+    content:"";
+    position:absolute;left:5px;top:8px;
+    width:9px;height:9px;border-radius:50%;
+    background:var(--accent);
+  }
+
+  /* ── 迷思對照表 ── */
+  .vs{
+    display:grid;grid-template-columns:1fr 1fr;gap:14px;
+    margin-bottom:22px;
+  }
+  @media (max-width:640px){.vs{grid-template-columns:1fr}}
+  .vs .col{
+    border-radius:8px;padding:18px 20px 8px;
+    border:1px solid var(--line);
+    background:var(--card);
+    font-size:14.5px;
+  }
+  .vs .col h4{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;letter-spacing:.14em;
+    margin-bottom:10px;
+  }
+  .vs .myth h4{color:#b3392b}
+  .vs .truth{border-left:4px solid var(--ok)}
+  .vs .truth h4{color:var(--ok)}
+  .vs ul{list-style:none}
+  .vs li{padding:0 0 10px 18px;position:relative;color:var(--ink-soft)}
+  .vs .myth li::before{content:"✕";position:absolute;left:0;color:#b3392b;font-size:12px;top:2px}
+  .vs .truth li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-size:12px;top:2px}
+
+  /* ── 金句 ── */
+  .quote{
+    background:var(--ink);color:#fff;
+    border-radius:10px;
+    padding:30px 28px;
+    margin:10px 0 26px;
+    position:relative;overflow:hidden;
+  }
+  .quote::before{
+    content:"";
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+    background-size:36px 36px;
+  }
+  .quote p{
+    font-family:'Noto Serif TC',serif;
+    font-size:clamp(17px,2.8vw,21px);
+    font-weight:600;color:#fff;
+    margin:0;position:relative;line-height:2;
+  }
+  .quote p em{color:var(--accent);font-style:normal}
+
+  /* ── 行動清單 ── */
+  .action{
+    background:var(--accent-soft);
+    border:1px solid #f3c9a5;
+    border-radius:10px;
+    padding:24px 26px 12px;
+    margin-bottom:26px;
+  }
+  .action h3{font-size:17px;font-weight:700;margin-bottom:12px}
+  .action ol{margin:0 0 12px 22px}
+  .action li{margin-bottom:10px;font-size:15px;color:var(--ink-soft)}
+
+  /* ── Footer ── */
+  footer{
+    margin-top:40px;
+    background:var(--ink);color:#c4d3df;
+    padding:36px 0 42px;
+    font-size:14px;
+  }
+  footer .brand{
+    font-family:'Noto Serif TC',serif;
+    font-weight:900;font-size:19px;color:#fff;
+    margin-bottom:8px;
+  }
+  footer a{color:var(--accent);text-decoration:none;font-weight:500}
+  footer a:hover{text-decoration:underline}
+  footer .links{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px 22px}
+  .divider{height:1px;background:var(--line);margin:34px 0 0}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">ROCK 好書分享 · 2026/07/26</div>
+    <h1>解決問題的人
+      <span class="en">SEE, SOLVE, SCALE — Danny Warshay</span>
+    </h1>
+    <div class="head-meta">
+      作者 <strong>丹尼．沃謝（Danny Warshay）</strong>：年輕時創辦文書軟體公司並成功賣給 Apple，現為布朗大學教授，開設全校最受歡迎的課程「企業進程 The Entrepreneurial Process」。
+    </div>
+    <div class="thesis">
+      創業不是一種精神，而是一種方法；<br>解決問題不是天賦，而是有步驟可循的技巧。
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- 01 為何要讀 -->
+  <section>
+    <div class="sec-label">01 / WHY</div>
+    <h2>基層員工也需要讀商管書嗎？</h2>
+    <p>很多人覺得：我不創業、只想把日常工作做好，商管與創業書跟我無關。這本書開宗明義反駁——<strong>想跳脫低價值的重複性工作、創造更高的個人價值，就必須學會「解決問題的技巧」</strong>。</p>
+    <p>職場上能解決「一次性、短暫」問題的人到處都是，那是日常工作的常態；真正稀缺的，是能解決<strong>「長久且有強烈需求」問題</strong>的人。這本書給的就是那套可以學、可以練的工具。</p>
+  </section>
+
+  <!-- 02 造橋比喻 -->
+  <section>
+    <div class="sec-label">02 / MINDSET</div>
+    <h2>創業是「過程」，不是「精神」</h2>
+    <div class="vs">
+      <div class="col myth">
+        <h4>MYTH · 傳統迷思</h4>
+        <ul>
+          <li>要有特殊的「創業精神」或內在天賦</li>
+          <li>只有極少數「天選之人」做得到</li>
+          <li>成功依賴高學歷與好背景</li>
+        </ul>
+      </div>
+      <div class="col truth">
+        <h4>TRUTH · 作者主張</h4>
+        <ul>
+          <li>創業是一套可傳授、可學習的<strong>結構化進程</strong></li>
+          <li>有基本原則、有方法、有循序漸進的步驟</li>
+          <li>擁有正確工具，人人都能成為解決問題的人</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="tag">ANALOGY</span>造橋樑的比喻</h3>
+      <p>如果要求所有造橋工程師依賴虛無縹緲的「造橋精神」工作，是一件瘋狂且危險的事。建橋需要的是<strong>紮實的步驟、標準與方法</strong>。每座橋的功能與美學各不相同，但從開工、施工到收尾，都有一套可以掌握的結構化進程——創業公司也是如此。</p>
+    </div>
+  </section>
+
+  <!-- 03 3S -->
+  <section>
+    <div class="sec-label">03 / FRAMEWORK</div>
+    <h2>3S 方法：本書的核心骨架</h2>
+    <div class="bridge">
+      <div class="bridge-flow">
+        <div class="pier">
+          <div class="s">S1</div>
+          <div class="zh">See 洞察</div>
+          <div class="desc">尋找並<strong>驗證</strong>一個尚未被滿足的需求。這是整個進程最關鍵的部分，需要投入超乎預期的時間去觀察。</div>
+        </div>
+        <div class="span-line"></div>
+        <div class="pier">
+          <div class="s">S2</div>
+          <div class="zh">Solve 解決</div>
+          <div class="desc">制定價值主張，透過不斷<strong>迭代</strong>，先開發出小規模的解決方案。</div>
+        </div>
+        <div class="span-line"></div>
+        <div class="pier">
+          <div class="s">S3</div>
+          <div class="zh">Scale 擴展</div>
+          <div class="desc">建立能產生<strong>長期且重大影響</strong>的永續商業模式。</div>
+        </div>
+      </div>
+    </div>
+    <div class="case">
+      <div class="case-title">Airbnb 的 3S 全流程</div>
+      <ul class="steps">
+        <li><strong>See：</strong>2007 年兩位舊金山設計師發現痛點——旅客難找到實惠住宿、房東有閒置房間卻租不出去。他們沒有停留在想像，而是<strong>親自訪問旅客與房東</strong>，驗證這是真實需求。</li>
+        <li><strong>Solve：</strong>搭建平台連接兩端——房東上傳照片、價格、日期；房客搜尋預訂。再迭代加入評價系統、保險保障與全年無休客服。</li>
+        <li><strong>Scale：</strong>從初期住宿問題擴展到全球主要城市，甚至延伸至個人化旅程體驗，成為改變人類旅行方式的企業。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 04 人類學家 -->
+  <section>
+    <div class="sec-label">04 / SEE 的心法</div>
+    <h2>像人類學家一樣，由下而上觀察行為</h2>
+    <p>做「洞察」時最大的盲點：<strong>只靠由上而下的市場計畫或問卷</strong>。就算是熱賣多年的產品，也可能藏著未被滿足的需求。答案不在問卷上，在使用者的「實際行為」裡。</p>
+    <div class="case">
+      <div class="case-title">汰漬（Tide）洗衣粉的包裝革命</div>
+      <ul class="steps">
+        <li><strong>問卷的盲點：</strong>1980 年代，成立 30 年的汰漬做消費者訪談，大家對紙盒包裝「非常滿意」——從問卷上看不出任何問題。</li>
+        <li><strong>現場的觀察：</strong>團隊到消費者家中，看到一位老婦人拿出全新洗衣粉，不用上方原有開孔，反而<strong>拿剪刀從盒子側面戳洞</strong>倒進量杯——她 30 年來都這樣用，因為最方便。</li>
+        <li><strong>洞察與結果：</strong>「從側邊拿取比從上方更直覺」這個自然行為，促使品牌更改包裝設計，甚至催生了後來如飲水機般側取的液體洗衣精桶。</li>
+      </ul>
+      <p><strong>結論：</strong>無論是從零創業，或是解決企業內部的舊問題，「直接聆聽與觀察人們的自然行為」才是找到痛點、驗證需求的第一步。</p>
+    </div>
+  </section>
+
+  <!-- 05 資源 -->
+  <section>
+    <div class="sec-label">05 / 最顛覆的一課</div>
+    <h2>創業，是不考慮當前掌控的資源</h2>
+    <p>傳統觀念：創業要先有資金、人脈、技術團隊與時間，項目才「可行」。作者說這是大錯特錯——<strong>重大影響的本質在於創新性，而不是一開始的可行性</strong>。缺技術、缺資金、缺團隊？沒有關係，記住創業是解決問題的結構化進程。</p>
+    <div class="case">
+      <div class="case-title">Casper 床墊：一無所知反而是優勢</div>
+      <ul class="steps">
+        <li><strong>痛點：</strong>2014 年，兩位學生發現買床墊體驗極差——展示間令人不自在、送貨要在家苦等、大品牌昂貴又吸引不了年輕人。</li>
+        <li><strong>資源匱乏：</strong>兩人只知道床墊是拿來睡的，對產業運作、物流、製造一無所知。</li>
+        <li><strong>匱乏變優勢：</strong>正因缺乏經驗，他們<strong>完全不被舊產業的 SOP 與物流模式綁架</strong>。</li>
+        <li><strong>創新方案：</strong>在家上網下單、直送到府，最顛覆的是「試用 100 天，不滿意全額退費」，免除去店面試躺的尷尬。</li>
+        <li><strong>結果：</strong>徹底顛覆床墊產業，2020 年成功 IPO 上市。</li>
+      </ul>
+    </div>
+    <div class="quote">
+      <p>「資源很豐富，常常會成為創業的阻礙。」<br>覺得<em>沒什麼好失去</em>的時候，反而能跳脫框架；<br>擁有太多、害怕損失時，做事反而綁手綁腳。</p>
+    </div>
+  </section>
+
+  <!-- 06 總結 -->
+  <section>
+    <div class="sec-label">06 / TAKEAWAY</div>
+    <h2>把 3S 帶回你的職場</h2>
+    <p>這套方法不只用來開公司——書中大量職場與生活案例證明，它可以落實到日常。對已經在創業或準備擴張的人，書的後半段還有團隊擴展步驟、募資與銷售簡報訣竅、企業永續經營技巧。</p>
+    <div class="action">
+      <h3>三個這週就能做的練習</h3>
+      <ol>
+        <li><strong>See：</strong>挑一個部門裡「大家都習慣了」的老流程，去現場看同事<strong>實際怎麼操作</strong>（不是問他們滿不滿意）——找你的「側面戳洞」時刻。</li>
+        <li><strong>Solve：</strong>不要一次做完美方案。先做一個最小可行的改善版本，讓 2～3 個人試用，再迭代。</li>
+        <li><strong>Scale：</strong>問自己：這個解法能不能寫成標準、讓別人也照著做？能被複製的解決方案，才是長久價值。</li>
+      </ol>
+    </div>
+    <div class="divider"></div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="brand">Rock 會計家教 · 每週好書分享</div>
+    <div>把商業與財務知識，講到機車行老闆也聽得懂。</div>
+    <div class="links">
+      <a href="https://brothergo99.github.io/rock-accounting/" target="_blank" rel="noopener">官方網站</a>
+      <a href="https://www.youtube.com/@Brothergo99" target="_blank" rel="noopener">YouTube 頻道</a>
+      <a href="https://lin.ee/365poxew" target="_blank" rel="noopener">LINE 官方帳號</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
