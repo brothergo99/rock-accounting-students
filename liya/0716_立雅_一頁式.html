@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>立雅 0716 · 特別股×資本市場×減損天花板×IFRS 15</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --fo:#064e3b;--fo2:#ecfdf5;--fo3:#6ee7b7;--fo4:#059669;
+  --am:#92400e;--am2:#fffbeb;--am3:#fde68a;--am4:#d97706;
+  --co:#9a3412;--co2:#fff7ed;--co3:#fed7aa;--co4:#ea580c;
+  --vi:#4c1d95;--vi2:#f5f3ff;--vi3:#c4b5fd;--vi4:#7c3aed;
+  --bl:#1e3a5f;--bl2:#eff6ff;--bl3:#93c5fd;--bl4:#2563eb;
+  --rd:#7f1d1d;--rd2:#fff1f2;--rd3:#fecdd3;
+  --night:#050e08;--night2:#0a1f14;
+  --white:#fff;--ink:#0a1f0f;--muted:#4a6b52;--bg:#f0fdf4;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+.page-header{background:linear-gradient(150deg,#030f07,#071a0e,#050d09,#020a05);padding:38px 50px 32px;position:relative;overflow:hidden;border-bottom:3px solid var(--fo3)}
+.ph-g1{position:absolute;top:-50px;right:-40px;width:260px;height:260px;background:radial-gradient(circle,rgba(5,150,105,.2),transparent 65%);pointer-events:none}
+.ph-g2{position:absolute;bottom:-30px;left:-20px;width:200px;height:200px;background:radial-gradient(circle,rgba(217,119,6,.12),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(110,231,183,.65);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(14px,2.1vw,21px);font-weight:900;color:#fff;line-height:1.28;margin-bottom:4px}
+.ph-title em{color:#6ee7b7;font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.38);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mc{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(110,231,183,.1);color:#6ee7b7;border:1px solid rgba(110,231,183,.25)}
+.mc-a{background:rgba(217,119,6,.13);color:var(--am3);border-color:rgba(217,119,6,.3)}
+.mc-o{background:rgba(234,88,12,.12);color:var(--co3);border-color:rgba(234,88,12,.28)}
+.mc-v{background:rgba(124,58,237,.13);color:var(--vi3);border-color:rgba(124,58,237,.28)}
+
+.container{max-width:1100px;margin:0 auto;padding:28px 26px}
+.section{margin-bottom:24px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--fo4);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--night);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--fo3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:720px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+.card{background:var(--white);border:1.5px solid var(--fo3);border-radius:10px;padding:14px}
+.card-fo{background:var(--fo2);border:1.5px solid var(--fo3);border-radius:10px;padding:14px}
+.card-am{background:var(--am2);border:1.5px solid var(--am3);border-radius:10px;padding:14px}
+.card-co{background:var(--co2);border:1.5px solid var(--co3);border-radius:10px;padding:14px}
+.card-vi{background:var(--vi2);border:1.5px solid var(--vi3);border-radius:10px;padding:14px}
+.card-bl{background:var(--bl2);border:1.5px solid var(--bl3);border-radius:10px;padding:14px}
+.card-rd{background:var(--rd2);border:1.5px solid var(--rd3);border-radius:10px;padding:14px}
+.card-dark{background:var(--night);border:none;border-radius:10px;padding:14px}
+
+.card h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px}
+.card-fo h3{color:var(--fo)}
+.card-am h3{color:var(--am)}
+.card-co h3{color:var(--co)}
+.card-vi h3{color:var(--vi)}
+.card-bl h3{color:var(--bl)}
+.card-rd h3{color:var(--rd)}
+.card-dark h3{color:var(--fo3)}
+.card p,.card li{font-size:12.5px;line-height:1.85;color:#374151}
+.card-fo p,.card-fo li{color:var(--fo);font-size:12.5px;line-height:1.85}
+.card-am p,.card-am li{color:var(--am);font-size:12.5px;line-height:1.85}
+.card-co p,.card-co li{color:var(--co);font-size:12.5px;line-height:1.85}
+.card-vi p,.card-vi li{color:var(--vi);font-size:12.5px;line-height:1.85}
+.card-bl p,.card-bl li{color:var(--bl);font-size:12.5px;line-height:1.85}
+.card-rd p,.card-rd li{color:var(--rd);font-size:12.5px;line-height:1.85}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8);font-size:12.5px;line-height:1.85}
+.card ul{padding-left:15px}.card ul li{margin-bottom:3px}
+
+/* 公式框 */
+.formula{background:var(--night2);border-radius:7px;padding:9px 13px;margin:7px 0;font-family:'DM Mono',monospace;font-size:12px;color:#6ee7b7;border-left:3px solid var(--fo4)}
+.formula span{color:#fde68a}
+.formula em{color:#fed7aa;font-style:normal}
+
+/* 警示框 */
+.trap{background:rgba(234,88,12,.1);border:1.5px solid var(--co3);border-radius:7px;padding:8px 12px;margin-top:7px;font-size:12px;color:var(--co)}
+.trap::before{content:"⚠️ 考試陷阱 ";font-weight:700}
+
+/* 案例行 */
+.case-row{display:flex;gap:8px;align-items:flex-start;padding:7px 0;border-bottom:1px solid rgba(5,150,105,.12)}
+.case-row:last-child{border-bottom:none}
+.case-num{font-family:'DM Mono',monospace;font-size:11px;background:var(--fo4);color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;margin-top:2px}
+.case-body{font-size:12.5px;color:#374151;line-height:1.75}
+
+/* 反分割時間軸 */
+.timeline{display:flex;flex-direction:column;gap:5px;margin-top:8px}
+.tl-item{display:flex;gap:10px;align-items:flex-start}
+.tl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.tl-body{font-size:12px;color:#374151;line-height:1.7}
+.tl-body strong{color:var(--co)}
+
+/* 數字對比 */
+.num-compare{display:flex;gap:8px;justify-content:space-between;margin-top:8px}
+.nc-box{flex:1;text-align:center;border-radius:8px;padding:10px 8px}
+.nc-label{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:3px}
+.nc-val{font-family:'Playfair Display',serif;font-size:16px;font-weight:700}
+
+/* 減損計算表 */
+.calc-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+.calc-table th{background:var(--fo);color:#fff;padding:5px 9px;font-weight:500;font-size:11.5px;text-align:left}
+.calc-table td{padding:5px 9px;border-bottom:1px solid rgba(5,150,105,.12)}
+.calc-table tr:nth-child(even) td{background:rgba(5,150,105,.04)}
+.hl-row td{background:rgba(217,119,6,.12)!important;font-weight:700;color:var(--am)}
+.cap-row td{background:rgba(234,88,12,.1)!important;font-weight:700;color:var(--co)}
+
+/* 股利分配表 */
+.div-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+.div-table th{background:var(--vi);color:#fff;padding:5px 9px;font-weight:500;text-align:center;font-size:11.5px}
+.div-table td{padding:5px 9px;border-bottom:1px solid rgba(124,58,237,.12);text-align:center;font-family:'DM Mono',monospace;font-size:12px;color:#374151}
+.div-table tr:last-child td{font-weight:700;background:var(--vi2);color:var(--vi)}
+.div-table .label-col{text-align:left;font-family:'Noto Sans TC',sans-serif;color:#374151}
+
+/* 借貸速記 */
+.debit-credit{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.dc-box{border-radius:7px;padding:9px 11px;text-align:center}
+.dc-label{font-size:10px;font-family:'DM Mono',monospace;margin-bottom:4px}
+.dc-content{font-size:12px;font-weight:700;line-height:1.6}
+
+/* 套色 badge */
+.badge{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;padding:2px 7px;border-radius:3px;margin:2px 2px 0 0}
+.bf{background:var(--fo2);color:var(--fo4);border:1px solid var(--fo3)}
+.ba{background:var(--am2);color:var(--am);border:1px solid var(--am3)}
+.bo{background:var(--co2);color:var(--co);border:1px solid var(--co3)}
+.bv{background:var(--vi2);color:var(--vi4);border:1px solid var(--vi3)}
+.bb{background:var(--bl2);color:var(--bl4);border:1px solid var(--bl3)}
+
+/* Quote */
+.quote{background:linear-gradient(135deg,var(--night),var(--night2));border-radius:10px;padding:14px 20px;position:relative;overflow:hidden;margin-bottom:20px}
+.qm{font-family:'Playfair Display',serif;font-size:72px;color:rgba(110,231,183,.08);position:absolute;top:-10px;left:8px;line-height:1}
+.qt{font-size:13px;color:rgba(255,255,255,.88);line-height:1.65;position:relative;z-index:1}
+.qt em{color:#6ee7b7;font-style:normal;font-weight:700}
+.qs{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.38);margin-top:6px;position:relative;z-index:1}
+
+.page-footer{background:var(--night);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--fo3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-g1"></div>
+  <div class="ph-g2"></div>
+  <div class="ph-eyebrow">0716 · 立雅課後複習 · 特別股×資本市場×減損天花板×IFRS 15</div>
+  <div class="ph-title">從考題到真實財報：<em>慧康生活科技反分割</em>、<br>減損迴轉「天花板原則」、退款負債的職場實戰</div>
+  <div class="ph-sub">特別股分配計算 × 成本會計公式推導 × 農產品評價 × 投資性不動產成本陷阱 × IFRS 15 退貨權</div>
+  <div class="ph-meta">
+    <span class="mc">2025.07.16</span>
+    <span class="mc">立雅</span>
+    <span class="mc mc-a">特別股 + 資本市場籌資</span>
+    <span class="mc mc-o">資產減損迴轉天花板</span>
+    <span class="mc mc-v">IFRS 15 退款負債</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 金句 -->
+  <div class="quote">
+    <div class="qm">"</div>
+    <div class="qt">「<em>非累積完全參加特別股</em>在現實根本不會發生——普通股股東絕不可能同意。」<br>理論背後是真實利益的權衡：累積保護投資人，不完全參加保護普通股股東。<em>理解了動機，考題才能真正看懂。</em></div>
+    <div class="qs">Rock 老師 · 0716 會計教學</div>
+  </div>
+
+  <!-- SECTION 1: 特別股理論×實務×案例 -->
+  <div class="section">
+    <div class="section-label">Part 1 · 特別股 · 理論與實務脫節＋國發基金真實案例</div>
+    <div class="section-title">特別股：「累積」是必要條件，「完全參加」是普通股股東的禁區</div>
+    <div class="grid-2">
+      <div>
+        <div class="card card-fo" style="margin-bottom:12px">
+          <h3>📐 特別股設計邏輯：誰保護誰？</h3>
+          <div class="case-row">
+            <div class="case-num">累積</div>
+            <div class="case-body"><strong>保護投資人：</strong>當年未發股利，未來賺錢時必須補發（累積未發股利）。<br>→ <span style="color:var(--fo4);font-weight:600">實務上必備</span>，否則無人購買特別股。</div>
+          </div>
+          <div class="case-row">
+            <div class="case-num" style="background:var(--co4)">非累積</div>
+            <div class="case-body"><strong>保護公司：</strong>當年不發即永遠不補發。對投資人極不友善。<br>→ 現實中幾乎不存在</div>
+          </div>
+          <div class="case-row">
+            <div class="case-num" style="background:var(--vi4)">完全參加</div>
+            <div class="case-body"><strong>特別股與普通股按比例共享剩餘股利。</strong><br>→ 普通股股東必定反對，實務中幾乎不發行。</div>
+          </div>
+          <div class="trap">考題「非累積完全參加特別股」：現實不存在，但考試考它——理解股利分配計算即可。</div>
+        </div>
+        <div class="card card-vi">
+          <h3>📊 完全參加特別股：股利分配計算步驟</h3>
+          <div style="font-size:12px;color:var(--vi);margin-bottom:7px">題設：普通股資本30萬、特別股18萬（8%），當期淨利6萬</div>
+          <table class="div-table">
+            <thead><tr><th></th><th>特別股</th><th>普通股</th></tr></thead>
+            <tbody>
+              <tr><td class="label-col">① 優先股利（8%）</td><td>14,400</td><td>—</td></tr>
+              <tr><td class="label-col">② 同等配發（8%）</td><td>—</td><td>24,000</td></tr>
+              <tr><td class="label-col">剩餘 60,000-38,400=21,600</td><td colspan="2" style="text-align:center;color:var(--vi4)">按資本比例 18:30 分配</td></tr>
+              <tr><td class="label-col">③ 按比例分配</td><td>8,100</td><td>13,500</td></tr>
+              <tr><td class="label-col">合計</td><td>22,500</td><td>37,500</td></tr>
+            </tbody>
+          </table>
+          <div class="trap" style="margin-top:8px">題目問「普通股」還是「特別股」？仔細看！</div>
+        </div>
+      </div>
+
+      <div class="card card-dark">
+        <h3>🏭 真實案例：慧康生活科技 (7581) × 國發基金</h3>
+        <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:10px 12px;margin-bottom:10px">
+          <div style="font-size:11px;color:rgba(255,255,255,.4);font-family:'DM Mono',monospace;margin-bottom:6px">2024年 EPS 曾跌至</div>
+          <div style="font-family:'Playfair Display',serif;font-size:28px;color:#fca5a5;font-weight:700">−15 元</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:3px">= 一年賠掉1.5個股本 → 無正常投資人敢買普通股</div>
+        </div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot" style="background:#6ee7b7"></div>
+            <div class="tl-body"><strong>疫情期間：</strong>國發基金以<strong style="color:#fde68a">特別股</strong>注資（保留控制權、限制表決權）</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot" style="background:#6ee7b7"></div>
+            <div class="tl-body"><strong>IFRS歸類：</strong>該特別股實質像「不用付利息的借款」→ 從股東權益剔除 → 歸類為長期負債<strong style="color:#c4b5fd">「特別股負債」</strong></div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot" style="background:#fde68a"></div>
+            <div class="tl-body"><strong>興櫃前操作①：</strong>特別股1比1全數<strong style="color:#6ee7b7">轉換為普通股</strong> → 國發基金成功收回資金並獲利</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot" style="background:#fed7aa"></div>
+            <div class="tl-body"><strong>興櫃前操作②：</strong>股票<strong style="color:#fed7aa">反分割（Reverse Stock Split）</strong><br>彌補虧損後股價剩約 <strong style="color:#fca5a5">NT$0.033</strong> → 合併多股 → 強拉面額至 <strong style="color:#86efac">NT$5</strong></div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot" style="background:#c4b5fd"></div>
+            <div class="tl-body"><strong>結果：</strong>淨值由負轉正，達成興櫃資本市場門檻。<br><em style="color:#c4b5fd">→ 講者稱之為「把所有籌資工具發揮至極致的經典案例」。</em></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: 現金流量 + 成本會計 + 農產品 + 投資性不動產 -->
+  <div class="section">
+    <div class="section-label">Part 2 · 計算快攻 · 現金流量×成本會計×農產品評價×投資性不動產</div>
+    <div class="section-title">四大計算考點：借貸邏輯速解、Prime/Conversion公式、市價淨值、資本化陷阱</div>
+    <div class="grid-2">
+      <div>
+        <div class="card card-bl" style="margin-bottom:12px">
+          <h3>💧 現金流量速算：用「借貸方」判斷加減項</h3>
+          <div style="font-size:12px;color:var(--bl);margin-bottom:8px">淨利、利息收入、租金收入 = 貸方科目 → 貸方增加＝加項</div>
+          <div class="debit-credit">
+            <div class="dc-box" style="background:var(--bl2);border:1.5px solid var(--bl3)">
+              <div class="dc-label" style="color:var(--bl4)">預收租金（負債）增加 2,000</div>
+              <div class="dc-content" style="color:var(--bl)">負債增加 = 貸方<br>→ <span style="color:var(--fo4)">＋2,000</span></div>
+            </div>
+            <div class="dc-box" style="background:var(--bl2);border:1.5px solid var(--bl3)">
+              <div class="dc-label" style="color:var(--bl4)">應收利息（資產）減少 6,000</div>
+              <div class="dc-content" style="color:var(--bl)">資產減少 = 貸方<br>→ <span style="color:var(--fo4)">＋6,000</span></div>
+            </div>
+          </div>
+          <div style="background:var(--night);border-radius:6px;padding:8px 11px;margin-top:8px;font-size:12px;color:#6ee7b7;font-family:'DM Mono',monospace">現金流量 = 淨利 + 2,000 + 6,000 = 快速得解</div>
+        </div>
+
+        <div class="card card-am">
+          <h3>⚙️ 成本會計：Prime Cost × Conversion Cost 公式推導</h3>
+          <div class="formula">
+            <span>主要成本 (Prime Cost)</span> = 直接材料 + 直接人工 = <em>21萬</em><br>
+            <span>加工成本 (Conversion Cost)</span> = 直接人工 + 製造費用 = <em>18萬</em><br>
+            已知：直接人工 = <em>12萬</em>
+          </div>
+          <div class="formula">
+            直接材料 = 21 - 12 = <em>9萬</em><br>
+            製造費用 = 18 - 12 = <em>6萬</em><br>
+            本期總投入 = 9 + 12 + 6 = <em>27萬</em>
+          </div>
+          <div class="formula">
+            期初在製品 + 27萬 − 期末在製品(5萬) = 製成品成本(30萬)<br>
+            → 期初在製品 = <em>8萬</em>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card card-fo" style="margin-bottom:12px">
+          <h3>🐄 農產品評價：公允價值減出售成本（市價淨值）</h3>
+          <div class="formula">
+            評價基礎：公允價值 − 出售成本（非歷史成本）<br>
+            例：牛奶 20萬公升 × (50 − 5) = <em>900萬元</em>
+          </div>
+          <div style="background:rgba(5,150,105,.1);border-radius:7px;padding:9px 12px;margin-top:7px">
+            <div style="font-size:12px;font-weight:700;color:var(--fo);margin-bottom:4px">採集員工薪資 → 不能灌入牛奶存貨成本</div>
+            <div style="font-size:12px;color:var(--fo);line-height:1.75">農產品直接以市價認定存貨價值，無法像製造業精確計算每單位工序工時。<br>→ 採集薪資直接列為<strong>當期薪資費用</strong>。</div>
+          </div>
+        </div>
+
+        <div class="card card-rd">
+          <h3>🏭 投資性不動產：成本認定的關鍵陷阱</h3>
+          <div style="font-size:12px;color:var(--rd);margin-bottom:8px">購買廠房用於出租 → 認列為「投資性不動產」</div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="background:var(--fo2);border:1.5px solid var(--fo3);border-radius:6px;padding:7px 11px;font-size:12.5px;color:var(--fo)">
+              <strong>✅ 可資本化（計入取得成本）：</strong><br>
+              購買價格(500萬) ＋ 房仲購屋佣金(12.5萬) ＋ 估價師鑑價費 ＋ 代書律師費<br>
+              <strong>合計：5,125,000 元</strong>
+            </div>
+            <div style="background:var(--rd2);border:1.5px solid var(--rd3);border-radius:6px;padding:7px 11px;font-size:12.5px;color:var(--rd)">
+              <strong>❌ 不可資本化（列為當期費用）：</strong><br>
+              為出租而支付給房仲的<strong>租金佣金(30萬)</strong>
+            </div>
+          </div>
+          <div class="trap">「購屋佣金」vs「租金佣金」：前者資本化，後者費用化。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: 減損天花板 + IFRS 15 -->
+  <div class="section">
+    <div class="section-label">Part 3 · 高階難題 · 資產減損迴轉「天花板原則」× IFRS 15 退款負債</div>
+    <div class="section-title">被玩壞的考點：天花板 ≠ 市價；退款負債：貨權轉移了還不能全認營收</div>
+    <div class="grid-2">
+      <div class="card card-am">
+        <h3>📉 資產減損迴轉利益：天花板原則完整計算</h3>
+        <div style="font-size:12px;color:var(--am);margin-bottom:8px">鄭丁旺 vs 林蕙真兩大權威曾有不同解讀——本考點被稱為「被玩壞的考點」</div>
+        <table class="calc-table">
+          <thead><tr><th>時間點</th><th>帳面價值</th><th>說明</th></tr></thead>
+          <tbody>
+            <tr><td>第1~2年折舊後</td><td>某金額</td><td>正常折舊進行中</td></tr>
+            <tr><td>第2年底提列減損</td><td>91,000</td><td>減損損失 9,000 元</td></tr>
+            <tr><td>第3年折舊（重算）</td><td class="hl-row">69,000</td><td>(91,000-25,000殘值)÷3×3年 → 折舊22,000</td></tr>
+            <tr class="cap-row"><td>天花板（正常路徑）</td><td>75,000</td><td>假設從未減損，正常折舊至第3年底</td></tr>
+            <tr><td>市價回升</td><td>76,000</td><td>高於天花板！</td></tr>
+          </tbody>
+        </table>
+        <div style="background:rgba(217,119,6,.12);border-radius:7px;padding:10px 13px;margin-top:10px">
+          <div style="font-size:12px;font-weight:700;color:var(--am);margin-bottom:4px">天花板原則：防止企業利用減損→迴轉操縱盈餘</div>
+          <div class="formula" style="background:rgba(0,0,0,.25);margin:0">
+            天花板 = 假設從未發生減損，按正常折舊計算至今的帳面價值<br>
+            迴轉利益上限 = <em>75,000 − 69,000 = 6,000</em>（非市價差7,000）
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-vi">
+        <h3>🧾 IFRS 15：退貨權×退款負債——職場一股清流</h3>
+        <div style="background:rgba(124,58,237,.1);border-radius:7px;padding:9px 12px;margin-bottom:9px">
+          <div style="font-size:12px;color:var(--vi);line-height:1.75">出貨給 <strong>Momo / 康是美 / 屈臣氏</strong> 等強勢通路，合約附帶「無條件退貨權（例如：可退回15%）」</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="background:var(--fo2);border:1.5px solid var(--fo3);border-radius:6px;padding:8px 12px">
+            <div style="font-size:11.5px;font-weight:700;color:var(--fo);margin-bottom:3px">✅ 可認列營收（85%）</div>
+            <div style="font-size:12px;color:var(--fo)">貨權已轉移且不預期退回的部分 → 正常認列為當期營收</div>
+          </div>
+          <div style="background:var(--co2);border:1.5px solid var(--co3);border-radius:6px;padding:8px 12px">
+            <div style="font-size:11.5px;font-weight:700;color:var(--co);margin-bottom:3px">❌ 不可認列營收（15%）→ 轉入「退款負債」</div>
+            <div style="font-size:12px;color:var(--co)">即使貨權已轉移，預期可能退貨的金額<strong>必須</strong>列為<strong>退款負債（Refund Liability）</strong></div>
+          </div>
+        </div>
+        <div style="background:var(--night);border-radius:7px;padding:10px 13px;margin-top:8px">
+          <div style="font-size:11.5px;color:#c4b5fd;margin-bottom:4px;font-weight:600">老長官的困惑 vs 講者的回應</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.75">「貨權都轉移了，為什麼不能認營收？什麼叫退款負債？」<br>→ 講者清晰解釋：<em style="color:#6ee7b7">IFRS 15 要求認列「預期退貨部分的可變對價」，這就是職場上 IFRS 最新規定帶來的話語權。</em></div>
+        </div>
+        <div style="background:rgba(5,150,105,.1);border-radius:6px;padding:8px 11px;margin-top:7px;font-size:12px;color:var(--fo)">
+          🎖 老公司財務主管不熟 IFRS → 講者成為公司內部「一股清流」，建立專業信任度。
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">立雅 · 0716 · 特別股×資本市場×減損天花板×IFRS 15</div>
+</div>
+
+</body>
+</html>
