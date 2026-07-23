@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joyce 0722 · 財報商業思維×HYROX飛輪×AI革命</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --co:#be123c;--co2:#fff1f2;--co3:#fecdd3;--co4:#f43f5e;
+  --te:#0f766e;--te2:#f0fdfa;--te3:#99f6e4;--te4:#14b8a6;
+  --or:#c2410c;--or2:#fff7ed;--or3:#fed7aa;--or4:#f97316;
+  --bl:#1e3a5f;--bl2:#eff6ff;--bl3:#93c5fd;--bl4:#2563eb;
+  --vi:#4c1d95;--vi2:#f5f3ff;--vi3:#c4b5fd;--vi4:#7c3aed;
+  --gd:#92400e;--gd2:#fffbeb;--gd3:#fde68a;--gd4:#d97706;
+  --night:#06080f;--night2:#0d1424;
+  --white:#fff;--ink:#0a0e1a;--muted:#4a5568;--bg:#f8f9ff;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+.page-header{background:linear-gradient(150deg,#04060e,#080f1f,#0b0d1a,#050810);padding:38px 50px 30px;position:relative;overflow:hidden;border-bottom:3px solid var(--co4)}
+.ph-g1{position:absolute;top:-60px;right:-40px;width:280px;height:280px;background:radial-gradient(circle,rgba(244,63,94,.18),transparent 65%);pointer-events:none}
+.ph-g2{position:absolute;bottom:-40px;left:-20px;width:220px;height:220px;background:radial-gradient(circle,rgba(20,184,166,.1),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(252,165,165,.65);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(14px,2.1vw,21px);font-weight:900;color:#fff;line-height:1.28;margin-bottom:4px}
+.ph-title em{color:#f43f5e;font-style:normal}
+.ph-title em2{color:#99f6e4;font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.38);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mc{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(244,63,94,.12);color:#fca5a5;border:1px solid rgba(244,63,94,.28)}
+.mc-t{background:rgba(20,184,166,.12);color:var(--te3);border-color:rgba(20,184,166,.28)}
+.mc-o{background:rgba(249,115,22,.12);color:var(--or3);border-color:rgba(249,115,22,.28)}
+.mc-g{background:rgba(217,119,6,.12);color:var(--gd3);border-color:rgba(217,119,6,.28)}
+
+.container{max-width:1100px;margin:0 auto;padding:28px 26px}
+.section{margin-bottom:24px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--co);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--night);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--co3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+
+.card{background:var(--white);border:1.5px solid var(--co3);border-radius:10px;padding:14px}
+.card-co{background:var(--co2);border:1.5px solid var(--co3);border-radius:10px;padding:14px}
+.card-te{background:var(--te2);border:1.5px solid var(--te3);border-radius:10px;padding:14px}
+.card-or{background:var(--or2);border:1.5px solid var(--or3);border-radius:10px;padding:14px}
+.card-bl{background:var(--bl2);border:1.5px solid var(--bl3);border-radius:10px;padding:14px}
+.card-vi{background:var(--vi2);border:1.5px solid var(--vi3);border-radius:10px;padding:14px}
+.card-gd{background:var(--gd2);border:1.5px solid var(--gd3);border-radius:10px;padding:14px}
+.card-dark{background:var(--night);border:none;border-radius:10px;padding:14px}
+
+.card h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px}
+.card-co h3{color:var(--co)}
+.card-te h3{color:var(--te)}
+.card-or h3{color:var(--or)}
+.card-bl h3{color:var(--bl)}
+.card-vi h3{color:var(--vi)}
+.card-gd h3{color:var(--gd)}
+.card-dark h3{color:var(--te3)}
+.card p,.card li{font-size:12.5px;line-height:1.85;color:#374151}
+.card-co p,.card-co li{color:var(--co);font-size:12.5px;line-height:1.85}
+.card-te p,.card-te li{color:var(--te);font-size:12.5px;line-height:1.85}
+.card-or p,.card-or li{color:var(--or);font-size:12.5px;line-height:1.85}
+.card-bl p,.card-bl li{color:var(--bl);font-size:12.5px;line-height:1.85}
+.card-vi p,.card-vi li{color:var(--vi);font-size:12.5px;line-height:1.85}
+.card-gd p,.card-gd li{color:var(--gd);font-size:12.5px;line-height:1.85}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8);font-size:12.5px;line-height:1.85}
+.card ul{padding-left:15px}.card ul li{margin-bottom:3px}
+
+/* 動機卡 */
+.motive-row{display:flex;gap:9px;align-items:flex-start;padding:7px 0;border-bottom:1px solid rgba(244,63,94,.1)}
+.motive-row:last-child{border-bottom:none}
+.motive-ic{font-size:16px;flex-shrink:0;margin-top:1px}
+.motive-body{font-size:12.5px;color:#374151;line-height:1.75}
+.motive-body strong{color:var(--co)}
+
+/* AI工具模組 */
+.ai-step{display:flex;gap:10px;align-items:flex-start;background:rgba(255,255,255,.07);border-radius:7px;padding:8px 11px;margin-bottom:5px}
+.ai-num{font-family:'DM Mono',monospace;font-size:11px;background:var(--co4);color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;margin-top:2px}
+.ai-body{font-size:12.5px;color:rgba(255,255,255,.85);line-height:1.7}
+
+/* 商業模式拆解 */
+.biz-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.biz-box{border-radius:7px;padding:9px 12px}
+.biz-label{font-family:'DM Mono',monospace;font-size:10px;margin-bottom:4px;font-weight:600}
+.biz-val{font-size:12.5px;line-height:1.7;font-weight:500}
+.biz-sub{font-size:11.5px;opacity:.8;line-height:1.6;margin-top:3px}
+
+/* 飛輪 */
+.flywheel{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin:8px 0;justify-content:center}
+.fw-node{border-radius:20px;padding:5px 12px;font-size:11.5px;font-weight:700;text-align:center}
+.fw-arrow{color:var(--co4);font-size:14px;flex-shrink:0}
+
+/* 數字卡 */
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:8px}
+.stat-box{text-align:center;border-radius:8px;padding:9px 6px}
+.stat-val{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;line-height:1.1}
+.stat-label{font-size:10px;font-family:'DM Mono',monospace;margin-top:3px;opacity:.8}
+
+/* 財報框架 */
+.report-row{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid rgba(20,184,166,.1);align-items:flex-start}
+.report-row:last-child{border-bottom:none}
+.rr-tag{font-family:'DM Mono',monospace;font-size:10px;background:var(--te4);color:#fff;border-radius:3px;padding:2px 8px;flex-shrink:0;white-space:nowrap;margin-top:3px}
+.rr-body{font-size:12.5px;color:var(--te);line-height:1.75}
+
+/* Quote */
+.quote{background:linear-gradient(135deg,var(--night),var(--night2));border-radius:10px;padding:14px 20px;position:relative;overflow:hidden;margin-bottom:20px}
+.qm{font-family:'Playfair Display',serif;font-size:72px;color:rgba(244,63,94,.08);position:absolute;top:-10px;left:8px;line-height:1}
+.qt{font-size:13px;color:rgba(255,255,255,.88);line-height:1.65;position:relative;z-index:1}
+.qt em{color:#f43f5e;font-style:normal;font-weight:700}
+.qt em2{color:#99f6e4;font-style:normal}
+.qs{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.38);margin-top:6px;position:relative;z-index:1}
+
+.badge{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;padding:2px 7px;border-radius:3px;margin:2px 2px 0 0}
+.bc{background:var(--co2);color:var(--co);border:1px solid var(--co3)}
+.bt{background:var(--te2);color:var(--te);border:1px solid var(--te3)}
+.bo{background:var(--or2);color:var(--or);border:1px solid var(--or3)}
+.bg{background:var(--gd2);color:var(--gd);border:1px solid var(--gd3)}
+
+.page-footer{background:var(--night);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--co4)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-g1"></div>
+  <div class="ph-g2"></div>
+  <div class="ph-eyebrow">0722 · Joyce 課後複習 · 財報商業思維×AI革命×HYROX飛輪拆解</div>
+  <div class="ph-title">看懂財報，先看懂<em>生意的本質</em>：<br>從 HYROX 飛輪，學會解讀任何一張財報</div>
+  <div class="ph-sub">重啟動機 × Claude 零基礎架站 × 360天原子習慣 × 商業思維財報框架 × HYROX 動態定價×授權收入×社群裂變</div>
+  <div class="ph-meta">
+    <span class="mc">2025.07.22</span>
+    <span class="mc">Joyce 佳儀</span>
+    <span class="mc mc-t">重啟財報課 · 第1堂</span>
+    <span class="mc mc-o">家族企業興櫃準備</span>
+    <span class="mc mc-g">每週三 21:30</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 金句 -->
+  <div class="quote">
+    <div class="qm">"</div>
+    <div class="qt">「看財報不能只看數字，<em>先搞清楚這家公司到底做什麼生意、錢從哪裡來</em>——<br>商業模式決定數字，數字只是結果。<em2>HYROX 一場9,000人，扣掉損益兩平1,500人，剩下7,500人幾乎都是純利潤。</em2>」</div>
+    <div class="qs">Rock 老師 · 0722 重啟第一堂</div>
+  </div>
+
+  <!-- SECTION 1: 重啟動機 + AI革命 -->
+  <div class="section">
+    <div class="section-label">Part 1 · 重啟動機 + AI工具革命 · 為什麼現在開始學財報？</div>
+    <div class="section-title">家族企業興櫃前的必修課 × Claude 零基礎架站 × 360天連續輸出的原子習慣</div>
+    <div class="grid-2">
+      <div>
+        <div class="card card-co" style="margin-bottom:12px">
+          <h3>✈️ Joyce 的重啟動機：海外7個月後回台</h3>
+          <div class="motive-row">
+            <div class="motive-ic">🎿</div>
+            <div class="motive-body">海外滑雪場工作7~8個月（含南美旅行一個月）→ 前台處理骨折、與警局交涉，鍛鍊極強的突發狀況應對力</div>
+          </div>
+          <div class="motive-row">
+            <div class="motive-ic">🏢</div>
+            <div class="motive-body"><strong>家族企業預計明年登錄興櫃</strong>——需要能看懂公司財務是否「健康」，不需成為會計師，但要有直覺判斷力</div>
+          </div>
+          <div class="motive-row">
+            <div class="motive-ic">📊</div>
+            <div class="motive-body"><strong>資產規劃與出場時機：</strong>未來可能有部分出售持股計畫 → 需透過財報了解業內動態，判斷何時行動</div>
+          </div>
+          <div class="motive-row">
+            <div class="motive-ic">💰</div>
+            <div class="motive-body">趁空閒整理家庭財務、學投資與債券知識，以多看幾家公司財報的方式<strong>累積財報直覺</strong></div>
+          </div>
+        </div>
+        <div class="card card-te">
+          <h3>📚 財報課程框架：商業思維 ＞ 會計計算</h3>
+          <div class="report-row">
+            <div class="rr-tag">經營者視角</div>
+            <div class="rr-body">把自己當作經營者，思考財報數字背後「透露了什麼訊號」，而非只算數字</div>
+          </div>
+          <div class="report-row">
+            <div class="rr-tag">損益兩平點</div>
+            <div class="rr-body">做生意最核心的概念——固定成本多少？賣多少才能回本？超過之後毛利如何放大？</div>
+          </div>
+          <div class="report-row">
+            <div class="rr-tag">照妖鏡</div>
+            <div class="rr-body">現金流量表 = 獲利的照妖鏡。帳面賺錢是一回事，<strong>錢有沒有實際收回來</strong>才是關鍵</div>
+          </div>
+          <div class="report-row">
+            <div class="rr-tag">財報地雷</div>
+            <div class="rr-body">企業如何美化財報？「能打裝不能打」vs「不能打裝能打」——學會看穿表象</div>
+          </div>
+          <div class="report-row">
+            <div class="rr-tag">參考書籍</div>
+            <div class="rr-body">張明輝會計師《大會計師教你從財報數字看懂經營本質》三部曲，從「經營本質」切入</div>
+          </div>
+          <div style="background:rgba(15,118,110,.1);border-radius:6px;padding:7px 11px;margin-top:8px;font-size:12px;color:var(--te)">
+            💡 資產負債表：公司的錢 = 老闆出的（股東權益）+ 借來的（負債）。<br>負債比80%？先問：是什麼商業模式讓銀行願意借這麼多？
+          </div>
+        </div>
+      </div>
+
+      <div class="card-dark" style="border-radius:10px;padding:14px">
+        <h3 style="font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:10px;color:var(--te3)">🤖 Rock 老師的 AI 革命 × 原子習慣</h3>
+        <div class="ai-step">
+          <div class="ai-num">震</div>
+          <div class="ai-body"><strong style="color:#fff">Claude 訂閱第一天</strong>，完全不懂程式碼 → 靠截圖問 Claude → 個人官網第一版<strong style="color:var(--te3)">直接做出來</strong>。完全不知道 GitHub 是什麼，卻把網站架上去了。</div>
+        </div>
+        <div class="ai-step">
+          <div class="ai-num">進</div>
+          <div class="ai-body"><strong style="color:#fff">Google Analytics 串接：</strong>把流量數據貼給 Claude → Claude 以行銷專家口吻分析 direct/organic 流量、用戶痛點。「這個世界真的太大了。」</div>
+        </div>
+        <div class="ai-step">
+          <div class="ai-num">省</div>
+          <div class="ai-body">AI 大幅降低<strong style="color:var(--co3)">「垃圾時間」</strong>——過去看財報需花大量時間排版找資料，AI 接手後學習目標更純粹，還能主動提示財報盲點。</div>
+        </div>
+        <div class="ai-step">
+          <div class="ai-num">習</div>
+          <div class="ai-body"><strong style="color:#fff">360天連續輸出：</strong>每天早上8~9點通勤時寫作，有精力多寫、累就少寫，完成後感覺「超級厲害」——用瓦基 APP 追蹤習慣，已突破一年。</div>
+        </div>
+        <div style="background:rgba(244,63,94,.12);border-radius:7px;padding:9px 12px;margin-top:8px;border:1px solid rgba(244,63,94,.25)">
+          <div style="font-size:12px;color:#fca5a5;font-weight:600;margin-bottom:3px">核心心法</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.8);line-height:1.75">AI 工具不是用來「學的」，是用來「做事的」——<br>帶著強烈動機，把 Claude 當作你的專家夥伴，超越想像的成果自然出現。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: HYROX 商業模式大拆解 -->
+  <div class="section">
+    <div class="section-label">Part 2 · HYROX 商業模式拆解 · 用一個賽事學會看懂任何一張財報</div>
+    <div class="section-title">藍海策略 × 動態定價 × 授權訂閱收入 × 聯名稀缺性 × 零廣告費社群飛輪 × LVMH 估值潛力</div>
+
+    <div class="grid-2" style="margin-bottom:13px">
+      <div class="card card-or">
+        <h3>🏆 HYROX 是什麼？為什麼這麼硬核？</h3>
+        <div style="font-size:12.5px;color:var(--or);margin-bottom:8px">8×1公里跑步，中間穿插8個關卡：滑雪機(1000m)、推雪橇(<strong>152kg</strong>)、拉雪橇、波比跳(80m)、划船機(1000m)、農夫走(24kg×2)、沙袋弓箭步(100m)、丟藥球(100顆)</div>
+        <div style="background:rgba(194,65,12,.1);border-radius:7px;padding:8px 11px;font-size:12px;color:var(--or)">
+          <strong>藍海市場切入：</strong><br>
+          跑步族（馬拉松）vs 健身族（CrossFit）壁壘分明 → HYROX 逼健身教練去跑步、讓跑步人去練重訓。<br>
+          → 為龐大健身房愛好者創造<strong>「展現成果的專屬舞台」</strong>，從生理需求直達馬斯洛的<strong>自我實現</strong>。
+        </div>
+      </div>
+      <div class="card card-vi">
+        <h3>💰 多元變現：每一個接觸點都在賺錢</h3>
+        <div class="biz-grid">
+          <div class="biz-box" style="background:var(--co2);border:1.5px solid var(--co3)">
+            <div class="biz-label" style="color:var(--co)">動態定價</div>
+            <div class="biz-val" style="color:var(--co)">單人報名費<br>約 NT$4,000</div>
+            <div class="biz-sub" style="color:var(--co)">早鳥越便宜、越晚越貴，類似航空動態票價——在傳統賽事中極為罕見</div>
+          </div>
+          <div class="biz-box" style="background:var(--or2);border:1.5px solid var(--or3)">
+            <div class="biz-label" style="color:var(--or)">客單價拉高</div>
+            <div class="biz-val" style="color:var(--or)">含照片+保險<br>約 NT$6,000</div>
+            <div class="biz-sub" style="color:var(--or)">完賽只送塑膠臂章，卻讓人甘願多花；官方預購照片 NT$800</div>
+          </div>
+          <div class="biz-box" style="background:var(--te2);border:1.5px solid var(--te3)">
+            <div class="biz-label" style="color:var(--te)">B2B授權收入</div>
+            <div class="biz-val" style="color:var(--te)">健身房<br>認證授權費</div>
+            <div class="biz-sub" style="color:var(--te)">參賽者必須到認證健身房訓練 → 如同 Netflix 的訂閱制穩定收入，無賽事期間照賺</div>
+          </div>
+          <div class="biz-box" style="background:var(--vi2);border:1.5px solid var(--vi3)">
+            <div class="biz-label" style="color:var(--vi)">聯名稀缺性</div>
+            <div class="biz-val" style="color:var(--vi)">Puma 合約<br>至 2030</div>
+            <div class="biz-sub" style="color:var(--vi)">聯名商品不打折，只在比賽現場/官網販售，一般門市買不到 → 稀缺性引爆認同感</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card card-gd">
+        <h3>📐 損益兩平點：跨過之後是暴利</h3>
+        <div class="stat-row">
+          <div class="stat-box" style="background:var(--or2);border:1.5px solid var(--or3)">
+            <div class="stat-val" style="color:var(--or)">1,500人</div>
+            <div class="stat-label" style="color:var(--or)">損益兩平點<br>（固定場租人事）</div>
+          </div>
+          <div class="stat-box" style="background:var(--co2);border:1.5px solid var(--co3)">
+            <div class="stat-val" style="color:var(--co)">9,000人</div>
+            <div class="stat-label" style="color:var(--co)">台灣場次兩天<br>實際報名人數</div>
+          </div>
+          <div class="stat-box" style="background:var(--te2);border:1.5px solid var(--te3)">
+            <div class="stat-val" style="color:var(--te)">7,500人</div>
+            <div class="stat-label" style="color:var(--te)">×NT$5,000<br>≈ 近純利潤</div>
+          </div>
+        </div>
+        <div style="background:rgba(146,64,14,.1);border-radius:7px;padding:8px 12px;margin-top:9px;font-size:12px;color:var(--gd);line-height:1.75">
+          場地一樣大、不需增加太多變動成本 → <strong>極高的營業槓桿</strong><br>9組標準化設備卡車，全球巡迴一年 <strong>170 場</strong>賽事，如同台積電三班制讓固定資產發揮最高效率
+        </div>
+      </div>
+      <div>
+        <div class="card card-dark" style="margin-bottom:12px">
+          <h3>🔄 零廣告費的社群飛輪</h3>
+          <div class="flywheel">
+            <div class="fw-node" style="background:rgba(244,63,94,.2);color:#fca5a5;border:1.5px solid rgba(244,63,94,.35)">報名參賽</div>
+            <div class="fw-arrow">→</div>
+            <div class="fw-node" style="background:rgba(249,115,22,.2);color:var(--or3);border:1.5px solid rgba(249,115,22,.35)">發現弱點</div>
+            <div class="fw-arrow">→</div>
+            <div class="fw-node" style="background:rgba(20,184,166,.15);color:var(--te3);border:1.5px solid rgba(20,184,166,.3)">常態訓練</div>
+            <div class="fw-arrow">→</div>
+            <div class="fw-node" style="background:rgba(124,58,237,.2);color:var(--vi3);border:1.5px solid rgba(124,58,237,.35)">添購裝備</div>
+            <div class="fw-arrow">→</div>
+            <div class="fw-node" style="background:rgba(217,119,6,.2);color:var(--gd3);border:1.5px solid rgba(217,119,6,.35)">IG洗版擴散</div>
+            <div class="fw-arrow">→</div>
+            <div class="fw-node" style="background:rgba(244,63,94,.2);color:#fca5a5;border:1.5px solid rgba(244,63,94,.35)">再次挑戰</div>
+          </div>
+          <div style="font-size:12px;color:rgba(255,255,255,.75);margin-top:6px">Rock 老師：「47歲才開始認真練跑——因為 HYROX 讓我知道自己跑步很爛。」</div>
+        </div>
+        <div class="card card-co">
+          <h3>🏦 估值潛力：LVMH 為何盯上它？</h3>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="background:rgba(190,18,60,.08);border-radius:6px;padding:8px 11px;font-size:12.5px;color:var(--co)">
+              World Gym 台灣：<strong>109億台幣</strong>年營收（靠「賭你不去」的月費）
+            </div>
+            <div style="background:rgba(20,184,166,.1);border-radius:6px;padding:8px 11px;font-size:12.5px;color:var(--te)">
+              HYROX 2026全球預估：<strong>約2億美金（60~70億台幣）</strong>，後續成長空間極大
+            </div>
+            <div style="background:var(--night2);border-radius:6px;padding:8px 11px;font-size:12.5px;color:rgba(255,255,255,.85)">
+              被 LVMH 收購的估值期待 → 市場狂熱 + 品牌溢價 + 飛輪模型 → 估值將直接翻倍變現
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">Joyce 佳儀 · 0722 重啟第1堂 · 每週三 21:30</div>
+</div>
+
+</body>
+</html>
