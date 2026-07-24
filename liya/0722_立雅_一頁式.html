@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>立雅 0722 · 無形資產×保固負債×公司債×EPS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --sl:#0d1b2a;--sl2:#e8f0fe;--sl3:#93c5fd;--sl4:#3b82f6;
+  --am:#92400e;--am2:#fffbeb;--am3:#fde68a;--am4:#d97706;
+  --ro:#9f1239;--ro2:#fff1f2;--ro3:#fecdd3;--ro4:#f43f5e;
+  --em:#065f46;--em2:#ecfdf5;--em3:#6ee7b7;--em4:#059669;
+  --vi:#4c1d95;--vi2:#f5f3ff;--vi3:#c4b5fd;--vi4:#7c3aed;
+  --or:#9a3412;--or2:#fff7ed;--or3:#fed7aa;--or4:#ea580c;
+  --ni:#581c87;--ni2:#faf5ff;--ni3:#e9d5ff;
+  --night:#06080f;--night2:#0d1020;
+  --white:#fff;--ink:#0a0e1f;--muted:#4a5568;--bg:#f8f7ff;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+.page-header{background:linear-gradient(150deg,#040610,#0b0e20,#07091a,#04060f);padding:38px 50px 30px;position:relative;overflow:hidden;border-bottom:3px solid var(--am3)}
+.ph-g1{position:absolute;top:-60px;right:-40px;width:280px;height:280px;background:radial-gradient(circle,rgba(217,119,6,.18),transparent 65%);pointer-events:none}
+.ph-g2{position:absolute;bottom:-40px;left:-20px;width:200px;height:200px;background:radial-gradient(circle,rgba(244,63,94,.1),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(253,230,138,.65);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(14px,2.1vw,21px);font-weight:900;color:#fff;line-height:1.28;margin-bottom:4px}
+.ph-title em{color:var(--am3);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.38);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mc{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(217,119,6,.13);color:var(--am3);border:1px solid rgba(217,119,6,.3)}
+.mc-r{background:rgba(244,63,94,.12);color:var(--ro3);border-color:rgba(244,63,94,.28)}
+.mc-v{background:rgba(124,58,237,.12);color:var(--vi3);border-color:rgba(124,58,237,.28)}
+.mc-g{background:rgba(5,150,105,.12);color:var(--em3);border-color:rgba(5,150,105,.28)}
+
+.container{max-width:1100px;margin:0 auto;padding:28px 26px}
+.section{margin-bottom:24px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--am4);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--night);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--am3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:720px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+.card{background:var(--white);border:1.5px solid var(--am3);border-radius:10px;padding:14px}
+.card-am{background:var(--am2);border:1.5px solid var(--am3);border-radius:10px;padding:14px}
+.card-ro{background:var(--ro2);border:1.5px solid var(--ro3);border-radius:10px;padding:14px}
+.card-em{background:var(--em2);border:1.5px solid var(--em3);border-radius:10px;padding:14px}
+.card-vi{background:var(--vi2);border:1.5px solid var(--vi3);border-radius:10px;padding:14px}
+.card-sl{background:var(--sl2);border:1.5px solid var(--sl3);border-radius:10px;padding:14px}
+.card-or{background:var(--or2);border:1.5px solid var(--or3);border-radius:10px;padding:14px}
+.card-ni{background:var(--ni2);border:1.5px solid var(--ni3);border-radius:10px;padding:14px}
+.card-dark{background:var(--night);border:none;border-radius:10px;padding:14px}
+
+.card h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px}
+.card-am h3{color:var(--am)}.card-ro h3{color:var(--ro)}.card-em h3{color:var(--em)}
+.card-vi h3{color:var(--vi)}.card-sl h3{color:var(--sl)}.card-or h3{color:var(--or)}
+.card-ni h3{color:var(--ni)}.card-dark h3{color:var(--am3)}
+.card p,.card li{font-size:12.5px;line-height:1.85;color:#374151}
+.card-am p,.card-am li{color:var(--am);font-size:12.5px;line-height:1.85}
+.card-ro p,.card-ro li{color:var(--ro);font-size:12.5px;line-height:1.85}
+.card-em p,.card-em li{color:var(--em);font-size:12.5px;line-height:1.85}
+.card-vi p,.card-vi li{color:var(--vi);font-size:12.5px;line-height:1.85}
+.card-sl p,.card-sl li{color:var(--sl);font-size:12.5px;line-height:1.85}
+.card-or p,.card-or li{color:var(--or);font-size:12.5px;line-height:1.85}
+.card-ni p,.card-ni li{color:var(--ni);font-size:12.5px;line-height:1.85}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8);font-size:12.5px;line-height:1.85}
+.card ul{padding-left:15px}.card ul li{margin-bottom:3px}
+
+/* 公式框 */
+.formula{background:var(--night2);border-radius:7px;padding:8px 13px;margin:6px 0;font-family:'DM Mono',monospace;font-size:12px;color:var(--am3);border-left:3px solid var(--am4)}
+.formula span{color:#99f6e4}.formula em{color:#fca5a5;font-style:normal}
+
+/* 考試陷阱 */
+.trap{background:rgba(244,63,94,.09);border:1.5px solid var(--ro3);border-radius:7px;padding:7px 12px;margin-top:7px;font-size:12px;color:var(--ro)}
+.trap::before{content:"⚠️ 考試陷阱 ";font-weight:700}
+
+/* 無形資產表格 */
+.ia-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+.ia-table th{background:var(--vi4);color:#fff;padding:5px 9px;font-weight:500;font-size:11.5px;text-align:left}
+.ia-table td{padding:6px 9px;border-bottom:1px solid rgba(124,58,237,.1);vertical-align:top}
+.ia-table tr:nth-child(even) td{background:rgba(124,58,237,.04)}
+.ia-table .tag{font-family:'DM Mono',monospace;font-size:10px;background:var(--vi2);color:var(--vi4);border:1px solid var(--vi3);border-radius:3px;padding:1px 6px;white-space:nowrap}
+.ia-table .tag-g{background:var(--em2);color:var(--em4);border-color:var(--em3)}
+.ia-table .tag-r{background:var(--ro2);color:var(--ro4);border-color:var(--ro3)}
+.ia-table .tag-y{background:var(--am2);color:var(--am4);border-color:var(--am3)}
+
+/* 計算步驟框 */
+.calc-step{display:flex;gap:9px;align-items:flex-start;padding:6px 0;border-bottom:1px solid rgba(146,64,14,.1)}
+.calc-step:last-child{border-bottom:none}
+.cs-num{font-family:'DM Mono',monospace;font-size:11px;background:var(--am4);color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;margin-top:3px}
+.cs-body{font-size:12.5px;color:#374151;line-height:1.75}
+.cs-body strong{color:var(--am)}
+
+/* 股數時間軸 */
+.share-tl{display:flex;flex-direction:column;gap:5px;margin-top:8px}
+.stl-row{display:flex;gap:10px;align-items:center}
+.stl-date{font-family:'DM Mono',monospace;font-size:10.5px;color:var(--em4);background:var(--em2);border:1px solid var(--em3);border-radius:4px;padding:2px 8px;flex-shrink:0;min-width:60px;text-align:center}
+.stl-arrow{color:var(--em3);flex-shrink:0}
+.stl-body{font-size:12.5px;color:#374151;line-height:1.7}
+
+/* 比較框 */
+.cmp-box{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.cb-item{border-radius:7px;padding:9px 12px}
+.cb-label{font-size:11px;font-family:'DM Mono',monospace;margin-bottom:4px;font-weight:700}
+.cb-body{font-size:12px;line-height:1.7}
+
+/* 試算表 */
+.trial-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+.trial-table th{background:var(--sl4);color:#fff;padding:5px 9px;font-weight:500;font-size:11px;text-align:center}
+.trial-table td{padding:5px 9px;border-bottom:1px solid rgba(59,130,246,.1);text-align:center;font-family:'DM Mono',monospace;font-size:12px;color:#374151}
+.trial-table .correct{background:rgba(5,150,105,.1);font-weight:700;color:var(--em4)}
+.trial-table .wrong{color:rgba(0,0,0,.3)}
+
+/* Quote */
+.quote{background:linear-gradient(135deg,var(--night),var(--night2));border-radius:10px;padding:14px 20px;position:relative;overflow:hidden;margin-bottom:20px}
+.qm{font-family:'Playfair Display',serif;font-size:72px;color:rgba(253,230,138,.07);position:absolute;top:-10px;left:8px;line-height:1}
+.qt{font-size:13px;color:rgba(255,255,255,.88);line-height:1.65;position:relative;z-index:1}
+.qt em{color:var(--am3);font-style:normal;font-weight:700}
+.qs{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.38);margin-top:6px;position:relative;z-index:1}
+
+.badge{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;padding:2px 7px;border-radius:3px;margin:2px 2px 0 0}
+.bv{background:var(--vi2);color:var(--vi4);border:1px solid var(--vi3)}
+.ba{background:var(--am2);color:var(--am);border:1px solid var(--am3)}
+.br{background:var(--ro2);color:var(--ro);border:1px solid var(--ro3)}
+.be{background:var(--em2);color:var(--em);border:1px solid var(--em3)}
+.bs{background:var(--sl2);color:var(--sl4);border:1px solid var(--sl3)}
+
+.page-footer{background:var(--night);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--am3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-g1"></div>
+  <div class="ph-g2"></div>
+  <div class="ph-eyebrow">0722 · 立雅課後複習 · 無形資產×保固負債×公司債折價×製造成本×加權平均股數×EPS</div>
+  <div class="ph-title">從商譽不能迴轉到累積特別股的<em>雪上加霜</em>：<br>中會六大計算考點完整攻略</div>
+  <div class="ph-sub">無形資產認列與商譽 × 保固負債一次提滿 × 公司債試算法 × 期末存貨 × 追溯調整加權平均 × EPS特別股股利</div>
+  <div class="ph-meta">
+    <span class="mc">2025.07.22</span>
+    <span class="mc">立雅</span>
+    <span class="mc mc-v">無形資產 · 商譽</span>
+    <span class="mc mc-r">EPS · 累積特別股</span>
+    <span class="mc mc-g">公司債折價試算法</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 金句 -->
+  <div class="quote">
+    <div class="qm">"</div>
+    <div class="qt">「商譽不攤銷、減損不迴轉——這是防止企業利用虛幻商譽操縱損益的防線。<br>累積特別股在虧損年份<em>照樣扣掉普通股的盈餘</em>——雪上加霜，這才是考試真正想考的地方。」</div>
+    <div class="qs">Rock 老師 · 0722 立雅課後複習</div>
+  </div>
+
+  <!-- SECTION 1: 無形資產 -->
+  <div class="section">
+    <div class="section-label">考點 1 · 無形資產 · 認列×研發費用×商譽特殊處理</div>
+    <div class="section-title">四大無形資產核心：歷史成本入帳、客戶名單算數、研發要分階段、商譽永遠不能迴轉</div>
+    <div class="grid-2">
+      <div>
+        <div class="card card-vi" style="margin-bottom:12px">
+          <h3>📋 無形資產四大核心整理</h3>
+          <table class="ia-table">
+            <thead><tr><th>類型</th><th>入帳基礎</th><th>攤銷方式</th><th>特殊規則</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>專利權</td>
+                <td><span class="tag tag-y">歷史成本</span></td>
+                <td>直線法</td>
+                <td>無市場標準價，買來的才認列</td>
+              </tr>
+              <tr>
+                <td>客戶名單<br>品牌名稱</td>
+                <td><span class="tag tag-y">歷史成本</span></td>
+                <td>直線法</td>
+                <td>只要能產生未來現金流即可認列<br><em style="color:var(--vi4);font-size:11px">實務：與迪士尼簽長期合約→估算認列</em></td>
+              </tr>
+              <tr>
+                <td>研發費用</td>
+                <td colspan="3">
+                  <span class="tag">研究階段</span> 全數當期費用（燒錢無產出）<br>
+                  <span class="tag tag-g">發展階段</span> 有樣品等具體成果 → 有限度可資本化<br>
+                  <em style="color:var(--vi);font-size:11.5px">→ 生技產業財報影響甚鉅</em>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>商譽</strong></td>
+                <td><span class="tag tag-r">不攤銷</span></td>
+                <td>定期減損測試</td>
+                <td><strong style="color:var(--ro)">減損後永遠不能迴轉</strong><br>防止企業用虛幻商譽操縱損益</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card card-dark">
+        <h3>🔄 減損迴轉天花板（複習 0716 + 本次延伸）</h3>
+        <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">
+          <div style="flex:1;min-width:130px;background:rgba(255,255,255,.07);border-radius:7px;padding:9px 11px">
+            <div style="font-size:10px;color:rgba(255,255,255,.45);font-family:'DM Mono',monospace;margin-bottom:5px">一般固定資產</div>
+            <div style="font-size:12px;color:#86efac;line-height:1.7">減損可以迴轉<br>但<strong style="color:#fff">上限 = 天花板</strong><br>（假設從未減損的正常折舊帳面價值）</div>
+            <div style="margin-top:7px;font-family:'DM Mono',monospace;font-size:11.5px;color:var(--am3)">市價 76,000 → 只能認 75,000<br>迴轉利益 = 6,000（非 7,000）</div>
+          </div>
+          <div style="flex:1;min-width:130px;background:rgba(244,63,94,.12);border-radius:7px;padding:9px 11px;border:1px solid rgba(244,63,94,.3)">
+            <div style="font-size:10px;color:rgba(255,255,255,.45);font-family:'DM Mono',monospace;margin-bottom:5px">商譽（特殊例外）</div>
+            <div style="font-size:12px;color:#fca5a5;line-height:1.7">減損<strong style="color:#fff">完全不能迴轉</strong><br>即使生意好轉也一樣<br>→ 此為防弊機制</div>
+            <div style="margin-top:7px;font-size:11.5px;color:rgba(255,255,255,.6)">兩位會計學泰斗（鄭丁旺×林蕙真）著作曾有不同解讀——「被玩壞的考點」</div>
+          </div>
+        </div>
+        <div class="trap" style="background:rgba(244,63,94,.1);border-color:rgba(244,63,94,.3);color:#fca5a5">商譽考題：只要看到「回升、迴轉」字眼，商譽答案永遠是 0。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: 保固負債 + 公司債 + 製造成本 -->
+  <div class="section">
+    <div class="section-label">考點 2·3·4 · 保固負債×公司債折價×製造成本期末存貨</div>
+    <div class="section-title">三大計算題型：一次提滿原則、試算選項法、銷管費用是煙霧彈</div>
+    <div class="grid-3">
+      <div class="card card-am">
+        <h3>🛡 保固負債準備：一次提滿原則</h3>
+        <div style="font-size:12px;color:var(--am);margin-bottom:8px">銷售當下一次估列全部 → 符合收入費用配合原則</div>
+        <div class="calc-step">
+          <div class="cs-num">①</div>
+          <div class="cs-body">三年銷售收入：30萬 + 39萬 + 42萬 = <strong>111萬</strong></div>
+        </div>
+        <div class="calc-step">
+          <div class="cs-num">②</div>
+          <div class="cs-body">保固費率 10% → 總保固費用估列 <strong>111,000 元</strong></div>
+        </div>
+        <div class="calc-step">
+          <div class="cs-num">③</div>
+          <div class="cs-body">已實際發生保固支出 60,000 元</div>
+        </div>
+        <div class="calc-step">
+          <div class="cs-num">④</div>
+          <div class="cs-body">期末保固負債準備 = 111,000 − 60,000 = <strong>51,000 元</strong></div>
+        </div>
+        <div class="trap">誤區：逐年按當年銷售額提列，而非一次估足總額。</div>
+      </div>
+
+      <div class="card card-sl">
+        <h3>📈 公司債折價：試算選項法速解</h3>
+        <div style="font-size:12px;color:var(--sl);margin-bottom:8px">帳面價值 13,626 → 13,744（增加）= 折價發行<br>票面利率 ＜ 市場利率（打折賣）</div>
+        <table class="trial-table">
+          <thead><tr><th>市場利率</th><th>13,626 × 利率</th><th>− 票面利息</th><th>= 攤銷額</th><th>13,626 + 攤銷</th></tr></thead>
+          <tbody>
+            <tr class="wrong"><td>6%</td><td>817</td><td>−票息</td><td>小</td><td>≠ 13,744</td></tr>
+            <tr class="correct"><td>7%</td><td>954</td><td>−票息</td><td>118</td><td>= 13,744 ✓</td></tr>
+          </tbody>
+        </table>
+        <div style="background:rgba(30,58,95,.08);border-radius:7px;padding:8px 11px;margin-top:8px;font-size:12px;color:var(--sl);line-height:1.75">
+          <strong>解題步驟：</strong>拿選項利率 × 期初帳面價值 − 票面利息 = 攤銷額；期初帳面價值 + 攤銷額是否等於期末帳面價值？符合者即為答案。
+        </div>
+      </div>
+
+      <div class="card card-or">
+        <h3>🏭 製造成本×期末存貨：銷管費是煙霧彈</h3>
+        <div style="font-size:12px;color:var(--or);margin-bottom:8px">只有「製造」相關才能計入產品成本</div>
+        <div class="cmp-box">
+          <div class="cb-item" style="background:var(--em2);border:1.5px solid var(--em3)">
+            <div class="cb-label" style="color:var(--em4)">✅ 製造成本（計入）</div>
+            <div class="cb-body" style="color:var(--em)">直接原料<br>直接人工<br>變動製造費用<br>固定製造費用</div>
+          </div>
+          <div class="cb-item" style="background:var(--ro2);border:1.5px solid var(--ro3)">
+            <div class="cb-label" style="color:var(--ro4)">❌ 期間費用（不計入）</div>
+            <div class="cb-body" style="color:var(--ro)">變動銷管費用<br>固定銷管費用<br>↑ 煙霧彈！</div>
+          </div>
+        </div>
+        <div class="formula" style="margin-top:9px">
+          製造成本合計 = <span>202,500</span> ÷ 生產 <span>300</span> 件 = 單件 <em>675 元</em><br>
+          期末存貨 = 剩餘 60 件 × 675 = <em>40,500 元</em>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: 加權平均股數 + EPS -->
+  <div class="section">
+    <div class="section-label">考點 5·6 · 加權平均流通股數×EPS累積特別股</div>
+    <div class="section-title">股票股利追溯調整（最高頻陷阱）× 累積特別股在虧損年份照樣雪上加霜</div>
+    <div class="grid-2">
+      <div class="card card-em">
+        <h3>📊 加權平均流通在外股數：兩大干擾條件</h3>
+        <div style="margin-bottom:10px">
+          <div style="background:rgba(5,150,105,.12);border-radius:7px;padding:9px 12px;margin-bottom:7px">
+            <div style="font-size:12px;font-weight:700;color:var(--em4);margin-bottom:4px">① 股票股利 / 股票分割 → 追溯調整（最容易錯）</div>
+            <div style="font-size:12.5px;color:var(--em);line-height:1.75">年中（例如7月1日）發放10%股票股利：<br>→ 7月1日「以前」的所有流通股數，全部 <strong>× 1.1</strong><br>→ 7月1日之後的股數，直接加總不需乘<br><br>理由：股票股利是「回溯」調整股本，視為從一開始就有這麼多股。</div>
+          </div>
+          <div style="background:rgba(5,150,105,.08);border-radius:7px;padding:9px 12px">
+            <div style="font-size:12px;font-weight:700;color:var(--em4);margin-bottom:4px">② 庫藏股交易 → 加權計算</div>
+            <div class="share-tl">
+              <div class="stl-row">
+                <div class="stl-date">買回庫藏股</div>
+                <div class="stl-arrow">→</div>
+                <div class="stl-body">流通股數<strong>減少</strong>（減項），按持有月份加權</div>
+              </div>
+              <div class="stl-row">
+                <div class="stl-date">賣出庫藏股</div>
+                <div class="stl-arrow">→</div>
+                <div class="stl-body">流通股數<strong>增加</strong>（加項），按持有月份加權</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="trap">考試陷阱：股票股利追溯調整只影響「發放日以前」的股數，發放日以後的股數不乘倍數，許多人全部都乘。</div>
+      </div>
+
+      <div>
+        <div class="card card-ro" style="margin-bottom:12px">
+          <h3>💸 EPS：累積特別股在虧損年份的「雪上加霜」</h3>
+          <div style="background:rgba(159,18,57,.08);border-radius:7px;padding:9px 12px;margin-bottom:8px">
+            <div style="font-size:12px;color:var(--ro);line-height:1.75">題設：當年淨損 70萬、累積特別股股利 10萬（因虧損未宣告發放）</div>
+          </div>
+          <div class="cmp-box">
+            <div class="cb-item" style="background:var(--ro2);border:1.5px solid var(--ro3)">
+              <div class="cb-label" style="color:var(--ro4)">❌ 直覺做法（錯）</div>
+              <div class="cb-body" style="color:var(--ro)">當年沒發股利<br>→ EPS分子 = −70萬</div>
+            </div>
+            <div class="cb-item" style="background:rgba(159,18,57,.12);border:1.5px solid var(--ro3)">
+              <div class="cb-label" style="color:var(--ro4)">✅ 正確做法</div>
+              <div class="cb-body" style="color:var(--ro)">累積特別股<br>→ 分子 = −70 − 10<br>= <strong>−80萬</strong>（雪上加霜）</div>
+            </div>
+          </div>
+          <div style="background:var(--night2);border-radius:7px;padding:9px 12px;margin-top:8px;font-size:12px;color:rgba(255,255,255,.82);line-height:1.75">
+            <strong style="color:var(--am3)">關鍵邏輯：</strong>「累積」= 虧損年未發的股利，未來必須補發，所以現在就算在普通股頭上。<br>「非累積」= 虧損年不發，隔年重新來過，不計入當年EPS分子。
+          </div>
+          <div class="trap">非累積特別股：當年虧損不發股利 → EPS分子只減淨損，不減特別股股利。</div>
+        </div>
+        <div class="card card-vi">
+          <h3>🏭 群創實務延伸：賠錢時的小額減資操作</h3>
+          <p>群創在虧損年份透過「<strong>小額減資</strong>」——將股東權益部分實質以現金退還股東。</p>
+          <p style="margin-top:5px">財報意涵：<span style="color:var(--vi4);font-weight:600">減資 ≠ 倒閉危機</span>，而是一種將沈澱資本退還投資人、優化股本結構的財務工程操作。</p>
+          <div style="background:rgba(124,58,237,.1);border-radius:6px;padding:7px 11px;margin-top:7px;font-size:12px;color:var(--vi)">
+            看財報時：看到減資，先確認是「現金減資退款」還是「彌補虧損減資」，意義完全不同。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">立雅 · 0722 · 無形資產×保固負債×公司債×EPS累積特別股</div>
+</div>
+
+</body>
+</html>
