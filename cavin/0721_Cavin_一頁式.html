@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cavin 0721 · 三大報表×商業模式×房地產資產活化</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cy:#0e7490;--cy2:#ecfeff;--cy3:#67e8f9;--cy4:#06b6d4;
+  --am:#92400e;--am2:#fffbeb;--am3:#fde68a;--am4:#d97706;
+  --vi:#5b21b6;--vi2:#f5f3ff;--vi3:#c4b5fd;--vi4:#7c3aed;
+  --em:#065f46;--em2:#ecfdf5;--em3:#6ee7b7;--em4:#059669;
+  --ro:#9f1239;--ro2:#fff1f2;--ro3:#fecdd3;--ro4:#f43f5e;
+  --bl:#1e3a5f;--bl2:#eff6ff;--bl3:#bfdbfe;--bl4:#2563eb;
+  --night:#080410;--night2:#100820;
+  --white:#fff;--ink:#0c0820;--muted:#5c4f7a;--bg:#f7f5ff;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+.page-header{background:linear-gradient(150deg,#05020c,#0c0718,#080412,#050110);padding:38px 50px 30px;position:relative;overflow:hidden;border-bottom:3px solid var(--cy3)}
+.ph-g1{position:absolute;top:-60px;right:-40px;width:280px;height:280px;background:radial-gradient(circle,rgba(6,182,212,.2),transparent 65%);pointer-events:none}
+.ph-g2{position:absolute;bottom:-40px;left:-20px;width:200px;height:200px;background:radial-gradient(circle,rgba(217,119,6,.12),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(103,232,249,.65);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(14px,2.1vw,21px);font-weight:900;color:#fff;line-height:1.28;margin-bottom:4px}
+.ph-title em{color:var(--cy3);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.38);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mc{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(6,182,212,.12);color:var(--cy3);border:1px solid rgba(6,182,212,.28)}
+.mc-a{background:rgba(217,119,6,.13);color:var(--am3);border-color:rgba(217,119,6,.3)}
+.mc-v{background:rgba(124,58,237,.12);color:var(--vi3);border-color:rgba(124,58,237,.28)}
+.mc-g{background:rgba(5,150,105,.12);color:var(--em3);border-color:rgba(5,150,105,.28)}
+
+.container{max-width:1100px;margin:0 auto;padding:28px 26px}
+.section{margin-bottom:24px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--cy4);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--night);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--cy3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:720px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+.card-cy{background:var(--cy2);border:1.5px solid var(--cy3);border-radius:10px;padding:14px}
+.card-am{background:var(--am2);border:1.5px solid var(--am3);border-radius:10px;padding:14px}
+.card-vi{background:var(--vi2);border:1.5px solid var(--vi3);border-radius:10px;padding:14px}
+.card-em{background:var(--em2);border:1.5px solid var(--em3);border-radius:10px;padding:14px}
+.card-ro{background:var(--ro2);border:1.5px solid var(--ro3);border-radius:10px;padding:14px}
+.card-bl{background:var(--bl2);border:1.5px solid var(--bl3);border-radius:10px;padding:14px}
+.card-dark{background:var(--night);border:none;border-radius:10px;padding:14px}
+.card-dark2{background:var(--night2);border:none;border-radius:10px;padding:14px}
+
+.card-cy h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--cy)}
+.card-am h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--am)}
+.card-vi h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--vi)}
+.card-em h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--em)}
+.card-ro h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--ro)}
+.card-bl h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--bl)}
+.card-dark h3,.card-dark2 h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--cy3)}
+.card-cy p,.card-cy li{color:var(--cy);font-size:12.5px;line-height:1.85}
+.card-am p,.card-am li{color:var(--am);font-size:12.5px;line-height:1.85}
+.card-vi p,.card-vi li{color:var(--vi);font-size:12.5px;line-height:1.85}
+.card-em p,.card-em li{color:var(--em);font-size:12.5px;line-height:1.85}
+.card-ro p,.card-ro li{color:var(--ro);font-size:12.5px;line-height:1.85}
+.card-bl p,.card-bl li{color:var(--bl);font-size:12.5px;line-height:1.85}
+.card-dark p,.card-dark li,.card-dark2 p,.card-dark2 li{color:rgba(255,255,255,.8);font-size:12.5px;line-height:1.85}
+.card-cy ul,.card-am ul,.card-vi ul,.card-em ul,.card-ro ul,.card-bl ul,.card-dark ul,.card-dark2 ul{padding-left:15px}
+.card-cy ul li,.card-am ul li,.card-vi ul li,.card-em ul li,.card-ro ul li,.card-bl ul li,.card-dark ul li,.card-dark2 ul li{margin-bottom:3px}
+
+/* 報表邏輯圖 */
+.report-logic{display:flex;flex-direction:column;gap:4px;margin-top:8px}
+.rl-row{display:flex;gap:8px;align-items:center;padding:6px 10px;border-radius:6px}
+.rl-label{font-family:'DM Mono',monospace;font-size:10.5px;font-weight:700;flex-shrink:0;min-width:70px}
+.rl-arrow{color:rgba(255,255,255,.3);flex-shrink:0}
+.rl-body{font-size:12px;line-height:1.6}
+
+/* 收斂漏斗 */
+.funnel{display:flex;flex-direction:column;gap:3px;margin-top:8px}
+.funnel-row{display:flex;align-items:center;gap:8px;padding:6px 12px;border-radius:6px}
+.fr-label{font-size:12.5px;font-weight:700;flex:1}
+.fr-minus{font-family:'DM Mono',monospace;font-size:13px;color:rgba(0,0,0,.3);flex-shrink:0}
+.fr-note{font-size:11px;color:inherit;opacity:.75;margin-left:4px}
+
+/* 企業比較欄 */
+.biz-stat{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+.bs-num{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;line-height:1}
+.bs-label{font-size:11px;font-family:'DM Mono',monospace;margin-top:2px}
+
+/* 存貨四階段 */
+.inv-stages{display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.is-node{border-radius:6px;padding:6px 10px;font-size:11.5px;font-weight:700;text-align:center;flex:1}
+.is-arrow{font-size:13px;color:var(--am4);flex-shrink:0}
+
+/* 利差視覺 */
+.spread-viz{display:flex;align-items:stretch;gap:0;margin:10px 0;border-radius:8px;overflow:hidden}
+.sv-borrow{flex:1;background:rgba(5,150,105,.15);padding:10px 13px;text-align:center}
+.sv-middle{flex:1.5;background:rgba(14,116,144,.25);padding:10px 13px;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.sv-lend{flex:1;background:rgba(159,18,57,.15);padding:10px 13px;text-align:center}
+.sv-val{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;line-height:1.1}
+.sv-label{font-size:11px;font-family:'DM Mono',monospace;margin-top:3px}
+
+/* 房產卡 */
+.prop-row{display:flex;gap:9px;align-items:flex-start;padding:7px 0;border-bottom:1px solid rgba(14,116,144,.12)}
+.prop-row:last-child{border-bottom:none}
+.prop-ic{font-size:15px;flex-shrink:0;margin-top:2px}
+.prop-body{font-size:12.5px;color:#374151;line-height:1.75}
+.prop-body strong{color:var(--cy)}
+
+/* quote */
+.quote{background:linear-gradient(135deg,var(--night),var(--night2));border-radius:10px;padding:14px 20px;position:relative;overflow:hidden;margin-bottom:20px}
+.qm{font-family:'Playfair Display',serif;font-size:72px;color:rgba(103,232,249,.07);position:absolute;top:-10px;left:8px;line-height:1}
+.qt{font-size:13px;color:rgba(255,255,255,.88);line-height:1.65;position:relative;z-index:1}
+.qt em{color:var(--cy3);font-style:normal;font-weight:700}
+.qt em2{color:var(--am3);font-style:normal}
+.qs{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.38);margin-top:6px;position:relative;z-index:1}
+
+.page-footer{background:var(--night);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--cy3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-g1"></div>
+  <div class="ph-g2"></div>
+  <div class="ph-eyebrow">0721 · Cavin 課後複習 · 三大報表邏輯×中租×華固×統一超商×房地產資產活化</div>
+  <div class="ph-title">商業模式決定財報長相：<br><em>80%負債不是地雷</em>，而是中租的核心生意邏輯</div>
+  <div class="ph-sub">資產負債表加法 × 損益表收斂漏斗 × 利差商業模式 × 預售屋好的負債 × 收快付慢通路優勢 × 理財型房貸+0050</div>
+  <div class="ph-meta">
+    <span class="mc">2025.07.21</span>
+    <span class="mc">Cavin</span>
+    <span class="mc mc-a">中租×華固×統一超商</span>
+    <span class="mc mc-v">三大報表框架</span>
+    <span class="mc mc-g">房地產資產活化</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 金句 -->
+  <div class="quote">
+    <div class="qm">"</div>
+    <div class="qt">「中租 80% 負債不是地雷，對融資業來說<em>借來的錢就是存貨</em>——只要能找到有還款能力的客戶，就能靠高槓桿創造獲利。<br><em2>看財報，先搞懂這家公司做什麼生意；數字，只是那門生意的結果。</em2>」</div>
+    <div class="qs">Rock 老師 · 0721 Cavin 課後複習</div>
+  </div>
+
+  <!-- SECTION 1: 三大報表框架 -->
+  <div class="section">
+    <div class="section-label">Part 1 · 三大報表框架 · 資產負債表（加法）× 損益表（減法）</div>
+    <div class="section-title">兩張報表、兩種思維：「錢從哪來花哪去」vs「從營收一路收斂到淨利」</div>
+    <div class="grid-2">
+      <div class="card-dark">
+        <h3>📊 資產負債表：加法邏輯（錢的起源與流向）</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:5px;margin-bottom:10px">
+          <div style="background:rgba(255,255,255,.07);border-radius:7px;padding:10px 12px">
+            <div style="font-size:10px;color:rgba(255,255,255,.45);font-family:'DM Mono',monospace;margin-bottom:5px">右邊：錢從哪裡來</div>
+            <div style="font-size:12.5px;color:#fff;line-height:1.75">
+              <div style="color:var(--cy3)">📥 負債</div>
+              <div style="font-size:11.5px;color:rgba(255,255,255,.65)">向銀行、債主借來的錢</div>
+              <div style="color:var(--am3);margin-top:5px">📥 股東權益</div>
+              <div style="font-size:11.5px;color:rgba(255,255,255,.65)">老闆/股東出的自有資金</div>
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,.07);border-radius:7px;padding:10px 12px">
+            <div style="font-size:10px;color:rgba(255,255,255,.45);font-family:'DM Mono',monospace;margin-bottom:5px">左邊：錢花到哪裡去</div>
+            <div style="font-size:12.5px;color:#fff;line-height:1.75">
+              <div>現金 / 應收帳款</div>
+              <div>存貨 / 固定資產</div>
+              <div style="color:var(--cy3);font-size:11.5px;margin-top:4px">→ 分配是否異常？<br>錢是囤在存貨？<br>還是像台積電押在固定資產+保證金？</div>
+            </div>
+          </div>
+        </div>
+        <div style="background:rgba(6,182,212,.1);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--cy3);font-family:'DM Mono',monospace">
+          總資產 = 負債 + 股東權益（永遠成立）<br>公司的錢 = 借來的 + 老闆出的
+        </div>
+      </div>
+
+      <div class="card-cy">
+        <h3>📉 損益表：減法邏輯（從營收收斂到淨利）</h3>
+        <div class="funnel">
+          <div class="funnel-row" style="background:rgba(14,116,144,.18)">
+            <div class="fr-label" style="color:var(--cy)">營收</div>
+            <div style="font-size:11.5px;color:var(--cy)">銷售產品/服務的總收入</div>
+          </div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--cy4);padding:2px 12px">↓ − 成本（多賣一個就多花一次）</div>
+          <div class="funnel-row" style="background:rgba(14,116,144,.13)">
+            <div class="fr-label" style="color:var(--cy)">毛利</div>
+            <div style="font-size:11.5px;color:var(--cy)">反映產品本身的獲利能力</div>
+          </div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--cy4);padding:2px 12px">↓ − 費用（沒賣產品也要付的固定開銷）</div>
+          <div class="funnel-row" style="background:rgba(14,116,144,.09)">
+            <div class="fr-label" style="color:var(--cy)">營業利益</div>
+            <div style="font-size:11.5px;color:var(--cy)">本業的真實獲利</div>
+          </div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--cy4);padding:2px 12px">↓ ± 業外損益 / 稅</div>
+          <div class="funnel-row" style="background:rgba(14,116,144,.2);border:1.5px solid var(--cy3)">
+            <div class="fr-label" style="color:var(--cy);font-weight:700">淨利</div>
+            <div style="font-size:12px;color:var(--cy);font-weight:600">股東真正拿到的數字</div>
+          </div>
+        </div>
+        <div style="background:rgba(14,116,144,.1);border-radius:6px;padding:7px 11px;margin-top:8px;font-size:12px;color:var(--cy)">
+          <strong>成本 vs 費用一句話：</strong><br>成本＝多賣一個就多花；費用＝不賣也得付（租金/薪資等）
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: 三大企業商業模式 -->
+  <div class="section">
+    <div class="section-label">Part 2 · 商業模式 → 財報長相 · 中租×華固×統一超商</div>
+    <div class="section-title">三種生意、三種財報結構：先懂商業模式，才能看懂數字為什麼長這樣</div>
+    <div class="grid-3">
+
+      <!-- 中租 -->
+      <div class="card-dark2">
+        <h3>🏦 中租控股：賺利差的融資業</h3>
+        <div class="spread-viz">
+          <div class="sv-borrow">
+            <div class="sv-val" style="color:var(--em3)">2.3%</div>
+            <div class="sv-label" style="color:var(--em3)">借入成本<br>（中信等銀行）</div>
+          </div>
+          <div class="sv-middle">
+            <div style="font-family:'Playfair Display',serif;font-size:13px;color:var(--cy3);text-align:center;font-weight:700">利差<br>≈ 8.7%</div>
+            <div style="font-size:10.5px;color:rgba(255,255,255,.5);text-align:center;margin-top:3px">太陽能等重資產<br>20億~30億/案</div>
+          </div>
+          <div class="sv-lend">
+            <div class="sv-val" style="color:var(--ro3)">11%</div>
+            <div class="sv-label" style="color:var(--ro3)">放款利率<br>（企業客戶）</div>
+          </div>
+        </div>
+        <div style="background:rgba(103,232,249,.1);border-radius:7px;padding:9px 12px;margin-top:6px">
+          <div style="font-size:12px;font-weight:700;color:var(--cy3);margin-bottom:4px">80% 負債 = 商業模式，不是地雷</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.75">對融資業而言，<strong style="color:#fff">借來的錢就是存貨</strong>。高負債代表業務量大，只要客戶有還款能力，高槓桿就能放大獲利。銀行願意借，說明看得上這門生意的現金流。</div>
+        </div>
+      </div>
+
+      <!-- 華固 -->
+      <div class="card-am">
+        <h3>🏗 華固建設：存貨佔74%的營建業</h3>
+        <div style="font-size:12px;color:var(--am);margin-bottom:8px">存貨四個成長階段：</div>
+        <div class="inv-stages">
+          <div class="is-node" style="background:var(--am2);border:1.5px solid var(--am3);color:var(--am)">①圈地<br><span style="font-size:10px;font-weight:400">預付地款</span></div>
+          <div class="is-arrow">→</div>
+          <div class="is-node" style="background:rgba(146,64,14,.15);border:1.5px solid var(--am3);color:var(--am)">②整地</div>
+          <div class="is-arrow">→</div>
+          <div class="is-node" style="background:rgba(146,64,14,.2);border:1.5px solid var(--am3);color:var(--am)">③在建<br><span style="font-size:10px;font-weight:400">在建工程</span></div>
+          <div class="is-arrow">→</div>
+          <div class="is-node" style="background:rgba(146,64,14,.28);border:1.5px solid var(--am3);color:var(--am)">④待售<br><span style="font-size:10px;font-weight:400">代售房地</span></div>
+        </div>
+        <div style="background:rgba(146,64,14,.08);border-radius:7px;padding:9px 12px;margin-top:8px">
+          <div style="font-size:12px;font-weight:700;color:var(--am);margin-bottom:4px">✅ 合約負債（預售屋訂金）= 好的負債</div>
+          <div style="font-size:12px;color:var(--am);line-height:1.75">
+            預售屋訂金雖然是「負債」，但未來不需還現金——而是<strong>還客戶一棟房子</strong>。<br>
+            代表業績已提前鎖定，是收入的保障。<br>
+            <br>
+            <em style="font-style:normal;color:var(--am4)">付款機制：訂金7~10% → 工程進度分期繳 → 交屋時申請銀行貸款（讓客戶分期付款的商業模式）</em>
+          </div>
+        </div>
+      </div>
+
+      <!-- 統一超商 -->
+      <div class="card-em">
+        <h3>🏪 統一超商：收快付慢的通路霸主</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:9px">
+          <div style="background:rgba(5,150,105,.15);border-radius:7px;padding:9px 11px;text-align:center">
+            <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--em)">9%</div>
+            <div style="font-size:11px;font-family:'DM Mono',monospace;color:var(--em4);margin-top:2px">存貨佔比（極低）</div>
+            <div style="font-size:11px;color:var(--em);margin-top:3px">寄銷模式+無條件退貨權 → 不需囤貨</div>
+          </div>
+          <div style="background:rgba(5,150,105,.2);border-radius:7px;padding:9px 11px;text-align:center">
+            <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--em)">17%</div>
+            <div style="font-size:11px;font-family:'DM Mono',monospace;color:var(--em4);margin-top:2px">現金佔比（極高）</div>
+            <div style="font-size:11px;color:var(--em);margin-top:3px">品牌強勢 → 先收錢後付款</div>
+          </div>
+        </div>
+        <div style="background:rgba(5,150,105,.1);border-radius:7px;padding:9px 12px">
+          <div style="font-size:12px;font-weight:700;color:var(--em4);margin-bottom:5px">「收快付慢」的通路優勢</div>
+          <ul style="padding-left:14px;list-style:disc">
+            <li style="font-size:12px;color:var(--em);margin-bottom:3px"><strong>寄銷模式：</strong>商品是廠商寄放，賣出才算進貨成本</li>
+            <li style="font-size:12px;color:var(--em);margin-bottom:3px"><strong>無條件退貨權：</strong>賣不掉可以直接退還廠商，庫存風險幾乎為零</li>
+            <li style="font-size:12px;color:var(--em)">現金沉澱在公司手中 → 資金運用效率極高</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: 房地產投資觀察 -->
+  <div class="section">
+    <div class="section-label">Part 3 · 房地產投資智慧 · 翻倍案例×區域比較×理財型房貸+0050</div>
+    <div class="section-title">自住為主、資產活化為輔：把房子增值的空間借出來，讓錢去賺錢</div>
+    <div class="grid-2">
+      <div class="card-cy">
+        <h3>🏠 淡水紅樹林翻倍案例 × 區域房價板塊觀察</h3>
+        <div class="prop-row">
+          <div class="prop-ic">📍</div>
+          <div class="prop-body">十多年前「林三淡」高空屋率負面評價，以每坪約 <strong>20萬出頭（總價約550萬）</strong>買入。當時實價登錄未上路，銀行估價700萬，實際只需約 <strong>50萬現金</strong>即可入手。</div>
+        </div>
+        <div class="prop-row">
+          <div class="prop-ic">📈</div>
+          <div class="prop-body">輕軌等建設並未帶來顯著直接漲幅，但大環境帶動下，現今每坪已沒有 <strong>40萬買不到</strong>——默默翻倍。</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+          <div style="background:rgba(14,116,144,.1);border-radius:7px;padding:9px 11px">
+            <div style="font-size:11.5px;font-weight:700;color:var(--cy);margin-bottom:4px">江子翠（重劃區）</div>
+            <div style="font-size:12px;color:var(--cy);line-height:1.7">環境單純，但目前房價已被炒高，<strong>未來下跌風險存在</strong>。</div>
+          </div>
+          <div style="background:rgba(14,116,144,.15);border-radius:7px;padding:9px 11px">
+            <div style="font-size:11.5px;font-weight:700;color:var(--cy);margin-bottom:4px">萬華（台北市本身）</div>
+            <div style="font-size:12px;color:var(--cy);line-height:1.7">市容較亂，但<strong>不用過橋</strong>，具都更題材，房價有支撐，<strong>不易下跌</strong>。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-dark">
+        <h3>💡 資產活化策略：理財型房貸 + 0050</h3>
+        <div style="display:flex;flex-direction:column;gap:7px;margin-top:4px">
+          <div style="background:rgba(255,255,255,.07);border-radius:7px;padding:9px 12px">
+            <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:4px">核心觀念：不用賣房也能把利潤拿出來</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.75">房地產已增值 → 不需要賣掉才能獲利 → 透過<strong style="color:var(--cy3)">「理財型房貸」</strong>，把房屋增值空間借出來，再轉投資更靈活的標的。</div>
+          </div>
+          <div style="background:rgba(6,182,212,.12);border-radius:7px;padding:9px 12px;border:1px solid rgba(6,182,212,.25)">
+            <div style="font-size:12px;font-weight:700;color:var(--cy3);margin-bottom:4px">推薦標的：0050 等穩定指數型 ETF</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.75">利用房產增值借出的資金，投入如0050等指數型標的，讓沉澱在磚頭裡的資產持續產生現金流。</div>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:7px;padding:9px 12px">
+            <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:4px">整體投資觀：自住為主，不盲目炒房</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.75">房地產以自住為核心需求即可；目前股票市場的獲利空間，可能優於純粹持有房產等增值。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">Cavin · 0721 · 三大報表×中租×華固×統一超商×房地產資產活化</div>
+</div>
+
+</body>
+</html>
