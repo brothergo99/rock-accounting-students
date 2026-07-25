@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>課後自我檢測 — 財報X光片 × 三家商業模式解碼（Cavin 0429）</title>
+<style>
+  :root{
+    --bg:#0d0f14;
+    --card:#161a22;
+    --card-border:#242938;
+    --accent:#7c8cff;
+    --accent2:#ff8a5c;
+    --good:#3ddc84;
+    --bad:#ff5c6c;
+    --text:#e8eaf0;
+    --sub:#9098ac;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:radial-gradient(circle at 20% 0%, #1b2036 0%, #0d0f14 55%);
+    color:var(--text);
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    padding:32px 16px 80px;
+  }
+  .wrap{max-width:760px;margin:0 auto;}
+  header{text-align:center;margin-bottom:32px;}
+  .eyebrow{color:var(--accent2);font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+  h1{font-size:26px;margin:0 0 10px;line-height:1.4;}
+  .desc{color:var(--sub);font-size:14px;}
+  .progress-bar{
+    position:sticky;top:0;background:var(--bg);padding:12px 0 20px;z-index:10;
+  }
+  .progress-track{height:8px;background:var(--card-border);border-radius:99px;overflow:hidden;}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%;transition:width .3s ease;}
+  .progress-row{display:flex;justify-content:space-between;font-size:12px;color:var(--sub);margin-top:6px;}
+  .score-live{color:var(--accent);font-weight:700;}
+  .q-card{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:16px;
+    padding:22px 22px 18px;
+    margin-bottom:18px;
+  }
+  .q-num{
+    display:inline-block;
+    font-size:12px;
+    color:var(--accent);
+    background:rgba(124,140,255,.12);
+    border:1px solid rgba(124,140,255,.35);
+    border-radius:99px;
+    padding:3px 10px;
+    margin-bottom:12px;
+  }
+  .q-num.done{color:var(--good);background:rgba(61,220,132,.12);border-color:rgba(61,220,132,.35);}
+  .q-text{font-size:16px;font-weight:600;margin-bottom:16px;line-height:1.6;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    padding:12px 14px;
+    border-radius:10px;
+    border:1px solid var(--card-border);
+    background:#11141c;
+    cursor:pointer;
+    font-size:14.5px;
+    line-height:1.5;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .opt:hover{border-color:var(--accent);}
+  .opt.correct{border-color:var(--good);background:rgba(61,220,132,.12);}
+  .opt.wrong{border-color:var(--bad);background:rgba(255,92,108,.12);}
+  .opt.disabled{cursor:default;}
+  .opt.dim{opacity:.55;}
+  .opt .tag{
+    flex:0 0 auto;
+    width:22px;height:22px;
+    border-radius:50%;
+    border:1px solid var(--card-border);
+    display:flex;align-items:center;justify-content:center;
+    font-size:12px;color:var(--sub);
+  }
+  .opt.correct .tag{border-color:var(--good);color:var(--good);}
+  .opt.wrong .tag{border-color:var(--bad);color:var(--bad);}
+  .result-tag{
+    margin-top:14px;
+    font-size:13.5px;
+    font-weight:700;
+  }
+  .result-tag.ok{color:var(--good);}
+  .result-tag.no{color:var(--bad);}
+  .explain{
+    display:none;
+    margin-top:10px;
+    padding:12px 14px;
+    border-radius:10px;
+    background:#0f1420;
+    border-left:3px solid var(--accent);
+    font-size:13.5px;
+    color:var(--sub);
+    line-height:1.7;
+  }
+  .explain.show{display:block;}
+  .explain b{color:var(--text);}
+  .footer-bar{
+    text-align:center;
+    padding:20px 0 4px;
+  }
+  #resetBtn{
+    background:none;
+    border:1px solid var(--card-border);
+    color:var(--sub);
+    font-weight:700;
+    font-size:14px;
+    padding:11px 26px;
+    border-radius:99px;
+    cursor:pointer;
+  }
+  .final-card{
+    display:none;
+    text-align:center;
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:16px;
+    padding:26px;
+    margin-bottom:18px;
+  }
+  .final-card.show{display:block;}
+  .final-score{font-size:36px;font-weight:800;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .final-msg{color:var(--sub);font-size:14px;margin-top:8px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">財報分析 · 課後自我檢測</div>
+    <h1>財報X光片 × 三家商業模式解碼</h1>
+    <div class="desc">依 Cavin 0429 一頁式教材命題 · 共 10 題 · 單選 · 每題作答後立即檢討</div>
+  </header>
+
+  <div class="progress-bar">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-row">
+      <span id="progressLabel">已作答 0 / 10</span>
+      <span class="score-live" id="scoreLive">目前答對 0 題</span>
+    </div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div class="final-card" id="finalCard">
+    <div class="final-score" id="finalScore">0 / 10</div>
+    <div class="final-msg" id="finalMsg"></div>
+  </div>
+
+  <div class="footer-bar">
+    <button id="resetBtn">重新作答</button>
+  </div>
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    q: "財報三神器中，「＋加法」對應的是資產負債表，它主要在看什麼？",
+    opts: [
+      "錢砸在哪，資金板塊是否異常",
+      "營收扣哪些，毛利→淨利的路徑",
+      "淨利率×周轉×槓桿的乘數放大器",
+      "三大能力的比率分析"
+    ],
+    correct: 0,
+    explain: "「＋」對應資產負債表：看錢砸在哪裡、資金板塊有沒有異常；「－」是損益表（毛利→淨利路徑）；「✕」是杜邦 ROE（乘數放大器）。"
+  },
+  {
+    q: "「－減法」在財報三神器中對應哪張報表、看什麼？",
+    opts: [
+      "資產負債表，看資金板塊",
+      "損益表，看營收扣哪些、毛利→淨利路徑",
+      "現金流量表，看現金增減",
+      "權益變動表，看股東結構"
+    ],
+    correct: 1,
+    explain: "「－」對應損益表：營收要扣掉哪些成本費用，才能走到淨利，這條路徑就是減法要看的重點。"
+  },
+  {
+    q: "中租控股（融資業）的核心賺錢邏輯是？",
+    opts: [
+      "大量囤積存貨，賺取價差",
+      "用低成本借款，放高利率貸款，賺取利差",
+      "靠通路寄銷模式，賺取上架費",
+      "靠預售屋訂金，賺取利息收入"
+    ],
+    correct: 1,
+    explain: "中租核心邏輯：80%低成本負債 → 61%應收帳款（放款）→ 賺高利差。這是典型融資業的商業模式。"
+  },
+  {
+    q: "中租控股負債比高達80%，教材強調這代表什麼？",
+    opts: [
+      "財務體質差，隨時有倒閉風險",
+      "融資業靠槓桿經營，80%負債是商業模式本質，並非財務危機",
+      "代表存貨過多，資金卡住",
+      "代表使用權資產大幅增加"
+    ],
+    correct: 1,
+    explain: "教材易錯觀念提醒：「負債高＝危險？」融資業本來就靠槓桿經營，重點要看資金成本 vs 利差，而非單純看負債比率高低。"
+  },
+  {
+    q: "華固建設（營建業）存貨佔總資產74%，這些存貨涵蓋哪四個階段？",
+    opts: [
+      "採購→加工→包裝→出貨",
+      "研發→測試→上市→回收",
+      "土地→施工→完工→交屋",
+      "生產→倉儲→運輸→銷售"
+    ],
+    correct: 2,
+    explain: "營建業存貨四階段：預付土地款 → 代建施工中 → 在建接近完工 → 待售交屋變現，全部都計入存貨。"
+  },
+  {
+    q: "華固建設的「合約負債」（預售屋訂金）為何被視為「好負債」？",
+    opts: [
+      "因為利率特別低",
+      "因為代表已收訂金、未來業績已被鎖定，是收入保障",
+      "因為不需要償還本金",
+      "因為可以用來節稅"
+    ],
+    correct: 1,
+    explain: "合約負債＝預售屋已收訂金，代表未來已鎖定的業績，反而是一種收入保障，所以被稱為「好負債」；扣除這部分，真實財務壓力約僅四成。"
+  },
+  {
+    q: "統一超商存貨僅9%，現金卻有17%（現金>存貨），主要原因是？",
+    opts: [
+      "門市數量太少，不需要存貨",
+      "採用寄銷模式，且對廠商佔款能力強（收現快、付款慢）",
+      "使用權資產大幅增加取代了存貨",
+      "壞帳提列過高，侵蝕存貨帳面價值"
+    ],
+    correct: 1,
+    explain: "統一超採寄銷模式：廠商商品寄放門市，賣掉才結帳，存貨自然低；同時收現金快、付廠商款慢，佔款能力強，因此現金比存貨還高，看似反常識，實則是通路業優勢。"
+  },
+  {
+    q: "統一超商使用權資產高達35%（約1,000億），主要原因是？",
+    opts: [
+      "大量購買不動產與土地",
+      "IFRS 16 租賃會計制度改變，全台7,000+門市租約全部入帳",
+      "存貨大量增加所致",
+      "應收帳款認列標準改變"
+    ],
+    correct: 1,
+    explain: "2019年起 IFRS 16 上路，租賃合約需入帳為使用權資產，統一超大量門市租約因此暴增為使用權資產，這是會計制度改變，並非公司真的大買資產。"
+  },
+  {
+    q: "教材提到「最大異常藏最強護城河」，下列何者符合這個觀念？",
+    opts: [
+      "負債越高，風險必然越高，沒有例外",
+      "中租80%負債、統一超9%存貨，這些反常識的數字其實正是各自的競爭優勢所在",
+      "存貨越低就代表存貨管理能力越差",
+      "任何財報異常數字都代表公司出了問題"
+    ],
+    correct: 1,
+    explain: "教材強調要反過來看：中租的高負債、統一超的低存貨，看似異常，實際上正是它們各自商業模式的護城河所在（低成本資金能力 / 佔款與寄銷模式）。"
+  },
+  {
+    q: "財報三層金字塔，由下而上（從數字到判斷）的正確順序是？",
+    opts: [
+      "財報數字 → 產業特性 → 商業條件",
+      "商業條件 → 財報數字 → 產業特性",
+      "產業特性 → 商業條件 → 財報數字",
+      "護城河 → 資金流向 → 比率結構"
+    ],
+    correct: 0,
+    explain: "三層金字塔：底層「財報數字」（比率×結構×異常）→ 中層「產業特性」（賺錢模式×資金流向）→ 頂層「商業條件」（競爭優勢×護城河）。先看懂數字，才能推出特性，進而判斷優勢。"
+  }
+];
+
+const quizEl = document.getElementById('quiz');
+const answered = new Array(QUESTIONS.length).fill(null);
+
+function render(){
+  quizEl.innerHTML = '';
+  QUESTIONS.forEach((item, qi) => {
+    const isDone = answered[qi] !== null;
+
+    const card = document.createElement('div');
+    card.className = 'q-card';
+
+    const num = document.createElement('div');
+    num.className = 'q-num' + (isDone ? ' done' : '');
+    num.textContent = isDone ? `第 ${qi+1} 題 / 10 · 已作答` : `第 ${qi+1} 題 / 10`;
+    card.appendChild(num);
+
+    const qText = document.createElement('div');
+    qText.className = 'q-text';
+    qText.textContent = item.q;
+    card.appendChild(qText);
+
+    const optsWrap = document.createElement('div');
+    optsWrap.className = 'options';
+
+    item.opts.forEach((optText, oi) => {
+      const opt = document.createElement('div');
+      opt.className = 'opt';
+
+      const tag = document.createElement('div');
+      tag.className = 'tag';
+      tag.textContent = String.fromCharCode(65 + oi);
+      opt.appendChild(tag);
+
+      const label = document.createElement('div');
+      label.textContent = optText;
+      opt.appendChild(label);
+
+      if(isDone){
+        opt.classList.add('disabled');
+        if(oi === item.correct){
+          opt.classList.add('correct');
+        } else if(oi === answered[qi]){
+          opt.classList.add('wrong');
+        } else {
+          opt.classList.add('dim');
+        }
+      } else {
+        opt.addEventListener('click', () => {
+          answered[qi] = oi;
+          render();
+          updateProgress();
+        });
+      }
+
+      optsWrap.appendChild(opt);
+    });
+
+    card.appendChild(optsWrap);
+
+    if(isDone){
+      const tagLine = document.createElement('div');
+      const isCorrect = answered[qi] === item.correct;
+      tagLine.className = 'result-tag ' + (isCorrect ? 'ok' : 'no');
+      tagLine.textContent = isCorrect ? '✓ 答對了！' : `✗ 答錯了，正確答案是 ${String.fromCharCode(65+item.correct)}`;
+      card.appendChild(tagLine);
+
+      const explain = document.createElement('div');
+      explain.className = 'explain show';
+      explain.innerHTML = `<b>解析：</b>${item.explain}`;
+      card.appendChild(explain);
+    }
+
+    quizEl.appendChild(card);
+  });
+
+  if(answered.every(a => a !== null)){
+    const score = answered.reduce((acc, a, i) => acc + (a === QUESTIONS[i].correct ? 1 : 0), 0);
+    document.getElementById('finalScore').textContent = `${score} / ${QUESTIONS.length}`;
+    let msg = '';
+    if(score >= 9) msg = '對三家商業模式的財報邏輯掌握得很扎實！';
+    else if(score >= 7) msg = '掌握度不錯，可再複習幾個容易搞混的觀念。';
+    else msg = '建議重新閱讀教材，特別留意「好負債」與各產業異常數字的意義。';
+    document.getElementById('finalMsg').textContent = msg;
+    document.getElementById('finalCard').classList.add('show');
+  } else {
+    document.getElementById('finalCard').classList.remove('show');
+  }
+}
+
+function updateProgress(){
+  const doneCount = answered.filter(a => a !== null).length;
+  const score = answered.reduce((acc, a, i) => acc + (a !== null && a === QUESTIONS[i].correct ? 1 : 0), 0);
+  document.getElementById('progressFill').style.width = (doneCount / QUESTIONS.length * 100) + '%';
+  document.getElementById('progressLabel').textContent = `已作答 ${doneCount} / ${QUESTIONS.length}`;
+  document.getElementById('scoreLive').textContent = `目前答對 ${score} 題`;
+}
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  answered.fill(null);
+  document.getElementById('finalCard').classList.remove('show');
+  render();
+  updateProgress();
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+
+render();
+updateProgress();
+</script>
+</body>
+</html>
