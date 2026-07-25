@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>課後自我檢測 — 損益兩平儀表板 × 工序定價 × 黑字倒閉（Cavin 0512）</title>
+<style>
+  :root{
+    --bg:#0d0f14;
+    --card:#161a22;
+    --card-border:#242938;
+    --accent:#7c8cff;
+    --accent2:#ff8a5c;
+    --good:#3ddc84;
+    --bad:#ff5c6c;
+    --text:#e8eaf0;
+    --sub:#9098ac;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:radial-gradient(circle at 20% 0%, #1b2036 0%, #0d0f14 55%);
+    color:var(--text);
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    padding:32px 16px 80px;
+  }
+  .wrap{max-width:760px;margin:0 auto;}
+  header{text-align:center;margin-bottom:32px;}
+  .eyebrow{color:var(--accent2);font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+  h1{font-size:26px;margin:0 0 10px;line-height:1.4;}
+  .desc{color:var(--sub);font-size:14px;}
+  .progress-bar{
+    position:sticky;top:0;background:var(--bg);padding:12px 0 20px;z-index:10;
+  }
+  .progress-track{height:8px;background:var(--card-border);border-radius:99px;overflow:hidden;}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%;transition:width .3s ease;}
+  .progress-row{display:flex;justify-content:space-between;font-size:12px;color:var(--sub);margin-top:6px;}
+  .score-live{color:var(--accent);font-weight:700;}
+  .q-card{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:16px;
+    padding:22px 22px 18px;
+    margin-bottom:18px;
+  }
+  .q-num{
+    display:inline-block;
+    font-size:12px;
+    color:var(--accent);
+    background:rgba(124,140,255,.12);
+    border:1px solid rgba(124,140,255,.35);
+    border-radius:99px;
+    padding:3px 10px;
+    margin-bottom:12px;
+  }
+  .q-num.done{color:var(--good);background:rgba(61,220,132,.12);border-color:rgba(61,220,132,.35);}
+  .q-text{font-size:16px;font-weight:600;margin-bottom:16px;line-height:1.6;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    padding:12px 14px;
+    border-radius:10px;
+    border:1px solid var(--card-border);
+    background:#11141c;
+    cursor:pointer;
+    font-size:14.5px;
+    line-height:1.5;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .opt:hover{border-color:var(--accent);}
+  .opt.correct{border-color:var(--good);background:rgba(61,220,132,.12);}
+  .opt.wrong{border-color:var(--bad);background:rgba(255,92,108,.12);}
+  .opt.disabled{cursor:default;}
+  .opt.dim{opacity:.55;}
+  .opt .tag{
+    flex:0 0 auto;
+    width:22px;height:22px;
+    border-radius:50%;
+    border:1px solid var(--card-border);
+    display:flex;align-items:center;justify-content:center;
+    font-size:12px;color:var(--sub);
+  }
+  .opt.correct .tag{border-color:var(--good);color:var(--good);}
+  .opt.wrong .tag{border-color:var(--bad);color:var(--bad);}
+  .result-tag{
+    margin-top:14px;
+    font-size:13.5px;
+    font-weight:700;
+  }
+  .result-tag.ok{color:var(--good);}
+  .result-tag.no{color:var(--bad);}
+  .explain{
+    display:none;
+    margin-top:10px;
+    padding:12px 14px;
+    border-radius:10px;
+    background:#0f1420;
+    border-left:3px solid var(--accent);
+    font-size:13.5px;
+    color:var(--sub);
+    line-height:1.7;
+  }
+  .explain.show{display:block;}
+  .explain b{color:var(--text);}
+  .footer-bar{
+    text-align:center;
+    padding:20px 0 4px;
+  }
+  #resetBtn{
+    background:none;
+    border:1px solid var(--card-border);
+    color:var(--sub);
+    font-weight:700;
+    font-size:14px;
+    padding:11px 26px;
+    border-radius:99px;
+    cursor:pointer;
+  }
+  .final-card{
+    display:none;
+    text-align:center;
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:16px;
+    padding:26px;
+    margin-bottom:18px;
+  }
+  .final-card.show{display:block;}
+  .final-score{font-size:36px;font-weight:800;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .final-msg{color:var(--sub);font-size:14px;margin-top:8px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">管理會計 × 現金流量 · 課後自我檢測</div>
+    <h1>損益兩平儀表板 × 工序定價 × 黑字倒閉</h1>
+    <div class="desc">依 Cavin 0512 一頁式教材命題 · 共 10 題 · 單選 · 每題作答後立即檢討</div>
+  </header>
+
+  <div class="progress-bar">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-row">
+      <span id="progressLabel">已作答 0 / 10</span>
+      <span class="score-live" id="scoreLive">目前答對 0 題</span>
+    </div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div class="final-card" id="finalCard">
+    <div class="final-score" id="finalScore">0 / 10</div>
+    <div class="final-msg" id="finalMsg"></div>
+  </div>
+
+  <div class="footer-bar">
+    <button id="resetBtn">重新作答</button>
+  </div>
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    q: "損益兩平數量的計算公式是？",
+    opts: [
+      "固定成本 ÷ 每單位邊際貢獻",
+      "固定成本 ÷ 售價",
+      "變動成本 ÷ 邊際貢獻",
+      "總成本 ÷ 單位售價"
+    ],
+    correct: 0,
+    explain: "損益兩平數量 ＝ 固定成本 ÷ 單位邊際貢獻。回本只代表「不賠不賺」，並非開始賺錢。"
+  },
+  {
+    q: "若要達成目標利潤，目標銷售量的公式應為？",
+    opts: [
+      "(固定成本 + 目標利潤) ÷ 單位邊際貢獻",
+      "固定成本 ÷ 目標利潤",
+      "(固定成本 − 目標利潤) ÷ 邊際貢獻",
+      "目標利潤 ÷ 邊際貢獻"
+    ],
+    correct: 0,
+    explain: "目標銷售量 ＝ (固定成本 + 目標利潤) ÷ 單位邊際貢獻，分子多加上目標利潤，才能算出真正要賣多少才達標。"
+  },
+  {
+    q: "機車行案例：輪胎售價 1,500 元，進貨成本 800 元，工資 200 元，每條輪胎的邊際貢獻是多少？",
+    opts: [
+      "700 元",
+      "500 元",
+      "300 元",
+      "1,500 元"
+    ],
+    correct: 1,
+    explain: "邊際貢獻 ＝ 售價 − 變動成本（料＋工資）＝ 1,500 − 800 − 200 ＝ 500 元／條，損益兩平 ＝ 30,000 ÷ 500 ＝ 60 條。"
+  },
+  {
+    q: "承上題，若進貨成本漲到 900 元（＋100，售價不變），邊際貢獻與損益兩平會如何變化？",
+    opts: [
+      "邊際貢獻降至 400 元，回本需 75 條",
+      "邊際貢獻升至 600 元，回本需 50 條",
+      "邊際貢獻不變，回本仍 60 條",
+      "邊際貢獻降至 300 元，回本需 100 條"
+    ],
+    correct: 0,
+    explain: "邊際貢獻 ＝ 1,500 − 900 − 200 ＝ 400 元，損益兩平 ＝ 30,000 ÷ 400 ＝ 75 條，目標利潤 20,000 則需賣 125 條，成本↑會讓邊際貢獻↓、需賣更多才能維持利潤。"
+  },
+  {
+    q: "混合商品（多種商品同時銷售）的加權平均邊際貢獻，主要由什麼因素決定？",
+    opts: [
+      "固定成本的高低",
+      "銷售配比（Sales Mix）",
+      "折舊金額大小",
+      "存貨周轉天數"
+    ],
+    correct: 1,
+    explain: "銷售配比決定整體回本速度：高毛利商品占比越高，加權平均邊際貢獻越大，達到兩平所需的總數量越少，是定價與推廣策略的核心依據。"
+  },
+  {
+    q: "工序成本定價中，工程類報價最大的陷阱是什麼？",
+    opts: [
+      "只看材料成本，忘記精算工時",
+      "只看工時，忘記材料成本",
+      "只看固定成本，忽略變動成本",
+      "只看目標利潤率，忽略市場行情"
+    ],
+    correct: 0,
+    explain: "工程報價最大陷阱是「只看材料忘算工時」。正確做法是拆解每道工序，累加師傅等級 × 工時，才能得到真實工資成本；漏算工時就等於讓師傅做賠錢的事。"
+  },
+  {
+    q: "換氣缸 vs 修氣門案例中，「修氣門」常見錯誤報價（材料×1.5＋固定工資）為何會導致「越做越賠」？",
+    opts: [
+      "材料成本被高估，報價過高接不到單",
+      "工序繁多、工時長，但報價公式只算材料未確實計入工時",
+      "固定成本分攤過高，稀釋利潤",
+      "師傅時薪設定過低，直接虧本"
+    ],
+    correct: 1,
+    explain: "修氣門材料便宜但工序繁多（8步以上）、工時長，若只用材料×1.5估算，會嚴重低估工時成本，導致「全接氣門單，師傅忙到沒時間賺錢的事」。"
+  },
+  {
+    q: "折舊費用被稱為「非現金費用」，主要原因是？",
+    opts: [
+      "購買資產當下錢已一次付出，之後每期認列只是帳面分攤，並無現金流出",
+      "折舊費用不會出現在損益表中",
+      "折舊費用可以直接抵免當期應繳稅金",
+      "折舊只影響資產負債表，與損益表無關"
+    ],
+    correct: 0,
+    explain: "折舊在買資產時錢就已經付出，之後每期提列只是帳面分攤成本，不是新的現金流出。因此帳面虧損的公司，現金流可能仍然健康——這正是現金流量表這面「照妖鏡」的價值所在。"
+  },
+  {
+    q: "「黑字倒閉」的核心成因是什麼？",
+    opts: [
+      "帳面雖然獲利，但利潤全部卡在存貨或應收款裡，現金無法周轉",
+      "公司帳面出現虧損，直接導致現金枯竭",
+      "折舊費用過高，侵蝕了現金",
+      "固定成本長期超過變動成本"
+    ],
+    correct: 0,
+    explain: "黑字 ＝ 帳面有賺錢，倒閉 ＝ 付不出薪水。原因是賺到的利潤全卡在機油、輪胎、材料等存貨裡，現金無法周轉；帳面越漂亮、備貨越多，現金壓力反而越大。"
+  },
+  {
+    q: "面對上游成本上漲，教材提出的三種因應策略是？",
+    opts: [
+      "轉嫁給客戶（漲售價）／吸收成本（多賣維持利潤）／超漲轉嫁（借機擴大毛利）",
+      "裁員／減產／緊急借款",
+      "降價促銷／增加庫存／延遲付款給廠商",
+      "提高折舊提列／減少工時／外包生產"
+    ],
+    correct: 0,
+    explain: "敏感性分析的三種選擇：①轉嫁給客戶（漲售價）②吸收成本（多賣條數維持利潤）③超漲轉嫁（借機擴大毛利），可用儀表板即時試算，讓決策有數字支撐而非憑感覺。"
+  }
+];
+
+const quizEl = document.getElementById('quiz');
+const answered = new Array(QUESTIONS.length).fill(null);
+
+function render(){
+  quizEl.innerHTML = '';
+  QUESTIONS.forEach((item, qi) => {
+    const isDone = answered[qi] !== null;
+
+    const card = document.createElement('div');
+    card.className = 'q-card';
+
+    const num = document.createElement('div');
+    num.className = 'q-num' + (isDone ? ' done' : '');
+    num.textContent = isDone ? `第 ${qi+1} 題 / 10 · 已作答` : `第 ${qi+1} 題 / 10`;
+    card.appendChild(num);
+
+    const qText = document.createElement('div');
+    qText.className = 'q-text';
+    qText.textContent = item.q;
+    card.appendChild(qText);
+
+    const optsWrap = document.createElement('div');
+    optsWrap.className = 'options';
+
+    item.opts.forEach((optText, oi) => {
+      const opt = document.createElement('div');
+      opt.className = 'opt';
+
+      const tag = document.createElement('div');
+      tag.className = 'tag';
+      tag.textContent = String.fromCharCode(65 + oi);
+      opt.appendChild(tag);
+
+      const label = document.createElement('div');
+      label.textContent = optText;
+      opt.appendChild(label);
+
+      if(isDone){
+        opt.classList.add('disabled');
+        if(oi === item.correct){
+          opt.classList.add('correct');
+        } else if(oi === answered[qi]){
+          opt.classList.add('wrong');
+        } else {
+          opt.classList.add('dim');
+        }
+      } else {
+        opt.addEventListener('click', () => {
+          answered[qi] = oi;
+          render();
+          updateProgress();
+        });
+      }
+
+      optsWrap.appendChild(opt);
+    });
+
+    card.appendChild(optsWrap);
+
+    if(isDone){
+      const tagLine = document.createElement('div');
+      const isCorrect = answered[qi] === item.correct;
+      tagLine.className = 'result-tag ' + (isCorrect ? 'ok' : 'no');
+      tagLine.textContent = isCorrect ? '✓ 答對了！' : `✗ 答錯了，正確答案是 ${String.fromCharCode(65+item.correct)}`;
+      card.appendChild(tagLine);
+
+      const explain = document.createElement('div');
+      explain.className = 'explain show';
+      explain.innerHTML = `<b>解析：</b>${item.explain}`;
+      card.appendChild(explain);
+    }
+
+    quizEl.appendChild(card);
+  });
+
+  if(answered.every(a => a !== null)){
+    const score = answered.reduce((acc, a, i) => acc + (a === QUESTIONS[i].correct ? 1 : 0), 0);
+    document.getElementById('finalScore').textContent = `${score} / ${QUESTIONS.length}`;
+    let msg = '';
+    if(score >= 9) msg = '對損益兩平、工序定價與黑字倒閉觀念掌握得很扎實！';
+    else if(score >= 7) msg = '掌握度不錯，可再複習幾個容易搞混的觀念。';
+    else msg = '建議重新閱讀教材，特別留意工序工時定價與現金流量表的判讀。';
+    document.getElementById('finalMsg').textContent = msg;
+    document.getElementById('finalCard').classList.add('show');
+  } else {
+    document.getElementById('finalCard').classList.remove('show');
+  }
+}
+
+function updateProgress(){
+  const doneCount = answered.filter(a => a !== null).length;
+  const score = answered.reduce((acc, a, i) => acc + (a !== null && a === QUESTIONS[i].correct ? 1 : 0), 0);
+  document.getElementById('progressFill').style.width = (doneCount / QUESTIONS.length * 100) + '%';
+  document.getElementById('progressLabel').textContent = `已作答 ${doneCount} / ${QUESTIONS.length}`;
+  document.getElementById('scoreLive').textContent = `目前答對 ${score} 題`;
+}
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  answered.fill(null);
+  document.getElementById('finalCard').classList.remove('show');
+  render();
+  updateProgress();
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+
+render();
+updateProgress();
+</script>
+</body>
+</html>
