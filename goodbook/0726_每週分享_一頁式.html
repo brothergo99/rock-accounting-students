@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>0726 每週分享 · 《解決問題的人》See × Solve × Scale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --or:#9a3412;--or2:#fff7ed;--or3:#fed7aa;--or4:#f97316;
+  --te:#0f766e;--te2:#f0fdfa;--te3:#99f6e4;--te4:#14b8a6;
+  --vi:#4c1d95;--vi2:#f5f3ff;--vi3:#c4b5fd;--vi4:#7c3aed;
+  --am:#92400e;--am2:#fffbeb;--am3:#fde68a;--am4:#d97706;
+  --em:#065f46;--em2:#ecfdf5;--em3:#6ee7b7;--em4:#059669;
+  --bl:#1e3a5f;--bl2:#eff6ff;--bl3:#93c5fd;--bl4:#2563eb;
+  --night:#060810;--night2:#0d0f1c;
+  --white:#fff;--ink:#060810;--muted:#4a5068;--bg:#fff8f3;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+.page-header{background:linear-gradient(150deg,#060408,#0e0808,#0a0506,#060308);padding:38px 50px 30px;position:relative;overflow:hidden;border-bottom:3px solid var(--or4)}
+.ph-g1{position:absolute;top:-60px;right:-40px;width:280px;height:280px;background:radial-gradient(circle,rgba(249,115,22,.22),transparent 65%);pointer-events:none}
+.ph-g2{position:absolute;bottom:-40px;left:-20px;width:200px;height:200px;background:radial-gradient(circle,rgba(20,184,166,.1),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(254,215,170,.65);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(14px,2.1vw,21px);font-weight:900;color:#fff;line-height:1.28;margin-bottom:4px}
+.ph-title em{color:var(--or3);font-style:normal}
+.ph-title em2{color:var(--te3);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.38);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mc{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(249,115,22,.13);color:var(--or3);border:1px solid rgba(249,115,22,.3)}
+.mc-t{background:rgba(20,184,166,.12);color:var(--te3);border-color:rgba(20,184,166,.28)}
+.mc-v{background:rgba(124,58,237,.12);color:var(--vi3);border-color:rgba(124,58,237,.28)}
+.mc-a{background:rgba(217,119,6,.13);color:var(--am3);border-color:rgba(217,119,6,.3)}
+
+.container{max-width:1100px;margin:0 auto;padding:28px 26px}
+.section{margin-bottom:24px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--or4);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--night);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--or3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:720px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+.card-or{background:var(--or2);border:1.5px solid var(--or3);border-radius:10px;padding:14px}
+.card-te{background:var(--te2);border:1.5px solid var(--te3);border-radius:10px;padding:14px}
+.card-vi{background:var(--vi2);border:1.5px solid var(--vi3);border-radius:10px;padding:14px}
+.card-am{background:var(--am2);border:1.5px solid var(--am3);border-radius:10px;padding:14px}
+.card-em{background:var(--em2);border:1.5px solid var(--em3);border-radius:10px;padding:14px}
+.card-bl{background:var(--bl2);border:1.5px solid var(--bl3);border-radius:10px;padding:14px}
+.card-dark{background:var(--night);border:none;border-radius:10px;padding:14px}
+
+.card-or h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--or)}
+.card-te h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--te)}
+.card-vi h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--vi)}
+.card-am h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--am)}
+.card-em h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--em)}
+.card-bl h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--bl)}
+.card-dark h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--or3)}
+.card-or p,.card-or li{color:var(--or);font-size:12.5px;line-height:1.85}
+.card-te p,.card-te li{color:var(--te);font-size:12.5px;line-height:1.85}
+.card-vi p,.card-vi li{color:var(--vi);font-size:12.5px;line-height:1.85}
+.card-am p,.card-am li{color:var(--am);font-size:12.5px;line-height:1.85}
+.card-em p,.card-em li{color:var(--em);font-size:12.5px;line-height:1.85}
+.card-bl p,.card-bl li{color:var(--bl);font-size:12.5px;line-height:1.85}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8);font-size:12.5px;line-height:1.85}
+.card-or ul,.card-te ul,.card-vi ul,.card-am ul,.card-em ul,.card-bl ul,.card-dark ul{padding-left:15px}
+.card-or ul li,.card-te ul li,.card-vi ul li,.card-am ul li,.card-em ul li,.card-bl ul li,.card-dark ul li{margin-bottom:3px}
+
+/* 3S 步驟標頭 */
+.step-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.step-badge{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;line-height:1}
+.step-info{}
+.step-en{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.15em;margin-bottom:2px}
+.step-zh{font-family:'Playfair Display',serif;font-size:16px;font-weight:700}
+
+/* 案例卡 */
+.case-item{border-radius:8px;padding:9px 12px;margin-bottom:7px}
+.ci-header{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.ci-tag{font-family:'DM Mono',monospace;font-size:10px;border-radius:3px;padding:2px 8px;font-weight:700;flex-shrink:0}
+.ci-title{font-size:13px;font-weight:700}
+.ci-body{font-size:12px;line-height:1.75;color:#374151}
+.ci-insight{font-size:11.5px;margin-top:5px;padding:5px 9px;border-radius:5px;font-weight:500}
+
+/* 打破迷思欄 */
+.myth-row{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-bottom:1px solid rgba(249,115,22,.1)}
+.myth-row:last-child{border-bottom:none}
+.mr-x{font-size:14px;flex-shrink:0;margin-top:1px}
+.mr-body{font-size:12.5px;line-height:1.75;color:#374151}
+.mr-body strong{color:var(--or)}
+
+/* 職場策略 */
+.strat-step{display:flex;gap:10px;align-items:flex-start;background:rgba(255,255,255,.07);border-radius:7px;padding:8px 11px;margin-bottom:5px}
+.ss-num{font-family:'DM Mono',monospace;font-size:11px;background:var(--or4);color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;margin-top:2px}
+.ss-body{font-size:12px;color:rgba(255,255,255,.85);line-height:1.75}
+
+/* Quote */
+.quote{background:linear-gradient(135deg,var(--night),var(--night2));border-radius:10px;padding:14px 20px;position:relative;overflow:hidden;margin-bottom:20px}
+.qm{font-family:'Playfair Display',serif;font-size:72px;color:rgba(249,115,22,.08);position:absolute;top:-10px;left:8px;line-height:1}
+.qt{font-size:13px;color:rgba(255,255,255,.88);line-height:1.65;position:relative;z-index:1}
+.qt em{color:var(--or3);font-style:normal;font-weight:700}
+.qt em2{color:var(--te3);font-style:normal}
+.qs{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.38);margin-top:6px;position:relative;z-index:1}
+
+.page-footer{background:var(--night);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--or3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-g1"></div>
+  <div class="ph-g2"></div>
+  <div class="ph-eyebrow">0726 每週分享 · 《解決問題的人》· 布朗大學 Danny Warshay 教授</div>
+  <div class="ph-title">創業不是天賦，是一套<em>人人可學的方法論</em>：<br><em2>See · Solve · Scale</em2> ── 從汰漬老婦人到 Airbnb 的三步驟進程</div>
+  <div class="ph-sub">打破創業迷思 × 人類學家觀察法 × 不被資源綁架的創新 × 降維打擊職場策略 × 找工作=解決公司的問題</div>
+  <div class="ph-meta">
+    <span class="mc">2025.07.26</span>
+    <span class="mc">每週分享</span>
+    <span class="mc mc-t">《解決問題的人》The Problem Solver</span>
+    <span class="mc mc-v">3S方法論</span>
+    <span class="mc mc-a">Rock 老師</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 金句 -->
+  <div class="quote">
+    <div class="qm">"</div>
+    <div class="qt">「面試時，與其單向描述自己會做什麼，不如反過來思考：<em>公司現在到底有什麼問題需要解決？</em><br>證明自己就是那個能解決問題的人——<em2>找工作本質上是一場價值交換，而不是一場自我介紹。</em2>」</div>
+    <div class="qs">Rock 老師 · 0726 好書分享 · 《解決問題的人》Danny Warshay / 布朗大學教授</div>
+  </div>
+
+  <!-- SECTION 1: 打破迷思 + See -->
+  <div class="section">
+    <div class="section-label">核心觀念 + Step 1 · See（洞察）· 打破創業迷思×人類學家觀察×汰漬經典案例</div>
+    <div class="section-title">最關鍵的第一步：80%的時間都要在傾聽——真正的痛點藏在消費者的「實際行為」裡</div>
+    <div class="grid-2">
+      <div class="card-or">
+        <h3>💡 打破四大創業迷思</h3>
+        <div class="myth-row">
+          <div class="mr-x">❌</div>
+          <div class="mr-body"><strong>迷思：創業需要特殊天賦或天選之人</strong><br>→ 創業是一套<strong>可傳授、可學習、結構化的進程</strong>，任何人都可以成為解決問題的人。</div>
+        </div>
+        <div class="myth-row">
+          <div class="mr-x">❌</div>
+          <div class="mr-body"><strong>迷思：靠精神與熱情就能成功</strong><br>→ 就像工程師父親造橋——若只憑虛無縹緲的精神去造橋，會非常危險。創業需要<strong>紮實步驟與標準</strong>。</div>
+        </div>
+        <div class="myth-row">
+          <div class="mr-x">❌</div>
+          <div class="mr-body"><strong>迷思：不創業就不需要學解決問題</strong><br>→ 想跳脫低價值重複性工作、<strong>創造更高個人價值</strong>，就必須學會解決問題的技巧。</div>
+        </div>
+        <div class="myth-row">
+          <div class="mr-x">💡</div>
+          <div class="mr-body"><strong>找工作 = 價值交換</strong><br>→ 與其不斷介紹自己，不如思考「公司有什麼問題？」並證明你是那個能解決它的人。</div>
+        </div>
+      </div>
+
+      <div class="card-dark">
+        <div class="step-header">
+          <div>
+            <div class="step-badge" style="color:var(--or3)">S<span style="font-size:18px;vertical-align:super">1</span></div>
+          </div>
+          <div class="step-info">
+            <div class="step-en" style="color:rgba(254,215,170,.6)">STEP 1 · See</div>
+            <div class="step-zh" style="color:#fff">洞察：化身人類學家，由下而上觀察</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:rgba(255,255,255,.65);margin-bottom:10px">不依賴問卷調查（由上而下），而是深入消費者的<strong style="color:#fff">「實際行為」</strong>中，80%時間傾聽，追根究底找真實需求。</div>
+
+        <div class="case-item" style="background:rgba(249,115,22,.12);border:1px solid rgba(249,115,22,.25)">
+          <div class="ci-header">
+            <div class="ci-tag" style="background:var(--or4);color:#fff">汰漬 Tide 案例</div>
+            <div class="ci-title" style="color:var(--or3)">洗衣粉包裝變革（1980年代）</div>
+          </div>
+          <div class="ci-body" style="color:rgba(255,255,255,.8)">問卷顯示消費者對紙盒「非常滿意」→ 調查員實際進入家中觀察，卻發現一位老婦人<strong style="color:#fff">用剪刀從側面戳洞、用了30年</strong>，因為側拿比從上方取用更直覺。</div>
+          <div class="ci-insight" style="background:rgba(249,115,22,.2);color:var(--or3)">→ 這個自然行為催生了後來「側邊按鈕取用」的洗衣精桶設計。問卷永遠問不出真正的痛點。</div>
+        </div>
+        <div style="background:rgba(255,255,255,.07);border-radius:7px;padding:8px 12px;margin-top:7px;font-size:12px;color:rgba(255,255,255,.78)">
+          ⚠️ 洞察階段必須投入<strong style="color:#fff">超乎預期的時間</strong>，不能因為時間壓力盲目往前衝——走錯路重來的成本更高。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: Solve + Scale -->
+  <div class="section">
+    <div class="section-label">Step 2 · Solve（解決）+ Step 3 · Scale（擴展）· 不被資源綁架的創新×三大經典案例×從一到全世界</div>
+    <div class="section-title">沒錢、沒資源反而是優勢：不被舊有 SOP 綁架，才能做出跳脫框架的解法</div>
+    <div class="grid-2">
+      <div class="card-te">
+        <div class="step-header">
+          <div class="step-badge" style="color:var(--te4)">S<span style="font-size:18px;vertical-align:super">2</span></div>
+          <div class="step-info">
+            <div class="step-en" style="color:rgba(153,246,228,.6)">STEP 2 · Solve</div>
+            <div class="step-zh" style="color:var(--te)">解決：不被現有資源綁架的創新</div>
+          </div>
+        </div>
+        <div style="background:rgba(15,118,110,.1);border-radius:7px;padding:8px 11px;font-size:12.5px;color:var(--te);margin-bottom:10px">傳統觀念：先有資金/人脈/技術/團隊才能創業 → <strong>大錯特錯。</strong><br>資源豐富有時反而阻礙創新；當你覺得沒什麼好失去，反而更能跳脫框架。</div>
+
+        <div class="case-item" style="background:rgba(15,118,110,.1);border:1px solid var(--te3)">
+          <div class="ci-header">
+            <div class="ci-tag" style="background:var(--te4);color:#fff">Airbnb</div>
+            <div class="ci-title" style="color:var(--te)">旅客找不到住宿×房東閒置房間</div>
+          </div>
+          <div class="ci-body">2007年兩位舊金山設計師，親自訪問驗證雙邊需求，搭起平台連結，隨後加入評價系統、保險保障，不斷迭代。</div>
+          <div class="ci-insight" style="background:rgba(15,118,110,.15);color:var(--te4)">→ 從解決短暫住宿問題，擴展至全球主要城市，最終改變人類旅行方式（Step 3: Scale）</div>
+        </div>
+
+        <div class="case-item" style="background:rgba(15,118,110,.08);border:1px solid var(--te3)">
+          <div class="ci-header">
+            <div class="ci-tag" style="background:var(--te4);color:#fff">Casper 床墊</div>
+            <div class="ci-title" style="color:var(--te)">線上買床墊×試用100天</div>
+          </div>
+          <div class="ci-body">創辦人缺乏製造與物流經驗 → 不被舊有SOP綁架 → 首創「線上購買＋100天不滿意全退」，解除實體店面試躺的尷尬。</div>
+          <div class="ci-insight" style="background:rgba(15,118,110,.15);color:var(--te4)">→ 2020年成功IPO上市。沒有包袱，才有創新。</div>
+        </div>
+
+        <div class="case-item" style="background:rgba(15,118,110,.06);border:1px solid var(--te3)">
+          <div class="ci-header">
+            <div class="ci-tag" style="background:var(--te4);color:#fff">跳跳糖</div>
+            <div class="ci-title" style="color:var(--te)">「如果讓糖果可以說話呢？」</div>
+          </div>
+          <div class="ci-body">課堂鼓勵荒謬創意 → 糖果與二氧化碳結合 → 糖果在嘴裡劈啪作響。</div>
+          <div class="ci-insight" style="background:rgba(15,118,110,.15);color:var(--te4)">→ 荒謬的問題有時催生改變世界的產品。</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card-vi" style="margin-bottom:12px">
+          <div class="step-header">
+            <div class="step-badge" style="color:var(--vi3)">S<span style="font-size:18px;vertical-align:super">3</span></div>
+            <div class="step-info">
+              <div class="step-en" style="color:rgba(196,181,253,.6)">STEP 3 · Scale</div>
+              <div class="step-zh" style="color:var(--vi)">擴展：從一擴展到全世界</div>
+            </div>
+          </div>
+          <p>市場實驗成功後，最困難的是如何將規模擴大。Airbnb 是最典型的範例：從初期解決旅客短暫住宿問題，拓展至全球主要城市，延伸至個人化旅遊體驗，最終成為跨國企業。</p>
+          <div style="background:rgba(124,58,237,.1);border-radius:7px;padding:8px 11px;margin-top:8px;font-size:12px;color:var(--vi)">
+            3S 不是線性步驟，而是<strong>持續迭代的循環</strong>——每一次 Scale 都帶來新的 See 與 Solve 機會。
+          </div>
+        </div>
+
+        <div class="card-dark">
+          <h3>🏢 Rock 老師的職場實踐：降維打擊</h3>
+          <div class="strat-step">
+            <div class="ss-num">①</div>
+            <div class="ss-body"><strong style="color:#fff">謀定而後動（洞察期）：</strong>到職後先花兩三週當「人類學家」，理解公司運作邏輯與人際利害關係，確認問題被精準定義後才進行提案。</div>
+          </div>
+          <div class="strat-step">
+            <div class="ss-num">②</div>
+            <div class="ss-body"><strong style="color:#fff">差異化提案：</strong>為避免「為改而改」的迷思或遭受既有利益者攻擊，專門解決現有團隊<strong style="color:var(--or3)">「沒辦法解決的問題」</strong>。</div>
+          </div>
+          <div class="strat-step">
+            <div class="ss-num">③</div>
+            <div class="ss-body"><strong style="color:#fff">降維打擊：</strong>只要不跟現有團隊在同一個維度競爭，去處理他們做不來的事，自然產生區隔，不會被攻擊，這也是展現個人價值的最佳方式。</div>
+          </div>
+          <div style="background:rgba(249,115,22,.15);border-radius:7px;padding:8px 12px;margin-top:7px;font-size:12px;color:var(--or3);font-weight:500">
+            核心：把 3S 方法論用在職場內部創業——先 See 清楚公司的痛點，再 Solve，最後 Scale 你的個人影響力。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">0726 每週分享 · 《解決問題的人》Danny Warshay · See × Solve × Scale</div>
+</div>
+
+</body>
+</html>
