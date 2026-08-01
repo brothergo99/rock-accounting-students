@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cavin 0725 · 知識複利×四大數據思維×邊際貢獻×損益兩平</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --li:#3f6212;--li2:#f7fee7;--li3:#bef264;--li4:#65a30d;
+  --am:#92400e;--am2:#fffbeb;--am3:#fde68a;--am4:#d97706;
+  --bl:#1e3a5f;--bl2:#eff6ff;--bl3:#93c5fd;--bl4:#2563eb;
+  --vi:#4c1d95;--vi2:#f5f3ff;--vi3:#c4b5fd;--vi4:#7c3aed;
+  --em:#065f46;--em2:#ecfdf5;--em3:#6ee7b7;--em4:#059669;
+  --ro:#9f1239;--ro2:#fff1f2;--ro3:#fecdd3;--ro4:#f43f5e;
+  --or:#9a3412;--or2:#fff7ed;--or3:#fed7aa;--or4:#ea580c;
+  --night:#050a08;--night2:#0c1410;
+  --white:#fff;--ink:#050a08;--muted:#3d6652;--bg:#f7fee7;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+.page-header{background:linear-gradient(150deg,#020806,#07120a,#04090a,#030705);padding:38px 50px 30px;position:relative;overflow:hidden;border-bottom:3px solid var(--li3)}
+.ph-g1{position:absolute;top:-60px;right:-40px;width:280px;height:280px;background:radial-gradient(circle,rgba(101,163,13,.2),transparent 65%);pointer-events:none}
+.ph-g2{position:absolute;bottom:-40px;left:-20px;width:200px;height:200px;background:radial-gradient(circle,rgba(217,119,6,.12),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(190,242,100,.65);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(14px,2.1vw,21px);font-weight:900;color:#fff;line-height:1.28;margin-bottom:4px}
+.ph-title em{color:var(--li3);font-style:normal}
+.ph-title em2{color:var(--am3);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.38);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mc{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(101,163,13,.14);color:var(--li3);border:1px solid rgba(101,163,13,.3)}
+.mc-a{background:rgba(217,119,6,.13);color:var(--am3);border-color:rgba(217,119,6,.3)}
+.mc-b{background:rgba(37,99,235,.12);color:var(--bl3);border-color:rgba(37,99,235,.28)}
+.mc-v{background:rgba(124,58,237,.12);color:var(--vi3);border-color:rgba(124,58,237,.28)}
+
+.container{max-width:1100px;margin:0 auto;padding:28px 26px}
+.section{margin-bottom:24px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--li4);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--night);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--li3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+
+.card-li{background:var(--li2);border:1.5px solid var(--li3);border-radius:10px;padding:14px}
+.card-am{background:var(--am2);border:1.5px solid var(--am3);border-radius:10px;padding:14px}
+.card-bl{background:var(--bl2);border:1.5px solid var(--bl3);border-radius:10px;padding:14px}
+.card-vi{background:var(--vi2);border:1.5px solid var(--vi3);border-radius:10px;padding:14px}
+.card-em{background:var(--em2);border:1.5px solid var(--em3);border-radius:10px;padding:14px}
+.card-ro{background:var(--ro2);border:1.5px solid var(--ro3);border-radius:10px;padding:14px}
+.card-or{background:var(--or2);border:1.5px solid var(--or3);border-radius:10px;padding:14px}
+.card-dark{background:var(--night);border:none;border-radius:10px;padding:14px}
+
+.card-li h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--li)}
+.card-am h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--am)}
+.card-bl h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--bl)}
+.card-vi h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--vi)}
+.card-em h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--em)}
+.card-ro h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--ro)}
+.card-or h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--or)}
+.card-dark h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--li3)}
+.card-li p,.card-li li{color:var(--li);font-size:12.5px;line-height:1.85}
+.card-am p,.card-am li{color:var(--am);font-size:12.5px;line-height:1.85}
+.card-bl p,.card-bl li{color:var(--bl);font-size:12.5px;line-height:1.85}
+.card-vi p,.card-vi li{color:var(--vi);font-size:12.5px;line-height:1.85}
+.card-em p,.card-em li{color:var(--em);font-size:12.5px;line-height:1.85}
+.card-ro p,.card-ro li{color:var(--ro);font-size:12.5px;line-height:1.85}
+.card-or p,.card-or li{color:var(--or);font-size:12.5px;line-height:1.85}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8);font-size:12.5px;line-height:1.85}
+.card-li ul,.card-am ul,.card-bl ul,.card-vi ul,.card-em ul,.card-ro ul,.card-or ul,.card-dark ul{padding-left:15px}
+.card-li ul li,.card-am ul li,.card-bl ul li,.card-vi ul li,.card-em ul li,.card-ro ul li,.card-or ul li,.card-dark ul li{margin-bottom:3px}
+
+/* 公式框 */
+.formula{background:var(--night2);border-radius:8px;padding:10px 14px;margin:8px 0;font-family:'DM Mono',monospace;font-size:13px;border-left:3px solid var(--li4)}
+.formula .var{color:var(--li3)}
+.formula .res{color:var(--am3);font-size:15px;font-weight:700}
+.formula .note{font-size:11px;color:rgba(255,255,255,.5);margin-top:4px;font-family:'Noto Sans TC',sans-serif}
+
+/* 四大數據思維 */
+.insight-card{border-radius:8px;padding:10px 13px}
+.ic-num{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;line-height:1;margin-bottom:3px}
+.ic-title{font-size:12.5px;font-weight:700;margin-bottom:4px}
+.ic-body{font-size:12px;line-height:1.7}
+
+/* 損益兩平視覺 */
+.bep-bar{display:flex;height:36px;border-radius:6px;overflow:hidden;margin:10px 0;font-size:12px;font-weight:700}
+.bep-fixed{background:var(--ro4);display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0}
+.bep-profit{background:var(--li4);display:flex;align-items:center;justify-content:center;color:#fff;flex:1}
+
+/* 敏感性分析表 */
+.sens-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+.sens-table th{background:var(--li4);color:#fff;padding:5px 9px;font-weight:500;font-size:11.5px;text-align:center}
+.sens-table td{padding:5px 9px;border-bottom:1px solid rgba(63,98,18,.1);text-align:center;font-family:'DM Mono',monospace}
+.sens-table .hl{background:rgba(245,158,11,.12);font-weight:700;color:var(--am)}
+
+/* 名詞解釋行 */
+.term-row{display:flex;gap:9px;align-items:flex-start;padding:6px 0;border-bottom:1px solid rgba(63,98,18,.1)}
+.term-row:last-child{border-bottom:none}
+.tr-tag{font-family:'DM Mono',monospace;font-size:10.5px;background:var(--li4);color:#fff;border-radius:3px;padding:2px 8px;flex-shrink:0;white-space:nowrap;margin-top:2px}
+.tr-body{font-size:12.5px;color:#374151;line-height:1.75}
+
+/* Quote */
+.quote{background:linear-gradient(135deg,var(--night),var(--night2));border-radius:10px;padding:14px 20px;position:relative;overflow:hidden;margin-bottom:20px}
+.qm{font-family:'Playfair Display',serif;font-size:72px;color:rgba(190,242,100,.07);position:absolute;top:-10px;left:8px;line-height:1}
+.qt{font-size:13px;color:rgba(255,255,255,.88);line-height:1.65;position:relative;z-index:1}
+.qt em{color:var(--li3);font-style:normal;font-weight:700}
+.qt em2{color:var(--am3);font-style:normal}
+.qs{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.38);margin-top:6px;position:relative;z-index:1}
+
+.page-footer{background:var(--night);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--li3)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-g1"></div>
+  <div class="ph-g2"></div>
+  <div class="ph-eyebrow">0725 · Cavin 課後複習 · 知識複利×四大數據思維×邊際貢獻×損益兩平×敏感性分析</div>
+  <div class="ph-title">不懂會計就不懂經營：<br><em>損益兩平點越低，生意越好做</em>；<em2>知識複利越疊越快，讀書越看越有感</em2></div>
+  <div class="ph-sub">《納瓦爾寶典》知識複利 × 《經營本質》降維思考 × 四大數據思維 × 邊際貢獻公式 × 敏感性分析 × 銷售配比策略</div>
+  <div class="ph-meta">
+    <span class="mc">2025.07.25</span>
+    <span class="mc">Cavin</span>
+    <span class="mc mc-a">管理會計實戰</span>
+    <span class="mc mc-b">損益兩平點×敏感性分析</span>
+    <span class="mc mc-v">四大數據思維</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 金句 -->
+  <div class="quote">
+    <div class="qm">"</div>
+    <div class="qt">「<em>不懂會計就不懂經營</em>（稻盛和夫）；沒辦法數量化的東西就沒辦法管理（張忠謀）。<br>看財報不是為了知道答案——而是為了<em2>追根究底，在關鍵議題上投入高質量的關注</em2>，讓數字告訴你公司真正發生了什麼事。」</div>
+    <div class="qs">Rock 老師 · 0725 Cavin · 管理會計 + 四大數據思維</div>
+  </div>
+
+  <!-- SECTION 1: 知識複利 + 書單 + 三大表 -->
+  <div class="section">
+    <div class="section-label">Part 1 · 知識複利 + 推薦書單 + 財報三大表 · 《納瓦爾寶典》×《經營本質》×財報基礎</div>
+    <div class="section-title">知識複利：讀第一遍只懂兩成，但這兩成不會消失——它是讀下一本書的地基</div>
+    <div class="grid-3">
+      <div class="card-li">
+        <h3>📚 知識複利（納瓦爾寶典）</h3>
+        <div style="background:rgba(63,98,18,.1);border-radius:7px;padding:9px 11px;margin-bottom:7px">
+          <div style="font-size:12px;font-weight:700;color:var(--li4);margin-bottom:3px">第一遍最痛苦，只懂兩成</div>
+          <div style="font-size:12.5px;color:var(--li);line-height:1.75">但這兩成不會消失，會成為讀下一本書的基礎；知識像複利一樣越疊加越快，越看越有感覺。</div>
+        </div>
+        <div style="background:rgba(63,98,18,.08);border-radius:7px;padding:9px 11px;margin-bottom:7px">
+          <div style="font-size:12px;font-weight:700;color:var(--li4);margin-bottom:3px">《隱形潛能》：極度不適 = 進步的象徵</div>
+          <div style="font-size:12.5px;color:var(--li);line-height:1.75">學習中若感到「極度不適」，那是代表自己正在進步——記住這種感覺並持續衝刺。</div>
+        </div>
+        <div style="background:rgba(63,98,18,.06);border-radius:7px;padding:8px 11px">
+          <div style="font-size:12px;font-weight:700;color:var(--li4);margin-bottom:3px">時間都是擠出來的</div>
+          <div style="font-size:12px;color:var(--li);line-height:1.75">想滑手機時強迫自己打開閱讀APP；同時並行兩三本書，這本讀不下去就換一本，慢慢縮小滑手機的時間。</div>
+        </div>
+      </div>
+
+      <div class="card-am">
+        <h3>📖 《經營本質》：降維思考的會計書</h3>
+        <p>張明輝會計師著（三部曲第一部，另有《投資本質》《產業本質》）。</p>
+        <div style="background:rgba(146,64,14,.1);border-radius:7px;padding:9px 11px;margin:8px 0">
+          <div style="font-size:12px;font-weight:700;color:var(--am4);margin-bottom:3px">為何值得讀？</div>
+          <div style="font-size:12.5px;color:var(--am);line-height:1.75">多數會計師寫書因處理硬數字而顯得枯燥。張明輝懂得<strong>「降維思考」</strong>，專為初學者與經營者寫作，將生硬數字轉化為公司背後的<strong>經營故事與概念</strong>。</div>
+        </div>
+        <div style="font-size:12px;font-weight:700;color:var(--am4);margin-bottom:5px">財報三大表核心意義</div>
+        <div class="term-row">
+          <div class="tr-tag" style="background:var(--am4)">資產負債表</div>
+          <div class="tr-body">錢有多少是借來的/自有的；這些錢變成現金/存貨/應收/設備</div>
+        </div>
+        <div class="term-row">
+          <div class="tr-tag" style="background:var(--am4)">損益表</div>
+          <div class="tr-body">最直觀：公司近期是賺錢還是賠錢</div>
+        </div>
+        <div class="term-row">
+          <div class="tr-tag" style="background:var(--am4)">現金流量表</div>
+          <div class="tr-body">損益表賺錢時，「錢到底有沒有實際收回來」</div>
+        </div>
+      </div>
+
+      <div class="card-dark">
+        <h3>💡 名詞速查：折舊×黑字倒閉</h3>
+        <div style="display:flex;flex-direction:column;gap:7px;margin-top:4px">
+          <div style="background:rgba(255,255,255,.07);border-radius:7px;padding:9px 12px">
+            <div style="font-size:12px;font-weight:700;color:var(--li3);margin-bottom:4px">折舊 = 非現金費用</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.75">設備變舊會產生費用，但現金在<strong style="color:#fff">一開始買設備時就出去了</strong>，後續不涉及現金流出。損益表有費用，現金流量表不受影響。</div>
+          </div>
+          <div style="background:rgba(244,63,94,.12);border-radius:7px;padding:9px 12px;border:1px solid rgba(244,63,94,.25)">
+            <div style="font-size:12px;font-weight:700;color:#fca5a5;margin-bottom:4px">黑字倒閉（日本名詞）</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.75">「黑字」＝賺錢。公司損益表明明有賺錢，但錢卡在<strong style="color:#fff">別人的欠款或壓在存貨</strong>，導致現金沒收回來而破產。<br>→ 這就是現金流量表的重要性。</div>
+          </div>
+          <div style="background:rgba(255,255,255,.07);border-radius:7px;padding:9px 12px">
+            <div style="font-size:12px;font-weight:700;color:var(--am3);margin-bottom:4px">「願意」≠「應該」（納瓦爾）</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.75">用「自己願意」的節奏從第一頁開始閱讀；等知識複利建立後，自然懂得如何跳著讀精華。不要有壓力。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: 四大數據思維 + 管會公式 -->
+  <div class="section">
+    <div class="section-label">Part 2 · 四大數據思維 + 管理會計實戰 · 經營者視角×邊際貢獻×損益兩平×敏感性分析</div>
+    <div class="section-title">經營者必備的數字敏銳度：從追根究底到壓力測試，讓每一個數字都說話</div>
+    <div class="grid-2">
+      <div>
+        <div class="card-bl" style="margin-bottom:12px">
+          <h3>🔍 四大數據思維（經營者視角）</h3>
+          <div class="grid-4" style="gap:7px">
+            <div class="insight-card" style="background:var(--li2);border:1.5px solid var(--li3)">
+              <div class="ic-num" style="color:var(--li4)">01</div>
+              <div class="ic-title" style="color:var(--li)">確保財報真實</div>
+              <div class="ic-body" style="color:var(--li)">投資人預設財報為真；經營者要<strong>主動督促</strong>會計讓財報反映實際狀況</div>
+            </div>
+            <div class="insight-card" style="background:var(--am2);border:1.5px solid var(--am3)">
+              <div class="ic-num" style="color:var(--am4)">02</div>
+              <div class="ic-title" style="color:var(--am)">對數字「有感」</div>
+              <div class="ic-body" style="color:var(--am)">損益表賺錢→馬上查現金流；中租高負債→立刻思考為何能承受；賠錢→分辨是折舊還是現金流出</div>
+            </div>
+            <div class="insight-card" style="background:var(--vi2);border:1.5px solid var(--vi3)">
+              <div class="ic-num" style="color:var(--vi4)">03</div>
+              <div class="ic-title" style="color:var(--vi)">追根究底</div>
+              <div class="ic-body" style="color:var(--vi)">「第一季獲利不如去年是因為春節」→ 爛理由！每年都有春節。在<strong>關鍵議題</strong>上投入高質量關注</div>
+            </div>
+            <div class="insight-card" style="background:var(--em2);border:1.5px solid var(--em3)">
+              <div class="ic-num" style="color:var(--em4)">04</div>
+              <div class="ic-title" style="color:var(--em)">細節觀察</div>
+              <div class="ic-body" style="color:var(--em)">阿米巴管理法＋避免倖存者偏差。像人類學家「由下往上」觀察（汰漬老婦人用剪刀戳洞30年）</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-vi">
+          <h3>📐 邊際貢獻（Contribution Margin）</h3>
+          <div style="background:rgba(124,58,237,.1);border-radius:7px;padding:9px 12px;margin-bottom:8px">
+            <div style="font-size:12px;font-weight:700;color:var(--vi4);margin-bottom:3px">定義</div>
+            <div style="font-size:12.5px;color:var(--vi);line-height:1.75">多賣一單位產品，能夠多賺多少錢。<br>＝ 售價 − 進貨變動成本<br>只有隨「多賣一單位」而連動變化的成本才列入；固定工資不列入。</div>
+          </div>
+          <div style="background:rgba(124,58,237,.07);border-radius:7px;padding:8px 12px;font-size:12px;color:var(--vi)">
+            <strong>銷售配比策略：</strong>不是高毛利就拼命賣（市場可能吃不下量）。在有限資源下，抓出高毛利與低毛利（但跑量）商品的<strong>最佳配比</strong>才是關鍵。
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card-dark" style="margin-bottom:12px">
+          <h3>📊 損益兩平點 × 目標利潤：完整公式</h3>
+          <div class="formula">
+            <span class="var">損益兩平數量</span> = 固定成本 ÷ 單位邊際貢獻<br>
+            = 30,000 ÷ 500 = <span class="res">60 條</span>
+            <div class="note">固定成本3萬 ÷ 每條輪胎邊際貢獻500元 → 賣60條才能回本</div>
+          </div>
+          <div class="formula">
+            <span class="var">目標銷售量</span> = (固定成本 + 目標利潤) ÷ 單位邊際貢獻<br>
+            = (30,000 + 20,000) ÷ 500 = <span class="res">100 條</span>
+            <div class="note">前60條打平固定成本，後40條才是淨利來源</div>
+          </div>
+
+          <div style="margin-top:10px">
+            <div style="font-size:11px;color:rgba(255,255,255,.45);font-family:'DM Mono',monospace;margin-bottom:5px">100條的結構視覺化</div>
+            <div class="bep-bar">
+              <div class="bep-fixed" style="width:60%">前60條：打平固定成本</div>
+              <div class="bep-profit">後40條：淨利</div>
+            </div>
+          </div>
+          <div style="background:rgba(190,242,100,.1);border-radius:6px;padding:7px 11px;margin-top:7px;font-size:12px;color:var(--li3)">
+            ⭐ 經營者必須將損益兩平點控制在低點——損益兩平點越高，代表這門生意風險越高、潛力越低。
+          </div>
+        </div>
+
+        <div class="card-or">
+          <h3>🔬 敏感性分析（壓力測試）</h3>
+          <div style="font-size:12px;color:var(--or);margin-bottom:8px">若進貨成本從 800 元漲到 900 元，會發生什麼事？</div>
+          <table class="sens-table">
+            <thead><tr><th>情境</th><th>售價</th><th>進貨成本</th><th>邊際貢獻</th><th>損益兩平</th></tr></thead>
+            <tbody>
+              <tr><td>原本</td><td>1,300</td><td>800</td><td>500</td><td>60條</td></tr>
+              <tr class="hl"><td>成本漲價後</td><td>1,300</td><td>900</td><td>400</td><td><strong>75條</strong></td></tr>
+            </tbody>
+          </table>
+          <div style="background:rgba(154,52,18,.1);border-radius:7px;padding:8px 12px;margin-top:8px;font-size:12px;color:var(--or);line-height:1.75">
+            <strong>經營者必須馬上思考：</strong>從賣60條變成要賣75條才能回本，公司與客戶是否能夠承擔？<br>→ 藉此決定是否要調整售價，或與供應商重新談判。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">Cavin · 0725 · 知識複利×四大數據思維×邊際貢獻×損益兩平×敏感性分析</div>
+</div>
+
+</body>
+</html>
