@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>佳儀 0729 · 財報思維加減乘除×資產負債表×ROE杜邦×中租案例</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ro:#9f1239;--ro2:#fff1f2;--ro3:#fecdd3;--ro4:#e11d48;
+  --bl:#1e3a5f;--bl2:#eff6ff;--bl3:#93c5fd;--bl4:#2563eb;
+  --am:#92400e;--am2:#fffbeb;--am3:#fde68a;--am4:#d97706;
+  --te:#134e4a;--te2:#f0fdf4;--te3:#6ee7b7;--te4:#0d9488;
+  --vi:#4c1d95;--vi2:#f5f3ff;--vi3:#c4b5fd;--vi4:#7c3aed;
+  --sl:#1e293b;--sl2:#f8fafc;--sl3:#cbd5e1;--sl4:#475569;
+  --night:#06020a;--night2:#0c0414;
+  --bg:#fff1f2;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--night);line-height:1.7}
+
+/* HEADER */
+.page-header{background:linear-gradient(150deg,#06020a,#0c0414,#050209,#080010);padding:36px 50px 28px;position:relative;overflow:hidden;border-bottom:3px solid var(--ro4)}
+.ph-g1{position:absolute;top:-60px;right:-40px;width:260px;height:260px;background:radial-gradient(circle,rgba(225,29,72,.22),transparent 65%);pointer-events:none}
+.ph-g2{position:absolute;bottom:-30px;left:-20px;width:180px;height:180px;background:radial-gradient(circle,rgba(213,158,0,.12),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(253,164,175,.65);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(14px,2.1vw,21px);font-weight:900;color:#fff;line-height:1.28;margin-bottom:4px}
+.ph-title em{color:#fb7185;font-style:normal}
+.ph-title em2{color:var(--am3);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.38);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mc{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(225,29,72,.14);color:#fb7185;border:1px solid rgba(225,29,72,.3)}
+.mc-a{background:rgba(217,119,6,.13);color:var(--am3);border-color:rgba(217,119,6,.3)}
+.mc-b{background:rgba(37,99,235,.12);color:var(--bl3);border-color:rgba(37,99,235,.28)}
+.mc-t{background:rgba(13,148,136,.12);color:var(--te3);border-color:rgba(13,148,136,.28)}
+
+.container{max-width:1100px;margin:0 auto;padding:26px 26px}
+.section{margin-bottom:22px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--ro4);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--night);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--ro3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.grid-32{display:grid;grid-template-columns:1.2fr .8fr;gap:13px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-4,.grid-32{grid-template-columns:1fr}}
+
+.card-ro{background:var(--ro2);border:1.5px solid var(--ro3);border-radius:10px;padding:14px}
+.card-bl{background:var(--bl2);border:1.5px solid var(--bl3);border-radius:10px;padding:14px}
+.card-am{background:var(--am2);border:1.5px solid var(--am3);border-radius:10px;padding:14px}
+.card-te{background:var(--te2);border:1.5px solid var(--te3);border-radius:10px;padding:14px}
+.card-vi{background:var(--vi2);border:1.5px solid var(--vi3);border-radius:10px;padding:14px}
+.card-sl{background:var(--sl2);border:1.5px solid var(--sl3);border-radius:10px;padding:14px}
+.card-dark{background:var(--night);border:none;border-radius:10px;padding:14px}
+.card-ro h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--ro)}
+.card-bl h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--bl)}
+.card-am h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--am)}
+.card-te h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--te)}
+.card-vi h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--vi)}
+.card-sl h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--sl)}
+.card-dark h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:#fb7185}
+.card-ro p,.card-ro li{color:var(--ro);font-size:12.5px;line-height:1.85}
+.card-bl p,.card-bl li{color:var(--bl);font-size:12.5px;line-height:1.85}
+.card-am p,.card-am li{color:var(--am);font-size:12.5px;line-height:1.85}
+.card-te p,.card-te li{color:var(--te);font-size:12.5px;line-height:1.85}
+.card-vi p,.card-vi li{color:var(--vi);font-size:12.5px;line-height:1.85}
+.card-sl p,.card-sl li{color:var(--sl);font-size:12.5px;line-height:1.85}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8);font-size:12.5px;line-height:1.85}
+ul{padding-left:15px}
+ul li{margin-bottom:3px}
+
+/* 四大框架總覽 */
+.op-card{border-radius:8px;padding:11px 14px;position:relative;overflow:hidden}
+.op-sym{font-family:'Playfair Display',serif;font-size:38px;font-weight:900;line-height:1;opacity:.1;position:absolute;top:2px;right:10px}
+.op-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;font-weight:700;margin-bottom:4px}
+.op-title{font-size:13.5px;font-weight:700;margin-bottom:4px;position:relative;z-index:1}
+.op-body{font-size:12px;line-height:1.75;position:relative;z-index:1}
+
+/* 資金來源 badge */
+.src-row{display:flex;gap:7px;align-items:flex-start;padding:6px 0;border-bottom:1px dashed rgba(159,18,57,.12)}
+.src-row:last-child{border-bottom:none}
+.src-tag{font-family:'DM Mono',monospace;font-size:10px;border-radius:3px;padding:2px 8px;flex-shrink:0;white-space:nowrap;margin-top:2px}
+.src-body{font-size:12.5px;line-height:1.7}
+
+/* 循環箭頭 */
+.cycle{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin:8px 0;font-size:12px;font-weight:700}
+.cy-box{border-radius:5px;padding:4px 10px;font-size:11.5px;font-weight:700}
+.cy-arrow{color:rgba(159,18,57,.4);font-size:14px}
+
+/* ROE 杜邦乘法 */
+.roe-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:8px 0}
+.roe-item{border-radius:6px;padding:7px 11px;text-align:center;flex:1;min-width:80px}
+.roe-sym{font-size:18px;font-weight:900;color:rgba(255,255,255,.35)}
+.roe-title{font-size:11.5px;font-weight:700;color:#fff;margin-bottom:2px}
+.roe-sub{font-size:10.5px;color:rgba(255,255,255,.6)}
+
+/* 中租數字 */
+.stat-row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.stat-box{border-radius:7px;padding:8px 12px;flex:1;min-width:80px;text-align:center}
+.stat-num{font-family:'DM Mono',monospace;font-size:16px;font-weight:700;line-height:1.1}
+.stat-lbl{font-size:11px;margin-top:3px;opacity:.75}
+
+/* 思辨翻轉 */
+.flip-row{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.06)}
+.flip-row:last-child{border-bottom:none}
+.flip-old{font-size:12px;color:rgba(100,116,139,.7);text-decoration:line-through;flex:1}
+.flip-arrow{color:rgba(225,29,72,.5);font-size:14px;flex-shrink:0;padding-top:2px}
+.flip-new{font-size:12.5px;font-weight:700;flex:1.5;line-height:1.65}
+
+/* Quote */
+.quote{background:linear-gradient(135deg,var(--night),var(--night2));border-radius:10px;padding:14px 20px;position:relative;overflow:hidden;margin-bottom:20px}
+.qm{font-family:'Playfair Display',serif;font-size:72px;color:rgba(225,29,72,.07);position:absolute;top:-10px;left:8px;line-height:1}
+.qt{font-size:13px;color:rgba(255,255,255,.88);line-height:1.65;position:relative;z-index:1}
+.qt em{color:#fb7185;font-style:normal;font-weight:700}
+.qt em2{color:var(--am3);font-style:normal}
+.qs{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.35);margin-top:6px;position:relative;z-index:1}
+
+.page-footer{background:var(--night);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:#fb7185}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-g1"></div>
+  <div class="ph-g2"></div>
+  <div class="ph-eyebrow">0729 · 佳儀 課後複習 · 財報思維加減乘除×資產負債表×損益表×ROE杜邦×中租案例</div>
+  <div class="ph-title">用<em>加減乘除</em>讀懂三大財報——<br>財報不是數字堆砌，是<em2>公司商業模式與經營者心態的語言</em2></div>
+  <div class="ph-sub">資產負債表(加法) × 損益表(減法) × ROE杜邦分析(乘法) × 償債/盈利/營運能力(除法) × 中租控股案例 × 反向思辨</div>
+  <div class="ph-meta">
+    <span class="mc">2025.07.29</span>
+    <span class="mc">佳儀</span>
+    <span class="mc mc-a">財報思維框架</span>
+    <span class="mc mc-b">ROE×杜邦分析</span>
+    <span class="mc mc-t">中租案例拆解</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 金句 -->
+  <div class="quote">
+    <div class="qm">"</div>
+    <div class="qt">「財報是<em>公司說話的語言</em>，學會讀它，你就能聽懂公司在告訴你什麼——它是怎麼賺錢的、錢放在哪裡、借了多少槓桿、老闆的格局有多大。<br>看到商業新聞時，能有自己的判斷，而不是只能聽別人說；能跟別人展開<em2>深度的商業對談</em2>——這才是學財報真正的目的。」</div>
+    <div class="qs">Rock 老師 · 0729 佳儀 · 財報思維加減乘除框架</div>
+  </div>
+
+  <!-- SECTION 1: 四大框架總覽 + 資產負債表深度 -->
+  <div class="section">
+    <div class="section-label">Part 1 · 財報思維框架總覽 + 資產負債表深度 · 加法＝錢從哪來、放哪裡、怎麼滾</div>
+    <div class="section-title">四個數學符號，對應三張財報的核心邏輯：加減乘除就是財報的入場券</div>
+
+    <!-- 四大框架 -->
+    <div class="grid-4" style="margin-bottom:12px">
+      <div class="op-card" style="background:var(--ro2);border:1.5px solid var(--ro3)">
+        <div class="op-sym" style="color:var(--ro4)">＋</div>
+        <div class="op-label" style="color:var(--ro4)">加法</div>
+        <div class="op-title" style="color:var(--ro)">資產負債表</div>
+        <div class="op-body" style="color:var(--ro)">錢從哪裡來（負債＋股東權益）→ 等於公司擁有的資產。有多少是自己的、多少借來的、放在哪裡生財。</div>
+      </div>
+      <div class="op-card" style="background:var(--bl2);border:1.5px solid var(--bl3)">
+        <div class="op-sym" style="color:var(--bl4)">－</div>
+        <div class="op-label" style="color:var(--bl4)">減法</div>
+        <div class="op-title" style="color:var(--bl)">損益表</div>
+        <div class="op-body" style="color:var(--bl)">收入 − 成本 ＝ 毛利；毛利 − 費用 ＝ 營業淨利。毛利看競爭力，淨利看費用控管。</div>
+      </div>
+      <div class="op-card" style="background:var(--am2);border:1.5px solid var(--am3)">
+        <div class="op-sym" style="color:var(--am4)">✕</div>
+        <div class="op-label" style="color:var(--am4)">乘法</div>
+        <div class="op-title" style="color:var(--am)">ROE × 杜邦分析</div>
+        <div class="op-body" style="color:var(--am)">利潤率 × 周轉率 × 財務槓桿。三者相乘＝讓股東報酬極大化的倍增引擎。</div>
+      </div>
+      <div class="op-card" style="background:var(--te2);border:1.5px solid var(--te3)">
+        <div class="op-sym" style="color:var(--te4)">÷</div>
+        <div class="op-label" style="color:var(--te4)">除法</div>
+        <div class="op-title" style="color:var(--te)">企業體檢指標</div>
+        <div class="op-body" style="color:var(--te)">償債能力（銀行/廠商在乎）、盈利能力（股東在乎）、營運能力（總經理/董事長在乎）。</div>
+      </div>
+    </div>
+
+    <!-- 資產負債表深度 -->
+    <div class="grid-2">
+      <div class="card-ro">
+        <h3>＋ 資產負債表：兩大商業循環</h3>
+        <div style="background:rgba(225,29,72,.08);border-radius:7px;padding:9px 12px;margin-bottom:8px">
+          <div style="font-size:11.5px;font-weight:700;color:var(--ro4);margin-bottom:5px">① 增值循環（營業循環）</div>
+          <div class="cycle">
+            <div class="cy-box" style="background:rgba(225,29,72,.12);color:var(--ro)">現金</div>
+            <span class="cy-arrow">→</span>
+            <div class="cy-box" style="background:rgba(225,29,72,.12);color:var(--ro)">存貨</div>
+            <span class="cy-arrow">→</span>
+            <div class="cy-box" style="background:rgba(225,29,72,.12);color:var(--ro)">應收帳款</div>
+            <span class="cy-arrow">→</span>
+            <div class="cy-box" style="background:rgba(225,29,72,.2);color:var(--ro);font-weight:700">現金↑</div>
+          </div>
+          <div style="font-size:12px;color:var(--ro);line-height:1.7">好生意：錢繞一圈後變大；這個循環越快越值錢。</div>
+        </div>
+        <div style="background:rgba(225,29,72,.05);border-radius:7px;padding:9px 12px;margin-bottom:8px">
+          <div style="font-size:11.5px;font-weight:700;color:var(--ro4);margin-bottom:4px">② 貶值循環（固定資產耗損）</div>
+          <div style="font-size:12px;color:var(--ro);line-height:1.7">購買生財器具 → 隨時間與使用產生折舊 → 固定資產慢慢縮小。<br>→ 當<strong>增值 ＞ 貶值</strong>，老闆開始思考擴大經營、尋找資金。</div>
+        </div>
+        <div style="font-size:12px;font-weight:700;color:var(--ro4);margin-bottom:6px">負債（借錢）三大來源</div>
+        <div class="src-row" style="padding-top:0">
+          <div class="src-tag" style="background:var(--ro4);color:#fff">銀行</div>
+          <div class="src-body" style="color:var(--ro)">借款期間與利率成本<strong>明確可預期</strong>，可取得大筆資金，但需繳利息。</div>
+        </div>
+        <div class="src-row">
+          <div class="src-tag" style="background:var(--ro4);color:#fff">客戶</div>
+          <div class="src-body" style="color:var(--ro)"><strong>預收帳款</strong>：餐廳收訂金、群眾募資先付錢幾個月後才出貨。客戶出錢幫你備料，公司幾乎零負擔，是最好的資金來源。</div>
+        </div>
+        <div class="src-row">
+          <div class="src-tag" style="background:var(--ro4);color:#fff">廠商</div>
+          <div class="src-body" style="color:var(--ro)"><strong>應付帳款</strong>：貨到後90–120天才付款。拿到貨賣出現金，卻延遲付錢給供應商，把資金壓力轉嫁出去。</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div class="card-bl">
+          <h3>－ 損益表：毛利看底氣，淨利看管理</h3>
+          <div style="background:rgba(37,99,235,.1);border-radius:7px;padding:9px 12px;margin-bottom:8px">
+            <div style="font-family:'DM Mono',monospace;font-size:12px;font-weight:700;color:var(--bl4);margin-bottom:4px">收入 − 成本 = 毛利 → 毛利 − 費用 = 營業淨利</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">
+            <div style="background:rgba(37,99,235,.08);border-radius:7px;padding:8px 11px">
+              <div style="font-size:12px;font-weight:700;color:var(--bl4);margin-bottom:3px">毛利率 → 競爭力</div>
+              <div style="font-size:12px;color:var(--bl);line-height:1.7">產品的「底氣」與定價權。毛利越高，產品市場越強、越有議價空間。</div>
+            </div>
+            <div style="background:rgba(37,99,235,.06);border-radius:7px;padding:8px 11px">
+              <div style="font-size:12px;font-weight:700;color:var(--bl4);margin-bottom:3px">淨利率 → 管理效率</div>
+              <div style="font-size:12px;color:var(--bl);line-height:1.7">老闆<strong>「有錢就作怪」</strong>，費用失控亂花，毛利再大也救不了淨利。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-dark">
+          <h3>✕ ROE × 杜邦分析：三力相乘極大化</h3>
+          <div style="font-size:12px;color:rgba(255,255,255,.55);margin-bottom:9px">ROE（股東權益報酬率）＝ 拿老闆的錢能賺多少回報；巴菲特最重視的指標。</div>
+          <div class="roe-row">
+            <div class="roe-item" style="background:rgba(225,29,72,.2)">
+              <div class="roe-title">利潤率</div>
+              <div class="roe-sub">賣得有價值<br>靠能力賺</div>
+            </div>
+            <div class="roe-sym">✕</div>
+            <div class="roe-item" style="background:rgba(37,99,235,.2)">
+              <div class="roe-title">總資產周轉率</div>
+              <div class="roe-sub">賣得快（翻桌率）<br>靠速度賺</div>
+            </div>
+            <div class="roe-sym">✕</div>
+            <div class="roe-item" style="background:rgba(217,119,6,.2)">
+              <div class="roe-title">財務槓桿</div>
+              <div class="roe-sub">借錢擴大<br>靠風險賺</div>
+            </div>
+            <div class="roe-sym">=</div>
+            <div class="roe-item" style="background:rgba(190,242,100,.15);border:1px solid rgba(190,242,100,.3)">
+              <div class="roe-title" style="color:#bef264">ROE極大化</div>
+              <div class="roe-sub">三力相乘<br>指數成長</div>
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,.05);border-radius:6px;padding:7px 11px;font-size:12px;color:rgba(255,255,255,.7)">
+            💡 開槓桿就是「買房付頭期款」的邏輯——用少量自有資金操作大筆資產。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: 中租案例 + 思辨 + 生活案例 -->
+  <div class="section">
+    <div class="section-label">Part 2 · 中租控股案例 + 財報思辨 + 生活案例 · 理論落地</div>
+    <div class="section-title">理論要有案例才有感：中租把槓桿借好借滿、資產可能是毒藥、便當店投資回本故事</div>
+    <div class="grid-3">
+
+      <!-- 中租 -->
+      <div class="card-am">
+        <h3>🏦 中租控股：借低利放高利的極致槓桿</h3>
+        <div class="stat-row" style="margin-bottom:8px">
+          <div class="stat-box" style="background:rgba(146,64,14,.1)">
+            <div class="stat-num" style="color:var(--am4)">9,761億</div>
+            <div class="stat-lbl" style="color:var(--am)">總資產</div>
+          </div>
+          <div class="stat-box" style="background:rgba(146,64,14,.1)">
+            <div class="stat-num" style="color:var(--am4)">80%</div>
+            <div class="stat-lbl" style="color:var(--am)">負債比</div>
+          </div>
+          <div class="stat-box" style="background:rgba(146,64,14,.1)">
+            <div class="stat-num" style="color:var(--am4)">61%</div>
+            <div class="stat-lbl" style="color:var(--am)">應收帳款佔資產</div>
+          </div>
+        </div>
+        <div style="background:rgba(146,64,14,.1);border-radius:7px;padding:9px 12px;margin-bottom:7px">
+          <div style="font-size:12px;font-weight:700;color:var(--am4);margin-bottom:3px">商業模式核心</div>
+          <div style="font-size:12.5px;color:var(--am);line-height:1.75">80%收入來自<strong>利息</strong>。向銀行借款成本 &lt;3%，但放款給中小企業/信用較差的客群（如買車的8+9）收取<strong>10%以上利息</strong>。</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:7px">
+          <div style="background:rgba(146,64,14,.08);border-radius:6px;padding:7px 10px;text-align:center">
+            <div style="font-family:'DM Mono',monospace;font-size:14px;font-weight:700;color:var(--am4)">66%</div>
+            <div style="font-size:11px;color:var(--am)">帳面毛利率</div>
+          </div>
+          <div style="background:rgba(146,64,14,.08);border-radius:6px;padding:7px 10px;text-align:center">
+            <div style="font-family:'DM Mono',monospace;font-size:14px;font-weight:700;color:var(--am4)">～46%</div>
+            <div style="font-size:11px;color:var(--am)">扣除20%呆帳後實質毛利</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--am);line-height:1.75;background:rgba(146,64,14,.06);border-radius:6px;padding:8px 11px">
+          <strong>結論：</strong>3%進、10%出的利差太好賺 → 理性的經營者一定會「借好借滿」 → 因此造就80%高負債比。<strong>高負債是商業模式，不是壞事。</strong>
+        </div>
+      </div>
+
+      <!-- 思辨 -->
+      <div class="card-vi">
+        <h3>🔄 財報思辨：翻轉刻板印象</h3>
+        <div style="font-size:12px;color:var(--vi4);font-weight:700;margin-bottom:9px">學完財報要有「反向思考」——傳統認知往往只說了一半</div>
+        <div class="flip-row" style="padding-top:0">
+          <div style="flex:1">
+            <div class="flip-old">資產都是好的</div>
+            <div class="flip-arrow" style="display:inline">→</div>
+            <div class="flip-new" style="color:var(--vi)">應收帳款放太久 → <strong>信用損失</strong>；存貨擺太久 → <strong>跌價減損</strong>。資產放久了可能是毒藥。</div>
+          </div>
+        </div>
+        <div class="flip-row">
+          <div style="flex:1">
+            <div class="flip-old">負債都是壞的</div>
+            <div class="flip-arrow" style="display:inline">→</div>
+            <div class="flip-new" style="color:var(--vi)">合約負債（預收帳款）＝客戶先付錢資助企業成長；建商蓋預售屋就是此例。這種負債是<strong>未來營收的保證</strong>。</div>
+          </div>
+        </div>
+        <div style="background:rgba(124,58,237,.1);border-radius:7px;padding:9px 12px;margin-top:9px">
+          <div style="font-size:12px;font-weight:700;color:var(--vi4);margin-bottom:3px">三大目標（財報思維）</div>
+          <ul style="color:var(--vi);font-size:12.5px">
+            <li>透過數字看懂公司的<strong>商業模式</strong></li>
+            <li>能與他人進行深度的<strong>商業對談</strong></li>
+            <li>看到新聞有自己的<strong>獨立判斷</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 生活案例 + 書單 -->
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <div class="card-te">
+          <h3>🍱 生活案例：便當店「大無敵」投資故事</h3>
+          <div style="background:rgba(13,148,136,.12);border-radius:7px;padding:9px 12px;margin-bottom:7px">
+            <div style="font-size:11.5px;font-weight:700;color:var(--te4);margin-bottom:3px">投資條件</div>
+            <div style="font-size:12px;color:var(--te);line-height:1.75">學生的孩子（高中生）集資投資便當店，初始投入 <strong>10萬元</strong>。</div>
+          </div>
+          <div style="font-size:12px;color:var(--te);line-height:1.8;margin-bottom:7px">
+            ✅ 單價可接受（毛利有底氣）<br>
+            ✅ 只要請到人就能快速運轉（<strong>周轉率高</strong>）<br>
+            ✅ 短短<strong>4個月</strong>回本並開始拿分潤
+          </div>
+          <div style="background:rgba(13,148,136,.1);border-radius:6px;padding:7px 11px;font-size:12px;color:var(--te4)">
+            呼應杜邦乘法：有毛利（利潤率）× 賣得快（周轉率）= 快速回本的小生意邏輯。
+          </div>
+        </div>
+
+        <div class="card-sl">
+          <h3>📚 學習資源與課程設計</h3>
+          <div style="background:rgba(30,41,59,.07);border-radius:7px;padding:8px 11px;margin-bottom:6px">
+            <div style="font-size:12px;font-weight:700;color:var(--sl4);margin-bottom:3px">《大會計師教你看懂商業本質》張明輝</div>
+            <div style="font-size:12px;color:var(--sl);line-height:1.7">本節課主要備課素材；專業扎實，初期閱讀較生硬但值得投入。</div>
+          </div>
+          <div style="background:rgba(30,41,59,.05);border-radius:7px;padding:8px 11px;margin-bottom:6px">
+            <div style="font-size:12px;font-weight:700;color:var(--sl4);margin-bottom:3px">《底層邏輯 2》劉潤（「用加減乘除學財報」框架）</div>
+            <div style="font-size:12px;color:var(--sl);line-height:1.7">兩書融合：大會計師的深度 × 劉潤的易懂框架 → 本課程的特色。</div>
+          </div>
+          <div style="background:rgba(30,41,59,.05);border-radius:7px;padding:8px 11px">
+            <div style="font-size:12px;font-weight:700;color:var(--sl4);margin-bottom:3px">課前分享：《致富心態》《一如既往》</div>
+            <div style="font-size:12px;color:var(--sl);line-height:1.7">投資心態類書籍，配合近期台股大跌背景一起閱讀，效果更佳。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">佳儀 · 0729 · 財報思維加減乘除×資產負債表×損益表×ROE杜邦×中租案例×財報思辨</div>
+</div>
+
+</body>
+</html>
