@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cavin 0728 · 資產負債表×六大評估標準×企業真實身價</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --co:#7c2d12;--co2:#fff7ed;--co3:#fed7aa;--co4:#ea580c;
+  --te:#134e4a;--te2:#f0fdf4;--te3:#6ee7b7;--te4:#0d9488;
+  --bl:#1e3a5f;--bl2:#eff6ff;--bl3:#93c5fd;--bl4:#2563eb;
+  --vi:#4c1d95;--vi2:#f5f3ff;--vi3:#c4b5fd;--vi4:#7c3aed;
+  --am:#92400e;--am2:#fffbeb;--am3:#fde68a;--am4:#d97706;
+  --ro:#9f1239;--ro2:#fff1f2;--ro3:#fecdd3;--ro4:#f43f5e;
+  --sl:#1e293b;--sl2:#f8fafc;--sl3:#cbd5e1;--sl4:#475569;
+  --night:#04080f;--night2:#080f1a;
+  --white:#fff;--ink:#04080f;--bg:#fff7ed;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+/* HEADER */
+.page-header{background:linear-gradient(150deg,#020508,#060d18,#040910,#03060c);padding:36px 50px 28px;position:relative;overflow:hidden;border-bottom:3px solid var(--co4)}
+.ph-g1{position:absolute;top:-60px;right:-40px;width:260px;height:260px;background:radial-gradient(circle,rgba(234,88,12,.2),transparent 65%);pointer-events:none}
+.ph-g2{position:absolute;bottom:-30px;left:-20px;width:180px;height:180px;background:radial-gradient(circle,rgba(13,148,136,.14),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(253,186,116,.65);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(14px,2.1vw,21px);font-weight:900;color:#fff;line-height:1.28;margin-bottom:4px}
+.ph-title em{color:#fb923c;font-style:normal}
+.ph-title em2{color:var(--te3);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.38);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mc{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(234,88,12,.14);color:#fb923c;border:1px solid rgba(234,88,12,.3)}
+.mc-t{background:rgba(13,148,136,.12);color:var(--te3);border-color:rgba(13,148,136,.28)}
+.mc-b{background:rgba(37,99,235,.12);color:var(--bl3);border-color:rgba(37,99,235,.28)}
+.mc-v{background:rgba(124,58,237,.12);color:var(--vi3);border-color:rgba(124,58,237,.28)}
+
+.container{max-width:1100px;margin:0 auto;padding:26px 26px}
+.section{margin-bottom:22px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--co4);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--night);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--co3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-32{display:grid;grid-template-columns:1.15fr .85fr;gap:13px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-32{grid-template-columns:1fr}}
+
+.card-co{background:var(--co2);border:1.5px solid var(--co3);border-radius:10px;padding:14px}
+.card-te{background:var(--te2);border:1.5px solid var(--te3);border-radius:10px;padding:14px}
+.card-bl{background:var(--bl2);border:1.5px solid var(--bl3);border-radius:10px;padding:14px}
+.card-vi{background:var(--vi2);border:1.5px solid var(--vi3);border-radius:10px;padding:14px}
+.card-am{background:var(--am2);border:1.5px solid var(--am3);border-radius:10px;padding:14px}
+.card-ro{background:var(--ro2);border:1.5px solid var(--ro3);border-radius:10px;padding:14px}
+.card-sl{background:var(--sl2);border:1.5px solid var(--sl3);border-radius:10px;padding:14px}
+.card-dark{background:var(--night);border:none;border-radius:10px;padding:14px}
+.card-co h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--co)}
+.card-te h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--te)}
+.card-bl h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--bl)}
+.card-vi h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--vi)}
+.card-am h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--am)}
+.card-ro h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--ro)}
+.card-sl h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--sl)}
+.card-dark h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:#fb923c}
+.card-co p,.card-co li{color:var(--co);font-size:12.5px;line-height:1.85}
+.card-te p,.card-te li{color:var(--te);font-size:12.5px;line-height:1.85}
+.card-bl p,.card-bl li{color:var(--bl);font-size:12.5px;line-height:1.85}
+.card-vi p,.card-vi li{color:var(--vi);font-size:12.5px;line-height:1.85}
+.card-am p,.card-am li{color:var(--am);font-size:12.5px;line-height:1.85}
+.card-ro p,.card-ro li{color:var(--ro);font-size:12.5px;line-height:1.85}
+.card-sl p,.card-sl li{color:var(--sl);font-size:12.5px;line-height:1.85}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8);font-size:12.5px;line-height:1.85}
+ul{padding-left:15px}
+ul li{margin-bottom:3px}
+
+/* T字帳 */
+.t-account{display:grid;grid-template-columns:1fr 1fr;border:2px solid var(--co4);border-radius:8px;overflow:hidden;margin-top:8px}
+.t-left{background:rgba(234,88,12,.08);padding:11px 13px;border-right:2px solid var(--co4)}
+.t-right{background:rgba(13,148,136,.07);padding:11px 13px}
+.t-head{font-family:'DM Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.08em;margin-bottom:7px}
+.t-left .t-head{color:var(--co4)}
+.t-right .t-head{color:var(--te4)}
+.t-item{display:flex;gap:5px;align-items:flex-start;padding:3px 0;border-bottom:1px dashed rgba(0,0,0,.08)}
+.t-item:last-child{border-bottom:none}
+.t-badge{font-family:'DM Mono',monospace;font-size:9.5px;border-radius:3px;padding:1.5px 6px;flex-shrink:0;margin-top:2px}
+.t-body{font-size:12px;color:#374151;line-height:1.65}
+
+/* 六大標準 */
+.std-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+@media(max-width:720px){.std-grid{grid-template-columns:1fr 1fr}}
+.std-card{border-radius:8px;padding:11px 13px;position:relative;overflow:hidden}
+.std-num{font-family:'Playfair Display',serif;font-size:30px;font-weight:900;line-height:1;opacity:.12;position:absolute;top:4px;right:8px}
+.std-tag{font-family:'DM Mono',monospace;font-size:9px;background:rgba(255,255,255,.6);border-radius:3px;padding:2px 7px;display:inline-block;margin-bottom:5px;letter-spacing:.08em;font-weight:700}
+.std-title{font-size:13px;font-weight:700;margin-bottom:4px;position:relative;z-index:1}
+.std-body{font-size:11.5px;line-height:1.75;position:relative;z-index:1}
+.std-case{font-family:'DM Mono',monospace;font-size:10.5px;margin-top:5px;padding:4px 8px;border-radius:4px;background:rgba(255,255,255,.45)}
+
+/* 股東權益科目表 */
+.eq-row{display:flex;gap:8px;align-items:flex-start;padding:7px 0;border-bottom:1px solid rgba(124,58,237,.12)}
+.eq-row:last-child{border-bottom:none}
+.eq-tag{font-family:'DM Mono',monospace;font-size:10px;border-radius:3px;padding:2px 8px;flex-shrink:0;white-space:nowrap;margin-top:2px}
+.eq-body{font-size:12.5px;color:var(--vi);line-height:1.75}
+
+/* Quote */
+.quote{background:linear-gradient(135deg,var(--night),var(--night2));border-radius:10px;padding:14px 20px;position:relative;overflow:hidden;margin-bottom:20px}
+.qm{font-family:'Playfair Display',serif;font-size:72px;color:rgba(234,88,12,.08);position:absolute;top:-10px;left:8px;line-height:1}
+.qt{font-size:13px;color:rgba(255,255,255,.88);line-height:1.65;position:relative;z-index:1}
+.qt em{color:#fb923c;font-style:normal;font-weight:700}
+.qt em2{color:var(--te3);font-style:normal}
+.qs{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.35);margin-top:6px;position:relative;z-index:1}
+
+/* 葡萄王比較 */
+.compare-bar{display:flex;height:30px;border-radius:6px;overflow:hidden;margin:6px 0;font-size:11.5px;font-weight:700}
+.cb-fill{display:flex;align-items:center;justify-content:center;color:#fff}
+.cb-empty{display:flex;align-items:center;justify-content:flex-start;padding-left:10px;font-size:11px;color:rgba(255,255,255,.5)}
+
+.warn-box{background:rgba(244,63,94,.1);border:1.5px solid rgba(244,63,94,.3);border-radius:8px;padding:10px 13px}
+
+.page-footer{background:var(--night);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:#fb923c}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-g1"></div>
+  <div class="ph-g2"></div>
+  <div class="ph-eyebrow">0728 · Cavin 課後複習 · 資產負債表×六大評估標準×合併財報×企業真實身價</div>
+  <div class="ph-title">評估企業真實身價：<em>不只看獲利，更要看底氣</em>——<br>資產負債表是<em2>公司錢的來源、去向與經營者心態的照妖鏡</em2></div>
+  <div class="ph-sub">T字帳架構 × 資產/負債/股東權益 × 六大評估標準 × 龍巖/全家/葡萄王案例 × 合併vs個體財報 × 警示指標</div>
+  <div class="ph-meta">
+    <span class="mc">2025.07.28</span>
+    <span class="mc">Cavin</span>
+    <span class="mc mc-t">資產負債表核心</span>
+    <span class="mc mc-b">六大企業評估標準</span>
+    <span class="mc mc-v">合併財報vs個體財報</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 金句 -->
+  <div class="quote">
+    <div class="qm">"</div>
+    <div class="qt">「損益表只能看到<em>近期的勝負</em>；資產負債表看的是<em>多年累積的底氣與財務佈局</em>——錢有多少是自己的、多少是借來的、借來的錢放在哪裡生財。<br>它甚至能<em2>看透經營者的心態與公司文化</em2>：買設備、買股票、還是讓現金閒置——每一個選擇都有跡可循。」</div>
+    <div class="qs">Rock 老師 · 0728 Cavin · 資產負債表×六大評估標準 · 引用《大會計師教你看懂商業本質》張明輝</div>
+  </div>
+
+  <!-- SECTION 1: T字帳 + 三大科目 -->
+  <div class="section">
+    <div class="section-label">Part 1 · T字帳架構 + 三大科目 · 資產＝負債＋股東權益</div>
+    <div class="section-title">財報的骨架：從個人理財到企業財報，左邊是「錢放哪」，右邊是「錢從哪來」</div>
+    <div class="grid-3">
+      <!-- T字帳 -->
+      <div class="card-dark" style="grid-column:span 1">
+        <h3>⚖️ 會計T字帳基本架構</h3>
+        <div style="font-size:12px;color:rgba(255,255,255,.6);margin-bottom:9px">個人理財對應：財產＝自己的＋借來的</div>
+        <div class="t-account">
+          <div class="t-left">
+            <div class="t-head">左邊 ▸ 資產（Assets）</div>
+            <div style="font-size:11.5px;color:rgba(255,255,255,.65);line-height:1.7">「錢放在哪裡」<br>流動資產 + 非流動資產</div>
+          </div>
+          <div class="t-right">
+            <div class="t-head">右邊 ▸ 資金來源</div>
+            <div style="font-size:11.5px;color:rgba(255,255,255,.6);line-height:1.7">負債（Liabilities）<br>＋<br>股東權益（Equity）</div>
+          </div>
+        </div>
+        <div style="background:rgba(234,88,12,.12);border-radius:6px;padding:7px 11px;margin-top:9px;font-size:12px;color:#fb923c">
+          恆等式：<strong>資產 ＝ 負債 ＋ 股東權益</strong>（台積電財報也遵循此架構）
+        </div>
+      </div>
+
+      <!-- 資產 + 負債 -->
+      <div class="card-co">
+        <h3>📦 資產 (Assets)</h3>
+        <div style="font-size:11.5px;color:var(--co4);font-weight:700;margin-bottom:6px">衡量標準：變成現金的速度（以一年或一個營業週期為界）</div>
+        <div class="t-item" style="padding-top:0">
+          <span class="t-badge" style="background:var(--co4);color:#fff">流動資產</span>
+          <div class="t-body">一年內可變現的資產：現金、股票投資、<strong>應收帳款</strong>等</div>
+        </div>
+        <div class="t-item">
+          <span class="t-badge" style="background:rgba(124,58,18,.3);color:var(--co)">非流動</span>
+          <div class="t-body">不急於變現或用來生財：房地產、生產設備等</div>
+        </div>
+        <div style="border-top:1.5px dashed var(--co3);margin-top:9px;padding-top:8px">
+          <div style="font-size:11.5px;font-weight:700;color:var(--co4);margin-bottom:5px">負債 (Liabilities)：欠款三大對象</div>
+          <div class="t-item" style="padding-top:0">
+            <span class="t-badge" style="background:var(--co4);color:#fff">銀行</span>
+            <div class="t-body">各類借款、信用貸款</div>
+          </div>
+          <div class="t-item">
+            <span class="t-badge" style="background:var(--co4);color:#fff">廠商</span>
+            <div class="t-body">應付帳款（對合作供應商/Vender 的欠款）</div>
+          </div>
+          <div class="t-item">
+            <span class="t-badge" style="background:var(--co4);color:#fff">客戶</span>
+            <div class="t-body">預收款項（客戶已付款但服務/商品尚未交付）</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 股東權益 -->
+      <div class="card-vi">
+        <h3>🏦 股東權益 (Equity)：三大組成</h3>
+        <div class="eq-row" style="padding-top:0">
+          <div class="eq-tag" style="background:var(--vi4);color:#fff">股本</div>
+          <div class="eq-body">原始投入的股份；台灣通常面額<strong>一股10元</strong>。股本大小代表公司規模基礎。</div>
+        </div>
+        <div class="eq-row">
+          <div class="eq-tag" style="background:var(--vi4);color:#fff">資本公積</div>
+          <div class="eq-body">A輪→B輪募資，新投資人以<strong>高於原價（溢價）</strong>認購。溢價部分不能算獲利（否則公司可以隨便發行股票造假），必須放入資本公積。<br><span style="font-size:11.5px;opacity:.8">例：面額10元，B輪以30元認購 → 溢價20元入資本公積</span></div>
+        </div>
+        <div class="eq-row">
+          <div class="eq-tag" style="background:var(--vi4);color:#fff">保留盈餘</div>
+          <div class="eq-body">公司從成立至今<strong>累積的淨利總和</strong>（Net Income）。股東會決議<strong>發股利</strong>時，就從這裡扣除發放。→ 保留盈餘越高，公司越有底氣。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: 六大評估標準 -->
+  <div class="section">
+    <div class="section-label">Part 2 · 六大企業評估標準 · 《大會計師教你看懂商業本質》張明輝 · 含實際企業案例</div>
+    <div class="section-title">大會計師的六把評估尺：從規模到風險偏好，讀懂財報背後的企業性格</div>
+    <div class="std-grid">
+      <div class="std-card" style="background:rgba(234,88,12,.08);border:1.5px solid var(--co3)">
+        <div class="std-num" style="color:var(--co4)">01</div>
+        <div class="std-tag" style="color:var(--co4)">資產總額</div>
+        <div class="std-title" style="color:var(--co)">企業影響力與「底氣」</div>
+        <div class="std-body" style="color:var(--co)">資產總額越大，代表「家大業大」。台灣前幾大資產多為金融業（富邦、國泰、中信）；<strong>台積電只排第七、八名</strong>，因金融業須吸收大量存款。</div>
+      </div>
+      <div class="std-card" style="background:rgba(13,148,136,.08);border:1.5px solid var(--te3)">
+        <div class="std-num" style="color:var(--te4)">02</div>
+        <div class="std-tag" style="color:var(--te4)">資產比重</div>
+        <div class="std-title" style="color:var(--te)">產業特性與競爭力</div>
+        <div class="std-body" style="color:var(--te)">各產業最重的資產項目不同。看佔比最高的資產，即可窺見商業模式：大聯大（存貨）、鴻海（設備）、全家（租用店面）、中信金（放款）。</div>
+      </div>
+      <div class="std-card" style="background:rgba(37,99,235,.07);border:1.5px solid var(--bl3)">
+        <div class="std-num" style="color:var(--bl4)">03</div>
+        <div class="std-tag" style="color:var(--bl4)">資產配置</div>
+        <div class="std-title" style="color:var(--bl)">經營理念與心態</div>
+        <div class="std-body" style="color:var(--bl)">
+          <strong>龍巖（殯葬）案例：</strong>預售靈骨塔位收大量預付款，多餘資金拿去買台積電、外幣ETF、債券ETF——市場戲稱「小型ETF」。<br>
+          <div class="std-case" style="color:var(--bl4)">⚠️ 警惕「髒東西」：長期掛著的預付款項、待出售非流動資產，可能是財報注水的訊號。</div>
+        </div>
+      </div>
+      <div class="std-card" style="background:rgba(124,58,237,.07);border:1.5px solid var(--vi3)">
+        <div class="std-num" style="color:var(--vi4)">04</div>
+        <div class="std-tag" style="color:var(--vi4)">資產周轉率</div>
+        <div class="std-title" style="color:var(--vi)">賺錢效能（同業比）</div>
+        <div class="std-body" style="color:var(--vi)">周轉率越高＝同樣的資產產出更多業績。<strong>只能同業比！</strong><br>大聯大（通路業）2.57 vs 中信金（金融業）0.02——數字懸殊是產業特性，不代表中信金表現差。</div>
+      </div>
+      <div class="std-card" style="background:rgba(146,64,14,.07);border:1.5px solid var(--am3)">
+        <div class="std-num" style="color:var(--am4)">05</div>
+        <div class="std-tag" style="color:var(--am4)">流動比率</div>
+        <div class="std-title" style="color:var(--am)">短期償債能力</div>
+        <div class="std-body" style="color:var(--am)">
+          流動比率 ＝ 流動資產 ÷ 流動負債<br>
+          衡量公司是否會「<strong>嘎三點半</strong>」——每天趕在銀行關門前軋票存錢、手頭緊到付不出貨款。
+          <div class="std-case" style="color:var(--am4)">比率過低 → 短期違約風險升高</div>
+        </div>
+      </div>
+      <div class="std-card" style="background:rgba(159,18,57,.07);border:1.5px solid var(--ro3)">
+        <div class="std-num" style="color:var(--ro4)">06</div>
+        <div class="std-tag" style="color:var(--ro4)">負債比</div>
+        <div class="std-title" style="color:var(--ro)">風險偏好與財務強度</div>
+        <div class="std-body" style="color:var(--ro)">
+          <strong>銀行/壽險/租賃業（如中租）</strong>負債比80-90%以上是常態，商業模式本就是「借錢生錢」。<br>
+          <strong>全家特例：</strong>高負債非借款，而是IFRS要求將「未來租金」認列為使用權資產＋負債，彰顯實體通路的龐大規模。
+          <div class="std-case" style="color:var(--ro4)">負債比越高 → 市場劇烈波動時多殺多風險越大</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: 合併vs個體 + 警示指標 + 書單 -->
+  <div class="section">
+    <div class="section-label">Part 3 · 合併vs個體財報 + 警示指標 + 書單 + 知識複利</div>
+    <div class="section-title">財報進階：「合併超比一比」揪出真實獲利來源；一個重訊訊號能比財報更快預警</div>
+    <div class="grid-32">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div class="card-te">
+          <h3>🔎 合併財報 vs 個體財報：葡萄王(1707)案例</h3>
+          <div style="font-size:12px;color:var(--te4);font-weight:700;margin-bottom:7px">核心問題：業績是母公司自己賺的，還是靠子公司撐起來的？</div>
+          <div style="background:rgba(13,148,136,.12);border-radius:7px;padding:9px 12px;margin-bottom:8px">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+              <div style="font-size:12px;font-weight:700;color:var(--te4)">合併營收（全家人業績）</div>
+              <div style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--te)">~100億</div>
+            </div>
+            <div class="compare-bar">
+              <div class="cb-fill" style="background:var(--te4);width:28%">母公司 28億</div>
+              <div class="cb-fill" style="background:var(--te);width:72%;opacity:.9">葡眾（子公司）72億</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:5px">
+              <div style="font-size:12px;font-weight:700;color:var(--te4)">個體營收（母公司自己的）</div>
+              <div style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--te)">~28億</div>
+            </div>
+          </div>
+          <div style="font-size:12px;color:var(--te);line-height:1.75">⚠️ 高達72億業績由直銷子公司「<strong>葡眾</strong>」貢獻——若只看合併財報，很容易誤解母公司本業的競爭力。<br>老師補充：長年購買葡眾益生菌，不知不覺就達到直銷體系「<strong>經理</strong>」位階。</div>
+        </div>
+
+        <div class="card-bl">
+          <h3>📊 財務分析的核心精神：一定要有比較基準</h3>
+          <p>孤立的財務數字沒有意義。要有意義，必須透過「<strong>比較</strong>」才能得出客觀結論：</p>
+          <ul>
+            <li>與去年同期比（YoY）</li>
+            <li>與同業比（Peer Comparison）</li>
+            <li>與自己設定的目標比</li>
+          </ul>
+          <div style="background:rgba(37,99,235,.1);border-radius:6px;padding:7px 11px;margin-top:8px;font-size:12px;color:var(--bl4)">
+            就像評估一個人的成就感，必須知道「跟誰比、比什麼」——成功與失敗都是相對的。
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div class="card-dark">
+          <h3>🚨 高風險警示：會計主管異動</h3>
+          <div class="warn-box" style="background:rgba(244,63,94,.12);border-color:rgba(244,63,94,.35);margin-bottom:9px">
+            <div style="font-size:12px;font-weight:700;color:#fca5a5;margin-bottom:4px">重訊：財務/會計主管更換</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.8);line-height:1.75">名義通常是「正常交接」，實際上往往暗藏問題。<strong style="color:#fff">財務主管最清楚公司帳務內情</strong>——連最懂的人都逃了，往往代表公司體質或業績出了大問題。</div>
+          </div>
+          <div style="font-size:12px;color:rgba(255,255,255,.6);line-height:1.75">→ 投資人收到這類重訊，應<strong style="color:#fb923c">立即提高警覺</strong>，不能以「正常人事異動」一筆帶過。</div>
+        </div>
+
+        <div class="card-am">
+          <h3>📚 老師推薦書單</h3>
+          <div style="background:rgba(146,64,14,.1);border-radius:7px;padding:9px 11px;margin-bottom:7px">
+            <div style="font-size:12px;font-weight:700;color:var(--am4)">《大會計師教你看懂商業本質》</div>
+            <div style="font-size:12px;color:var(--am);margin-top:3px;line-height:1.7">張明輝會計師著（三部曲之一，另有《財報》《投資本質》）。初期閱讀較生硬，但內容扎實；是老師<strong>本節課備課核心素材</strong>。</div>
+          </div>
+          <div style="background:rgba(146,64,14,.07);border-radius:7px;padding:9px 11px">
+            <div style="font-size:12px;font-weight:700;color:var(--am4)">《底層邏輯 2》劉潤</div>
+            <div style="font-size:12px;color:var(--am);margin-top:3px;line-height:1.7">「用加減乘除學財報」易懂框架。老師將兩書融合，打造出兼具專業性與生動性的財務課。</div>
+          </div>
+        </div>
+
+        <div class="card-sl">
+          <h3>💡 知識複利：老師的親身示範</h3>
+          <p>2024年初開始自學財報、教授至今兩年多，<strong>完全靠閱讀這類專業書籍</strong>，並將知識應用於克服公司挑戰，感受到極大的知識複利與心智提升。</p>
+          <div style="background:rgba(30,41,59,.08);border-radius:6px;padding:7px 11px;margin-top:8px;font-size:12px;color:var(--sl4)">
+            成功鼓勵三位學生去就讀 <strong>EMBA</strong>，知識複利已超出財務本身，延伸至人生規劃。
+          </div>
+          <div style="background:rgba(13,148,136,.08);border-radius:6px;padding:7px 11px;margin-top:6px;font-size:12px;color:var(--te)">
+            📌 下週課程預告：老師飛往日本參加 <strong>Hyrox 體能比賽</strong>，週日返台。週二與週六課程暫停一次。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">Cavin · 0728 · 資產負債表×六大評估標準×合併財報vs個體財報×企業真實身價</div>
+</div>
+
+</body>
+</html>
