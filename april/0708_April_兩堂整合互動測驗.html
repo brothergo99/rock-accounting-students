@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>現金流照妖鏡 × 診所財報架構 — 互動複習測驗 · April</title>
+<style>
+  :root{
+    --bg:#0f1115;
+    --card:#171a21;
+    --card2:#1e222b;
+    --accent:#ff8a3d;
+    --accent2:#4fd1c5;
+    --purple:#a78bfa;
+    --good:#4ade80;
+    --bad:#f87171;
+    --text:#e8eaed;
+    --sub:#9aa1ab;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:radial-gradient(circle at 20% -10%, #26314a 0%, var(--bg) 45%);
+    color:var(--text);
+    padding:24px 16px 60px;
+  }
+  .wrap{max-width:800px;margin:0 auto;}
+  header{margin-bottom:22px;}
+  .tag{
+    display:inline-block;font-size:12px;letter-spacing:1px;color:var(--accent);
+    background:rgba(255,138,61,.12);border:1px solid rgba(255,138,61,.35);
+    padding:4px 10px;border-radius:999px;margin-bottom:12px;
+  }
+  h1{font-size:25px;line-height:1.45;margin:0 0 8px;}
+  .desc{color:var(--sub);font-size:14px;margin:0;line-height:1.75;}
+  .meta{color:var(--sub);font-size:12px;margin-top:10px;line-height:1.7;}
+
+  .progress-bar{height:6px;background:#262b35;border-radius:999px;overflow:hidden;margin:20px 0 10px;}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%;transition:width .4s ease;}
+  .progress-text{text-align:right;font-size:11.5px;color:var(--sub);margin-bottom:22px;}
+
+  .card{background:var(--card);border:1px solid #262b35;border-radius:16px;padding:22px 20px;margin-bottom:18px;display:none;}
+  .card.active{display:block;}
+  .topline{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+  .qnum{font-size:12px;color:var(--sub);font-weight:700;letter-spacing:1px;}
+  .badges{display:flex;gap:6px;}
+  .sec{font-size:11px;padding:2px 9px;border-radius:999px;font-weight:600;}
+  .sec.s0618{color:var(--accent2);border:1px solid rgba(79,209,197,.4);background:rgba(79,209,197,.1);}
+  .sec.s0701{color:var(--accent);border:1px solid rgba(255,138,61,.4);background:rgba(255,138,61,.1);}
+  .sec.sMix{color:var(--purple);border:1px solid rgba(167,139,250,.4);background:rgba(167,139,250,.1);}
+  .level{font-size:11px;color:var(--sub);border:1px solid #333a46;padding:2px 9px;border-radius:999px;}
+
+  .qtext{font-size:17px;line-height:1.65;margin:0 0 14px;font-weight:600;}
+  .databox{
+    background:#12151b;border:1px solid #262b35;border-radius:10px;
+    padding:12px 14px;margin-bottom:16px;font-size:13px;line-height:1.95;color:#c3c9d1;
+    font-variant-numeric:tabular-nums;
+  }
+  .databox b{color:var(--accent);}
+
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt{
+    text-align:left;background:var(--card2);border:1px solid #2c313c;color:var(--text);
+    padding:13px 16px;border-radius:10px;font-size:14.5px;cursor:pointer;transition:all .15s ease;line-height:1.55;
+  }
+  .opt:hover{border-color:var(--accent2);}
+  .opt.correct{background:rgba(74,222,128,.14);border-color:var(--good);color:#c6f6d5;}
+  .opt.wrong{background:rgba(248,113,113,.14);border-color:var(--bad);color:#fecaca;}
+  .opt.disabled{cursor:default;pointer-events:none;opacity:.78;}
+
+  .explain{
+    margin-top:16px;padding:14px 16px;background:#12151b;border-left:3px solid var(--accent2);
+    border-radius:8px;font-size:13.5px;line-height:1.9;color:#d4d8dd;display:none;
+  }
+  .explain.show{display:block;}
+  .explain .key{color:var(--accent);font-weight:700;}
+
+  .nextBtn{
+    margin-top:18px;display:none;background:var(--accent);color:#1a1000;font-weight:700;
+    border:none;padding:11px 22px;border-radius:999px;font-size:14px;cursor:pointer;
+  }
+  .nextBtn.show{display:inline-block;}
+
+  .result{display:none;background:var(--card);border:1px solid #262b35;border-radius:16px;padding:34px 22px;}
+  .result.show{display:block;}
+  .result .center{text-align:center;}
+  .result .score{font-size:46px;font-weight:800;margin:6px 0;color:var(--accent);}
+  .result .label{color:var(--sub);font-size:13px;}
+  .secscore{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:22px 0 4px;}
+  .secscore div{
+    background:#12151b;border:1px solid #262b35;border-radius:10px;
+    padding:10px 14px;font-size:12.5px;color:var(--sub);min-width:120px;text-align:center;
+  }
+  .secscore div b{display:block;font-size:19px;color:var(--text);margin-top:4px;font-variant-numeric:tabular-nums;}
+  .result .msg{margin:22px auto 0;max-width:560px;font-size:14.5px;line-height:1.9;color:#d4d8dd;text-align:left;}
+  .retryBtn{margin:24px auto 0;display:block;background:transparent;border:1px solid var(--accent2);color:var(--accent2);padding:9px 22px;border-radius:999px;cursor:pointer;font-size:13.5px;}
+
+  .quicktable{margin-top:40px;}
+  .quicktable h2{font-size:15px;color:var(--accent2);margin-bottom:12px;}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;background:var(--card);border-radius:12px;overflow:hidden;}
+  th,td{padding:9px 10px;border-bottom:1px solid #262b35;text-align:left;vertical-align:top;}
+  th{background:#1e222b;color:var(--sub);font-weight:600;}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;}
+
+  footer{margin-top:40px;text-align:center;color:#5a606b;font-size:11.5px;line-height:1.9;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="tag">財報分析 · 兩堂課整合測驗</span>
+    <h1>面子 vs 裡子<br>現金流照妖鏡 × 診所財報架構</h1>
+    <p class="desc">共 20 題單選，涵蓋 0618（現金流照妖鏡：新星網 × 摩斯 × 慧康）與 0701（群創折舊 × 診所財務架構 × 直接法），最後 3 題為跨堂整合。答完顯示分區得分與錯題複習清單。</p>
+    <div class="meta">Rock 會計家教 · 蕭啟漢｜學生：April</div>
+  </header>
+
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-text" id="progressText">0 / 20</div>
+
+  <div id="quizArea"></div>
+
+  <div class="result" id="resultBox">
+    <div class="center">
+      <div class="label">測驗完成</div>
+      <div class="score" id="scoreText">0 / 20</div>
+      <div class="label" id="scoreSub"></div>
+    </div>
+    <div class="secscore" id="secScore"></div>
+    <div class="msg" id="resultMsg"></div>
+    <button class="retryBtn" onclick="restartQuiz()">重新測驗</button>
+  </div>
+
+  <div class="quicktable">
+    <h2>📌 四大案例對照表（測驗後複習用）</h2>
+    <table>
+      <tr><th>案例</th><th>帳面表現</th><th>營業現金流</th><th>真正原因</th></tr>
+      <tr><td>新星網 113年</td><td>稅前淨利 +1.2 億</td><td>−8,500 萬</td><td>🔴 備貨、應收未收、提早付款三重失血</td></tr>
+      <tr><td>新星網 114年</td><td>稅前淨利 +1.3 億</td><td>+9,200 萬</td><td>🟢 應付帳款 +1.39 億，借供應商的錢周轉</td></tr>
+      <tr><td>摩斯 1259（114年）</td><td>營業損失 −1,300 萬</td><td>+7 億多</td><td>🟢 主動選擇：2 年加速折舊，避稅＋壓股利</td></tr>
+      <tr><td>群創 3481（112年）</td><td>淨損 −163 億</td><td>+95 億</td><td>🟢 結構性：約 300 億折舊，非現金流出</td></tr>
+      <tr><td>慧康生活</td><td>EPS −15 → −2.5 元</td><td>現金占資產 81%</td><td>🟡 資本操作副產品，本業實質成長</td></tr>
+    </table>
+  </div>
+
+  <div class="quicktable">
+    <h2>🏥 診所三大資產與折舊年限速查</h2>
+    <table>
+      <tr><th>項目</th><th>會計科目</th><th>年限設定原則</th></tr>
+      <tr><td>裝潢與改良</td><td>租賃改良物</td><td>租約（20年）或重裝週期（5年），取較短者</td></tr>
+      <tr><td>醫療設備（超音波機等）</td><td>機器與設備</td><td>稅局最低 7 年；內部抓 10 年攤提合法合理</td></tr>
+      <tr><td>長期租約</td><td>使用權資產</td><td>折現後認列為資產；未上市診所內部可簡化為當期費用</td></tr>
+      <tr><td colspan="3">📖 設定折舊前先查：國稅局「固定資產耐用年數表」</td></tr>
+    </table>
+  </div>
+
+  <footer>
+    April · 財報分析兩堂整合測驗<br>
+    教材來源：0618 現金流量表：獲利的照妖鏡｜0701 診所財報架構 × 群創折舊案例 × 現金流直接法
+  </footer>
+</div>
+
+<script>
+const questions = [
+  /* ===== 0618 現金流照妖鏡 ===== */
+  {
+    sec:"0618", secCls:"s0618", level:"框架",
+    q:"「現金流大水池」模型中，三大水龍頭裡最能決定企業體質的是哪一個？",
+    data:"營業活動｜投資活動｜籌資活動",
+    options:[
+      "籌資活動，因為能借到錢代表銀行信任這家公司",
+      "營業活動，因為它是本業增值循環扣除貶值循環後真實流入的現金",
+      "投資活動，因為投資越多代表公司越積極成長",
+      "三者同等重要，不應有主次之分"
+    ],
+    correct:1,
+    explain:"<span class='key'>營業活動現金流是本業的生命線</span>——它代表增值循環（現金→存貨→應收→現金）扣掉貶值循環後真正流回來的錢。投資活動是「水池滿了往下一個成長高峰投」，籌資活動是與股東銀行的往來。<span class='key'>只有營業活動能證明公司自己會賺錢</span>，另外兩條龍頭都是外部借力。"
+  },
+  {
+    sec:"0618", secCls:"s0618", level:"警訊",
+    q:"新星網 113 年帳面稅前淨利 +1.2 億，營業現金流卻是 −8,500 萬。三項同時失血指的是什麼？",
+    data:"營收約 <b>57 億</b>｜毛利率僅 <b>10%</b><br>資產結構：存貨 <b>32%</b> ＋ 應收帳款 <b>29%</b>",
+    options:[
+      "存貨積壓、應收帳款未收回、提早支付貨款",
+      "毛利率下滑、營收衰退、費用暴增",
+      "存貨減損、匯兌損失、利息支出增加",
+      "應付帳款增加、預收款減少、股利發放"
+    ],
+    correct:0,
+    explain:"三項同時失血：<span class='key'>① 迎戰雙 11 砸錢備貨（存貨↑）② 應收帳款未收回 ③ 提早付貨款給供應商</span>。新星網毛利率僅 10%，靠<span class='key'>快速周轉賺規模</span>而非高毛利，所以存貨與應收合計佔資產 61%——這種結構一旦周轉卡住，就必須靠借款補現金缺口。"
+  },
+  {
+    sec:"0618", secCls:"s0618", level:"逆轉",
+    q:"新星網 114 年淨利只微幅增加，營業現金流卻從 −8,500 萬翻正到 +9,200 萬。關鍵是什麼？",
+    data:"113年：淨利 +1.2 億｜現金流 −8,500 萬<br>114年：淨利 +1.3 億｜現金流 <b>+9,200 萬</b><br>關鍵科目：應付帳款增加 <b>+1.39 億</b>",
+    options:[
+      "存貨大幅出清，換回現金",
+      "應付帳款增加 1.39 億——貨已賣掉收到錢，但還沒付給供應商，等於借用供應商的資金周轉",
+      "公司向銀行借入新的短期借款",
+      "應收帳款全數收回，客戶提前付款"
+    ],
+    correct:1,
+    explain:"淨利幾乎沒變（1.2 → 1.3 億），現金流卻改善近 1.8 億——差異幾乎全來自<span class='key'>應付帳款 +1.39 億</span>。貨賣掉收到現金，但錢還壓在供應商那邊沒付。<span class='key'>現金流管理的最高境界就是「收錢比付錢快」</span>，這與 0507 談的「應付帳款周轉率越低越好」是同一個道理。"
+  },
+  {
+    sec:"0618", secCls:"s0618", level:"陷阱",
+    q:"摩斯漢堡（安心 1259）114 年營業損失 −1,300 萬，媒體大標「上市以來首次本業虧損」。但財報實際說了什麼？",
+    data:"兩年營業額各約 <b>60 億</b>，損益近乎持平<br>113年營業損益 <b>+1,100 萬</b>｜114年 <b>−1,300 萬</b><br>但營業活動淨現金流入 <b>+7 億多</b>",
+    options:[
+      "公司確實經營困難，現金流是靠變賣資產取得",
+      "帳面小賺小賠只是「面子」，現金流入 7 億多的「裡子」證明公司現金多到花不完",
+      "現金流為正只是暫時現象，下一年就會轉負",
+      "營業額 60 億卻只小賺，代表定價策略確實失敗"
+    ],
+    correct:1,
+    explain:"113 年小賺 1,100 萬、114 年小賠 1,300 萬——<span class='key'>兩年營業額都約 60 億，損益幾乎持平</span>，本來就不是「暴跌」。媒體抓住「首次虧損」四個字做文章，但<span class='key'>營業活動現金流入 7 億多</span>才是真相。<span class='key'>損益表是面子，現金流量表是裡子</span>，兩者背離時就有故事。"
+  },
+  {
+    sec:"0618", secCls:"s0618", level:"手法",
+    q:"摩斯把租賃改良物（店面裝潢）用 2 年極速攤提，這個動作在報表上還造成什麼「副作用」？",
+    data:"店面裝潢正常年限可使用很久<br>摩斯選擇：<b>2 年</b>攤提 → <b>1.2 億 / 2 年</b><br>折舊重分類至「營業成本」",
+    options:[
+      "營業費用增加，導致營業利益率下滑",
+      "折舊被重分類至營業成本，使毛利率被壓縮到 22%，毛利率因此失真",
+      "資產負債表的固定資產金額被高估",
+      "營業現金流因折舊增加而減少"
+    ],
+    correct:1,
+    explain:"這是最容易忽略的一層：折舊<span class='key'>不是放在營業費用，而是被重分類到「營業成本」</span>——直接壓縮毛利率到 22%。所以看到摩斯的毛利率時，<span class='key'>那個數字本身就是失真的</span>，不能拿去跟同業直接比較。這也提醒我們：<span class='key'>比率分析前，要先確認科目分類的口徑</span>。"
+  },
+  {
+    sec:"0618", secCls:"s0618", level:"動機",
+    q:"摩斯加速折舊的三重商業動機，下列何者「不是」教材提到的？",
+    data:"大股東：東元集團",
+    options:[
+      "合法避稅：折舊↑ → 帳面利潤↓ → 所得稅↓ → 真實現金留在公司",
+      "壓低股利：帳面利潤低 → 大股東名正言順少發股利",
+      "集團移轉訂價：設備與數位系統由集團內公司供應，高折舊率讓資金流回集團",
+      "拉低股價：讓大股東能在公開市場低價回收股權"
+    ],
+    correct:3,
+    explain:"三重動機是<span class='key'>① 合法避稅 ② 壓低股利 ③ 集團移轉訂價</span>。第三點最精妙：設備與數位系統由集團內其他公司供應，摩斯提列高額折舊的同時，<span class='key'>資金也不斷流入集團口袋，肥水不落外人田</span>。「拉低股價回收股權」不在教材論述中，屬於過度推論。"
+  },
+  {
+    sec:"0618", secCls:"s0618", level:"資本操作",
+    q:"慧康生活的 EPS 從 −15 元大幅改善到 −2.5 元。真正的原因是什麼？",
+    data:"EPS ＝ 稅後淨損 ÷ 加權平均普通股股數",
+    options:[
+      "虧損金額大幅縮減，本業快速好轉",
+      "普通股股數暴增，稀釋了分母，讓每股虧損看起來好看很多",
+      "公司進行減資，減少了流通在外股數",
+      "認列了一次性的處分利益"
+    ],
+    correct:1,
+    explain:"<span class='key'>分子沒怎麼變，是分母被灌大了</span>。特別股 1:1 轉換為普通股後股數暴增，EPS 的絕對值自然被稀釋。這題的教訓是：<span class='key'>看 EPS 改善時，一定要拆開分子與分母</span>——是真的少虧了，還是只是股數變多了？"
+  },
+  {
+    sec:"0618", secCls:"s0618", level:"資本操作",
+    q:"慧康在上興櫃前把國發基金持有的「特別股」1:1 轉換為普通股，主要目的是什麼？",
+    data:"特別股：疫情紓困期間的籌資工具，<b>無投票權、不賺不發股利</b>",
+    options:[
+      "提高國發基金的持股比例，強化政府對公司的控制",
+      "讓國發基金取得公開市場的退場管道，得以套現解套",
+      "降低公司的財務費用負擔",
+      "符合上興櫃對股權結構的法定要求"
+    ],
+    correct:1,
+    explain:"特別股在紓困階段是很好的工具（無投票權、不干預經營），但<span class='key'>特別股本身難以在市場流通</span>，國發基金等於錢被卡住。轉成普通股後，隨著公司上興櫃，<span class='key'>國發基金就有了公開市場的退場管道</span>。看懂這個動作，才知道興櫃前的股權變動往往不是為了公司，而是為了讓早期投資人下車。"
+  },
+  {
+    sec:"0618", secCls:"s0618", level:"資本操作",
+    q:"慧康的員工認股權費用化，對財報造成什麼影響？",
+    data:"「十年磨一劍」的認股權，依會計準則認列為<b>當期薪資成本</b>",
+    options:[
+      "造成大量現金流出，壓縮營運資金",
+      "無實際現金流出，卻大幅壓低帳面利潤，同時達到留才目的",
+      "增加公司的負債金額，提高負債比率",
+      "屬於資本公積項目，不影響損益表"
+    ],
+    correct:1,
+    explain:"認股權費用是<span class='key'>非現金費用</span>——帳面認列薪資成本，但公司一毛錢都沒付出去。效果是<span class='key'>帳面利潤被壓低，現金卻完好保留</span>。同時興櫃後員工持股可能翻升 6~8 倍，達成留才的雙贏佈局。這與摩斯的加速折舊是同一類邏輯：<span class='key'>用非現金費用調節帳面，不動到真實現金</span>。"
+  },
+  {
+    sec:"0618", secCls:"s0618", level:"辨識",
+    q:"摩斯漢堡、群創、慧康生活三者的帳面虧損，性質有何關鍵差異？",
+    data:"三家公司都出現「帳面難看但體質不差」的現象",
+    options:[
+      "三者本質相同，都是刻意操作會計政策的結果",
+      "摩斯＝主動選擇的折舊戰略；群創＝行業本質的結構性需求；慧康＝資本市場佈局的延遲顯現",
+      "只有群創是真虧損，其他兩家都是假虧損",
+      "三者都是為了避稅，只是使用的科目不同"
+    ],
+    correct:1,
+    explain:"這是本堂課最關鍵的分類能力：<br><span class='key'>摩斯——主動選擇</span>：刻意運用折舊政策壓低利潤，是戰略性選擇。<br><span class='key'>群創/南亞科——結構性需求</span>：面板、記憶體天生需要巨大固定資產，高折舊是行業本質，<span class='key'>不是刻意操作</span>。<br><span class='key'>慧康——資本市場佈局</span>：虧損是多年前特別股與認股權操作的延遲顯現，業務實質持續成長。<br>看到「帳虧現金正」不能一律說是操作，要判斷它屬於哪一種。"
+  },
+  {
+    sec:"0618", secCls:"s0618", level:"框架",
+    q:"「三維財報閱讀框架」中，附註（靈魂）這一層負責回答什麼問題？",
+    data:"損益表（面子）→ 看方向<br>現金流量表（裡子）→ 看真實<br>附註（靈魂）→ ？",
+    options:[
+      "看方向：公司是賺是賠、趨勢向上或向下",
+      "看真實：錢有沒有真的回來、三大活動是否健康",
+      "看動機：折舊年限、會計政策選擇背後的戰略意圖",
+      "看合規：公司是否符合會計準則的最低要求"
+    ],
+    correct:2,
+    explain:"三層各有分工：<span class='key'>損益表看方向、現金流量表看真實、附註看動機</span>。摩斯的 2 年折舊年限、折舊重分類至營業成本，這些關鍵資訊<span class='key'>全部藏在附註裡</span>，主表上完全看不出來。媒體只看得到主表，所以只能「用現象解釋現象」——真正的高手讀附註。"
+  },
+
+  /* ===== 0701 群創折舊 × 診所財報 ===== */
+  {
+    sec:"0701", secCls:"s0701", level:"基礎",
+    q:"為什麼老師習慣優先閱讀第四季（年報）財報，而非季報？",
+    data:"年報：會計師<b>查核報告</b>（Audit）★★★<br>季報：<b>核閱報告</b>（Review）★☆☆",
+    options:[
+      "因為第四季通常是旺季，數字最漂亮",
+      "年報採查核報告，金管會嚴格要求，資訊揭露最完整；季報僅為核閱，強度較低",
+      "因為季報不需要會計師簽名，可信度為零",
+      "因為年報是唯一需要對外公告的財務報表"
+    ],
+    correct:1,
+    explain:"<span class='key'>查核（Audit）與核閱（Review）的保證程度差異極大</span>。年報採查核報告、金管會嚴格要求、揭露最詳盡；季報因為出報表時程趕，只做核閱，<span class='key'>強度較低，僅供過程參考</span>。所以要深入分析一家公司，起手式永遠是<span class='key'>完整年度的第四季合併財報</span>。"
+  },
+  {
+    sec:"0701", secCls:"s0701", level:"計算",
+    q:"群創總資產 3,500 億，PP&E 占 42-43%（約 1,500 億），以 5 年攤提。每年折舊約多少？這解釋了什麼？",
+    data:"112 年度：損益表淨損 <b>−163 億</b>｜營業現金流 <b>+95 億</b><br>落差超過 <b>200 億</b>",
+    options:[
+      "每年約 150 億，不足以解釋 200 億的落差",
+      "每年約 300 億，折舊不牽涉當期現金流出，因此帳面鉅虧但現金流仍為正",
+      "每年約 700 億，公司實際上嚴重超額提列折舊",
+      "無法計算，因為折舊年限每年都不同"
+    ],
+    correct:1,
+    explain:"1,500 億 ÷ 5 年 ≈ <span class='key'>每年 300 億折舊</span>。這 300 億是<span class='key'>把過去建廠時已經付出的現金，在未來分期認列為費用</span>，當下不涉及任何新的現金流出。所以損益表被拉到 −163 億，營業現金流仍有 +95 億。<span class='key'>重資產產業的規模邏輯，用一個除法就能推出來</span>。"
+  },
+  {
+    sec:"0701", secCls:"s0701", level:"趨勢",
+    q:"群創 114 年 PP&E 已降至約 1,125 億。這個數字印證了什麼軌跡？",
+    data:"折舊年限揭露為 <b>2 到 65 年</b>不等（屬「估計」而非精確）",
+    options:[
+      "公司正在大量變賣廠房設備，準備退出面板產業",
+      "設備逐步攤提完畢；若設備仍能運作，未來省下每年約 300 億折舊包袱，獲利將呈現爆發",
+      "公司發生大額資產減損，必須認列損失",
+      "代表公司資本支出不足，競爭力正在流失"
+    ],
+    correct:1,
+    explain:"PP&E 從 1,500 億降到 1,125 億，是<span class='key'>攤提的自然結果</span>。關鍵在於：<span class='key'>折舊攤完但設備還在轉</span>——設備繼續生產、營收照樣進來，但每年 300 億的折舊包袱不見了，<span class='key'>獲利會瞬間爆發</span>。這就是重資產產業投資人最想抓的時間點，也是南亞科、群創這類公司「垃圾堆裡的寶物」的由來。"
+  },
+  {
+    sec:"0701", secCls:"s0701", level:"資本",
+    q:"群創 113 年現金減資 108 億、114 年動用資本公積配息 21 億。這說明什麼？",
+    data:"現金減資：非股利而是「<b>退還資本</b>」，無課稅問題<br>資本公積配息：本業保留盈餘不足時的替代方案",
+    options:[
+      "公司財務困難，被迫縮減資本規模",
+      "公司虧損 ≠ 無法退錢給股東；透過現金減資或資本公積仍能維持股東關係",
+      "這是違反公司法的異常操作，屬於重大警訊",
+      "代表公司即將下市，正在清算資產"
+    ],
+    correct:1,
+    explain:"這題打破一個常見迷思：<span class='key'>帳面虧損的公司照樣能退錢給股東</span>。現金減資本質是<span class='key'>「退還資本」而非分配盈餘，所以沒有課稅問題</span>，還能滿足股東的資金需求；保留盈餘不足時，則可動用資本公積發放。<span class='key'>看懂這類操作，才算真正讀懂科技重資產業的財報</span>。"
+  },
+  {
+    sec:"0701", secCls:"s0701", level:"診所",
+    q:"新設診所的店面裝潢應如何處理？攤提年限怎麼抓？",
+    data:"租約 <b>20 年</b>｜重裝週期 <b>5 年</b>",
+    options:[
+      "列為當期費用一次認列，因為裝潢無法帶來未來效益",
+      "列為「租賃改良物」資本化，年限取租約 20 年與重裝週期 5 年之中的「較短者」",
+      "列為「使用權資產」，依租約 20 年攤提",
+      "列為「機器與設備」，依稅局最低年限 7 年攤提"
+    ],
+    correct:1,
+    explain:"裝潢在租來的空間上，屬於<span class='key'>租賃改良物（Leasehold Improvements）</span>，因為能帶來多年效益所以<span class='key'>應該資本化，不能一次費用化</span>。年限採<span class='key'>「取較短者」</span>原則：租約再長，若 5 年就會重裝，效益也只有 5 年。設定前務必查<span class='key'>國稅局「固定資產耐用年數表」</span>作為客觀基準。"
+  },
+  {
+    sec:"0701", secCls:"s0701", level:"診所",
+    q:"上層控股公司收取管理費再轉介給新診所，導致現金流與資產負債表不對稱。正確做法是什麼？",
+    data:"問題根源：關係人交易未在帳上明確反映",
+    options:[
+      "把管理費全部列為診所的當期費用即可",
+      "在財報中設立「應收關係人」與「應付關係人」明確科目，母子公司間的進銷貨與資金調度必須清楚記錄",
+      "由控股公司統一記帳，診所端不需另外處理",
+      "將管理費直接沖抵股東往來，簡化帳務"
+    ],
+    correct:1,
+    explain:"關係人交易若不落帳，會出現<span class='key'>「現金明明動了，但資產負債表看不出來」</span>的斷裂。正確做法三步：<span class='key'>① 設立應收/應付關係人科目 ② 進銷貨與資金調度清楚記錄 ③ 帳務邏輯清晰後，現金流向才會合乎邏輯</span>。這也是移轉訂價規範的基本要求——集團內部往來越透明，日後查核風險越低。"
+  },
+  {
+    sec:"0701", secCls:"s0701", level:"管理會計",
+    q:"診所的損益兩平點（Break-even Point）應該怎麼算？哪些屬於固定成本？",
+    data:"變動成本：多看一個病人就增加的（耗材、檢查用品）<br>固定成本：不管幾個病人都不變（<b>底薪、租金、折舊</b>）",
+    options:[
+      "（固定成本＋變動成本）÷ 客單價",
+      "固定成本 ÷（客單價 − 單位變動成本）",
+      "客單價 ÷ 固定成本",
+      "總成本 ÷ 就診人次"
+    ],
+    correct:1,
+    explain:"公式是<span class='key'>固定成本 ÷（客單價 − 單位變動成本）＝ 需要多少就診人次才能打平</span>。分母就是「每多看一位病人能貢獻多少邊際利潤」。注意<span class='key'>折舊屬於固定成本</span>——不管看幾個病人都要認列。<span class='key'>這是診所營運儀表板最核心的一個數字</span>，老闆每個月只要盯這一個就知道有沒有及格。"
+  },
+  {
+    sec:"0701", secCls:"s0701", level:"陷阱",
+    q:"某醫療設備帳面折舊 10 年。這是否代表診所需要 10 年才能回本？",
+    data:"若客流量、客單價、複合成長率達標<br>實際現金流入 > 期初投資總額",
+    options:[
+      "是，折舊年限就是投資回收年限",
+      "否，ROI 與折舊年限是兩回事；若營運達標可能 3 到 5 年就回收全部期初投資",
+      "是，除非提前處分設備",
+      "無法判斷，因為 ROI 必須等設備報廢後才能計算"
+    ],
+    correct:1,
+    explain:"<span class='key'>ROI ≠ 折舊年限</span>——這是初學者最常混淆的一組概念。折舊年限是<span class='key'>會計上把成本分期認列的規則</span>；投資回收期是<span class='key'>實際現金流入累積超過期初投資的時間點</span>。設備 10 年折舊，但若客流量與客單價達標，<span class='key'>3 到 5 年現金就回本了</span>。跟老闆報告時務必分開講，否則會被誤解成「要等十年」。"
+  },
+  {
+    sec:"0701", secCls:"s0701", level:"說故事",
+    q:"把診所裝潢費用資本化 20 年攤提（而非一次費用化），對損益表產生什麼效果？為什麼這樣做才對？",
+    data:"錯誤做法：一次費用化 → 當年度全額認列<br>正確做法：20 年資本化攤提 → 每月僅認列 <b>5%</b><br>帳面費用瞬間「<b>減少 95%</b>」",
+    options:[
+      "為了美化報表給銀行看，屬於財務包裝手法",
+      "讓老闆看到真實的月度營運體質，而非被期初投資拖累的失真數字",
+      "為了延後繳稅，把費用推到後面年度",
+      "為了讓資產負債表的資產總額看起來更大"
+    ],
+    correct:1,
+    explain:"這不是包裝，而是<span class='key'>還原真相</span>。裝潢的效益會延續 20 年，若全部塞進第一年，損益表會呈現<span class='key'>「日常營運超級失血」的假象</span>——但那其實是期初投資，不是每月經營不善。資本化攤提後每月只認列 5%，<span class='key'>老闆才能看到真實的月度營運體質</span>。這與摩斯「刻意加速折舊壓低利潤」的動機正好相反。"
+  },
+  {
+    sec:"0701", secCls:"s0701", level:"實務",
+    q:"為什麼直接法現金流量表比間接法更適合拿去跟診所老闆報告？",
+    data:"間接法：從<b>本期淨利</b>出發，加減折舊等一堆非現金項目<br>直接法：<b>從客戶收到多少現金 − 支付給廠商與員工多少現金</b>",
+    options:[
+      "因為直接法是會計準則要求對外揭露的標準格式",
+      "因為直接法只看「收到多少、付出多少」，老闆一眼就懂；間接法從淨利倒推調節，非財務背景的人看了一頭霧水",
+      "因為直接法算出來的現金流金額比較大，比較好看",
+      "因為間接法不需要會計師查核，可信度較低"
+    ],
+    correct:1,
+    explain:"<span class='key'>間接法是給會計師看的，直接法是給老闆看的</span>。間接法從淨利出發加減折舊等非現金項目——邏輯正確但需要會計基礎才讀得懂。直接法只講兩件事：<span class='key'>從客戶收到多少現金，減去付給廠商與員工多少現金，結果為正就是自給自足</span>。這才是內部管理的王牌工具。"
+  },
+  {
+    sec:"0701", secCls:"s0701", level:"說故事",
+    q:"診所本月投資活動現金流大幅為負（買超音波機、付裝潢款）。要怎麼向老闆說明這件事？",
+    data:"🟢 營業活動：收診費 − 耗材/薪資 ＝ <b>正數</b><br>🔴 投資活動：− 設備 − 裝潢 ＝ <b>大額負數</b><br>🟡 籌資活動：股東投入 ＋ 銀行借款",
+    options:[
+      "坦承本月大幅虧損，建議暫緩後續投資計畫",
+      "說明日常營運健康（營業現金流為正），那筆鉅額流出是為 2027 年擴點做準備的佈局，不是燒錢",
+      "把投資活動的支出併入營業活動，讓數字看起來平穩",
+      "只呈現營業活動現金流，避免老闆看到大額流出而恐慌"
+    ],
+    correct:1,
+    explain:"三大活動分開講，正是為了<span class='key'>凝聚「衝刺派」與「踩剎車派」老闆的共識</span>。標準句型是：<span class='key'>「我們日常營運是健康的（正的營業現金流），那筆鉅額流出是我們正在為 2027 年擴點做準備（投資活動），資金來源是股東投入與銀行借款（籌資活動）。」</span>選項 C、D 屬於刻意隱瞞，反而會失去老闆信任。"
+  },
+
+  /* ===== 跨堂整合 ===== */
+  {
+    sec:"整合", secCls:"sMix", level:"整合",
+    q:"以下四種「帳面難看」的情境，哪一個最需要立刻警戒？",
+    data:"A 群創：淨損 −163 億｜營業現金流 +95 億<br>B 摩斯：營業損失 −1,300 萬｜營業現金流 +7 億<br>C 慧康：EPS −2.5 元｜現金占資產 81%、無銀行借款<br>D 新星網 113年：稅前淨利 <b>+1.2 億</b>｜營業現金流 <b>−8,500 萬</b>",
+    options:[
+      "A 群創，因為虧損金額最大",
+      "B 摩斯，因為出現上市以來首次本業虧損",
+      "C 慧康，因為每股仍在虧損",
+      "D 新星網，因為它是唯一「帳面賺錢但現金流出」的公司，錢卡在存貨與應收上"
+    ],
+    correct:3,
+    explain:"A、B、C 都是<span class='key'>帳面難看但現金充沛</span>——現金流是正的，只是原因不同（結構性折舊／主動折舊策略／資本操作副產品）。只有 D 新星網是<span class='key'>帳面賺錢但現金流出</span>：獲利卡在存貨與應收帳款，必須靠借款補缺口。<span class='key'>企業不是虧損倒的，是現金斷鏈倒的</span>——這才是真正的紅燈。"
+  },
+  {
+    sec:"整合", secCls:"sMix", level:"整合",
+    q:"摩斯的「加速折舊壓低利潤」與診所的「裝潢資本化拉高利潤」方向完全相反。這兩者的差異該如何理解？",
+    data:"摩斯：正常年限可用很久 → 選 <b>2 年</b>攤提（帳面利潤↓）<br>診所：裝潢效益 20 年 → 資本化 <b>20 年</b>攤提（帳面費用↓95%）",
+    options:[
+      "兩者都是操縱報表，只是操縱的方向不同，都不可取",
+      "折舊年限本質是「估計」，關鍵在於是否貼近真實效益期間；診所是還原營運真相，摩斯則是刻意偏離以達成稅務與股利目的",
+      "摩斯的做法違反會計準則，診所的做法才合法",
+      "兩者差異只是產業慣例不同，沒有判斷標準"
+    ],
+    correct:1,
+    explain:"群創的揭露就說明了關鍵：<span class='key'>折舊年限是「估計」而非精確</span>（耐用年限 2 到 65 年不等），預期改變時可合理調整，會計師也認可。所以判準不是「幾年」，而是<span class='key'>是否貼近資產真實的效益期間，以及背後的動機</span>。<br><span class='key'>診所</span>：裝潢確實能用 20 年 → 資本化＝還原真相；<br><span class='key'>摩斯</span>：店面不可能 2 年重裝 → 刻意偏離＝為避稅與壓低股利服務。<br>兩者都合法，但<span class='key'>合法 ≠ 反映真實</span>。"
+  },
+  {
+    sec:"整合", secCls:"sMix", level:"整合",
+    q:"綜合兩堂課，「看別人，想自己」這個閱讀財報的最高境界，實際應用在自己的診所上會是什麼？",
+    data:"群創：折舊攤完 → 獲利爆發<br>診所 0618 重點：老設施折舊攤完後，多接一位客人 = 多賺一份純利",
+    options:[
+      "模仿摩斯的做法，也採用最短折舊年限來節稅",
+      "把上市公司的案例邏輯轉化成自己的營運儀表板：設定回本目標（積極 5 年／保守 8~10 年），檢視本業能否穩定覆蓋折舊，並期待折舊攤完後的邊際紅利",
+      "計算診所的 EPS，與上市公司做同業比較",
+      "先做現金減資，把資本退還給股東"
+    ],
+    correct:1,
+    explain:"群創的「折舊攤完後獲利爆發」與診所的<span class='key'>「邊際紅利」是同一個道理</span>：固定成本（含折舊）撐起來以後，<span class='key'>多接一位客人 = 多賺一份純利</span>，這是成熟服務業最甜蜜的狀態。<br>診所的財務核心不是現金周轉（無存貨、無傳統應收），而是三個問題：<span class='key'>① 前期建置成本如何賺回來（設定 5 年或 8~10 年回本目標）② 折舊年限內本業能否穩定覆蓋折舊 ③ 攤完後如何放大邊際紅利</span>。<br>這就是「看別人的財報，想自己的生意」。"
+  }
+];
+
+let current = 0;
+let score = 0;
+const wrongList = [];
+const secStats = {};
+questions.forEach(q => { if(!secStats[q.sec]) secStats[q.sec] = {total:0, right:0}; secStats[q.sec].total++; });
+
+const quizArea = document.getElementById('quizArea');
+const progressFill = document.getElementById('progressFill');
+const progressText = document.getElementById('progressText');
+
+function renderQuiz(){
+  quizArea.innerHTML = '';
+  wrongList.length = 0;
+  Object.keys(secStats).forEach(k => secStats[k].right = 0);
+
+  questions.forEach((item, idx) => {
+    const card = document.createElement('div');
+    card.className = 'card' + (idx === current ? ' active' : '');
+    card.id = 'card-' + idx;
+
+    const topline = document.createElement('div');
+    topline.className = 'topline';
+    const qnum = document.createElement('span');
+    qnum.className = 'qnum';
+    qnum.textContent = `Q${idx+1} / ${questions.length}`;
+    const badges = document.createElement('span');
+    badges.className = 'badges';
+    const secTag = document.createElement('span');
+    secTag.className = 'sec ' + item.secCls;
+    secTag.textContent = item.sec;
+    const lv = document.createElement('span');
+    lv.className = 'level';
+    lv.textContent = item.level;
+    badges.appendChild(secTag);
+    badges.appendChild(lv);
+    topline.appendChild(qnum);
+    topline.appendChild(badges);
+    card.appendChild(topline);
+
+    const qtext = document.createElement('div');
+    qtext.className = 'qtext';
+    qtext.textContent = item.q;
+    card.appendChild(qtext);
+
+    if(item.data){
+      const db = document.createElement('div');
+      db.className = 'databox';
+      db.innerHTML = item.data;
+      card.appendChild(db);
+    }
+
+    const optsWrap = document.createElement('div');
+    optsWrap.className = 'options';
+    item.options.forEach((optText, oIdx) => {
+      const btn = document.createElement('button');
+      btn.className = 'opt';
+      btn.textContent = optText;
+      btn.onclick = () => selectAnswer(idx, oIdx);
+      optsWrap.appendChild(btn);
+    });
+    card.appendChild(optsWrap);
+
+    const explain = document.createElement('div');
+    explain.className = 'explain';
+    explain.id = 'explain-' + idx;
+    explain.innerHTML = item.explain;
+    card.appendChild(explain);
+
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'nextBtn';
+    nextBtn.id = 'next-' + idx;
+    nextBtn.textContent = idx === questions.length - 1 ? '查看結果' : '下一題 →';
+    nextBtn.onclick = () => goNext(idx);
+    card.appendChild(nextBtn);
+
+    quizArea.appendChild(card);
+  });
+  updateProgress();
+}
+
+function updateProgress(){
+  progressFill.style.width = (current / questions.length * 100) + '%';
+  progressText.textContent = `${current} / ${questions.length}`;
+}
+
+function selectAnswer(qIdx, oIdx){
+  const card = document.getElementById('card-' + qIdx);
+  const opts = card.querySelectorAll('.opt');
+  const item = questions[qIdx];
+
+  opts.forEach((o, i) => {
+    o.classList.add('disabled');
+    if(i === item.correct) o.classList.add('correct');
+    if(i === oIdx && oIdx !== item.correct) o.classList.add('wrong');
+  });
+
+  if(oIdx === item.correct){
+    score++;
+    secStats[item.sec].right++;
+  }else{
+    wrongList.push(`Q${qIdx+1}（${item.sec}·${item.level}）`);
+  }
+
+  document.getElementById('explain-' + qIdx).classList.add('show');
+  document.getElementById('next-' + qIdx).classList.add('show');
+}
+
+function goNext(qIdx){
+  document.getElementById('card-' + qIdx).classList.remove('active');
+  current++;
+  if(current < questions.length){
+    const nextCard = document.getElementById('card-' + current);
+    nextCard.classList.add('active');
+    nextCard.scrollIntoView({behavior:'smooth', block:'start'});
+    updateProgress();
+  }else{
+    progressFill.style.width = '100%';
+    progressText.textContent = `${questions.length} / ${questions.length}`;
+    showResult();
+  }
+}
+
+function showResult(){
+  const resultBox = document.getElementById('resultBox');
+  resultBox.classList.add('show');
+  document.getElementById('scoreText').textContent = `${score} / ${questions.length}`;
+
+  const secBox = document.getElementById('secScore');
+  secBox.innerHTML = '';
+  const secNames = {"0618":"0618 照妖鏡","0701":"0701 折舊×診所","整合":"跨堂整合"};
+  Object.keys(secStats).forEach(k => {
+    const d = document.createElement('div');
+    d.innerHTML = `${secNames[k] || k}<b>${secStats[k].right} / ${secStats[k].total}</b>`;
+    secBox.appendChild(d);
+  });
+
+  let subLabel = '', msg = '';
+  const pct = score / questions.length;
+  if(pct === 1){
+    subLabel = '滿分';
+    msg = '「面子 vs 裡子」的判讀框架已經完整建立，而且能區分主動選擇、結構性需求與資本操作三種不同性質的帳面虧損。<br><br><b>下一步練習：</b>把這套框架直接套回自己的診所——先算出損益兩平點（固定成本 ÷ 單位邊際貢獻），再用直接法做一份三大活動現金流月報，向老闆說一次完整的故事。這才是「看別人，想自己」的實際落地。';
+  }else if(pct >= 0.8){
+    subLabel = '掌握良好';
+    msg = '主架構已經穩了。建議回頭補齊答錯的部分，特別留意兩個最容易混淆的地方：<b>① 帳虧現金正不一定是好事也不一定是壞事，要判斷屬於主動選擇、結構性需求還是資本操作</b>；<b>② ROI 與折舊年限是兩回事</b>。';
+  }else if(pct >= 0.6){
+    subLabel = '基礎及格';
+    msg = '觀念大致有，但案例細節與數字推論還不夠熟。建議先把最下方的「四大案例對照表」背起來——帳面 vs 現金流的五種組合是這兩堂課的骨架，記住骨架後其他細節會自動歸位。';
+  }else{
+    subLabel = '需要重新複習';
+    msg = '建議重讀兩份一頁式教材，先抓住每堂課的一句話核心：<br><b>0618</b>——損益表是面子，現金流量表是裡子，附註是靈魂；兩者背離就有故事。<br><b>0701</b>——折舊不是現金流出；資本化與攤提年限的目的是還原真實的月度營運體質。';
+  }
+  if(wrongList.length){
+    msg += '<br><br><b>建議複習題號：</b>' + wrongList.join('、');
+  }
+  document.getElementById('scoreSub').textContent = subLabel;
+  document.getElementById('resultMsg').innerHTML = msg;
+}
+
+function restartQuiz(){
+  current = 0;
+  score = 0;
+  document.getElementById('resultBox').classList.remove('show');
+  renderQuiz();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+renderQuiz();
+</script>
+</body>
+</html>
