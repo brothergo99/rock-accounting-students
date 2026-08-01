@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>April 0801 · 財報測驗×財務說話的藝術×Gogoro解剖×Google案例</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --vi:#4c1d95;--vi2:#f5f3ff;--vi3:#c4b5fd;--vi4:#7c3aed;--vi5:#8b5cf6;
+  --li:#3f6212;--li2:#f7fee7;--li3:#bef264;--li4:#65a30d;
+  --am:#92400e;--am2:#fffbeb;--am3:#fde68a;--am4:#d97706;
+  --ro:#9f1239;--ro2:#fff1f2;--ro3:#fecdd3;--ro4:#e11d48;
+  --bl:#1e3a5f;--bl2:#eff6ff;--bl3:#93c5fd;--bl4:#2563eb;
+  --te:#134e4a;--te2:#f0fdf4;--te3:#6ee7b7;--te4:#0d9488;
+  --sl:#1e293b;--sl2:#f8fafc;--sl3:#cbd5e1;--sl4:#475569;
+  --night:#04060e;--night2:#080c18;
+  --bg:#f5f3ff;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--night);line-height:1.7}
+
+/* HEADER */
+.page-header{background:linear-gradient(150deg,#04060e,#080c18,#060210,#030008);padding:36px 50px 28px;position:relative;overflow:hidden;border-bottom:3px solid var(--vi5)}
+.ph-g1{position:absolute;top:-60px;right:-40px;width:260px;height:260px;background:radial-gradient(circle,rgba(139,92,246,.22),transparent 65%);pointer-events:none}
+.ph-g2{position:absolute;bottom:-30px;left:-20px;width:180px;height:180px;background:radial-gradient(circle,rgba(163,230,53,.12),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(196,181,253,.65);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(14px,2.1vw,21px);font-weight:900;color:#fff;line-height:1.28;margin-bottom:4px}
+.ph-title em{color:#a78bfa;font-style:normal}
+.ph-title em2{color:var(--li3);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.38);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mc{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(139,92,246,.14);color:#a78bfa;border:1px solid rgba(139,92,246,.3)}
+.mc-g{background:rgba(101,163,13,.13);color:var(--li3);border-color:rgba(101,163,13,.3)}
+.mc-r{background:rgba(225,29,72,.12);color:#fb7185;border-color:rgba(225,29,72,.3)}
+.mc-a{background:rgba(217,119,6,.13);color:var(--am3);border-color:rgba(217,119,6,.3)}
+
+.container{max-width:1100px;margin:0 auto;padding:26px 26px}
+.section{margin-bottom:22px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--vi4);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--night);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--vi3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-32{display:grid;grid-template-columns:1.3fr 1fr;gap:13px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-32{grid-template-columns:1fr}}
+
+.card-vi{background:var(--vi2);border:1.5px solid var(--vi3);border-radius:10px;padding:14px}
+.card-li{background:var(--li2);border:1.5px solid var(--li3);border-radius:10px;padding:14px}
+.card-am{background:var(--am2);border:1.5px solid var(--am3);border-radius:10px;padding:14px}
+.card-ro{background:var(--ro2);border:1.5px solid var(--ro3);border-radius:10px;padding:14px}
+.card-bl{background:var(--bl2);border:1.5px solid var(--bl3);border-radius:10px;padding:14px}
+.card-te{background:var(--te2);border:1.5px solid var(--te3);border-radius:10px;padding:14px}
+.card-sl{background:var(--sl2);border:1.5px solid var(--sl3);border-radius:10px;padding:14px}
+.card-dark{background:var(--night);border:none;border-radius:10px;padding:14px}
+.card-vi h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--vi)}
+.card-li h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--li)}
+.card-am h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--am)}
+.card-ro h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--ro)}
+.card-bl h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--bl)}
+.card-te h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--te)}
+.card-sl h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--sl)}
+.card-dark h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:#a78bfa}
+.card-vi p,.card-vi li{color:var(--vi);font-size:12.5px;line-height:1.85}
+.card-li p,.card-li li{color:var(--li);font-size:12.5px;line-height:1.85}
+.card-am p,.card-am li{color:var(--am);font-size:12.5px;line-height:1.85}
+.card-ro p,.card-ro li{color:var(--ro);font-size:12.5px;line-height:1.85}
+.card-bl p,.card-bl li{color:var(--bl);font-size:12.5px;line-height:1.85}
+.card-te p,.card-te li{color:var(--te);font-size:12.5px;line-height:1.85}
+.card-sl p,.card-sl li{color:var(--sl);font-size:12.5px;line-height:1.85}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8);font-size:12.5px;line-height:1.85}
+ul{padding-left:15px}
+ul li{margin-bottom:3px}
+
+/* 測驗觀念 badge rows */
+.cq{display:flex;gap:7px;align-items:flex-start;padding:6px 0;border-bottom:1px dashed rgba(76,29,149,.1)}
+.cq:last-child{border-bottom:none;padding-bottom:0}
+.cq-tag{font-family:'DM Mono',monospace;font-size:9.5px;background:var(--vi4);color:#fff;border-radius:3px;padding:2px 7px;flex-shrink:0;margin-top:2px;white-space:nowrap}
+.cq-body{font-size:12.5px;color:var(--vi);line-height:1.75}
+
+/* Gogoro 指標比較 */
+.metric-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(0,0,0,.06)}
+.metric-row:last-child{border-bottom:none}
+.metric-label{font-size:12px;color:rgba(255,255,255,.55);flex-shrink:0;width:100px}
+.metric-before{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#fb7185;min-width:60px;text-align:right}
+.metric-arrow{color:rgba(255,255,255,.2);font-size:12px;flex-shrink:0;padding:0 4px}
+.metric-after{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#a78bfa;min-width:60px}
+.metric-note{font-size:11px;color:rgba(255,255,255,.4);flex:1}
+
+/* 策略牌 */
+.tactic{border-radius:7px;padding:10px 12px;margin-bottom:7px}
+.tactic:last-child{margin-bottom:0}
+.tactic-head{font-size:11.5px;font-weight:700;margin-bottom:4px;font-family:'DM Mono',monospace;letter-spacing:.05em}
+.tactic-body{font-size:12px;line-height:1.75}
+
+/* 數字對比 */
+.num-compare{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin:6px 0}
+.nc-box{border-radius:6px;padding:6px 12px;text-align:center}
+.nc-num{font-family:'DM Mono',monospace;font-size:16px;font-weight:700;line-height:1.1}
+.nc-lbl{font-size:10.5px;margin-top:2px;opacity:.75}
+.nc-arrow{font-size:18px;color:rgba(139,92,246,.35)}
+
+/* Quote */
+.quote{background:linear-gradient(135deg,var(--night),var(--night2));border-radius:10px;padding:14px 20px;position:relative;overflow:hidden;margin-bottom:20px}
+.qm{font-family:'Playfair Display',serif;font-size:72px;color:rgba(139,92,246,.07);position:absolute;top:-10px;left:8px;line-height:1}
+.qt{font-size:13px;color:rgba(255,255,255,.88);line-height:1.65;position:relative;z-index:1}
+.qt em{color:#a78bfa;font-style:normal;font-weight:700}
+.qt em2{color:var(--li3);font-style:normal}
+.qs{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.35);margin-top:6px;position:relative;z-index:1}
+
+.page-footer{background:var(--night);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:#a78bfa}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-g1"></div>
+  <div class="ph-g2"></div>
+  <div class="ph-eyebrow">0801 · April 課後複習 · 財報測驗解析×財務說話的藝術×Gogoro財報解剖×Google案例</div>
+  <div class="ph-title"><em>財報數字背後都有人在說故事</em>——<br>讀懂「調整後指標」，才能看穿<em2>企業包裝的戰略意圖</em2></div>
+  <div class="ph-sub">現金流量表×折舊策略×移轉定價×EPS庫藏股×營運槓桿×EBITDA × Gogoro四大包裝術 × Google投資利得案例</div>
+  <div class="ph-meta">
+    <span class="mc">2025.08.01</span>
+    <span class="mc">April</span>
+    <span class="mc mc-r">財報測驗解析</span>
+    <span class="mc mc-a">財務說話的藝術</span>
+    <span class="mc mc-g">Gogoro案例解剖</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 金句 -->
+  <div class="quote">
+    <div class="qm">"</div>
+    <div class="qt">「學完財報分析，你要懂得<em>反問財報</em>：這個數字是真實的本業表現，還是一次性事件造成的？帳面的虧損縮小，是公司真的好轉，還是只是股價暴跌帶來的迴轉利益？<br>企業和財務人員都在<em2>用數字說故事，你的工作是聽懂他們在說什麼——以及沒說什麼</em2>。」</div>
+    <div class="qs">Rock 老師 · 0801 April · 財報測驗解析 + 財務說話的藝術</div>
+  </div>
+
+  <!-- SECTION 1: 財報測驗核心觀念 -->
+  <div class="section">
+    <div class="section-label">Part 1 · 財報測驗解析 · AI選擇題回顧×9大核心財務觀念</div>
+    <div class="section-title">測驗中的九個關鍵觀念：從現金流量表到營運槓桿，每一題都是實戰思維</div>
+    <div class="grid-2">
+      <div class="card-vi">
+        <h3>🧩 財報觀念速攻（上）</h3>
+        <div class="cq" style="padding-top:0">
+          <div class="cq-tag">現金流量表</div>
+          <div class="cq-body"><strong>營業活動現金流</strong>是三大現金流中最重要的，代表企業體質的核心。帳面賺錢但營業現金流為負 → 應收帳款未收回或存貨積壓；應付帳款增加但現金未流出 → 特定商業模式下未必是壞事。</div>
+        </div>
+        <div class="cq">
+          <div class="cq-tag">折舊策略</div>
+          <div class="cq-body">摩斯漢堡案例：帳面小賺小賠，現金卻很充裕。原因：<strong>加速折舊</strong>（縮短攤提年限）→ 拉高費用壓低利潤 → 合法避稅、壓低股利期望、把現金留在公司。反向：診所把裝潢費拉長年限攤提，讓初期帳面好看。</div>
+        </div>
+        <div class="cq">
+          <div class="cq-tag">移轉定價</div>
+          <div class="cq-body">集團內母子公司交易定價必須「<strong>符合常規</strong>」（符合外部市場價）。跨國企業試圖把利潤轉往低稅率國家（如開曼），反避稅法規就是「警察抓小偷」，確保各國最低15%稅率基準。</div>
+        </div>
+        <div class="cq">
+          <div class="cq-tag">EPS×庫藏股</div>
+          <div class="cq-body">EPS ＝ 淨利 ÷ 加權平均流通股數。虧損時股數多→每股虧損「看起來小」；獲利時公司反而想<strong>縮小股數</strong>（買回庫藏股）讓EPS變大，同時護盤股價。</div>
+        </div>
+        <div class="cq">
+          <div class="cq-tag">直接法vs間接法</div>
+          <div class="cq-body"><strong>間接法</strong>（正式財報）：從淨利往回推算調整；<strong>直接法</strong>：直接列出客戶端收現與付給供應商的現金，最直觀，適合老闆與內部管理使用。</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div class="card-am">
+          <h3>🧩 財報觀念速攻（下）</h3>
+          <div class="cq" style="padding-top:0">
+            <div class="cq-tag" style="background:var(--am4)">員工認股權</div>
+            <div class="cq-body" style="color:var(--am)">認股權產生「<strong>無現金流出的費用</strong>」（市價與認購價差額），壓低帳面利潤，但實質留住人才。非公開發行公司讓員工以低成本持股 → 參與股利分發 → 心態轉為「自己人」。</div>
+          </div>
+          <div class="cq">
+            <div class="cq-tag" style="background:var(--am4)">周大福案例</div>
+            <div class="cq-body" style="color:var(--am)">餐飲店邀請打工族以<strong>1萬元認股</strong>入資，三個月後分紅六七千元。「價值交換」激發基層員工熱情，連帶提升管理意願。</div>
+          </div>
+          <div class="cq">
+            <div class="cq-tag" style="background:var(--am4)">營運槓桿</div>
+            <div class="cq-body" style="color:var(--am)">群創（面板）、美光（記憶體）：固定資產大、折舊重。景氣差 → 訂單少但折舊照跑 → <strong>嚴重虧損</strong>；景氣好 → 產能滿載、提高報價 → <strong>驚人超額利潤</strong>。大好大壞是宿命。</div>
+          </div>
+          <div class="cq">
+            <div class="cq-tag" style="background:var(--am4)">資本公積×減資</div>
+            <div class="cq-body" style="color:var(--am)">公司虧損仍可退錢給股東：動用<strong>資本公積</strong>，或進行<strong>現金減資</strong>。虧損 ≠ 不能退錢，因為錢可能存在其他科目。</div>
+          </div>
+          <div class="cq">
+            <div class="cq-tag" style="background:var(--am4)">損益兩平點</div>
+            <div class="cq-body" style="color:var(--am)">固定成本 ÷（客單價 − 變動成本）＝ 需要多少客流量才能回本。診所/小餐飲業最常用。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: 財務說話的藝術 + Gogoro -->
+  <div class="section">
+    <div class="section-label">Part 2 · 財務說話的藝術 · 調整後指標×Gogoro四大包裝術×Google投資利得案例</div>
+    <div class="section-title">企業如何用「調整後指標」讓難看的財報說出好聽的故事</div>
+    <div class="grid-32">
+      <!-- Gogoro 主區塊 -->
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div class="card-dark">
+          <h3>🛵 Gogoro 財報解剖：四大包裝術（老師親歷）</h3>
+          <div style="font-size:12px;color:rgba(255,255,255,.45);margin-bottom:10px">從「台灣之光」到財報數字危機——財務部如何為衰退尋找理由</div>
+
+          <div class="tactic" style="background:rgba(139,92,246,.13);border:1px solid rgba(139,92,246,.25)">
+            <div class="tactic-head" style="color:#a78bfa">① 匯率戰術 ── 把衰退歸咎大環境</div>
+            <div class="num-compare">
+              <div class="nc-box" style="background:rgba(248,113,113,.15)">
+                <div class="nc-num" style="color:#fb7185">69,711</div>
+                <div class="nc-lbl" style="color:#fb7185">去年Q1營收</div>
+              </div>
+              <div class="nc-arrow">→</div>
+              <div class="nc-box" style="background:rgba(248,113,113,.15)">
+                <div class="nc-num" style="color:#fb7185">63,621</div>
+                <div class="nc-lbl" style="color:#fb7185">今年Q1營收</div>
+              </div>
+              <div class="nc-arrow">→</div>
+              <div class="nc-box" style="background:rgba(139,92,246,.15)">
+                <div class="nc-num" style="color:#a78bfa">−4.5%</div>
+                <div class="nc-lbl" style="color:#a78bfa">排除匯率後</div>
+              </div>
+            </div>
+            <div class="tactic-body" style="color:rgba(255,255,255,.7)">帳面衰退8.7%，透過「排除匯率影響」計算出衰退僅4.5%，將<strong style="color:#fff">一半責任歸咎美金貶值</strong>，而非本業問題。</div>
+          </div>
+
+          <div class="tactic" style="background:rgba(101,163,13,.1);border:1px solid rgba(101,163,13,.2)">
+            <div class="tactic-head" style="color:var(--li3)">② 一次性成本 ── 電池升級為毛利「背鍋」</div>
+            <div class="num-compare">
+              <div class="nc-box" style="background:rgba(248,113,113,.12)">
+                <div class="nc-num" style="color:#fb7185">4.9%</div>
+                <div class="nc-lbl" style="color:#fb7185">實際毛利率</div>
+              </div>
+              <div class="nc-arrow">+調整</div>
+              <div class="nc-box" style="background:rgba(101,163,13,.15)">
+                <div class="nc-num" style="color:var(--li3)">18.2%</div>
+                <div class="nc-lbl" style="color:var(--li3)">調整後毛利率</div>
+              </div>
+            </div>
+            <div class="tactic-body" style="color:rgba(255,255,255,.7)">毛利率從6.4%跌至4.9%，公司將主因歸咎於「<strong style="color:#fff">第三代電池全面升級</strong>（斷電危機）」為一次性成本，剔除後宣稱本業毛利達18.2%。投資人難以辨真偽。</div>
+          </div>
+
+          <div class="tactic" style="background:rgba(217,119,6,.1);border:1px solid rgba(217,119,6,.2)">
+            <div class="tactic-head" style="color:var(--am3)">③ 公允價值變動 ── 股價暴跌成「虧損的救星」</div>
+            <div class="tactic-body" style="color:rgba(255,255,255,.7)">限制型股票隨股價從<strong style="color:#fb7185">$17</strong>跌至<strong style="color:#fb7185">$1多</strong>，原認列的高額員工薪酬費用大幅縮水 → 產生鉅額「<strong style="color:#fff">金融負債公允價值迴轉利益</strong>」，帳面上硬性縮小了2024年虧損數字。<br>⚠️ 剔除此項後，2024年實際營運虧損極其慘烈。</div>
+          </div>
+
+          <div class="tactic" style="background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.2)">
+            <div class="tactic-head" style="color:var(--bl3)">④ 調整後EBITDA ── 裁員後的「重生敘事」</div>
+            <div class="tactic-body" style="color:rgba(255,255,255,.7)">2025年大規模裁員縮減成本後，財務部將所有不利因素（金融負債迴轉、電池升級等）加回，計算出「<strong style="color:#fff">調整後EBITDA</strong>」，向投資人說明：歷經殘酷瘦身轉型，實質現金流與營運確實在好轉。</div>
+          </div>
+        </div>
+
+        <div class="card-ro">
+          <h3>📉 Gogoro 興衰反思：台灣之光的隕落</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;font-size:12px">
+            <div style="background:rgba(159,18,57,.1);border-radius:6px;padding:7px 10px">
+              <div style="font-weight:700;color:var(--ro4);margin-bottom:3px">疫情外送爭議</div>
+              <div style="color:var(--ro);line-height:1.6">打壓高用量外送員客群 → 信任瓦解 → 換電生態惡化</div>
+            </div>
+            <div style="background:rgba(159,18,57,.1);border-radius:6px;padding:7px 10px">
+              <div style="font-weight:700;color:var(--ro4);margin-bottom:3px">海外擴張落空</div>
+              <div style="color:var(--ro);line-height:1.6">簽署眾多MOU，卻未能實際落地兌現，對外宣傳成為笑話</div>
+            </div>
+            <div style="background:rgba(159,18,57,.1);border-radius:6px;padding:7px 10px">
+              <div style="font-weight:700;color:var(--ro4);margin-bottom:3px">高層人事鬥爭</div>
+              <div style="color:var(--ro);line-height:1.6">尹衍樑撤換 Horis，組織震盪，方向失準</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右欄：Google + 調整後指標說明 + 啟發 -->
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div class="card-bl">
+          <h3>🔍 Google 案例：投資利得遮蓋本業</h3>
+          <div class="num-compare" style="margin-bottom:8px">
+            <div class="nc-box" style="background:rgba(37,99,235,.12);flex:1">
+              <div class="nc-num" style="color:var(--bl4)">$9</div>
+              <div class="nc-lbl" style="color:var(--bl4)">帳面EPS</div>
+            </div>
+            <div class="nc-arrow">剔除<br>投資利得</div>
+            <div class="nc-box" style="background:rgba(37,99,235,.08);flex:1">
+              <div class="nc-num" style="color:var(--bl)">$2.85</div>
+              <div class="nc-lbl" style="color:var(--bl)">核心獲利EPS</div>
+            </div>
+          </div>
+          <p>豐厚利潤多數來自<strong>持有其他公司股票的未實現評價損益</strong>，非本業成長。若不剔除，投資人將誤判本業健康度。</p>
+        </div>
+
+        <div class="card-vi">
+          <h3>📊 什麼是「調整後指標」？</h3>
+          <div style="font-size:12px;color:var(--vi);margin-bottom:8px">財務人員剔除「非核心、非常規」項目，引導投資人看見本業營運能力。</div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="background:rgba(124,58,237,.1);border-radius:6px;padding:7px 10px;font-size:12px;color:var(--vi)"><span style="font-weight:700;color:var(--vi4)">常見調整項目：</span><br>匯率變動 / 一次性投資升級費用 / 股權激勵費用 / 金融資產公允價值變動</div>
+            <div style="background:rgba(124,58,237,.07);border-radius:6px;padding:7px 10px;font-size:12px;color:var(--vi)"><span style="font-weight:700;color:var(--vi4)">核心指標：</span><br>調整後EPS / 調整後毛利率 / 調整後EBITDA</div>
+          </div>
+          <div style="background:rgba(124,58,237,.1);border-radius:6px;padding:7px 11px;margin-top:8px;font-size:12px;color:var(--vi4)">
+            ⚠️ 美股財報與商業新聞中<strong>極為常見</strong>——掌握這個技能，大幅提升解讀國際財經新聞的敏銳度。
+          </div>
+        </div>
+
+        <div class="card-te">
+          <h3>💡 讀財報的核心姿態</h3>
+          <ul style="color:var(--te)">
+            <li>帳面數字 ≠ 真實本業表現，先問「有沒有一次性項目？」</li>
+            <li>看到調整後指標，先問「剔除了什麼？為什麼剔除？」</li>
+            <li>虧損縮小 → 先查是否有公允價值迴轉利益</li>
+            <li>毛利調整後變很好看 → 問「一次性成本有多大可能再發生？」</li>
+          </ul>
+          <div style="background:rgba(13,148,136,.1);border-radius:6px;padding:7px 11px;margin-top:8px;font-size:12px;color:var(--te4)">
+            財務說話的藝術是雙向的：你不只要能<strong>聽懂</strong>，還要能辨別哪些是「數字的修辭」。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">April · 0801 · 財報測驗解析×財務說話的藝術×Gogoro四大包裝術×Google投資利得案例</div>
+</div>
+
+</body>
+</html>
