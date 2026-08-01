@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>佳汝 0730 · 財報矛盾點×現金流照妖鏡×加速折舊×調整後指標×IPO警訊</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --em:#065f46;--em2:#ecfdf5;--em3:#6ee7b7;--em4:#059669;--em5:#10b981;
+  --or:#9a3412;--or2:#fff7ed;--or3:#fed7aa;--or4:#ea580c;
+  --vi:#4c1d95;--vi2:#f5f3ff;--vi3:#c4b5fd;--vi4:#7c3aed;
+  --bl:#1e3a5f;--bl2:#eff6ff;--bl3:#93c5fd;--bl4:#2563eb;
+  --am:#92400e;--am2:#fffbeb;--am3:#fde68a;--am4:#d97706;
+  --ro:#9f1239;--ro2:#fff1f2;--ro3:#fecdd3;--ro4:#f43f5e;
+  --sl:#1e293b;--sl2:#f8fafc;--sl3:#cbd5e1;--sl4:#475569;
+  --night:#030b08;--night2:#060f0c;
+  --bg:#ecfdf5;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--night);line-height:1.7}
+
+.page-header{background:linear-gradient(150deg,#030b08,#060f0c,#020a06,#030705);padding:36px 50px 28px;position:relative;overflow:hidden;border-bottom:3px solid var(--em5)}
+.ph-g1{position:absolute;top:-60px;right:-40px;width:260px;height:260px;background:radial-gradient(circle,rgba(16,185,129,.2),transparent 65%);pointer-events:none}
+.ph-g2{position:absolute;bottom:-30px;left:-20px;width:180px;height:180px;background:radial-gradient(circle,rgba(234,88,12,.13),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(110,231,183,.65);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(14px,2.1vw,21px);font-weight:900;color:#fff;line-height:1.28;margin-bottom:4px}
+.ph-title em{color:#34d399;font-style:normal}
+.ph-title em2{color:var(--or3);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.38);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mc{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(16,185,129,.14);color:#34d399;border:1px solid rgba(16,185,129,.3)}
+.mc-o{background:rgba(234,88,12,.13);color:var(--or3);border-color:rgba(234,88,12,.3)}
+.mc-v{background:rgba(124,58,237,.12);color:var(--vi3);border-color:rgba(124,58,237,.28)}
+.mc-r{background:rgba(244,63,94,.12);color:#fda4af;border-color:rgba(244,63,94,.28)}
+
+.container{max-width:1100px;margin:0 auto;padding:26px 26px}
+.section{margin-bottom:22px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--em4);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--night);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--em3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-32{display:grid;grid-template-columns:1.2fr 1fr;gap:13px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-32{grid-template-columns:1fr}}
+
+.card-em{background:var(--em2);border:1.5px solid var(--em3);border-radius:10px;padding:14px}
+.card-or{background:var(--or2);border:1.5px solid var(--or3);border-radius:10px;padding:14px}
+.card-vi{background:var(--vi2);border:1.5px solid var(--vi3);border-radius:10px;padding:14px}
+.card-bl{background:var(--bl2);border:1.5px solid var(--bl3);border-radius:10px;padding:14px}
+.card-am{background:var(--am2);border:1.5px solid var(--am3);border-radius:10px;padding:14px}
+.card-ro{background:var(--ro2);border:1.5px solid var(--ro3);border-radius:10px;padding:14px}
+.card-sl{background:var(--sl2);border:1.5px solid var(--sl3);border-radius:10px;padding:14px}
+.card-dark{background:var(--night);border:none;border-radius:10px;padding:14px}
+.card-em h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--em)}
+.card-or h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--or)}
+.card-vi h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--vi)}
+.card-bl h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--bl)}
+.card-am h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--am)}
+.card-ro h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--ro)}
+.card-sl h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--sl)}
+.card-dark h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:#34d399}
+.card-em p,.card-em li{color:var(--em);font-size:12.5px;line-height:1.85}
+.card-or p,.card-or li{color:var(--or);font-size:12.5px;line-height:1.85}
+.card-vi p,.card-vi li{color:var(--vi);font-size:12.5px;line-height:1.85}
+.card-bl p,.card-bl li{color:var(--bl);font-size:12.5px;line-height:1.85}
+.card-am p,.card-am li{color:var(--am);font-size:12.5px;line-height:1.85}
+.card-ro p,.card-ro li{color:var(--ro);font-size:12.5px;line-height:1.85}
+.card-sl p,.card-sl li{color:var(--sl);font-size:12.5px;line-height:1.85}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8);font-size:12.5px;line-height:1.85}
+ul{padding-left:15px}
+ul li{margin-bottom:3px}
+
+/* 現金流照妖鏡案例卡 */
+.cf-case{border-radius:8px;padding:10px 13px;margin-bottom:8px;position:relative}
+.cf-case:last-child{margin-bottom:0}
+.cf-badge{font-family:'DM Mono',monospace;font-size:9.5px;padding:2px 8px;border-radius:3px;display:inline-block;margin-bottom:5px}
+.cf-nums{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:5px}
+.cf-num{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;padding:4px 10px;border-radius:5px}
+.cf-vs{font-size:11px;color:rgba(0,0,0,.3);font-weight:700}
+.cf-body{font-size:12px;line-height:1.75}
+.cf-verdict{font-size:11.5px;font-weight:700;margin-top:5px;padding:4px 9px;border-radius:4px;display:inline-block}
+
+/* ROE 三要素 */
+.roe-strip{display:flex;align-items:stretch;gap:4px;border-radius:8px;overflow:hidden;margin:8px 0}
+.roe-item{flex:1;padding:10px 9px;text-align:center}
+.roe-sym{font-size:18px;font-weight:900;color:rgba(255,255,255,.25);display:flex;align-items:center;padding:0 2px}
+.roe-icon{font-size:16px;margin-bottom:3px}
+.roe-title{font-size:11.5px;font-weight:700;color:#fff;margin-bottom:2px}
+.roe-sub{font-size:10.5px;color:rgba(255,255,255,.6)}
+
+/* 折舊動機 */
+.mo-row{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-bottom:1px dashed rgba(5,150,105,.12)}
+.mo-row:last-child{border-bottom:none}
+.mo-n{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:rgba(5,150,105,.25);flex-shrink:0;width:22px;line-height:1.2}
+.mo-body{font-size:12.5px;color:var(--em);line-height:1.75}
+
+/* 警示指標 */
+.warn-item{background:rgba(244,63,94,.08);border:1px solid rgba(244,63,94,.2);border-radius:7px;padding:9px 12px;margin-bottom:7px}
+.warn-item:last-child{margin-bottom:0}
+.warn-tag{font-family:'DM Mono',monospace;font-size:9.5px;background:var(--ro4);color:#fff;border-radius:3px;padding:2px 7px;display:inline-block;margin-bottom:4px}
+.warn-body{font-size:12.5px;color:var(--ro);line-height:1.75}
+
+/* Quote */
+.quote{background:linear-gradient(135deg,var(--night),var(--night2));border-radius:10px;padding:14px 20px;position:relative;overflow:hidden;margin-bottom:20px}
+.qm{font-family:'Playfair Display',serif;font-size:72px;color:rgba(16,185,129,.07);position:absolute;top:-10px;left:8px;line-height:1}
+.qt{font-size:13px;color:rgba(255,255,255,.88);line-height:1.65;position:relative;z-index:1}
+.qt em{color:#34d399;font-style:normal;font-weight:700}
+.qt em2{color:var(--or3);font-style:normal}
+.qs{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.35);margin-top:6px;position:relative;z-index:1}
+
+.page-footer{background:var(--night);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:#34d399}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-g1"></div>
+  <div class="ph-g2"></div>
+  <div class="ph-eyebrow">0730 · 佳汝 課後複習 · 財報矛盾點×現金流照妖鏡×加速折舊×IPO警訊×調整後指標</div>
+  <div class="ph-title">讀財報要尋找<em>數字的矛盾點</em>——<br>帳面賺錢但現金為負？帳面虧損但現金充裕？<em2>每個矛盾都是企業真相的入口</em2></div>
+  <div class="ph-sub">杜邦ROE×應付帳款周轉率×中租資產結構×現金流照妖鏡×摩斯/欣欣網/南亞科案例×義隆IPO美化×調整後指標</div>
+  <div class="ph-meta">
+    <span class="mc">2025.07.30</span>
+    <span class="mc">佳汝</span>
+    <span class="mc mc-o">現金流照妖鏡</span>
+    <span class="mc mc-v">IPO警訊×義隆案例</span>
+    <span class="mc mc-r">調整後指標×Google</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 金句 -->
+  <div class="quote">
+    <div class="qm">"</div>
+    <div class="qt">「財報的帳面數字永遠只說一半；<em>現金流量表是那面照妖鏡</em>——它不說謊，只告訴你錢到底有沒有回來。<br>帳面賺錢、現金卻為負，代表錢卡在別人口袋；帳面虧損、現金卻充裕，折舊正在幫公司悄悄囤積資金。<em2>讀懂矛盾，才能看穿數字後面的真相。</em2>」</div>
+    <div class="qs">Rock 老師 · 0730 佳汝 · 財報矛盾點×現金流照妖鏡 · 佳汝現任遠東生技類財務長，協助公司上櫃（IPO）</div>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <div class="section-label">Part 1 · 杜邦ROE + 應付帳款 + 資產負債表 · 賺錢三維度×零利率資金×中租結構解碼</div>
+    <div class="section-title">從杜邦方程式看懂企業賺錢基因：能力、速度、風險三個齒輪如何咬合</div>
+    <div class="grid-3">
+      <div class="card-dark">
+        <h3>✕ 杜邦方程式：賺錢三大齒輪</h3>
+        <div class="roe-strip">
+          <div class="roe-item" style="background:rgba(16,185,129,.2)">
+            <div class="roe-icon">💎</div>
+            <div class="roe-title">毛利率</div>
+            <div class="roe-sub">靠能力<br>賣得貴/有價值</div>
+          </div>
+          <div class="roe-sym">✕</div>
+          <div class="roe-item" style="background:rgba(37,99,235,.2)">
+            <div class="roe-icon">⚡</div>
+            <div class="roe-title">周轉率</div>
+            <div class="roe-sub">靠速度<br>賣得快（翻桌率）</div>
+          </div>
+          <div class="roe-sym">✕</div>
+          <div class="roe-item" style="background:rgba(234,88,12,.2)">
+            <div class="roe-icon">📈</div>
+            <div class="roe-title">負債比</div>
+            <div class="roe-sub">靠風險<br>開槓桿擴大</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,.06);border-radius:6px;padding:8px 11px;font-size:12px;color:rgba(255,255,255,.7)">
+          三齒輪相乘 ＝ ROE（股東權益報酬率）極大化。巴菲特最重視的指標，衡量「拿老闆的錢能賺多少」。
+        </div>
+      </div>
+
+      <div class="card-em">
+        <h3>📑 應付帳款：越慢付越有利</h3>
+        <div style="background:rgba(5,150,105,.1);border-radius:7px;padding:9px 12px;margin-bottom:8px">
+          <div style="font-size:11.5px;font-weight:700;color:var(--em4);margin-bottom:3px">與存貨/應收帳款相反</div>
+          <div style="font-size:12.5px;color:var(--em);line-height:1.75">一般存貨、應收帳款周轉率「越快越好」；但<strong>應付帳款周轉率越低越好</strong>——付款期越長，等於免費佔用供應商的資金。</div>
+        </div>
+        <div style="font-size:12px;font-weight:700;color:var(--em4);margin-bottom:5px">「零利率」資金的兩大來源</div>
+        <div style="background:rgba(5,150,105,.08);border-radius:6px;padding:7px 10px;margin-bottom:5px;font-size:12px;color:var(--em)">
+          <strong>向客戶借：</strong>預售屋 ＝ 客戶先付款讓建商蓋房。建商讓利（售價較低）吸引客戶；成屋建商已自行吸收資金成本，價格較硬。
+        </div>
+        <div style="background:rgba(5,150,105,.06);border-radius:6px;padding:7px 10px;font-size:12px;color:var(--em)">
+          <strong>向供應商借：</strong>拿貨90–120天後才付款，賣貨現金已收但款尚未付出，資金壓力轉嫁給供應商。
+        </div>
+      </div>
+
+      <div class="card-or">
+        <h3>🏦 中租控股：資產結構破解</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px">
+          <div style="background:rgba(234,88,12,.1);border-radius:6px;padding:7px 10px;text-align:center">
+            <div style="font-family:'DM Mono',monospace;font-size:15px;font-weight:700;color:var(--or4)">9,761億</div>
+            <div style="font-size:11px;color:var(--or);margin-top:2px">總資產</div>
+          </div>
+          <div style="background:rgba(234,88,12,.1);border-radius:6px;padding:7px 10px;text-align:center">
+            <div style="font-family:'DM Mono',monospace;font-size:15px;font-weight:700;color:var(--or4)">80%</div>
+            <div style="font-size:11px;color:var(--or);margin-top:2px">負債比</div>
+          </div>
+        </div>
+        <div style="background:rgba(234,88,12,.1);border-radius:7px;padding:9px 12px;margin-bottom:7px">
+          <div style="font-size:11.5px;font-weight:700;color:var(--or4);margin-bottom:3px">應收帳款佔總資產61%（約5,940億）</div>
+          <div style="font-size:12px;color:var(--or);line-height:1.75">看佔比最高的科目即可猜中主業——中租主要就是靠「放款賺利息」。向銀行借&lt;3%，放款給中小企業收10%以上。</div>
+        </div>
+        <div style="font-size:12px;color:var(--or);line-height:1.75;background:rgba(234,88,12,.06);border-radius:6px;padding:7px 10px">
+          80%負債比並非高風險信號——<strong>只要利差（借低放高）持續成立，槓桿借好借滿是最理性的策略</strong>。增值循環 &gt; 貶值循環即可。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: 現金流照妖鏡 + 折舊動機 -->
+  <div class="section">
+    <div class="section-label">Part 2 · 現金流量表照妖鏡 + 加速折舊動機 · 欣欣網×南亞科×摩斯漢堡三大案例</div>
+    <div class="section-title">現金流量表不說謊：帳面數字可以美化，但錢進來了就是進來了</div>
+    <div class="grid-32">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <!-- 三大案例 -->
+        <div class="card-dark">
+          <h3>🔦 現金流照妖鏡：三大案例對照</h3>
+
+          <div class="cf-case" style="background:rgba(244,63,94,.1);border:1px solid rgba(244,63,94,.2)">
+            <span class="cf-badge" style="background:var(--ro4);color:#fff">⚠️ 欣欣網 — 最危險型</span>
+            <div class="cf-nums">
+              <div class="cf-num" style="background:rgba(190,242,100,.1);color:#bef264">獲利 +9,000萬</div>
+              <div class="cf-vs">但</div>
+              <div class="cf-num" style="background:rgba(244,63,94,.15);color:#fb7185">現金流 −1億</div>
+            </div>
+            <div class="cf-body" style="color:rgba(255,255,255,.75)">帳面賺錢，錢卻跑掉了。主因：錢卡在<strong style="color:#fff">存貨與應收帳款</strong>（尚未收回），或正在積極壓貨擴張（策略性考量）。無論如何，帳面獲利無法動用。</div>
+            <span class="cf-verdict" style="background:rgba(244,63,94,.15);color:#fb7185">→ 最需警覺：「黑字倒閉」就是這樣發生的</span>
+          </div>
+
+          <div class="cf-case" style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2)">
+            <span class="cf-badge" style="background:var(--em4);color:#fff">✅ 南亞科 — 最不用擔心型</span>
+            <div class="cf-nums">
+              <div class="cf-num" style="background:rgba(244,63,94,.12);color:#fb7185">虧損 −5億</div>
+              <div class="cf-vs">但</div>
+              <div class="cf-num" style="background:rgba(16,185,129,.15);color:#34d399">現金流 +30億</div>
+            </div>
+            <div class="cf-body" style="color:rgba(255,255,255,.75)">帳面虧損，現金卻源源不絕。主因：龐大的<strong style="color:#fff">折舊攤銷費用</strong>（過去已付現的設備，現在只是帳面攤提，實際現金仍留在公司）。</div>
+            <span class="cf-verdict" style="background:rgba(16,185,129,.12);color:#34d399">→ 最不需擔心：帳面虧損只是折舊在作帳</span>
+          </div>
+
+          <div class="cf-case" style="background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.2);margin-bottom:0">
+            <span class="cf-badge" style="background:var(--vi4);color:#fff">💡 摩斯漢堡 — 刻意加速折舊型</span>
+            <div class="cf-body" style="color:rgba(255,255,255,.75)">上市首度帳面虧損，但現金極為充裕。細看財報：固定資產（裝潢）以<strong style="color:#fff">最低年限兩年加速攤銷</strong>，刻意壓低利潤。現金還在，只是藏起來了。</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <!-- 折舊動機 -->
+        <div class="card-em">
+          <h3>🎯 摩斯加速折舊的商業動機</h3>
+          <div class="mo-row" style="padding-top:0">
+            <div class="mo-n">①</div>
+            <div class="mo-body"><strong>節稅（首要目的）</strong>：折舊費用拉高 → 稅前利潤壓低 → 應繳所得稅減少。合法、最划算的省錢方式。</div>
+          </div>
+          <div class="mo-row">
+            <div class="mo-n">②</div>
+            <div class="mo-body"><strong>免發股利</strong>：獲利壓到損益兩平或小虧，股東大會無從要求發放現金股利 → 現金留在公司內部繼續滾動。</div>
+          </div>
+          <div class="mo-row">
+            <div class="mo-n">③</div>
+            <div class="mo-body"><strong>次年EPS增長率好看</strong>：今年基期已壓低，明年只要正常表現，成長率數字就會非常漂亮 → 股東與分析師皆高興。</div>
+          </div>
+          <div style="background:rgba(5,150,105,.1);border-radius:6px;padding:8px 11px;margin-top:8px;font-size:12px;color:var(--em4)">
+            反向操作：診所將裝潢費<strong>拉長年限攤提</strong>，是為了讓初期帳面利潤較好看，吸引投資人或合作夥伴。
+          </div>
+        </div>
+
+        <!-- 損益表落差 -->
+        <div class="card-bl">
+          <h3>📊 毛利率 vs 營業利益率落差</h3>
+          <p>損益表是「減法」的報表：<br>收入 − 成本 ＝ 毛利 → 毛利 − 費用 ＝ 營業利益</p>
+          <div style="background:rgba(37,99,235,.1);border-radius:7px;padding:9px 12px;margin-top:8px">
+            <div style="font-size:12px;font-weight:700;color:var(--bl4);margin-bottom:3px">兩者落差過大 ＝ 費用失控</div>
+            <div style="font-size:12.5px;color:var(--bl);line-height:1.75">毛利率高但淨利率差，代表老闆「<strong>有錢就作怪</strong>」——亂花費用，管理效率低落。好公司費用控管嚴格（意味著員工被嚴格要求、效率高）。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: 警示 + 調整後指標 -->
+  <div class="section">
+    <div class="section-label">Part 3 · 財報警訊 + 調整後指標 · KAM×義隆IPO×存貨備抵×Google案例</div>
+    <div class="section-title">財報裡的警訊訊號：會計師標的、存貨品質、IPO前夕的利潤美化</div>
+    <div class="grid-3">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <!-- 警示指標 -->
+        <div class="card-ro">
+          <h3>🚨 三大財報警訊</h3>
+          <div class="warn-item" style="background:rgba(244,63,94,.07);border-color:rgba(244,63,94,.18)">
+            <span class="warn-tag">KAM 關鍵查核事項</span>
+            <div class="warn-body">讀不完整本財報時，<strong>先看會計師標記的KAM</strong>——會計師標示的風險點，就是最可能藏有問題的地方。</div>
+          </div>
+          <div class="warn-item" style="background:rgba(244,63,94,.07);border-color:rgba(244,63,94,.18)">
+            <span class="warn-tag">義隆 — 存貨備抵逆勢上升</span>
+            <div class="warn-body">存貨總額下降（舊貨已去化）→ 照理備抵損失率應降低。但義隆備抵損失率從18%<strong>逆勢升至20%</strong>，說明「<strong>留下來的都是賣不掉的爛貨</strong>」。</div>
+          </div>
+          <div class="warn-item" style="background:rgba(244,63,94,.07);border-color:rgba(244,63,94,.18)">
+            <span class="warn-tag">義隆 — IPO前財報美化</span>
+            <div class="warn-body">IPO當年毛利率從24%飆升至30%。主因：將過去認列的9.5億元負債準備（產能未達標損失）進行<strong>「迴轉利益」</strong>，直接沖減當期營業成本，讓毛利率看起來異常漂亮。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Google案例 + 調整後指標 -->
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="card-am">
+          <h3>🔍 Google 財報：投資利得遮蓋本業</h3>
+          <div style="display:flex;gap:7px;margin-bottom:8px">
+            <div style="flex:1;background:rgba(146,64,14,.1);border-radius:6px;padding:8px 10px;text-align:center">
+              <div style="font-family:'DM Mono',monospace;font-size:17px;font-weight:700;color:var(--am4)">$9.00</div>
+              <div style="font-size:11px;color:var(--am);margin-top:2px">帳面EPS</div>
+            </div>
+            <div style="display:flex;align-items:center;color:rgba(146,64,14,.35);font-size:20px">→</div>
+            <div style="flex:1;background:rgba(146,64,14,.07);border-radius:6px;padding:8px 10px;text-align:center">
+              <div style="font-family:'DM Mono',monospace;font-size:17px;font-weight:700;color:var(--am)">$2.74</div>
+              <div style="font-size:11px;color:var(--am);margin-top:2px">核心業務EPS</div>
+            </div>
+          </div>
+          <p>高達<strong>$6.26的EPS</strong>來自對CrowdStrike等公司的<strong>未實現投資收益</strong>——「帳面賺錢但錢沒回來」（現金流無流入）。剔除後才能看出本業真實表現。</p>
+        </div>
+
+        <div class="card-vi">
+          <h3>📊 調整後指標：財務人員的說話藝術</h3>
+          <div style="font-size:12px;color:var(--vi);margin-bottom:7px">法說會上常見的「調整後財務指標」——剔除非常規、非現金、特殊一次性項目。</div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="background:rgba(124,58,237,.1);border-radius:6px;padding:7px 10px;font-size:12px;color:var(--vi)"><span style="font-weight:700;color:var(--vi4)">常見剔除項目：</span>匯率波動 / 重組裁員費用 / 股權激勵費用 / 資產減損 / 未實現投資損益</div>
+            <div style="background:rgba(124,58,237,.07);border-radius:6px;padding:7px 10px;font-size:12px;color:var(--vi)"><span style="font-weight:700;color:var(--vi4)">SAP案例：</span>從地端軟體轉雲端服務，地端維護人力大量裁員 → 一次性重組費用 → 剔除後才能看出轉型後的本業潛力</div>
+            <div style="background:rgba(124,58,237,.1);border-radius:6px;padding:7px 10px;font-size:12.5px;font-weight:700;color:var(--vi4)">⭐ 掌握這個，就能讀懂美股法說會與國際財經新聞的「財務修辭」。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 職涯背景 + 啟示 -->
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="card-dark">
+          <h3>👤 佳汝背景：財務長實戰視角</h3>
+          <div style="background:rgba(16,185,129,.1);border-radius:7px;padding:9px 12px;margin-bottom:8px">
+            <div style="font-size:12px;font-weight:700;color:#34d399;margin-bottom:3px">遠東生技 · 類財務長職務</div>
+            <div style="font-size:12.5px;color:rgba(255,255,255,.78);line-height:1.75">核心任務：協助公司<strong style="color:#fff">推動上櫃（IPO）</strong>，處理困難財務挑戰，以任務型工作模式保有自由彈性。重視家庭時間與身體健康，不愛加班。</div>
+          </div>
+          <div style="font-size:12.5px;color:rgba(255,255,255,.75);line-height:1.8">
+            ⚙️ 這堂課對佳汝的實戰連結：<br>
+            · 義隆IPO前財報美化 → 自己正在準備的IPO值得對照<br>
+            · KAM與存貨警訊 → 審視遠東生技的財報健康度<br>
+            · 調整後指標 → 向投資人溝通業績時的說故事框架
+          </div>
+        </div>
+
+        <div class="card-sl">
+          <h3>🎯 財報判讀核心姿態</h3>
+          <ul style="color:var(--sl)">
+            <li>先看「現金流量表」驗證帳面獲利是否為真</li>
+            <li>毛利率突然跳升 → 先問有無一次性迴轉利益</li>
+            <li>存貨縮小但備抵損失率上升 → 留下的是爛貨</li>
+            <li>帳面虧損不代表公司有問題 → 先看現金流</li>
+            <li>帳面獲利極高 → 先確認錢有沒有真正收回來</li>
+          </ul>
+          <div style="background:rgba(30,41,59,.08);border-radius:6px;padding:7px 11px;margin-top:8px;font-size:12px;color:var(--sl4)">
+            具備財報知識 ＝ 投資時能趨吉避凶——只要公司基本面良好，大盤波動只是比拚資金深度。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">佳汝 · 0730 · 財報矛盾點×現金流照妖鏡×加速折舊×IPO警訊×義隆×調整後指標×Google</div>
+</div>
+
+</body>
+</html>
