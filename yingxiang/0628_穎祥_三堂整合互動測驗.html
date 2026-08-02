@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>估值 × 商業模式 × 損益表競爭力 — 互動複習測驗 · 穎祥</title>
+<style>
+  :root{
+    --bg:#0f1115;
+    --card:#171a21;
+    --card2:#1e222b;
+    --accent:#ff8a3d;
+    --accent2:#4fd1c5;
+    --blue:#7dd3fc;
+    --purple:#a78bfa;
+    --good:#4ade80;
+    --bad:#f87171;
+    --text:#e8eaed;
+    --sub:#9aa1ab;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:radial-gradient(circle at 20% -10%, #26314a 0%, var(--bg) 45%);
+    color:var(--text);
+    padding:24px 16px 60px;
+  }
+  .wrap{max-width:800px;margin:0 auto;}
+  header{margin-bottom:22px;}
+  .tag{
+    display:inline-block;font-size:12px;letter-spacing:1px;color:var(--accent);
+    background:rgba(255,138,61,.12);border:1px solid rgba(255,138,61,.35);
+    padding:4px 10px;border-radius:999px;margin-bottom:12px;
+  }
+  h1{font-size:25px;line-height:1.45;margin:0 0 8px;}
+  .desc{color:var(--sub);font-size:14px;margin:0;line-height:1.75;}
+  .meta{color:var(--sub);font-size:12px;margin-top:10px;line-height:1.7;}
+
+  .progress-bar{height:6px;background:#262b35;border-radius:999px;overflow:hidden;margin:20px 0 10px;}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%;transition:width .4s ease;}
+  .progress-text{text-align:right;font-size:11.5px;color:var(--sub);margin-bottom:22px;}
+
+  .card{background:var(--card);border:1px solid #262b35;border-radius:16px;padding:22px 20px;margin-bottom:18px;display:none;}
+  .card.active{display:block;}
+  .topline{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+  .qnum{font-size:12px;color:var(--sub);font-weight:700;letter-spacing:1px;}
+  .badges{display:flex;gap:6px;}
+  .sec{font-size:11px;padding:2px 9px;border-radius:999px;font-weight:600;}
+  .sec.s0608{color:var(--blue);border:1px solid rgba(125,211,252,.4);background:rgba(125,211,252,.1);}
+  .sec.s0615{color:var(--accent2);border:1px solid rgba(79,209,197,.4);background:rgba(79,209,197,.1);}
+  .sec.s0621{color:var(--accent);border:1px solid rgba(255,138,61,.4);background:rgba(255,138,61,.1);}
+  .sec.sMix{color:var(--purple);border:1px solid rgba(167,139,250,.4);background:rgba(167,139,250,.1);}
+  .level{font-size:11px;color:var(--sub);border:1px solid #333a46;padding:2px 9px;border-radius:999px;}
+
+  .qtext{font-size:17px;line-height:1.65;margin:0 0 14px;font-weight:600;}
+  .databox{
+    background:#12151b;border:1px solid #262b35;border-radius:10px;
+    padding:12px 14px;margin-bottom:16px;font-size:13px;line-height:1.95;color:#c3c9d1;
+    font-variant-numeric:tabular-nums;
+  }
+  .databox b{color:var(--accent);}
+
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt{
+    text-align:left;background:var(--card2);border:1px solid #2c313c;color:var(--text);
+    padding:13px 16px;border-radius:10px;font-size:14.5px;cursor:pointer;transition:all .15s ease;line-height:1.55;
+  }
+  .opt:hover{border-color:var(--accent2);}
+  .opt.correct{background:rgba(74,222,128,.14);border-color:var(--good);color:#c6f6d5;}
+  .opt.wrong{background:rgba(248,113,113,.14);border-color:var(--bad);color:#fecaca;}
+  .opt.disabled{cursor:default;pointer-events:none;opacity:.78;}
+
+  .explain{
+    margin-top:16px;padding:14px 16px;background:#12151b;border-left:3px solid var(--accent2);
+    border-radius:8px;font-size:13.5px;line-height:1.9;color:#d4d8dd;display:none;
+  }
+  .explain.show{display:block;}
+  .explain .key{color:var(--accent);font-weight:700;}
+
+  .nextBtn{
+    margin-top:18px;display:none;background:var(--accent);color:#1a1000;font-weight:700;
+    border:none;padding:11px 22px;border-radius:999px;font-size:14px;cursor:pointer;
+  }
+  .nextBtn.show{display:inline-block;}
+
+  .result{display:none;background:var(--card);border:1px solid #262b35;border-radius:16px;padding:34px 22px;}
+  .result.show{display:block;}
+  .result .center{text-align:center;}
+  .result .score{font-size:46px;font-weight:800;margin:6px 0;color:var(--accent);}
+  .result .label{color:var(--sub);font-size:13px;}
+  .secscore{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:22px 0 4px;}
+  .secscore div{
+    background:#12151b;border:1px solid #262b35;border-radius:10px;
+    padding:10px 14px;font-size:12.5px;color:var(--sub);min-width:118px;text-align:center;
+  }
+  .secscore div b{display:block;font-size:19px;color:var(--text);margin-top:4px;font-variant-numeric:tabular-nums;}
+  .result .msg{margin:22px auto 0;max-width:560px;font-size:14.5px;line-height:1.9;color:#d4d8dd;text-align:left;}
+  .retryBtn{margin:24px auto 0;display:block;background:transparent;border:1px solid var(--accent2);color:var(--accent2);padding:9px 22px;border-radius:999px;cursor:pointer;font-size:13.5px;}
+
+  .quicktable{margin-top:40px;}
+  .quicktable h2{font-size:15px;color:var(--accent2);margin-bottom:12px;}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;background:var(--card);border-radius:12px;overflow:hidden;}
+  th,td{padding:9px 10px;border-bottom:1px solid #262b35;text-align:left;vertical-align:top;}
+  th{background:#1e222b;color:var(--sub);font-weight:600;}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;}
+
+  .disclaimer{
+    margin-top:24px;padding:12px 14px;background:#12151b;border:1px solid #262b35;
+    border-radius:10px;font-size:12px;color:var(--sub);line-height:1.8;
+  }
+  footer{margin-top:26px;text-align:center;color:#5a606b;font-size:11.5px;line-height:1.9;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="tag">商業思維 · 三堂課整合測驗</span>
+    <h1>財報是過去，估值是未來<br>從商業模式到損益表競爭力</h1>
+    <p class="desc">共 20 題單選，涵蓋 0608（財報 vs 估值 × AI 賣鏟子）、0615（皮克敏商業模式解密）、0621（損益表看結構性護城河），最後 3 題為跨堂整合。答完顯示分區得分與錯題複習清單。</p>
+    <div class="meta">Rock 會計家教 · 蕭啟漢｜學生：穎祥</div>
+  </header>
+
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-text" id="progressText">0 / 20</div>
+
+  <div id="quizArea"></div>
+
+  <div class="result" id="resultBox">
+    <div class="center">
+      <div class="label">測驗完成</div>
+      <div class="score" id="scoreText">0 / 20</div>
+      <div class="label" id="scoreSub"></div>
+    </div>
+    <div class="secscore" id="secScore"></div>
+    <div class="msg" id="resultMsg"></div>
+    <button class="retryBtn" onclick="restartQuiz()">重新測驗</button>
+  </div>
+
+  <div class="quicktable">
+    <h2>🏰 四大護城河與毛利率對照表</h2>
+    <table>
+      <tr><th>類型</th><th>代表</th><th class="num">毛利率</th><th>護城河來源</th></tr>
+      <tr><td>專利優勢</td><td>生技 IP 授權</td><td class="num">100%</td><td>零生產成本，專利＝壟斷性定價權</td></tr>
+      <tr><td>品牌優勢</td><td>LVMH</td><td class="num">69%</td><td>消費者買的是「階級提升感」</td></tr>
+      <tr><td>本業＋業外</td><td>龍巖（生命禮儀）</td><td class="num">66%</td><td>高毛利本業 ＋ 投資雙引擎</td></tr>
+      <tr><td>技術優勢</td><td>台積電</td><td class="num">53%</td><td>技術壁壘＝無可取代的定價主導權</td></tr>
+      <tr><td>穩定優勢</td><td>弘帆（女性髮飾）</td><td class="num">穩定</td><td>自 2011 年起年年 ≥ 20 億，穩定本身就是護城河</td></tr>
+    </table>
+  </div>
+
+  <div class="quicktable">
+    <h2>📊 三項費用控管紀律速查</h2>
+    <table>
+      <tr><th>費用類別</th><th>看什麼</th><th>案例數據</th></tr>
+      <tr><td>推銷費用</td><td>品牌投資強度（比率固定不波動＝紀律）</td><td>LVMH 36%（半年約 150 億歐元）</td></tr>
+      <tr><td>管理費用</td><td>企業內控強度（暴增＝忘記自己是誰）</td><td>LVMH 7%，精準控制</td></tr>
+      <tr><td>研發費用</td><td>未來投資力度（轉化為開發文件與 IP）</td><td>台積電 460 億/季，約占營收 8%</td></tr>
+    </table>
+  </div>
+
+  <div class="quicktable">
+    <h2>🌸 皮克敏關鍵數字</h2>
+    <table>
+      <tr><th>指標</th><th class="num">數字</th><th>意義</th></tr>
+      <tr><td>累積營收（至 2025.12）</td><td class="num">1 億美金</td><td>約新台幣 32 億元</td></tr>
+      <tr><td>台灣月活躍用戶 MAU</td><td class="num">50 萬</td><td>頂級遊戲／直播僅 2~3 萬</td></tr>
+      <tr><td>玩家平均年齡</td><td class="num">36 歲</td><td>有工作、有消費力，女性受眾極多</td></tr>
+      <tr><td>獲客成本 CAC</td><td class="num">≈ 0</td><td>靠口碑飛輪，不買廣告</td></tr>
+      <tr><td>蘋果稅／Google 稅</td><td class="num">25%</td><td>平台未參與開發卻穩定抽成</td></tr>
+    </table>
+  </div>
+
+  <div class="disclaimer">
+    ⚠ 免責聲明：本測驗內容取自課後複習教材，僅供教學與觀念練習之用，非投資買賣建議。個股數據請以公司正式公告之財務報告為準。
+  </div>
+
+  <footer>
+    穎祥 · 商業思維三堂整合測驗<br>
+    教材來源：0608 財報是過去，估值是未來｜0615 皮克敏商業模式解密｜0621 從損益表看穿結構性護城河
+  </footer>
+</div>
+
+<script>
+const questions = [
+  /* ===== 0608 財報 vs 估值 ===== */
+  {
+    sec:"0608", secCls:"s0608", level:"核心",
+    q:"「財報 ≠ 股價，但兩者絕對有關」——這句話中，財報與估值各自代表什麼？",
+    data:"📊 財報：歷史數據 · 確定<br>🔮 估值：市場信念 · 不確定",
+    options:[
+      "財報是未來的預測，估值是過去的紀錄",
+      "財報是過去的意見（歷史數據），估值是未來的預期（市場信念）",
+      "財報與估值都反映當下，只是計算方式不同",
+      "財報決定股價，兩者是因果關係"
+    ],
+    correct:1,
+    explain:"<span class='key'>財報是過去的意見，估值是未來的預期</span>。財報提供確定的歷史數據作為評估基礎，但股價真正定價的是<span class='key'>市場對未來的信念</span>。所以會出現「財報好帶你上天堂，但未來預期差會讓你跌落神壇」的現象——這是整堂課的底層公式。"
+  },
+  {
+    sec:"0608", secCls:"s0608", level:"比喻",
+    q:"NBA 球員薪水的比喻中，「歷史數據」與「薪水」分別對應到什麼？",
+    data:"Curry 的合約建立在球團對他<b>未來表現</b>的信念上",
+    options:[
+      "歷史數據＝估值；薪水＝財報",
+      "歷史數據＝財報（證明過去實力）；薪水＝估值（對未來的預期）",
+      "兩者都是財報，只是統計口徑不同",
+      "歷史數據與薪水沒有關聯，薪水純由市場行情決定"
+    ],
+    correct:1,
+    explain:"<span class='key'>過去的「鬼神數據」是評估的基礎，但薪水買的是未來</span>。所以當球團預期球員體能下滑或即將退役時，<span class='key'>即使歷史數據再漂亮，薪水（估值）也會下修</span>。這個比喻完美對應微軟——財報創新高，但市場擔心 AI 威脅其未來，估值照樣崩。"
+  },
+  {
+    sec:"0608", secCls:"s0608", level:"陷阱",
+    q:"為什麼不能只看新聞判斷一家公司？瓦城的案例說明了什麼？",
+    data:"新聞報導負面<br>實際查閱財報：毛利率仍維持 <b>20%+</b>，營業利益接近損益兩平，成本並未如新聞所說惡化",
+    options:[
+      "新聞永遠是錯的，應該完全忽略",
+      "人類天生偏信壞消息，悲觀故事常是吸引點擊的包裝；要用財報數據佐證才不被商業故事誤導",
+      "因為新聞記者不懂會計，數字一定有誤",
+      "因為新聞有時間落差，等到刊出時股價已經反映完畢"
+    ],
+    correct:1,
+    explain:"關鍵在人性：<span class='key'>壞消息聽起來像善意警告，所以人類天生偏信</span>，但悲觀故事往往只是吸引點擊的包裝。瓦城被報導得很慘，實際查財報<span class='key'>毛利率仍有 20%+、成本並未惡化</span>。正確順序是<span class='key'>先查財報，再看新聞</span>——用數據佐證觀點，而不是被故事牽著走。"
+  },
+  {
+    sec:"0608", secCls:"s0608", level:"案例",
+    q:"微軟 2025 年營收 +15%、營業利益 +17%、訂閱制現金流極穩定，股價卻從 $527 跌到 $380+。根本原因是什麼？",
+    data:"PE 修正：<b>40 倍 → 28 倍</b><br>股價跌回 COVID 水準",
+    options:[
+      "財報數字造假，被市場識破",
+      "AI 橫空出世，市場擔憂 AI 全面取代傳統軟體，認為未來有致命缺點，因此估值大幅下修",
+      "公司大股東大量賣股，造成賣壓",
+      "美國升息導致資金撤離科技股"
+    ],
+    correct:1,
+    explain:"這就是<span class='key'>「微軟悖論」：財報完美 ＋ 未來有 AI 威脅 ＝ 股價雪崩</span>。財報三項指標全都很漂亮，但市場擔心 AI 會全面取代傳統軟體，<span class='key'>對未來的信念改變了，PE 就從 40 倍修正到 28 倍</span>。這證明一件事：<span class='key'>賺錢不夠，還要讓市場相信你的未來</span>。"
+  },
+  {
+    sec:"0608", secCls:"s0608", level:"計算",
+    q:"本益比（PE）的定義與意義是什麼？",
+    data:"PE ＝ 股價 ÷ EPS<br>EPS 不變，股價越高 → PE 越高",
+    options:[
+      "PE 越高代表公司越賺錢，體質越好",
+      "PE 是市場給的估值倍數；EPS 不變時股價越高 PE 越高，代表市場給越大信任——也可能是泡沫",
+      "PE 越低代表公司衰退，應該避開",
+      "PE 只反映公司的獲利能力，與市場情緒無關"
+    ],
+    correct:1,
+    explain:"<span class='key'>PE ＝ 股價 ÷ EPS，本質是「市場願意用幾倍的獲利去買這家公司」</span>。EPS 不變而股價上漲，代表市場給予更高的信任倍數——<span class='key'>但信任過頭就是泡沫</span>。判斷泡沫的方法就是：<span class='key'>PE 過高 ＝ 未來預期被過度放大，隨時可能破裂</span>。"
+  },
+  {
+    sec:"0608", secCls:"s0608", level:"洞見",
+    q:"38 歲的梅西、41 歲的 C 羅體能已不如全盛期，為何仍能拿到天價薪水？",
+    data:"沙烏地王儲把辦世界盃與簽球星當作<b>國際曝光策略</b>",
+    options:[
+      "因為他們的體能其實沒有下滑",
+      "估值 ＝ 踢球能力 ＋ 廣告效益 ＋ 熱度商業價值；市場有時會因非常規理由給出瘋狂估值",
+      "因為球團無法找到替代球員",
+      "因為合約是很久以前簽的，尚未到期"
+    ],
+    correct:1,
+    explain:"這題延伸了估值的概念：<span class='key'>估值不只反映本業能力，還包含附加商業價值</span>。梅西、C 羅的薪水 ＝ 球技 ＋ 廣告效益 ＋ 熱度。沙烏地是把簽球星當國際曝光策略，<span class='key'>市場有時會因非常規理由給出瘋狂估值</span>——這也解釋了為何有些公司的股價，用純財務指標怎麼算都算不出來。"
+  },
+  {
+    sec:"0608", secCls:"s0608", level:"策略",
+    q:"AI 淘金熱中的「賣鏟子理論」，誰才是相對確定的贏家？",
+    data:"🤖 AI 軟體公司 ＝ 淘金者（不一定挖到金礦）<br>⛏️ 晶片／伺服器 ＝ 賣鏟子的人",
+    options:[
+      "AI 軟體公司，因為它們直接面對終端客戶",
+      "晶片與伺服器供應商（如 Nvidia、台積電）——只要大家相信 AI，需求就持續噴發",
+      "傳統軟體股，因為它們有既有的客戶基礎",
+      "所有與 AI 沾邊的公司都會是贏家"
+    ],
+    correct:1,
+    explain:"淘金熱的邏輯：<span class='key'>淘金者不一定挖到金礦，甚至可能半路陣亡，但賣鏟子的人穩賺</span>。AI 軟體公司彼此廝殺、勝負難料；<span class='key'>Nvidia（高階運算晶片設計）與台積電（全球唯一的製造節點）只要「大家相信 AI」需求就持續噴發</span>。反之傳統軟體股因 AI 降低其不可替代性，估值承壓。"
+  },
+  {
+    sec:"0608", secCls:"s0608", level:"風險",
+    q:"關於槓桿（借錢）的使用，課程給出的判準是什麼？",
+    data:"🏢 企業：投報率 > 借款利率 → 借錢擴張<br>👤 個人：個人理財",
+    options:[
+      "企業與個人都應該積極使用槓桿放大報酬",
+      "企業在投報率高於借款利率時可借錢擴張；個人理財則強烈不建議槓桿",
+      "企業不應舉債，個人則可適度槓桿",
+      "槓桿一律有害，任何情況都應避免"
+    ],
+    correct:1,
+    explain:"槓桿是雙刃劍，判準完全不同：<span class='key'>企業有明確的計算基準——投報率 > 借款利率就值得借</span>；但<span class='key'>個人理財強烈不建議槓桿</span>，因為個人沒有企業的現金流穩定性與風險分散能力。重點是<span class='key'>清楚自己的底線，才不會因旁人質疑而動搖</span>。"
+  },
+
+  /* ===== 0615 皮克敏商業模式 ===== */
+  {
+    sec:"0615", secCls:"s0615", level:"結構",
+    q:"傳統遊戲產業的成本結構特徵是什麼？為何跨越損益兩平點後股價會驚人？",
+    data:"固定成本（高）：世界建置、平台開發、伺服器、前期廣告<br>變動成本（極低）：虛寶程式碼已寫好、無工廠、無庫存",
+    options:[
+      "低固定成本 × 高變動成本，靠薄利多銷獲利",
+      "高固定成本 × 極低變動成本；跨過損益兩平點後每筆新消費毛利率極高",
+      "固定與變動成本各半，屬於均衡型產業",
+      "全部都是變動成本，因為遊戲需要持續更新內容"
+    ],
+    correct:1,
+    explain:"這是<span class='key'>虛擬產品的本質：寫好程式就能無限複製</span>。前期要投入巨額固定成本（開發、伺服器、廣告），但每多一位玩家只增加微量頻寬與客服。<span class='key'>跨越損益兩平點後，每一筆新消費幾乎全是毛利</span>——這就是成功遊戲公司股價爆發的財務邏輯。"
+  },
+  {
+    sec:"0615", secCls:"s0615", level:"漏斗",
+    q:"傳統遊戲的高獲客成本（CAC）難題，核心風險在哪裡？",
+    data:"廣告觸及 → 下載安裝 → 付費氪金 → 高價值鯨魚<br>（每一層都<b>大幅流失</b>）",
+    options:[
+      "廣告費用太貴，中小公司無法負擔",
+      "漏斗底端少數付費玩家必須撐起整個廣告成本；遊戲不夠好玩→留存差→CAC 無法回收",
+      "下載量太低，無法達到規模經濟",
+      "鯨魚玩家太少，收入來源不夠分散"
+    ],
+    correct:1,
+    explain:"漏斗每一層都在流失，最終<span class='key'>只有底端少數付費玩家要扛起整個廣告成本</span>。所以關鍵不在花多少廣告費，而在<span class='key'>遊戲夠不夠好玩 → 留存率高不高 → CAC 能不能回收</span>。這正好凸顯皮克敏 CAC ≈ 0 有多驚人：它根本繞過了這整個漏斗。"
+  },
+  {
+    sec:"0615", secCls:"s0615", level:"策略",
+    q:"皮克敏採用的是藍海策略。它的「藍海」具體指什麼？",
+    data:"🔴 紅海：所有遊戲公司爭奪同一批傳統玩家<br>🔵 藍海：？",
+    options:[
+      "開發比競爭對手畫面更精美的遊戲",
+      "把目標鎖定「原本根本不玩遊戲的人」，重新定義競爭邊界",
+      "用更低的價格搶走競爭對手的玩家",
+      "同時經營手遊與主機遊戲，擴大產品線"
+    ],
+    correct:1,
+    explain:"<span class='key'>藍海 ＝ 重新定義客群，而非搶競爭對手的客戶</span>。紅海是所有公司爭奪同一批傳統玩家、削價競爭、廣告戰無止盡；皮克敏鎖定的是<span class='key'>「從未被傳統遊戲產業納入目標範圍」的通勤族</span>——這群人數量龐大卻沒人服務。<span class='key'>不是打贏競爭，而是讓競爭失去意義</span>。"
+  },
+  {
+    sec:"0615", secCls:"s0615", level:"設計",
+    q:"皮克敏「無死亡機制、無壓力競爭」的設計，對傳統玩家而言很無聊。為什麼這反而是成功關鍵？",
+    data:"剛性需求：都市人每天必然走路（捷運通勤）<br>缺乏的是<b>情緒價值</b>與激勵",
+    options:[
+      "因為開發簡單，可以降低製作成本",
+      "因為目標客群是通勤族，他們要的是被動、無壓力的陪伴；「無聊」對他們而言恰到好處",
+      "因為無死亡機制可以避免玩家流失",
+      "因為這樣可以通過更寬鬆的遊戲分級審查"
+    ],
+    correct:1,
+    explain:"這題測的是<span class='key'>「產品缺點對誰而言是缺點」的判斷力</span>。走路是剛性需求，但缺乏情緒價值；皮克敏用<span class='key'>手機放口袋計步、完全被動、不需主動操作</span>的設計把它遊戲化。對傳統玩家是「無聊」，<span class='key'>對通勤族卻恰到好處</span>——設計是為目標客群服務，不是為評論家服務。"
+  },
+  {
+    sec:"0615", secCls:"s0615", level:"客群",
+    q:"皮克敏玩家（平均 36 歲上班族）與傳統遊戲玩家的關鍵差異，如何影響氪金模式？",
+    data:"🎮 傳統玩家：年齡偏低，<b>有時間、沒錢</b>，傾向找免費資源，CAC 高、LTV 低<br>🌸 皮克敏玩家：平均 36 歲，<b>時間少、消費力高</b>",
+    options:[
+      "皮克敏玩家因為年紀大，反而更不願意花錢",
+      "傳統玩家「花時間換強度」；皮克敏玩家「時間稀缺 → 願意花錢換便利」，如擴充背包、買蘑菇卷",
+      "兩者氪金動機相同，只是消費金額不同",
+      "皮克敏靠廣告收入，不需要玩家氪金"
+    ],
+    correct:1,
+    explain:"氪金動機完全翻轉。傳統玩家<span class='key'>有時間沒錢</span>，願意投入大量時間彌補等級差距；皮克敏玩家是<span class='key'>36 歲上班族、女性受眾極多、時間少但消費力高</span>，氪金是為了<span class='key'>擴充背包空間、買蘑菇卷避免搶不到、購買精華與皮克敏小屋</span>——本質是<span class='key'>「時間稀缺 → 花錢換便利」</span>。"
+  },
+  {
+    sec:"0615", secCls:"s0615", level:"飛輪",
+    q:"皮克敏 CAC ≈ 0 的零獲客成本飛輪是怎麼運作的？",
+    data:"傳統：花錢買廣告 → 微量人流<br>皮克敏：免費口碑 → <b>巨量自帶流量</b>",
+    options:[
+      "任天堂用品牌知名度取代廣告，不需要口碑",
+      "玩家在 IG/Threads 分享「為了遊戲改變通勤路線」→ 引起非玩家好奇 → 下載試玩 → 玩家拉入玩家，雪球越滾越大",
+      "透過與電信商合作預裝，取得免費曝光",
+      "靠應用商店的推薦演算法自然導流"
+    ],
+    correct:1,
+    explain:"飛輪的起點是<span class='key'>玩家自發的社群分享</span>——「為了遊戲改變通勤路線」這種截圖本身就有話題性，引起非玩家好奇下載，然後<span class='key'>玩家拉入玩家，像雪球越滾越大</span>。任天堂幾乎不用下廣告，CAC ≈ 零。<span class='key'>飛輪效應比廣告強大</span>：傳統是花錢買微量人流，飛輪是免費得到巨量流量。"
+  },
+  {
+    sec:"0615", secCls:"s0615", level:"洞見",
+    q:"課程指出皮克敏真正的競爭對手不是其他手遊。那是誰？為什麼？",
+    data:"多數手遊<b>無法邊走邊玩</b>",
+    options:[
+      "Pokémon GO 等其他位置型遊戲",
+      "Google Maps 在地廣告與 SEO 關鍵字廣告的市場——因為皮克敏本質是空間廣告網路",
+      "健身環等體感運動遊戲",
+      "計步 App 與健康管理軟體"
+    ],
+    correct:1,
+    explain:"這是整堂課最關鍵的認知翻轉：<span class='key'>皮克敏是「披著計步器外皮的空間廣告網路」</span>。多數手遊無法邊走邊玩，根本不在同一個賽道；它真正搶的是<span class='key'>Google Maps 在地廣告與 SEO 關鍵字廣告</span>的預算——因為它能<span class='key'>把真實人流導進實體店面</span>，這正是在地廣告想做卻做不好的事。"
+  },
+  {
+    sec:"0615", secCls:"s0615", level:"O2O",
+    q:"皮克敏的 O2O 引流漏斗四步驟中，「來都來了」心理指的是什麼？",
+    data:"① 蘑菇/大花朵生成在現實店面位置<br>② 玩家<b>特地前往</b>原本不認識的店面<br>③ ？<br>④ 羊群效應加乘",
+    options:[
+      "玩家因為打完蘑菇太累，順便進店休息",
+      "類似迪士尼樂園心態：既然都特地來了，極高機率走進店裡消費",
+      "店家提供玩家專屬折扣，吸引消費",
+      "玩家為了拍照打卡而進店"
+    ],
+    correct:1,
+    explain:"這是行為經濟學的巧妙運用——<span class='key'>類似迪士尼樂園心態：都花時間特地來了，不消費好像虧了</span>。整套漏斗是：資源點生成 → 玩家主動改變路線 → 「來都來了」促成消費 → <span class='key'>人潮聚集引發羊群效應，路人好奇跟進</span>。實例：日本鐵道每站下車觀光、嘉義縣人潮塞爆棒球場到電信三雄要派行動基地台。"
+  },
+  {
+    sec:"0615", secCls:"s0615", level:"成本",
+    q:"「蘋果稅／Google 稅」對遊戲公司造成什麼影響？業界的應對之道是什麼？",
+    data:"玩家消費 <b>100 元</b> → 平台抽走 <b>25 元</b> → 公司實得 <b>75 元</b>",
+    options:[
+      "影響不大，因為 25% 可以轉嫁給玩家",
+      "平台未參與開發卻穩定抽走 25%，是高毛利遊戲公司最大的隱形成本；應對方式是設立官方網站販售虛寶，提供更優惠價格吸引玩家繞過平台",
+      "只影響小型遊戲公司，大廠可以協商豁免",
+      "這筆費用可以列為研發支出抵稅，實質負擔很低"
+    ],
+    correct:1,
+    explain:"<span class='key'>平台未參與任何開發，卻在累積收入達門檻後穩定抽走 25%</span>——對變動成本趨近於零的遊戲公司而言，這是<span class='key'>最大的隱形成本</span>，直接吃掉四分之一毛利。應對之道是<span class='key'>設立官方網站販售虛寶，價格比 App 內更優惠</span>，引導玩家繞過平台直接消費，保住那 25% 的利潤。"
+  },
+
+  /* ===== 0621 損益表競爭力 ===== */
+  {
+    sec:"0621", secCls:"s0621", level:"成長",
+    q:"雲豹能源營收 21 億（2021）→ 63 億（2022）→ 67 億（2023）。除了成長之外，更值得注意的競爭力訊號是什麼？",
+    data:"2021 ☀️ 太陽能 → 2022 ☀️→🔋 轉型 → 2023 🔋 儲能",
+    options:[
+      "兩年翻三倍的成長速度本身就是全部重點",
+      "成功將主力從太陽能切換為儲能事業，展現事業版圖調整能力，而非只是被動受惠於市場紅利",
+      "營收成長趨緩，代表競爭力正在下滑",
+      "營收規模仍小，尚不足以判斷競爭力"
+    ],
+    correct:1,
+    explain:"數字成長只是表象，真正的訊號是<span class='key'>「版圖轉換力」</span>——公司能主動把主力事業從太陽能切換到儲能，代表它<span class='key'>有能力自己調整戰場，而不是被動等待市場紅利</span>。被動受惠的公司，紅利退潮就完了；有版圖調整能力的公司，能一直找到下一個浪頭。"
+  },
+  {
+    sec:"0621", secCls:"s0621", level:"觀念",
+    q:"弘帆（女性髮飾）自 2011 年起每年營收 ≥ 20 億，2023 年 31 億。這種「不爆發但穩定」的表現該如何評價？",
+    data:"廠區橫跨東莞與越南，大量自動化產線<br>法說會簡報：<b>粉紅底色 × 48 頁</b>",
+    options:[
+      "缺乏成長性，不具投資價值",
+      "不需要爆發性成長，「穩定」本身就是護城河——十餘年不墜的長期穩定性是傳產企業的底氣",
+      "傳統產業無法用損益表分析，應改看資產負債表",
+      "營收停滯代表已到成熟期，即將衰退"
+    ],
+    correct:1,
+    explain:"<span class='key'>「穩定」本身就是護城河</span>。一家做女性髮飾的傳產，能<span class='key'>自 2011 年起連續十餘年營收不低於 20 億</span>，代表它在特定品類有難以撼動的地位。搭配自動化產線與東莞／越南雙廠區，這種穩定不是運氣。<span class='key'>不是所有好公司都必須高速成長</span>。"
+  },
+  {
+    sec:"0621", secCls:"s0621", level:"護城河",
+    q:"生技公司藥品 IP 授權毛利率可達 100%。原因是什麼？",
+    data:"純授權商業模式，<b>零生產成本</b>",
+    options:[
+      "因為藥品定價不受管制，可以任意提高",
+      "純授權模式沒有製造成本，每一塊收入幾乎全是毛利；專利＝壟斷性定價權",
+      "因為研發費用可以全額資本化，不列入成本",
+      "因為生技業享有租稅減免，成本被政府補貼"
+    ],
+    correct:1,
+    explain:"授權模式<span class='key'>賣的是專利權利，不是實體產品</span>——沒有工廠、沒有原料、沒有製造成本，所以<span class='key'>毛利即淨利</span>。護城河來源是<span class='key'>專利本身的排他性＝壟斷性定價權</span>。這是四大護城河中毛利率最極端的一種，但風險也高：專利到期就結束。"
+  },
+  {
+    sec:"0621", secCls:"s0621", level:"護城河",
+    q:"LVMH 毛利率 69%「像印鈔票」般穩定。消費者買的究竟是什麼？",
+    data:"2024H1 營收 <b>416 億歐元</b>（全年上看 861 億）",
+    options:[
+      "商品本身的材質與工藝品質",
+      "「階級提升感」——買的是身份認同而非商品本身，這就是品牌溢價的來源",
+      "限量供應造成的稀缺性",
+      "售後服務與保固的附加價值"
+    ],
+    correct:1,
+    explain:"品牌護城河的本質：<span class='key'>消費者買的是「階級提升感」，而非商品本身</span>。同樣的皮革與工藝，掛上 LVMH 的標就能賣出數倍價格——這個差額就是<span class='key'>品牌溢價 × 消費者身份認同</span>，也是毛利率能穩定維持 69% 的原因。材質與稀缺性只是支撐這個敘事的配件。"
+  },
+  {
+    sec:"0621", secCls:"s0621", level:"費用",
+    q:"LVMH 推銷費用占比 36%（半年約 150 億歐元）、管理費用僅 7%。這兩個數字分別說明什麼？",
+    data:"對比：某些公司剛上市就「<b>忘記自己是誰</b>」，管理費用暴增失控",
+    options:[
+      "推銷費用太高代表行銷失控，管理費用太低代表人力不足",
+      "推銷費用是塑造品牌壁壘的必要投資，且比率固定不輕易波動＝紀律；管理費用精準控制在 7%＝企業治理紀律的直接證明",
+      "兩個比率都應該越低越好，LVMH 的推銷費用有優化空間",
+      "這兩項費用比率是產業慣例，無法反映管理能力"
+    ],
+    correct:1,
+    explain:"看費用不能只看高低，要看<span class='key'>性質與穩定性</span>。<span class='key'>推銷費用 36%</span>不是浪費，而是<span class='key'>塑造品牌壁壘的必要成本</span>——關鍵在於比率固定不輕易波動，這本身就是紀律。<span class='key'>管理費用 7%</span>則是內控強度的直接證明，對比某些公司<span class='key'>剛上市就「忘記自己是誰」、管理費用暴增失控</span>，高下立判。"
+  },
+  {
+    sec:"0621", secCls:"s0621", level:"研發",
+    q:"台積電研發費用每季 460 億（月均約 150 億、占營收約 8%）。這筆錢的意義是什麼？",
+    data:"法說會直言「<b>AI 是真的</b>」，看好未來五年財務表現",
+    options:[
+      "研發費用過高，侵蝕當期獲利，屬於警訊",
+      "龐大研發支出轉化為開發文件與智慧財產；願意砸重金＝公司體質健康且明確看好未來趨勢",
+      "研發費用應該資本化，列為費用是保守做法",
+      "研發占營收 8% 屬於產業平均，不具特別意義"
+    ],
+    correct:1,
+    explain:"研發費用看的是<span class='key'>未來投資力度</span>。每季 460 億不是憑空燒掉，而是<span class='key'>轉化為開發文件與智慧財產</span>，堆疊成技術壁壘（也就是 53% 毛利率的來源）。更重要的訊號是：<span class='key'>敢持續砸重金，代表公司體質健康且對趨勢有明確判斷</span>——法說會直言「AI 是真的」就是這個判斷的公開表態。"
+  },
+  {
+    sec:"0621", secCls:"s0621", level:"ROE",
+    q:"為什麼 ROE 比 EPS 更能反映經營能力（巴菲特最愛的指標）？雲豹 2023 年 ROE 30%、股利發放率 70% 說明什麼？",
+    data:"杜邦方程式：淨利率（能力）× 資產周轉（速度）× 財務槓桿（風險）＝ ROE",
+    options:[
+      "ROE 計算較簡單，數字也比較好看",
+      "ROE 拆解為能力 × 速度 × 風險三個引擎，完整反映經營全貌；能擠出 70% 發放率代表各事業部業績嚴格達標＋現金預算控管強悍",
+      "EPS 會受股數影響，ROE 則完全不受任何干擾",
+      "ROE 只適用於高成長公司，EPS 適用於成熟公司"
+    ],
+    correct:1,
+    explain:"EPS 只是一個結果數字，<span class='key'>ROE 透過杜邦方程式拆成能力（淨利率）× 速度（資產周轉）× 風險（財務槓桿）</span>，能看出報酬是靠什麼來的。雲豹 ROE 30% 已經很強，更關鍵的是<span class='key'>股利發放率 70%</span>——能把七成獲利真金白銀發出去，代表<span class='key'>各事業部業績嚴格達標，且現金預算控管極度精準</span>。"
+  },
+  {
+    sec:"0621", secCls:"s0621", level:"DNA",
+    q:"弘帆的簡報是粉紅底色 48 頁秀廠區照片，雲豹則是數位儀表板風格強打 ROE 與移轉訂價對標。這說明什麼？",
+    data:"雲豹：總經理 ＋ 財務長<b>均具備會計師／事務所背景</b>",
+    options:[
+      "簡報設計只是美編品味，與公司實質無關",
+      "經營團隊的背景直接反映在法說會的視覺語言與說故事方式；看簡報風格與強調重點，兩分鐘內就能判斷公司的核心競爭力來源與管理層思維框架",
+      "雲豹的簡報比較專業，代表公司體質較好",
+      "粉紅底色代表公司不夠嚴謹，是負面訊號"
+    ],
+    correct:1,
+    explain:"這是<span class='key'>閱讀法說會的隱藏技巧</span>。弘帆用粉紅底色（配合女性消費者定位）× 48 頁厚重簡報主秀廠區與自動化產線，傳達的是<span class='key'>「我有實體、我有規模、我是真實的製造業」的底氣</span>；雲豹經營層有會計師背景，於是用儀表板 × 財務比率 × 移轉訂價對標國際同業中位數，說的是<span class='key'>「成為我的股東，你能獲得 30% ROE」</span>。<span class='key'>沒有優劣，只有 DNA 不同</span>。"
+  },
+
+  /* ===== 跨堂整合 ===== */
+  {
+    sec:"整合", secCls:"sMix", level:"整合",
+    q:"皮克敏「高固定成本 × 極低變動成本」的結構，與 0621 的哪一個護城河案例在財務邏輯上最相似？",
+    data:"皮克敏：程式寫好後無限複製，每多一位玩家只增加微量頻寬<br>生技 IP 授權：純授權模式，<b>零生產成本</b>",
+    options:[
+      "台積電 53%——因為兩者都是科技業",
+      "生技 IP 授權 100%——都是「前期投入完成後，後續每筆收入幾乎全是毛利」的無形資產商業模式",
+      "弘帆——因為兩者都靠穩定的重複性收入",
+      "LVMH 69%——因為兩者都靠品牌吸引消費者"
+    ],
+    correct:1,
+    explain:"共同的財務 DNA 是<span class='key'>「無形資產／可無限複製」</span>：生技把研發成果一次投入換來專利，之後純授權<span class='key'>零生產成本、毛利即淨利</span>；皮克敏把開發與伺服器建置一次投入，之後<span class='key'>虛寶程式碼已寫好、無工廠無庫存</span>。兩者都是<span class='key'>跨過損益兩平點後邊際成本趨近於零</span>。台積電與弘帆則相反，是實打實的重資產製造。"
+  },
+  {
+    sec:"整合", secCls:"sMix", level:"整合",
+    q:"若用 0608 的估值框架來看皮克敏與台積電，兩者「市場信念」的基礎有何不同？",
+    data:"0608 核心：估值 ＝ 對未來的預期<br>台積電：AI 賣鏟子的人｜皮克敏：CAC ≈ 0 的飛輪 ＋ O2O 廣告網路",
+    options:[
+      "兩者都只看歷史財報數字，與市場信念無關",
+      "台積電的信念建立在「AI 需求持續噴發＋全球唯一製造節點」的技術不可取代性；皮克敏則建立在「飛輪能否持續轉動＋能否真正搶下在地廣告市場」的商業模式想像",
+      "兩者的估值都完全由 PE 倍數決定，沒有差異",
+      "皮克敏屬於遊戲業，不適用估值框架"
+    ],
+    correct:1,
+    explain:"估值是<span class='key'>對未來的預期</span>，但「預期什麼」因公司而異。<span class='key'>台積電</span>是賣鏟子的人——只要市場相信 AI，需求就噴發，信念基礎是<span class='key'>技術壁壘的不可取代性</span>，相對確定。<span class='key'>皮克敏</span>的信念基礎是商業模式想像：<span class='key'>飛輪能不能一直轉、能不能真正從 Google Maps 手上搶下在地廣告預算</span>——想像空間大，但不確定性也高。<span class='key'>這正是「賣鏟子的人比淘金者確定」的道理</span>。"
+  },
+  {
+    sec:"整合", secCls:"sMix", level:"整合",
+    q:"綜合三堂課，下列哪一個結論最能概括「商業智慧」的核心？",
+    data:"0608 微軟悖論｜0615 皮克敏藍海｜0621 護城河與費用紀律",
+    options:[
+      "只要財報數字漂亮，公司就值得投資",
+      "財報提供確定的過去，估值反映不確定的未來；要用數據佐證觀點、從商業模式理解護城河來源，並把生活觀察與市場現象相互印證",
+      "跟著新聞與市場情緒操作，就能掌握趨勢",
+      "只要找到毛利率最高的公司，就能獲得最好的報酬"
+    ],
+    correct:1,
+    explain:"三堂課串成一條線：<br><span class='key'>0608</span>——財報是過去、估值是未來；微軟證明<span class='key'>賺錢不夠，還要讓市場相信你的未來</span>。<br><span class='key'>0615</span>——商機無所不在，走路這種最日常的行為被重新詮釋，就創造出三方受益的生態系。<br><span class='key'>0621</span>——毛利率看護城河來源、費用比率看管理紀律、ROE 看經營全貌、法說會風格看公司 DNA。<br>核心是那句話：<span class='key'>「能用數據支撐觀點，將生活比喻與商業市場相互印證，才是扎實的商業智慧。」</span>"
+  }
+];
+
+let current = 0;
+let score = 0;
+const wrongList = [];
+const secStats = {};
+questions.forEach(q => { if(!secStats[q.sec]) secStats[q.sec] = {total:0, right:0}; secStats[q.sec].total++; });
+
+const quizArea = document.getElementById('quizArea');
+const progressFill = document.getElementById('progressFill');
+const progressText = document.getElementById('progressText');
+
+function renderQuiz(){
+  quizArea.innerHTML = '';
+  wrongList.length = 0;
+  Object.keys(secStats).forEach(k => secStats[k].right = 0);
+
+  questions.forEach((item, idx) => {
+    const card = document.createElement('div');
+    card.className = 'card' + (idx === current ? ' active' : '');
+    card.id = 'card-' + idx;
+
+    const topline = document.createElement('div');
+    topline.className = 'topline';
+    const qnum = document.createElement('span');
+    qnum.className = 'qnum';
+    qnum.textContent = `Q${idx+1} / ${questions.length}`;
+    const badges = document.createElement('span');
+    badges.className = 'badges';
+    const secTag = document.createElement('span');
+    secTag.className = 'sec ' + item.secCls;
+    secTag.textContent = item.sec;
+    const lv = document.createElement('span');
+    lv.className = 'level';
+    lv.textContent = item.level;
+    badges.appendChild(secTag);
+    badges.appendChild(lv);
+    topline.appendChild(qnum);
+    topline.appendChild(badges);
+    card.appendChild(topline);
+
+    const qtext = document.createElement('div');
+    qtext.className = 'qtext';
+    qtext.textContent = item.q;
+    card.appendChild(qtext);
+
+    if(item.data){
+      const db = document.createElement('div');
+      db.className = 'databox';
+      db.innerHTML = item.data;
+      card.appendChild(db);
+    }
+
+    const optsWrap = document.createElement('div');
+    optsWrap.className = 'options';
+    item.options.forEach((optText, oIdx) => {
+      const btn = document.createElement('button');
+      btn.className = 'opt';
+      btn.textContent = optText;
+      btn.onclick = () => selectAnswer(idx, oIdx);
+      optsWrap.appendChild(btn);
+    });
+    card.appendChild(optsWrap);
+
+    const explain = document.createElement('div');
+    explain.className = 'explain';
+    explain.id = 'explain-' + idx;
+    explain.innerHTML = item.explain;
+    card.appendChild(explain);
+
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'nextBtn';
+    nextBtn.id = 'next-' + idx;
+    nextBtn.textContent = idx === questions.length - 1 ? '查看結果' : '下一題 →';
+    nextBtn.onclick = () => goNext(idx);
+    card.appendChild(nextBtn);
+
+    quizArea.appendChild(card);
+  });
+  updateProgress();
+}
+
+function updateProgress(){
+  progressFill.style.width = (current / questions.length * 100) + '%';
+  progressText.textContent = `${current} / ${questions.length}`;
+}
+
+function selectAnswer(qIdx, oIdx){
+  const card = document.getElementById('card-' + qIdx);
+  const opts = card.querySelectorAll('.opt');
+  const item = questions[qIdx];
+
+  opts.forEach((o, i) => {
+    o.classList.add('disabled');
+    if(i === item.correct) o.classList.add('correct');
+    if(i === oIdx && oIdx !== item.correct) o.classList.add('wrong');
+  });
+
+  if(oIdx === item.correct){
+    score++;
+    secStats[item.sec].right++;
+  }else{
+    wrongList.push(`Q${qIdx+1}（${item.sec}·${item.level}）`);
+  }
+
+  document.getElementById('explain-' + qIdx).classList.add('show');
+  document.getElementById('next-' + qIdx).classList.add('show');
+}
+
+function goNext(qIdx){
+  document.getElementById('card-' + qIdx).classList.remove('active');
+  current++;
+  if(current < questions.length){
+    const nextCard = document.getElementById('card-' + current);
+    nextCard.classList.add('active');
+    nextCard.scrollIntoView({behavior:'smooth', block:'start'});
+    updateProgress();
+  }else{
+    progressFill.style.width = '100%';
+    progressText.textContent = `${questions.length} / ${questions.length}`;
+    showResult();
+  }
+}
+
+function showResult(){
+  const resultBox = document.getElementById('resultBox');
+  resultBox.classList.add('show');
+  document.getElementById('scoreText').textContent = `${score} / ${questions.length}`;
+
+  const secBox = document.getElementById('secScore');
+  secBox.innerHTML = '';
+  const secNames = {"0608":"0608 財報vs估值","0615":"0615 皮克敏","0621":"0621 損益表競爭力","整合":"跨堂整合"};
+  Object.keys(secStats).forEach(k => {
+    const d = document.createElement('div');
+    d.innerHTML = `${secNames[k] || k}<b>${secStats[k].right} / ${secStats[k].total}</b>`;
+    secBox.appendChild(d);
+  });
+
+  let subLabel = '', msg = '';
+  const pct = score / questions.length;
+  if(pct === 1){
+    subLabel = '滿分';
+    msg = '三堂課的邏輯已經完整串起來：估值看未來（0608）→ 商業模式決定護城河（0615）→ 損益表驗證競爭力（0621）。<br><br><b>下一步練習：</b>自己挑一家有興趣的公司，走一遍完整流程——先讀最新法說會簡報（看風格判斷 DNA）、抓毛利率判斷護城河類型、看三項費用比率是否穩定、算 ROE 拆解三引擎，最後問自己一句：<b>市場現在給它的 PE，反映的是什麼樣的未來預期？</b>';
+  }else if(pct >= 0.8){
+    subLabel = '掌握良好';
+    msg = '主架構已經穩了。建議回頭補齊答錯的部分，特別留意兩個容易滑過去的重點：<b>① 費用比率的「穩定性」比「高低」更能反映紀律</b>；<b>② 藍海不是打贏競爭，而是重新定義客群讓競爭失去意義</b>。';
+  }else if(pct >= 0.6){
+    subLabel = '基礎及格';
+    msg = '觀念大致有，但案例細節還不夠熟。建議先把最下方的三張速查表背起來——四大護城河毛利率、三項費用紀律、皮克敏關鍵數字，記住這些骨架後其他細節會自動歸位。';
+  }else{
+    subLabel = '需要重新複習';
+    msg = '建議依序重讀三份一頁式教材，先抓住每堂課的一句話核心：<br><b>0608</b>——財報是過去的意見，估值是未來的預期。<br><b>0615</b>——藍海是去找還沒被服務到的人，不是搶對手的客戶。<br><b>0621</b>——毛利率看護城河，費用比率看紀律，ROE 看經營全貌。';
+  }
+  if(wrongList.length){
+    msg += '<br><br><b>建議複習題號：</b>' + wrongList.join('、');
+  }
+  document.getElementById('scoreSub').textContent = subLabel;
+  document.getElementById('resultMsg').innerHTML = msg;
+}
+
+function restartQuiz(){
+  current = 0;
+  score = 0;
+  document.getElementById('resultBox').classList.remove('show');
+  renderQuiz();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+renderQuiz();
+</script>
+</body>
+</html>
