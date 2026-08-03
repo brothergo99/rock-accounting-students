@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>佳儀 0802 · 華固建設×統一超商×使用權資產×見微知著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --sk:#0c4a6e;--sk2:#f0f9ff;--sk3:#7dd3fc;--sk4:#0284c7;--sk5:#38bdf8;
+  --am:#92400e;--am2:#fffbeb;--am3:#fde68a;--am4:#d97706;
+  --em:#065f46;--em2:#ecfdf5;--em3:#6ee7b7;--em4:#059669;
+  --ro:#9f1239;--ro2:#fff1f2;--ro3:#fecdd3;--ro4:#e11d48;
+  --or:#9a3412;--or2:#fff7ed;--or3:#fed7aa;--or4:#ea580c;
+  --vi:#4c1d95;--vi2:#f5f3ff;--vi3:#c4b5fd;--vi4:#7c3aed;
+  --sl:#1e293b;--sl2:#f8fafc;--sl3:#cbd5e1;--sl4:#475569;
+  --night:#060c15;--night2:#0a1220;
+  --bg:#f0f9ff;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--night);line-height:1.7}
+
+.page-header{background:linear-gradient(150deg,#060c15,#0a1220,#050a12,#040810);padding:36px 50px 28px;position:relative;overflow:hidden;border-bottom:3px solid var(--sk5)}
+.ph-g1{position:absolute;top:-60px;right:-40px;width:260px;height:260px;background:radial-gradient(circle,rgba(56,189,248,.2),transparent 65%);pointer-events:none}
+.ph-g2{position:absolute;bottom:-30px;left:-20px;width:180px;height:180px;background:radial-gradient(circle,rgba(251,191,36,.12),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(125,211,252,.65);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(14px,2.1vw,21px);font-weight:900;color:#fff;line-height:1.28;margin-bottom:4px}
+.ph-title em{color:var(--sk5);font-style:normal}
+.ph-title em2{color:var(--am3);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.38);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mc{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(56,189,248,.14);color:var(--sk5);border:1px solid rgba(56,189,248,.3)}
+.mc-a{background:rgba(217,119,6,.13);color:var(--am3);border-color:rgba(217,119,6,.3)}
+.mc-e{background:rgba(5,150,105,.12);color:var(--em3);border-color:rgba(5,150,105,.28)}
+.mc-r{background:rgba(225,29,72,.12);color:#fb7185;border-color:rgba(225,29,72,.28)}
+
+.container{max-width:1100px;margin:0 auto;padding:26px 26px}
+.section{margin-bottom:22px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--sk4);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--night);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--sk3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-32{display:grid;grid-template-columns:1.15fr 1fr;gap:13px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-32{grid-template-columns:1fr}}
+
+.card-sk{background:var(--sk2);border:1.5px solid var(--sk3);border-radius:10px;padding:14px}
+.card-am{background:var(--am2);border:1.5px solid var(--am3);border-radius:10px;padding:14px}
+.card-em{background:var(--em2);border:1.5px solid var(--em3);border-radius:10px;padding:14px}
+.card-ro{background:var(--ro2);border:1.5px solid var(--ro3);border-radius:10px;padding:14px}
+.card-or{background:var(--or2);border:1.5px solid var(--or3);border-radius:10px;padding:14px}
+.card-vi{background:var(--vi2);border:1.5px solid var(--vi3);border-radius:10px;padding:14px}
+.card-sl{background:var(--sl2);border:1.5px solid var(--sl3);border-radius:10px;padding:14px}
+.card-dark{background:var(--night);border:none;border-radius:10px;padding:14px}
+.card-sk h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--sk)}
+.card-am h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--am)}
+.card-em h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--em)}
+.card-ro h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--ro)}
+.card-or h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--or)}
+.card-vi h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--vi)}
+.card-sl h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--sl)}
+.card-dark h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--sk5)}
+.card-sk p,.card-sk li{color:var(--sk);font-size:12.5px;line-height:1.85}
+.card-am p,.card-am li{color:var(--am);font-size:12.5px;line-height:1.85}
+.card-em p,.card-em li{color:var(--em);font-size:12.5px;line-height:1.85}
+.card-ro p,.card-ro li{color:var(--ro);font-size:12.5px;line-height:1.85}
+.card-or p,.card-or li{color:var(--or);font-size:12.5px;line-height:1.85}
+.card-vi p,.card-vi li{color:var(--vi);font-size:12.5px;line-height:1.85}
+.card-sl p,.card-sl li{color:var(--sl);font-size:12.5px;line-height:1.85}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8);font-size:12.5px;line-height:1.85}
+ul{padding-left:15px}
+ul li{margin-bottom:3px}
+
+/* 資產比例條 */
+.asset-bar{height:32px;border-radius:6px;overflow:hidden;display:flex;margin:8px 0;font-size:11px;font-weight:700}
+.ab-seg{display:flex;align-items:center;justify-content:center;color:#fff;overflow:hidden;white-space:nowrap;padding:0 6px}
+
+/* 存貨流程 */
+.inv-flow{display:flex;align-items:stretch;gap:4px;margin:8px 0}
+.if-box{flex:1;border-radius:7px;padding:9px 10px;text-align:center}
+.if-icon{font-size:18px;margin-bottom:3px}
+.if-title{font-size:11.5px;font-weight:700;margin-bottom:2px}
+.if-body{font-size:11px;line-height:1.6;opacity:.8}
+.if-arrow{display:flex;align-items:center;color:rgba(12,74,110,.25);font-size:18px;flex-shrink:0;padding:0 2px}
+
+/* 7-11 資產格子 */
+.asset-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 0}
+.ag-box{border-radius:7px;padding:8px 10px;text-align:center}
+.ag-pct{font-family:'DM Mono',monospace;font-size:17px;font-weight:700;line-height:1.1}
+.ag-lbl{font-size:11px;margin-top:3px}
+.ag-note{font-size:10.5px;margin-top:2px;opacity:.7}
+
+/* 應付vs應收對比 */
+.ar-compare{display:flex;gap:6px;align-items:center;margin:8px 0}
+.arc-box{flex:1;border-radius:6px;padding:8px 11px;text-align:center}
+.arc-num{font-family:'DM Mono',monospace;font-size:16px;font-weight:700;line-height:1.1}
+.arc-lbl{font-size:11px;margin-top:3px}
+.arc-mid{font-size:22px;color:rgba(2,132,199,.25);flex-shrink:0}
+
+/* 見微知著比較 */
+.insight-row{display:flex;gap:8px;align-items:flex-start;padding:7px 0;border-bottom:1px dashed rgba(56,189,248,.2)}
+.insight-row:last-child{border-bottom:none}
+.ir-co{font-family:'DM Mono',monospace;font-size:10px;border-radius:3px;padding:2px 7px;flex-shrink:0;margin-top:3px;white-space:nowrap}
+.ir-body{font-size:12.5px;line-height:1.75}
+
+/* Quote */
+.quote{background:linear-gradient(135deg,var(--night),var(--night2));border-radius:10px;padding:14px 20px;position:relative;overflow:hidden;margin-bottom:20px}
+.qm{font-family:'Playfair Display',serif;font-size:72px;color:rgba(56,189,248,.07);position:absolute;top:-10px;left:8px;line-height:1}
+.qt{font-size:13px;color:rgba(255,255,255,.88);line-height:1.65;position:relative;z-index:1}
+.qt em{color:var(--sk5);font-style:normal;font-weight:700}
+.qt em2{color:var(--am3);font-style:normal}
+.qs{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.35);margin-top:6px;position:relative;z-index:1}
+
+.page-footer{background:var(--night);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--sk5)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-g1"></div>
+  <div class="ph-g2"></div>
+  <div class="ph-eyebrow">0802 · 佳儀 課後複習 · 華固建設×統一超商×使用權資產IFRS16×見微知著×心流</div>
+  <div class="ph-title"><em>看資產負債表最大那一格，就能猜出公司在做什麼</em>——<br>華固壓在<em2>存貨</em2>、7-11壓在<em>使用權資產</em>、中租壓在應收帳款</div>
+  <div class="ph-sub">加減乘除複習 × 思辨（好資產/壞負債的迷思）× 華固建設存貨74% × 統一超商IFRS16使用權資產35% × 心流學習體驗</div>
+  <div class="ph-meta">
+    <span class="mc">2025.08.02</span>
+    <span class="mc">佳儀</span>
+    <span class="mc mc-a">華固建設×存貨74%</span>
+    <span class="mc mc-e">統一超商×使用權資產</span>
+    <span class="mc mc-r">IFRS16×租賃負債</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 金句 -->
+  <div class="quote">
+    <div class="qm">"</div>
+    <div class="qt">「看財報就像密室逃脫——找到最大的那格資產，謎題就解開了一半。<em>華固的錢壓在土地與鋼骨（存貨）</em>；7-11的錢壓在全台7,000家租賃店面（使用權資產）；中租的錢壓在放出去的貸款（應收帳款）。<br>抓到核心後，整份財報的<em2>商業邏輯就會自動串起來</em2>，其他數字只是在印證你的猜測。」</div>
+    <div class="qs">Rock 老師 · 0802 佳儀 · 華固建設×統一超商×見微知著 · 佳儀心得：像在玩密室逃脫，心流狀態</div>
+  </div>
+
+  <!-- SECTION 1: 加減乘除複習 + 思辨 -->
+  <div class="section">
+    <div class="section-label">Part 1 · 加減乘除複習 + 財務思辨 · 框架鞏固×資產不一定好×負債不一定壞</div>
+    <div class="section-title">複習四大框架，並建立「反直覺」思辨能力——財報最大的陷阱是想當然耳</div>
+    <div class="grid-2">
+      <div class="card-dark">
+        <h3>➕➖✕➗ 加減乘除框架速覽</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:4px">
+          <div style="background:rgba(56,189,248,.12);border-radius:7px;padding:8px 10px">
+            <div style="font-size:11px;font-family:'DM Mono',monospace;color:var(--sk5);margin-bottom:3px">＋ 資產負債表</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.75);line-height:1.65">財務結構：自有幾成、借來幾成。如同股市「槓桿仔」——融資比現股風險大得多。</div>
+          </div>
+          <div style="background:rgba(251,191,36,.1);border-radius:7px;padding:8px 10px">
+            <div style="font-size:11px;font-family:'DM Mono',monospace;color:var(--am3);margin-bottom:3px">－ 損益表</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.75);line-height:1.65">毛利率＝競爭力定價底氣；營業淨利＝費用控管效率。兩者落差大＝費用失控。</div>
+          </div>
+          <div style="background:rgba(5,150,105,.1);border-radius:7px;padding:8px 10px">
+            <div style="font-size:11px;font-family:'DM Mono',monospace;color:var(--em3);margin-bottom:3px">✕ ROE 杜邦</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.75);line-height:1.65">利潤率×周轉率×財務槓桿三者相乘，判斷公司靠能力、速度還是風險賺錢。</div>
+          </div>
+          <div style="background:rgba(124,58,237,.1);border-radius:7px;padding:8px 10px">
+            <div style="font-size:11px;font-family:'DM Mono',monospace;color:var(--vi3);margin-bottom:3px">÷ 企業體檢</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.75);line-height:1.65">銀行/廠商在乎償債能力；股東在乎盈利報酬率；經營者在乎營運效率。</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border-radius:6px;padding:7px 11px;margin-top:8px;font-size:12px;color:rgba(255,255,255,.6)">
+          💡 便當店員工合夥入股案例：解決展店資金問題＋讓員工有老闆心態，一石二鳥的正向循環。
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="card-ro">
+          <h3>🔄 財務思辨：翻轉直覺認知</h3>
+          <div style="background:rgba(244,63,94,.08);border-radius:7px;padding:9px 12px;margin-bottom:8px">
+            <div style="font-size:12px;font-weight:700;color:var(--ro4);margin-bottom:3px">資產不一定永遠是好的</div>
+            <div style="font-size:12.5px;color:var(--ro);line-height:1.75">「存貨」放久了不僅貶值、掉價，還變成呆帳。<br>→ 控管<strong>存貨流通</strong>與<strong>應收帳款收現</strong>，是公司營運的兩大命脈。</div>
+          </div>
+          <div style="background:rgba(244,63,94,.05);border-radius:7px;padding:9px 12px">
+            <div style="font-size:12px;font-weight:700;color:var(--ro4);margin-bottom:3px">負債不一定永遠是壞的</div>
+            <div style="font-size:12.5px;color:var(--ro);line-height:1.75">中租負債比高達80%——但它借2%利率的錢，放款收11%利率。<br>→ 只要利差成立，<strong>借好借滿反而是獲利最大化的理性策略</strong>。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: 華固建設 -->
+  <div class="section">
+    <div class="section-label">Part 2 · 華固建設實戰解析 · 存貨74%×存貨三階段×營收劇烈波動×景氣反轉風險</div>
+    <div class="section-title">華固建設：十年磨一劍的資金遊戲——存貨就是一磚一瓦疊出來的資產</div>
+    <div class="grid-32">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div class="card-am">
+          <h3>🏗️ 存貨佔資產74%：為什麼這麼高？</h3>
+          <div style="font-size:11.5px;color:var(--am4);font-weight:700;margin-bottom:6px">華固建設 總資產 542億</div>
+          <div class="asset-bar">
+            <div class="ab-seg" style="background:var(--am4);width:74%">存貨 398億（74%）</div>
+            <div class="ab-seg" style="background:rgba(146,64,14,.4);width:5%;font-size:10px">固5%</div>
+            <div class="ab-seg" style="background:rgba(146,64,14,.25);width:21%;font-size:10px">其他21%</div>
+          </div>
+          <div style="background:rgba(146,64,14,.1);border-radius:7px;padding:9px 12px;margin-top:7px">
+            <div style="font-size:12px;font-weight:700;color:var(--am4);margin-bottom:4px">為什麼？建商的「存貨」不是一般商品</div>
+            <div style="font-size:12.5px;color:var(--am);line-height:1.75">從買地、整地、打地基、蓋鋼骨（信義區「無雙」建案），每一筆投入的成本，都不斷堆疊進「存貨」這個大池子。<br>→ 土地與在建半成品在會計上<strong>屬於「存貨」，不是不動產設備</strong>。</div>
+          </div>
+
+          <div style="margin-top:10px;font-size:12px;font-weight:700;color:var(--am4);margin-bottom:5px">存貨三大階段（財報附註）</div>
+          <div class="inv-flow">
+            <div class="if-box" style="background:rgba(146,64,14,.1)">
+              <div class="if-icon">📋</div>
+              <div class="if-title" style="color:var(--am4)">預付地款/代建</div>
+              <div class="if-body" style="color:var(--am)">早期整地與預備階段，資金已流出但尚未動工</div>
+            </div>
+            <div class="if-arrow">→</div>
+            <div class="if-box" style="background:rgba(146,64,14,.12)">
+              <div class="if-icon">🏗️</div>
+              <div class="if-title" style="color:var(--am4)">在建房地</div>
+              <div class="if-body" style="color:var(--am)">正在蓋中，每年不斷灌注成本<br>（無雙：11億→16.9億）</div>
+            </div>
+            <div class="if-arrow">→</div>
+            <div class="if-box" style="background:rgba(146,64,14,.15)">
+              <div class="if-icon">🏠</div>
+              <div class="if-title" style="color:var(--am4)">待售房地</div>
+              <div class="if-body" style="color:var(--am)">完工可賣的成屋。在建→待售代表建案落成。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div class="card-or">
+          <h3>📊 營收波動 + 財務風險</h3>
+          <div style="background:rgba(234,88,12,.1);border-radius:7px;padding:9px 12px;margin-bottom:8px">
+            <div style="font-size:12px;font-weight:700;color:var(--or4);margin-bottom:3px">為什麼營收忽高忽低是常態？</div>
+            <div style="display:flex;gap:8px;align-items:center;margin:6px 0">
+              <div style="background:rgba(234,88,12,.12);border-radius:5px;padding:5px 10px;text-align:center;flex:1">
+                <div style="font-family:'DM Mono',monospace;font-size:15px;font-weight:700;color:var(--or4)">72億</div>
+                <div style="font-size:11px;color:var(--or)">去年</div>
+              </div>
+              <div style="color:rgba(234,88,12,.35);font-size:18px">→</div>
+              <div style="background:rgba(234,88,12,.15);border-radius:5px;padding:5px 10px;text-align:center;flex:1">
+                <div style="font-family:'DM Mono',monospace;font-size:15px;font-weight:700;color:var(--or4)">182億</div>
+                <div style="font-size:11px;color:var(--or)">今年</div>
+              </div>
+            </div>
+            <div style="font-size:12px;color:var(--or);line-height:1.7">非景氣異常，而是會計公報規定：<strong>房子交屋才能認列營收</strong>。大建案完工年份才有大業績，否則只是存貨持續累積。</div>
+          </div>
+          <div style="background:rgba(244,63,94,.1);border-radius:7px;padding:9px 12px;border:1px solid rgba(244,63,94,.2)">
+            <div style="font-size:12px;font-weight:700;color:#e11d48;margin-bottom:4px">⚠️ 景氣反轉的致命傷</div>
+            <div style="font-size:12px;color:var(--ro);line-height:1.75">
+              <strong>好時：</strong>龐大存貨＝金雞母<br>
+              <strong>壞時：</strong>存貨面臨減損、銀行貸款還不出去<br>
+              → 中國房地產崩盤就是過度槓桿+景氣反轉的教科書；台灣近期也有上市建商資金斷鏈、打折賣樓的案例。<br>
+              → 華固近期毛利率大幅下跌，反映建築與人力成本瘋狂上漲。
+            </div>
+          </div>
+        </div>
+
+        <div class="card-sk">
+          <h3>📐 財務結構解析</h3>
+          <div class="asset-bar" style="height:26px">
+            <div class="ab-seg" style="background:var(--sk4);width:40%;font-size:11px">自有40%</div>
+            <div class="ab-seg" style="background:rgba(12,74,110,.55);width:25%;font-size:11px">合約負債68億</div>
+            <div class="ab-seg" style="background:rgba(12,74,110,.35);width:35%;font-size:11px">借款≈100億</div>
+          </div>
+          <div style="font-size:12px;color:var(--sk);line-height:1.75;margin-top:7px">
+            合約負債（預售屋收款）增加是<strong>好消息</strong>——代表客戶定金進來；但長短期借款加總仍逼近<strong>100億，槓桿不小</strong>。必須密切追蹤現金流量表。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: 統一超商 -->
+  <div class="section">
+    <div class="section-label">Part 3 · 統一超商（7-11）實戰解析 · 應付>應收×存貨僅9%×使用權資產IFRS16×租賃負債</div>
+    <div class="section-title">7-11：通路霸主的商業魔法——存貨低得反直覺，負債高得讓人誤解</div>
+    <div class="grid-3">
+      <!-- 資產結構 -->
+      <div class="card-sk">
+        <h3>🏪 7-11 資產結構（總資產約2,926億）</h3>
+        <div class="asset-grid">
+          <div class="ag-box" style="background:rgba(2,132,199,.15)">
+            <div class="ag-pct" style="color:var(--sk4)">35%</div>
+            <div class="ag-lbl" style="color:var(--sk)">使用權資產</div>
+            <div class="ag-note" style="color:var(--sk4)">~1,000億</div>
+          </div>
+          <div class="ag-box" style="background:rgba(2,132,199,.1)">
+            <div class="ag-pct" style="color:var(--sk4)">21%</div>
+            <div class="ag-lbl" style="color:var(--sk)">固定資產</div>
+            <div class="ag-note" style="color:var(--sk4)">冷氣/冰箱等</div>
+          </div>
+          <div class="ag-box" style="background:rgba(2,132,199,.1)">
+            <div class="ag-pct" style="color:var(--sk4)">17%</div>
+            <div class="ag-lbl" style="color:var(--sk)">現金</div>
+            <div class="ag-note" style="color:var(--sk4)">~500億</div>
+          </div>
+          <div class="ag-box" style="background:rgba(2,132,199,.07)">
+            <div class="ag-pct" style="color:var(--sk4)">9%</div>
+            <div class="ag-lbl" style="color:var(--sk)">存貨</div>
+            <div class="ag-note" style="color:var(--ro4)">反直覺！</div>
+          </div>
+          <div class="ag-box" style="background:rgba(2,132,199,.07)">
+            <div class="ag-pct" style="color:var(--sk4)">9%</div>
+            <div class="ag-lbl" style="color:var(--sk)">應付帳款</div>
+            <div class="ag-note" style="color:var(--sk4)">~266億</div>
+          </div>
+          <div class="ag-box" style="background:rgba(2,132,199,.05)">
+            <div class="ag-pct" style="color:var(--sk4)">3%</div>
+            <div class="ag-lbl" style="color:var(--sk)">應收帳款</div>
+            <div class="ag-note" style="color:var(--sk4)">~76億</div>
+          </div>
+        </div>
+        <div class="ar-compare">
+          <div class="arc-box" style="background:rgba(5,150,105,.1)">
+            <div class="arc-num" style="color:var(--em4)">266億↑</div>
+            <div class="arc-lbl" style="color:var(--em)">應付帳款（欠廠商）</div>
+          </div>
+          <div class="arc-mid">&gt;</div>
+          <div class="arc-box" style="background:rgba(244,63,94,.08)">
+            <div class="arc-num" style="color:var(--ro4)">76億↓</div>
+            <div class="arc-lbl" style="color:var(--ro)">應收帳款（別人欠的）</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--sk);line-height:1.7">消費者刷卡即收現；但進貨可延後付款給廠商。<strong>用廠商的錢做自己的生意</strong>，財務調度強悍。</div>
+      </div>
+
+      <!-- 存貨9%秘密 + IFRS 16 -->
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="card-em">
+          <h3>🛒 存貨只有9%的秘密</h3>
+          <div style="background:rgba(5,150,105,.1);border-radius:7px;padding:9px 12px;margin-bottom:7px">
+            <div style="font-size:12px;font-weight:700;color:var(--em4);margin-bottom:3px">走進店裡明明滿山滿谷，為什麼存貨這麼少？</div>
+            <div style="font-size:12.5px;color:var(--em);line-height:1.8">
+              <strong>原因①：超高周轉率</strong>——商品賣得快，停留時間極短。<br>
+              <strong>原因②：強勢通路「寄銷」模式</strong>——廠商搶著上架，7-11不用花錢買斷貨品，反而能向廠商收<strong>上架費、抽成</strong>，甚至連物流都用廠商的。
+            </div>
+          </div>
+          <div style="font-size:12px;color:var(--em4);font-weight:700">通路為王的絕對優勢：<span style="font-weight:400;color:var(--em)">貨不是自己的，錢卻是自己的。</span></div>
+        </div>
+
+        <div class="card-vi">
+          <h3>📋 IFRS 16 使用權資產（35%）</h3>
+          <div style="background:rgba(124,58,237,.1);border-radius:7px;padding:9px 12px;margin-bottom:7px">
+            <div style="font-size:12px;font-weight:700;color:var(--vi4);margin-bottom:3px">為什麼「租的店面」要進財報？</div>
+            <div style="font-size:12.5px;color:var(--vi);line-height:1.75">7-11 全台7,000多家店幾乎全是<strong>租的</strong>。2019年起IFRS 16規定：未來租金必須折算堆疊，認列為「<strong>使用權資產</strong>」入帳。<br>→ 讓報表真實反映公司靠什麼吃飯（7-11靠店面通路）。</div>
+          </div>
+          <div style="background:rgba(124,58,237,.07);border-radius:6px;padding:7px 11px;font-size:12px;color:var(--vi)">
+            維珍航空的故事：財務長在飛機上找不到「飛機」資產，因為飛機是租的——IFRS 16正是為了解決這個盲點。
+          </div>
+        </div>
+      </div>
+
+      <!-- 負債真相 + 三公司見微知著 -->
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="card-dark">
+          <h3>💡 負債81%≠真的高風險</h3>
+          <div style="background:rgba(255,255,255,.06);border-radius:7px;padding:9px 12px;margin-bottom:8px">
+            <div style="font-size:11.5px;color:rgba(255,255,255,.5);margin-bottom:5px;font-family:'DM Mono',monospace">7-11 負債比拆解</div>
+            <div style="display:flex;height:28px;border-radius:5px;overflow:hidden;font-size:11px;font-weight:700;margin-bottom:5px">
+              <div style="background:rgba(56,189,248,.25);width:30%;display:flex;align-items:center;justify-content:center;color:var(--sk5)">租賃30%</div>
+              <div style="background:rgba(255,255,255,.1);width:51%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6)">其他負債51%</div>
+              <div style="background:rgba(255,255,255,.15);width:19%;display:flex;align-items:center;justify-content:center;color:#fff">自有19%</div>
+            </div>
+            <div style="font-size:12px;color:rgba(255,255,255,.7);line-height:1.7">帳面負債81%，但<strong style="color:#fff">30%是租賃負債</strong>（對應使用權資產，非真實借款）。剔除後真實負債僅約<strong style="color:var(--sk5)">40%</strong>，財務結構並非看起來那麼危險。</div>
+          </div>
+        </div>
+
+        <div class="card-sl">
+          <h3>🔭 見微知著：三大案例總整理</h3>
+          <div class="insight-row" style="padding-top:0">
+            <span class="ir-co" style="background:var(--sk4);color:#fff">中租</span>
+            <div class="ir-body" style="color:var(--sl)">最大資產＝<strong>應收帳款（61%）</strong> → 主業是放款賺利差</div>
+          </div>
+          <div class="insight-row">
+            <span class="ir-co" style="background:var(--am4);color:#fff">華固</span>
+            <div class="ir-body" style="color:var(--sl)">最大資產＝<strong>存貨（74%）</strong> → 主業是蓋房子，十年磨一劍</div>
+          </div>
+          <div class="insight-row">
+            <span class="ir-co" style="background:var(--sk4);color:#fff">7-11</span>
+            <div class="ir-body" style="color:var(--sl)">最大資產＝<strong>使用權資產（35%）</strong> → 主業是稱霸實體通路店面</div>
+          </div>
+          <div style="background:rgba(30,41,59,.07);border-radius:6px;padding:8px 11px;margin-top:8px;font-size:12px;color:var(--sl4)">
+            ⭐ 佳儀心得：學財報像玩密室逃脫，進入「<strong>心流（Flow）狀態</strong>」，大腦持續運轉、充滿挑戰與成就感，時間不知不覺就消失了。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">佳儀 · 0802 · 加減乘除複習×華固存貨74%×統一超商使用權資產IFRS16×見微知著×心流</div>
+</div>
+
+</body>
+</html>
