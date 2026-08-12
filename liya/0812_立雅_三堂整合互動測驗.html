@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中會考點三堂整合測驗 · 立雅</title>
+<style>
+  :root{
+    --bg:#0f1115;
+    --card:#171a21;
+    --card2:#1e222b;
+    --line:#262b35;
+    --accent:#ff8a3d;
+    --accent2:#4fd1c5;
+    --blue:#7dd3fc;
+    --purple:#a78bfa;
+    --good:#4ade80;
+    --bad:#f87171;
+    --text:#e8eaed;
+    --sub:#9aa1ab;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:radial-gradient(circle at 20% -10%, #26314a 0%, var(--bg) 45%);
+    color:var(--text);
+    padding:24px 16px 60px;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{margin-bottom:22px;}
+  .tag{
+    display:inline-block;font-size:12px;letter-spacing:1px;color:var(--accent);
+    background:rgba(255,138,61,.12);border:1px solid rgba(255,138,61,.35);
+    padding:4px 10px;border-radius:999px;margin-bottom:12px;
+  }
+  h1{font-size:25px;line-height:1.45;margin:0 0 8px;}
+  .desc{color:var(--sub);font-size:14px;margin:0;line-height:1.75;}
+  .meta{color:var(--sub);font-size:12px;margin-top:10px;line-height:1.7;}
+
+  .progress-bar{height:6px;background:var(--line);border-radius:999px;overflow:hidden;margin:20px 0 10px;}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%;transition:width .4s ease;}
+  .progress-text{text-align:right;font-size:11.5px;color:var(--sub);margin-bottom:22px;}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 20px;margin-bottom:18px;display:none;}
+  .card.active{display:block;}
+  .topline{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+  .qnum{font-size:12px;color:var(--sub);font-weight:700;letter-spacing:1px;}
+  .badges{display:flex;gap:6px;}
+  .sec{font-size:11px;padding:2px 9px;border-radius:999px;font-weight:600;}
+  .sec.s0624{color:var(--blue);border:1px solid rgba(125,211,252,.4);background:rgba(125,211,252,.1);}
+  .sec.s0716{color:var(--accent2);border:1px solid rgba(79,209,197,.4);background:rgba(79,209,197,.1);}
+  .sec.s0722{color:var(--accent);border:1px solid rgba(255,138,61,.4);background:rgba(255,138,61,.1);}
+  .sec.sMix{color:var(--purple);border:1px solid rgba(167,139,250,.4);background:rgba(167,139,250,.1);}
+  .level{font-size:11px;color:var(--sub);border:1px solid #333a46;padding:2px 9px;border-radius:999px;}
+
+  .qtext{font-size:17px;line-height:1.65;margin:0 0 14px;font-weight:600;}
+  .databox{
+    background:#12151b;border:1px solid var(--line);border-radius:10px;
+    padding:12px 14px;margin-bottom:16px;font-size:13px;line-height:2;color:#c3c9d1;
+    font-variant-numeric:tabular-nums;
+  }
+  .databox b{color:var(--accent);}
+
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt{
+    text-align:left;background:var(--card2);border:1px solid #2c313c;color:var(--text);
+    padding:13px 16px;border-radius:10px;font-size:14.5px;cursor:pointer;transition:all .15s ease;line-height:1.55;
+  }
+  .opt:hover{border-color:var(--accent2);}
+  .opt.correct{background:rgba(74,222,128,.14);border-color:var(--good);color:#c6f6d5;}
+  .opt.wrong{background:rgba(248,113,113,.14);border-color:var(--bad);color:#fecaca;}
+  .opt.disabled{cursor:default;pointer-events:none;opacity:.78;}
+
+  .explain{
+    margin-top:16px;padding:14px 16px;background:#12151b;border-left:3px solid var(--accent2);
+    border-radius:8px;font-size:13.5px;line-height:1.95;color:#d4d8dd;display:none;
+  }
+  .explain.show{display:block;}
+  .explain .key{color:var(--accent);font-weight:700;}
+  .explain .trap{color:var(--bad);font-weight:700;}
+
+  .nextBtn{
+    margin-top:18px;display:none;background:var(--accent);color:#1a1000;font-weight:700;
+    border:none;padding:11px 22px;border-radius:999px;font-size:14px;cursor:pointer;
+  }
+  .nextBtn.show{display:inline-block;}
+
+  .result{display:none;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:34px 22px;}
+  .result.show{display:block;}
+  .result .center{text-align:center;}
+  .result .score{font-size:46px;font-weight:800;margin:6px 0;color:var(--accent);}
+  .result .label{color:var(--sub);font-size:13px;}
+  .secscore{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:22px 0 4px;}
+  .secscore div{
+    background:#12151b;border:1px solid var(--line);border-radius:10px;
+    padding:10px 14px;font-size:12.5px;color:var(--sub);min-width:120px;text-align:center;
+  }
+  .secscore div b{display:block;font-size:19px;color:var(--text);margin-top:4px;font-variant-numeric:tabular-nums;}
+  .result .msg{margin:22px auto 0;max-width:580px;font-size:14.5px;line-height:1.9;color:#d4d8dd;text-align:left;}
+  .retryBtn{margin:24px auto 0;display:block;background:transparent;border:1px solid var(--accent2);color:var(--accent2);padding:9px 22px;border-radius:999px;cursor:pointer;font-size:13.5px;}
+
+  .quicktable{margin-top:40px;}
+  .quicktable h2{font-size:15px;color:var(--accent2);margin-bottom:12px;}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;background:var(--card);border-radius:12px;overflow:hidden;}
+  th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--sub);font-weight:600;}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent);}
+  tr:last-child td{border-bottom:none;}
+
+  footer{margin-top:36px;text-align:center;color:#5a606b;font-size:11.5px;line-height:2;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="tag">中級會計學 · 三堂課整合測驗</span>
+    <h1>從折舊變更到商譽不迴轉<br>25 題掃過三堂課所有計算陷阱</h1>
+    <p class="desc">共 25 題單選，涵蓋 0624（折舊 × 資產交換 × 銀行調節）、0716（特別股 × 減損天花板 × IFRS 15）、0722（無形資產 × 保固 × 公司債 × EPS），最後 2 題為跨堂整合。每題附題設數據，答完顯示分區得分與錯題複習清單。</p>
+    <div class="meta">Rock 會計家教 · 蕭啟漢｜學生：立雅</div>
+  </header>
+
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-text" id="progressText">0 / 25</div>
+
+  <div id="quizArea"></div>
+
+  <div class="result" id="resultBox">
+    <div class="center">
+      <div class="label">測驗完成</div>
+      <div class="score" id="scoreText">0 / 25</div>
+      <div class="label" id="scoreSub"></div>
+    </div>
+    <div class="secscore" id="secScore"></div>
+    <div class="msg" id="resultMsg"></div>
+    <button class="retryBtn" onclick="restartQuiz()">重新測驗</button>
+  </div>
+
+  <div class="quicktable">
+    <h2>⚠️ 八大陷阱速查表（測驗後複習用）</h2>
+    <table>
+      <tr><th>陷阱</th><th>錯誤直覺</th><th>正確處理</th></tr>
+      <tr><td>折舊方法變更</td><td>追溯調整前期</td><td>不追溯，用剩餘帳面價值往下重估（將錯就錯）</td></tr>
+      <tr><td>資產交換乙方入帳</td><td>用 11 萬入帳</td><td>11 萬 − 收到現金 3 萬 ＝ <b>8 萬</b></td></tr>
+      <tr><td>未兌現支票</td><td>把上月 9.6 萬算進本月</td><td>先剔除上月遺留，再算本月未兌現</td></tr>
+      <tr><td>財報品質特性</td><td>寫「審慎性」</td><td>攸關性 ＋ 忠實表達（中立性/免於錯誤/完整性）</td></tr>
+      <tr><td>減損迴轉</td><td>迴轉到市價</td><td>上限＝天花板（假設從未減損的正常折舊帳面價值）</td></tr>
+      <tr><td>商譽減損</td><td>比照一般資產可迴轉</td><td><b>永遠不能迴轉，答案是 0</b></td></tr>
+      <tr><td>保固負債</td><td>逐年按當年銷售額提列</td><td>銷售當下<b>一次提滿</b>總額</td></tr>
+      <tr><td>股票股利追溯</td><td>全年股數都乘 1.1</td><td>只有<b>發放日以前</b>的股數乘</td></tr>
+    </table>
+  </div>
+
+  <div class="quicktable">
+    <h2>🧮 三堂課關鍵答案數字</h2>
+    <table>
+      <tr><th>題型</th><th>來源</th><th class="num">答案</th></tr>
+      <tr><td>第一年折舊（年數合計法 + 半年）</td><td>0624</td><td class="num">25,000</td></tr>
+      <tr><td>第二年折舊（跨年度）</td><td>0624</td><td class="num">45,000</td></tr>
+      <tr><td>第三年起改直線法（每年）</td><td>0624</td><td class="num">40,000</td></tr>
+      <tr><td>甲公司處分損失</td><td>0624</td><td class="num">110,000</td></tr>
+      <tr><td>乙公司新設備入帳</td><td>0624</td><td class="num">80,000</td></tr>
+      <tr><td>調整後銀行餘額</td><td>0624</td><td class="num">2,544,000</td></tr>
+      <tr><td>完全參加特別股 → 普通股股利</td><td>0716</td><td class="num">37,500</td></tr>
+      <tr><td>期初在製品</td><td>0716</td><td class="num">80,000</td></tr>
+      <tr><td>投資性不動產取得成本</td><td>0716</td><td class="num">5,125,000</td></tr>
+      <tr><td>減損迴轉利益上限</td><td>0716</td><td class="num">6,000</td></tr>
+      <tr><td>期末保固負債準備</td><td>0722</td><td class="num">51,000</td></tr>
+      <tr><td>期末存貨（60 件 × 675）</td><td>0722</td><td class="num">40,500</td></tr>
+      <tr><td>EPS 分子（累積特別股）</td><td>0722</td><td class="num">−800,000</td></tr>
+    </table>
+  </div>
+
+  <footer>
+    立雅 · 中會考點三堂整合測驗<br>
+    教材來源：0624 折舊×資產交換×銀行調節×應收融資｜0716 特別股×資本市場×減損天花板×IFRS 15｜0722 無形資產×保固負債×公司債×EPS
+  </footer>
+</div>
+
+<script>
+const questions = [
+  /* ===== 0624 ===== */
+  {
+    sec:"0624", secCls:"s0624", level:"計算",
+    q:"7月1日購入設備，成本 30 萬、耐用年限 5 年、殘值 15 萬，採年數合計法。第一年（7/1~12/31）折舊為多少？",
+    data:"可折舊金額 ＝ 30萬 − 15萬 ＝ <b>15萬</b><br>年數合計 ＝ 5+4+3+2+1 ＝ <b>15</b>",
+    options:["50,000 元","25,000 元","30,000 元","15,000 元"],
+    correct:1,
+    explain:"15萬 × 5/15 × <span class='key'>6/12</span> ＝ <span class='key'>25,000 元</span>。<br>兩個關鍵：① 可折舊金額要先扣殘值（殘值 15 萬佔成本 50%，真實世界極不合理，是出題老師的怪設計）；② <span class='trap'>7月1日購入，當年只能算半年</span>——漏掉 6/12 就會答成 50,000。"
+  },
+  {
+    sec:"0624", secCls:"s0624", level:"計算",
+    q:"承上題，第二年（完整年度）的折舊費用是多少？",
+    data:"第 1 折舊年度後半：15萬 × 5/15 × 6/12<br>第 2 折舊年度前半：15萬 × 4/15 × 6/12",
+    options:["40,000 元","45,000 元","50,000 元","25,000 元"],
+    correct:1,
+    explain:"跨年度要拆兩段相加：<br>15萬 × 5/15 × 6/12 ＝ 25,000（第1折舊年度後半）<br>15萬 × 4/15 × 6/12 ＝ 20,000（第2折舊年度前半）<br>合計 <span class='key'>45,000 元</span>。累計折舊 ＝ 25,000 ＋ 45,000 ＝ <span class='key'>70,000</span>。<br><span class='trap'>陷阱：直接用 4/15 算整年</span>，會漏掉前一個折舊年度延伸過來的半年。"
+  },
+  {
+    sec:"0624", secCls:"s0624", level:"觀念",
+    q:"第三年起改用直線法。應如何處理？每年折舊多少？",
+    data:"累計折舊 <b>7萬</b> → 剩餘帳面價值 30萬 − 7萬 ＝ <b>23萬</b><br>剩餘年限 <b>2 年</b>｜殘值 <b>15萬</b>",
+    options:[
+      "追溯調整前兩年折舊，重編報表後每年 4 萬",
+      "不追溯調整前期，直接用剩餘帳面價值往下重新估計：(23萬 − 15萬) ÷ 2 ＝ 每年 4 萬",
+      "改用直線法後應重新計算全部 5 年，每年 3 萬",
+      "方法變更屬於錯誤更正，須調整保留盈餘"
+    ],
+    correct:1,
+    explain:"折舊<span class='key'>本質是「估計」而非精確科學</span>，方法變更屬於<span class='key'>會計估計變更，採推延法（不追溯）</span>。做法是：拿剩餘帳面價值 23 萬，扣掉殘值 15 萬，除以剩餘年限 2 年 ＝ <span class='key'>每年 4 萬</span>。<br>Rock 老師的講法就是<span class='key'>「將錯就錯往下算」</span>——前期不動，往後重新估計就好。"
+  },
+  {
+    sec:"0624", secCls:"s0624", level:"觀念",
+    q:"資產交換「具商業實質」時，換入資產應如何入帳？為什麼現實中幾乎都具商業實質？",
+    data:"獅子林比喻：拿 Ericsson T18/T28 舊手機「貼錢」換更好的二手機",
+    options:[
+      "以換出資產的帳面價值入帳，不認列損益",
+      "以公允價值（市價）入帳，並認列交換損益；因為若資產不具商業實質，根本沒有交換的必要",
+      "以雙方帳面價值的平均數入帳",
+      "以支付的現金金額入帳"
+    ],
+    correct:1,
+    explain:"<span class='key'>具商業實質 ＝ 換入的資產未來會被實際使用 → 用公允價值入帳並認列損益</span>。<br>Rock 老師的洞察：<span class='key'>如果資產不具商業實質，根本沒人要換</span>——真實人生幾乎見不到不具實質的交換，那只是出題老師的考試設計。交換的日常版本就是評估雙方資產價值，<span class='key'>誰吃虧誰貼錢</span>。"
+  },
+  {
+    sec:"0624", secCls:"s0624", level:"計算",
+    q:"甲公司舊設備成本 30 萬、累計折舊 11 萬，支付現金 3 萬換入公允價值 11 萬的設備。甲的處分損失是多少？",
+    data:"甲帳面價值 ＝ 30萬 − 11萬 ＝ <b>19萬</b><br>舊機市價 ＝ 換入公允值 11萬 − 支付現金 3萬 ＝ <b>8萬</b>",
+    options:["8 萬","11 萬","19 萬","3 萬"],
+    correct:1,
+    explain:"處分損失 ＝ 帳面價值 − 舊機真實市價 ＝ 19萬 − 8萬 ＝ <span class='key'>11 萬</span>。<br>關鍵在於<span class='key'>舊機市價要用「換入公允值 − 支付現金」倒推</span>：既然還要貼 3 萬才換得到 11 萬的設備，代表自己那台只值 8 萬。<br>分錄：借 新設備 110,000 ／ 處分損失 110,000 ／ 累計折舊 110,000；貸 舊設備 300,000 ／ 現金 30,000（借貸各 33 萬 ✓）。"
+  },
+  {
+    sec:"0624", secCls:"s0624", level:"陷阱",
+    q:"承上題，乙公司換入甲的舊設備並收取現金 3 萬。乙的新設備應以多少入帳？",
+    data:"乙舊設備成本 20萬、累計折舊 5萬 → 帳面 <b>15萬</b><br>乙自身設備公允值 <b>11萬</b>｜收取現金 <b>3萬</b>",
+    options:["11 萬（換出資產的公允價值）","8 萬（11 萬 − 收到的現金 3 萬）","15 萬（自身帳面價值）","14 萬（11 萬 + 3 萬）"],
+    correct:1,
+    explain:"這是本堂課<span class='trap'>最容易寫錯的分錄</span>。乙換入的是甲的舊設備，而乙<span class='key'>還收到 3 萬現金</span>，所以換入資產只值 <span class='key'>11萬 − 3萬 ＝ 8萬</span>。<br>乙的損失 ＝ 15萬 − 11萬 ＝ 4萬。<br>分錄：借 現金 30,000 ／ 新設備 80,000 ／ 處分損失 40,000 ／ 累計折舊 50,000；貸 舊設備 200,000（借貸各 20 萬 ✓）。<br><span class='trap'>8 萬與 11 萬搞混就全錯。</span>"
+  },
+  {
+    sec:"0624", secCls:"s0624", level:"陷阱",
+    q:"公司開出支票 120 萬，銀行已支付 84 萬（其中含 11 月遺留的未兌現支票 9.6 萬）。銀行對帳單餘額 300 萬，調整後的正確餘額是多少？",
+    data:"Step 1 剔除上月遺留：84萬 − 9.6萬 ＝ ?<br>Step 2 本月未兌現：120萬 − ? ＝ ?<br>Step 3 調整：300萬 − ? ＝ ?",
+    options:["2,160,000 元","2,544,000 元","2,640,000 元","2,448,000 元"],
+    correct:1,
+    explain:"三步驟：<br>① 84萬 − 9.6萬 ＝ <span class='key'>74.4萬</span>（12 月真正被兌現的金額）<br>② 120萬 − 74.4萬 ＝ <span class='key'>45.6萬</span>（12 月未兌現支票）<br>③ 300萬 − 45.6萬 ＝ <span class='key'>254.4萬</span><br><span class='trap'>核心陷阱：那 9.6 萬是「上月的舊帳」</span>，不能算成 12 月的未兌現。這題文字遊戲成分居多，難度約高二會計檢定水準，錯的人幾乎都是敗在讀題。"
+  },
+  {
+    sec:"0624", secCls:"s0624", level:"觀念",
+    q:"關於財務報表品質特性，下列敘述何者正確？",
+    data:"兩大基本品質特性：？<br>忠實表達的三要素：？",
+    options:[
+      "兩大基本品質特性為攸關性與審慎性",
+      "兩大基本品質特性為攸關性與忠實表達；忠實表達包含中立性、免於錯誤、完整性",
+      "忠實表達包含審慎性、可比性、時效性",
+      "流動比率屬於長期償債能力指標"
+    ],
+    correct:1,
+    explain:"兩大基本品質特性是<span class='key'>攸關性（Relevance）＋ 忠實表達（Faithful representation）</span>；忠實表達的三要素是<span class='key'>中立性 × 免於錯誤 × 完整性</span>。<br><span class='trap'>「審慎性」不是正確的品質特性用語，考試絕不可寫。</span><br>另外附帶：<span class='key'>流動比率是短期指標</span>，衡量長期償債要用<span class='key'>負債比率、利息保障倍數</span>。實務上老闆其實不在意這些比率，真正在意的是銀行——而且只要獲利好或股價漂亮，銀行甚至會主動放寬標準。"
+  },
+  {
+    sec:"0624", secCls:"s0624", level:"實務",
+    q:"「無追索權」應收帳款融資，在會計處理與實務動機上的重點是什麼？",
+    data:"聯發科等不缺錢的大公司，財報上也看得到應收融資",
+    options:[
+      "帳款風險未轉移，應收帳款不能除列，屬於借款",
+      "帳款賣斷給銀行、風險完全轉移，應收帳款必須全數除列；大公司做這件事往往不是為了籌資，而是與銀行維持關係、做業績",
+      "無追索權與有追索權的會計處理完全相同",
+      "屬於中級會計學範圍，處理極為複雜"
+    ],
+    correct:1,
+    explain:"<span class='key'>無追索權 ＝ 賣斷，風險完全轉移 → 應收帳款全數除列（沖銷）</span>；<span class='key'>有追索權則不能除列</span>，本質是借款而非賣斷，處理複雜得多。<br>實務洞察：<span class='key'>聯發科這種不缺錢的大公司也做應收融資，目的是與銀行「維持關係、做業績」</span>的短借手段。<br>延伸思考：<span class='key'>資產是好的，但放久了就變不好</span>——應收帳款放久＝收不回來，存貨放久＝失去價值。"
+  },
+
+  /* ===== 0716 ===== */
+  {
+    sec:"0716", secCls:"s0716", level:"觀念",
+    q:"特別股的「累積」與「完全參加」條款，分別保護誰？為什麼「非累積完全參加特別股」現實中幾乎不存在？",
+    data:"考題最愛考「非累積完全參加特別股」",
+    options:[
+      "累積保護公司，完全參加保護投資人",
+      "累積保護投資人（未發股利未來必須補發），完全參加則讓特別股與普通股共享剩餘股利——普通股股東必定反對；非累積又對投資人極不友善，兩者相加現實不可能發行",
+      "兩者都保護普通股股東，所以實務上很常見",
+      "兩者都是法定必要條款，發行時不可選擇"
+    ],
+    correct:1,
+    explain:"理解<span class='key'>動機</span>，考題才看得懂：<br><span class='key'>累積</span>——當年未發的股利未來賺錢時必須補發，<span class='key'>保護投資人</span>，實務上是必備條件，否則沒人願意買。<br><span class='key'>非累積</span>——當年不發即永遠不補，<span class='key'>保護公司</span>，對投資人極不友善，現實幾乎不存在。<br><span class='key'>完全參加</span>——與普通股按比例共享剩餘股利，<span class='key'>普通股股東必定反對</span>。<br>兩個對投資人／普通股都不利的條款湊在一起，現實根本談不成——但考試照考，會算就好。"
+  },
+  {
+    sec:"0716", secCls:"s0716", level:"計算",
+    q:"普通股資本 30 萬、特別股 18 萬（8%、完全參加），當期淨利 6 萬全數分配。普通股可分得多少股利？",
+    data:"① 特別股優先股利 18萬 × 8% ＝ <b>14,400</b><br>② 普通股同等配發 30萬 × 8% ＝ <b>24,000</b><br>③ 剩餘 60,000 − 38,400 ＝ <b>21,600</b>，按資本比例 18:30 分配",
+    options:["24,000 元","37,500 元","22,500 元","13,500 元"],
+    correct:1,
+    explain:"剩餘 21,600 按 18:30 分配：特別股 8,100、普通股 13,500。<br>合計：特別股 14,400 ＋ 8,100 ＝ <span class='key'>22,500</span>；普通股 24,000 ＋ 13,500 ＝ <span class='key'>37,500</span>。<br><span class='trap'>最常見的失分不是算錯，是看錯題目問的是普通股還是特別股</span>——兩個答案都在選項裡等你。"
+  },
+  {
+    sec:"0716", secCls:"s0716", level:"實務",
+    q:"國發基金以特別股注資慧康生活科技（7581）。為何該特別股在 IFRS 下被歸類為「特別股負債」而非股東權益？",
+    data:"2024 年 EPS 曾跌至 <b>−15 元</b>（一年賠掉 1.5 個股本）<br>該特別股保留控制權、限制表決權",
+    options:[
+      "因為國發基金是政府機構，屬於特殊規定",
+      "因為該特別股實質上像「不用付利息的借款」，公司有償還義務 → 依經濟實質從股東權益剔除，歸類為長期負債",
+      "因為特別股一律歸類為負債",
+      "因為公司當年虧損，權益為負數所以必須重分類"
+    ],
+    correct:1,
+    explain:"IFRS 看的是<span class='key'>經濟實質而非法律形式</span>。這檔特別股實質像<span class='key'>「不用付利息的借款」</span>——公司負有償還義務，不具權益工具的特性，因此<span class='key'>從股東權益剔除、歸類為長期負債「特別股負債」</span>。<br>當年 EPS −15 元代表一年賠掉 1.5 個股本，正常投資人不可能買普通股，所以疫情期間只能靠特別股注資，同時<span class='key'>限制表決權以保留原經營團隊控制權</span>。"
+  },
+  {
+    sec:"0716", secCls:"s0716", level:"實務",
+    q:"慧康在興櫃前進行「股票反分割（Reverse Stock Split）」。目的是什麼？",
+    data:"彌補虧損後股價僅剩約 <b>NT$0.033</b><br>反分割後面額強拉至 <b>NT$5</b>",
+    options:[
+      "增加流通在外股數，提高市場流動性",
+      "合併多股為一股、把面額拉回 NT$5，使淨值由負轉正，達成興櫃資本市場的門檻",
+      "降低每股股價，吸引小額投資人進場",
+      "為了讓國發基金取得更多股份"
+    ],
+    correct:1,
+    explain:"反分割是<span class='key'>分割的反向操作：合併多股為一股</span>。股價剩 0.033 元根本不符合掛牌條件，透過反分割<span class='key'>把面額強拉至 NT$5、淨值由負轉正</span>，才跨過興櫃門檻。<br>搭配前一步<span class='key'>特別股 1:1 全數轉換為普通股</span>，讓國發基金順利收回資金並獲利。<br>Rock 老師稱這整套是<span class='key'>「把所有籌資工具發揮到極致的經典案例」</span>。"
+  },
+  {
+    sec:"0716", secCls:"s0716", level:"技巧",
+    q:"用「借貸方」判斷現金流量表的加減項。預收租金（負債）增加 2,000、應收利息（資產）減少 6,000，應如何調整？",
+    data:"淨利、利息收入、租金收入 ＝ <b>貸方科目</b><br>貸方增加 ＝ 加項",
+    options:[
+      "−2,000、−6,000",
+      "＋2,000、＋6,000（負債增加為貸方；資產減少也是貸方，兩者皆為加項）",
+      "＋2,000、−6,000",
+      "−2,000、＋6,000"
+    ],
+    correct:1,
+    explain:"這是速解技巧：<span class='key'>只要判斷該變動落在借方還是貸方</span>。<br><span class='key'>負債增加 ＝ 貸方 → ＋2,000</span><br><span class='key'>資產減少 ＝ 貸方 → ＋6,000</span><br>現金流量 ＝ 淨利 ＋ 2,000 ＋ 6,000，一秒得解。不用死背「哪些加、哪些減」的表格，回歸借貸邏輯就好。"
+  },
+  {
+    sec:"0716", secCls:"s0716", level:"計算",
+    q:"主要成本（Prime Cost）21 萬、加工成本（Conversion Cost）18 萬、直接人工 12 萬、期末在製品 5 萬、製成品成本 30 萬。期初在製品是多少？",
+    data:"Prime ＝ 直接材料 ＋ 直接人工<br>Conversion ＝ 直接人工 ＋ 製造費用",
+    options:["5 萬","8 萬","12 萬","27 萬"],
+    correct:1,
+    explain:"逐步推導：<br>直接材料 ＝ 21 − 12 ＝ <span class='key'>9萬</span><br>製造費用 ＝ 18 − 12 ＝ <span class='key'>6萬</span><br>本期總投入 ＝ 9 ＋ 12 ＋ 6 ＝ <span class='key'>27萬</span><br>期初在製品 ＋ 27萬 − 5萬 ＝ 30萬 → 期初在製品 ＝ <span class='key'>8萬</span><br>關鍵在於<span class='key'>直接人工是兩個公式的交集</span>，先用它拆出材料與製造費用，其餘就是存貨流程的加減。"
+  },
+  {
+    sec:"0716", secCls:"s0716", level:"陷阱",
+    q:"購買廠房用於出租（投資性不動產）。購買價 500 萬、房仲購屋佣金 12.5 萬、估價師鑑價費與代書律師費若干、為出租而付給房仲的租金佣金 30 萬。取得成本為多少？",
+    data:"✅ 可資本化：購買價格 ＋ 購屋佣金 ＋ 鑑價費 ＋ 代書律師費<br>❌ 不可資本化：？",
+    options:[
+      "5,425,000 元（全部加總）",
+      "5,125,000 元（租金佣金 30 萬須列為當期費用）",
+      "5,000,000 元（僅購買價格）",
+      "5,300,000 元"
+    ],
+    correct:1,
+    explain:"判準是<span class='key'>「這筆支出是為了取得資產，還是為了產生收入」</span>：<br><span class='key'>購屋佣金</span>——為了取得資產 → <span class='key'>資本化</span><br><span class='key'>租金佣金 30 萬</span>——為了招租產生收入 → <span class='key'>列為當期費用</span><br>取得成本 ＝ <span class='key'>5,125,000 元</span>。<br><span class='trap'>「購屋佣金」與「租金佣金」只差兩個字，卻是資本化與費用化的分水嶺。</span>"
+  },
+  {
+    sec:"0716", secCls:"s0716", level:"IFRS",
+    q:"出貨給 Momo、康是美、屈臣氏等強勢通路，合約附帶可退回 15% 的無條件退貨權。應如何認列？",
+    data:"貨權<b>已經轉移</b>給通路商",
+    options:[
+      "貨權已轉移，100% 全數認列為當期營收",
+      "認列 85% 為營收，預期可能退貨的 15% 必須列為「退款負債（Refund Liability）」",
+      "全部暫不認列營收，等退貨期間結束後再一次認列",
+      "認列 100% 營收，同時提列 15% 的備抵呆帳"
+    ],
+    correct:1,
+    explain:"IFRS 15 要求<span class='key'>認列「預期退貨部分的可變對價」</span>——即使貨權已轉移，預期可能被退回的金額<span class='key'>必須列為退款負債（Refund Liability）</span>，不能認營收。<br><span class='trap'>老長官的典型困惑：「貨權都轉移了，為什麼不能認營收？」</span> 這正是老公司財務主管不熟 IFRS 的地方——<span class='key'>能把這條講清楚，就是職場上的專業話語權</span>。"
+  },
+
+  /* ===== 0722 ===== */
+  {
+    sec:"0722", secCls:"s0722", level:"觀念",
+    q:"研發支出的會計處理，正確的是？",
+    data:"研究階段：燒錢但無產出<br>發展階段：已有樣品等具體成果",
+    options:[
+      "研究與發展階段的支出一律資本化為無形資產",
+      "研究階段全數列為當期費用；發展階段有具體成果時，可有限度資本化",
+      "研究階段可資本化，發展階段列為費用",
+      "研發支出一律列為當期費用，不得資本化"
+    ],
+    correct:1,
+    explain:"<span class='key'>研究階段＝燒錢無產出 → 全數當期費用</span>；<span class='key'>發展階段＝已有樣品等具體成果 → 有限度可資本化</span>。<br>這條規則<span class='key'>對生技產業財報影響甚鉅</span>——同樣的研發投入，落在哪個階段會讓損益表與資產負債表長得完全不同。<br>順帶複習無形資產認列基礎：<span class='key'>專利權、客戶名單、品牌名稱都以歷史成本入帳、直線法攤銷</span>，只要能產生未來現金流即可認列（如與迪士尼簽長期合約 → 估算認列）。"
+  },
+  {
+    sec:"0722", secCls:"s0722", level:"計算",
+    q:"三年銷售收入分別為 30 萬、39 萬、42 萬，保固費率 10%，期間已實際發生保固支出 60,000 元。期末保固負債準備為多少？",
+    data:"三年銷售合計 ＝ 30 + 39 + 42 ＝ <b>111萬</b><br>總保固費用估列 ＝ 111萬 × 10% ＝ <b>111,000</b>",
+    options:["42,000 元","51,000 元","111,000 元","60,000 元"],
+    correct:1,
+    explain:"111,000 − 60,000 ＝ <span class='key'>51,000 元</span>。<br>核心是<span class='key'>「一次提滿」原則</span>：銷售當下就一次估列全部保固費用，符合<span class='key'>收入費用配合原則</span>。<br><span class='trap'>誤區：逐年按當年銷售額提列</span>——這樣算出來的數字完全不同，也違背配合原則。"
+  },
+  {
+    sec:"0722", secCls:"s0722", level:"技巧",
+    q:"公司債帳面價值從 13,626 增加到 13,744。市場利率最可能是多少？用什麼方法最快解出來？",
+    data:"帳面價值<b>增加</b> → 折價發行 → 票面利率 ＜ 市場利率<br>攤銷額 ＝ 13,744 − 13,626 ＝ <b>118</b>",
+    options:[
+      "6%，用公式推導年金現值",
+      "7%，用「試算選項法」：選項利率 × 期初帳面價值 − 票面利息 ＝ 攤銷額，回推驗證",
+      "8%，票面利率越低市場利率越高",
+      "無法判斷，須知道票面金額才能計算"
+    ],
+    correct:1,
+    explain:"考試不需要硬推公式，<span class='key'>直接拿選項試算最快</span>：<br>6%：13,626 × 6% ＝ 817 − 票息 → 攤銷額太小，13,626 ＋ 攤銷 ≠ 13,744<br><span class='key'>7%：13,626 × 7% ＝ 954 − 票息 ＝ 118 → 13,626 ＋ 118 ＝ 13,744 ✓</span><br>步驟固定：<span class='key'>選項利率 × 期初帳面價值 − 票面利息 ＝ 攤銷額；期初帳面 ＋ 攤銷額 ＝ 期末帳面？符合者即答案。</span><br>另外先判方向：<span class='key'>帳面價值遞增 ＝ 折價（打折賣，票面利率低於市場利率）</span>。"
+  },
+  {
+    sec:"0722", secCls:"s0722", level:"陷阱",
+    q:"生產 300 件，製造成本合計 202,500 元，期末剩餘 60 件。期末存貨金額為多少？計算時最需要注意什麼？",
+    data:"✅ 計入產品成本：直接原料、直接人工、變動製造費用、固定製造費用<br>❌ 不計入：？",
+    options:[
+      "40,500 元；須注意變動與固定「銷管費用」是煙霧彈，不能計入產品成本",
+      "40,500 元；所有變動成本都應計入產品成本",
+      "67,500 元；固定製造費用不應計入",
+      "202,500 元；期末存貨等於全部製造成本"
+    ],
+    correct:0,
+    explain:"單位成本 ＝ 202,500 ÷ 300 ＝ <span class='key'>675 元</span>；期末存貨 ＝ 60 × 675 ＝ <span class='key'>40,500 元</span>。<br>真正的考點不是除法，是<span class='key'>「哪些成本可以進產品」</span>：<span class='key'>只有製造相關（直接原料、直接人工、變動製造費用、固定製造費用）才能計入</span>；<span class='trap'>變動銷管費用與固定銷管費用是煙霧彈</span>，屬於期間費用，一旦誤加進去，單位成本與期末存貨就全錯。"
+  },
+  {
+    sec:"0722", secCls:"s0722", level:"陷阱",
+    q:"7 月 1 日發放 10% 股票股利。計算加權平均流通在外股數時應如何調整？",
+    data:"股票股利屬於<b>回溯調整股本</b>，視為從一開始就有這麼多股",
+    options:[
+      "全年度所有月份的股數都乘以 1.1",
+      "只有 7 月 1 日「以前」的股數乘以 1.1，之後的股數直接加總不需乘",
+      "只有 7 月 1 日「以後」的股數乘以 1.1",
+      "股票股利不影響加權平均股數"
+    ],
+    correct:1,
+    explain:"<span class='key'>股票股利與股票分割都要追溯調整</span>，理由是它<span class='key'>回溯調整股本，視為從一開始就有這麼多股</span>。所以<span class='key'>發放日以前的所有流通股數 × 1.1</span>，<span class='key'>發放日以後的股數不需再乘</span>（因為已經是調整後的股數了）。<br><span class='trap'>最高頻陷阱：很多人全年度都乘 1.1，直接重複計算。</span><br>另一個干擾條件是<span class='key'>庫藏股</span>：買回＝減項、賣出＝加項，都按持有月份加權。"
+  },
+  {
+    sec:"0722", secCls:"s0722", level:"陷阱",
+    q:"當年淨損 70 萬，累積特別股股利 10 萬因虧損未宣告發放。計算 EPS 時，分子應為多少？",
+    data:"「累積」＝ 虧損年未發的股利，<b>未來必須補發</b>",
+    options:[
+      "−70 萬（當年沒發股利，不必扣除）",
+      "−80 萬（累積特別股股利即使未宣告，仍須自淨損中再扣除）",
+      "−60 萬（虧損可抵減特別股股利）",
+      "0（虧損年度不計算 EPS）"
+    ],
+    correct:1,
+    explain:"<span class='key'>累積特別股在虧損年份會「雪上加霜」</span>：分子 ＝ −70 − 10 ＝ <span class='key'>−80 萬</span>。<br>邏輯是：<span class='key'>「累積」代表虧損年未發的股利未來必須補發，等於已經先記在普通股股東頭上</span>，所以現在就要扣。<br>對照：<span class='key'>非累積特別股</span>——虧損年不發、隔年重新來過，<span class='key'>不計入當年 EPS 分子</span>，分子就只有 −70 萬。<br><span class='trap'>直覺「當年沒發就不用扣」正是出題老師要抓的錯。</span>"
+  },
+
+  /* ===== 跨堂整合 ===== */
+  {
+    sec:"整合", secCls:"sMix", level:"整合",
+    q:"一般固定資產減損後市價回升至 76,000（天花板 75,000、現帳面 69,000）；另一項商譽減損後被投資公司生意好轉。兩者的迴轉利益分別是多少？",
+    data:"一般資產：帳面 <b>69,000</b>｜天花板 <b>75,000</b>｜市價 <b>76,000</b><br>商譽：不攤銷、定期減損測試",
+    options:[
+      "一般資產 7,000；商譽 7,000",
+      "一般資產 6,000（上限為天花板）；商譽 0（永遠不能迴轉）",
+      "一般資產 6,000；商譽比照一般資產亦為 6,000",
+      "一般資產 7,000；商譽 0"
+    ],
+    correct:1,
+    explain:"這組是 0716 與 0722 的跨堂呼應，也是被稱為<span class='key'>「被玩壞的考點」</span>（鄭丁旺與林蕙真曾有不同解讀）。<br><span class='key'>一般資產</span>：迴轉上限是<span class='key'>天花板＝假設從未減損、正常折舊至今的帳面價值 75,000</span>，所以迴轉利益 ＝ 75,000 − 69,000 ＝ <span class='key'>6,000</span>，<span class='trap'>不是市價差的 7,000</span>。<br><span class='key'>商譽</span>：<span class='key'>減損後永遠不能迴轉，答案恆為 0</span>——這是防止企業用虛幻商譽操縱損益的防線。<br>口訣：<span class='key'>看到商譽 + 回升/迴轉，直接寫 0。</span>"
+  },
+  {
+    sec:"整合", secCls:"sMix", level:"整合",
+    q:"0716 的特別股股利分配與 0722 的 EPS 雪上加霜，共通的底層邏輯是什麼？",
+    data:"0716：完全參加特別股先拿 8% 優先股利，再與普通股共享剩餘<br>0722：累積特別股在虧損年份仍從 EPS 分子扣除",
+    options:[
+      "兩者無關，只是恰好都與特別股有關的計算題",
+      "共通邏輯是「特別股的權利優先於普通股」：不論公司賺錢或虧錢，特別股該拿的都要先扣掉，剩下的才是普通股股東的",
+      "共通邏輯是特別股一律歸類為負債",
+      "共通邏輯是特別股股利必須每年強制發放"
+    ],
+    correct:1,
+    explain:"把兩堂課串起來就是一句話：<span class='key'>EPS 是「普通股」每股盈餘，所以任何屬於特別股的權利都必須先扣掉</span>。<br><span class='key'>賺錢時（0716）</span>——特別股先拿優先股利 14,400，完全參加還能再分剩餘，普通股拿的是「扣完之後」的 37,500。<br><span class='key'>虧錢時（0722）</span>——累積特別股的 10 萬股利未來要補發，所以現在就先記在普通股頭上，分子變成 −80 萬。<br><span class='key'>順風逆風，特別股都排在普通股前面</span>——理解這個利益順位，兩類題目就不需要分開背。<br>延伸：群創在虧損年份用<span class='key'>小額減資</span>把沈澱資本以現金退還股東，<span class='key'>減資 ≠ 倒閉危機</span>，看到減資要先分辨是「現金減資退款」還是「彌補虧損減資」，意義完全不同。"
+  }
+];
+
+let current = 0;
+let score = 0;
+const wrongList = [];
+const secStats = {};
+questions.forEach(q => { if(!secStats[q.sec]) secStats[q.sec] = {total:0, right:0}; secStats[q.sec].total++; });
+
+const quizArea = document.getElementById('quizArea');
+const progressFill = document.getElementById('progressFill');
+const progressText = document.getElementById('progressText');
+
+function renderQuiz(){
+  quizArea.innerHTML = '';
+  wrongList.length = 0;
+  Object.keys(secStats).forEach(k => secStats[k].right = 0);
+
+  questions.forEach((item, idx) => {
+    const card = document.createElement('div');
+    card.className = 'card' + (idx === current ? ' active' : '');
+    card.id = 'card-' + idx;
+
+    const topline = document.createElement('div');
+    topline.className = 'topline';
+    const qnum = document.createElement('span');
+    qnum.className = 'qnum';
+    qnum.textContent = `Q${idx+1} / ${questions.length}`;
+    const badges = document.createElement('span');
+    badges.className = 'badges';
+    const secTag = document.createElement('span');
+    secTag.className = 'sec ' + item.secCls;
+    secTag.textContent = item.sec;
+    const lv = document.createElement('span');
+    lv.className = 'level';
+    lv.textContent = item.level;
+    badges.appendChild(secTag);
+    badges.appendChild(lv);
+    topline.appendChild(qnum);
+    topline.appendChild(badges);
+    card.appendChild(topline);
+
+    const qtext = document.createElement('div');
+    qtext.className = 'qtext';
+    qtext.textContent = item.q;
+    card.appendChild(qtext);
+
+    if(item.data){
+      const db = document.createElement('div');
+      db.className = 'databox';
+      db.innerHTML = item.data;
+      card.appendChild(db);
+    }
+
+    const optsWrap = document.createElement('div');
+    optsWrap.className = 'options';
+    item.options.forEach((optText, oIdx) => {
+      const btn = document.createElement('button');
+      btn.className = 'opt';
+      btn.textContent = optText;
+      btn.onclick = () => selectAnswer(idx, oIdx);
+      optsWrap.appendChild(btn);
+    });
+    card.appendChild(optsWrap);
+
+    const explain = document.createElement('div');
+    explain.className = 'explain';
+    explain.id = 'explain-' + idx;
+    explain.innerHTML = item.explain;
+    card.appendChild(explain);
+
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'nextBtn';
+    nextBtn.id = 'next-' + idx;
+    nextBtn.textContent = idx === questions.length - 1 ? '查看結果' : '下一題 →';
+    nextBtn.onclick = () => goNext(idx);
+    card.appendChild(nextBtn);
+
+    quizArea.appendChild(card);
+  });
+  updateProgress();
+}
+
+function updateProgress(){
+  progressFill.style.width = (current / questions.length * 100) + '%';
+  progressText.textContent = `${current} / ${questions.length}`;
+}
+
+function selectAnswer(qIdx, oIdx){
+  const card = document.getElementById('card-' + qIdx);
+  const opts = card.querySelectorAll('.opt');
+  const item = questions[qIdx];
+
+  opts.forEach((o, i) => {
+    o.classList.add('disabled');
+    if(i === item.correct) o.classList.add('correct');
+    if(i === oIdx && oIdx !== item.correct) o.classList.add('wrong');
+  });
+
+  if(oIdx === item.correct){
+    score++;
+    secStats[item.sec].right++;
+  }else{
+    wrongList.push(`Q${qIdx+1}（${item.sec}·${item.level}）`);
+  }
+
+  document.getElementById('explain-' + qIdx).classList.add('show');
+  document.getElementById('next-' + qIdx).classList.add('show');
+}
+
+function goNext(qIdx){
+  document.getElementById('card-' + qIdx).classList.remove('active');
+  current++;
+  if(current < questions.length){
+    const nextCard = document.getElementById('card-' + current);
+    nextCard.classList.add('active');
+    nextCard.scrollIntoView({behavior:'smooth', block:'start'});
+    updateProgress();
+  }else{
+    progressFill.style.width = '100%';
+    progressText.textContent = `${questions.length} / ${questions.length}`;
+    showResult();
+  }
+}
+
+function showResult(){
+  const resultBox = document.getElementById('resultBox');
+  resultBox.classList.add('show');
+  document.getElementById('scoreText').textContent = `${score} / ${questions.length}`;
+
+  const secBox = document.getElementById('secScore');
+  secBox.innerHTML = '';
+  const secNames = {"0624":"0624 折舊·交換","0716":"0716 特別股·減損","0722":"0722 無形·EPS","整合":"跨堂整合"};
+  Object.keys(secStats).forEach(k => {
+    const d = document.createElement('div');
+    d.innerHTML = `${secNames[k] || k}<b>${secStats[k].right} / ${secStats[k].total}</b>`;
+    secBox.appendChild(d);
+  });
+
+  let subLabel = '', msg = '';
+  const pct = score / questions.length;
+  if(pct === 1){
+    subLabel = '滿分';
+    msg = '三堂課的計算與陷阱全數掌握，包含最容易失分的資產交換乙方入帳、天花板原則與累積特別股。<br><br><b>下一步練習：</b>把「八大陷阱速查表」蓋起來，自己默寫一次每個陷阱的錯誤直覺與正確處理。能默寫出來，考場上才不會被題目的文字設計牽著走。';
+  }else if(pct >= 0.84){
+    subLabel = '掌握良好';
+    msg = '主要考點已經穩了。回頭把答錯的題目重算一次，特別留意三個最高頻失分點：<b>① 資產交換乙方入帳是 8 萬不是 11 萬</b>；<b>② 減損迴轉上限是天花板不是市價</b>；<b>③ 股票股利只追溯調整發放日以前的股數</b>。';
+  }else if(pct >= 0.64){
+    subLabel = '基礎及格';
+    msg = '觀念大致有，但計算步驟還不夠熟練。建議先把最下方的「關鍵答案數字」表格遮住，逐題重算一次——這些數字都是課堂題目的標準答案，算得出來代表流程真的通了。';
+  }else{
+    subLabel = '需要重新複習';
+    msg = '建議依序重讀三份一頁式教材，先抓住每堂課的核心原則：<br><b>0624</b>——折舊是估計不是科學，方法變更不追溯，將錯就錯往下算。<br><b>0716</b>——理解條款背後的利益動機（誰保護誰），考題才看得懂。<br><b>0722</b>——商譽減損永遠不能迴轉；累積特別股在虧損年份雪上加霜。';
+  }
+  if(wrongList.length){
+    msg += '<br><br><b>建議複習題號：</b>' + wrongList.join('、');
+  }
+  document.getElementById('scoreSub').textContent = subLabel;
+  document.getElementById('resultMsg').innerHTML = msg;
+}
+
+function restartQuiz(){
+  current = 0;
+  score = 0;
+  document.getElementById('resultBox').classList.remove('show');
+  renderQuiz();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+renderQuiz();
+</script>
+</body>
+</html>
