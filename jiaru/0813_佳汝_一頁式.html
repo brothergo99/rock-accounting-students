@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>佳汝 0813 · 法說會×調整後指標×Gogoro×遠傳×台灣大×EBITDA×FCF</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --in:#312e81;--in2:#eef2ff;--in3:#a5b4fc;--in4:#6366f1;--in5:#818cf8;
+  --am:#78350f;--am2:#fffbeb;--am3:#fde68a;--am4:#d97706;--am5:#fbbf24;
+  --em:#065f46;--em2:#ecfdf5;--em3:#6ee7b7;--em4:#059669;
+  --ro:#9f1239;--ro2:#fff1f2;--ro3:#fecdd3;--ro4:#e11d48;
+  --or:#9a3412;--or2:#fff7ed;--or3:#fed7aa;--or4:#f97316;
+  --cy:#164e63;--cy2:#ecfeff;--cy3:#a5f3fc;--cy4:#0891b2;
+  --sl:#1e293b;--sl2:#f8fafc;--sl3:#cbd5e1;--sl4:#475569;
+  --night:#080c14;--night2:#0d1220;
+  --bg:#eef2ff;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--night);line-height:1.7}
+
+.page-header{background:linear-gradient(150deg,#080c14,#0d1220,#060a12,#050810);padding:36px 50px 28px;position:relative;overflow:hidden;border-bottom:3px solid var(--in5)}
+.ph-g1{position:absolute;top:-60px;right:-40px;width:260px;height:260px;background:radial-gradient(circle,rgba(129,140,248,.22),transparent 65%);pointer-events:none}
+.ph-g2{position:absolute;bottom:-30px;left:-20px;width:180px;height:180px;background:radial-gradient(circle,rgba(251,191,36,.12),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(165,180,252,.65);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(14px,2.1vw,21px);font-weight:900;color:#fff;line-height:1.28;margin-bottom:4px}
+.ph-title em{color:var(--in5);font-style:normal}
+.ph-title em2{color:var(--am5);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.38);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mc{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(129,140,248,.14);color:var(--in5);border:1px solid rgba(129,140,248,.3)}
+.mc-a{background:rgba(245,158,11,.13);color:var(--am5);border-color:rgba(245,158,11,.3)}
+.mc-e{background:rgba(5,150,105,.12);color:var(--em3);border-color:rgba(5,150,105,.28)}
+.mc-r{background:rgba(225,29,72,.12);color:#fb7185;border-color:rgba(225,29,72,.28)}
+
+.container{max-width:1100px;margin:0 auto;padding:26px 26px}
+.section{margin-bottom:22px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--in4);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--night);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--in3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-32{display:grid;grid-template-columns:1.1fr 1fr;gap:13px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-32{grid-template-columns:1fr}}
+
+.card-in{background:var(--in2);border:1.5px solid var(--in3);border-radius:10px;padding:14px}
+.card-am{background:var(--am2);border:1.5px solid var(--am3);border-radius:10px;padding:14px}
+.card-em{background:var(--em2);border:1.5px solid var(--em3);border-radius:10px;padding:14px}
+.card-ro{background:var(--ro2);border:1.5px solid var(--ro3);border-radius:10px;padding:14px}
+.card-or{background:var(--or2);border:1.5px solid var(--or3);border-radius:10px;padding:14px}
+.card-cy{background:var(--cy2);border:1.5px solid var(--cy3);border-radius:10px;padding:14px}
+.card-sl{background:var(--sl2);border:1.5px solid var(--sl3);border-radius:10px;padding:14px}
+.card-dark{background:var(--night);border:none;border-radius:10px;padding:14px}
+.card-in h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--in)}
+.card-am h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--am)}
+.card-em h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--em)}
+.card-ro h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--ro)}
+.card-or h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--or)}
+.card-cy h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--cy)}
+.card-sl h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--sl)}
+.card-dark h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--in5)}
+.card-in p,.card-in li{color:var(--in);font-size:12.5px;line-height:1.85}
+.card-am p,.card-am li{color:var(--am);font-size:12.5px;line-height:1.85}
+.card-em p,.card-em li{color:var(--em);font-size:12.5px;line-height:1.85}
+.card-ro p,.card-ro li{color:var(--ro);font-size:12.5px;line-height:1.85}
+.card-or p,.card-or li{color:var(--or);font-size:12.5px;line-height:1.85}
+.card-cy p,.card-cy li{color:var(--cy);font-size:12.5px;line-height:1.85}
+.card-sl p,.card-sl li{color:var(--sl);font-size:12.5px;line-height:1.85}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8);font-size:12.5px;line-height:1.85}
+ul{padding-left:15px}
+ul li{margin-bottom:3px}
+
+/* 五大調整項目 */
+.adj-row{display:flex;gap:8px;align-items:flex-start;padding:7px 0;border-bottom:1px dashed rgba(99,102,241,.12)}
+.adj-row:last-child{border-bottom:none}
+.adj-n{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:rgba(99,102,241,.2);flex-shrink:0;width:20px;line-height:1.2}
+.adj-tag{font-family:'DM Mono',monospace;font-size:9.5px;border-radius:3px;padding:2px 7px;flex-shrink:0;white-space:nowrap;margin-top:3px}
+.adj-body{font-size:12.5px;line-height:1.75}
+
+/* Gogoro 調整步驟 */
+.step-row{display:flex;align-items:center;gap:7px;padding:7px 0;border-bottom:1px dashed rgba(0,0,0,.07)}
+.step-row:last-child{border-bottom:none}
+.step-from{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;min-width:80px;text-align:right}
+.step-op{font-size:10.5px;color:var(--sl4);flex-shrink:0;text-align:center;width:80px;line-height:1.4}
+.step-to{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;min-width:80px}
+.step-note{font-size:12px;flex:1;color:var(--sl4);line-height:1.6}
+
+/* ARPU 比較 */
+.arpu-bar{display:flex;gap:5px;align-items:flex-end;height:80px;margin:8px 0}
+.arpu-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
+.arpu-fill{border-radius:4px 4px 0 0;width:100%;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:11.5px;font-weight:700;color:#fff}
+.arpu-lbl{font-size:10.5px;text-align:center;color:var(--sl4)}
+
+/* 台灣大 momo vs 電信 */
+.split-bar{display:flex;height:32px;border-radius:6px;overflow:hidden;font-size:11.5px;font-weight:700;margin:7px 0}
+.sb-left{display:flex;align-items:center;justify-content:center;color:#fff}
+.sb-right{display:flex;align-items:center;justify-content:center;color:#fff}
+
+/* 紅旗 */
+.rf-item{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-bottom:1px dashed rgba(225,29,72,.12)}
+.rf-item:last-child{border-bottom:none}
+.rf-n{font-family:'DM Mono',monospace;font-size:10px;background:var(--ro4);color:#fff;border-radius:3px;padding:2px 7px;flex-shrink:0;margin-top:2px}
+.rf-body{font-size:12.5px;color:var(--ro);line-height:1.75}
+
+/* Quote */
+.quote{background:linear-gradient(135deg,var(--night),var(--night2));border-radius:10px;padding:14px 20px;position:relative;overflow:hidden;margin-bottom:20px}
+.qm{font-family:'Playfair Display',serif;font-size:72px;color:rgba(129,140,248,.07);position:absolute;top:-10px;left:8px;line-height:1}
+.qt{font-size:13px;color:rgba(255,255,255,.88);line-height:1.65;position:relative;z-index:1}
+.qt em{color:var(--in5);font-style:normal;font-weight:700}
+.qt em2{color:var(--am5);font-style:normal}
+.qs{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.35);margin-top:6px;position:relative;z-index:1}
+
+.page-footer{background:var(--night);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--in5)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-g1"></div>
+  <div class="ph-g2"></div>
+  <div class="ph-eyebrow">0813 · 佳汝 課後複習 · 法說會財務溝通×調整後指標×Gogoro解剖×遠傳×台灣大哥大×EBITDA×FCF</div>
+  <div class="ph-title"><em>法說會不是數字陳列，而是一場戰略對話</em>——<br>報表是給會計師看的，<em2>法說會簡報是給投資人說故事的</em2></div>
+  <div class="ph-sub">五大調整項目 × Gogoro四步包裝術 × EBITDA睡前洗錢 × FCF擴張底氣 × 遠傳ARPU稱王 × 台灣大momo警訊 × 三大紅旗</div>
+  <div class="ph-meta">
+    <span class="mc">2026.08.13</span>
+    <span class="mc">佳汝</span>
+    <span class="mc mc-a">調整後指標×法說會藝術</span>
+    <span class="mc mc-e">遠傳×台灣大哥大</span>
+    <span class="mc mc-r">Gogoro四步包裝×三大紅旗</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 金句 -->
+  <div class="quote">
+    <div class="qm">"</div>
+    <div class="qt">「<em>財務簡報既是溝通的橋樑，也可能是優雅的遮羞布。</em>Gogoro毛利率從4.9%調整後到18.2%，是企業誠實還原一次性事件；但如果連續三年加回「一次性費用」，那這筆費用就是「經常性費用」——永遠不要讓調整變成習慣。<br><em2>優秀的財務分析不只是看數字，更是看企業在變動環境中，如何訴說一個關於生存與野心的故事。</em2>」</div>
+    <div class="qs">Rock 老師 · 0813 佳汝 · 法說會溝通藝術 · 佳汝現任遠東生技類財務長，協助IPO上櫃</div>
+  </div>
+
+  <!-- SECTION 1: 五大調整項目 + EBITDA/FCF -->
+  <div class="section">
+    <div class="section-label">Part 1 · 法說會五大調整項目 + EBITDA×FCF · Adjusted Metrics核心邏輯</div>
+    <div class="section-title">五大「過濾噪音」工具：CFO如何引導投資人看清本業真實健康度</div>
+    <div class="grid-2">
+      <div class="card-in">
+        <h3>🎛️ 五大核心調整項目（法說會常見）</h3>
+        <div class="adj-row" style="padding-top:0">
+          <div class="adj-n">①</div>
+          <span class="adj-tag" style="background:var(--in4);color:#fff">匯率FX</span>
+          <div class="adj-body" style="color:var(--in)"><strong>固定匯率（Constant Currency）還原。</strong>跨國企業最常用的止痛藥——台幣貶值導致帳面營收縮水，CFO用固定匯率還原說明「貨賣更多但被匯率害了」。</div>
+        </div>
+        <div class="adj-row">
+          <div class="adj-n">②</div>
+          <span class="adj-tag" style="background:var(--in4);color:#fff">一次性損益</span>
+          <div class="adj-body" style="color:var(--in)">排除賣樓、賣股等非核心業務的干擾。今年賣了大樓賺百億，明年毫無參考價值；反之投資股票下跌，加回損失才能看見本業強韌。</div>
+        </div>
+        <div class="adj-row">
+          <div class="adj-n">③</div>
+          <span class="adj-tag" style="background:var(--in4);color:#fff">召回/升級費</span>
+          <div class="adj-body" style="color:var(--in)">電池更新、產品召回等特殊事件成本。財務長主張屬於「Special Event」，不應計入常態成本——以保住市場對長期營運效率的信心。</div>
+        </div>
+        <div class="adj-row">
+          <div class="adj-n">④</div>
+          <span class="adj-tag" style="background:var(--in4);color:#fff">SBC股權激勵</span>
+          <div class="adj-body" style="color:var(--in)">非現金費用（Stock-based Compensation）。損益表認列費用但無現金流出；加回是為展現「現金獲利能力」，同時向股東說明這是留才的必要長期投資。</div>
+        </div>
+        <div class="adj-row">
+          <div class="adj-n">⑤</div>
+          <span class="adj-tag" style="background:var(--in4);color:#fff">公允價值變動</span>
+          <div class="adj-body" style="color:var(--in)">SPAC上市公司的<strong>最弔詭會計悖論</strong>：股價暴跌→認股權證負債減少→帳面「利益」。「股價愈爛，獲利愈好」——必須拆解，否則誤導散戶以為轉虧為盈。</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div class="card-dark">
+          <h3>📊 EBITDA × FCF：兩大底層指標</h3>
+          <div style="background:rgba(129,140,248,.12);border-radius:7px;padding:10px 13px;margin-bottom:9px">
+            <div style="font-size:12px;font-weight:700;color:var(--in5);margin-bottom:4px">EBITDA ＝「睡前、洗錢」</div>
+            <div style="font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,.6);margin-bottom:5px">= 稅前、息前、折舊攤銷前獲利</div>
+            <div style="font-size:12.5px;color:rgba(255,255,255,.78);line-height:1.75">資本密集型產業（電信、能源基礎設施）的淨利會被龐大折舊壓扁——EBITDA才能揭露企業真正的<strong style="color:#fff">現金產出能力</strong>。<br>Gogoro：帳面淨損，但加回折舊後Adj. EBITDA轉正$1,432萬。</div>
+          </div>
+          <div style="background:rgba(251,191,36,.1);border-radius:7px;padding:10px 13px">
+            <div style="font-size:12px;font-weight:700;color:var(--am5);margin-bottom:4px">FCF ＝ 擴張的底氣</div>
+            <div style="font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,.6);margin-bottom:5px">= 營業現金流 − 資本支出（CapEx）</div>
+            <div style="font-size:12.5px;color:rgba(255,255,255,.78);line-height:1.75">評估企業能否<strong style="color:#fff">自給自足</strong>的終極指標。殘酷問題：<br>你賺的錢是只能拿來買更多機器（CapEx），還是能進口袋分給股東？<br>→ 遠傳FCF成長14.47%，是其強健體質的最佳佐證。</div>
+          </div>
+        </div>
+
+        <div class="card-em">
+          <h3>🔍 三步專業觀察路徑</h3>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="background:rgba(5,150,105,.1);border-radius:6px;padding:8px 11px;font-size:12px;color:var(--em);line-height:1.7">
+              <strong style="color:var(--em4)">Step 1：看標題判斷主觀意圖</strong><br>企業想強調成長？還是在解釋衰退？簡報的敘事框架洩露了管理層的信心程度。
+            </div>
+            <div style="background:rgba(5,150,105,.08);border-radius:6px;padding:8px 11px;font-size:12px;color:var(--em);line-height:1.7">
+              <strong style="color:var(--em4)">Step 2：核心指標還原</strong><br>對比 Adjusted vs Reported 的落差——差距越大，越需要追問「到底加回了什麼」。
+            </div>
+            <div style="background:rgba(5,150,105,.07);border-radius:6px;padding:8px 11px;font-size:12px;color:var(--em);line-height:1.7">
+              <strong style="color:var(--em4)">Step 3：回歸EBITDA & FCF</strong><br>確認公司是否有持續經營的血液——數據只是起點，能從結構中看穿事業本質，才是決策的終點。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: Gogoro + 電信雙案例 -->
+  <div class="section">
+    <div class="section-label">Part 2 · 三大企業案例 · Gogoro四步包裝×遠傳ARPU稱王×台灣大momo警訊</div>
+    <div class="section-title">三個法說會風格：Gogoro的重整敘事、遠傳的數據侵略、台灣大的結構美學</div>
+    <div class="grid-3">
+
+      <!-- Gogoro -->
+      <div class="card-or">
+        <h3>🛵 Gogoro：四步「化腐朽為神奇」</h3>
+        <div style="font-size:11.5px;color:var(--or4);font-weight:700;margin-bottom:7px">2025Q1 · 潤泰進駐後的新管理層IR操作</div>
+
+        <div style="font-size:12px;font-weight:700;color:var(--or4);margin-bottom:5px">① 匯率還原：8.7%→4.5%</div>
+        <div class="step-row" style="padding-top:0">
+          <span class="step-from" style="color:var(--ro4)">$69,711k</span>
+          <span class="step-op">Q1 2024<br>↓</span>
+          <span class="step-from" style="color:var(--ro4)">$63,621k</span>
+          <span class="step-note">帳面衰退-8.7%（第一眼很難看）</span>
+        </div>
+        <div class="step-row">
+          <span class="step-from" style="color:rgba(154,52,18,.4)">FX還原</span>
+          <span class="step-op">固定匯率<br>↓</span>
+          <span class="step-from" style="color:var(--em4)">$66,558k</span>
+          <span class="step-note">實質衰退僅-4.5%，川普匯率效應</span>
+        </div>
+
+        <div style="font-size:12px;font-weight:700;color:var(--or4);margin:8px 0 5px">② 事業部差異化：硬體vs換電</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:8px">
+          <div style="background:rgba(5,150,105,.1);border-radius:6px;padding:7px 9px;text-align:center">
+            <div style="font-family:'DM Mono',monospace;font-size:14px;font-weight:700;color:var(--em4)">+11.1%</div>
+            <div style="font-size:11px;color:var(--em)">換電服務成長<br>（排除匯率後）</div>
+          </div>
+          <div style="background:rgba(225,29,72,.08);border-radius:6px;padding:7px 9px;text-align:center">
+            <div style="font-family:'DM Mono',monospace;font-size:14px;font-weight:700;color:var(--ro4)">−18%</div>
+            <div style="font-size:11px;color:var(--ro)">硬體（機車）銷售</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--or);margin-bottom:8px;background:rgba(154,52,18,.07);border-radius:5px;padding:6px 9px;line-height:1.65">戰略轉移：讓投資人的目光從「賣不動的機車」移到「有剛需的換電服務」。車在路上跑，換電收入就不會消失。</div>
+
+        <div style="font-size:12px;font-weight:700;color:var(--or4);margin-bottom:5px">③ 毛利率：4.9%→18.2%</div>
+        <div class="step-row" style="padding-top:0">
+          <span class="step-from" style="color:var(--ro4)">4.9%</span>
+          <span class="step-op">+電池升級費<br>$8,347k</span>
+          <span class="step-from" style="color:var(--em4)">18.2%</span>
+          <span class="step-note">一次性安全升級，主張不代表長期效率</span>
+        </div>
+
+        <div style="font-size:12px;font-weight:700;color:var(--or4);margin:8px 0 4px">④ EBITDA轉正</div>
+        <div style="background:rgba(154,52,18,.1);border-radius:6px;padding:7px 10px;font-size:12px;color:var(--or);line-height:1.7">帳面淨損$1,856萬，加回SBC+金融負債迴轉+折舊後，Adj. EBITDA轉正達<strong>$1,432萬</strong>。「電池機台折舊還沒提完，但機器確實在賺錢。」</div>
+      </div>
+
+      <!-- 遠傳 -->
+      <div class="card-cy">
+        <h3>📡 遠傳電信：數據侵略型風格</h3>
+        <div style="font-size:11.5px;color:var(--cy4);font-weight:700;margin-bottom:7px">AT&T背景井琪總經理 · 高透明度×執行力</div>
+
+        <div style="background:rgba(8,145,178,.1);border-radius:7px;padding:9px 12px;margin-bottom:8px">
+          <div style="font-size:12px;font-weight:700;color:var(--cy4);margin-bottom:4px">🟢 綠色的「誠信標籤」</div>
+          <div style="font-size:12.5px;color:var(--cy);line-height:1.75">所有<strong>優於財測（Better than Forecast）</strong>的KPI全部以綠色標示——向市場傳達核心價值：「說到做到」。<br>EBITDA達成率排在營業利益之上，因為電信業的本質是「穩定的現金乳牛」。</div>
+        </div>
+
+        <div style="font-size:12px;font-weight:700;color:var(--cy4);margin-bottom:6px">ARPU三強對決（每月每用戶平均收入）</div>
+        <div class="arpu-bar">
+          <div class="arpu-col">
+            <div class="arpu-fill" style="background:var(--cy4);height:80px">733元</div>
+            <div class="arpu-lbl" style="color:var(--cy4);font-weight:700">遠傳 👑</div>
+          </div>
+          <div class="arpu-col">
+            <div class="arpu-fill" style="background:rgba(8,145,178,.55);height:65px">699元</div>
+            <div class="arpu-lbl">台灣大</div>
+          </div>
+          <div class="arpu-col">
+            <div class="arpu-fill" style="background:rgba(8,145,178,.3);height:45px">599元</div>
+            <div class="arpu-lbl">中華電</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--cy);line-height:1.75;background:rgba(8,145,178,.07);border-radius:6px;padding:7px 10px;margin-top:4px">
+          遠傳ARPU高出台灣大34元、中華電134元——證明其在5G資費包裝與高端客群精準打擊上的領先地位。<br>合併亞太後FCF成長<strong>14.47%</strong>，是健康擴張的最佳佐證。
+        </div>
+      </div>
+
+      <!-- 台灣大 + 紅旗 -->
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div class="card-in">
+          <h3>📱 台灣大哥大：結構美學與momo警訊</h3>
+          <div style="font-size:12px;font-weight:700;color:var(--in4);margin-bottom:5px">一張表格說清「規模vs獲利」的矛盾</div>
+
+          <div style="font-size:11.5px;color:var(--in4);margin-bottom:4px">事業結構佔比</div>
+          <div class="split-bar">
+            <div class="sb-left" style="background:var(--in4);width:53%;font-size:11px">momo零售 53%（營收引擎）</div>
+            <div class="sb-right" style="background:rgba(99,102,241,.5);width:47%;font-size:11px">電信 47%（EBITDA來源）</div>
+          </div>
+          <div style="font-size:12px;color:var(--in);margin-bottom:9px;line-height:1.7">零售用來換取「流量與規模」；電信才是用來「賺錢養家」。momo營收大但利潤薄，電信利潤厚才是真正的護城河。</div>
+
+          <div style="background:rgba(244,63,94,.1);border-radius:7px;padding:9px 12px;border:1px solid rgba(244,63,94,.2)">
+            <div style="font-size:12px;font-weight:700;color:var(--ro4);margin-bottom:4px">⚠️ momo margin惡化警訊</div>
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:5px">
+              <div style="background:rgba(244,63,94,.1);border-radius:5px;padding:5px 10px;text-align:center;flex:1">
+                <div style="font-family:'DM Mono',monospace;font-size:14px;font-weight:700;color:var(--em4)">8.30%</div>
+                <div style="font-size:11px;color:var(--em)">過去</div>
+              </div>
+              <div style="color:rgba(225,29,72,.35);font-size:18px">↘</div>
+              <div style="background:rgba(244,63,94,.12);border-radius:5px;padding:5px 10px;text-align:center;flex:1">
+                <div style="font-family:'DM Mono',monospace;font-size:14px;font-weight:700;color:var(--ro4)">7.813%</div>
+                <div style="font-size:11px;color:var(--ro)">現在（-50bps）</div>
+              </div>
+            </div>
+            <div style="font-size:12px;color:var(--ro);line-height:1.7">50bps下滑＝<strong>酷澎（Coupang）入台</strong>造成的直接競爭壓力。台灣大罕見揭露<strong>ROS廣告支出回報率</strong>，試圖用行銷效率當防禦工事。</div>
+          </div>
+        </div>
+
+        <div class="card-ro">
+          <h3>🚩 三大紅旗（投資人應警覺）</h3>
+          <div class="rf-item" style="padding-top:0">
+            <span class="rf-n">紅旗①</span>
+            <div class="rf-body"><strong>過度調整：</strong>連續三年加回「一次性費用」，那就是「經常性費用」——調整是藉口，不是解釋。</div>
+          </div>
+          <div class="rf-item">
+            <span class="rf-n">紅旗②</span>
+            <div class="rf-body"><strong>指標跳躍：</strong>公司突然不再提ARPU，改強調用戶數——通常代表獲利品質正在惡化，在掩蓋問題。</div>
+          </div>
+          <div class="rf-item">
+            <span class="rf-n">紅旗③</span>
+            <div class="rf-body"><strong>會計利益：</strong>Gogoro因股價暴跌產生帳面利益——「股價愈爛，帳面愈好」是失敗的副產品，不是經營功勞。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">佳汝 · 0813 · 法說會×調整後指標×Gogoro四步包裝×遠傳ARPU×台灣大momo警訊×EBITDA×FCF×三大紅旗</div>
+</div>
+
+</body>
+</html>
