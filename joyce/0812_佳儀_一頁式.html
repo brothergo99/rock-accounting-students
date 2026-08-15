@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>佳儀 0812 · 現金流照妖鏡×雲數位×摩斯漢堡×南亞科×營業槓桿</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gd:#78350f;--gd2:#fffbeb;--gd3:#fde68a;--gd4:#d97706;--gd5:#f59e0b;
+  --cy:#164e63;--cy2:#ecfeff;--cy3:#a5f3fc;--cy4:#0891b2;--cy5:#22d3ee;
+  --em:#065f46;--em2:#ecfdf5;--em3:#6ee7b7;--em4:#059669;
+  --ro:#9f1239;--ro2:#fff1f2;--ro3:#fecdd3;--ro4:#e11d48;
+  --vi:#4c1d95;--vi2:#f5f3ff;--vi3:#c4b5fd;--vi4:#7c3aed;
+  --or:#9a3412;--or2:#fff7ed;--or3:#fed7aa;--or4:#ea580c;
+  --sl:#1e293b;--sl2:#f8fafc;--sl3:#cbd5e1;--sl4:#475569;
+  --night:#0c0c0a;--night2:#141410;
+  --bg:#fffbeb;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--night);line-height:1.7}
+
+.page-header{background:linear-gradient(150deg,#0c0c0a,#141410,#0a0a08,#080806);padding:36px 50px 28px;position:relative;overflow:hidden;border-bottom:3px solid var(--gd5)}
+.ph-g1{position:absolute;top:-60px;right:-40px;width:260px;height:260px;background:radial-gradient(circle,rgba(245,158,11,.22),transparent 65%);pointer-events:none}
+.ph-g2{position:absolute;bottom:-30px;left:-20px;width:180px;height:180px;background:radial-gradient(circle,rgba(8,145,178,.13),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(253,230,138,.65);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(14px,2.1vw,21px);font-weight:900;color:#fff;line-height:1.28;margin-bottom:4px}
+.ph-title em{color:var(--gd5);font-style:normal}
+.ph-title em2{color:var(--cy5);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.38);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mc{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(245,158,11,.14);color:var(--gd5);border:1px solid rgba(245,158,11,.3)}
+.mc-c{background:rgba(8,145,178,.13);color:var(--cy5);border-color:rgba(8,145,178,.3)}
+.mc-e{background:rgba(5,150,105,.12);color:var(--em3);border-color:rgba(5,150,105,.28)}
+.mc-r{background:rgba(225,29,72,.12);color:#fb7185;border-color:rgba(225,29,72,.28)}
+
+.container{max-width:1100px;margin:0 auto;padding:26px 26px}
+.section{margin-bottom:22px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--gd4);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--night);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--gd3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-31{display:grid;grid-template-columns:1fr 2fr;gap:13px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-31{grid-template-columns:1fr}}
+
+.card-gd{background:var(--gd2);border:1.5px solid var(--gd3);border-radius:10px;padding:14px}
+.card-cy{background:var(--cy2);border:1.5px solid var(--cy3);border-radius:10px;padding:14px}
+.card-em{background:var(--em2);border:1.5px solid var(--em3);border-radius:10px;padding:14px}
+.card-ro{background:var(--ro2);border:1.5px solid var(--ro3);border-radius:10px;padding:14px}
+.card-vi{background:var(--vi2);border:1.5px solid var(--vi3);border-radius:10px;padding:14px}
+.card-or{background:var(--or2);border:1.5px solid var(--or3);border-radius:10px;padding:14px}
+.card-sl{background:var(--sl2);border:1.5px solid var(--sl3);border-radius:10px;padding:14px}
+.card-dark{background:var(--night);border:none;border-radius:10px;padding:14px}
+.card-gd h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--gd)}
+.card-cy h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--cy)}
+.card-em h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--em)}
+.card-ro h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--ro)}
+.card-vi h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--vi)}
+.card-or h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--or)}
+.card-sl h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--sl)}
+.card-dark h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--gd5)}
+.card-gd p,.card-gd li{color:var(--gd);font-size:12.5px;line-height:1.85}
+.card-cy p,.card-cy li{color:var(--cy);font-size:12.5px;line-height:1.85}
+.card-em p,.card-em li{color:var(--em);font-size:12.5px;line-height:1.85}
+.card-ro p,.card-ro li{color:var(--ro);font-size:12.5px;line-height:1.85}
+.card-vi p,.card-vi li{color:var(--vi);font-size:12.5px;line-height:1.85}
+.card-or p,.card-or li{color:var(--or);font-size:12.5px;line-height:1.85}
+.card-sl p,.card-sl li{color:var(--sl);font-size:12.5px;line-height:1.85}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8);font-size:12.5px;line-height:1.85}
+ul{padding-left:15px}
+ul li{margin-bottom:3px}
+
+/* 三大活動正負號表 */
+.flow-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:9px}
+.flow-table th{background:rgba(12,12,10,.85);color:rgba(255,255,255,.7);padding:6px 10px;font-size:11px;font-family:'DM Mono',monospace;font-weight:500;text-align:left}
+.flow-table td{padding:7px 10px;border-bottom:1px solid rgba(245,158,11,.1);vertical-align:top;line-height:1.65}
+.flow-table .pos{color:var(--em4);font-family:'DM Mono',monospace;font-weight:700;font-size:13px}
+.flow-table .neg{color:var(--ro4);font-family:'DM Mono',monospace;font-weight:700;font-size:13px}
+.flow-table .lbl{color:var(--night);font-size:12px}
+.flow-table .note{color:var(--sl4);font-size:11.5px}
+
+/* 水庫三龍頭 */
+.reservoir{background:linear-gradient(135deg,rgba(12,12,10,.9),rgba(20,20,16,.9));border-radius:9px;padding:11px 14px;margin-bottom:10px}
+.res-row{display:flex;gap:7px;align-items:center;padding:6px 0;border-bottom:1px dashed rgba(245,158,11,.12)}
+.res-row:last-child{border-bottom:none}
+.res-icon{font-size:16px;flex-shrink:0;width:22px;text-align:center}
+.res-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--gd5);flex-shrink:0;width:70px}
+.res-body{font-size:12px;color:rgba(255,255,255,.75);line-height:1.6}
+
+/* 矛盾對比框 */
+.contrast{display:flex;gap:6px;align-items:center;margin:8px 0;flex-wrap:wrap}
+.ct-box{flex:1;border-radius:6px;padding:8px 11px;text-align:center;min-width:80px}
+.ct-num{font-family:'DM Mono',monospace;font-size:15px;font-weight:700;line-height:1.1}
+.ct-lbl{font-size:11px;margin-top:3px}
+.ct-mid{font-size:22px;color:rgba(0,0,0,.15);flex-shrink:0}
+
+/* 折舊視覺 */
+.dep-bar{height:28px;border-radius:5px;overflow:hidden;display:flex;margin:6px 0;font-size:11px;font-weight:700}
+.db-dep{background:var(--ro4);display:flex;align-items:center;justify-content:center;color:#fff}
+.db-net{display:flex;align-items:center;justify-content:center;font-size:11px}
+
+/* 南亞科 爆發 */
+.leverage-chart{display:flex;gap:8px;align-items:flex-end;height:100px;margin:10px 0}
+.lc-bar{display:flex;flex-direction:column;align-items:center;flex:1;gap:4px}
+.lc-fill{border-radius:4px 4px 0 0;width:100%;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:10.5px;font-weight:700;color:#fff;min-height:14px}
+.lc-lbl{font-size:10px;color:var(--sl4);text-align:center;line-height:1.4}
+
+/* Quote */
+.quote{background:linear-gradient(135deg,var(--night),var(--night2));border-radius:10px;padding:14px 20px;position:relative;overflow:hidden;margin-bottom:20px}
+.qm{font-family:'Playfair Display',serif;font-size:72px;color:rgba(245,158,11,.07);position:absolute;top:-10px;left:8px;line-height:1}
+.qt{font-size:13px;color:rgba(255,255,255,.88);line-height:1.65;position:relative;z-index:1}
+.qt em{color:var(--gd5);font-style:normal;font-weight:700}
+.qt em2{color:var(--cy5);font-style:normal}
+.qs{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.35);margin-top:6px;position:relative;z-index:1}
+
+.page-footer{background:var(--night);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--gd5)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-g1"></div>
+  <div class="ph-g2"></div>
+  <div class="ph-eyebrow">0812 · 佳儀 課後複習 · 現金流量表照妖鏡×雲數位×安心食品（摩斯漢堡）×南亞科技×營業槓桿</div>
+  <div class="ph-title"><em>獲利品質的照妖鏡</em>：現金流量表不說謊——<br>帳面賺2000萬但OCF流出5000萬？<em2>損益表只說故事，現金流才是真相</em2></div>
+  <div class="ph-sub">三大活動正負號解析 × 雲數位電商資金挑戰 × 摩斯漢堡折舊50%節稅策略 × 南亞科DRAM槓桿爆發 × 職涯奇遇記</div>
+  <div class="ph-meta">
+    <span class="mc">2026.08.12</span>
+    <span class="mc">佳儀</span>
+    <span class="mc mc-c">現金流量表三大活動</span>
+    <span class="mc mc-e">摩斯漢堡×折舊策略</span>
+    <span class="mc mc-r">南亞科×營業槓桿爆發</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 金句 -->
+  <div class="quote">
+    <div class="qm">"</div>
+    <div class="qt">「<em>損益表是企業的故事，現金流量表是企業的真相。</em>摩斯漢堡帳面虧損1400萬，媒體說它陷入困境——但OCF高達7億多，這才是企業的底牌；南亞科虧損50億，卻靠158億折舊維持OCF正19億，度過寒冬。<br>學會讀現金流，你就學會了<em2>在嘈雜的商業世界中看見真實的風景</em2>。」</div>
+    <div class="qs">Rock 老師 · 0812 佳儀 · 現金流量表×三案例實戰 · 如同身心健康的真正底牌是體能而非外表，企業的底牌是OCF而非淨利</div>
+  </div>
+
+  <!-- SECTION 1: 現金流三大活動 -->
+  <div class="section">
+    <div class="section-label">Part 1 · 現金流量表框架 · 水庫比喻×三大水龍頭×正負號戰略解析</div>
+    <div class="section-title">現金流量表：企業是真強健還是假繁榮？三個水龍頭控制水庫水位</div>
+    <div class="grid-2">
+      <div class="card-dark">
+        <h3>💧 水庫比喻：三大水龍頭</h3>
+        <div class="reservoir">
+          <div class="res-row">
+            <div class="res-icon">🔧</div>
+            <div class="res-label">營業活動</div>
+            <div class="res-body">企業的<strong style="color:#fff">核心活水源頭</strong>。增值循環＞貶值循環，水庫持續灌入。這是判斷獲利品質最關鍵的水龍頭。</div>
+          </div>
+          <div class="res-row">
+            <div class="res-icon">🏗️</div>
+            <div class="res-label">投資活動</div>
+            <div class="res-body">為了擴張疆域（展店、買設備）而開啟的流出水龍頭。擴張期流出是健康的——把現金轉化為生產力。</div>
+          </div>
+          <div class="res-row">
+            <div class="res-icon">🏦</div>
+            <div class="res-label">籌資活動</div>
+            <div class="res-body">向銀行借款或現金增資（流入）vs. 還債、發放股利（流出）。穩健公司的流出＝對股東與債權人的回饋。</div>
+          </div>
+        </div>
+        <div style="background:rgba(245,158,11,.1);border-radius:6px;padding:7px 11px;font-size:12px;color:var(--gd4)">
+          ⭐ 核心原則：<strong>損益表可以修飾，現金流量表不說謊</strong>——錢進來了就是進來了。
+        </div>
+      </div>
+
+      <div class="card-gd">
+        <h3>📊 三大活動正負號戰略解析</h3>
+        <table class="flow-table">
+          <thead><tr><th>活動</th><th>正數（+）</th><th>負數（-）</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="lbl"><strong>營業<br>OCF</strong></td>
+              <td><span class="pos">✅ 正</span><br><span class="note">獲利有實質含金量，錢真正回流——健康訊號</span></td>
+              <td><span class="neg">⚠️ 負</span><br><span class="note">警訊！獲利可能只是帳面，錢卡在應收帳款或存貨</span></td>
+            </tr>
+            <tr>
+              <td class="lbl"><strong>投資</strong></td>
+              <td><span class="pos">賣資產</span><br><span class="note">注意是否在「賣祖產」換現金，需辨別動機</span></td>
+              <td><span class="neg">資本支出</span><br><span class="note">擴張期正常，代表企業正在投資未來生產力</span></td>
+            </tr>
+            <tr>
+              <td class="lbl"><strong>籌資</strong></td>
+              <td><span class="pos">借款/增資</span><br><span class="note">向外尋求資金水源，顯示擴張意圖</span></td>
+              <td><span class="neg">還款/股利</span><br><span class="note">穩健公司的正常回饋，對債權人與股東履約</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: 三大案例 -->
+  <div class="section">
+    <div class="section-label">Part 2 · 三大企業案例實戰 · 雲數位(2949)×安心食品摩斯(MOS)×南亞科技(2408)</div>
+    <div class="section-title">三種典型財務模式：電商資金壓力、隱身折舊策略、重資產槓桿爆發</div>
+    <div class="grid-3">
+
+      <!-- 雲數位 -->
+      <div class="card-cy">
+        <h3>🛒 雲數位(2949)：電商資金回流挑戰</h3>
+        <div style="font-size:11.5px;color:var(--cy4);font-weight:700;margin-bottom:6px">2023年新上櫃雲端電商·總資產約28億</div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:8px">
+          <div style="background:rgba(8,145,178,.1);border-radius:6px;padding:6px 8px;text-align:center">
+            <div style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--cy4)">12%</div>
+            <div style="font-size:10.5px;color:var(--cy)">毛利率</div>
+          </div>
+          <div style="background:rgba(8,145,178,.1);border-radius:6px;padding:6px 8px;text-align:center">
+            <div style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--cy4)">2-3%</div>
+            <div style="font-size:10.5px;color:var(--cy)">淨利率</div>
+          </div>
+          <div style="background:rgba(8,145,178,.1);border-radius:6px;padding:6px 8px;text-align:center">
+            <div style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--cy4)">~1億+</div>
+            <div style="font-size:10.5px;color:var(--cy)">全年預估獲利</div>
+          </div>
+        </div>
+
+        <div class="contrast">
+          <div class="ct-box" style="background:rgba(5,150,105,.12)">
+            <div class="ct-num" style="color:var(--em4)">+2,000萬</div>
+            <div class="ct-lbl" style="color:var(--em)">Q1帳面獲利</div>
+          </div>
+          <div class="ct-mid">但</div>
+          <div class="ct-box" style="background:rgba(225,29,72,.1)">
+            <div class="ct-num" style="color:var(--ro4)">−5,000萬</div>
+            <div class="ct-lbl" style="color:var(--ro)">Q1營業現金流</div>
+          </div>
+        </div>
+
+        <div style="font-size:12px;font-weight:700;color:var(--cy4);margin-bottom:5px">矛盾原因拆解</div>
+        <div style="background:rgba(8,145,178,.08);border-radius:6px;padding:8px 11px;margin-bottom:5px;font-size:12px;color:var(--cy);line-height:1.75">
+          <strong>① 應收帳款增加：</strong>B2B供貨給康是美、屈臣氏等大型通路，需接受長達數月的「<strong>月結制度</strong>」。今年Q1應收帳款顯著增加（去年是減少），代表資金被卡在通路端。
+        </div>
+        <div style="background:rgba(8,145,178,.07);border-radius:6px;padding:8px 11px;font-size:12px;color:var(--cy);line-height:1.75">
+          <strong>② 存貨增加：</strong>存貨由8.5億攀升至10億（+1.5億）。可能是<strong>618購物節前置備貨</strong>的策略性決策。<br>
+          <span style="color:var(--cy4);font-weight:700">📌 真理時刻：</span>8/15半年報公布——若存貨回歸8.5億=正常循環；若持續攀升=滯銷警訊。
+        </div>
+      </div>
+
+      <!-- 摩斯漢堡 -->
+      <div class="card-gd">
+        <h3>🍔 安心食品(摩斯漢堡)：隱身財務學</h3>
+        <div style="font-size:11.5px;color:var(--gd4);font-weight:700;margin-bottom:6px">「能打卻裝作不能打」的戰略意圖</div>
+
+        <div class="contrast" style="margin-bottom:7px">
+          <div class="ct-box" style="background:rgba(146,64,14,.1)">
+            <div class="ct-num" style="color:var(--gd4)">60億</div>
+            <div class="ct-lbl" style="color:var(--gd)">年營收</div>
+          </div>
+          <div class="ct-mid" style="font-size:16px">vs</div>
+          <div class="ct-box" style="background:rgba(225,29,72,.08)">
+            <div class="ct-num" style="color:var(--ro4)">虧損1,400萬</div>
+            <div class="ct-lbl" style="color:var(--ro)">帳面淨利（僅佔0.2%）</div>
+          </div>
+          <div class="ct-mid" style="font-size:16px">≠</div>
+          <div class="ct-box" style="background:rgba(5,150,105,.1)">
+            <div class="ct-num" style="color:var(--em4)">+7億+</div>
+            <div class="ct-lbl" style="color:var(--em)">營業現金流OCF</div>
+          </div>
+        </div>
+
+        <div style="font-size:12px;font-weight:700;color:var(--gd4);margin-bottom:5px">秘密：租賃改良物折舊率高達50%</div>
+        <div style="background:rgba(146,64,14,.1);border-radius:7px;padding:8px 11px;margin-bottom:7px">
+          <div style="font-size:12px;color:var(--gd);line-height:1.75">門市裝潢期初帳面約<strong>2.3億</strong>，年度折舊卻高達<strong>1.2億</strong>（折舊率50%）。採用稅法規定的<strong>最低兩年攤銷年限</strong>，而非依租約期間平均攤提。</div>
+          <div class="dep-bar" style="margin-top:8px">
+            <div class="db-dep" style="width:50%">折舊費1.2億（50%）</div>
+            <div class="db-net" style="width:50%;background:rgba(146,64,14,.15);color:var(--gd)">殘值1.1億</div>
+          </div>
+        </div>
+
+        <div style="font-size:12px;font-weight:700;color:var(--gd4);margin-bottom:5px">背後兩層深意</div>
+        <div style="display:flex;flex-direction:column;gap:5px">
+          <div style="background:rgba(146,64,14,.08);border-radius:6px;padding:7px 10px;font-size:12px;color:var(--gd);line-height:1.65"><strong>① 稅務防護＋現金鎖定：</strong>壓低帳面獲利→合法節稅；帳面「沒賺錢」→正當理由不發高額股利→7億現金留公司做設備汰換與數位轉型</div>
+          <div style="background:rgba(146,64,14,.06);border-radius:6px;padding:7px 10px;font-size:12px;color:var(--gd);line-height:1.65"><strong>② 東元集團生態圈：</strong>摩斯採購東元空調、使用遠傳網路、京城/神通數位軟硬體。集團透過供應鏈早已獲利，摩斯本身損益表是否漂亮並不急切。</div>
+        </div>
+      </div>
+
+      <!-- 南亞科 -->
+      <div class="card-vi">
+        <h3>💾 南亞科技(2408)：DRAM槓桿爆發</h3>
+        <div style="font-size:11.5px;color:var(--vi4);font-weight:700;margin-bottom:6px">重資產+營業槓桿的典型演繹</div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:9px">
+          <div style="background:rgba(124,58,237,.1);border-radius:7px;padding:9px 10px">
+            <div style="font-size:11px;font-family:'DM Mono',monospace;color:var(--vi4);margin-bottom:4px">113年（DRAM 寒冬期）</div>
+            <div style="display:flex;gap:4px;align-items:center;margin-bottom:4px">
+              <span style="font-family:'DM Mono',monospace;font-size:12.5px;font-weight:700;color:var(--ro4)">虧損50億</span>
+              <span style="font-size:11px;color:var(--vi)">帳面</span>
+            </div>
+            <div style="display:flex;gap:4px;align-items:center;margin-bottom:4px">
+              <span style="font-family:'DM Mono',monospace;font-size:12.5px;font-weight:700;color:var(--em4)">OCF +19億</span>
+              <span style="font-size:11px;color:var(--vi)">現金流</span>
+            </div>
+            <div style="font-size:11.5px;color:var(--vi);line-height:1.65">關鍵：提列折舊<br><strong style="color:var(--vi4)">高達158億</strong>。<br>OCF+19億是生存底線——員工薪水和原料還付得出去。</div>
+          </div>
+          <div style="background:rgba(124,58,237,.14);border-radius:7px;padding:9px 10px">
+            <div style="font-size:11px;font-family:'DM Mono',monospace;color:var(--vi4);margin-bottom:4px">114年（景氣回暖）</div>
+            <div style="display:flex;gap:4px;align-items:center;margin-bottom:4px">
+              <span style="font-family:'DM Mono',monospace;font-size:12.5px;font-weight:700;color:var(--em4)">獲利+6億</span>
+              <span style="font-size:11px;color:var(--vi)">帳面</span>
+            </div>
+            <div style="display:flex;gap:4px;align-items:center;margin-bottom:4px">
+              <span style="font-family:'DM Mono',monospace;font-size:15px;font-weight:700;color:var(--em4)">OCF +185億 🚀</span>
+            </div>
+            <div style="font-size:11.5px;color:var(--vi);line-height:1.65">帳面獲利只微增6億，但現金流爆增至<strong style="color:var(--vi4)">185億</strong>！這就是槓桿天花板的力量。</div>
+          </div>
+        </div>
+
+        <div style="background:rgba(124,58,237,.1);border-radius:7px;padding:9px 12px">
+          <div style="font-size:12px;font-weight:700;color:var(--vi4);margin-bottom:4px">爆發力機制：為什麼6億→185億？</div>
+          <div style="font-size:12.5px;color:var(--vi);line-height:1.75">固定成本（折舊158億）已投入、損益兩平點已跨越 → 每一分多出來的營收，幾乎都<strong>直接轉化為現金流</strong>（因為折舊已不需要再付出現金）。<br>→ 對重資產企業，看損益表的小利潤沒意義；看<strong>OCF的爆發力</strong>才是重點。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: 職涯奇遇 + 總結 -->
+  <div class="section">
+    <div class="section-label">Part 3 · 職涯洞察 + 課程總結 · 摩斯漢堡咖啡廳被挖角的真實案例</div>
+    <div class="grid-2">
+      <div class="card-em">
+        <h3>☕ 職涯奇遇記：摩斯漢堡咖啡廳被挖角</h3>
+        <div style="background:rgba(5,150,105,.12);border-radius:7px;padding:10px 13px;margin-bottom:8px">
+          <div style="font-size:12px;font-weight:700;color:var(--em4);margin-bottom:4px">故事情境</div>
+          <div style="font-size:12.5px;color:var(--em);line-height:1.8">佳儀老師在摩斯漢堡進行<strong>線上視訊家教</strong>時，隔壁桌一位同樣在進行實體家教的男士，下課後主動攀談——揭曉身分是某大型高職補習班負責人，因在旁聽見佳儀對會計深度解碼，<strong>當場發出面試邀約</strong>。</div>
+        </div>
+        <div style="font-size:12px;color:var(--em);line-height:1.75;background:rgba(5,150,105,.07);border-radius:6px;padding:8px 11px">
+          💡 這正呼應摩斯漢堡的哲學：<br>在一個看似平凡的場域（咖啡廳），展現出極致專業的「<strong>含金量</strong>」時，即便外在再低調，也無法掩蓋內在的價值。<br>→ 真正的實力，就是最好的名片。
+        </div>
+      </div>
+
+      <div class="card-sl">
+        <h3>🎯 三案例見微知著總整理</h3>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <div style="background:rgba(8,145,178,.08);border-radius:6px;padding:8px 11px">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px">
+              <span style="font-family:'DM Mono',monospace;font-size:9.5px;background:var(--cy4);color:#fff;border-radius:3px;padding:2px 7px">雲數位</span>
+              <span style="font-size:12px;font-weight:700;color:var(--cy)">獲利≠現金，當心B2B應收帳款</span>
+            </div>
+            <div style="font-size:12px;color:var(--sl4)">月結制度＋備貨策略導致OCF負數；等半年報驗證存貨是否正常去化。</div>
+          </div>
+          <div style="background:rgba(146,64,14,.08);border-radius:6px;padding:8px 11px">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px">
+              <span style="font-family:'DM Mono',monospace;font-size:9.5px;background:var(--gd4);color:#fff;border-radius:3px;padding:2px 7px">摩斯漢堡</span>
+              <span style="font-size:12px;font-weight:700;color:var(--gd)">帳面虧損≠公司出問題，看OCF才對</span>
+            </div>
+            <div style="font-size:12px;color:var(--sl4)">50%折舊率壓低帳面利潤；OCF高達7億是真正的底氣與戰略性現金鎖定。</div>
+          </div>
+          <div style="background:rgba(124,58,237,.08);border-radius:6px;padding:8px 11px">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px">
+              <span style="font-family:'DM Mono',monospace;font-size:9.5px;background:var(--vi4);color:#fff;border-radius:3px;padding:2px 7px">南亞科</span>
+              <span style="font-size:12px;font-weight:700;color:var(--vi)">重資產企業看OCF爆發力，不看淨利</span>
+            </div>
+            <div style="font-size:12px;color:var(--sl4)">固定成本已投入→跨越損益兩平後每分錢都變現金流；19億→185億是槓桿天花板。</div>
+          </div>
+        </div>
+        <div style="background:rgba(245,158,11,.12);border-radius:6px;padding:8px 11px;margin-top:8px;font-size:12px;color:var(--gd4);font-weight:700">
+          ⭐ 個人健康的底牌是體能而非外表；企業經營的底牌是OCF而非損益表的淨利數字。
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 會計家教 · 蕭啟漢</div>
+  <div class="ft-note">佳儀 · 0812 · 現金流照妖鏡×雲數位×摩斯漢堡折舊策略×南亞科DRAM槓桿×職涯奇遇</div>
+</div>
+
+</body>
+</html>
