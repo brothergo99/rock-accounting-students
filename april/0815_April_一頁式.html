@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>0815 April · 會康7851財報解構×醫療診所會計實務×資本工程×損益還原</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cy:#0e7490;--cy2:#ecfeff;--cy3:#a5f3fc;--cy4:#06b6d4;--cy5:#22d3ee;
+  --am:#92400e;--am2:#fffbeb;--am3:#fde68a;--am4:#d97706;--am5:#f59e0b;
+  --ro:#9f1239;--ro2:#fff1f2;--ro3:#fecdd3;--ro4:#e11d48;
+  --gr:#14532d;--gr2:#f0fdf4;--gr3:#86efac;--gr4:#16a34a;--gr5:#22c55e;
+  --vi:#4c1d95;--vi2:#f5f3ff;--vi3:#c4b5fd;--vi4:#7c3aed;
+  --sl:#1e293b;--sl2:#f8fafc;--sl3:#cbd5e1;--sl4:#475569;
+  --night:#060d1a;--night2:#0a1525;
+  --bg:#ecfeff;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--night);line-height:1.7}
+
+.page-header{background:linear-gradient(150deg,#060d1a,#0a1525,#060a14,#0c1020);padding:36px 50px 28px;position:relative;overflow:hidden;border-bottom:3px solid var(--cy4)}
+.ph-g1{position:absolute;top:-60px;right:-40px;width:260px;height:260px;background:radial-gradient(circle,rgba(6,182,212,.2),transparent 65%);pointer-events:none}
+.ph-g2{position:absolute;bottom:-30px;left:-20px;width:180px;height:180px;background:radial-gradient(circle,rgba(245,158,11,.12),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(165,243,252,.6);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(14px,2.1vw,21px);font-weight:900;color:#fff;line-height:1.28;margin-bottom:4px}
+.ph-title em{color:var(--cy5);font-style:normal}
+.ph-title em2{color:var(--am5);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.38);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mc{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(6,182,212,.15);color:var(--cy5);border:1px solid rgba(6,182,212,.3)}
+.mc-a{background:rgba(245,158,11,.13);color:var(--am5);border-color:rgba(245,158,11,.28)}
+.mc-r{background:rgba(225,29,72,.12);color:#fb7185;border-color:rgba(225,29,72,.28)}
+.mc-g{background:rgba(34,197,94,.12);color:var(--gr5);border-color:rgba(34,197,94,.28)}
+
+.container{max-width:1100px;margin:0 auto;padding:26px 26px}
+.section{margin-bottom:22px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--cy4);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--night);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--cy3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-32{display:grid;grid-template-columns:1.3fr 1fr;gap:13px}
+.grid-23{display:grid;grid-template-columns:1fr 1.3fr;gap:13px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-32,.grid-23{grid-template-columns:1fr}}
+
+.card-cy{background:var(--cy2);border:1.5px solid var(--cy3);border-radius:10px;padding:14px}
+.card-am{background:var(--am2);border:1.5px solid var(--am3);border-radius:10px;padding:14px}
+.card-ro{background:var(--ro2);border:1.5px solid var(--ro3);border-radius:10px;padding:14px}
+.card-gr{background:var(--gr2);border:1.5px solid var(--gr3);border-radius:10px;padding:14px}
+.card-vi{background:var(--vi2);border:1.5px solid var(--vi3);border-radius:10px;padding:14px}
+.card-sl{background:var(--sl2);border:1.5px solid var(--sl3);border-radius:10px;padding:14px}
+.card-dark{background:var(--night);border:none;border-radius:10px;padding:14px}
+.card-cy h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--cy)}
+.card-am h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--am)}
+.card-ro h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--ro)}
+.card-gr h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--gr)}
+.card-vi h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--vi)}
+.card-sl h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--sl)}
+.card-dark h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--cy5)}
+.card-cy p,.card-cy li{color:var(--cy);font-size:12.5px;line-height:1.85}
+.card-am p,.card-am li{color:var(--am);font-size:12.5px;line-height:1.85}
+.card-ro p,.card-ro li{color:var(--ro);font-size:12.5px;line-height:1.85}
+.card-gr p,.card-gr li{color:var(--gr);font-size:12.5px;line-height:1.85}
+.card-vi p,.card-vi li{color:var(--vi);font-size:12.5px;line-height:1.85}
+.card-sl p,.card-sl li{color:var(--sl);font-size:12.5px;line-height:1.85}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8);font-size:12.5px;line-height:1.85}
+ul{padding-left:15px}
+ul li{margin-bottom:3px}
+
+/* Quote */
+.quote{background:linear-gradient(135deg,var(--night),var(--night2));border-radius:10px;padding:14px 20px;position:relative;overflow:hidden;margin-bottom:20px}
+.qm{font-family:'Playfair Display',serif;font-size:72px;color:rgba(6,182,212,.07);position:absolute;top:-10px;left:8px;line-height:1}
+.qt{font-size:13px;color:rgba(255,255,255,.88);line-height:1.65;position:relative;z-index:1}
+.qt em{color:var(--cy5);font-style:normal;font-weight:700}
+.qt em2{color:var(--am5);font-style:normal;font-weight:700}
+.qs{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.35);margin-top:6px;position:relative;z-index:1}
+
+/* KPI chips */
+.kpi-row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.kpi{border-radius:7px;padding:7px 12px;text-align:center;min-width:70px}
+.kpi-val{font-family:'DM Mono',monospace;font-size:17px;font-weight:700;line-height:1.1}
+.kpi-lbl{font-size:10.5px;margin-top:2px;opacity:.75}
+
+/* 損益還原表 */
+.restore-table{width:100%;border-collapse:collapse;font-size:12px;margin:8px 0}
+.restore-table th{background:var(--night);color:rgba(255,255,255,.9);padding:6px 10px;text-align:left;font-weight:700;font-size:11.5px}
+.restore-table td{padding:7px 10px;border-bottom:1px solid var(--cy3);color:var(--cy);vertical-align:top}
+.restore-table tr:last-child td{border-bottom:none;font-weight:700;background:rgba(6,182,212,.07)}
+.restore-table .neg{color:var(--ro4);font-family:'DM Mono',monospace}
+.restore-table .pos{color:var(--gr4);font-family:'DM Mono',monospace}
+.restore-table .mono{font-family:'DM Mono',monospace}
+.restore-table .note{font-size:11px;color:var(--sl4)}
+
+/* 特別股輪次 */
+.round-row{display:flex;flex-direction:column;gap:5px;margin:8px 0}
+.rr-item{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:7px}
+.rr-badge{font-family:'DM Mono',monospace;font-size:11px;font-weight:700;min-width:30px;text-align:center}
+.rr-rate{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;min-width:42px}
+.rr-desc{font-size:12px;flex:1}
+
+/* 反分割流程 */
+.split-flow{display:flex;align-items:center;gap:8px;margin:8px 0;flex-wrap:wrap}
+.sf-box{border-radius:7px;padding:9px 12px;flex:1;min-width:80px}
+.sf-title{font-size:11.5px;font-weight:700;margin-bottom:3px}
+.sf-body{font-size:12px;line-height:1.65}
+.sf-arrow{color:rgba(6,182,212,.35);font-size:22px;flex-shrink:0}
+
+/* 成長閉環 */
+.key-row{display:flex;gap:6px;flex-wrap:wrap;margin:7px 0}
+.key-tag{border-radius:5px;padding:4px 10px;font-size:12px;font-weight:700;white-space:nowrap}
+
+.page-footer{background:var(--night);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--cy5)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-g1"></div>
+  <div class="ph-g2"></div>
+  <div class="ph-eyebrow">0815 · April · 資本市場分析實戰 · 會康（7851）財報深層解構×醫療診所會計實務</div>
+  <div class="ph-title"><em>從損益還原到資本工程——</em><br>在數字迷霧中看清企業存續的本質：<em2>燒錢速率×假賠真賠×特別股融資×反分割</em2></div>
+  <div class="ph-sub">現金流存續期11.7個月 × 損益還原實質虧損擴大45% × 資本公積彌補虧損三步驟 × 醫療院所權責發生制導入實務 × 國發基金隱形政策安全網</div>
+  <div class="ph-meta">
+    <span class="mc">2025.08.15</span>
+    <span class="mc">April</span>
+    <span class="mc mc-a">會康7851×財報解構</span>
+    <span class="mc mc-r">Burn Rate×Cash Runway</span>
+    <span class="mc mc-g">醫療診所會計實務</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 金句 -->
+  <div class="quote">
+    <div class="qm">"</div>
+    <div class="qt">「損益表上的虧損，是會計師的作品；現金流量表的流出，才是老闆的真實煩惱。<br>
+    去年的8,600萬，有一大半是ESOP的紙上費用——<em>公司沒有支出一毛錢</em>；今年的8,600萬，卻是<em2>紮紮實實地從戶頭消失</em2>。<br>
+    這就是為什麼分析師必須做「損益還原」——不還原，你看的根本不是同一家公司。」</div>
+    <div class="qs">Rock 老師 · 蕭啟漢 · April 0815 · 會康7851財報解構×醫療診所會計實務</div>
+  </div>
+
+  <!-- SECTION 1: 現金流深度分析 -->
+  <div class="section">
+    <div class="section-label">Part 1 · 現金流深度分析 · Cash Flow × Burn Rate × Cash Runway × 資產重分類警訊</div>
+    <div class="section-title">血脈比骨架更重要——現金流才是企業存續的生命線</div>
+    <div class="grid-32">
+      <div class="card-cy">
+        <h3>💧 現金存續期（Cash Runway）量化計算</h3>
+        <div class="kpi-row">
+          <div class="kpi" style="background:rgba(14,116,163,.1)">
+            <div class="kpi-val" style="color:var(--cy4)">1.68億</div>
+            <div class="kpi-lbl" style="color:var(--cy)">現金及約當現金<br>2025 Q2</div>
+          </div>
+          <div class="kpi" style="background:rgba(225,29,72,.1)">
+            <div class="kpi-val" style="color:var(--ro4)">8,600萬</div>
+            <div class="kpi-lbl" style="color:var(--ro)">H1營業活動<br>現金流出</div>
+          </div>
+          <div class="kpi" style="background:rgba(245,158,11,.1)">
+            <div class="kpi-val" style="color:var(--am4)">1,433萬</div>
+            <div class="kpi-lbl" style="color:var(--am)">月平均<br>燒錢量</div>
+          </div>
+          <div class="kpi" style="background:rgba(225,29,72,.15);border:1.5px solid var(--ro3)">
+            <div class="kpi-val" style="color:var(--ro4)">≈11.7月</div>
+            <div class="kpi-lbl" style="color:var(--ro)">現金存續期<br>⚠️ 危險紅線</div>
+          </div>
+        </div>
+        <div style="background:rgba(225,29,72,.08);border-radius:7px;padding:9px 12px;margin-top:6px;border-left:3px solid var(--ro4)">
+          <div style="font-size:12px;font-weight:700;color:var(--ro4);margin-bottom:3px">⚠️ 顧問黃金法則：Runway &lt; 12個月 = 啟動融資的警報</div>
+          <div style="font-size:12.5px;color:var(--ro);line-height:1.75">當現金存續期低於12個月，經營層必須立即：①啟動下一輪融資、②大幅削減資本支出（CAPEX）、③對外「講好故事」換取續命資金。會康目前正處於這個臨界點，是「對外講故事」以換取續命錢的關鍵時刻。</div>
+        </div>
+
+        <div style="margin-top:10px;font-size:12.5px;font-weight:700;color:var(--cy);margin-bottom:5px">現金遞減趨勢（直線下滑警訊）</div>
+        <div style="display:flex;align-items:flex-end;gap:6px;height:50px;margin-bottom:4px">
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px">
+            <div style="background:var(--cy4);width:100%;border-radius:3px 3px 0 0;height:50px"></div>
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--cy4)">3億</div>
+            <div style="font-size:10px;color:var(--cy)">2024 Q4</div>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px">
+            <div style="background:rgba(6,182,212,.65);width:100%;border-radius:3px 3px 0 0;height:41px"></div>
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--cy4)">2.5億</div>
+            <div style="font-size:10px;color:var(--cy)">2025 Q1</div>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px">
+            <div style="background:rgba(225,29,72,.7);width:100%;border-radius:3px 3px 0 0;height:28px"></div>
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ro4)">1.68億</div>
+            <div style="font-size:10px;color:var(--cy)">2025 Q2</div>
+          </div>
+        </div>
+
+        <div style="background:rgba(245,158,11,.08);border-radius:7px;padding:8px 12px;margin-top:6px">
+          <div style="font-size:12px;font-weight:700;color:var(--am4);margin-bottom:3px">非流動資產消失？→ 資產重分類解讀</div>
+          <div style="font-size:12.5px;color:var(--am);line-height:1.75">「按攤銷後成本衡量之金融資產（非流動）」減少，<strong>並非定存不見，而是典型的資產重分類（Reclassification）</strong>。原持有超過一年的定存，時間推移後進入「一年內到期」範疇，從非流動轉向流動。資金未消失，但已全部轉為「戰備狀態」，暗示公司無法進行任何長期資金配置。</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <div class="card-dark">
+          <h3>🔑 三大核心概念解碼</h3>
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <div style="background:rgba(6,182,212,.12);border-radius:6px;padding:8px 11px">
+              <div style="font-size:12px;font-weight:700;color:var(--cy5);margin-bottom:2px">📊 資產負債表 = 骨架</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.75);line-height:1.65">紀錄資產與負債的存量狀態，呈現某一時間點的財務結構，但無法顯示血液流向。</div>
+            </div>
+            <div style="background:rgba(245,158,11,.12);border-radius:6px;padding:8px 11px">
+              <div style="font-size:12px;font-weight:700;color:var(--am5);margin-bottom:2px">💉 現金流量表 = 血脈</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.75);line-height:1.65">顯示資金的流入與流出，才能真實反映企業能否繼續運轉。<strong style="color:#fff">血脈枯竭，再完美的骨架也無法支撐。</strong></div>
+            </div>
+            <div style="background:rgba(225,29,72,.12);border-radius:6px;padding:8px 11px">
+              <div style="font-size:12px;font-weight:700;color:#fb7185;margin-bottom:2px">🔥 Burn Rate = 燒錢速率</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.75);line-height:1.65">每月消耗的現金量。和現有現金相除，得出公司的「生命倒數計時器」——<strong style="color:#fff">Cash Runway（現金存續期）</strong>。</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-am">
+          <h3>⚖️ 權責發生制 vs 現金收付制</h3>
+          <div style="font-size:12.5px;color:var(--am);line-height:1.75">財報使用<strong>權責發生制（Accrual）</strong>：認列收入不等於收到現金，認列費用不等於支出現金。這讓帳面虧損可能包含大量「不流出現金」的非現金費用（如折舊、ESOP股份基礎給付）。<br><br>分析師的核心任務：透過<strong>「損益還原」</strong>剝除非現金干擾，還原企業的真實現金耗損量，才能判斷「真賠」還是「假賠」。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: 損益還原 -->
+  <div class="section">
+    <div class="section-label">Part 2 · 損益還原技術 · 假賠 vs 真賠 · ESOP股份基礎給付 × 非現金費用剔除</div>
+    <div class="section-title">「損益表平穩、現金流崩盤」——這種脫節，是法人股東最擔心的紅線</div>
+    <div class="grid-23">
+      <div class="card-cy">
+        <h3>📋 損益還原對照表：2024 H1 vs 2025 H1</h3>
+        <table class="restore-table">
+          <tr>
+            <th>項目（單位：萬元）</th>
+            <th>2024 H1（去年）</th>
+            <th>2025 H1（本期）</th>
+            <th>差異說明</th>
+          </tr>
+          <tr>
+            <td>帳面本期淨損 ①</td>
+            <td class="neg">(7,200)</td>
+            <td class="neg">(7,700)</td>
+            <td class="note">表面看差距不大</td>
+          </tr>
+          <tr>
+            <td>加回：非現金股權費用 ②<br><span style="font-size:11px;color:var(--sl4)">（ESOP限制型股票費用化）</span></td>
+            <td class="pos">+ 1,900</td>
+            <td class="mono" style="color:var(--sl4)">0</td>
+            <td class="note">去年高額ESOP，<br>今年費用已耗盡</td>
+          </tr>
+          <tr>
+            <td><strong>還原後實質營運虧損</strong><br>① 加回 ②</td>
+            <td class="neg"><strong>(5,300)</strong></td>
+            <td class="neg"><strong>(7,700)</strong></td>
+            <td class="note" style="color:var(--ro4)"><strong>⬆️ 實質虧損<br>擴大約45%</strong></td>
+          </tr>
+          <tr>
+            <td><strong>營業活動現金流出</strong></td>
+            <td class="neg"><strong>(3,200)</strong></td>
+            <td class="neg" style="font-size:14px"><strong>(8,600)</strong></td>
+            <td class="note" style="color:var(--ro4)"><strong>⬆️ 現金流失<br>急遽惡化</strong></td>
+          </tr>
+        </table>
+        <div style="background:rgba(225,29,72,.08);border-radius:7px;padding:8px 11px;margin-top:6px;border-left:3px solid var(--ro4)">
+          <div style="font-size:12px;font-weight:700;color:var(--ro4);margin-bottom:3px">資深顧問分析結論</div>
+          <div style="font-size:12px;color:var(--ro);line-height:1.75">去年看似大虧，其實有近2,000萬是激勵員工的「紙上費用」，公司一毛現金都沒出。今年看似差不多，卻是實實在在地把錢從戶頭燒掉。<strong>不做損益還原，分析師看的根本不是同一家公司。</strong></div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <div class="card-dark">
+          <h3>📦 ESOP「假賠」的會計邏輯</h3>
+          <div style="background:rgba(6,182,212,.1);border-radius:6px;padding:9px 12px;margin-bottom:8px">
+            <div style="font-size:12px;font-weight:700;color:var(--cy5);margin-bottom:3px">限制型股票（Restricted Stock）費用化</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.8);line-height:1.75">公司發給員工限制型股票，依IFRS 2「股份基礎給付」必須在認股條件達成期間認列薪資費用。<strong style="color:#fff">但公司實際上沒有支出任何現金——費用是以股票（發行新股）代替。</strong></div>
+          </div>
+          <div style="font-size:12.5px;color:rgba(255,255,255,.75);line-height:1.75">這類費用在損益表上造成虧損放大，但在現金流量表中會「加回」，因此對現金毫無影響。<br><br>判斷是「真賠」或「假賠」：<br>→ 帳面虧損遠大於現金流出 = 有大量非現金費用 = <strong style="color:var(--cy5)">部分假賠</strong><br>→ 帳面虧損約等於現金流出 = 損益如實反映 = <strong style="color:#fb7185">真賠</strong></div>
+          <div style="margin-top:8px;padding:7px 10px;background:rgba(245,158,11,.1);border-radius:6px;font-size:12px;color:var(--am5)">
+            ⭐ 會康2024 H1 認購價1.25元 vs 市價數十元 = 超大規模ESOP，被戲稱「宗教式激勵」，將持續對未來幾年損益表形成壓力。
+          </div>
+        </div>
+        <div class="card-ro">
+          <h3>🎯 損益還原三步驟</h3>
+          <ul>
+            <li><strong>步驟一：找出非現金費用</strong> → 折舊、攤銷、ESOP費用化、呆帳提列等</li>
+            <li><strong>步驟二：加回至帳面虧損</strong> → 得出「實質營運虧損」</li>
+            <li><strong>步驟三：對比現金流量表</strong> → 若兩者接近，代表今年屬「真賠」，需高度警惕</li>
+          </ul>
+          <div style="background:rgba(159,18,57,.08);border-radius:6px;padding:7px 11px;margin-top:8px;font-size:12px;color:var(--ro)">
+            2025 H1：帳面虧損(7,700) ≈ 現金流出(8,600)，差距極小，<strong>今年是紮紮實實的「真賠」。</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: 醫療診所會計 -->
+  <div class="section">
+    <div class="section-label">Part 3 · 醫療診所會計實務 · 政府專案補助款×薪資時間差×Project P&L×權責發生制</div>
+    <div class="section-title">診所的財務雜訊來自時間差——「暴利」與「巨虧」交替，其實都是假象</div>
+    <div class="grid-3">
+      <div class="card-am">
+        <h3>⏰ 問題根源：補助款時間錯置</h3>
+        <div style="background:rgba(146,64,14,.1);border-radius:7px;padding:9px 11px;margin-bottom:8px">
+          <div style="font-size:12px;font-weight:700;color:var(--am4);margin-bottom:3px">典型流程（以肝炎篩檢等公衛計畫為例）</div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <div style="background:rgba(146,64,14,.08);border-radius:5px;padding:5px 8px;font-size:12px;color:var(--am)">① 1月 完成案例執行（提供醫療服務）</div>
+            <div style="background:rgba(146,64,14,.1);border-radius:5px;padding:5px 8px;font-size:12px;color:var(--am)">② 6～12月後 衛福部/健保局才撥款</div>
+            <div style="background:rgba(146,64,14,.12);border-radius:5px;padding:5px 8px;font-size:12px;color:var(--am)">③ 撥款後 才發醫師獎金</div>
+          </div>
+        </div>
+        <div style="font-size:12px;font-weight:700;color:var(--am4);margin-bottom:3px">財務報表的後果</div>
+        <ul>
+          <li>A月收入認列（撥款月）突然暴增</li>
+          <li>B月成本爆發（獎金支付月）出現假虧</li>
+          <li>月度P&L完全失去決策參考價值</li>
+          <li>老闆誤判業績、誤發獎金、誤判預算</li>
+        </ul>
+        <div style="background:rgba(146,64,14,.08);border-radius:6px;padding:7px 10px;margin-top:7px;font-size:12px;color:var(--am)">
+          根本原因：現金收付制讓你被「政府撥款時間」牽著走，而非被「真實業務量」所驅動。
+        </div>
+      </div>
+
+      <div class="card-cy">
+        <h3>🗂️ 第一步：剝離專案損益（Project P&L）</h3>
+        <div style="font-size:12.5px;color:var(--cy);line-height:1.8;margin-bottom:8px">「外科手術式」地將不穩定的政府專案從一般報表中剝離，讓本業乾淨。</div>
+        <div style="background:rgba(14,116,163,.1);border-radius:7px;padding:9px 11px;margin-bottom:8px">
+          <div style="font-size:12px;font-weight:700;color:var(--cy4);margin-bottom:4px">報表拆分架構</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
+            <div style="background:rgba(6,182,212,.1);border-radius:5px;padding:6px 8px;text-align:center">
+              <div style="font-size:11.5px;font-weight:700;color:var(--cy4)">本業報表</div>
+              <div style="font-size:11px;color:var(--cy)">掛號費、自費項目<br>→ 自我造血能力</div>
+            </div>
+            <div style="background:rgba(245,158,11,.1);border-radius:5px;padding:6px 8px;text-align:center">
+              <div style="font-size:11.5px;font-weight:700;color:var(--am4)">專案損益表</div>
+              <div style="font-size:11px;color:var(--am)">政府補助收入<br>衍生獎金費用</div>
+            </div>
+          </div>
+        </div>
+        <div style="font-size:12px;font-weight:700;color:var(--cy4);margin-bottom:4px">關鍵問題：剝離後，診所靠自己能活嗎？</div>
+        <div style="font-size:12.5px;color:var(--cy);line-height:1.75">剔除補助後的「本業損益表」才是真實的經營表現。若本業持續虧損、只靠政府補助支撐，這是極度危險的業務結構。</div>
+      </div>
+
+      <div class="card-gr">
+        <h3>📐 第二步：導入預估機制（Accrual）</h3>
+        <div style="font-size:12px;font-weight:700;color:var(--gr4);margin-bottom:5px">以「萊克數（歷史執行量）」為基準預估</div>
+        <div style="background:rgba(22,163,74,.1);border-radius:7px;padding:9px 11px;margin-bottom:8px">
+          <div style="font-size:12px;color:var(--gr);line-height:1.75">
+            每月預估收入：<strong>借：應收收益 1萬 / 貸：專案收入 1萬</strong><br>
+            同步認列成本：<strong>借：薪資費用 0.5萬 / 貸：應付薪資 0.5萬</strong>
+          </div>
+        </div>
+        <div style="font-size:12px;font-weight:700;color:var(--gr4);margin-bottom:5px">結案月：高低估調整（Reconciliation）</div>
+        <div style="background:rgba(22,163,74,.08);border-radius:7px;padding:8px 11px;margin-bottom:6px">
+          <div style="font-size:12px;color:var(--gr);line-height:1.75">
+            若全年預估12萬，實際撥款13萬：<br>
+            → 沖銷12萬應收收益<br>
+            → 結案月補認列1萬收入+相應獎金成本<br>
+            → <strong>全年P&L平滑，無月份異常暴衝</strong>
+          </div>
+        </div>
+        <div style="background:rgba(22,163,74,.1);border-radius:6px;padding:7px 10px;font-size:12px;color:var(--gr4)">
+          ⭐ 顧問提醒：會計人員會嫌麻煩（「會計會哭」）。但這是從「記帳員」升級為「財務管理員」的必經之路——管理價值遠大於作業成本。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: 資本工程三招 -->
+  <div class="section">
+    <div class="section-label">Part 4 · 資本工程解碼 · 資本公積彌補虧損×特別股融資輪次×反分割真相×股東結構</div>
+    <div class="section-title">當本業虧損嚴重，高階財務工程成為「維持資本結構表面張力」的工具</div>
+    <div class="grid-3">
+
+      <!-- 資本公積 -->
+      <div class="card-vi">
+        <h3>🔄 資本公積彌補虧損</h3>
+        <div style="font-size:12.5px;color:var(--vi);line-height:1.75;margin-bottom:8px">會康帳上有高達<strong>7.9億元資本公積</strong>（IPO溢價發行所得），以其沖抵累積虧損。</div>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:8px">
+          <div style="background:rgba(124,58,237,.1);border-radius:6px;padding:7px 10px;font-size:12.5px;color:var(--vi)">
+            <strong>實質影響：零。</strong>股東權益內部「左手換右手」，對總資產、現金流、真實虧損毫無影響。
+          </div>
+          <div style="background:rgba(124,58,237,.07);border-radius:6px;padding:7px 10px;font-size:12.5px;color:var(--vi)">
+            <strong>財務動機：</strong>累積虧損「歸零」後，法律上更快恢復<strong>分配股利的資格</strong>，向市場發出「重塑信心」的訊號。
+          </div>
+          <div style="background:rgba(124,58,237,.12);border-radius:6px;padding:7px 10px;font-size:12.5px;color:var(--vi)">
+            <strong>分析師讀法：</strong>這是會計科目的化妝術。看穿它，就看穿了公司「維持門面」的意圖。
+          </div>
+        </div>
+        <div style="font-size:12px;font-weight:700;color:var(--vi4);margin-bottom:4px">9億元可轉換特別股→普通股的衝擊</div>
+        <div style="font-size:12.5px;color:var(--vi);line-height:1.75">緩解負債壓力，但帶來股權<strong>劇烈稀釋</strong>。原始股東的每股價值被大幅攤薄——這才是真正的代價。</div>
+      </div>
+
+      <!-- 特別股輪次 -->
+      <div class="card-ro">
+        <h3>📈 多輪特別股融資：條款越趨嚴苛</h3>
+        <div class="round-row">
+          <div class="rr-item" style="background:rgba(159,18,57,.05)">
+            <span class="rr-badge" style="color:var(--ro4)">A輪</span>
+            <span class="rr-rate" style="color:var(--ro)">0%</span>
+            <span class="rr-desc" style="color:var(--ro)">無特別約定。早期戰略投資，靠對創辦人/技術的純粹信任。</span>
+          </div>
+          <div class="rr-item" style="background:rgba(159,18,57,.07)">
+            <span class="rr-badge" style="color:var(--ro4)">B2輪</span>
+            <span class="rr-rate" style="color:var(--ro4)">1.5%</span>
+            <span class="rr-desc" style="color:var(--ro)">投資人開始要求「下檔保護」，利率雖低但已具補償性。</span>
+          </div>
+          <div class="rr-item" style="background:rgba(159,18,57,.1)">
+            <span class="rr-badge" style="color:var(--ro4)">B+輪</span>
+            <span class="rr-rate" style="color:var(--ro4);font-size:15px">6.0%</span>
+            <span class="rr-desc" style="color:var(--ro)"><strong>資金壓力顯著</strong>，必須以高額利誘換取資金。</span>
+          </div>
+          <div class="rr-item" style="background:rgba(159,18,57,.13);border:1px solid var(--ro3)">
+            <span class="rr-badge" style="color:var(--ro4)">C輪</span>
+            <span class="rr-rate" style="color:var(--ro4);font-size:15px">6.0%</span>
+            <span class="rr-desc" style="color:var(--ro)">融資難度極高，<strong>此利率已接近高收益債性質</strong>。</span>
+          </div>
+        </div>
+        <div style="background:rgba(159,18,57,.08);border-radius:7px;padding:9px 11px;margin-top:6px">
+          <div style="font-size:12px;font-weight:700;color:var(--ro4);margin-bottom:3px">⚠️ 顧問洞察：6%股利的本質</div>
+          <div style="font-size:12.5px;color:var(--ro);line-height:1.75">公司持續虧損，法律規定無盈餘不得發股利，這些6%<strong>根本發不出去</strong>，不斷累積成未來財務負擔。條款更多是「募資包裝」，將未來獲利權利提前承諾給投資人以換取即時資金。</div>
+        </div>
+      </div>
+
+      <!-- 反分割 + 股東結構 -->
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <div class="card-am">
+          <h3>🔀 反分割（5→1）：數字遊戲解碼</h3>
+          <div class="split-flow">
+            <div class="sf-box" style="background:rgba(146,64,14,.1)">
+              <div class="sf-title" style="color:var(--am4)">併股前</div>
+              <div class="sf-body" style="color:var(--am)">10元×5股<br>成本50元<br>每股淨值2元</div>
+            </div>
+            <div class="sf-arrow">→</div>
+            <div class="sf-box" style="background:rgba(146,64,14,.15)">
+              <div class="sf-title" style="color:var(--am4)">5股併1股</div>
+              <div class="sf-body" style="color:var(--am)">淨值×5倍<br>跳升至10元<br>表面「體面」</div>
+            </div>
+            <div class="sf-arrow">→</div>
+            <div class="sf-box" style="background:rgba(225,29,72,.1)">
+              <div class="sf-title" style="color:var(--ro4)">股價炒至47元</div>
+              <div class="sf-body" style="color:var(--ro)">手中1股=47元<br>成本50元<br>⚠️ 仍然虧損！</div>
+            </div>
+          </div>
+          <div style="font-size:12px;color:var(--am);line-height:1.75;background:rgba(146,64,14,.07);border-radius:6px;padding:7px 10px;margin-top:4px">動機：規避每股淨值低於面值的監管紅線，提高法人投資意願。本質是數字遊戲，<strong>投資人的真實成本與損益完全不變</strong>，切莫被股價的絕對數值迷惑。</div>
+        </div>
+        <div class="card-cy">
+          <h3>🏛️ 隱形政策安全網：股東結構</h3>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:7px">
+            <div style="background:rgba(6,182,212,.1);border-radius:6px;padding:7px 10px;font-size:12.5px;color:var(--cy)"><strong>行政院國發基金</strong>：政策性背書，並非僅出資，更是「政治/行政資源」的隱形護盾</div>
+            <div style="background:rgba(14,116,163,.08);border-radius:6px;padding:7px 10px;font-size:12.5px;color:var(--cy)"><strong>水牛創投（排山/三號生機）</strong>：國發基金透過「政府背景創投」結構間接持股，多層次設計</div>
+          </div>
+          <div style="background:rgba(6,182,212,.08);border-radius:6px;padding:7px 10px;font-size:12px;color:var(--cy4)">
+            ⭐ 戰略含義：興櫃週成交2,286張（流通股數7%）的異常換手率，在此背景下仍有人接盤——背後是對「政策安全網可防止資金斷鏈」的隱性信任，是生技公司融資比一般企業多一條活路的根本原因。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 核心洞見 -->
+  <div class="card-dark" style="margin-bottom:22px">
+    <h3>🎯 Rock老師核心洞見：四大分析框架總結</h3>
+    <div class="grid-2" style="margin-top:9px">
+      <div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="background:rgba(6,182,212,.1);border-radius:6px;padding:8px 11px">
+            <div style="font-size:12px;font-weight:700;color:var(--cy5);margin-bottom:2px">框架一：現金流是生死線，損益表是公關稿</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.75);line-height:1.65">任何財報分析必須從現金流量表切入，確認Burn Rate與Cash Runway，才能判斷企業存活能力。</div>
+          </div>
+          <div style="background:rgba(245,158,11,.1);border-radius:6px;padding:8px 11px">
+            <div style="font-size:12px;font-weight:700;color:var(--am5);margin-bottom:2px">框架二：損益還原，剔除非現金干擾</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.75);line-height:1.65">ESOP費用化、折舊攤銷均為非現金科目，必須加回才能看清「真賠」的實質規模。</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="background:rgba(124,58,237,.12);border-radius:6px;padding:8px 11px">
+            <div style="font-size:12px;font-weight:700;color:var(--vi3);margin-bottom:2px">框架三：資本工程看動機，不看表面</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.75);line-height:1.65">資本公積彌補虧損、反分割、特別股融資均是維持表面張力的工具。分析師的任務是看穿動機，還原真實財務狀態。</div>
+          </div>
+          <div style="background:rgba(34,197,94,.1);border-radius:6px;padding:8px 11px">
+            <div style="font-size:12px;font-weight:700;color:var(--gr5);margin-bottom:2px">框架四：診所管理必須「時間配對」</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.75);line-height:1.65">政府專案補助的時間差是診所P&L失真的元兇。Project P&L + 預估機制是唯一解藥，讓收入與成本在同月份配對。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="background:rgba(6,182,212,.08);border-radius:7px;padding:10px 13px;margin-top:9px;font-size:12.5px;color:rgba(255,255,255,.85);line-height:1.75">
+      📌 會康的存續邏輯：<strong style="color:var(--cy5)">短線靠資本工程買時間（特別股、反分割、資本公積），長線仍須回歸營業活動現金流何時能轉正。</strong>有國發基金的政策安全網，它比一般公司多了緩衝時間——但這場與燒錢速率的賽跑，終究需要實質營收增長才能畫下句點。
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 老師 · 蕭啟漢 · April 學員 · 0815</div>
+  <div class="ft-note">會康7851財報解構 × 燒錢速率×損益還原 × 醫療診所Project P&L × 資本公積×特別股融資 × 反分割真相 × 國發基金隱形安全網</div>
+</div>
+
+</body>
+</html>
