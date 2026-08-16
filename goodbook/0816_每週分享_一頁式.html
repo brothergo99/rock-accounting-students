@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>0816 每週分享 · 一年能改變的比您想像的多×Let Me×HYROX×CFO×AI革命</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --or:#7c2d12;--or2:#fff7ed;--or3:#fed7aa;--or4:#ea580c;--or5:#f97316;
+  --gr:#14532d;--gr2:#f0fdf4;--gr3:#86efac;--gr4:#16a34a;--gr5:#22c55e;
+  --bl:#1e3a5f;--bl2:#eff6ff;--bl3:#93c5fd;--bl4:#2563eb;
+  --vi:#4c1d95;--vi2:#f5f3ff;--vi3:#c4b5fd;--vi4:#7c3aed;
+  --am:#92400e;--am2:#fffbeb;--am3:#fde68a;--am4:#d97706;
+  --ro:#9f1239;--ro2:#fff1f2;--ro3:#fecdd3;--ro4:#e11d48;
+  --sl:#1e293b;--sl2:#f8fafc;--sl3:#cbd5e1;--sl4:#475569;
+  --night:#0a0906;--night2:#120d09;
+  --bg:#fff7ed;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--night);line-height:1.7}
+
+.page-header{background:linear-gradient(150deg,#0a0906,#120d09,#08070a,#0a0604);padding:36px 50px 28px;position:relative;overflow:hidden;border-bottom:3px solid var(--or5)}
+.ph-g1{position:absolute;top:-60px;right:-40px;width:260px;height:260px;background:radial-gradient(circle,rgba(249,115,22,.22),transparent 65%);pointer-events:none}
+.ph-g2{position:absolute;bottom:-30px;left:-20px;width:180px;height:180px;background:radial-gradient(circle,rgba(34,197,94,.13),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(253,186,116,.65);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(14px,2.1vw,21px);font-weight:900;color:#fff;line-height:1.28;margin-bottom:4px}
+.ph-title em{color:var(--or5);font-style:normal}
+.ph-title em2{color:var(--gr5);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.38);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mc{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(249,115,22,.14);color:var(--or5);border:1px solid rgba(249,115,22,.3)}
+.mc-g{background:rgba(34,197,94,.13);color:var(--gr5);border-color:rgba(34,197,94,.3)}
+.mc-b{background:rgba(37,99,235,.12);color:var(--bl3);border-color:rgba(37,99,235,.28)}
+.mc-v{background:rgba(124,58,237,.12);color:var(--vi3);border-color:rgba(124,58,237,.28)}
+
+.container{max-width:1100px;margin:0 auto;padding:26px 26px}
+.section{margin-bottom:22px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--or4);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--night);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--or3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-32{display:grid;grid-template-columns:1.2fr 1fr;gap:13px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-32{grid-template-columns:1fr}}
+
+.card-or{background:var(--or2);border:1.5px solid var(--or3);border-radius:10px;padding:14px}
+.card-gr{background:var(--gr2);border:1.5px solid var(--gr3);border-radius:10px;padding:14px}
+.card-bl{background:var(--bl2);border:1.5px solid var(--bl3);border-radius:10px;padding:14px}
+.card-vi{background:var(--vi2);border:1.5px solid var(--vi3);border-radius:10px;padding:14px}
+.card-am{background:var(--am2);border:1.5px solid var(--am3);border-radius:10px;padding:14px}
+.card-ro{background:var(--ro2);border:1.5px solid var(--ro3);border-radius:10px;padding:14px}
+.card-sl{background:var(--sl2);border:1.5px solid var(--sl3);border-radius:10px;padding:14px}
+.card-dark{background:var(--night);border:none;border-radius:10px;padding:14px}
+.card-or h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--or)}
+.card-gr h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--gr)}
+.card-bl h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--bl)}
+.card-vi h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--vi)}
+.card-am h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--am)}
+.card-ro h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--ro)}
+.card-sl h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--sl)}
+.card-dark h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--or5)}
+.card-or p,.card-or li{color:var(--or);font-size:12.5px;line-height:1.85}
+.card-gr p,.card-gr li{color:var(--gr);font-size:12.5px;line-height:1.85}
+.card-bl p,.card-bl li{color:var(--bl);font-size:12.5px;line-height:1.85}
+.card-vi p,.card-vi li{color:var(--vi);font-size:12.5px;line-height:1.85}
+.card-am p,.card-am li{color:var(--am);font-size:12.5px;line-height:1.85}
+.card-ro p,.card-ro li{color:var(--ro);font-size:12.5px;line-height:1.85}
+.card-sl p,.card-sl li{color:var(--sl);font-size:12.5px;line-height:1.85}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8);font-size:12.5px;line-height:1.85}
+ul{padding-left:15px}
+ul li{margin-bottom:3px}
+
+/* Let Them → Let Me */
+.letme{display:flex;align-items:center;gap:10px;background:var(--night);border-radius:9px;padding:13px 16px;margin:8px 0}
+.lm-box{border-radius:7px;padding:10px 14px;text-align:center;flex:1}
+.lm-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:900;margin-bottom:3px;line-height:1.2}
+.lm-sub{font-size:11.5px;line-height:1.6}
+.lm-arrow{font-size:24px;color:rgba(255,255,255,.2);flex-shrink:0}
+
+/* 運動三階段時間軸 */
+.phase-row{display:flex;gap:0;margin:8px 0}
+.phase{flex:1;position:relative;padding:10px 12px;border-right:none}
+.phase:last-child{border-right:none}
+.phase-n{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;opacity:.15;position:absolute;top:6px;right:8px;line-height:1}
+.phase-time{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.1em;margin-bottom:4px}
+.phase-title{font-size:12.5px;font-weight:700;margin-bottom:4px;position:relative;z-index:1}
+.phase-body{font-size:12px;line-height:1.7;position:relative;z-index:1}
+.phase-arrow{display:flex;align-items:center;color:rgba(249,115,22,.3);font-size:20px;flex-shrink:0;padding:0 2px;align-self:center}
+
+/* 職涯時間軸 */
+.career-step{display:flex;gap:8px;padding:7px 0;border-bottom:1px dashed rgba(34,197,94,.15)}
+.career-step:last-child{border-bottom:none}
+.cs-age{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;min-width:44px;flex-shrink:0;margin-top:2px}
+.cs-body{font-size:12.5px;line-height:1.75}
+
+/* AI工作流 */
+.ai-flow{display:flex;align-items:stretch;gap:4px;margin:9px 0}
+.af-box{flex:1;border-radius:7px;padding:10px 10px;text-align:center}
+.af-icon{font-size:18px;margin-bottom:3px}
+.af-title{font-size:12px;font-weight:700;margin-bottom:3px}
+.af-body{font-size:11px;line-height:1.65;opacity:.8}
+.af-arrow{display:flex;align-items:center;color:rgba(249,115,22,.3);font-size:18px;flex-shrink:0;padding:0 2px}
+
+/* 成長閉環 */
+.loop{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:8px 0;background:rgba(12,9,6,.05);border-radius:8px;padding:10px 13px}
+.lp-box{border-radius:5px;padding:5px 11px;font-size:12px;font-weight:700;white-space:nowrap}
+.lp-arrow{color:rgba(249,115,22,.4);font-size:16px}
+
+/* Quote */
+.quote{background:linear-gradient(135deg,var(--night),var(--night2));border-radius:10px;padding:14px 20px;position:relative;overflow:hidden;margin-bottom:20px}
+.qm{font-family:'Playfair Display',serif;font-size:72px;color:rgba(249,115,22,.07);position:absolute;top:-10px;left:8px;line-height:1}
+.qt{font-size:13px;color:rgba(255,255,255,.88);line-height:1.65;position:relative;z-index:1}
+.qt em{color:var(--or5);font-style:normal;font-weight:700}
+.qt em2{color:var(--gr5);font-style:normal}
+.qs{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.35);margin-top:6px;position:relative;z-index:1}
+
+.page-footer{background:var(--night);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--or5)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-g1"></div>
+  <div class="ph-g2"></div>
+  <div class="ph-eyebrow">0816 · 每週分享 · 兩週年特輯 · 社群成立2周年×一年能改變的比您想像的多</div>
+  <div class="ph-title"><em>「Let Them，然後立刻 Let Me」</em>——<br>47歲、200堂F45、三場HYROX、AI效率革命、<em2>上市公司CFO</em2>：一年的真實告白</div>
+  <div class="ph-sub">梅爾·羅賓斯《隨他們去》轉念哲學 × F45+HYROX三階段體能蛻變 × Claude×GitHub AI工作流 × 32歲AP會計→47歲CFO烏龜逆襲記</div>
+  <div class="ph-meta">
+    <span class="mc">2026.08.16</span>
+    <span class="mc">每週分享</span>
+    <span class="mc mc-g">社群兩週年特輯</span>
+    <span class="mc mc-b">HYROX×F45×Zone2</span>
+    <span class="mc mc-v">Claude×GitHub×AI工作流</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 金句 -->
+  <div class="quote">
+    <div class="qm">"</div>
+    <div class="qt">「書歸書，如果知識僅僅停留在紙面上，讀再多書也是枉然。過去這一年，<em>思維的改變真實發生在我自己身上</em>——運動帶給我的多巴胺反哺了工作，工作的底氣讓我面對董事會的考驗時從容自若，財務的底氣讓我不需要靠任何公司才能活下去。<br><em2>輸出的人總是收穫最多——</em2>這兩年最大的受益者，就是我自己。」</div>
+    <div class="qs">Rock 老師 · 蕭啟漢 · 0816 每週分享 · 2026年8月 · 社群成立兩週年 · 一年能改變的比您想像的多</div>
+  </div>
+
+  <!-- SECTION 1: 轉念哲學 + 書單 -->
+  <div class="section">
+    <div class="section-label">Part 1 · Let Them → Let Me 轉念哲學 · 梅爾·羅賓斯《隨他們去》×可控×不可控</div>
+    <div class="section-title">「隨他們去」只是第一步——真正的力量在於下一秒立刻問「我能做什麼？」</div>
+    <div class="grid-2">
+      <div class="card-dark">
+        <h3>🔄 Let Them → Let Me：轉念的精髓</h3>
+        <div class="letme">
+          <div class="lm-box" style="background:rgba(225,29,72,.15)">
+            <div class="lm-title" style="color:#fb7185">Let Them</div>
+            <div class="lm-sub" style="color:rgba(255,255,255,.6)">隨他們去<br>放下不可控的外部干擾<br>（他人行為、環境變化）<br>不糾結、不浪費一分鐘</div>
+          </div>
+          <div class="lm-arrow">→</div>
+          <div class="lm-box" style="background:rgba(34,197,94,.15)">
+            <div class="lm-title" style="color:var(--gr5)">Let Me</div>
+            <div class="lm-sub" style="color:rgba(255,255,255,.6)">我能做什麼？<br>立刻轉移注意力到<br>可控的自我行動上<br>主動出擊，往前推進</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:rgba(255,255,255,.65);line-height:1.75;margin-top:8px;padding:8px 11px;background:rgba(255,255,255,.05);border-radius:6px">
+          ⭐ 核心洞見：只說「隨他們去」而雙手一攤，事情完全不會往前推移。<strong style="color:#fff">必須在下一個瞬間立刻完成轉念</strong>——這才是這本書標題沒說但最關鍵的下一步。
+        </div>
+        <div style="font-size:12px;color:rgba(255,255,255,.5);margin-top:8px;font-family:'DM Mono',monospace">
+          梅爾·羅賓斯《Let Them》· 五秒法則作者最新理論演進
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <div class="card-or">
+          <h3>⏱️ 極度緊縮的人生時間表</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px">
+            <div style="background:rgba(234,88,12,.1);border-radius:6px;padding:6px 9px;font-size:11.5px;color:var(--or)">👶 照顧小小孩（弟弟）</div>
+            <div style="background:rgba(234,88,12,.1);border-radius:6px;padding:6px 9px;font-size:11.5px;color:var(--or)">💼 繁重的本業工作</div>
+            <div style="background:rgba(234,88,12,.1);border-radius:6px;padding:6px 9px;font-size:11.5px;color:var(--or)">🏋️ 高強度運動訓練</div>
+            <div style="background:rgba(234,88,12,.1);border-radius:6px;padding:6px 9px;font-size:11.5px;color:var(--or)">📚 線上家教課程</div>
+            <div style="background:rgba(234,88,12,.12);border-radius:6px;padding:6px 9px;font-size:11.5px;color:var(--or);grid-column:span 2">📱 每週社群分享（兩年不間斷）</div>
+          </div>
+          <p>在近乎飽和的時間表下，<strong>對任何不可控的事情選擇不糾結、直接放下</strong>，才能把每一分鐘用在刀口上。</p>
+        </div>
+        <div class="card-gr">
+          <h3>🏆 兩週年成果：社群與自我的雙重里程碑</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:7px">
+            <div style="background:rgba(22,163,74,.1);border-radius:6px;padding:7px 10px;text-align:center">
+              <div style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--gr4)">2年</div>
+              <div style="font-size:11px;color:var(--gr)">社群創立至今</div>
+            </div>
+            <div style="background:rgba(22,163,74,.1);border-radius:6px;padding:7px 10px;text-align:center">
+              <div style="font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--gr4)">14,000+</div>
+              <div style="font-size:11px;color:var(--gr)">單日官網點擊（週三）</div>
+            </div>
+          </div>
+          <p>「輸出的人總是收穫最多」——每週準備分享、整理知識、對外傳授的過程，最能內化並重塑自我的往往是分享者本人。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: 運動三階段 -->
+  <div class="section">
+    <div class="section-label">Part 2 · 運動蛻變三階段 · F45×HYROX台北×HYROX上海個人×Zone2跑步特訓×日本男雙</div>
+    <div class="section-title">從中年大叔到雙手提48公斤壺鈴微笑上課：200堂課、三場HYROX、一場Zone2革命</div>
+    <div class="grid-32">
+      <div class="card-or">
+        <h3>🏋️ 體能三階段進化時間軸</h3>
+        <div style="font-size:11.5px;color:var(--or4);font-weight:700;margin-bottom:6px">初衷：弟弟誕生，男孩活動量驚人，爸爸必須進化</div>
+        <div class="phase-row">
+          <div class="phase" style="background:rgba(234,88,12,.07);border-radius:8px;flex:1">
+            <div class="phase-n" style="color:var(--or4)">1</div>
+            <div class="phase-time" style="color:var(--or4)">2025.08 – 2026.01</div>
+            <div class="phase-title" style="color:var(--or)">習慣養成期</div>
+            <div class="phase-body" style="color:var(--or)">規律F45，默默累積<br>完成約<strong>100堂課</strong><br>建立體能基礎底盤</div>
+          </div>
+          <div class="phase-arrow">→</div>
+          <div class="phase" style="background:rgba(234,88,12,.11);border-radius:8px;flex:1.2">
+            <div class="phase-n" style="color:var(--or4)">2</div>
+            <div class="phase-time" style="color:var(--or4)">2026.02 – 05</div>
+            <div class="phase-title" style="color:var(--or)">突破挑戰期</div>
+            <div class="phase-body" style="color:var(--or)">台北HYROX（2月底）<br>→飲食控管+蛋白質<br>→體脂肪迅猛消失<br>上海HYROX<strong>個人組</strong>（5月）<br>「用盡生命力量咬牙完賽」</div>
+          </div>
+          <div class="phase-arrow">→</div>
+          <div class="phase" style="background:rgba(234,88,12,.15);border-radius:8px;flex:1.2">
+            <div class="phase-n" style="color:var(--or4)">3</div>
+            <div class="phase-time" style="color:var(--or4)">2026.06 – 08</div>
+            <div class="phase-title" style="color:var(--or)">Zone 2 特訓期</div>
+            <div class="phase-body" style="color:var(--or)">發現跑步弱點<br>→聘請專業教練<br>低心率Zone 2堆疊<br>日本男雙賽事<br>模擬：<strong>87-88分鐘</strong></div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:9px">
+          <div style="background:rgba(234,88,12,.1);border-radius:6px;padding:7px 10px;text-align:center">
+            <div style="font-family:'DM Mono',monospace;font-size:17px;font-weight:700;color:var(--or4)">200+</div>
+            <div style="font-size:11px;color:var(--or)">F45堂課累積</div>
+          </div>
+          <div style="background:rgba(234,88,12,.1);border-radius:6px;padding:7px 10px;text-align:center">
+            <div style="font-family:'DM Mono',monospace;font-size:17px;font-weight:700;color:var(--or4)">3場</div>
+            <div style="font-size:11px;color:var(--or)">HYROX完賽</div>
+          </div>
+          <div style="background:rgba(234,88,12,.1);border-radius:6px;padding:7px 10px;text-align:center">
+            <div style="font-family:'DM Mono',monospace;font-size:17px;font-weight:700;color:var(--or4)">24kg×2</div>
+            <div style="font-size:11px;color:var(--or)">雙手壺鈴帶笑上課</div>
+          </div>
+        </div>
+
+        <div style="background:rgba(234,88,12,.08);border-radius:7px;padding:9px 12px;margin-top:8px">
+          <div style="font-size:12px;font-weight:700;color:var(--or4);margin-bottom:3px">Zone 2 的極簡訓練邏輯</div>
+          <div style="font-size:12.5px;color:var(--or);line-height:1.75">「在相同的心率下，拉長距離、提升速度。」心率過高就立刻降速，太喘就改走，累了就休息。<strong>一旦心率過高，就絕不逞強</strong>——這與F45 200堂課學到的身體控制哲學完全相通。47歲首次感受跑步進步，那一天都很快樂。</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <div class="card-dark">
+          <h3>💪 運動的真實意義</h3>
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <div style="background:rgba(234,88,12,.12);border-radius:6px;padding:8px 11px">
+              <div style="font-size:12px;font-weight:700;color:var(--or5);margin-bottom:3px">為家庭而戰</div>
+              <div style="font-size:12.5px;color:rgba(255,255,255,.78);line-height:1.7">男孩活動量驚人。若沒有這一年運動，現在可能每天都要「帶著護具」才能來陪孩子。家庭永遠是人生最值得投資的底牌。</div>
+            </div>
+            <div style="background:rgba(255,255,255,.06);border-radius:6px;padding:8px 11px">
+              <div style="font-size:12px;font-weight:700;color:var(--or5);margin-bottom:3px">壓力的最佳出口</div>
+              <div style="font-size:12.5px;color:rgba(255,255,255,.78);line-height:1.7">F45的45分鐘累到無法思考——跳槽新工作＋新生兒的雙重壓力，在汗水中得到釋放。</div>
+            </div>
+            <div style="background:rgba(34,197,94,.1);border-radius:6px;padding:8px 11px;border:1px solid rgba(34,197,94,.2)">
+              <div style="font-size:12px;font-weight:700;color:var(--gr5);margin-bottom:3px">自信心的建立</div>
+              <div style="font-size:12.5px;color:rgba(255,255,255,.78);line-height:1.7">上海個人賽完賽後，打從心底體悟：<strong style="color:#fff">「只要願意給自己機會、持之以恆，很多原本看似不可能的事，你都有機會完成。」</strong>這個信念成為面試與職涯轉變的底氣。</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-gr">
+          <h3>🌟 F45夥伴的小故事</h3>
+          <p>訓練到第三大組休息時，年輕夥伴驚呼：「哇，你怎麼都做這麼重？」</p>
+          <div style="background:rgba(22,163,74,.1);border-radius:6px;padding:8px 11px;margin-top:7px;font-size:12.5px;color:var(--gr);line-height:1.75">
+            老師的回答：「<strong>我已經上200多堂課了！你先不要激動，也不要急。你到現在都沒有放棄、能堅持跟著做完，就已經非常厲害了！</strong>只要慢慢來，你一定能做得比我更好。」<br>→ 累積帶來謙遜，謙遜帶來正能量。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: AI工作流 + 職涯 -->
+  <div class="section">
+    <div class="section-label">Part 3 · AI效率革命 + 職涯烏龜逆襲 · Claude×GitHub×30分董事會報告×32歲AP→47歲CFO</div>
+    <div class="section-title">數位效率降維打擊本業，知識複利閉環成就烏龜逆襲：從32歲應付帳款到47歲上市公司CFO</div>
+    <div class="grid-3">
+
+      <!-- AI工作流 -->
+      <div class="card-bl">
+        <h3>🤖 AI極簡自動化工作流</h3>
+        <div class="ai-flow">
+          <div class="af-box" style="background:rgba(37,99,235,.1)">
+            <div class="af-icon">🎙️</div>
+            <div class="af-title" style="color:var(--bl4)">逐字稿截取</div>
+            <div class="af-body" style="color:var(--bl)">課程語音轉換為完整逐字稿</div>
+          </div>
+          <div class="af-arrow">→</div>
+          <div class="af-box" style="background:rgba(37,99,235,.12)">
+            <div class="af-icon">🧠</div>
+            <div class="af-title" style="color:var(--bl4)">Claude深度協作</div>
+            <div class="af-body" style="color:var(--bl)">AI歸納整理+代碼生成→精美一頁式HTML</div>
+          </div>
+          <div class="af-arrow">→</div>
+          <div class="af-box" style="background:rgba(37,99,235,.1)">
+            <div class="af-icon">🚀</div>
+            <div class="af-title" style="color:var(--bl4)">GitHub自動部署</div>
+            <div class="af-body" style="color:var(--bl)">上傳即觸發更新→官網秒級同步</div>
+          </div>
+        </div>
+        <div style="background:rgba(37,99,235,.1);border-radius:7px;padding:9px 12px;margin-top:8px">
+          <div style="font-size:12px;font-weight:700;color:var(--bl4);margin-bottom:3px">降維打擊本業：30分鐘董事會報告</div>
+          <div style="font-size:12.5px;color:var(--bl);line-height:1.75">78歲董事長：「欸，你那個報告準備半個小時夠嗎？」<br>過去答案：不夠，至少半天。<br>現在答案：<strong>「可以啊，沒問題！」</strong><br>→ Claude快速整理資料庫+分析，30分鐘產出結構嚴謹的董事會專業報告。董事長視為「魔術師」。</div>
+        </div>
+        <div style="background:rgba(37,99,235,.07);border-radius:6px;padding:7px 11px;margin-top:6px;font-size:12px;color:var(--bl4)">
+          ⭐ 官網單日突破<strong>14,000次</strong>點擊——老顧客驚訝：「老師，你的課程怎麼變得這麼厲害？」（當初還在用Word檔看）
+        </div>
+      </div>
+
+      <!-- 職涯烏龜逆襲 -->
+      <div class="card-gr">
+        <h3>🐢 烏龜逆襲：32歲→47歲的15年追趕</h3>
+        <div style="font-size:11.5px;color:var(--gr4);font-weight:700;margin-bottom:7px">龜兔賽跑的真實演繹——烏龜後發先至</div>
+        <div class="career-step" style="padding-top:0">
+          <div class="cs-age" style="color:rgba(22,163,74,.4)">16-28歲</div>
+          <div class="cs-body" style="color:var(--gr)">壘球＋淡江大學會計系助教（開心教課、下課打球喝酒）</div>
+        </div>
+        <div class="career-step">
+          <div class="cs-age" style="color:rgba(22,163,74,.5)">28-32歲</div>
+          <div class="cs-body" style="color:var(--gr)">保險業務員——鍛鍊業務溝通，但未在會計本業深根。「30歲以前都在玩！」</div>
+        </div>
+        <div class="career-step">
+          <div class="cs-age" style="color:var(--gr4)">32歲</div>
+          <div class="cs-body" style="color:var(--gr)">從<strong>最底層「應付帳款（AP）會計」</strong>一步一腳印做起，薪水微薄，但紮下馬步</div>
+        </div>
+        <div class="career-step">
+          <div class="cs-age" style="color:var(--gr4)">32-46歲</div>
+          <div class="cs-body" style="color:var(--gr)">克服無數個撞牆期、持續追趕——同齡兔子早已是四大合夥人，烏龜仍在猛追</div>
+        </div>
+        <div class="career-step" style="border-bottom:none">
+          <div class="cs-age" style="color:var(--gr5);font-size:15px">47歲</div>
+          <div class="cs-body" style="color:var(--gr4);font-weight:700;font-size:13px">上市公司<strong>財務長（CFO）× 協理</strong><br>網路Google姓名即可公開查詢到職位</div>
+        </div>
+        <div style="background:rgba(22,163,74,.1);border-radius:6px;padding:8px 11px;margin-top:8px;font-size:12px;color:var(--gr);line-height:1.75">
+          稽核主管問：「你怎麼對底層會計細節這麼熟？是四大資深經理嗎？」<br>→「<strong>廢話，我以前就是天天搞應付帳款、對帳的人啊！</strong>」正是32歲的馬步，讓他具備高階主管沒有的「地氣」。
+        </div>
+      </div>
+
+      <!-- 職業球員哲學 + 成長閉環 -->
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <div class="card-am">
+          <h3>⚾ 職業球員哲學</h3>
+          <div style="background:rgba(146,64,14,.1);border-radius:7px;padding:9px 12px;margin-bottom:8px">
+            <div style="font-size:12px;font-weight:700;color:var(--am4);margin-bottom:3px">「我不是去上班的，我是去完成任務的」</div>
+            <div style="font-size:12.5px;color:var(--am);line-height:1.75">不詢問特休、福利——只問：「我能幫你們解決什麼財務難題？你給我滿意的年薪，我幫你們贏球。」</div>
+          </div>
+          <div style="background:rgba(146,64,14,.07);border-radius:7px;padding:9px 12px;margin-bottom:8px">
+            <div style="font-size:12px;font-weight:700;color:var(--am4);margin-bottom:3px">底氣的來源：三年不缺錢的財務安全墊</div>
+            <div style="font-size:12.5px;color:var(--am);line-height:1.75">規律投入0050、0052市值型ETF，股市大跌時不慌張反而笑稱「加碼機會」。「即便立刻離職，三年不賺錢也完全不缺錢。」</div>
+          </div>
+          <div style="font-size:12px;color:var(--am);line-height:1.7;background:rgba(146,64,14,.06);border-radius:6px;padding:7px 10px">
+            五月底想休息到8月再找工作，因面試表現太亮眼，7月初被火速挖角上班。
+          </div>
+        </div>
+
+        <div class="card-dark">
+          <h3>🔁 成長閉環：思維→行為→體態→能量→方向</h3>
+          <div class="loop">
+            <span class="lp-box" style="background:rgba(249,115,22,.2);color:var(--or5)">思維改變</span>
+            <span class="lp-arrow">→</span>
+            <span class="lp-box" style="background:rgba(249,115,22,.15);color:var(--or5)">行為轉變</span>
+            <span class="lp-arrow">→</span>
+            <span class="lp-box" style="background:rgba(34,197,94,.15);color:var(--gr5)">體態蛻變</span>
+            <span class="lp-arrow">→</span>
+            <span class="lp-box" style="background:rgba(34,197,94,.2);color:var(--gr5)">強大能量</span>
+            <span class="lp-arrow">→</span>
+            <span class="lp-box" style="background:rgba(255,255,255,.12);color:#fff">精準方向</span>
+          </div>
+          <div style="font-size:12px;color:rgba(255,255,255,.7);line-height:1.75;margin-top:8px">運動的多巴胺→反哺工作底氣→面對董事會從容自若→「Let Me」心態持續强化。<br>這個閉環在這一年完美印證。</div>
+          <div style="background:rgba(249,115,22,.1);border-radius:6px;padding:8px 11px;margin-top:8px;font-size:12px;color:var(--or5)">
+            🎯 未來願景：全職在社群與大家嘻嘻哈哈分享，好好運動、享受冰水澡，不再需要去商業公司拋頭露面——只在大家真正需要時重出江湖。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 老師 每週分享 · 蕭啟漢 · Brothergo99</div>
+  <div class="ft-note">0816 · 兩週年特輯 · Let Them→Let Me × F45×HYROX三階段 × Claude×GitHub × 32歲AP→47歲CFO</div>
+</div>
+
+</body>
+</html>
