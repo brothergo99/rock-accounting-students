@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>0816 Cavin · 遠傳×台哥大法說會深度解構×EBITDA×ARPU×商業對話×M&A×AI創業</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ro:#9f1239;--ro2:#fff1f2;--ro3:#fecdd3;--ro4:#e11d48;--ro5:#f43f5e;
+  --bl:#1e3a8a;--bl2:#eff6ff;--bl3:#bfdbfe;--bl4:#2563eb;--bl5:#38bdf8;
+  --gr:#14532d;--gr2:#f0fdf4;--gr3:#86efac;--gr4:#16a34a;--gr5:#22c55e;
+  --am:#92400e;--am2:#fffbeb;--am3:#fde68a;--am4:#d97706;--am5:#f59e0b;
+  --vi:#4c1d95;--vi2:#f5f3ff;--vi3:#c4b5fd;--vi4:#7c3aed;
+  --sl:#1e293b;--sl2:#f8fafc;--sl3:#cbd5e1;--sl4:#475569;
+  --night:#0c0a1a;--night2:#120f22;
+  --bg:#fff1f2;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--night);line-height:1.7}
+
+.page-header{background:linear-gradient(150deg,#0c0a1a,#120f22,#0a0c1a,#10081a);padding:36px 50px 28px;position:relative;overflow:hidden;border-bottom:3px solid var(--ro5)}
+.ph-g1{position:absolute;top:-60px;right:-40px;width:260px;height:260px;background:radial-gradient(circle,rgba(244,63,94,.2),transparent 65%);pointer-events:none}
+.ph-g2{position:absolute;bottom:-30px;left:-20px;width:180px;height:180px;background:radial-gradient(circle,rgba(56,189,248,.13),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(253,205,211,.6);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(14px,2.1vw,21px);font-weight:900;color:#fff;line-height:1.28;margin-bottom:4px}
+.ph-title em{color:var(--ro5);font-style:normal}
+.ph-title em2{color:var(--bl5);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.38);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mc{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(244,63,94,.15);color:var(--ro5);border:1px solid rgba(244,63,94,.3)}
+.mc-b{background:rgba(56,189,248,.13);color:var(--bl5);border-color:rgba(56,189,248,.28)}
+.mc-g{background:rgba(34,197,94,.12);color:var(--gr5);border-color:rgba(34,197,94,.28)}
+.mc-a{background:rgba(245,158,11,.13);color:var(--am5);border-color:rgba(245,158,11,.28)}
+.mc-v{background:rgba(124,58,237,.12);color:var(--vi3);border-color:rgba(124,58,237,.28)}
+
+.container{max-width:1120px;margin:0 auto;padding:26px 26px}
+.section{margin-bottom:22px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--ro4);text-transform:uppercase;margin-bottom:5px}
+.section-label-b{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--bl4);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--night);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--ro3)}
+.section-title-b{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--night);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--bl3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-32{display:grid;grid-template-columns:1.3fr 1fr;gap:13px}
+.grid-23{display:grid;grid-template-columns:1fr 1.3fr;gap:13px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-32,.grid-23{grid-template-columns:1fr}}
+
+.card-ro{background:var(--ro2);border:1.5px solid var(--ro3);border-radius:10px;padding:14px}
+.card-bl{background:var(--bl2);border:1.5px solid var(--bl3);border-radius:10px;padding:14px}
+.card-gr{background:var(--gr2);border:1.5px solid var(--gr3);border-radius:10px;padding:14px}
+.card-am{background:var(--am2);border:1.5px solid var(--am3);border-radius:10px;padding:14px}
+.card-vi{background:var(--vi2);border:1.5px solid var(--vi3);border-radius:10px;padding:14px}
+.card-sl{background:var(--sl2);border:1.5px solid var(--sl3);border-radius:10px;padding:14px}
+.card-dark{background:var(--night);border:none;border-radius:10px;padding:14px}
+.card-ro h3,.card-ro h4{font-family:'Playfair Display',serif;margin-bottom:7px;color:var(--ro);font-weight:700}
+.card-ro h3{font-size:13.5px}
+.card-ro h4{font-size:12.5px}
+.card-bl h3,.card-bl h4{font-family:'Playfair Display',serif;margin-bottom:7px;color:var(--bl);font-weight:700}
+.card-bl h3{font-size:13.5px}
+.card-bl h4{font-size:12.5px}
+.card-gr h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--gr)}
+.card-am h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--am)}
+.card-vi h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--vi)}
+.card-sl h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--sl)}
+.card-dark h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--ro5)}
+.card-ro p,.card-ro li{color:var(--ro);font-size:12.5px;line-height:1.85}
+.card-bl p,.card-bl li{color:var(--bl);font-size:12.5px;line-height:1.85}
+.card-gr p,.card-gr li{color:var(--gr);font-size:12.5px;line-height:1.85}
+.card-am p,.card-am li{color:var(--am);font-size:12.5px;line-height:1.85}
+.card-vi p,.card-vi li{color:var(--vi);font-size:12.5px;line-height:1.85}
+.card-sl p,.card-sl li{color:var(--sl);font-size:12.5px;line-height:1.85}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8);font-size:12.5px;line-height:1.85}
+ul{padding-left:15px}
+ul li{margin-bottom:3px}
+
+/* Quote */
+.quote{background:linear-gradient(135deg,var(--night),var(--night2));border-radius:10px;padding:14px 20px;position:relative;overflow:hidden;margin-bottom:20px}
+.qm{font-family:'Playfair Display',serif;font-size:72px;color:rgba(244,63,94,.07);position:absolute;top:-10px;left:8px;line-height:1}
+.qt{font-size:13px;color:rgba(255,255,255,.88);line-height:1.65;position:relative;z-index:1}
+.qt em{color:var(--ro5);font-style:normal;font-weight:700}
+.qt em2{color:var(--bl5);font-style:normal;font-weight:700}
+.qs{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.35);margin-top:6px;position:relative;z-index:1}
+
+/* KPI */
+.kpi-row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.kpi{border-radius:7px;padding:7px 12px;text-align:center;min-width:70px}
+.kpi-val{font-family:'DM Mono',monospace;font-size:16px;font-weight:700;line-height:1.1}
+.kpi-lbl{font-size:10px;margin-top:2px;opacity:.75}
+
+/* 對比條 */
+.vs-row{display:flex;align-items:stretch;gap:4px;margin:8px 0}
+.vs-box{flex:1;border-radius:7px;padding:9px 11px}
+.vs-title{font-size:12px;font-weight:700;margin-bottom:4px}
+.vs-body{font-size:12px;line-height:1.65}
+.vs-mid{display:flex;align-items:center;padding:0 4px;font-family:'DM Mono',monospace;font-size:14px;color:rgba(255,255,255,.25);flex-shrink:0}
+
+/* 步驟 */
+.step-row{display:flex;flex-direction:column;gap:6px}
+.step{display:flex;gap:9px;align-items:flex-start}
+.step-n{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;min-width:22px;margin-top:2px}
+.step-body{font-size:12.5px;line-height:1.75;flex:1}
+
+/* 部門圓餅視覺 */
+.dept-bar{height:14px;border-radius:7px;overflow:hidden;display:flex;margin:5px 0}
+
+.page-footer{background:var(--night);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--ro5)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-g1"></div>
+  <div class="ph-g2"></div>
+  <div class="ph-eyebrow">0816 · Cavin · 財務策略深度對話 · 遠傳×台哥大法說會×董事會實務×AI創業×顧問三部曲</div>
+  <div class="ph-title"><em>「遠傳」賣現金流，<em2>「台哥大」賣EPS</em2>——<br>同一個市場，兩套截然不同的財務溝通哲學：說誰的故事，決定誰贏董事會</div>
+  <div class="ph-sub">EBITDA快速現金流指標 × Net Debt/EBITDA 0.83 × ARPU 733元業界居冠 × Momo被酷澎狙擊 × 合併報表操縱（遠通電收+50億）× 精誠資訊M&A × AI照片檢索創業 × 顧問三部曲</div>
+  <div class="ph-meta">
+    <span class="mc">2026.08.16</span>
+    <span class="mc">Cavin</span>
+    <span class="mc">遠傳×台哥大</span>
+    <span class="mc mc-b">法說會×董事會</span>
+    <span class="mc mc-g">EBITDA×FCF×ARPU</span>
+    <span class="mc mc-a">M&A×AI創業</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 金句 -->
+  <div class="quote">
+    <div class="qm">"</div>
+    <div class="qt">「<em>簡報必須有想溝通的重點</em>——不是給董事會看數字，是告訴他們「我們贏在哪裡」。<br>遠傳贏在現金流，就用EBITDA說話；台哥大贏在EPS，就拿EPS開門。<br>財務主管的核心能力，是知道<em2>哪個數字放第一行，哪個數字深埋在第八頁後面</em2>。」</div>
+    <div class="qs">Rock 老師 · 蕭啟漢 · Cavin 0816 · 遠傳×台哥大法說會深度解構×商業對話實務×EBITDA×ARPU×M&A×AI創業</div>
+  </div>
+
+  <!-- SECTION 0: 董事會實務 -->
+  <div class="section">
+    <div class="section-label">Part 0 · 董事會實務×商業對話 · 接班訊號×會前會×觀仿創×AI時代溝通主導權</div>
+    <div class="section-title">董事會上的財務對話，是最真實的「商業能力考場」</div>
+    <div class="grid-3">
+      <div class="card-ro">
+        <h3>🏛️ 董事會結構與會前會實務</h3>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:8px">
+          <div style="background:rgba(159,18,57,.08);border-radius:6px;padding:7px 10px">
+            <div style="font-size:12px;font-weight:700;color:var(--ro4);margin-bottom:2px">一般董事</div>
+            <div style="font-size:12px;color:var(--ro);line-height:1.65">主要出資者或利害關係人，以股東利益為優先。</div>
+          </div>
+          <div style="background:rgba(159,18,57,.1);border-radius:6px;padding:7px 10px">
+            <div style="font-size:12px;font-weight:700;color:var(--ro4);margin-bottom:2px">獨立董事（獨董）</div>
+            <div style="font-size:12px;color:var(--ro);line-height:1.65">不直接投資，代表外部利害關係人，職責是「客觀監督」經營團隊。</div>
+          </div>
+          <div style="background:rgba(159,18,57,.12);border-radius:6px;padding:7px 10px;border-left:3px solid var(--ro4)">
+            <div style="font-size:12px;font-weight:700;color:var(--ro4);margin-bottom:2px">⚠️ 會前會的真實功能</div>
+            <div style="font-size:12px;color:var(--ro);line-height:1.65">表面是「非正式聊天」，實質是核心階層協調利益、確認數字、定調報告方向的關鍵場合。</div>
+          </div>
+        </div>
+        <div style="background:rgba(159,18,57,.07);border-radius:6px;padding:7px 10px;font-size:12px;color:var(--ro);line-height:1.75">
+          📅 8/15「鐵條申報」：上市櫃公司半年報（Q2，1-6月）法規最後期限，公開資訊觀測站全數上傳，今日剛好是遠傳與台哥大同步發布之日。
+        </div>
+      </div>
+
+      <div class="card-dark">
+        <h3>⚡ 老師的接班訊號：現場臨時考</h3>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <div style="background:rgba(244,63,94,.12);border-radius:6px;padding:8px 11px">
+            <div style="font-size:12px;font-weight:700;color:var(--ro5);margin-bottom:2px">會前會突然被介紹</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.65">董事長無預警向全體董事介紹：「這是我們新來的副財務長」，並隱含接班訊號。</div>
+          </div>
+          <div style="background:rgba(244,63,94,.15);border-radius:6px;padding:8px 11px;border:1px solid rgba(244,63,94,.25)">
+            <div style="font-size:12px;font-weight:700;color:var(--ro5);margin-bottom:2px">董事長臨時抽考</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.65">未投影的情況下突然問：「我們要怎麼開始？」→ 老師全套簡報早已備妥，以專業財務表達力順利過關。</div>
+          </div>
+          <div style="background:rgba(56,189,248,.1);border-radius:6px;padding:8px 11px">
+            <div style="font-size:12px;font-weight:700;color:var(--bl5);margin-bottom:2px">二維表達獲獨董認可</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.65">老師將台哥大「部門別收入×獲利貢獻」二維表邏輯複製應用在自家董事會，獲全體獨董一致認可。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-am">
+        <h3>🎨 觀、仿、創與AI時代溝通</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:8px">
+          <div style="background:rgba(146,64,14,.1);border-radius:6px;padding:6px 9px;text-align:center">
+            <div style="font-size:15px;font-weight:900;color:var(--am4);font-family:'Playfair Display',serif">觀</div>
+            <div style="font-size:11px;color:var(--am);line-height:1.5">觀察優秀公司法說會的表達方式</div>
+          </div>
+          <div style="background:rgba(146,64,14,.12);border-radius:6px;padding:6px 9px;text-align:center">
+            <div style="font-size:15px;font-weight:900;color:var(--am4);font-family:'Playfair Display',serif">仿</div>
+            <div style="font-size:11px;color:var(--am);line-height:1.5">模仿經典數據表達結構</div>
+          </div>
+          <div style="background:rgba(146,64,14,.15);border-radius:6px;padding:6px 9px;text-align:center">
+            <div style="font-size:15px;font-weight:900;color:var(--am4);font-family:'Playfair Display',serif">創</div>
+            <div style="font-size:11px;color:var(--am);line-height:1.5">融入自己業務的創新詮釋</div>
+          </div>
+        </div>
+        <div style="background:rgba(146,64,14,.08);border-radius:6px;padding:8px 11px;font-size:12.5px;color:var(--am);line-height:1.75">
+          AI 時代：圖表可以 AI 秒生成，但<strong>「要講什麼、故事怎麼說、重點怎麼控」的主導權，永遠在人腦裡</strong>——這正是財務人員不可被替代的核心價值。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: 遠傳 -->
+  <div class="section">
+    <div class="section-label">Part 1 · 遠傳電信（FarEasTone）· 現金流導向溝通策略 · EBITDA×FCF×ARPU×合併報表操縱</div>
+    <div class="section-title">遠傳的核心命題：「我不是最賺錢的，但我是最穩定的現金機器」</div>
+    <div class="grid-32">
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <div class="card-ro">
+          <h3>📊 財務簡報佈局的策略邏輯</h3>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:8px">
+            <div style="display:flex;align-items:center;gap:8px;background:rgba(159,18,57,.1);border-radius:6px;padding:6px 10px">
+              <span style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;color:var(--ro4);min-width:36px">第1行</span>
+              <span style="font-size:12px;color:var(--ro)">營收（Revenue）</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;background:rgba(159,18,57,.15);border-radius:6px;padding:6px 10px;border:1px solid var(--ro3)">
+              <span style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;color:var(--ro4);min-width:36px">第2行</span>
+              <span style="font-size:12px;color:var(--ro)"><strong>EBITDA</strong>（刻意排在EPS與營業利益之前！）</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;background:rgba(159,18,57,.08);border-radius:6px;padding:6px 10px">
+              <span style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;color:var(--ro4);min-width:36px">第3行</span>
+              <span style="font-size:12px;color:var(--ro)">營業利益、稅後淨利、EPS</span>
+            </div>
+          </div>
+          <div style="font-size:12px;font-weight:700;color:var(--ro4);margin-bottom:3px">為什麼EBITDA放第二行？</div>
+          <div style="font-size:12.5px;color:var(--ro);line-height:1.75">法說會時間緊湊，現金流量表太複雜冗長。EBITDA = 營業利益 + 折舊攤銷，能發揮「快速版營業活動現金流指標」的作用。折舊雖然是費用，<strong>但不需要實際支付現金</strong>，加回後的EBITDA才是公司真正賺回口袋的現金。</div>
+        </div>
+
+        <div class="card-ro">
+          <h3>💧 淨負債倍數與自由現金流：財務健全度展示</h3>
+          <div class="kpi-row">
+            <div class="kpi" style="background:rgba(159,18,57,.1)">
+              <div class="kpi-val" style="color:var(--ro4)">0.83x</div>
+              <div class="kpi-lbl" style="color:var(--ro)">淨負債/EBITDA<br>2026 Q2</div>
+            </div>
+            <div class="kpi" style="background:rgba(34,197,94,.12)">
+              <div class="kpi-val" style="color:var(--gr4)">健全</div>
+              <div class="kpi-lbl" style="color:var(--gr)">不到1個半年<br>即可清償所有債務</div>
+            </div>
+          </div>
+          <div style="background:rgba(159,18,57,.08);border-radius:7px;padding:9px 11px;margin-top:6px">
+            <div style="font-size:12px;font-weight:700;color:var(--ro4);margin-bottom:3px">淨負債（Net Debt）定義</div>
+            <div style="font-size:12.5px;color:var(--ro);line-height:1.75">總借款（含使用權資產+租賃負債）<strong>減去</strong>現金及約當現金。這個倍數愈低，代表清債速度愈快，財務結構愈健全。</div>
+          </div>
+          <div style="background:rgba(159,18,57,.07);border-radius:7px;padding:8px 11px;margin-top:6px">
+            <div style="font-size:12px;font-weight:700;color:var(--ro4);margin-bottom:2px">自由現金流（FCF）= 現金牛的勳章</div>
+            <div style="font-size:12.5px;color:var(--ro);line-height:1.75">FCF = 營業活動現金流 − CapEx。遠傳拉出長達6年（2021-2026）的FCF逐年攀升數據，證明即便持續大量資本支出建設基地台，口袋裡依然留得住自由現金。</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <div class="card-dark">
+          <h3>📡 合併報表操縱：遠通電收+50億的精算</h3>
+          <div style="background:rgba(244,63,94,.1);border-radius:6px;padding:9px 12px;margin-bottom:8px">
+            <div style="font-size:12px;font-weight:700;color:var(--ro5);margin-bottom:3px">原本：兄弟公司，不用合併</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.65">遠傳與遠通電收原屬同集團兄弟公司，無須編入合併報表。</div>
+          </div>
+          <div style="background:rgba(244,63,94,.15);border-radius:6px;padding:9px 12px;margin-bottom:8px;border:1px solid rgba(244,63,94,.3)">
+            <div style="font-size:12px;font-weight:700;color:var(--ro5);margin-bottom:3px">操作：調整董事會席位→取得控制權</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.65">去年Q4透過調整董事席位，取得對遠通電收的「實質控制權」，正式成為子公司，全額納入合併報表。</div>
+          </div>
+          <div style="background:rgba(56,189,248,.1);border-radius:6px;padding:9px 12px;border:1px solid rgba(56,189,248,.2)">
+            <div style="font-size:12px;font-weight:700;color:var(--bl5);margin-bottom:3px">精算動機：泰國高速公路專案</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.65">遠通電收承接泰國4-5條高速公路建設，2026年為認列高峰。泰國專案貢獻<strong style="color:var(--bl5)">10億+</strong>，合計為遠傳集團灌入<strong style="color:#fff">約50億</strong>合併營收，為當期成長添加強大動能。</div>
+          </div>
+        </div>
+
+        <div class="card-ro">
+          <h3>📱 ARPU 733元居冠 + 流失率新低：揚長避短的溝通藝術</h3>
+          <div class="kpi-row">
+            <div class="kpi" style="background:rgba(159,18,57,.12);border:1.5px solid var(--ro3)">
+              <div class="kpi-val" style="color:var(--ro4)">733元</div>
+              <div class="kpi-lbl" style="color:var(--ro)">ARPU<br>電信三雄第一</div>
+            </div>
+            <div class="kpi" style="background:rgba(159,18,57,.1)">
+              <div class="kpi-val" style="color:var(--ro4)">0.7%</div>
+              <div class="kpi-lbl" style="color:var(--ro)">月型流失率<br>歷史新低</div>
+            </div>
+          </div>
+          <ul style="margin-top:7px">
+            <li>ARPU提升靠<strong>交叉銷售</strong>（來電答鈴、影音加值套餐），拉高每位用戶的平均貢獻</li>
+            <li>流失率防禦策略：在老客戶合約到期時，直接提供<strong>等同於攜碼跳槽的優惠+APP便捷體驗</strong>，鎖住老客戶</li>
+            <li>用戶總數並非第一（中華電信第一）→ 策略性<strong>「不提用戶總數」，改主打流失率最低×ARPU最高</strong></li>
+          </ul>
+          <div style="background:rgba(159,18,57,.07);border-radius:6px;padding:7px 10px;margin-top:6px;font-size:12px;color:var(--ro)">
+            📅 遠傳：8月15日同步公告財測達成率，向股東證明「說到做到」的誠信。對準預算是其財務體系的核心天條。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: 台哥大 -->
+  <div class="section">
+    <div class="section-label-b">Part 2 · 台灣大哥大（Taiwan Mobile）· 獲利×EPS×M&A導向策略 · Momo×酷澎×精誠資訊</div>
+    <div class="section-title-b">台哥大的核心命題：「我的EPS業界最高，稅後淨利創20年新高」</div>
+    <div class="grid-23">
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <div class="card-bl">
+          <h3>📊 部門別：收入×獲利二維分析（Rock老師最推崇的表達）</h3>
+          <div style="font-size:12px;font-weight:700;color:var(--bl4);margin-bottom:5px">誰貢獻「收入」？</div>
+          <div class="dept-bar" style="margin-bottom:8px">
+            <div style="width:55%;background:var(--bl5);border-radius:7px 0 0 7px;display:flex;align-items:center;justify-content:center">
+              <span style="font-size:10.5px;font-weight:700;color:#fff">Momo 55%</span>
+            </div>
+            <div style="flex:1;background:rgba(37,99,235,.25);border-radius:0 7px 7px 0;display:flex;align-items:center;justify-content:center">
+              <span style="font-size:10.5px;font-weight:700;color:var(--bl4)">電信 45%</span>
+            </div>
+          </div>
+          <div style="font-size:12px;font-weight:700;color:var(--bl4);margin-bottom:5px">誰貢獻「獲利（EBITDA）」？</div>
+          <div class="dept-bar">
+            <div style="width:23%;background:rgba(56,189,248,.5);border-radius:7px 0 0 7px;display:flex;align-items:center;justify-content:center">
+              <span style="font-size:10px;font-weight:700;color:var(--bl)">Momo 23%</span>
+            </div>
+            <div style="width:77%;background:var(--bl4);border-radius:0 7px 7px 0;display:flex;align-items:center;justify-content:center">
+              <span style="font-size:10.5px;font-weight:700;color:#fff">電信本業 77%</span>
+            </div>
+          </div>
+          <div style="background:rgba(30,58,138,.08);border-radius:7px;padding:9px 11px;margin-top:8px;font-size:12.5px;color:var(--bl);line-height:1.75">
+            ⭐ 核心洞見：Momo走「薄利多銷（賣得快）」，電信走「高毛利穩定現金流（賣得貴）」。<strong>Momo的營收貢獻是裝飾，電信本業才是真正的經濟命脈。</strong>
+          </div>
+        </div>
+
+        <div class="card-bl">
+          <h3>📈 營收+4% vs 營業利益+25%：費用控管的精準執行</h3>
+          <div class="kpi-row">
+            <div class="kpi" style="background:rgba(30,58,138,.08)">
+              <div class="kpi-val" style="color:var(--bl4)">+4%</div>
+              <div class="kpi-lbl" style="color:var(--bl)">總收入YoY<br>2026 H1</div>
+            </div>
+            <div class="kpi" style="background:rgba(30,58,138,.12);border:1.5px solid var(--bl3)">
+              <div class="kpi-val" style="color:var(--bl4)">+25%</div>
+              <div class="kpi-lbl" style="color:var(--bl)">營業利益YoY<br>「矛盾」的背後</div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:7px">
+            <div style="background:rgba(30,58,138,.08);border-radius:6px;padding:7px 10px">
+              <div style="font-size:12px;font-weight:700;color:var(--bl4);margin-bottom:2px">① 行銷補貼費用大減</div>
+              <div style="font-size:12px;color:var(--bl);line-height:1.65">聚焦守住優質舊客戶，不再大量補貼搶新客，費用大幅下降。</div>
+            </div>
+            <div style="background:rgba(30,58,138,.1);border-radius:6px;padding:7px 10px">
+              <div style="font-size:12px;font-weight:700;color:var(--bl4);margin-bottom:2px">② 5G折舊費用陸續到期</div>
+              <div style="font-size:12px;color:var(--bl);line-height:1.65">過去5G資本支出折舊年限屆滿，當期折舊費用銳減，直接轉化為獲利。</div>
+            </div>
+          </div>
+          <div style="font-size:12px;color:var(--bl4);margin-top:6px;padding:6px 10px;background:rgba(30,58,138,.06);border-radius:6px">兩大因素都屬於「年底就能精確預判並強力執行」的人為可控範疇——這才是高超財務策略的本質。</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <div class="card-dark">
+          <h3>🛒 Momo vs 酷澎：龍頭地位被動搖</h3>
+          <div style="background:rgba(56,189,248,.08);border-radius:6px;padding:8px 11px;margin-bottom:7px">
+            <div style="font-size:12px;font-weight:700;color:var(--bl5);margin-bottom:2px">過去：Momo完全壓制PChome</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.65">台灣電商界的絕對龍頭，將PChome打得毫無招架之力。</div>
+          </div>
+          <div style="background:rgba(244,63,94,.12);border-radius:6px;padding:8px 11px;margin-bottom:7px;border:1px solid rgba(244,63,94,.25)">
+            <div style="font-size:12px;font-weight:700;color:var(--ro5);margin-bottom:2px">近三年：南韓酷澎強勢登台</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.65">Coupang憑藉雄厚資金與物流效率，對Momo造成根本性威脅。Rock老師一位香港CFO朋友約三年前被挖角至台灣酷澎擔任財務主管。</div>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:6px;padding:8px 11px">
+            <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.7);margin-bottom:2px">後果：Momo移到第8頁以後</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.65">Momo高速增長曲線顯著趨緩甚至下滑，台哥大在簡報中刻意降低其曝光度。<strong style="color:#fff">4G→5G升級月租費增幅+46%</strong>、流失率僅0.5%反而成為主打亮點。</div>
+          </div>
+        </div>
+
+        <div class="card-bl">
+          <h3>⚠️ 台哥大三大「隱藏財務隱憂」</h3>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="background:rgba(225,29,72,.08);border-radius:6px;padding:8px 11px;border-left:3px solid var(--ro4)">
+              <div style="font-size:12px;font-weight:700;color:var(--ro4);margin-bottom:2px">① 迴避EBITDA</div>
+              <div style="font-size:12.5px;color:var(--bl);line-height:1.65">Momo低利潤拉低整體折舊前利潤率，刻意不主打EBITDA指標。</div>
+            </div>
+            <div style="background:rgba(225,29,72,.08);border-radius:6px;padding:8px 11px;border-left:3px solid var(--ro4)">
+              <div style="font-size:12px;font-weight:700;color:var(--ro4);margin-bottom:2px">② 流動比率偏低</div>
+              <div style="font-size:12.5px;color:var(--bl);line-height:1.65">短期可變現資產不足以輕鬆償還短期負債，流動性承壓。</div>
+            </div>
+            <div style="background:rgba(225,29,72,.1);border-radius:6px;padding:8px 11px;border-left:3px solid var(--ro4)">
+              <div style="font-size:12px;font-weight:700;color:var(--ro4);margin-bottom:2px">③ 淨負債/EBITDA惡化（深埋後頁）</div>
+              <div style="font-size:12.5px;color:var(--bl);line-height:1.65">vs 遠傳0.83，台哥大此倍數呈惡化趨勢，清債速度趨緩，刻意藏於後頁。根本原因：兩大M&A耗盡流動資金。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-vi">
+          <h3>🏢 M&A戰略：精誠資訊收購震撼業界</h3>
+          <div style="font-size:12px;color:var(--vi);line-height:1.75;margin-bottom:7px">台哥大總經理（40-50歲）奉行「以買代建」M&A思維，近年兩大關鍵並購：</div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="background:rgba(124,58,237,.1);border-radius:6px;padding:7px 10px">
+              <div style="font-size:12px;font-weight:700;color:var(--vi4)">① 前兩年：合併亞太電信</div>
+              <div style="font-size:12px;color:var(--vi)">擴大用戶基礎與頻譜資源。</div>
+            </div>
+            <div style="background:rgba(124,58,237,.14);border-radius:6px;padding:7px 10px;border:1px solid var(--vi3)">
+              <div style="font-size:12px;font-weight:700;color:var(--vi4)">② 2026年：收購精誠資訊（京城）</div>
+              <div style="font-size:12px;color:var(--vi)">系統集成+ERP+電子發票龍頭。H1營收273億，年營收約500億元，體量達台哥大的1/4。這正是造成流動比率偏低的主因。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: 對比 + AI創業 + 顧問三部曲 -->
+  <div class="section">
+    <div class="section-label">Part 3 · 雙雄對比×AI照片檢索創業×顧問三部曲 · HYROX 88分鐘完賽</div>
+    <div class="section-title">兩套財務哲學的本質差異，以及AI時代的商業應用啟示</div>
+    <div class="grid-3">
+
+      <!-- 雙雄對比 -->
+      <div class="card-dark">
+        <h3>⚔️ 遠傳 vs 台哥大：核心指標對決</h3>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div class="vs-row">
+            <div class="vs-box" style="background:rgba(244,63,94,.15)">
+              <div class="vs-title" style="color:var(--ro5)">遠傳</div>
+              <div class="vs-body" style="color:rgba(255,255,255,.8)">EBITDA放第2行<br>預算達成率主打</div>
+            </div>
+            <div class="vs-mid">vs</div>
+            <div class="vs-box" style="background:rgba(56,189,248,.12)">
+              <div class="vs-title" style="color:var(--bl5)">台哥大</div>
+              <div class="vs-body" style="color:rgba(255,255,255,.8)">EPS居冠<br>20年淨利新高</div>
+            </div>
+          </div>
+          <div class="vs-row">
+            <div class="vs-box" style="background:rgba(244,63,94,.12)">
+              <div class="vs-title" style="color:var(--ro5)">ARPU 733元 ①</div>
+              <div class="vs-body" style="color:rgba(255,255,255,.8)">電信三雄最高</div>
+            </div>
+            <div class="vs-mid">vs</div>
+            <div class="vs-box" style="background:rgba(56,189,248,.1)">
+              <div class="vs-title" style="color:var(--bl5)">4G→5G+46%</div>
+              <div class="vs-body" style="color:rgba(255,255,255,.8)">升級月租費增幅第一</div>
+            </div>
+          </div>
+          <div class="vs-row">
+            <div class="vs-box" style="background:rgba(244,63,94,.12)">
+              <div class="vs-title" style="color:var(--ro5)">流失率 0.7%</div>
+              <div class="vs-body" style="color:rgba(255,255,255,.8)">歷史新低</div>
+            </div>
+            <div class="vs-mid">vs</div>
+            <div class="vs-box" style="background:rgba(56,189,248,.12)">
+              <div class="vs-title" style="color:var(--bl5)">流失率 0.5% ①</div>
+              <div class="vs-body" style="color:rgba(255,255,255,.8)">甚至更低</div>
+            </div>
+          </div>
+          <div class="vs-row">
+            <div class="vs-box" style="background:rgba(34,197,94,.12)">
+              <div class="vs-title" style="color:var(--gr5)">淨負債 0.83x ①</div>
+              <div class="vs-body" style="color:rgba(255,255,255,.8)">財務結構最優</div>
+            </div>
+            <div class="vs-mid">vs</div>
+            <div class="vs-box" style="background:rgba(225,29,72,.12)">
+              <div class="vs-title" style="color:#fb7185">淨負債惡化 ⚠️</div>
+              <div class="vs-body" style="color:rgba(255,255,255,.8)">M&A代價顯現</div>
+            </div>
+          </div>
+        </div>
+        <div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:7px;font-family:'DM Mono',monospace">① 表示該項指標勝出方</div>
+      </div>
+
+      <!-- AI創業 + HYROX -->
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <div class="card-am">
+          <h3>🏃 HYROX 88分鐘完賽 → AI創業靈感</h3>
+          <div style="background:rgba(146,64,14,.1);border-radius:7px;padding:9px 11px;margin-bottom:8px">
+            <div style="font-size:12px;font-weight:700;color:var(--am4);margin-bottom:3px">完賽實錄</div>
+            <div style="font-size:12.5px;color:var(--am);line-height:1.75">第六、七圈搭檔抽筋，最後三關幾乎全由老師獨自承擔，最終以<strong>88分鐘</strong>在90分鐘門檻內完賽。10月將帶夥伴參加台灣HCO精簡版（跑步400m替代1km）。</div>
+          </div>
+          <div style="font-size:12px;font-weight:700;color:var(--am4);margin-bottom:4px">📸 HYROX AI照片檢索系統</div>
+          <div style="background:rgba(146,64,14,.08);border-radius:6px;padding:8px 11px;font-size:12.5px;color:var(--am);line-height:1.75">
+            現場自拍上傳 → AI臉孔識別 → 36-40張清晰賽事照片秒速篩選供下載。<strong>商業邏輯：HYROX參賽者有強烈「社群分享衝動」</strong>，AI照片系統精準滿足「想告訴大家我做到了」的痛點，具極高變現價值。
+          </div>
+        </div>
+
+        <div class="card-gr">
+          <h3>🌺 延伸創業構想：圓山花博夜派對</h3>
+          <div style="font-size:12.5px;color:var(--gr);line-height:1.75;margin-bottom:6px">圓山花博：白天親子遊（捷運紅線+遙控電動車），夜晚變身電音Party狂歡場所。</div>
+          <div style="background:rgba(22,163,74,.1);border-radius:6px;padding:8px 11px;font-size:12.5px;color:var(--gr);line-height:1.75">
+            創業模式：攝影師現場隨機捕捉精采瞬間 → 參與者宿醉後上傳自拍 → AI快速比對 → <strong>付費下載自己的派對照片用於社群分享</strong>。從需求出發，商業閉環清晰。
+          </div>
+        </div>
+      </div>
+
+      <!-- 顧問三部曲 -->
+      <div class="card-sl">
+        <h3>🗺️ 多公司財務顧問三部曲</h3>
+        <div style="font-size:12px;color:var(--sl4);margin-bottom:8px">Cavin旗下約4家公司，各由不同會計負責。整合培訓提案：</div>
+        <div class="step-row">
+          <div class="step">
+            <span class="step-n" style="color:var(--sl4)">①</span>
+            <div class="step-body" style="color:var(--sl)">
+              <strong>理解行業別與日常帳目</strong><br>調閱各公司實際帳務（花博等據點營收報表），先理解Business Model，分析會計每月/季實際deliver的報表內容。
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-n" style="color:var(--sl4)">②</span>
+            <div class="step-body" style="color:var(--sl)">
+              <strong>明確期待與產出目標</strong><br>釐清Cavin希望達到的管理深度——是日常帳目更清晰，還是能產出具備商業對談價值的財務簡報？
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-n" style="color:var(--sl4)">③</span>
+            <div class="step-body" style="color:var(--sl)">
+              <strong>運用AI工具橋接整理</strong><br>評估如何利用AI幫助會計人員簡化手動過帳，將雜亂日常資料自動橋接至符合商業思維的高階財務決策報表。
+            </div>
+          </div>
+        </div>
+        <div style="background:rgba(30,41,59,.08);border-radius:7px;padding:9px 11px;margin-top:9px">
+          <div style="font-size:12px;font-weight:700;color:var(--sl);margin-bottom:3px">🏆 Cavin的商業思維蛻變</div>
+          <div style="font-size:12.5px;color:var(--sl4);line-height:1.75">老師突然拋出財務提問（Momo vs電信獲利結構、台哥大營業利益暴增主因），Cavin皆能<strong>迅速精準地回答核心邏輯</strong>。雙方已從「師生授課」進化為「高水平商業策略對話」的層次。</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 老師 · 蕭啟漢 · Cavin 學員 · 0816</div>
+  <div class="ft-note">遠傳×台哥大法說會深度解構 × EBITDA×Net Debt/EBITDA×FCF×ARPU × 合併報表操縱+50億 × Momo被酷澎狙擊 × 精誠資訊M&A × AI照片創業 × 顧問三部曲</div>
+</div>
+
+</body>
+</html>
