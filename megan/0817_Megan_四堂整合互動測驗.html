@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>從看懂報表到用規則創造價值 — 四堂整合測驗 · Megan</title>
+<style>
+  :root{
+    --bg:#0f1115;
+    --card:#171a21;
+    --card2:#1e222b;
+    --line:#262b35;
+    --accent:#ff8a3d;
+    --accent2:#4fd1c5;
+    --blue:#7dd3fc;
+    --pink:#f9a8d4;
+    --purple:#a78bfa;
+    --good:#4ade80;
+    --bad:#f87171;
+    --text:#e8eaed;
+    --sub:#9aa1ab;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:radial-gradient(circle at 20% -10%, #26314a 0%, var(--bg) 45%);
+    color:var(--text);
+    padding:24px 16px 60px;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{margin-bottom:22px;}
+  .tag{
+    display:inline-block;font-size:12px;letter-spacing:1px;color:var(--accent);
+    background:rgba(255,138,61,.12);border:1px solid rgba(255,138,61,.35);
+    padding:4px 10px;border-radius:999px;margin-bottom:12px;
+  }
+  h1{font-size:25px;line-height:1.45;margin:0 0 8px;}
+  .desc{color:var(--sub);font-size:14px;margin:0;line-height:1.75;}
+  .meta{color:var(--sub);font-size:12px;margin-top:10px;line-height:1.7;}
+
+  .progress-bar{height:6px;background:var(--line);border-radius:999px;overflow:hidden;margin:20px 0 10px;}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%;transition:width .4s ease;}
+  .progress-text{text-align:right;font-size:11.5px;color:var(--sub);margin-bottom:22px;}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 20px;margin-bottom:18px;display:none;}
+  .card.active{display:block;}
+  .topline{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+  .qnum{font-size:12px;color:var(--sub);font-weight:700;letter-spacing:1px;}
+  .badges{display:flex;gap:6px;}
+  .sec{font-size:11px;padding:2px 9px;border-radius:999px;font-weight:600;}
+  .sec.s0413{color:var(--blue);border:1px solid rgba(125,211,252,.4);background:rgba(125,211,252,.1);}
+  .sec.s0511{color:var(--accent2);border:1px solid rgba(79,209,197,.4);background:rgba(79,209,197,.1);}
+  .sec.s0608{color:var(--accent);border:1px solid rgba(255,138,61,.4);background:rgba(255,138,61,.1);}
+  .sec.s0720{color:var(--pink);border:1px solid rgba(249,168,212,.4);background:rgba(249,168,212,.1);}
+  .sec.sMix{color:var(--purple);border:1px solid rgba(167,139,250,.4);background:rgba(167,139,250,.1);}
+  .level{font-size:11px;color:var(--sub);border:1px solid #333a46;padding:2px 9px;border-radius:999px;}
+
+  .qtext{font-size:17px;line-height:1.65;margin:0 0 14px;font-weight:600;}
+  .databox{
+    background:#12151b;border:1px solid var(--line);border-radius:10px;
+    padding:12px 14px;margin-bottom:16px;font-size:13px;line-height:2;color:#c3c9d1;
+    font-variant-numeric:tabular-nums;
+  }
+  .databox b{color:var(--accent);}
+
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt{
+    text-align:left;background:var(--card2);border:1px solid #2c313c;color:var(--text);
+    padding:13px 16px;border-radius:10px;font-size:14.5px;cursor:pointer;transition:all .15s ease;line-height:1.55;
+  }
+  .opt:hover{border-color:var(--accent2);}
+  .opt.correct{background:rgba(74,222,128,.14);border-color:var(--good);color:#c6f6d5;}
+  .opt.wrong{background:rgba(248,113,113,.14);border-color:var(--bad);color:#fecaca;}
+  .opt.disabled{cursor:default;pointer-events:none;opacity:.78;}
+
+  .explain{
+    margin-top:16px;padding:14px 16px;background:#12151b;border-left:3px solid var(--accent2);
+    border-radius:8px;font-size:13.5px;line-height:1.95;color:#d4d8dd;display:none;
+  }
+  .explain.show{display:block;}
+  .explain .key{color:var(--accent);font-weight:700;}
+  .explain .trap{color:var(--bad);font-weight:700;}
+
+  .nextBtn{
+    margin-top:18px;display:none;background:var(--accent);color:#1a1000;font-weight:700;
+    border:none;padding:11px 22px;border-radius:999px;font-size:14px;cursor:pointer;
+  }
+  .nextBtn.show{display:inline-block;}
+
+  .result{display:none;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:34px 22px;}
+  .result.show{display:block;}
+  .result .center{text-align:center;}
+  .result .score{font-size:46px;font-weight:800;margin:6px 0;color:var(--accent);}
+  .result .label{color:var(--sub);font-size:13px;}
+  .secscore{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:22px 0 4px;}
+  .secscore div{
+    background:#12151b;border:1px solid var(--line);border-radius:10px;
+    padding:10px 14px;font-size:12.5px;color:var(--sub);min-width:118px;text-align:center;
+  }
+  .secscore div b{display:block;font-size:19px;color:var(--text);margin-top:4px;font-variant-numeric:tabular-nums;}
+  .result .msg{margin:22px auto 0;max-width:580px;font-size:14.5px;line-height:1.9;color:#d4d8dd;text-align:left;}
+  .retryBtn{margin:24px auto 0;display:block;background:transparent;border:1px solid var(--accent2);color:var(--accent2);padding:9px 22px;border-radius:999px;cursor:pointer;font-size:13.5px;}
+
+  .quicktable{margin-top:40px;}
+  .quicktable h2{font-size:15px;color:var(--accent2);margin-bottom:12px;}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;background:var(--card);border-radius:12px;overflow:hidden;}
+  th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--sub);font-weight:600;}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent);}
+  tr:last-child td{border-bottom:none;}
+
+  .disclaimer{
+    margin-top:24px;padding:12px 14px;background:#12151b;border:1px solid var(--line);
+    border-radius:10px;font-size:12px;color:var(--sub);line-height:1.85;
+  }
+  footer{margin-top:22px;text-align:center;color:#5a606b;font-size:11.5px;line-height:2;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="tag">財務實戰 · 四堂課整合測驗</span>
+    <h1>從看懂報表，到用規則創造價值<br>25 題貫穿四堂課的實戰邏輯</h1>
+    <p class="desc">共 25 題單選，涵蓋 0413（通路業現金流照妖鏡）、0511（CVP 損益兩平 × AI 船長思維）、0608（財務儀表板 × 中小企業實戰）、0720（Claude 職場實戰 × 半自動化），最後 2 題為跨堂整合。答完顯示分區得分與錯題複習清單。</p>
+    <div class="meta">Rock 會計家教 · 蕭啟漢｜學生：Megan</div>
+  </header>
+
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-text" id="progressText">0 / 25</div>
+
+  <div id="quizArea"></div>
+
+  <div class="result" id="resultBox">
+    <div class="center">
+      <div class="label">測驗完成</div>
+      <div class="score" id="scoreText">0 / 25</div>
+      <div class="label" id="scoreSub"></div>
+    </div>
+    <div class="secscore" id="secScore"></div>
+    <div class="msg" id="resultMsg"></div>
+    <button class="retryBtn" onclick="restartQuiz()">重新測驗</button>
+  </div>
+
+  <div class="quicktable">
+    <h2>🧮 CVP 核心公式與課堂答案（測驗後複習用）</h2>
+    <table>
+      <tr><th>項目</th><th>公式 / 計算</th><th class="num">答案</th></tr>
+      <tr><td>單位邊際貢獻（輪胎）</td><td>1,500 − 800 − 200</td><td class="num">500 元</td></tr>
+      <tr><td>損益兩平數量</td><td>30,000 ÷ 500</td><td class="num">60 條</td></tr>
+      <tr><td>目標利潤 50,000</td><td>(30,000 + 50,000) ÷ 500</td><td class="num">160 條</td></tr>
+      <tr><td>單位邊際貢獻（美甲）</td><td>1,200 − 300 − 150</td><td class="num">750 元</td></tr>
+      <tr><td>美甲損益兩平</td><td>48,000 ÷ 750</td><td class="num">64 次</td></tr>
+      <tr><td>美甲目標利潤 30,000</td><td>78,000 ÷ 750</td><td class="num">104 次</td></tr>
+      <tr><td>成本漲 100、次數不變</td><td>(100 × 104) ÷ 104</td><td class="num">漲 100 元</td></tr>
+    </table>
+  </div>
+
+  <div class="quicktable">
+    <h2>📊 四堂課關鍵數字對照</h2>
+    <table>
+      <tr><th>案例</th><th>數字</th><th>意義</th></tr>
+      <tr><td>全家帳面營業現金流</td><td class="num">104 億</td><td>虛胖（含使用權資產折舊 65 億）</td></tr>
+      <tr><td>全家真實營業現金流</td><td class="num">51 億</td><td>22 億淨利 ＋ 29 億有形固定資產折舊</td></tr>
+      <tr><td>全家 113 年帳面 / 常態</td><td class="num">48 / 20 億</td><td>差額為中國投資處分一次性利得</td></tr>
+      <tr><td>實體通路推銷費用占比</td><td class="num">37%</td><td>點數回饋、促銷折扣＝搶市占的必要成本</td></tr>
+      <tr><td>遠通認列方式改變</td><td class="num">$6 → $100</td><td>承擔資金風險後改採總額認列</td></tr>
+      <tr><td>0720 財報視覺化警訊</td><td class="num">52% → 44%</td><td>營收 +30%、成本 +53%，真因是銷售組合改變</td></tr>
+    </table>
+  </div>
+
+  <div class="disclaimer">
+    ⚠ 免責聲明：本測驗內容取自課後複習教材，僅供教學與觀念練習之用，非投資買賣建議。個股數據請以公司正式公告之財務報告為準。
+  </div>
+
+  <footer>
+    Megan · 財務實戰四堂整合測驗<br>
+    教材來源：0413 全家 vs 7-11 現金流量表｜0511 損益兩平 × AI 船長思維｜0608 財務儀表板 × 中小企業實戰｜0720 Claude 職場實戰 × 半自動化
+  </footer>
+</div>
+
+<script>
+const questions = [
+  /* ===== 0413 通路業現金流 ===== */
+  {
+    sec:"0413", secCls:"s0413", level:"陷阱",
+    q:"全家稅前淨利 22 億，帳面營業現金流卻高達 104 億。為什麼說這個數字是「虛胖」？",
+    data:"稅前淨利 <b>+22 億</b><br>加回有形固定資產折舊 <b>+29 億</b><br>加回使用權資產折舊（租金） <b>+65 億</b><br>籌資活動：償還租約 <b>−66 億</b>",
+    options:[
+      "因為公司刻意灌水營業現金流，屬於財報造假",
+      "因為 IFRS 16 把租金拆成「使用權資產折舊」（加回營業活動）與「還租約本金」（列在籌資活動），兩者一正一負剛好相抵",
+      "因為折舊金額計算錯誤，應該重編報表",
+      "因為 104 億裡面包含了大量一次性收益"
+    ],
+    correct:1,
+    explain:"<span class='key'>IFRS 16 規定租賃店面的租金要拆成兩塊</span>：使用權資產折舊（加回營業現金流）＋ 還租約本金（列在籌資活動扣除）。<br>加回 65 億、又在籌資扣掉 66 億，<span class='key'>一正一負剛好相抵</span>——所以帳面的 104 億是虛報。<br>這對<span class='key'>門市全部靠租的通路業影響極大</span>，不理解這條就會嚴重高估公司的現金創造力。"
+  },
+  {
+    sec:"0413", secCls:"s0413", level:"計算",
+    q:"承上題，全家的「真實」營業現金流合理估算應為多少？",
+    data:"帳面 104 億 − 籌資償還租約 66 億 ≈ ?<br>或：稅前淨利 22 億 ＋ 有形固定資產折舊 29 億 ＝ ?",
+    options:["104 億","51 億","66 億","22 億"],
+    correct:1,
+    explain:"把租賃的一正一負抵銷後，真實值 ＝ <span class='key'>22 億（淨利）＋ 29 億（有形固定資產折舊）＝ 51 億</span>。<br>口訣：<span class='key'>有使用權資產的公司看現金流量表，要把營業活動加回的租金折舊，對應籌資活動扣掉的租約還款，兩個一起看才算數。</span>"
+  },
+  {
+    sec:"0413", secCls:"s0413", level:"判準",
+    q:"營業現金流大約是淨利的幾倍算合理？什麼情況要提高警覺？",
+    data:"全家真實值：51 億 ÷ 22 億 ≈ <b>2.3 倍</b>",
+    options:[
+      "5 倍以上才算健康，越高越好",
+      "約 2 倍屬於合理水位；出現 5 倍時要先找原因，通常是租賃或非現金項目造成的虛胖",
+      "1 倍以下才正常，超過就是異常",
+      "沒有參考倍數，只要是正數就好"
+    ],
+    correct:1,
+    explain:"<span class='key'>現金流 ≈ 淨利的 2 倍 → 正常；5 倍 → 先找原因</span>。<br>這是一個很實用的<span class='key'>快篩指標</span>：倍數異常高，通常代表報表裡塞了大量非現金項目（使用權資產折舊、重資產折舊），必須往下追是哪一項撐起來的。<span class='trap'>看到高倍數就直覺認定「現金超充沛」，是最常見的誤判。</span>"
+  },
+  {
+    sec:"0413", secCls:"s0413", level:"說故事",
+    q:"全家 113 年帳面淨利 48 億、114 年只有 22 億。這代表公司衰退了嗎？",
+    data:"113 年帳面 <b>48 億</b>（含中國投資處分一次性利得）<br>113 年常態 <b>20 億</b>（剔除一次性後）<br>114 年 <b>22 億</b>",
+    options:[
+      "是，淨利腰斬超過一半，明顯衰退",
+      "否，113 年含一次性處分利得；剔除後常態為 20 億，114 年的 22 億其實是約 10% 的實質成長",
+      "無法判斷，因為兩年的會計政策不同",
+      "是，但衰退是因為 IFRS 16 的影響"
+    ],
+    correct:1,
+    explain:"<span class='key'>比較前先問：有沒有一次性損益？</span> 113 年的 48 億含中國投資處分利得，屬於<span class='key'>一次性</span>；剔除後常態基準是 <span class='key'>20 億</span>。<br>拿 20 億對比 114 年的 22 億，<span class='key'>其實是實質成長約 10%</span>。<br>會計師報告也用同一套技巧——<span class='key'>別被帳面數字嚇到。</span>"
+  },
+  {
+    sec:"0413", secCls:"s0413", level:"觀念",
+    q:"下列哪一組項目全部屬於分析時應剔除的「一次性損益」？",
+    data:"剔除的目的：讓兩個年度回到<b>同一個比較基礎</b>",
+    options:[
+      "本業銷貨收入、門市租金、員工薪資",
+      "資產處分利益、投資收益、訴訟和解金、政府補貼",
+      "折舊費用、攤銷費用、利息費用",
+      "存貨跌價損失、應收帳款、營業稅"
+    ],
+    correct:1,
+    explain:"一次性損益的常見類型：<span class='key'>資產處分、投資收益、訴訟和解金、補貼</span>。<br>共同特徵是<span class='key'>不會年年重複發生、與本業核心營運能力無關</span>。<br>選項 C 的折舊攤銷雖然是非現金項目，但屬於<span class='key'>經常性費用</span>，不能當一次性剔除——這是很容易混淆的地方。"
+  },
+  {
+    sec:"0413", secCls:"s0413", level:"護城河",
+    q:"實體通路的三大護城河是物流、支付、App。關於全聯「全支付」每年仍虧 6 億，正確的解讀是？",
+    data:"每筆刷卡手續費 <b>1~2%</b>｜一年幾百億營收累積<br>實體通路推銷費用占營收 <b>37%</b>",
+    options:[
+      "支付業務不賺錢，應該盡快收掉止血",
+      "這是「買未來」的佈局投資——手續費內化後，幾百億營收的 1~2% 自己收比給銀行賺划算",
+      "虧損代表消費者不接受自建支付，策略失敗",
+      "支付與通路本業無關，屬於多角化失敗案例"
+    ],
+    correct:1,
+    explain:"三大護城河各有邏輯：<br><span class='key'>物流</span>——自有物流才能掌控補貨速度、省下外部手續費，還能替別人賺服務費（7-11 養黑貓、Coupang 進台灣第一步就是蓋倉）。<br><span class='key'>支付</span>——每筆手續費 1~2%，乘上幾百億營收就是可觀金額，<span class='key'>全支付現在虧 6 億是「買未來」的長期佈局</span>。<br><span class='key'>App</span>——讓消費可以在任何地方發生，不必非到店不可；<span class='key'>推銷費用高達營收 37%</span>（點數回饋、促銷折扣）正是搶市占的必要成本。"
+  },
+
+  /* ===== 0511 CVP × AI ===== */
+  {
+    sec:"0511", secCls:"s0511", level:"計算",
+    q:"機車行輪胎售價 1,500 元，料工成本 800 元、技師抽成 200 元。單位邊際貢獻是多少？",
+    data:"邊際貢獻 ＝ 售價 − 變動成本（料 ＋ 工 ＋ 抽成）",
+    options:["700 元","500 元","1,500 元","300 元"],
+    correct:1,
+    explain:"1,500 − 800 − 200 ＝ <span class='key'>500 元</span>。<br>關鍵在於<span class='key'>技師抽成也是變動成本</span>——它隨著每賣一條輪胎而發生，必須一起扣。<span class='trap'>只扣料工成本會算成 700 元</span>，後面的兩平點與目標銷量就全部偏掉。"
+  },
+  {
+    sec:"0511", secCls:"s0511", level:"計算",
+    q:"設備固定成本 30,000 元、單位邊際貢獻 500 元。損益兩平點是幾條？以每月 24 天工作制換算，每天要賣幾條？",
+    data:"損益兩平數量 ＝ 固定成本 ÷ 單位邊際貢獻",
+    options:["60 條；每天 2.5 條","20 條；每天約 0.8 條","160 條；每天約 6.7 條","30 條；每天 1.25 條"],
+    correct:0,
+    explain:"30,000 ÷ 500 ＝ <span class='key'>60 條</span>；60 ÷ 24 ＝ <span class='key'>每天 2.5 條</span>。<br>這個換算在跟老闆溝通時特別有用——<span class='key'>「60 條」是抽象的，「每天 2.5 條」才有體感</span>，老闆一聽就知道做不做得到。<br>用途延伸：<span class='key'>設備回本計算、月目標逆推日標</span>。"
+  },
+  {
+    sec:"0511", secCls:"s0511", level:"計算",
+    q:"承上，若老闆設定月目標利潤 50,000 元，每月需賣幾條輪胎？",
+    data:"目標銷售量 ＝（固定成本 ＋ 目標利潤）÷ 單位邊際貢獻",
+    options:["100 條","160 條","60 條","110 條"],
+    correct:1,
+    explain:"(30,000 ＋ 50,000) ÷ 500 ＝ <span class='key'>160 條</span>。<br>公式的邏輯是：<span class='key'>把目標利潤當成「另一筆必須先賺回來的固定成本」</span>，一起除以邊際貢獻。<br><span class='trap'>常見錯誤：只算 50,000 ÷ 500 ＝ 100 條</span>，忘了設備成本也要先賺回來。"
+  },
+  {
+    sec:"0511", secCls:"s0511", level:"應用",
+    q:"美甲工作室設備 48,000 元，服務售價 1,200 元、材料 300 元、助理抽成 150 元。損益兩平次數與達成月利潤 30,000 元所需次數分別是？",
+    data:"單位邊際貢獻 ＝ 1,200 − 300 − 150 ＝ ?",
+    options:[
+      "64 次；104 次",
+      "40 次；65 次",
+      "64 次；40 次",
+      "53 次；87 次"
+    ],
+    correct:0,
+    explain:"邊際貢獻 ＝ 1,200 − 300 − 150 ＝ <span class='key'>750 元/次</span><br>損益兩平 ＝ 48,000 ÷ 750 ＝ <span class='key'>64 次</span><br>目標銷售量 ＝ (48,000 ＋ 30,000) ÷ 750 ＝ 78,000 ÷ 750 ＝ <span class='key'>104 次</span><br>以每月 26 天工作制換算，<span class='key'>約 4 次/天</span>——這個數字才能讓老闆判斷產能夠不夠。"
+  },
+  {
+    sec:"0511", secCls:"s0511", level:"敏感性",
+    q:"承上，材料成本漲 100 元，工作室打算維持原服務次數 104 次不變。售價至少應調漲多少才能維持原目標利潤？",
+    data:"獲利缺口 ＝ 100 × 104 ＝ <b>10,400 元</b><br>若次數不變，缺口全由售價彌補",
+    options:["漲 50 元","漲 100 元","漲 150 元","漲 200 元"],
+    correct:1,
+    explain:"10,400 ÷ 104 ＝ <span class='key'>每次需漲 100 元</span>。<br>結論可以記成一句話：<span class='key'>成本漲多少，若銷量不變，售價就要漲等額金額</span>。<br>敏感性分析的價值在於<span class='key'>讓定價決策有數字依據，而不是憑感覺喊價</span>——也可以反過來算「若不漲價，要多賣幾條才能維持原利潤」。"
+  },
+  {
+    sec:"0511", secCls:"s0511", level:"陷阱",
+    q:"「邊際貢獻」與「毛利」有何差異？為什麼管理會計決策要用邊際貢獻？",
+    data:"毛利 ＝ 售價 − 銷貨成本（<b>含固定製造費用</b>）<br>邊際貢獻 ＝ 售價 − <b>全部變動成本</b>（含變動銷售費用）",
+    options:[
+      "兩者相同，只是名稱不同",
+      "毛利扣的是含固定製造費用的銷貨成本；邊際貢獻扣的是全部變動成本。管理會計用邊際貢獻，因為固定成本短期內不隨銷量變動",
+      "邊際貢獻一定小於毛利",
+      "毛利用於內部決策，邊際貢獻用於對外報表"
+    ],
+    correct:1,
+    explain:"<span class='key'>毛利含固定製造費用，邊際貢獻只扣變動成本</span>（而且包含變動銷售費用，例如技師抽成）。<br>管理會計用邊際貢獻做決策的理由很直接：<span class='key'>固定成本在短期內不會因為多賣一單位而改變</span>，所以判斷「要不要多接這筆生意」時，只需要看每多賣一單位能貢獻多少。<br><span class='trap'>把毛利當邊際貢獻套進 CVP 公式，兩平點就會全錯。</span>"
+  },
+  {
+    sec:"0511", secCls:"s0511", level:"AI",
+    q:"「船長思維」中，為什麼建議主動請 AI 扮演「最挑剔的客戶」來嗆你？",
+    data:"AI 是加速器——<b>方向錯了只會跑更遠</b>",
+    options:[
+      "為了測試 AI 的能力上限",
+      "因為 AI 擅長「補強」，預設會把你的想法圓滿化，這反而是盲點；讓它扮演挑剔者才能找出方向性錯誤",
+      "因為批評性的回答通常比較短，可以省 Token",
+      "因為 AI 的正面回答通常不準確"
+    ],
+    correct:1,
+    explain:"<span class='key'>AI 的預設行為是幫你把想法補圓滿</span>——這聽起來很好，但正是盲點所在：你的方向如果錯了，AI 會幫你把錯的方向講得更有說服力。<br>解法是<span class='key'>主動要求 AI 扮演「最挑剔的客戶」來嗆你</span>，逼它找漏洞。<br>核心是分工：<span class='key'>你是船長負責定方向，AI 是艦隊負責執行</span>。方向不對，跑得越快偏得越遠。"
+  },
+
+  /* ===== 0608 儀表板 × 中小企業 ===== */
+  {
+    sec:"0608", secCls:"s0608", level:"框架",
+    q:"財務知識的三個層次（L1/L2/L3）分別是什麼？",
+    data:"L1 → L2 → L3",
+    options:[
+      "L1 記帳、L2 報稅、L3 查帳",
+      "L1 看懂報表（記帳士能做到的事）、L2 用報表做決策（儀表板/瓶頸分析/預算規劃）、L3 用規則創造價值（總額認列/移轉訂價/財報策略）",
+      "L1 財務會計、L2 成本會計、L3 稅務會計",
+      "L1 資產負債表、L2 損益表、L3 現金流量表"
+    ],
+    correct:1,
+    explain:"三個層次是這堂課的主軸：<br><span class='key'>L1 看懂報表</span>——記帳士能做到的事，但他們只負責稅務申報（營業稅、營所稅）。<br><span class='key'>L2 用報表做決策</span>——儀表板、瓶頸分析、預算規劃，這是中小企業最缺的一塊。<br><span class='key'>L3 用規則創造價值</span>——總額認列、移轉訂價、財報策略。<br>中小企業老闆沒有 CFO，靠的是<span class='key'>街頭智慧＋前人經驗</span>，卡在 L1 上不去，這正是財務人員能創造價值的空間。"
+  },
+  {
+    sec:"0608", secCls:"s0608", level:"策略",
+    q:"機車行空間、機台、技師人數固定，每月最多服務客數有天花板。在這個前提下，「薄利多銷」為什麼是死路？",
+    data:"平價胎 <b>1,000 元 × 480 組</b><br>高價胎 <b>2,500 元 × 240 組</b>",
+    options:[
+      "因為平價胎的品質較差，會流失客人",
+      "因為產能有物理上限，客數無法無限增加；在同樣的天花板下，只能靠拉高高價商品比例才能達成獲利目標",
+      "因為薄利多銷需要更多行銷費用",
+      "因為平價胎的變動成本比較高"
+    ],
+    correct:1,
+    explain:"這是<span class='key'>瓶頸思維</span>的核心：<span class='key'>當產能有物理上限（空間、機台、技師人數），客數就有天花板</span>，再怎麼衝量也衝不過去。<br>此時唯一的解法是<span class='key'>拉高高毛利商品的比例，提高每一組客人的獲利絕對值</span>。<br><span class='trap'>「薄利多銷」的前提是產能可以無限擴張</span>——服務業幾乎不成立，這是老闆最常犯的直覺錯誤。"
+  },
+  {
+    sec:"0608", secCls:"s0608", level:"洞見",
+    q:"「漲價心魔」的需求彈性盲點指的是什麼？同樣漲 100 元，為何高端客與平價客反應差這麼多？",
+    data:"高端客（$2,500 輪胎）：漲 $100 ＝ <b>4%</b><br>平價客（$1,000 輪胎）：漲 $100 ＝ <b>10%</b>",
+    options:[
+      "高端客比較有錢，所以不在意任何漲價",
+      "同樣的絕對金額，對高單價商品是 4%（幾乎無感），對低單價商品是 10%（非常敏感）——所以漲價應從高端切入，並用精良設備與不刮傷輪框的服務合理化",
+      "平價客的忠誠度較低，容易流失",
+      "高端客購買頻率較高，可以攤平漲幅"
+    ],
+    correct:1,
+    explain:"關鍵是<span class='key'>「相同絕對金額，佔比完全不同」</span>：$100 對 $2,500 只有 4%，對 $1,000 卻是 10%。<br>所以<span class='key'>漲價應該從高端客群切入</span>，而且高端客期待的是體驗——<span class='key'>商務艙與 LV 都是「花錢買出來的體驗」</span>，機車行對應的就是精良設備與不刮傷輪框的服務。<br>延伸案例：<span class='key'>摩斯漢堡看似空間窄、上菜慢，但現金流異常充沛，甚至會「財報醜化」來節稅。</span>"
+  },
+  {
+    sec:"0608", secCls:"s0608", level:"實務",
+    q:"「以終為始」的採購邏輯，正確的順序是什麼？",
+    data:"存貨 ＝ <b>卡住的資金</b>，盲目囤貨會壓縮現金流",
+    options:[
+      "先看供應商報價 → 大量採購壓低單價 → 再想辦法賣掉",
+      "設定轉型方向 → 訂銷售預算 → 回推採購量",
+      "先採購 → 觀察銷售狀況 → 再調整下次採購",
+      "依照去年採購量 → 加上成長率 → 決定今年採購量"
+    ],
+    correct:1,
+    explain:"順序是<span class='key'>設定轉型方向 → 訂銷售預算 → 回推採購量</span>。<br>先決定未來一年高價胎與平價胎的比例，再精算需要採購多少，<span class='key'>不再只憑感覺或前人經驗</span>。<br>底層觀念是<span class='key'>存貨 ＝ 卡住的資金</span>——選項 A 的「大量採購壓低單價」看似省錢，實際上是把現金鎖進倉庫，這正是中小企業現金週轉卡住的常見主因。"
+  },
+  {
+    sec:"0608", secCls:"s0608", level:"L3",
+    q:"遠通 IPO 前把城市車旅導客的收入從淨額認列改為總額認列，營收從 3 千萬變破億。關鍵的正當性基礎是什麼？",
+    data:"原本：只賺導客利潤 <b>6%</b> → 認列 <b>$6</b><br>調整後：遠通<b>預付停車費、承擔資金風險</b>，再以原價售出 → 認列 <b>$100</b>",
+    options:[
+      "因為 IPO 前可以自由選擇認列方式",
+      "因為遠通預付停車費、實質承擔了資金風險，成為交易的主要義務人，才符合總額認列的條件——實質獲利不變，但營收暴增",
+      "因為營收規模是 IPO 的法定門檻，主管機關同意調整",
+      "因為城市車旅同意讓遠通掛名為銷售方"
+    ],
+    correct:1,
+    explain:"總額 vs 淨額認列的判準是<span class='key'>「你是主要義務人還是代理人」</span>。遠通透過<span class='key'>預付停車費、實質承擔資金風險</span>，改變了自己在交易中的角色，因此得以按總額認列。<br><span class='key'>實質獲利不變，但營收從 3 千萬變破億</span>，成為 IPO 的重要推手——<span class='key'>懂規則的人能合法放大帳面價值</span>。<br>同一層次的另一個工具是<span class='key'>移轉訂價</span>：內部交易定價不能任意調整，否則毛利率劇烈波動，無法向國稅局與櫃買中心交代（蘋果在北愛爾蘭、可口可樂在開曼群島都遭鉅額開罰）。"
+  },
+  {
+    sec:"0608", secCls:"s0608", level:"實務",
+    q:"老闆永遠不滿意預算數字、要求持續拉高獲利目標。為什麼解法是「提出新事業」而不是調高既有業務目標？",
+    data:"中華電信不能突然宣稱 ARPU 超越遠傳——<b>大家太熟悉了</b>",
+    options:[
+      "因為新事業的成本比較低",
+      "因為既有業務的數字大家太熟悉，瞎掰馬上會被拆穿；新事業或併購計畫尚未被驗證，才撐得起更高的期望值",
+      "因為新事業不需要編列預算",
+      "因為既有業務已達飽和，法規不允許再成長"
+    ],
+    correct:1,
+    explain:"<span class='key'>既有業務不能瞎掰</span>——市場、分析師、同業對這些數字太熟悉，中華電信突然宣稱 ARPU 超越遠傳，沒有人會信。<br><span class='key'>新事業或併購計畫尚未被驗證</span>，才有想像空間去撐高數字。<br>這也解釋了一個現象：<span class='key'>法說會上為什麼一定要談新事業</span>——不只是策略揭露，更是撐起市場期望值的必要工具。"
+  },
+
+  /* ===== 0720 Claude 職場實戰 ===== */
+  {
+    sec:"0720", secCls:"s0720", level:"策略",
+    q:"為什麼「半自動化」比「全自動化」更有效益？",
+    data:"全自動化：系統卡住一次 → 無端消耗 <b>40%~50%</b> Token 額度<br>例：GitHub 上傳改為<b>手動操作</b>，Claude 只負責生成內容",
+    options:[
+      "因為全自動化的技術門檻太高，一般人做不到",
+      "因為系統卡住一次就會燒掉近半 Token 額度；只要時間差不大，保留關鍵人工決策點反而讓 Token 用在刀口上，產出更穩定也更安全",
+      "因為半自動化的產出品質比較好",
+      "因為全自動化會違反公司資安規定"
+    ],
+    correct:1,
+    explain:"核心觀念：<span class='key'>人工介入不是退步，是最聰明的資源分配</span>。<br>全自動化一旦卡住，<span class='key'>可能無端消耗 40~50% 的 Token 額度</span>，$20/月的方案就這樣白燒，還沒有任何產出。<br>實例：<span class='key'>GitHub 上傳改為手動，讓 Claude 只負責「生成內容」而不負責「執行上傳」</span>——省下大量 Token，而且更安全。<br>判準很簡單：<span class='key'>只要時間差不大，就把關鍵步驟留給人工。</span>"
+  },
+  {
+    sec:"0720", secCls:"s0720", level:"方法",
+    q:"撰寫上櫃內控辦法（如佣金支付管理辦法）時，「先胖後瘦」策略指的是什麼？",
+    data:"需同時符合<b>查核準則第 92 條</b>、會計師審查、公司治理要求",
+    options:[
+      "先寫簡短版本，再逐步補充細節",
+      "先讓 AI 把所有法規都塞進去（極胖），再逐條討論刪除非必要條款，避免辦法卡死公司實際執行",
+      "先給高層看粗略版，再補上完整內容",
+      "先參考同業版本，再依公司狀況調整"
+    ],
+    correct:1,
+    explain:"<span class='key'>先增胖：把所有法規要求全部塞進去</span>，確保法遵無死角、能通過會計師與稽核；<span class='key'>再瘦身：逐條檢視刪除非必要條款</span>，避免辦法訂得太嚴反而卡死公司日常執行。<br>順序不能反——<span class='key'>先寫簡版再補，很容易漏掉法規要求</span>。<br>成效：<span class='key'>半天完成，順利通過稽核與會計師審核、零修改</span>；同類型的交際費使用辦法，另一位主管卡關兩個月，用這套方法當天就完成。"
+  },
+  {
+    sec:"0720", secCls:"s0720", level:"洞見",
+    q:"財報視覺化分析發現：營收成長 30%、成本成長 53%、毛利率從 52% 掉到 44%。真正的原因是什麼？",
+    data:"營收 <b>+30%</b>｜成本 <b>+53%</b>｜毛利率 <b>52% → 44%</b>",
+    options:[
+      "採購管理失控，原物料成本大幅上漲",
+      "銷售組合改變——高毛利的生技健康產品佔比降低，拉低了整體毛利率",
+      "產能利用率下降，固定成本無法攤薄",
+      "匯率波動導致進口成本上升"
+    ],
+    correct:1,
+    explain:"這是一個典型的<span class='key'>「數字對了，歸因錯了」</span>案例。成本成長率遠高於營收，直覺會判定成本失控，但拆開各通路與產品線後發現：<span class='key'>真因是銷售組合改變，高毛利的生技健康產品佔比降低</span>。<br>兩者的處方完全不同——成本失控要去談供應商，<span class='key'>組合改變則要調整銷售策略與產品推廣重心</span>。<br>視覺化的價值就在這裡：<span class='key'>過去人工刻字要數天，現在兩三小時完成，而且各通路業績一目了然。</span>"
+  },
+  {
+    sec:"0720", secCls:"s0720", level:"工作流",
+    q:"Claude ＋ NotebookLM ＋ Gemini 的跨工具工作流中，各自的角色分工是什麼？",
+    data:"Claude → Gemini → Claude",
+    options:[
+      "三個工具功能重複，選一個用就好",
+      "Claude 讀財報產出長篇逐字稿（可指定用財務長法說會角度、運用排除匯率影響等手法）；文字太長時交給 Gemini 生成一頁式重點或儀表板架構；再由 Claude 接手轉成網頁整合進官網",
+      "Gemini 讀財報、Claude 做簡報、NotebookLM 上傳網站",
+      "先用 Gemini 寫程式碼，再用 Claude 檢查錯字"
+    ],
+    correct:1,
+    explain:"分工邏輯是<span class='key'>各取所長、互相接力</span>：<br><span class='key'>Claude</span>——讀取財報，用「財務長法說會角度給我 5000 字逐字稿」這類指令，自動運用排除匯率影響等分析手法。<br><span class='key'>Gemini</span>——處理超長文字，濃縮成一頁式重點；或先產出儀表板架構。<br><span class='key'>Claude</span>——接收 Gemini 的程式碼架構，轉成網頁格式整合進官網，<span class='key'>省去從頭溝通的 Token 與時間</span>。<br>這正是 0511「船長思維」的延伸：<span class='key'>你指揮艦隊，每艘船做它最擅長的事。</span>"
+  },
+
+  /* ===== 跨堂整合 ===== */
+  {
+    sec:"整合", secCls:"sMix", level:"整合",
+    q:"0511 的「加權平均邊際貢獻」、0608 的「拉高高價胎比例」、0720 的「毛利率下滑真因」——三者指向同一個關鍵變數。是什麼？",
+    data:"0511：銷售配比決定綜合邊際貢獻率<br>0608：產能有天花板 → 拉高高毛利商品比例<br>0720：高毛利生技產品佔比降低 → 毛利率 52%→44%",
+    options:[
+      "單位變動成本",
+      "銷售組合（Sales Mix）——它同時決定損益兩平點、產能受限下的獲利上限，以及整體毛利率的變動方向",
+      "固定成本的絕對金額",
+      "營收成長率"
+    ],
+    correct:1,
+    explain:"三堂課講的是<span class='key'>同一件事的三個面向</span>：<br><span class='key'>0511</span>——多商品時，兩平點取決於<span class='key'>加權平均邊際貢獻</span>；高毛利商品占比越大，達到兩平所需的總銷售量越少。<br><span class='key'>0608</span>——產能有物理天花板時，<span class='key'>唯一的解法就是改變組合</span>，把同樣的客數換成更高的獲利絕對值。<br><span class='key'>0720</span>——毛利率下滑不是成本失控，而是<span class='key'>組合往低毛利傾斜</span>。<br>所以看到毛利率或獲利異動時，<span class='key'>第一個要拆的永遠是銷售組合，而不是急著檢討成本</span>。"
+  },
+  {
+    sec:"整合", secCls:"sMix", level:"整合",
+    q:"綜合四堂課，下列哪一個結論最能概括「財務人員的價值躍升路徑」？",
+    data:"0413 剔除一次性、還原真實現金流<br>0511 CVP 事前模擬｜0608 儀表板與 L3 規則運用<br>0720 AI 半自動化放大產出",
+    options:[
+      "只要把帳記對、報表出得快，就是好的財務人員",
+      "從 L1 看懂報表（還原真實數字）→ L2 用報表做決策（CVP、儀表板、瓶頸分析）→ L3 用規則創造價值（認列方式、預算故事）；AI 是加速器，但方向必須自己定",
+      "財務人員應該把所有工作全自動化，減少人工介入",
+      "只要學會 AI 工具，就能取代傳統財務專業"
+    ],
+    correct:1,
+    explain:"四堂課串成一條完整的躍升路徑：<br><span class='key'>L1 看懂報表</span>（0413）——把 IFRS 16 造成的虛胖還原成 51 億、把一次性利得剔除後才發現 114 年其實成長 10%。<span class='key'>沒有還原真實數字，後面全都是錯的。</span><br><span class='key'>L2 用報表做決策</span>（0511＋0608）——CVP 事前模擬、儀表板讓老闆自己拉動變數、瓶頸思維改變產品組合。<br><span class='key'>L3 用規則創造價值</span>（0608）——總額認列、移轉訂價、預算說故事。<br><span class='key'>AI（0720）貫穿全程</span>，但它是加速器不是方向盤：<span class='key'>半自動化才是最聰明的資源分配，而船長永遠是你。</span>"
+  }
+];
+
+let current = 0;
+let score = 0;
+const wrongList = [];
+const secStats = {};
+questions.forEach(q => { if(!secStats[q.sec]) secStats[q.sec] = {total:0, right:0}; secStats[q.sec].total++; });
+
+const quizArea = document.getElementById('quizArea');
+const progressFill = document.getElementById('progressFill');
+const progressText = document.getElementById('progressText');
+
+function renderQuiz(){
+  quizArea.innerHTML = '';
+  wrongList.length = 0;
+  Object.keys(secStats).forEach(k => secStats[k].right = 0);
+
+  questions.forEach((item, idx) => {
+    const card = document.createElement('div');
+    card.className = 'card' + (idx === current ? ' active' : '');
+    card.id = 'card-' + idx;
+
+    const topline = document.createElement('div');
+    topline.className = 'topline';
+    const qnum = document.createElement('span');
+    qnum.className = 'qnum';
+    qnum.textContent = `Q${idx+1} / ${questions.length}`;
+    const badges = document.createElement('span');
+    badges.className = 'badges';
+    const secTag = document.createElement('span');
+    secTag.className = 'sec ' + item.secCls;
+    secTag.textContent = item.sec;
+    const lv = document.createElement('span');
+    lv.className = 'level';
+    lv.textContent = item.level;
+    badges.appendChild(secTag);
+    badges.appendChild(lv);
+    topline.appendChild(qnum);
+    topline.appendChild(badges);
+    card.appendChild(topline);
+
+    const qtext = document.createElement('div');
+    qtext.className = 'qtext';
+    qtext.textContent = item.q;
+    card.appendChild(qtext);
+
+    if(item.data){
+      const db = document.createElement('div');
+      db.className = 'databox';
+      db.innerHTML = item.data;
+      card.appendChild(db);
+    }
+
+    const optsWrap = document.createElement('div');
+    optsWrap.className = 'options';
+    item.options.forEach((optText, oIdx) => {
+      const btn = document.createElement('button');
+      btn.className = 'opt';
+      btn.textContent = optText;
+      btn.onclick = () => selectAnswer(idx, oIdx);
+      optsWrap.appendChild(btn);
+    });
+    card.appendChild(optsWrap);
+
+    const explain = document.createElement('div');
+    explain.className = 'explain';
+    explain.id = 'explain-' + idx;
+    explain.innerHTML = item.explain;
+    card.appendChild(explain);
+
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'nextBtn';
+    nextBtn.id = 'next-' + idx;
+    nextBtn.textContent = idx === questions.length - 1 ? '查看結果' : '下一題 →';
+    nextBtn.onclick = () => goNext(idx);
+    card.appendChild(nextBtn);
+
+    quizArea.appendChild(card);
+  });
+  updateProgress();
+}
+
+function updateProgress(){
+  progressFill.style.width = (current / questions.length * 100) + '%';
+  progressText.textContent = `${current} / ${questions.length}`;
+}
+
+function selectAnswer(qIdx, oIdx){
+  const card = document.getElementById('card-' + qIdx);
+  const opts = card.querySelectorAll('.opt');
+  const item = questions[qIdx];
+
+  opts.forEach((o, i) => {
+    o.classList.add('disabled');
+    if(i === item.correct) o.classList.add('correct');
+    if(i === oIdx && oIdx !== item.correct) o.classList.add('wrong');
+  });
+
+  if(oIdx === item.correct){
+    score++;
+    secStats[item.sec].right++;
+  }else{
+    wrongList.push(`Q${qIdx+1}（${item.sec}·${item.level}）`);
+  }
+
+  document.getElementById('explain-' + qIdx).classList.add('show');
+  document.getElementById('next-' + qIdx).classList.add('show');
+}
+
+function goNext(qIdx){
+  document.getElementById('card-' + qIdx).classList.remove('active');
+  current++;
+  if(current < questions.length){
+    const nextCard = document.getElementById('card-' + current);
+    nextCard.classList.add('active');
+    nextCard.scrollIntoView({behavior:'smooth', block:'start'});
+    updateProgress();
+  }else{
+    progressFill.style.width = '100%';
+    progressText.textContent = `${questions.length} / ${questions.length}`;
+    showResult();
+  }
+}
+
+function showResult(){
+  const resultBox = document.getElementById('resultBox');
+  resultBox.classList.add('show');
+  document.getElementById('scoreText').textContent = `${score} / ${questions.length}`;
+
+  const secBox = document.getElementById('secScore');
+  secBox.innerHTML = '';
+  const secNames = {"0413":"0413 通路現金流","0511":"0511 CVP·AI","0608":"0608 儀表板","0720":"0720 Claude實戰","整合":"跨堂整合"};
+  Object.keys(secStats).forEach(k => {
+    const d = document.createElement('div');
+    d.innerHTML = `${secNames[k] || k}<b>${secStats[k].right} / ${secStats[k].total}</b>`;
+    secBox.appendChild(d);
+  });
+
+  let subLabel = '', msg = '';
+  const pct = score / questions.length;
+  if(pct === 1){
+    subLabel = '滿分';
+    msg = '從還原真實數字（L1）、CVP 與瓶頸決策（L2），到認列規則與預算故事（L3），四堂課的邏輯已經完整貫通。<br><br><b>下一步練習：</b>挑一家自己熟悉的公司或自家業務，走一遍完整流程——先剔除一次性與租賃虛胖還原真實現金流，再拆出銷售組合算加權平均邊際貢獻，最後做一張讓老闆能自己拉動變數的儀表板。做過一次，這套方法才真的變成你的。';
+  }else if(pct >= 0.84){
+    subLabel = '掌握良好';
+    msg = '主架構已經穩了。回頭補齊答錯的部分，特別留意三個高頻失分點：<b>① IFRS 16 的租金一正一負要一起看</b>；<b>② 目標銷售量要把固定成本和目標利潤一起除</b>；<b>③ 毛利率異動先拆銷售組合，不要急著檢討成本</b>。';
+  }else if(pct >= 0.64){
+    subLabel = '基礎及格';
+    msg = '觀念大致有，但計算與歸因還不夠熟練。建議先把最下方的「CVP 公式與課堂答案」表格遮住，逐題重算一次——輪胎與美甲兩組數字都是課堂標準題，算得出來代表流程真的通了。';
+  }else{
+    subLabel = '需要重新複習';
+    msg = '建議依序重讀四份一頁式教材，先抓住每堂課的一句話核心：<br><b>0413</b>——現金流 ≈ 淨利 2 倍才正常；比較兩年獲利前先剔除一次性。<br><b>0511</b>——固定成本 ÷ 單位邊際貢獻＝兩平點；AI 是加速器，方向自己定。<br><b>0608</b>——產能有天花板時，拉高高毛利佔比才是解法。<br><b>0720</b>——半自動化才是最聰明的資源分配。';
+  }
+  if(wrongList.length){
+    msg += '<br><br><b>建議複習題號：</b>' + wrongList.join('、');
+  }
+  document.getElementById('scoreSub').textContent = subLabel;
+  document.getElementById('resultMsg').innerHTML = msg;
+}
+
+function restartQuiz(){
+  current = 0;
+  score = 0;
+  document.getElementById('resultBox').classList.remove('show');
+  renderQuiz();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+renderQuiz();
+</script>
+</body>
+</html>
