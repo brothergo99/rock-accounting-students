@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>破壞性創新 — 0823 每週分享預習一頁式</title>
+<style>
+  :root{
+    --bg:#0f1115;
+    --card:#171a21;
+    --card2:#1e222b;
+    --line:#262b35;
+    --accent:#ff8a3d;
+    --accent2:#4fd1c5;
+    --blue:#7dd3fc;
+    --purple:#a78bfa;
+    --pink:#f9a8d4;
+    --good:#4ade80;
+    --bad:#f87171;
+    --text:#e8eaed;
+    --sub:#9aa1ab;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:radial-gradient(circle at 20% -8%, #26314a 0%, var(--bg) 45%);
+    color:var(--text);
+    padding:26px 16px 60px;
+    line-height:1.75;
+  }
+  .wrap{max-width:880px;margin:0 auto;}
+
+  header{margin-bottom:34px;}
+  .tag{
+    display:inline-block;font-size:12px;letter-spacing:1px;color:var(--accent);
+    background:rgba(255,138,61,.12);border:1px solid rgba(255,138,61,.35);
+    padding:4px 11px;border-radius:999px;margin-bottom:14px;
+  }
+  h1{font-size:30px;line-height:1.38;margin:0 0 12px;letter-spacing:.5px;}
+  h1 em{font-style:normal;color:var(--accent);}
+  .sub{color:var(--sub);font-size:14.5px;margin:0;line-height:1.85;}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px;}
+  .chip{
+    font-size:11.5px;color:var(--sub);background:var(--card);
+    border:1px solid var(--line);padding:4px 10px;border-radius:999px;
+  }
+  .chip.hl{color:var(--accent2);border-color:rgba(79,209,197,.4);background:rgba(79,209,197,.08);}
+
+  .prep{
+    margin-top:20px;background:linear-gradient(135deg, rgba(79,209,197,.10), rgba(255,138,61,.05));
+    border:1px solid rgba(79,209,197,.32);border-radius:14px;padding:16px 18px;
+  }
+  .prep .t{font-size:13px;font-weight:700;color:var(--accent2);letter-spacing:1px;margin-bottom:8px;}
+  .prep p{margin:0;font-size:13.5px;color:#c7cdd5;line-height:1.9;}
+
+  section{margin-bottom:38px;}
+  .sec-label{
+    font-size:11.5px;letter-spacing:2px;color:var(--sub);text-transform:uppercase;
+    margin-bottom:8px;font-weight:700;
+  }
+  h2{
+    font-size:21px;margin:0 0 18px;line-height:1.5;
+    padding-bottom:12px;border-bottom:1px solid var(--line);
+  }
+  h3{font-size:16px;margin:0 0 10px;color:var(--accent2);}
+
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:18px;margin-bottom:14px;
+  }
+  .grid{display:grid;gap:14px;}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  @media(max-width:700px){.g3,.g2{grid-template-columns:1fr;}}
+
+  .card .ico{font-size:22px;margin-bottom:6px;}
+  .card h4{font-size:15.5px;margin:0 0 8px;}
+  .card p{font-size:13.5px;color:#c7cdd5;margin:0;line-height:1.85;}
+  .card p + p{margin-top:9px;}
+  .card small{display:block;font-size:12px;color:var(--sub);margin-top:9px;line-height:1.8;}
+  .card b{color:var(--text);}
+
+  .eq{
+    background:#12151b;border:1px solid var(--line);border-radius:12px;
+    padding:18px 16px;text-align:center;font-size:16.5px;font-weight:700;
+    line-height:1.85;margin-bottom:16px;
+  }
+  .eq span{color:var(--accent);}
+  .eq .cap{display:block;font-size:12px;color:var(--sub);font-weight:400;margin-top:9px;}
+
+  .quote{
+    background:linear-gradient(135deg, rgba(255,138,61,.10), rgba(79,209,197,.06));
+    border:1px solid rgba(255,138,61,.3);border-radius:14px;
+    padding:20px;font-size:15px;line-height:1.95;font-weight:600;
+  }
+  .quote .lbl{
+    display:block;font-size:11px;letter-spacing:2px;color:var(--accent);
+    font-weight:700;margin-bottom:9px;
+  }
+  .quote .who{
+    display:block;font-size:12px;color:var(--sub);font-weight:400;margin-top:10px;text-align:right;
+  }
+
+  table{width:100%;border-collapse:collapse;font-size:13px;background:var(--card);border-radius:12px;overflow:hidden;}
+  th,td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--sub);font-weight:600;font-size:12px;}
+  td.dim{color:var(--sub);}
+  td.hot{color:var(--accent2);font-weight:600;}
+  tr:last-child td{border-bottom:none;}
+
+  ul.list{margin:0;padding-left:18px;font-size:13.5px;color:#c7cdd5;line-height:1.95;}
+  ul.list li{margin-bottom:7px;}
+  ul.list b{color:var(--text);}
+
+  .flow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;margin:8px 0 4px;}
+  .flow .step{
+    background:var(--card2);border:1px solid var(--line);border-radius:10px;
+    padding:10px 14px;font-size:12.5px;text-align:center;flex:1;min-width:120px;
+  }
+  .flow .arw{color:var(--accent);font-size:16px;font-weight:700;}
+
+  .ghost{
+    background:#12151b;border:1px solid rgba(248,113,113,.28);border-radius:12px;
+    padding:15px;
+  }
+  .ghost .h{font-size:14px;font-weight:700;color:var(--bad);margin-bottom:7px;}
+  .ghost p{font-size:13px;color:#c7cdd5;margin:0;line-height:1.85;}
+
+  .layer{display:flex;gap:13px;padding:13px 0;border-bottom:1px solid var(--line);}
+  .layer:last-child{border-bottom:none;}
+  .layer .n{
+    flex:0 0 62px;height:26px;border-radius:8px;background:rgba(79,209,197,.14);
+    color:var(--accent2);font-size:12px;font-weight:800;display:flex;
+    align-items:center;justify-content:center;margin-top:2px;
+  }
+  .layer .t{font-size:14.5px;font-weight:700;margin-bottom:4px;}
+  .layer .d{font-size:13px;color:#c7cdd5;line-height:1.85;}
+
+  .qbox{
+    background:var(--card);border:1px solid var(--line);border-left:3px solid var(--purple);
+    border-radius:12px;padding:16px 18px;margin-bottom:12px;
+  }
+  .qbox .qn{font-size:11.5px;letter-spacing:1.5px;color:var(--purple);font-weight:700;margin-bottom:6px;}
+  .qbox .qt{font-size:14.5px;font-weight:700;margin-bottom:7px;line-height:1.7;}
+  .qbox .qd{font-size:13px;color:#c7cdd5;line-height:1.85;}
+
+  .bottomline{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 18px;}
+  .bl-item{display:flex;gap:13px;padding:12px 0;border-bottom:1px solid var(--line);}
+  .bl-item:last-child{border-bottom:none;}
+  .bl-item .n{
+    flex:0 0 26px;height:26px;border-radius:8px;background:rgba(255,138,61,.14);
+    color:var(--accent);font-size:12.5px;font-weight:800;display:flex;
+    align-items:center;justify-content:center;margin-top:2px;
+  }
+  .bl-item .t{font-size:14.5px;font-weight:700;margin-bottom:4px;}
+  .bl-item .d{font-size:13px;color:#c7cdd5;line-height:1.85;}
+
+  .src{
+    margin-top:26px;padding:13px 15px;background:#12151b;border:1px solid var(--line);
+    border-radius:10px;font-size:12px;color:var(--sub);line-height:1.9;
+  }
+  footer{margin-top:22px;text-align:center;color:#5a606b;font-size:11.5px;line-height:2;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="tag">每週分享 · 預習一頁式</span>
+    <h1>在數據叫你<em>不要行動</em>的時候<br>採取行動</h1>
+    <p class="sub">《破壞性創新》讀書會精華：從克里斯汀生的資訊與行動悖論，<br>到 AI 原生領導力的六個範式轉移</p>
+    <div class="chips">
+      <span class="chip">2026.08.23</span>
+      <span class="chip hl">破壞性創新</span>
+      <span class="chip hl">AI 原生領導力</span>
+      <span class="chip">Epic Disruption</span>
+      <span class="chip">組織變革</span>
+      <span class="chip">Rock 老師 每週分享</span>
+    </div>
+
+    <div class="prep">
+      <div class="t">📖 這份預習怎麼用</div>
+      <p>分享前請先掃過一遍，重點放在<b>第 3 節「AI 原生領導力六大轉移」</b>與<b>第 6 節「預習思考題」</b>。<br>當天不會逐頁重講內容，而是直接從思考題切入討論——<b>先想過，收穫差很多</b>。</p>
+    </div>
+  </header>
+
+  <!-- ============ 1. 創意 vs 創新 ============ -->
+  <section>
+    <div class="sec-label">Definition · 先把定義釘死</div>
+    <h2>💡 創意不等於創新，差別在「有沒有真的改變什麼」</h2>
+
+    <div class="eq">
+      有點子（Ideation）　但沒有<span>影響力（Impact）</span>　＝　只是創意<br>
+      點子　＋　<span>做出改變（Make a difference）</span>　＝　創新
+      <span class="cap">創意是發想不同的點子，創新是把點子落實</span>
+    </div>
+
+    <div class="card" style="border-left:3px solid var(--accent);">
+      <h3>破壞性創新的定義</h3>
+      <p style="font-size:15px;">
+        <b>「把複雜的事情變簡單，把昂貴的東西變普及，進而破壞並重新定義市場的競爭基準。」</b>
+      </p>
+      <p>換句話說：讓<b>過去只有少數人擁有的能力，變成多數人都能輕鬆擁有的能力</b>。</p>
+      <small>⚠️ 關鍵區辨：破壞性創新的本質<b>不是「把原有的事情做得更好」，而是「用完全不同的方法來做」</b>——這才會對既有業者造成真正的挑戰。</small>
+    </div>
+
+    <div class="grid g3">
+      <div class="card">
+        <div class="ico">📱</div>
+        <h4>iPhone</h4>
+        <p>徹底改變手機與行動網路生態，重新定義了整個產業的競爭基準。</p>
+      </div>
+      <div class="card">
+        <div class="ico">🚁</div>
+        <h4>無人機</h4>
+        <p>用<b>極便宜的設備</b>炸毀極其昂貴的軍事據點——成本結構被完全翻轉。</p>
+      </div>
+      <div class="card">
+        <div class="ico">🔧</div>
+        <h4>台積電</h4>
+        <p>專業晶圓代工模式，徹底翻轉半導體產業鏈的分工方式。</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px;border-left:3px solid var(--pink);">
+      <h3>🕯️ 為什麼南丁格爾也算破壞性創新？</h3>
+      <p>她不只是護士。在<b>還沒有護理學系的年代</b>，她是一位極其擅長<b>數據視覺化</b>的人——把不同原因的死亡人數與致死率繪成圖表，讓大眾與決策者<b>一眼就看懂</b>，因而產生了強大的社會號召力與改革影響力。</p>
+      <small>💬 對財務人的啟示：同樣一份數字，<b>能不能讓不懂的人一眼看懂，決定了它有沒有影響力</b>。這正是我們一直在做的儀表板與視覺化。</small>
+    </div>
+
+    <div class="card" style="margin-top:14px;">
+      <h3>🎯 創新用途理論（Jobs to Be Done）</h3>
+      <p>克里斯汀生的核心理論之一：<b>所有創新都是從客戶的需求、從想要解決某個特定痛點開始的</b>。</p>
+      <p>用 AI 也一樣——<b>必須是用 AI 解決一個特定問題，而不是盲目追逐工具</b>。<br>「不管黑貓白貓，能抓老鼠的就是好貓。」</p>
+    </div>
+  </section>
+
+  <!-- ============ 2. 矽谷 vs 亞洲 ============ -->
+  <section>
+    <div class="sec-label">Culture Gap · 環境差異</div>
+    <h2>🌏 為什麼矽谷「做什麼好像都會成功」？</h2>
+
+    <div class="grid g2">
+      <div class="card" style="border-left:3px solid var(--bad);">
+        <h4>🇹🇼 在亞洲提出新想法時</h4>
+        <p>第一反應通常是<b>質疑</b>：</p>
+        <ul class="list" style="margin-top:8px;">
+          <li>「這可行嗎？」</li>
+          <li>「以前有誰做過類似的？」</li>
+          <li>「你找一個成功案例給我看。」</li>
+        </ul>
+      </div>
+      <div class="card" style="border-left:3px solid var(--good);">
+        <h4>🇺🇸 在矽谷提出新想法時</h4>
+        <p>第一反應是<b>支持</b>：</p>
+        <ul class="list" style="margin-top:8px;">
+          <li>「Wow, awesome!」</li>
+          <li>「我要怎麼幫助你成功？（How can I be helpful?）」</li>
+          <li>希望透過你的成功，讓世界變得更好</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="quote" style="margin-top:16px;">
+      <span class="lbl">值得停下來想一想</span>
+      「找一個成功案例給我看」——這句話聽起來很理性、很負責任。<br>
+      但如果所有決策都必須等到別人先做成功，<b>你永遠只能當第二名</b>。
+    </div>
+  </section>
+
+  <!-- ============ 3. AI 原生領導力 ============ -->
+  <section>
+    <div class="sec-label">Paradigm Shift · 本次分享重點</div>
+    <h2>⚡ AI 原生領導力：六個範式轉移</h2>
+
+    <table>
+      <tr><th>轉變維度</th><th>過去的模式 Before</th><th>AI 原生領導力 After</th></tr>
+      <tr>
+        <td><b>管理核心</b></td>
+        <td class="dim">管理人、定義每個人的工作職責</td>
+        <td class="hot">人與 AI 系統的協同作戰（Orchestra）</td>
+      </tr>
+      <tr>
+        <td><b>規劃方式</b></td>
+        <td class="dim">事前做詳盡的規劃</td>
+        <td class="hot">設定目標後直接展開實驗，依結果動態調整</td>
+      </tr>
+      <tr>
+        <td><b>資源依賴</b></td>
+        <td class="dim">依賴擁有的資源、既有知識與經驗</td>
+        <td class="hot">學習速度才是關鍵，快速截取未知知識</td>
+      </tr>
+      <tr>
+        <td><b>流程運作</b></td>
+        <td class="dim">既有流程優化（小修小補）</td>
+        <td class="hot">工作流程重塑，追求更簡化且更好的結果</td>
+      </tr>
+      <tr>
+        <td><b>人才需求</b></td>
+        <td class="dim">著重過去的執行經驗</td>
+        <td class="hot">看重學習速度、轉化能力與實際產出效能</td>
+      </tr>
+      <tr>
+        <td><b>決策週期</b></td>
+        <td class="dim">依賴月報、季報，數週至數月</td>
+        <td class="hot">即時 Dashboard：看今早狀況，下午就決策</td>
+      </tr>
+    </table>
+
+    <div class="card" style="margin-top:16px;border-left:3px solid var(--accent2);">
+      <h3>🔍 怎麼在面試中問出「這個人學得快不快」？</h3>
+      <div class="grid g2" style="margin-top:12px;">
+        <div style="background:#12151b;border:1px solid var(--line);border-radius:10px;padding:14px;">
+          <div style="font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--accent2);Q1</div>
+          <p style="font-size:13px;color:#c7cdd5;margin:0;">「就你過去的經驗或對該產業的了解，你認為目前組織或產業遇到<b>最大的挑戰</b>是什麼？」</p>
+          <small style="display:block;font-size:12px;color:var(--sub);margin-top:8px;">→ 測<b>觀察力是否貼近第一線</b>。對產業瓶頸毫無感覺，第一關就淘汰。</small>
+        </div>
+        <div style="background:#12151b;border:1px solid var(--line);border-radius:10px;padding:14px;">
+          <div style="font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--accent2);">Q2</div>
+          <p style="font-size:13px;color:#c7cdd5;margin:0;">「針對你看到的挑戰，你<b>試圖提供或落實過什麼樣的解決方案</b>？」</p>
+          <small style="display:block;font-size:12px;color:var(--sub);margin-top:8px;">→ 區分<b>執行者（Operator）vs 建造者（Builder）</b>。現在是每個人都該是 Builder 的時代。</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px;">
+      <h3>🧭 AI 時代誰會勝出？</h3>
+      <p style="font-size:15px;"><b>不是「模型最強」的人，而是「跟顧客關係最近、最了解顧客痛點」的人。</b></p>
+      <p>因為 AI 技術發展太快、模式太多，一個人的時間有限，所以<b>合作（Collaboration）成為必要手段</b>——跨界打群架是必然選擇。</p>
+      <small>實務做法：團隊成員不只上 AI 課程，每個人都要親手做視覺化程式設計、建立自己的 AI 工具；每天派出多個 AI 代理人掃描全球最新技術與各產業實戰案例。</small>
+    </div>
+  </section>
+
+  <!-- ============ 4. 組織的幽靈 ============ -->
+  <section>
+    <div class="sec-label">Organizational Barriers · 為什麼推不動</div>
+    <h2>👻 組織的三個「幽靈」，與三層人的不同恐懼</h2>
+
+    <div class="grid g3">
+      <div class="ghost">
+        <div class="h">👻 刻在骨子裡的舊模式</div>
+        <p>公司文化本身就是阻力。「我們一直都是這樣做的」是最難撼動的一句話。</p>
+      </div>
+      <div class="ghost">
+        <div class="h">👻 歷史的創傷</div>
+        <p>「過去做失敗過，所以現在不准做」——一次失敗封印了整條路。</p>
+      </div>
+      <div class="ghost">
+        <div class="h">👻 害怕失去身分認同</div>
+        <p>擔心與新創合作或導入 AI 後，<b>自己的職位會不保</b>。</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h3>😰 大企業的三大包袱</h3>
+      <ul class="list">
+        <li><b>過多的 KPI 綁架</b>——所有動作都要對得上考核</li>
+        <li><b>流程慣性與部門利益考量</b>——動了流程就動了誰的地盤</li>
+        <li><b>害怕犯錯的文化</b>——不做不錯，做了就要負責</li>
+      </ul>
+      <small>在 AI 時代，最後勝出的公司不一定是用最高昂模型的公司，而是<b>「有辦法重塑工作流程、讓數據協同優化營運」的公司</b>。很多 AI 原生新創只有以前一半的人力，卻能創造三倍產出。</small>
+    </div>
+
+    <h3 style="margin-top:22px;">🎭 三個層級，三種不同的恐懼與解方</h3>
+    <div class="card">
+      <div class="layer">
+        <div class="n">高階</div>
+        <div>
+          <div class="t">問題不在能力，在意願</div>
+          <div class="d">必須先有<b>擁抱變革、擁抱破壞性創新的意願與動機</b>。高層不動，底下做什麼都是白工。</div>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="n">中階</div>
+        <div>
+          <div class="t">最擔心因採用 AI 而失去存在價值</div>
+          <div class="d">解法是<b>自己先懂 AI</b>：用 AI 自動化重複性工作，把自己的經驗解放出來，專注在更關鍵的<b>決策制定</b>上。</div>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="n">基層</div>
+        <div>
+          <div class="t">擔心工作被取代</div>
+          <div class="d">應鼓勵他們<b>深入第一線</b>，收集產業與人脈的第一手反饋。這些<b>未被系統化的人際反饋與現場知識，是 AI 目前無法取代的</b>。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. 落地三步驟 ============ -->
+  <section>
+    <div class="sec-label">Playbook · 怎麼做</div>
+    <h2>🛠 推動轉變的三個步驟</h2>
+
+    <div class="flow">
+      <div class="step">① 重新梳理<br><b>決策資訊</b></div>
+      <div class="arw">→</div>
+      <div class="step">② 做好數據的<br><b>部署與獲取</b></div>
+      <div class="arw">→</div>
+      <div class="step">③ 展開<br><b>多版本實驗</b></div>
+    </div>
+
+    <div class="grid g3" style="margin-top:14px;">
+      <div class="card">
+        <h4>① 梳理決策資訊</h4>
+        <p>先鎖定：<b>你做決策時最需要哪些關鍵資訊？</b> 不先問這題，蒐集再多資料也是雜訊。</p>
+      </div>
+      <div class="card">
+        <h4>② 數據部署與獲取</h4>
+        <p>及時、正確地收集企業<b>內部</b>數位化資料；同時透過 Agentic AI 大量收集<b>外部</b>產業知識與即時脈動。</p>
+      </div>
+      <div class="card">
+        <h4>③ 多版本實驗</h4>
+        <p>不要只做單一假設。依變因跑 <b>3 到 6 個版本</b>做多重測試，迅速加碼表現優異的版本，轉為暫時性營運流程，每月或每季滾動檢視。</p>
+      </div>
+    </div>
+
+    <div class="quote" style="margin-top:16px;">
+      <span class="lbl">別搞錯順序</span>
+      導入 AI 工具<b>只是手段</b>，核心永遠是：<b style="color:var(--accent2);">你想達到什麼營運成果？</b>
+    </div>
+
+    <div class="card" style="margin-top:16px;border-left:3px solid var(--good);">
+      <h3>✅ 兩個「先驗證再投入」的實戰案例</h3>
+      <p><b>醫療新創：</b>創辦人先花一年拜訪幾百位醫生收集診所營運挑戰，更關鍵的是——<b>產品還沒出來就先讓醫生付費預訂</b>，未來享有優先使用權。這驗證了對方是<b>真的願意付錢解決問題</b>，而不是口頭說說。</p>
+      <p><b>RPA 物流新創：</b>對方技術主管以資安、流程等理由嚴厲質疑。破解方式是直接對總經理說：<b>「要不要讓最基層的作業同仁直接試用看看？有用再談，沒用也沒關係。」</b> 結果基層試用後反應極佳——終於不用再做痛苦的重複輸入——公司隨即瘋狂追加採購。</p>
+      <small>💡 共同心法：<b>繞過決策層的質疑，直接讓真正的使用者投票</b>。另外，產品出來後必須<b>能容忍不完美</b>——只要真正解決痛點，用戶會樂意一邊用一邊幫你修 Bug。</small>
+    </div>
+
+    <div class="card" style="margin-top:14px;">
+      <h3>🍽 不是科技業也適用：兩個回歸基本的問題</h3>
+      <p>沙烏地阿拉伯的一個團隊，專門幫餐廳做社群行銷：<b>自動抓取餐廳附近的活動、天氣、當地熱搜關鍵字</b>，生成符合品牌調性的貼文與視覺圖，並自動追蹤轉換成效。現在已在日本蓬勃發展，獲得三家日本創投投資。</p>
+      <p>品牌零售業要落地，回到兩個問題就好：</p>
+      <ul class="list" style="margin-top:8px;">
+        <li>你的服務流程中，有哪些顧客是你<b>想服務但「尚未被服務到」</b>的？</li>
+        <li>已經在服務的顧客，你如何<b>深化互動、創造口碑</b>？</li>
+      </ul>
+      <small>案例：透過 LINE 官方帳號管理工具，在用戶點餐或互動時<b>自動貼標籤</b>，記錄來過幾次、上次因為什麼活動進來——精準 CRM。<b>這不需要深奧的演算法，只需要對用戶痛點的深刻理解。</b></small>
+    </div>
+  </section>
+
+  <!-- ============ 6. 資訊與行動悖論 ============ -->
+  <section>
+    <div class="sec-label">Core Thesis · 全場最重要的一段</div>
+    <h2>⏰ 資訊與行動悖論（Information-Action Paradox）</h2>
+
+    <div class="quote">
+      <span class="lbl">克里斯汀生 · 經典理論</span>
+      「那些等到一切都顯而易見才行動的人，我從來沒看過他們成功。<br>
+      當你等到平台已經<b>火燒屁股</b>才想轉型，遊戲已經結束了。<br><br>
+      我在課堂上教給學生的第一件事就是：<b style="color:var(--accent);">處理破壞性變革的訣竅在於，你必須在數據告訴你『不要行動』的時候採取行動。</b><br><br>
+      因為，當數據終於清晰地告訴你是時候該行動時，你將面臨一個悖論：<b>答案雖然無比清晰，但你已經失去了採取行動所需的時間與資源。</b><br><br>
+      一位優秀的領導者會說：『雖然現有的財務數據看起來一切都很好，但我看到了<b>微弱的預警訊號</b>，這些訊號告訴我巨大的變革即將來臨，我必須提前佈局。』」
+      <span class="who">— Clayton Christensen（轉述自 Scott Anthony）</span>
+    </div>
+
+    <div class="card" style="margin-top:16px;border-left:3px solid var(--bad);">
+      <h3>🚫 當前時代最錯誤的決策</h3>
+      <p style="font-size:15px;"><b>就是試圖做出一個「完全正確的決策」。</b></p>
+      <p>大企業管理層往往希望凡事百分之百掌握、有十足勝算才願意投資——但在快速變動的 AI 時代，這是不可能的。<b>如果你等一切數據都明朗、市場都看好才行動，遊戲早就結束了。</b></p>
+    </div>
+
+    <div class="card" style="margin-top:14px;">
+      <h3>🌉 AI 大規模採用的「鴻溝」在哪裡？</h3>
+      <p>致命的鴻溝有兩個：<b>組織不願意改變現有流程</b>，以及<b>害怕不熟悉、無法完全掌控的營運模式</b>。</p>
+      <p>很多人用 AI 產出報告，但如果產出後直接寄給主管、裡面<b>毫無洞察（Insight）</b>，這份報告是毫無價值的。組織必須跨越的第一步，是<b>願意接納「有價值的洞察」來干擾、衝擊、甚至破壞既有營運模式</b>——企業必須<b>先革自己的命</b>。</p>
+      <small>好消息是門檻已經降低：以前基層要做原型得向 IT 申請龐大資源、通常被以資源吃緊為由拒絕；<b>現在每個人都能用無程式碼或 AI 工具，幾天內做出 Prototype 並取得數據，直接拿實證跟主管對話。</b><br>但記住：<b>創新不能關在辦公室裡做</b>，必須走出去觀察目標受眾的行為模式。</small>
+    </div>
+  </section>
+
+  <!-- ============ 7. 預習思考題 ============ -->
+  <section>
+    <div class="sec-label">Pre-work · 分享當天從這裡開始</div>
+    <h2>🤔 五個預習思考題（請先想過再來）</h2>
+
+    <div class="qbox">
+      <div class="qn">Q 01</div>
+      <div class="qt">你手上有哪一件事，是「把複雜變簡單、把昂貴變普及」的機會？</div>
+      <div class="qd">不必是新產品。可能是一份每個月都要人工整理的報表、一個跨部門溝通的流程、一份只有你看得懂的分析。<b>試著具體寫出一件</b>。</div>
+    </div>
+
+    <div class="qbox">
+      <div class="qn">Q 02</div>
+      <div class="qt">用面試的那兩個問題問你自己，你會怎麼回答？</div>
+      <div class="qd">① 你認為目前組織或產業遇到最大的挑戰是什麼？<br>② 針對這個挑戰，你<b>實際落實過</b>什麼解決方案？<br>如果第二題答不出來，你現在是 Operator 還是 Builder？</div>
+    </div>
+
+    <div class="qbox">
+      <div class="qn">Q 03</div>
+      <div class="qt">你的組織裡，哪一隻「幽靈」最強？</div>
+      <div class="qd">是刻在骨子裡的舊模式、歷史創傷，還是害怕失去身分認同？<br>再往下想一層：<b>如果那隻幽靈其實住在你自己身上呢？</b></div>
+    </div>
+
+    <div class="qbox">
+      <div class="qn">Q 04</div>
+      <div class="qt">你最近一次「在數據還沒說清楚時就行動」是什麼時候？</div>
+      <div class="qd">或者反過來問——<b>你現在正在等哪一個數據明朗，才要開始做某件事？</b> 那件事等得起嗎？</div>
+    </div>
+
+    <div class="qbox">
+      <div class="qn">Q 05</div>
+      <div class="qt">你的 AI 產出，有洞察嗎？</div>
+      <div class="qd">誠實檢視最近一次用 AI 做出來的東西：如果直接寄給主管，裡面有<b>只有你能給的判斷</b>嗎？還是只是把資料換個排版？</div>
+    </div>
+  </section>
+
+  <!-- ============ 收斂 ============ -->
+  <section>
+    <div class="sec-label">Bottom Line · 帶走這五句</div>
+    <h2>📌 這場分享的五個核心</h2>
+
+    <div class="bottomline">
+      <div class="bl-item">
+        <div class="n">①</div>
+        <div>
+          <div class="t">有點子沒影響力，那只是創意</div>
+          <div class="d">創新的門檻不在想法有多新，而在有沒有真的<b>做出改變</b>。南丁格爾靠一張圖表改變了整個醫療體系。</div>
+        </div>
+      </div>
+      <div class="bl-item">
+        <div class="n">②</div>
+        <div>
+          <div class="t">破壞性創新不是「做得更好」，是「用完全不同的方法做」</div>
+          <div class="d">把複雜變簡單、把昂貴變普及。在既有軌道上加速，永遠追不上換了軌道的人。</div>
+        </div>
+      </div>
+      <div class="bl-item">
+        <div class="n">③</div>
+        <div>
+          <div class="t">學習速度取代既有經驗，成為人才的第一標準</div>
+          <div class="d">面試不再問「你做過什麼」，而是問「你看到什麼問題、你動手解決過嗎」。<b>現在是每個人都該是 Builder 的時代。</b></div>
+        </div>
+      </div>
+      <div class="bl-item">
+        <div class="n">④</div>
+        <div>
+          <div class="t">勝出的不是模型最強的人，是離顧客最近的人</div>
+          <div class="d">工具人人都有，差別在你知不知道要解決誰的什麼痛點。<b>創新不能關在辦公室裡做。</b></div>
+        </div>
+      </div>
+      <div class="bl-item">
+        <div class="n">⑤</div>
+        <div>
+          <div class="t">在數據叫你不要行動的時候，行動</div>
+          <div class="d">等數據百分之百明確才動，答案雖然清晰，但你已經失去採取行動的時間與資源。<b>最錯誤的決策，是試圖做出一個完全正確的決策。</b></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quote" style="margin-top:18px;">
+      <span class="lbl">最後一句</span>
+      「這個世代最大的挑戰，是<b>用過去的成功來決定明天的未來</b>。<br>
+      真正的關鍵，是在趨勢還很微小、外界還看不懂的時候，你就願意採取行動。<br>
+      <b style="color:var(--accent2);">這個世代，只有採取行動的人，才能夠勝出。</b>」
+    </div>
+  </section>
+
+  <div class="src">
+    📚 <b>資料來源：</b>天下會員讀書會《破壞性創新》線上讀書會直播實錄。主持人：寶太；與談人：SparkLabs Taiwan 共同創辦人暨管理合夥人 Ag（邱彥錡）。<br>
+    探討書籍：《Epic Disruption》— Scott Anthony 著。理論基礎：Clayton Christensen（1952–2020）破壞性創新理論、創新用途理論（Jobs to Be Done）。<br>
+    本頁為個人閱讀筆記整理，僅供學習與內部分享用途，非投資或經營建議。
+  </div>
+
+  <footer>
+    Rock 會計家教 · 蕭啟漢<br>
+    每週分享 · 預習一頁式 · 2026.08.23
+  </footer>
+
+</div>
+</body>
+</html>
