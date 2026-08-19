@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>加減乘除 × 見微知著 × 現金流照妖鏡 — 三堂整合測驗 · 佳儀</title>
+<style>
+  :root{
+    --bg:#0f1115;
+    --card:#171a21;
+    --card2:#1e222b;
+    --line:#262b35;
+    --accent:#ff8a3d;
+    --accent2:#4fd1c5;
+    --blue:#7dd3fc;
+    --purple:#a78bfa;
+    --good:#4ade80;
+    --bad:#f87171;
+    --text:#e8eaed;
+    --sub:#9aa1ab;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:radial-gradient(circle at 20% -10%, #26314a 0%, var(--bg) 45%);
+    color:var(--text);
+    padding:24px 16px 60px;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{margin-bottom:22px;}
+  .tag{
+    display:inline-block;font-size:12px;letter-spacing:1px;color:var(--accent);
+    background:rgba(255,138,61,.12);border:1px solid rgba(255,138,61,.35);
+    padding:4px 10px;border-radius:999px;margin-bottom:12px;
+  }
+  h1{font-size:25px;line-height:1.45;margin:0 0 8px;}
+  .desc{color:var(--sub);font-size:14px;margin:0;line-height:1.75;}
+  .meta{color:var(--sub);font-size:12px;margin-top:10px;line-height:1.7;}
+
+  .progress-bar{height:6px;background:var(--line);border-radius:999px;overflow:hidden;margin:20px 0 10px;}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%;transition:width .4s ease;}
+  .progress-text{text-align:right;font-size:11.5px;color:var(--sub);margin-bottom:22px;}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 20px;margin-bottom:18px;display:none;}
+  .card.active{display:block;}
+  .topline{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+  .qnum{font-size:12px;color:var(--sub);font-weight:700;letter-spacing:1px;}
+  .badges{display:flex;gap:6px;}
+  .sec{font-size:11px;padding:2px 9px;border-radius:999px;font-weight:600;}
+  .sec.s0729{color:var(--blue);border:1px solid rgba(125,211,252,.4);background:rgba(125,211,252,.1);}
+  .sec.s0802{color:var(--accent2);border:1px solid rgba(79,209,197,.4);background:rgba(79,209,197,.1);}
+  .sec.s0812{color:var(--accent);border:1px solid rgba(255,138,61,.4);background:rgba(255,138,61,.1);}
+  .sec.sMix{color:var(--purple);border:1px solid rgba(167,139,250,.4);background:rgba(167,139,250,.1);}
+  .level{font-size:11px;color:var(--sub);border:1px solid #333a46;padding:2px 9px;border-radius:999px;}
+
+  .qtext{font-size:17px;line-height:1.65;margin:0 0 14px;font-weight:600;}
+  .databox{
+    background:#12151b;border:1px solid var(--line);border-radius:10px;
+    padding:12px 14px;margin-bottom:16px;font-size:13px;line-height:2;color:#c3c9d1;
+    font-variant-numeric:tabular-nums;
+  }
+  .databox b{color:var(--accent);}
+
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt{
+    text-align:left;background:var(--card2);border:1px solid #2c313c;color:var(--text);
+    padding:13px 16px;border-radius:10px;font-size:14.5px;cursor:pointer;transition:all .15s ease;line-height:1.55;
+  }
+  .opt:hover{border-color:var(--accent2);}
+  .opt.correct{background:rgba(74,222,128,.14);border-color:var(--good);color:#c6f6d5;}
+  .opt.wrong{background:rgba(248,113,113,.14);border-color:var(--bad);color:#fecaca;}
+  .opt.disabled{cursor:default;pointer-events:none;opacity:.78;}
+
+  .explain{
+    margin-top:16px;padding:14px 16px;background:#12151b;border-left:3px solid var(--accent2);
+    border-radius:8px;font-size:13.5px;line-height:1.95;color:#d4d8dd;display:none;
+  }
+  .explain.show{display:block;}
+  .explain .key{color:var(--accent);font-weight:700;}
+  .explain .trap{color:var(--bad);font-weight:700;}
+
+  .nextBtn{
+    margin-top:18px;display:none;background:var(--accent);color:#1a1000;font-weight:700;
+    border:none;padding:11px 22px;border-radius:999px;font-size:14px;cursor:pointer;
+  }
+  .nextBtn.show{display:inline-block;}
+
+  .result{display:none;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:34px 22px;}
+  .result.show{display:block;}
+  .result .center{text-align:center;}
+  .result .score{font-size:46px;font-weight:800;margin:6px 0;color:var(--accent);}
+  .result .label{color:var(--sub);font-size:13px;}
+  .secscore{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:22px 0 4px;}
+  .secscore div{
+    background:#12151b;border:1px solid var(--line);border-radius:10px;
+    padding:10px 14px;font-size:12.5px;color:var(--sub);min-width:124px;text-align:center;
+  }
+  .secscore div b{display:block;font-size:19px;color:var(--text);margin-top:4px;font-variant-numeric:tabular-nums;}
+  .result .msg{margin:22px auto 0;max-width:580px;font-size:14.5px;line-height:1.9;color:#d4d8dd;text-align:left;}
+  .retryBtn{margin:24px auto 0;display:block;background:transparent;border:1px solid var(--accent2);color:var(--accent2);padding:9px 22px;border-radius:999px;cursor:pointer;font-size:13.5px;}
+
+  .quicktable{margin-top:40px;}
+  .quicktable h2{font-size:15px;color:var(--accent2);margin-bottom:12px;}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;background:var(--card);border-radius:12px;overflow:hidden;}
+  th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--sub);font-weight:600;}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent);}
+  tr:last-child td{border-bottom:none;}
+
+  .disclaimer{
+    margin-top:24px;padding:12px 14px;background:#12151b;border:1px solid var(--line);
+    border-radius:10px;font-size:12px;color:var(--sub);line-height:1.85;
+  }
+  footer{margin-top:22px;text-align:center;color:#5a606b;font-size:11.5px;line-height:2;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="tag">財報思維 · 三堂課整合測驗</span>
+    <h1>找到最大的那一格，謎題就解開一半<br>25 題貫穿加減乘除到現金流照妖鏡</h1>
+    <p class="desc">共 25 題單選，涵蓋 0729（加減乘除框架 × ROE 杜邦 × 中租）、0802（華固存貨 74% × 統一超使用權資產 × 見微知著）、0812（現金流照妖鏡 × 雲數位 × 摩斯 × 南亞科），最後 2 題為跨堂整合。答完顯示分區得分與錯題複習清單。</p>
+    <div class="meta">Rock 會計家教 · 蕭啟漢｜學生：佳儀｜複習日：0819</div>
+  </header>
+
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-text" id="progressText">0 / 25</div>
+
+  <div id="quizArea"></div>
+
+  <div class="result" id="resultBox">
+    <div class="center">
+      <div class="label">測驗完成</div>
+      <div class="score" id="scoreText">0 / 25</div>
+      <div class="label" id="scoreSub"></div>
+    </div>
+    <div class="secscore" id="secScore"></div>
+    <div class="msg" id="resultMsg"></div>
+    <button class="retryBtn" onclick="restartQuiz()">重新測驗</button>
+  </div>
+
+  <div class="quicktable">
+    <h2>🔭 見微知著：找出最大的那一格</h2>
+    <table>
+      <tr><th>公司</th><th>最大資產項目</th><th class="num">佔比</th><th>主業推論</th></tr>
+      <tr><td>中租控股</td><td>應收帳款</td><td class="num">61%</td><td>放款賺利差（借 3% 進、放 10% 出）</td></tr>
+      <tr><td>華固建設</td><td>存貨（土地＋在建）</td><td class="num">74%</td><td>蓋房子，十年磨一劍</td></tr>
+      <tr><td>統一超商 7-11</td><td>使用權資產</td><td class="num">35%</td><td>稱霸實體通路店面（7,000 多家全是租的）</td></tr>
+      <tr><td>南亞科技</td><td>折舊（費用面）</td><td class="num">158 億</td><td>重資產 DRAM，看 OCF 爆發力不看淨利</td></tr>
+    </table>
+  </div>
+
+  <div class="quicktable">
+    <h2>💧 帳面 vs 現金流：三案例對照</h2>
+    <table>
+      <tr><th>公司</th><th>帳面表現</th><th>營業現金流 OCF</th><th>判讀</th></tr>
+      <tr><td>雲數位 2949</td><td>Q1 獲利 +2,000 萬</td><td class="num">−5,000 萬</td><td>🔴 應收月結 ＋ 618 備貨，錢卡在通路與存貨</td></tr>
+      <tr><td>安心食品（摩斯）</td><td>虧損 1,400 萬</td><td class="num">+7 億以上</td><td>🟢 50% 折舊率壓低帳面，戰略性現金鎖定</td></tr>
+      <tr><td>南亞科 113 年</td><td>虧損 50 億</td><td class="num">+19 億</td><td>🟢 折舊 158 億撐住，生存底線</td></tr>
+      <tr><td>南亞科 114 年</td><td>獲利 +6 億</td><td class="num">+185 億 🚀</td><td>🟢 跨越兩平點後的槓桿天花板爆發</td></tr>
+    </table>
+  </div>
+
+  <div class="quicktable">
+    <h2>➕➖✕➗ 四個符號速查</h2>
+    <table>
+      <tr><th>符號</th><th>對應</th><th>核心問題</th></tr>
+      <tr><td><b>＋ 加法</b></td><td>資產負債表</td><td>錢從哪來、放在哪、自有幾成借來幾成</td></tr>
+      <tr><td><b>－ 減法</b></td><td>損益表</td><td>毛利看競爭力（定價底氣）、淨利看費用控管</td></tr>
+      <tr><td><b>✕ 乘法</b></td><td>ROE 杜邦</td><td>利潤率 × 周轉率 × 財務槓桿＝靠能力/速度/風險賺</td></tr>
+      <tr><td><b>÷ 除法</b></td><td>企業體檢指標</td><td>償債（銀行廠商）、盈利（股東）、營運（經營者）</td></tr>
+    </table>
+  </div>
+
+  <div class="disclaimer">
+    ⚠ 免責聲明：本測驗內容取自課後複習教材，僅供教學與觀念練習之用，非投資買賣建議。個股數據請以公司正式公告之財務報告為準。
+  </div>
+
+  <footer>
+    佳儀 · 財報思維三堂整合測驗<br>
+    教材來源：0729 加減乘除 × ROE 杜邦 × 中租案例｜0802 華固建設 × 統一超商 × 見微知著｜0812 現金流照妖鏡 × 雲數位 × 摩斯 × 南亞科
+  </footer>
+</div>
+
+<script>
+const questions = [
+  /* ===== 0729 ===== */
+  {
+    sec:"0729", secCls:"s0729", level:"框架",
+    q:"「用加減乘除讀財報」的框架中，四個符號分別對應什麼？",
+    data:"＋　－　✕　÷",
+    options:[
+      "＋損益表、－資產負債表、✕現金流量表、÷附註",
+      "＋資產負債表、－損益表、✕ROE 杜邦分析、÷企業體檢指標",
+      "＋收入、－成本、✕毛利率、÷淨利率",
+      "＋資產、－負債、✕權益、÷報酬率"
+    ],
+    correct:1,
+    explain:"四個符號的對應是：<br><span class='key'>＋ 加法＝資產負債表</span>——錢從哪裡來（負債＋股東權益）＝公司擁有的資產。<br><span class='key'>－ 減法＝損益表</span>——收入 − 成本 ＝ 毛利；毛利 − 費用 ＝ 營業淨利。<br><span class='key'>✕ 乘法＝ROE 杜邦分析</span>——利潤率 × 周轉率 × 財務槓桿。<br><span class='key'>÷ 除法＝企業體檢指標</span>——償債、盈利、營運三大能力。<br>這四個符號就是<span class='key'>財報的入場券</span>。"
+  },
+  {
+    sec:"0729", secCls:"s0729", level:"觀念",
+    q:"資產負債表的「增值循環」（營業循環）順序為何？判斷好生意的標準是什麼？",
+    data:"另一個是<b>貶值循環</b>：購買生財器具 → 折舊 → 固定資產縮小",
+    options:[
+      "存貨 → 現金 → 應收帳款 → 存貨；循環越慢越穩健",
+      "現金 → 存貨 → 應收帳款 → 現金↑；錢繞一圈後變大，且循環越快越值錢",
+      "應收帳款 → 存貨 → 現金 → 固定資產；重點在資產規模擴大",
+      "現金 → 固定資產 → 折舊 → 現金；重點在折舊速度"
+    ],
+    correct:1,
+    explain:"增值循環是<span class='key'>現金 → 存貨 → 應收帳款 → 現金↑</span>，好生意的定義就是<span class='key'>錢繞一圈之後變大，而且這個循環越快越值錢</span>。<br>另一條是<span class='key'>貶值循環</span>：生財器具隨時間與使用而折舊、慢慢縮小。<br>關鍵判斷：<span class='key'>當增值 ＞ 貶值，老闆就會開始思考擴大經營、尋找資金</span>——這正是資產負債表在告訴你的事。"
+  },
+  {
+    sec:"0729", secCls:"s0729", level:"洞見",
+    q:"負債的三大來源中，哪一個對公司而言是「最好的資金來源」？為什麼？",
+    data:"① 銀行　② 客戶　③ 廠商",
+    options:[
+      "銀行，因為借款期間與利率成本明確可預期",
+      "客戶（預收帳款）——餐廳訂金、群眾募資先付錢後出貨，客戶出錢幫你備料，公司幾乎零負擔",
+      "廠商，因為應付帳款可以拖到 90–120 天",
+      "三者條件相同，沒有優劣之分"
+    ],
+    correct:1,
+    explain:"三大來源各有特性：<br><span class='key'>銀行</span>——期間與利率成本明確可預期，可取得大筆資金，但要繳利息。<br><span class='key'>客戶（預收帳款）</span>——餐廳收訂金、群眾募資先付錢幾個月後才出貨，<span class='key'>客戶出錢幫你備料，公司幾乎零負擔，是最好的資金來源</span>。<br><span class='key'>廠商（應付帳款）</span>——貨到後 90–120 天才付款，<span class='key'>拿到貨賣出變現金，卻延遲付錢，把資金壓力轉嫁出去</span>。"
+  },
+  {
+    sec:"0729", secCls:"s0729", level:"觀念",
+    q:"損益表中，毛利率與淨利率分別在看什麼？老師說的「有錢就作怪」指的是什麼現象？",
+    data:"收入 − 成本 ＝ 毛利 → 毛利 − 費用 ＝ 營業淨利",
+    options:[
+      "毛利率看費用控管，淨利率看競爭力",
+      "毛利率看競爭力（產品底氣與定價權），淨利率看管理效率——老闆一有錢就亂花，費用失控時毛利再大也救不了淨利",
+      "兩者都看競爭力，只是計算基礎不同",
+      "毛利率看短期，淨利率看長期，與管理無關"
+    ],
+    correct:1,
+    explain:"<span class='key'>毛利率 → 競爭力</span>：反映產品的「底氣」與定價權，毛利越高代表市場地位越強、越有議價空間。<br><span class='key'>淨利率 → 管理效率</span>：老師的原話是<span class='key'>「有錢就作怪」</span>——老闆手頭一寬鬆就開始亂花費用，<span class='key'>毛利再大也救不了淨利</span>。<br>所以<span class='key'>兩者落差大 ＝ 費用失控</span>，這是看損益表最直接的健檢動作。"
+  },
+  {
+    sec:"0729", secCls:"s0729", level:"框架",
+    q:"ROE 杜邦分析的三力相乘，分別代表靠什麼賺錢？",
+    data:"ROE ＝ 拿老闆的錢能賺多少回報｜巴菲特最重視的指標",
+    options:[
+      "毛利率 × 淨利率 × 負債比；分別是產品力、管理力、融資力",
+      "利潤率（賣得有價值、靠能力賺）× 總資產周轉率（賣得快、靠速度賺）× 財務槓桿（借錢擴大、靠風險賺）",
+      "營收成長率 × 市佔率 × 股價；三者相乘決定市值",
+      "資產報酬率 × 稅率 × 股利發放率"
+    ],
+    correct:1,
+    explain:"三力相乘的白話對應：<br><span class='key'>利潤率</span>——賣得有價值，<span class='key'>靠能力賺</span>。<br><span class='key'>總資產周轉率</span>——賣得快（翻桌率），<span class='key'>靠速度賺</span>。<br><span class='key'>財務槓桿</span>——借錢擴大，<span class='key'>靠風險賺</span>。<br>三者相乘才會有<span class='key'>指數型的成長</span>。槓桿的比喻是<span class='key'>「買房付頭期款」——用少量自有資金操作大筆資產</span>。"
+  },
+  {
+    sec:"0729", secCls:"s0729", level:"案例",
+    q:"中租控股負債比高達 80%。為什麼說「高負債是商業模式，不是壞事」？",
+    data:"總資產 <b>9,761 億</b>｜應收帳款佔資產 <b>61%</b><br>向銀行借款成本 <b>&lt; 3%</b>｜放款收取 <b>10% 以上</b>利息",
+    options:[
+      "因為金融業不適用負債比這個指標",
+      "因為 80% 收入來自利息，3% 進、10% 出的利差太好賺，理性的經營者一定會「借好借滿」——高負債正是它的商業模式本身",
+      "因為中租有政府背景，不會倒閉",
+      "因為負債比越高代表銀行越信任這家公司"
+    ],
+    correct:1,
+    explain:"中租的獲利邏輯是<span class='key'>用低成本借款、再以高利率放款給中小企業或信用較差的客群，賺取利差</span>。<span class='key'>3% 進、10% 出的利差太好賺，理性的經營者當然會借好借滿</span>——80% 負債比是這個模式的必然結果，不是財務危機。<br>判斷原則：<span class='key'>先看行業邏輯，再看數字高低</span>。"
+  },
+  {
+    sec:"0729", secCls:"s0729", level:"陷阱",
+    q:"中租帳面毛利率 66%，為何實質毛利只有約 46%？",
+    data:"帳面毛利率 <b>66%</b>｜扣除呆帳後 <b>約 46%</b>",
+    options:[
+      "因為要扣除營業費用",
+      "因為放款對象信用較差，必須扣除約 20% 的呆帳（信用損失）",
+      "因為要扣除向銀行支付的利息成本",
+      "因為匯率波動造成的評價損失"
+    ],
+    correct:1,
+    explain:"66% − 約 20% 呆帳 ≈ <span class='key'>46% 實質毛利</span>。<br>這是高利差生意的必然代價：<span class='key'>能收 10% 以上利息，正是因為放款對象信用較差</span>，違約率自然高。<br>看金融或租賃業時，<span class='key'>只看帳面毛利率會嚴重高估獲利能力，一定要往下看信用損失</span>——這也呼應了後面「資產放久了可能是毒藥」的思辨。"
+  },
+  {
+    sec:"0729", secCls:"s0729", level:"思辨",
+    q:"財報思辨要求「反向思考」。關於資產與負債，正確的翻轉認知是什麼？",
+    data:"傳統認知：資產都是好的、負債都是壞的",
+    options:[
+      "資產永遠是好的，負債永遠是壞的，傳統認知沒有問題",
+      "應收帳款放太久會變信用損失、存貨擺太久會跌價減損——資產放久了可能是毒藥；合約負債（預收帳款）是客戶先付錢資助企業成長，是未來營收的保證",
+      "資產都是壞的，負債都是好的",
+      "只有金融業才需要反向思考，一般產業不適用"
+    ],
+    correct:1,
+    explain:"兩個方向都要翻轉：<br><span class='key'>資產不一定好</span>——應收帳款放太久 → 信用損失；存貨擺太久 → 跌價減損。<span class='key'>控管存貨流通與應收帳款收現，是公司營運的兩大命脈</span>。<br><span class='key'>負債不一定壞</span>——合約負債（預收帳款）＝<span class='key'>客戶先付錢資助企業成長</span>，建商賣預售屋就是最典型的例子，這種負債是<span class='key'>未來營收的保證</span>。"
+  },
+
+  /* ===== 0802 ===== */
+  {
+    sec:"0802", secCls:"s0802", level:"方法",
+    q:"「看財報像玩密室逃脫」——最有效的第一個動作是什麼？",
+    data:"華固 → ?｜7-11 → ?｜中租 → ?",
+    options:[
+      "先看損益表的營收與淨利成長率",
+      "找出資產負債表中「最大的那一格」，就能推論公司在做什麼，其他數字只是印證你的猜測",
+      "先看負債比是否超過 50%",
+      "先讀完整份財報附註再下判斷"
+    ],
+    correct:1,
+    explain:"<span class='key'>找到最大的那一格，謎題就解開了一半</span>：<br><span class='key'>華固</span>——錢壓在土地與鋼骨（存貨 74%）<br><span class='key'>7-11</span>——錢壓在全台 7,000 家租賃店面（使用權資產 35%）<br><span class='key'>中租</span>——錢壓在放出去的貸款（應收帳款 61%）<br>抓到核心後，<span class='key'>整份財報的商業邏輯會自動串起來</span>，其他數字只是在驗證你的推論。"
+  },
+  {
+    sec:"0802", secCls:"s0802", level:"案例",
+    q:"華固建設存貨佔總資產 74%（398 億 / 542 億）。為什麼建商的存貨會這麼高？",
+    data:"從買地、整地、打地基、蓋鋼骨（信義區「無雙」建案）",
+    options:[
+      "因為房子賣不出去，大量滯銷積壓",
+      "因為土地與在建半成品在會計上屬於「存貨」而非不動產設備，每一筆投入的成本都不斷堆疊進這個大池子",
+      "因為建商刻意囤積土地等待漲價",
+      "因為存貨包含了公司持有的投資性不動產"
+    ],
+    correct:1,
+    explain:"關鍵在會計分類：<span class='key'>對建商而言，土地與在建半成品屬於「存貨」，不是不動產廠房設備</span>——因為那是它要賣的商品。<br>從買地、整地、打地基到蓋鋼骨，<span class='key'>每一筆投入都持續堆疊進存貨這個池子</span>，所以佔比自然極高。<br><span class='trap'>看到存貨 74% 就直覺判定「滯銷」，是對產業本質的誤解。</span>"
+  },
+  {
+    sec:"0802", secCls:"s0802", level:"實務",
+    q:"華固財報附註中的存貨三大階段，正確的順序與意義是什麼？",
+    data:"無雙建案：11 億 → 16.9 億",
+    options:[
+      "待售房地 → 在建房地 → 預付地款",
+      "預付地款/代建（資金已流出尚未動工）→ 在建房地（正在蓋，每年灌注成本）→ 待售房地（完工可賣的成屋）",
+      "在建房地 → 預付地款 → 待售房地",
+      "三個階段沒有先後順序，是平行分類"
+    ],
+    correct:1,
+    explain:"順序是<span class='key'>預付地款/代建 → 在建房地 → 待售房地</span>。<br>這三格的移動<span class='key'>本身就是進度條</span>：<br><span class='key'>預付地款</span>——早期整地與預備，資金已流出但尚未動工。<br><span class='key'>在建房地</span>——正在蓋，每年不斷灌注成本（無雙從 11 億增至 16.9 億）。<br><span class='key'>待售房地</span>——完工可賣的成屋；<span class='key'>「在建」轉「待售」就代表建案落成</span>。<br>追蹤這三格的變化，比看營收更能掌握建商的真實進度。"
+  },
+  {
+    sec:"0802", secCls:"s0802", level:"陷阱",
+    q:"華固營收去年 72 億、今年 182 億，波動極大。這代表營運不穩定嗎？",
+    data:"會計公報規定：<b>房子交屋才能認列營收</b>",
+    options:[
+      "是，營收暴起暴落代表接案能力不穩定",
+      "否，這是產業常態——大建案完工交屋的年份才有大業績，其他年份只是存貨持續累積",
+      "是，代表公司採用了不同的會計政策",
+      "否，因為建商營收本來就與景氣無關"
+    ],
+    correct:1,
+    explain:"<span class='key'>營收忽高忽低是建商的常態，不是景氣異常</span>——因為<span class='key'>會計公報規定房子交屋才能認列營收</span>。<br>大建案完工的年份才會出現大業績，沒完工的年份，錢都還躺在存貨裡。<br>所以判斷建商<span class='key'>不能只看單年營收，要看存貨三階段的推進與合約負債的累積</span>。"
+  },
+  {
+    sec:"0802", secCls:"s0802", level:"判斷",
+    q:"華固自有資金 40%、合約負債 68 億、長短期借款合計逼近 100 億。應如何解讀？",
+    data:"合約負債 ＝ 預售屋收款",
+    options:[
+      "合約負債與借款都是負債，都應該視為壞消息",
+      "合約負債增加是好消息（客戶定金進來、鎖定未來營收），但借款逼近 100 億代表槓桿不小，必須密切追蹤現金流量表",
+      "自有資金 40% 太低，公司隨時可能倒閉",
+      "只要合約負債持續增加，借款多寡就不必在意"
+    ],
+    correct:1,
+    explain:"同樣掛在負債項下，性質完全不同：<br><span class='key'>合約負債（預售屋收款）＝好消息</span>——客戶定金進來，代表<span class='key'>未來營收已被鎖定</span>，而且要還的是房子不是現金。<br><span class='key'>長短期借款近 100 億＝真實槓桿</span>，要付利息、要還本金。<br>結論：<span class='key'>必須密切追蹤現金流量表</span>。景氣好時龐大存貨是金雞母，<span class='key'>景氣反轉時存貨面臨減損、銀行貸款還不出去</span>——中國房地產崩盤就是過度槓桿加景氣反轉的教科書案例。"
+  },
+  {
+    sec:"0802", secCls:"s0802", level:"陷阱",
+    q:"走進 7-11 店裡商品滿山滿谷，為什麼帳上存貨只佔資產 9%？",
+    data:"總資產約 <b>2,926 億</b>｜存貨佔 <b>9%</b>",
+    options:[
+      "因為門市數量太多，存貨被分散稀釋",
+      "① 超高周轉率，商品停留時間極短；② 強勢通路「寄銷」模式，不用花錢買斷貨品，還能向廠商收上架費與抽成，連物流都用廠商的",
+      "因為存貨都掛在加盟主的帳上",
+      "因為採用先進先出法導致存貨帳面價值偏低"
+    ],
+    correct:1,
+    explain:"兩個原因疊加：<br><span class='key'>① 超高周轉率</span>——商品賣得快，在店裡停留的時間極短。<br><span class='key'>② 寄銷模式</span>——廠商搶著上架，<span class='key'>7-11 不用花錢買斷貨品，反而能收上架費與抽成，甚至連物流都用廠商的</span>。<br>一句話總結通路為王的優勢：<span class='key'>貨不是自己的，錢卻是自己的。</span>"
+  },
+  {
+    sec:"0802", secCls:"s0802", level:"洞見",
+    q:"7-11 應付帳款 266 億（9%）遠大於應收帳款 76 億（3%）。這代表什麼？",
+    data:"消費者刷卡<b>即收現</b>；進貨可<b>延後付款</b>給廠商",
+    options:[
+      "代表公司周轉不靈，積欠廠商大量貨款",
+      "代表財務調度強悍——收現快、付款慢，等於「用廠商的錢做自己的生意」",
+      "代表應收帳款管理不佳，收款效率低落",
+      "代表公司規模太小，議價能力不足"
+    ],
+    correct:1,
+    explain:"<span class='key'>應付 ＞ 應收</span>是通路霸主的典型特徵：<span class='key'>消費者刷卡當下就收現，但進貨可以延後付款給廠商</span>——中間這段時間差，等於<span class='key'>用廠商的錢做自己的生意</span>。<br>這與 0729 提到的「跟廠商借錢＝應付帳款」是同一個邏輯，只是 7-11 把它做到了極致。"
+  },
+  {
+    sec:"0802", secCls:"s0802", level:"IFRS",
+    q:"IFRS 16 要求把「租的店面」認列為使用權資產（佔 7-11 資產 35%，約 1,000 億）。這條準則要解決什麼問題？",
+    data:"維珍航空的故事：財務長在飛機上<b>找不到「飛機」這項資產</b>",
+    options:[
+      "為了增加公司的資產總額，美化財務結構",
+      "為了讓報表真實反映公司靠什麼吃飯——租來的核心生財工具原本不會出現在報表上，形成盲點",
+      "為了讓租金費用可以分年攤提，達到節稅效果",
+      "為了統一各國的租賃契約格式"
+    ],
+    correct:1,
+    explain:"問題出在<span class='key'>「公司靠什麼吃飯，報表上卻看不到」</span>。<br><span class='key'>維珍航空的財務長坐在自家飛機上，卻在財報裡找不到飛機——因為飛機是租的</span>。同理，7-11 全台 7,000 多家店幾乎全是租的，這才是它真正的生財工具。<br>2019 年起 IFRS 16 規定<span class='key'>未來租金必須折算堆疊、認列為「使用權資產」入帳</span>，讓報表<span class='key'>真實反映公司的營運本質</span>。"
+  },
+  {
+    sec:"0802", secCls:"s0802", level:"判斷",
+    q:"7-11 帳面負債比高達 81%。為什麼說它並非看起來那麼危險？",
+    data:"租賃負債 <b>30%</b>｜其他負債 <b>51%</b>｜自有 <b>19%</b>",
+    options:[
+      "因為零售業的負債比本來就偏高，屬於產業常態",
+      "因為 81% 中有 30% 是租賃負債（對應使用權資產，並非真實借款），剔除後真實負債僅約 40%",
+      "因為統一超商有母公司統一集團擔保",
+      "因為負債比高代表銀行願意給予更多授信"
+    ],
+    correct:1,
+    explain:"<span class='key'>租賃負債是 IFRS 16 帶進來的會計數字，對應的是使用權資產，不是真的向銀行借了錢</span>。<br>把這 30% 剔除後，<span class='key'>真實負債比約 40%</span>，財務結構相當穩健。<br>這是 IFRS 16 上路後必備的一個調整動作——<span class='trap'>直接拿 81% 去跟其他產業比較，會嚴重誤判</span>。"
+  },
+
+  /* ===== 0812 ===== */
+  {
+    sec:"0812", secCls:"s0812", level:"框架",
+    q:"用「水庫三大水龍頭」比喻現金流量表。三大活動的正負號各代表什麼？",
+    data:"營業 OCF｜投資｜籌資",
+    options:[
+      "三大活動都是正數才代表公司健康",
+      "OCF 正＝獲利有含金量；OCF 負＝警訊，錢可能卡在應收或存貨。投資負＝擴張期正常的資本支出；籌資負＝對股東與債權人的正常回饋",
+      "投資活動為正數才代表公司在成長",
+      "籌資活動為正數代表公司財務健全"
+    ],
+    correct:1,
+    explain:"三個水龍頭要分開讀：<br><span class='key'>營業活動</span>——核心活水源頭。<span class='key'>正＝獲利有實質含金量；負＝警訊，錢可能卡在應收帳款或存貨</span>。<br><span class='key'>投資活動</span>——負數（資本支出）在擴張期是<span class='key'>健康的，代表把現金轉化為生產力</span>；正數要留意是不是在<span class='key'>「賣祖產」換現金</span>。<br><span class='key'>籌資活動</span>——負數（還款、發股利）是<span class='key'>穩健公司對股東與債權人的正常履約</span>。<br>核心原則：<span class='key'>損益表可以修飾，現金流量表不說謊。</span>"
+  },
+  {
+    sec:"0812", secCls:"s0812", level:"警訊",
+    q:"雲數位（2949）Q1 帳面獲利 +2,000 萬，營業現金流卻是 −5,000 萬。兩大原因是什麼？",
+    data:"毛利率 <b>12%</b>｜淨利率 <b>2-3%</b>｜總資產約 28 億<br>存貨：<b>8.5 億 → 10 億</b>",
+    options:[
+      "毛利率太低與費用失控",
+      "① 應收帳款增加——B2B 供貨給康是美、屈臣氏等大型通路，須接受長達數月的月結制度；② 存貨增加 1.5 億，可能是 618 購物節的前置備貨",
+      "投資新設備導致大量現金流出",
+      "償還銀行借款造成現金減少"
+    ],
+    correct:1,
+    explain:"兩股力量同時吸走現金：<br><span class='key'>① 應收帳款</span>——B2B 供貨給大型通路，必須接受<span class='key'>長達數月的月結制度</span>，資金卡在通路端（去年同期是減少，今年顯著增加）。<br><span class='key'>② 存貨</span>——從 8.5 億攀升到 10 億，<span class='key'>可能是 618 購物節的策略性前置備貨</span>。<br>注意毛利率僅 12%、淨利率 2-3%——<span class='key'>薄利多銷的電商，對資金周轉的容錯空間極小</span>。"
+  },
+  {
+    sec:"0812", secCls:"s0812", level:"追蹤",
+    q:"針對雲數位的存貨增加，教材提到的「真理時刻」判準是什麼？",
+    data:"存貨由 <b>8.5 億 → 10 億</b>（+1.5 億）",
+    options:[
+      "等下一季法說會管理層的說明",
+      "等半年報公布：若存貨回歸 8.5 億＝正常的備貨循環；若持續攀升＝滯銷警訊",
+      "看股價是否回升即可判斷",
+      "看應收帳款是否同步減少"
+    ],
+    correct:1,
+    explain:"這是很實用的<span class='key'>「先假設、後驗證」</span>操作：備貨與滯銷在當下長得一模一樣，<span class='key'>只有下一期的數字能區分</span>。<br><span class='key'>存貨回歸 8.5 億 ＝ 正常循環（確實是為 618 備貨，貨賣掉了）</span>；<span class='key'>持續攀升 ＝ 滯銷警訊（東西根本沒賣出去）</span>。<br>財報分析不是一次看完就下定論，而是<span class='key'>設定觀察點，等下一期揭曉</span>。"
+  },
+  {
+    sec:"0812", secCls:"s0812", level:"計算",
+    q:"摩斯漢堡門市裝潢期初帳面約 2.3 億，年度折舊高達 1.2 億。這反推出什麼？",
+    data:"年營收 <b>60 億</b>｜帳面虧損 <b>1,400 萬</b>（僅佔營收 0.2%）<br>營業現金流 OCF <b>+7 億以上</b>",
+    options:[
+      "公司正在快速展店，每年都有大量新裝潢",
+      "折舊率高達 50%——採用稅法規定的最低兩年攤銷年限，而非依租約期間平均攤提",
+      "門市發生資產減損，必須一次認列損失",
+      "租約即將到期，所以加速攤銷完畢"
+    ],
+    correct:1,
+    explain:"1.2 億 ÷ 2.3 億 ≈ <span class='key'>50% 折舊率</span>，等於<span class='key'>兩年攤銷完畢</span>——正是稅法允許的最低年限，而非依實際租約期間平均攤提。<br>但門市裝潢不可能只用兩年，所以這是<span class='key'>刻意的加速折舊</span>。<br>結果就是：年營收 60 億的公司，帳面只虧 1,400 萬（僅佔營收 0.2%），<span class='key'>但 OCF 高達 7 億以上</span>——<span class='key'>這才是企業的底牌</span>。"
+  },
+  {
+    sec:"0812", secCls:"s0812", level:"洞見",
+    q:"摩斯漢堡「能打卻裝作不能打」的兩層深意是什麼？",
+    data:"母公司：<b>東元集團</b>",
+    options:[
+      "① 為了壓低股價方便回收股權；② 為了避免同業競爭",
+      "① 稅務防護＋現金鎖定：壓低帳面獲利合法節稅，帳面「沒賺錢」就有正當理由不發高額股利，7 億現金留在公司做設備汰換與數位轉型；② 東元集團生態圈：摩斯採購東元空調、遠傳網路、京城/神通軟硬體，集團透過供應鏈早已獲利",
+      "① 為了符合上市櫃的財報揭露規定；② 為了配合政府補助申請",
+      "① 為了讓明年獲利成長率好看；② 為了降低員工分紅"
+    ],
+    correct:1,
+    explain:"第一層是<span class='key'>財務層面</span>：<span class='key'>折舊衝高 → 帳面獲利低 → 合法節稅</span>；同時<span class='key'>帳面「沒賺錢」→ 有正當理由不發高額股利 → 7 億現金留在公司</span>做設備汰換與數位轉型。<br>第二層是<span class='key'>集團層面</span>：摩斯採購東元空調、使用遠傳網路、京城／神通的數位軟硬體——<span class='key'>集團透過供應鏈早就賺到了，摩斯本身損益表漂不漂亮並不急切</span>。<br>看懂第二層，才算真的讀懂這家公司。"
+  },
+  {
+    sec:"0812", secCls:"s0812", level:"槓桿",
+    q:"南亞科 113 年虧損 50 億但 OCF +19 億；114 年獲利僅 +6 億，OCF 卻爆增至 185 億。爆發機制是什麼？",
+    data:"113 年提列折舊高達 <b>158 億</b><br>帳面獲利 6 億 vs OCF <b>185 億</b>",
+    options:[
+      "因為公司大量變賣廠房設備換取現金",
+      "固定成本（折舊 158 億）早已投入、損益兩平點已跨越，因此每一分多出來的營收幾乎都直接轉化為現金流——折舊不需要再付出現金",
+      "因為客戶提前付款，應收帳款大幅減少",
+      "因為公司獲得政府補助與紓困貸款"
+    ],
+    correct:1,
+    explain:"這是<span class='key'>重資產＋營業槓桿</span>的典型演繹：<br><span class='key'>寒冬期（113 年）</span>——虧損 50 億，但因折舊高達 158 億不需付現，<span class='key'>OCF 仍有 +19 億，這是生存底線</span>（員工薪水與原料還付得出來）。<br><span class='key'>回暖期（114 年）</span>——<span class='key'>固定成本早已投入、損益兩平點已跨越，每一分多出來的營收幾乎直接變成現金流</span>，所以帳面只微增 6 億，OCF 卻衝到 185 億。<br>結論：<span class='key'>對重資產企業，看損益表的小利潤沒意義，看 OCF 的爆發力才是重點。</span>"
+  },
+  {
+    sec:"0812", secCls:"s0812", level:"心法",
+    q:"「個人健康的底牌是體能而非外表；企業經營的底牌是 ＿＿ 而非 ＿＿」。這句話要填入什麼？",
+    data:"摩斯：帳面虧 1,400 萬 → OCF +7 億<br>南亞科：虧 50 億 → OCF +19 億",
+    options:[
+      "營收 / 市佔率",
+      "OCF（營業現金流）/ 損益表的淨利數字",
+      "毛利率 / 淨利率",
+      "總資產 / 股東權益"
+    ],
+    correct:1,
+    explain:"完整的一句話是：<span class='key'>個人健康的底牌是體能而非外表；企業經營的底牌是 OCF 而非損益表的淨利數字。</span><br>三個案例都在說同一件事：<span class='key'>損益表是企業的故事，現金流量表是企業的真相</span>。<br>摩斯帳面虧損被媒體說成陷入困境，但 OCF 高達 7 億；南亞科虧 50 億，靠 158 億折舊撐住 OCF +19 億度過寒冬。<span class='key'>學會讀現金流，就學會在嘈雜的商業世界中看見真實的風景。</span>"
+  },
+
+  /* ===== 跨堂整合 ===== */
+  {
+    sec:"整合", secCls:"sMix", level:"整合",
+    q:"中租應收 61%、華固存貨 74%、7-11 使用權資產 35%、南亞科折舊 158 億——四者透露的共同分析方法是什麼？",
+    data:"0802 見微知著｜0812 重資產槓桿",
+    options:[
+      "先算出各項財務比率，再與同業平均比較",
+      "先找出「金額最大的那一格」（資產面或費用面），它就是公司商業模式的核心；找到之後，其餘數字都只是在印證這個推論",
+      "先看負債比高低，判斷公司是否安全",
+      "先讀完整份附註，再從頭分析主表"
+    ],
+    correct:1,
+    explain:"四個案例是同一個方法的四種展現：<br><span class='key'>資產面</span>——中租壓在應收（放款賺利差）、華固壓在存貨（蓋房子）、7-11 壓在使用權資產（通路店面）。<br><span class='key'>費用面</span>——南亞科壓在折舊 158 億（重資產 DRAM）。<br>找到最大那一格之後，其他數字自然會歸位：<span class='key'>中租看信用損失、華固看存貨三階段與交屋認列、7-11 看應付大於應收、南亞科看 OCF 爆發力</span>。<br>這就是<span class='key'>見微知著</span>——密室逃脫的第一把鑰匙。"
+  },
+  {
+    sec:"整合", secCls:"sMix", level:"整合",
+    q:"綜合三堂課，「合約負債」（0729/0802）與「租賃負債」（0802）都掛在負債項下，但性質完全不同。加上 0812 的 OCF 觀點，最完整的判讀原則是什麼？",
+    data:"華固合約負債 68 億｜7-11 租賃負債佔 30%｜摩斯 OCF +7 億",
+    options:[
+      "所有負債都應該盡量降低，比例越低越好",
+      "判斷負債不能只看比例，要看性質與最終要還什麼：合約負債還的是商品（未來營收的保證）、租賃負債對應使用權資產（非真實借款）、真實借款才需要還本付息——最後再用 OCF 驗證公司到底有沒有能力還",
+      "只要負債比低於 50%，公司就是安全的",
+      "負債的性質不重要，重點只在利率高低"
+    ],
+    correct:1,
+    explain:"三堂課疊起來就是一套完整的負債判讀法：<br><span class='key'>0729</span>——負債三來源（銀行/客戶/廠商）成本完全不同；合約負債是<span class='key'>客戶出錢資助你成長</span>。<br><span class='key'>0802</span>——7-11 帳面 81%，剔除 30% 租賃負債後<span class='key'>真實僅約 40%</span>；華固合約負債 68 億是好消息，但借款近 100 億才是真槓桿。<br><span class='key'>0812</span>——最後用 <span class='key'>OCF 驗證還債能力</span>：帳面再漂亮，OCF 為負就是警訊；帳面再難看，OCF 充沛就有底氣。<br>一句話：<span class='key'>先分辨負債要還什麼，再用現金流確認還不還得起。</span>"
+  }
+];
+
+let current = 0;
+let score = 0;
+const wrongList = [];
+const secStats = {};
+questions.forEach(q => { if(!secStats[q.sec]) secStats[q.sec] = {total:0, right:0}; secStats[q.sec].total++; });
+
+const quizArea = document.getElementById('quizArea');
+const progressFill = document.getElementById('progressFill');
+const progressText = document.getElementById('progressText');
+
+function renderQuiz(){
+  quizArea.innerHTML = '';
+  wrongList.length = 0;
+  Object.keys(secStats).forEach(k => secStats[k].right = 0);
+
+  questions.forEach((item, idx) => {
+    const card = document.createElement('div');
+    card.className = 'card' + (idx === current ? ' active' : '');
+    card.id = 'card-' + idx;
+
+    const topline = document.createElement('div');
+    topline.className = 'topline';
+    const qnum = document.createElement('span');
+    qnum.className = 'qnum';
+    qnum.textContent = `Q${idx+1} / ${questions.length}`;
+    const badges = document.createElement('span');
+    badges.className = 'badges';
+    const secTag = document.createElement('span');
+    secTag.className = 'sec ' + item.secCls;
+    secTag.textContent = item.sec;
+    const lv = document.createElement('span');
+    lv.className = 'level';
+    lv.textContent = item.level;
+    badges.appendChild(secTag);
+    badges.appendChild(lv);
+    topline.appendChild(qnum);
+    topline.appendChild(badges);
+    card.appendChild(topline);
+
+    const qtext = document.createElement('div');
+    qtext.className = 'qtext';
+    qtext.textContent = item.q;
+    card.appendChild(qtext);
+
+    if(item.data){
+      const db = document.createElement('div');
+      db.className = 'databox';
+      db.innerHTML = item.data;
+      card.appendChild(db);
+    }
+
+    const optsWrap = document.createElement('div');
+    optsWrap.className = 'options';
+    item.options.forEach((optText, oIdx) => {
+      const btn = document.createElement('button');
+      btn.className = 'opt';
+      btn.textContent = optText;
+      btn.onclick = () => selectAnswer(idx, oIdx);
+      optsWrap.appendChild(btn);
+    });
+    card.appendChild(optsWrap);
+
+    const explain = document.createElement('div');
+    explain.className = 'explain';
+    explain.id = 'explain-' + idx;
+    explain.innerHTML = item.explain;
+    card.appendChild(explain);
+
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'nextBtn';
+    nextBtn.id = 'next-' + idx;
+    nextBtn.textContent = idx === questions.length - 1 ? '查看結果' : '下一題 →';
+    nextBtn.onclick = () => goNext(idx);
+    card.appendChild(nextBtn);
+
+    quizArea.appendChild(card);
+  });
+  updateProgress();
+}
+
+function updateProgress(){
+  progressFill.style.width = (current / questions.length * 100) + '%';
+  progressText.textContent = `${current} / ${questions.length}`;
+}
+
+function selectAnswer(qIdx, oIdx){
+  const card = document.getElementById('card-' + qIdx);
+  const opts = card.querySelectorAll('.opt');
+  const item = questions[qIdx];
+
+  opts.forEach((o, i) => {
+    o.classList.add('disabled');
+    if(i === item.correct) o.classList.add('correct');
+    if(i === oIdx && oIdx !== item.correct) o.classList.add('wrong');
+  });
+
+  if(oIdx === item.correct){
+    score++;
+    secStats[item.sec].right++;
+  }else{
+    wrongList.push(`Q${qIdx+1}（${item.sec}·${item.level}）`);
+  }
+
+  document.getElementById('explain-' + qIdx).classList.add('show');
+  document.getElementById('next-' + qIdx).classList.add('show');
+}
+
+function goNext(qIdx){
+  document.getElementById('card-' + qIdx).classList.remove('active');
+  current++;
+  if(current < questions.length){
+    const nextCard = document.getElementById('card-' + current);
+    nextCard.classList.add('active');
+    nextCard.scrollIntoView({behavior:'smooth', block:'start'});
+    updateProgress();
+  }else{
+    progressFill.style.width = '100%';
+    progressText.textContent = `${questions.length} / ${questions.length}`;
+    showResult();
+  }
+}
+
+function showResult(){
+  const resultBox = document.getElementById('resultBox');
+  resultBox.classList.add('show');
+  document.getElementById('scoreText').textContent = `${score} / ${questions.length}`;
+
+  const secBox = document.getElementById('secScore');
+  secBox.innerHTML = '';
+  const secNames = {"0729":"0729 加減乘除","0802":"0802 見微知著","0812":"0812 現金流","整合":"跨堂整合"};
+  Object.keys(secStats).forEach(k => {
+    const d = document.createElement('div');
+    d.innerHTML = `${secNames[k] || k}<b>${secStats[k].right} / ${secStats[k].total}</b>`;
+    secBox.appendChild(d);
+  });
+
+  let subLabel = '', msg = '';
+  const pct = score / questions.length;
+  if(pct === 1){
+    subLabel = '滿分';
+    msg = '三堂課的框架已經完整串起來：加減乘除建立地圖（0729）→ 找最大那一格解謎（0802）→ 用 OCF 驗證真相（0812）。<br><br><b>下一步練習：</b>自己挑一家有興趣的公司，走一遍完整流程——先翻資產負債表找最大那一格推論主業，再看毛利率與淨利率的落差判斷費用控管，最後拿 OCF 對照淨利驗證獲利品質。做過一次，這套方法才真的變成你的。';
+  }else if(pct >= 0.84){
+    subLabel = '掌握良好';
+    msg = '主架構已經穩了。回頭補齊答錯的部分，特別留意三個容易滑過去的重點：<b>① 高負債比要先看行業邏輯（中租的 80% 是商業模式）</b>；<b>② 租賃負債不是真實借款，比較前要先剔除</b>；<b>③ 帳面虧損不等於公司出問題，要看 OCF</b>。';
+  }else if(pct >= 0.64){
+    subLabel = '基礎及格';
+    msg = '觀念大致有，但案例細節還不夠熟。建議先把最下方的三張速查表背起來——「最大那一格」對照表與「帳面 vs 現金流」對照表是這三堂課的骨架，記住骨架後其他細節會自動歸位。';
+  }else{
+    subLabel = '需要重新複習';
+    msg = '建議依序重讀三份一頁式教材，先抓住每堂課的一句話核心：<br><b>0729</b>——加法看錢從哪來、減法看賺不賺、乘法看報酬引擎、除法看體檢指標。<br><b>0802</b>——找到最大的那一格，謎題就解開一半。<br><b>0812</b>——損益表是故事，現金流量表是真相。';
+  }
+  if(wrongList.length){
+    msg += '<br><br><b>建議複習題號：</b>' + wrongList.join('、');
+  }
+  document.getElementById('scoreSub').textContent = subLabel;
+  document.getElementById('resultMsg').innerHTML = msg;
+}
+
+function restartQuiz(){
+  current = 0;
+  score = 0;
+  document.getElementById('resultBox').classList.remove('show');
+  renderQuiz();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+renderQuiz();
+</script>
+</body>
+</html>
