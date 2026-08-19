@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>記帳士考題三堂整合測驗 · 立雅 0819</title>
+<style>
+  :root{
+    --bg:#0f1115;
+    --card:#171a21;
+    --card2:#1e222b;
+    --line:#262b35;
+    --accent:#ff8a3d;
+    --accent2:#4fd1c5;
+    --blue:#7dd3fc;
+    --purple:#a78bfa;
+    --good:#4ade80;
+    --bad:#f87171;
+    --text:#e8eaed;
+    --sub:#9aa1ab;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:radial-gradient(circle at 20% -10%, #26314a 0%, var(--bg) 45%);
+    color:var(--text);
+    padding:24px 16px 60px;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{margin-bottom:22px;}
+  .tag{
+    display:inline-block;font-size:12px;letter-spacing:1px;color:var(--accent);
+    background:rgba(255,138,61,.12);border:1px solid rgba(255,138,61,.35);
+    padding:4px 10px;border-radius:999px;margin-bottom:12px;
+  }
+  h1{font-size:25px;line-height:1.45;margin:0 0 8px;}
+  .desc{color:var(--sub);font-size:14px;margin:0;line-height:1.75;}
+  .meta{color:var(--sub);font-size:12px;margin-top:10px;line-height:1.7;}
+
+  .progress-bar{height:6px;background:var(--line);border-radius:999px;overflow:hidden;margin:20px 0 10px;}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%;transition:width .4s ease;}
+  .progress-text{text-align:right;font-size:11.5px;color:var(--sub);margin-bottom:22px;}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 20px;margin-bottom:18px;display:none;}
+  .card.active{display:block;}
+  .topline{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+  .qnum{font-size:12px;color:var(--sub);font-weight:700;letter-spacing:1px;}
+  .badges{display:flex;gap:6px;}
+  .sec{font-size:11px;padding:2px 9px;border-radius:999px;font-weight:600;}
+  .sec.s0603{color:var(--blue);border:1px solid rgba(125,211,252,.4);background:rgba(125,211,252,.1);}
+  .sec.s0610{color:var(--accent2);border:1px solid rgba(79,209,197,.4);background:rgba(79,209,197,.1);}
+  .sec.s0617{color:var(--accent);border:1px solid rgba(255,138,61,.4);background:rgba(255,138,61,.1);}
+  .sec.sMix{color:var(--purple);border:1px solid rgba(167,139,250,.4);background:rgba(167,139,250,.1);}
+  .level{font-size:11px;color:var(--sub);border:1px solid #333a46;padding:2px 9px;border-radius:999px;}
+
+  .qtext{font-size:17px;line-height:1.65;margin:0 0 14px;font-weight:600;}
+  .databox{
+    background:#12151b;border:1px solid var(--line);border-radius:10px;
+    padding:12px 14px;margin-bottom:16px;font-size:13px;line-height:2;color:#c3c9d1;
+    font-variant-numeric:tabular-nums;
+  }
+  .databox b{color:var(--accent);}
+
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt{
+    text-align:left;background:var(--card2);border:1px solid #2c313c;color:var(--text);
+    padding:13px 16px;border-radius:10px;font-size:14.5px;cursor:pointer;transition:all .15s ease;line-height:1.55;
+  }
+  .opt:hover{border-color:var(--accent2);}
+  .opt.correct{background:rgba(74,222,128,.14);border-color:var(--good);color:#c6f6d5;}
+  .opt.wrong{background:rgba(248,113,113,.14);border-color:var(--bad);color:#fecaca;}
+  .opt.disabled{cursor:default;pointer-events:none;opacity:.78;}
+
+  .explain{
+    margin-top:16px;padding:14px 16px;background:#12151b;border-left:3px solid var(--accent2);
+    border-radius:8px;font-size:13.5px;line-height:1.95;color:#d4d8dd;display:none;
+  }
+  .explain.show{display:block;}
+  .explain .key{color:var(--accent);font-weight:700;}
+  .explain .trap{color:var(--bad);font-weight:700;}
+
+  .nextBtn{
+    margin-top:18px;display:none;background:var(--accent);color:#1a1000;font-weight:700;
+    border:none;padding:11px 22px;border-radius:999px;font-size:14px;cursor:pointer;
+  }
+  .nextBtn.show{display:inline-block;}
+
+  .result{display:none;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:34px 22px;}
+  .result.show{display:block;}
+  .result .center{text-align:center;}
+  .result .score{font-size:46px;font-weight:800;margin:6px 0;color:var(--accent);}
+  .result .label{color:var(--sub);font-size:13px;}
+  .secscore{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:22px 0 4px;}
+  .secscore div{
+    background:#12151b;border:1px solid var(--line);border-radius:10px;
+    padding:10px 14px;font-size:12.5px;color:var(--sub);min-width:124px;text-align:center;
+  }
+  .secscore div b{display:block;font-size:19px;color:var(--text);margin-top:4px;font-variant-numeric:tabular-nums;}
+  .result .msg{margin:22px auto 0;max-width:580px;font-size:14.5px;line-height:1.9;color:#d4d8dd;text-align:left;}
+  .retryBtn{margin:24px auto 0;display:block;background:transparent;border:1px solid var(--accent2);color:var(--accent2);padding:9px 22px;border-radius:999px;cursor:pointer;font-size:13.5px;}
+
+  .quicktable{margin-top:40px;}
+  .quicktable h2{font-size:15px;color:var(--accent2);margin-bottom:12px;}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;background:var(--card);border-radius:12px;overflow:hidden;}
+  th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--sub);font-weight:600;}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent);}
+  tr:last-child td{border-bottom:none;}
+
+  footer{margin-top:36px;text-align:center;color:#5a606b;font-size:11.5px;line-height:2;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="tag">112 年記帳士考題 · 三堂整合測驗</span>
+    <h1>25 題掃過三堂課的所有陷阱<br>從資本化判斷到 IFRS 反直覺分類</h1>
+    <p class="desc">共 25 題單選，涵蓋 0603（固定資產 × 庫藏股 × 毛利法 × 減損）、0610（EPS × CVP × 現金流 × 申論四階段）、0617（金融資產投資 × 現金流量分類），最後 2 題為跨堂整合。每題附題設數據，答完顯示分區得分與錯題複習清單。</p>
+    <div class="meta">Rock 會計家教 · 蕭啟漢｜學生：立雅｜複習日：0819</div>
+  </header>
+
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-text" id="progressText">0 / 25</div>
+
+  <div id="quizArea"></div>
+
+  <div class="result" id="resultBox">
+    <div class="center">
+      <div class="label">測驗完成</div>
+      <div class="score" id="scoreText">0 / 25</div>
+      <div class="label" id="scoreSub"></div>
+    </div>
+    <div class="secscore" id="secScore"></div>
+    <div class="msg" id="resultMsg"></div>
+    <button class="retryBtn" onclick="restartQuiz()">重新測驗</button>
+  </div>
+
+  <div class="quicktable">
+    <h2>⚠️ 十大陷阱速查表（測驗後複習用）</h2>
+    <table>
+      <tr><th>陷阱</th><th>錯誤直覺</th><th>正確處理</th></tr>
+      <tr><td>大修資本化</td><td>直接列費用</td><td>能延長年限就資本化，並<b>重算剩餘年限折舊</b></td></tr>
+      <tr><td>訴訟負債準備</td><td>取中間值或平均值</td><td>取<b>機率最高</b>的金額</td></tr>
+      <tr><td>庫藏股折價賣出</td><td>認列損失進損益表</td><td>先沖資本公積，不足部分<b>借記保留盈餘</b></td></tr>
+      <tr><td>OCI 股票處分</td><td>比照 FVTPL 進損益</td><td><b>絕不重分類</b>，差額轉入保留盈餘／留在權益</td></tr>
+      <tr><td>毛利法倖存存貨</td><td>直接用售價扣減</td><td>先 × 成本率<b>還原為成本</b>再扣</td></tr>
+      <tr><td>EPS 分子</td><td>直接用「綜合損益」</td><td><b>本期淨利 ＝ 綜合損益 − OCI</b></td></tr>
+      <tr><td>CVP 逆推</td><td>算出邊際貢獻就作答</td><td>題目問<b>售價</b>：邊際貢獻 ＋ 變動成本</td></tr>
+      <tr><td>DDB 折舊率</td><td>先扣殘值再算</td><td><b>2 ÷ 剩餘年限，不考慮殘值</b></td></tr>
+      <tr><td>FVTOCI 現金股利</td><td>放入 OCI</td><td>一律認列<b>股利收入（本期損益）</b>；權益法才例外</td></tr>
+      <tr><td>第二年評價基礎</td><td>用原始成本起算</td><td>以<b>上年底公允價值</b>為比較基礎</td></tr>
+    </table>
+  </div>
+
+  <div class="quicktable">
+    <h2>🧮 三堂課關鍵答案數字</h2>
+    <table>
+      <tr><th>題型</th><th>來源</th><th class="num">答案</th></tr>
+      <tr><td>大修資本化後 X5 年底帳面價值</td><td>0603 第7題</td><td class="num">324,500</td></tr>
+      <tr><td>庫藏股折價：沖資本公積／保留盈餘</td><td>0603 第9題</td><td class="num">5,000 / 4,000</td></tr>
+      <tr><td>利息保障倍數</td><td>0603 第16題</td><td class="num">27.5 倍</td></tr>
+      <tr><td>EPS（80萬 ÷ 125,000 股）</td><td>0610 第17題</td><td class="num">6.4 元</td></tr>
+      <tr><td>加權平均流通在外股數</td><td>0610 第17題</td><td class="num">125,000 股</td></tr>
+      <tr><td>總製造成本（DM 5 + DL 4 + OH 3）</td><td>0610 第18題</td><td class="num">12 萬</td></tr>
+      <tr><td>CVP 售價（40 + 60）</td><td>0610 第19題</td><td class="num">100 元</td></tr>
+      <tr><td>機器入帳成本（含運保安）</td><td>0610 申論</td><td class="num">584,600</td></tr>
+      <tr><td>X5 年 DDB 折舊（404,241 × 2/7.5）</td><td>0610 申論</td><td class="num">107,798</td></tr>
+      <tr><td>X6 年底減損損失</td><td>0610 申論</td><td class="num">17,391</td></tr>
+      <tr><td>X2 年本期損益合計</td><td>0617 第2題</td><td class="num">430,000</td></tr>
+      <tr><td>累計保留盈餘增加</td><td>0617 第2題</td><td class="num">250,000</td></tr>
+      <tr><td>累計其他權益</td><td>0617 第2題</td><td class="num">95,000</td></tr>
+    </table>
+  </div>
+
+  <footer>
+    立雅 · 112 年記帳士考題三堂整合測驗<br>
+    教材來源：0603 會計學科考題解析 ×10｜0610 EPS × CVP × 現金流 × 申論四階段｜0617 金融資產投資 × 現金流量表分類
+  </footer>
+</div>
+
+<script>
+const questions = [
+  /* ===== 0603 ===== */
+  {
+    sec:"0603", secCls:"s0603", level:"計算",
+    q:"設備原成本 420,000、殘值 90,000、耐用 6 年。使用 3 年後進行大修 120,000 並延長壽命 3 年。X5 年底帳面價值為多少？",
+    data:"每年折舊 ＝（420,000 − 90,000）÷ 6 ＝ <b>55,000</b><br>大修 120,000 → <b>能延長年限就資本化</b><br>資本化後：（剩餘帳面 ＋ 大修成本）÷ 剩餘年限",
+    options:["255,000 元","324,500 元","375,000 元","280,000 元"],
+    correct:1,
+    explain:"答案 <span class='key'>324,500 元</span>。<br>兩個關鍵動作缺一不可：<span class='key'>① 大修能延長耐用年限 → 資本化，不可列費用</span>；<span class='key'>② 資本化後必須用「剩餘帳面價值 ＋ 大修成本 ÷ 新的剩餘年限」重算折舊</span>。<br><span class='trap'>最常見的失分是資本化做對了，卻忘了重算折舊</span>，還沿用原本的 55,000。<br>實務意義：能延長年限就資本化，避免費用一次沖銷拖累損益表。"
+  },
+  {
+    sec:"0603", secCls:"s0603", level:"觀念",
+    q:"訴訟負債準備應如何認列？金額與機率由誰評估？",
+    data:"情境：律師評估勝訴機率高，公司認為不需提列",
+    options:[
+      "取各種可能結果的中間值或平均數，由會計師評估",
+      "認列機率最高的金額，機率與金額由律師提供評估；即使律師評估勝訴機率高，會計師基於保守原則仍可能強制認列部分負債準備",
+      "只有敗訴確定後才認列，之前一律不提列",
+      "取最大可能損失金額，由公司管理階層決定"
+    ],
+    correct:1,
+    explain:"<span class='key'>取機率最高的金額，不是中間值也不是平均值</span>——這是最高頻的錯誤。<br>分工是：<span class='key'>機率與金額由律師提供評估</span>，會計師據以判斷是否入帳。<br>實務常見爭議：<span class='key'>即使律師說勝訴機率高，會計師基於保守原則仍可能強制認列</span>，公司端往往覺得不合理，但<span class='key'>會計師優先考慮的是財報使用者的保護</span>。"
+  },
+  {
+    sec:"0603", secCls:"s0603", level:"計算",
+    q:"庫藏股折價賣出賠 9,000 元，帳上「資本公積－庫藏股交易」僅有 5,000 元。應如何處理？",
+    data:"庫藏股交易<b>絕不認列損益</b><br>溢價賣出 → 貸記資本公積－庫藏股交易",
+    options:[
+      "認列處分損失 9,000 元進損益表",
+      "沖資本公積 5,000 元，不足的 4,000 元借記保留盈餘",
+      "全額 9,000 元借記保留盈餘",
+      "掛帳為其他應收款，待未來溢價賣出時沖抵"
+    ],
+    correct:1,
+    explain:"處理順序是<span class='key'>先沖資本公積 5,000，不足部分 4,000 借記保留盈餘</span>。<br>核心原則：<span class='key'>庫藏股交易絕不認列損益</span>——立法目的是<span class='key'>防止公司不做本業只炒自家股票</span>，靠買賣股票美化損益表。<br>口訣：<span class='key'>股票交易不進損益表</span>。"
+  },
+  {
+    sec:"0603", secCls:"s0603", level:"技巧",
+    q:"現金流量表（間接法）的調整方向，正確的口訣是？",
+    data:"存貨增加 → ?｜應付帳款減少 → ?<br>存貨減少 → ?｜應付帳款增加 → ?",
+    options:[
+      "資產增加加、負債增加減",
+      "資產增加減、負債增加加（方向相反記）",
+      "資產與負債增加皆為加項",
+      "資產與負債增加皆為減項"
+    ],
+    correct:1,
+    explain:"口訣是<span class='key'>「資產增加減，負債增加加；方向相反記」</span>。<br><span class='key'>存貨增加</span>＝資金積壓 → 減項；<span class='key'>應付帳款減少</span>＝付出現金 → 減項；<span class='key'>存貨減少</span>＝資金釋放 → 加項；<span class='key'>應付帳款增加</span>＝延遲付款 → 加項。<br>更快的判法是回到<span class='key'>借貸方向：貸方 → ＋，借方 → −</span>，不必背表格。"
+  },
+  {
+    sec:"0603", secCls:"s0603", level:"觀念",
+    q:"財務資訊的「基本品質特性」與「強化性品質特性」分別包含哪些？",
+    data:"基本：？｜強化性：？",
+    options:[
+      "基本＝攸關性、審慎性；強化性＝可比性、時效性",
+      "基本＝攸關性（預測價值、確認價值、重大性）與忠實表達（完整、中立、免於錯誤）；強化性＝可比性、可驗證性、時效性、可了解性",
+      "基本＝可比性、可驗證性；強化性＝攸關性、忠實表達",
+      "基本＝完整、中立、免於錯誤；強化性＝重大性、預測價值"
+    ],
+    correct:1,
+    explain:"<span class='key'>基本品質特性</span>只有兩個：<span class='key'>攸關性</span>（預測價值、確認價值、重大性）與<span class='key'>忠實表達</span>（完整、中立、免於錯誤）。<br><span class='key'>強化性品質特性</span>有四個：<span class='key'>可比性、可驗證性、時效性、可了解性</span>。<br><span class='trap'>「審慎性」不是正確用語，考試絕不可寫。</span><br>老師的比喻：<span class='key'>攸關性＝講效率，忠實表達＝巨細靡遺</span>，兩者本質上難以同時完美達成，這正是準則要取捨的地方。"
+  },
+  {
+    sec:"0603", secCls:"s0603", level:"觀念",
+    q:"關於公司債折溢價與利息費用，下列敘述何者正確？",
+    data:"票面 &gt; 市場 → 溢價發行<br>票面 &lt; 市場 → 折價發行",
+    options:[
+      "溢價發行時利息費用增加，折價發行時利息費用減少；攤銷額逐期遞減",
+      "溢價發行借到更多錢 → 實質利息費用減少；折價發行少拿的錢是補償投資人 → 利息費用增加。無論折溢價，每期攤銷額均為遞增",
+      "折溢價不影響利息費用，只影響帳面價值",
+      "溢價發行的攤銷額遞增，折價發行的攤銷額遞減"
+    ],
+    correct:1,
+    explain:"記憶邏輯很直觀：<span class='key'>折價＝少借到錢 → 少拿的部分是補償投資人 → 費用補上去（增加）</span>；<span class='key'>溢價＝多借到錢 → 費用抵回來（減少）</span>。<br>另一個必記的點：<span class='key'>無論折價或溢價，每期攤銷額都是遞增的</span>——因為有效利率法下，攤銷額會隨帳面價值變動而逐期放大。<span class='trap'>把攤銷額方向記成一增一減是常見錯誤。</span>"
+  },
+  {
+    sec:"0603", secCls:"s0603", level:"陷阱",
+    q:"透過其他綜合損益（OCI）衡量的「股權投資」，出售時的處分損益如何處理？若換成債券投資（FVOCI）呢？",
+    data:"股權 FVOCI：評價損益留在 OCI<br>債券 FVOCI：？",
+    options:[
+      "兩者出售時都要重分類進損益表",
+      "股權投資的處分損益絕不重分類進損益表（不影響本期淨利），差額直接轉入保留盈餘或留在權益；債券投資則須計算損益並重分類進損益表",
+      "兩者都不重分類，差額均留在權益",
+      "股權須重分類，債券不須重分類"
+    ],
+    correct:1,
+    explain:"這是高頻混淆點：<span class='key'>股權 FVOCI ——處分損益絕不重分類，差額轉入保留盈餘或留在權益</span>；<span class='key'>債券 FVOCI ——處分時要計算損益並重分類進損益表</span>。<br>口訣：<span class='key'>股票 OCI 永不回損益</span>。<br><span class='trap'>把股權 FVOCI 當成 FVTPL 處理、讓處分損益進損益表，是最常見的失分。</span>"
+  },
+  {
+    sec:"0603", secCls:"s0603", level:"陷阱",
+    q:"用毛利法估計火災存貨損失時，最容易失分的一步是什麼？",
+    data:"① 期初存貨 ＋ 本期進貨 ＝ 可供銷售總額<br>② 銷貨成本 ＝ 收入 × 成本率（1 − 毛利率）<br>③ 期末存貨估計值 ＝ ① − ②<br>④ 火災損失 ＝ ③ − 倖存存貨",
+    options:[
+      "忘記把本期進貨加入可供銷售總額",
+      "倖存存貨通常以「售價」標示（例如 3 萬），必須先 × 成本率還原為成本（2.1 萬）後才能扣減",
+      "成本率應為毛利率本身，而非 1 − 毛利率",
+      "期初存貨應以售價計算"
+    ],
+    correct:1,
+    explain:"前三步大家都會，<span class='key'>失分永遠在第四步</span>：倖存存貨通常以售價標示，<span class='key'>必須先 × 成本率還原為成本再扣</span>（3 萬 × 70% ＝ 2.1 萬）。<br>口訣：<span class='key'>售價 × 成本率 ＝ 成本</span>。<br>老師的實務提醒：<span class='key'>清點災後存貨時用售價回報，實務上會被老闆罵</span>——因為公司真正損失的是成本，不是還沒賺到的毛利。"
+  },
+  {
+    sec:"0603", secCls:"s0603", level:"計算",
+    q:"利息保障倍數的公式為何？分子最容易漏掉哪一項？",
+    data:"本題計算結果：<b>27.5 倍</b><br>意義：稅前息前利潤可支付利息幾次",
+    options:[
+      "稅後淨利 ÷ 利息費用；容易漏掉利息費用",
+      "（稅後淨利 ＋ 利息費用 ＋ 所得稅費用）÷ 利息費用；最容易漏掉加回所得稅",
+      "營業收入 ÷ 利息費用；容易漏掉營業外收入",
+      "（稅前淨利 − 利息費用）÷ 利息費用；容易多扣利息"
+    ],
+    correct:1,
+    explain:"公式：<span class='key'>（稅後淨利 ＋ 利息費用 ＋ 所得稅費用）÷ 利息費用</span>。<br>分子的用意是<span class='key'>把利息與稅額加回，還原成稅前息前淨利（EBIT）</span>——因為付利息是在繳稅之前發生的。<br>口訣：<span class='key'>淨利加回利與稅</span>。<br><span class='trap'>最常見的錯誤是只加回利息、忘了加回所得稅。</span>倍數越高代表償息能力越安全。"
+  },
+
+  /* ===== 0610 ===== */
+  {
+    sec:"0610", secCls:"s0610", level:"陷阱",
+    q:"題目給「綜合損益 100 萬、其他綜合損益 20 萬」，計算 EPS 時分子應為多少？",
+    data:"EPS 分子必須用<b>本期淨利</b>，不是綜合損益",
+    options:["100 萬","80 萬","120 萬","20 萬"],
+    correct:1,
+    explain:"<span class='key'>本期淨利 ＝ 綜合損益 − 其他綜合損益 ＝ 100萬 − 20萬 ＝ 80 萬</span>。<br>這題純粹是<span class='key'>定義陷阱</span>——題目故意用「綜合損益」這種象牙塔講法來迷惑考生，實務上大家都直接說「本期淨利」。<br><span class='trap'>直接拿 100 萬當分子，整題就報銷了。</span>"
+  },
+  {
+    sec:"0610", secCls:"s0610", level:"計算",
+    q:"流通在外股數：前 3 個月 10 萬股、中間 6 個月 14 萬股、最後 3 個月 12 萬股。加權平均股數為多少？EPS 為何？",
+    data:"10萬 × 3/12 ＋ 14萬 × 6/12 ＋ 12萬 × 3/12<br>本期淨利 <b>80 萬</b>",
+    options:[
+      "120,000 股；EPS 6.67 元",
+      "125,000 股；EPS 6.4 元",
+      "140,000 股；EPS 5.71 元",
+      "110,000 股；EPS 7.27 元"
+    ],
+    correct:1,
+    explain:"2.5 ＋ 7 ＋ 3 ＝ <span class='key'>12.5 萬股 ＝ 125,000 股</span><br>EPS ＝ 80萬 ÷ 125,000 ＝ <span class='key'>6.4 元</span><br>加權的邏輯是<span class='key'>「每一批股數乘以它實際流通的月份佔比」</span>——這題還算單純，真正麻煩的是加上股票股利或庫藏股的變形題。"
+  },
+  {
+    sec:"0610", secCls:"s0610", level:"計算",
+    q:"主要成本（DM＋DL）9 萬、加工成本（DL＋OH）7 萬、DM：OH ＝ 5：3。總製造成本為多少？",
+    data:"Step 1 相減消去 DL：9萬 − 7萬 ＝ DM − OH ＝ <b>2萬</b><br>Step 2 5:3 差 2 等份 ＝ 2萬 → 1 等份 ＝ ?",
+    options:["16 萬","12 萬","9 萬","14 萬"],
+    correct:1,
+    explain:"Step 2：1 等份 ＝ 1 萬 → <span class='key'>DM ＝ 5 萬、OH ＝ 3 萬</span><br>Step 3 回推：<span class='key'>DL ＝ 9萬 − 5萬 ＝ 4 萬</span><br>總製造成本 ＝ 5 ＋ 4 ＋ 3 ＝ <span class='key'>12 萬</span><br>解題關鍵是<span class='key'>「兩式相減消去 DL」</span>這個動作。老師的批判也記一下：<span class='key'>這是成管會第一章的內容，本來不該出現在「會計學概要」</span>，而且 5:3 的比例在實務上毫無意義——考場上若腦筋轉不過來，這種題可以策略性放棄。"
+  },
+  {
+    sec:"0610", secCls:"s0610", level:"陷阱",
+    q:"固定成本 5 萬、稅率 20%、變動成本 60 元、銷量 3,125 單位，目標稅後淨利 6 萬。售價應為多少？",
+    data:"S1 稅後→稅前：6萬 ÷ 0.8 ＝ <b>7.5萬</b><br>S2 總邊際貢獻：7.5萬 ＋ 5萬 ＝ <b>12.5萬</b><br>S3 單位邊際貢獻：12.5萬 ÷ 3,125 ＝ <b>40 元</b>",
+    options:["40 元","100 元","60 元","160 元"],
+    correct:1,
+    explain:"<span class='trap'>40 元是誘餌，而且選項中一定會放它。</span><br>算到單位邊際貢獻 40 元只是第三步，題目問的是<span class='key'>售價</span>：<span class='key'>售價 ＝ 邊際貢獻 ＋ 變動成本 ＝ 40 ＋ 60 ＝ 100 元</span>。<br>完整流程要背熟：<span class='key'>稅後 ÷（1−稅率）→ ＋固定成本 → ÷ 銷量 → 得邊際貢獻 → ＋變動成本 → 售價</span>。<br>教訓：<span class='key'>算出邊際貢獻就開心作答，直接失分。</span>"
+  },
+  {
+    sec:"0610", secCls:"s0610", level:"陷阱",
+    q:"間接法現金流量表中，「處分資產利益」應如何調整？為什麼？",
+    data:"折舊費用（非現金支出）→ ＋<br>應收帳款增加（借方）→ −<br>處分資產利益 → ?",
+    options:[
+      "加項，因為它是利益",
+      "減項，因為它屬於非營業項目，現金流入應歸類到投資活動",
+      "不需調整，因為已包含在淨利中",
+      "視金額大小決定，重大者才調整"
+    ],
+    correct:1,
+    explain:"<span class='key'>處分資產利益是「非營業項目」——其現金流入屬於投資活動，因此必須從營業活動中減除</span>，避免重複計算。<br>判斷原則：<span class='key'>貸方方向 → ＋，借方方向 → −；非現金／非營業項目特別處理</span>。<br>老師親測提醒：<span class='key'>連 AI 都會把「處分資產利益」的反推邏輯搞錯</span>，而選擇題要一次做對 9 個加減項，<span class='key'>按錯一個鍵整題泡湯，零容錯空間</span>。"
+  },
+  {
+    sec:"0610", secCls:"s0610", level:"申論",
+    q:"機器定價 60 萬、95 折、符合條件的現金折扣 2%，另有運輸費、保險費、安裝費、運送碰撞修理費、舊機器拆除費、人員操作訓練費。哪些「不計入」入帳成本？",
+    data:"60萬 × 95% ＝ 57萬 → × 98% ＝ <b>558,600</b><br>＋ 運輸 ＋ 保險 ＋ 安裝 ＝ <b>584,600</b>",
+    options:[
+      "運輸費、保險費、安裝費",
+      "運送碰撞修理費、舊機器拆除費、人員操作訓練費",
+      "只有運送碰撞修理費不計入",
+      "全部都可以計入成本"
+    ],
+    correct:1,
+    explain:"可計入：<span class='key'>價格淨額 558,600 ＋ 運輸費 ＋ 保險費 ＋ 安裝費 ＝ 584,600</span>。<br>不可計入的三項各有理由：<br><span class='key'>運送碰撞修理費</span>——屬<span class='key'>意外損失</span>，不是讓資產達可用狀態的必要支出。<br><span class='key'>舊機器拆除費</span>——故意拿來混淆<span class='key'>土地／建物拆除</span>的處理方式。<br><span class='key'>人員操作訓練費</span>——極刻意的陷阱，實務上這根本包在設備款裡。<br><span class='trap'>這是申論的第一階段，一旦算錯，後面三個階段全部 0 分。</span>"
+  },
+  {
+    sec:"0610", secCls:"s0610", level:"申論",
+    q:"X3 年 7 月 1 日購入設備，成本 584,600、耐用 8 年，採年數合計法（SYD）。X3 年折舊如何計算？X4 年呢？",
+    data:"分母 ＝ 1+2+…+8 ＝ <b>36</b>",
+    options:[
+      "X3 年 ＝ 584,600 × 8/36（整年）；X4 年 ＝ 584,600 × 7/36",
+      "X3 年 ＝ 584,600 × 8/36 × 6/12；X4 年須分兩段：前半 8/36、後半 7/36",
+      "X3 年 ＝ 584,600 × 1/8 × 6/12；X4 年 ＝ 584,600 × 1/8",
+      "X3 年不提列折舊，X4 年起才開始提列"
+    ],
+    correct:1,
+    explain:"<span class='key'>年中購入必須切半</span>：X3 年 ＝ 584,600 × <span class='key'>8/36 × 6/12</span>。<br>更麻煩的是 X4 年：因為<span class='key'>從 7/1 起算，每個折舊年度都橫跨兩個會計年度</span>，所以 X4 年要拆成<span class='key'>前半 8/36 ＋ 後半 7/36</span>兩段相加。<br><span class='trap'>跨年度切割除不盡，是考場最大的恐慌點</span>——但只要記住「一個折舊年度＝兩個半年」，流程就固定了。"
+  },
+  {
+    sec:"0610", secCls:"s0610", level:"申論",
+    q:"X5 年初三改同時發動：殘值增加、耐用年限延長 1 年、折舊法改為雙倍餘額遞減法（DDB）。若 X5 年初帳面價值 404,241、剩餘年限 7.5 年，X5 年折舊為多少？",
+    data:"DDB 折舊率 ＝ <b>2 ÷ 剩餘年限</b>",
+    options:[
+      "先扣殘值再乘 2/7.5",
+      "404,241 × 2/7.5 ＝ 107,798 元（DDB 不考慮殘值）",
+      "404,241 × 1/7.5 ＝ 53,899 元",
+      "須追溯調整前期折舊後再計算"
+    ],
+    correct:1,
+    explain:"<span class='key'>DDB 的折舊率 ＝ 2 ÷ 剩餘年限，且計算時「不考慮殘值」</span>——這是 DDB 最反直覺、也最常錯的地方（殘值只在最後一年當作停止折舊的下限）。<br>404,241 × 2/7.5 ＝ <span class='key'>107,798 元</span>。<br>另外注意剩餘年限的算法：<span class='key'>原剩餘 6.5 年 ＋ 延長 1 年 ＝ 7.5 年</span>。三個變更（殘值、年限、方法）都屬會計估計變更，<span class='key'>不追溯，直接往下算</span>。"
+  },
+
+  /* ===== 0617 ===== */
+  {
+    sec:"0617", secCls:"s0617", level:"陷阱",
+    q:"買進 A 公司股票共 3 萬股、每股 20 元，支付手續費 15,000 元。其中 2 萬股分類為 FVTPL、1 萬股為 FVTOCI。手續費應如何處理？",
+    data:"依股數比例分攤：FVTPL <b>10,000</b>／FVTOCI <b>5,000</b>",
+    options:[
+      "全部 15,000 元列為當期費用",
+      "FVTPL 的 10,000 直接列當期費用；FVTOCI 的 5,000 計入投資成本（成本基礎 ＝ 20 × 10,000 ＋ 5,000 ＝ 205,000）",
+      "全部 15,000 元計入投資成本",
+      "FVTPL 計入成本、FVTOCI 列費用"
+    ],
+    correct:1,
+    explain:"兩層陷阱：<span class='key'>① 手續費必須依股數比例分攤，不能全歸同一類</span>；<span class='key'>② 兩種分類的處理方式相反</span>。<br><span class='key'>FVTPL「渣男」（短線操作）</span>——手續費<span class='key'>直接當期費用</span>，立刻吃掉利潤。<br><span class='key'>FVTOCI「舉棋不定」</span>——手續費<span class='key'>計入投資成本</span>，成本基礎變成 205,000。<br>這個成本基礎會一路影響到後面「其他權益」的計算。"
+  },
+  {
+    sec:"0617", secCls:"s0617", level:"陷阱",
+    q:"FVTOCI 分類下收到的現金股利，應認列在哪裡？",
+    data:"高頻錯誤：誤以為 FVTOCI 的股利要放入 OCI",
+    options:[
+      "計入其他綜合損益（OCI）",
+      "認列為股利收入，進入本期損益——FVTPL 與 FVTOCI 皆同；唯獨「權益法」才視為本金返還，貸記投資帳戶",
+      "沖減投資成本，不認列收入",
+      "計入其他權益，不影響損益也不影響 OCI"
+    ],
+    correct:1,
+    explain:"<span class='key'>兩種分類的現金股利一律認列為「股利收入」進入本期損益</span>——不論是 FVTPL 還是 FVTOCI。<br><span class='key'>唯一的例外是「權益法」</span>：此時股利視為<span class='key'>投資本金返還</span>，貸記投資帳戶，不認列收入。<br><span class='trap'>誤把 FVTOCI 的股利放進 OCI，是這題最常見的滅頂錯誤</span>——記住：<span class='key'>評價損益才進 OCI，股利永遠是收入。</span>"
+  },
+  {
+    sec:"0617", secCls:"s0617", level:"陷阱",
+    q:"股票原始成本每股 20 元，X1 年底市價 10 元、X2 年底市價 30 元。X2 年每股評價利益應為多少？",
+    data:"X1 年底已完成評價至 <b>10 元</b>",
+    options:["10 元（30 − 20）","20 元（30 − 10）","30 元","無評價利益"],
+    correct:1,
+    explain:"<span class='key'>每年評價必須以「上年底公允價值」為比較基礎</span>，不能回頭用原始成本。<br>X1 年底已經評價到 10 元，所以 X2 年的評價利益 ＝ <span class='key'>30 − 10 ＝ 20 元</span>。<br><span class='trap'>用 30 − 20 ＝ 10 元是大錯特錯</span>——那等於漏掉了 X1 年那筆跌價 10 元的迴升。<br>這是本題「最不直覺」的陷阱，一旦錯了，本期損益、OCI、其他權益三個欄位會全部連動錯。"
+  },
+  {
+    sec:"0617", secCls:"s0617", level:"計算",
+    q:"X2 年的本期損益（P&L）合計為多少？",
+    data:"股利收入：3萬股 × $1 × 兩年 ＝ <b>+30,000</b><br>FVTPL 評價利益：2萬股 × $20 ＝ <b>+400,000</b>",
+    options:["400,000 元","430,000 元","630,000 元","230,000 元"],
+    correct:1,
+    explain:"30,000 ＋ 400,000 ＝ <span class='key'>430,000 元</span>。<br>兩個組成要素：<span class='key'>① 股利收入（FVTPL 與 FVTOCI 的股利都在這裡）</span>；<span class='key'>② 只有 FVTPL 的評價利益才進本期損益</span>。<br>對照：<span class='key'>FVTOCI 的評價回升（1萬股 × $20 ＝ 200,000）進的是 OCI，不是本期損益</span>——兩者絕對不能混。"
+  },
+  {
+    sec:"0617", secCls:"s0617", level:"技巧",
+    q:"用「宏觀速算法」計算累計保留盈餘增加，正確的組成是什麼？",
+    data:"FVTPL 期末市值（2萬 × $30） <b>+600,000</b><br>減 FVTPL 原始成本（2萬 × $20） <b>−400,000</b><br>減 X1 年手續費（一次性認列） <b>−10,000</b><br>加 兩年累計股利（3萬 × $1 × 2） <b>+60,000</b>",
+    options:[
+      "190,000 元（只計資本利得）",
+      "250,000 元＝FVTPL（期末市值 − 原始成本 − 手續費）＋ 全部股利",
+      "300,000 元（含 FVTOCI 市值）",
+      "95,000 元"
+    ],
+    correct:1,
+    explain:"資本利得 ＝ 600,000 − 400,000 − 10,000 ＝ <span class='key'>190,000</span>；再加兩年股利 60,000 ＝ <span class='key'>250,000 元</span>。<br>速算核心：<span class='key'>保留盈餘 ＝ FVTPL（期末市值 − 原始成本 − 手續費）＋ 全部股利</span>。<br><span class='key'>不要逐年加減</span>，直接用「現在有多少 vs 最初花了多少」的<span class='key'>宏觀差額法</span>一次到位——考場上省下的時間就是分數。<br>對照：<span class='key'>累計其他權益 ＝ FVTOCI 總市值 300,000 − 含手續費成本 205,000 ＝ 95,000 元</span>。"
+  },
+  {
+    sec:"0617", secCls:"s0617", level:"死記",
+    q:"依 IFRS 規範，「收到利息」、「收到股利」、「支付利息」、「支付現金股利」分別歸類在哪個活動？",
+    data:"⚠ 這組分類<b>違反直覺，只能硬背</b><br>台積電財報亦如此揭露",
+    options:[
+      "全部歸類為籌資活動",
+      "收到利息、收到股利、支付利息 → 營業活動；支付（發放）現金股利 → 籌資活動",
+      "收到利息與收到股利 → 投資活動；支付利息與支付股利 → 籌資活動",
+      "全部歸類為投資活動"
+    ],
+    correct:1,
+    explain:"這是<span class='key'>送分題中的反直覺陷阱</span>：<br><span class='key'>營業活動</span>——收到利息 ✅、收到股利 ✅、支付利息 ✅（三個都違反直覺）<br><span class='key'>籌資活動</span>——支付（發放）現金股利 ✅<br>關鍵記憶點：<span class='key'>收到股利（營業）≠ 支付股利（籌資）——方向不同，分類完全相反！</span><br>佐證：<span class='key'>台積電財報中「利息收入」與「股利收入」都直接包在營業活動揭露</span>。這題只要分類、不用計算，錯了非常可惜。"
+  },
+
+  /* ===== 跨堂整合 ===== */
+  {
+    sec:"整合", secCls:"sMix", level:"整合",
+    q:"X6 年底帳面價值 217,391，市價 18 萬、處分成本 3 萬、使用價值 20 萬。減損損失為多少？若日後價值回升，商譽與專利權的迴轉規定有何不同？",
+    data:"可回收金額 ＝ max（<b>18萬 − 3萬 ＝ 15萬</b>，<b>使用價值 20萬</b>）",
+    options:[
+      "減損 67,391；商譽與專利權皆可迴轉",
+      "減損 17,391（可回收金額取 200,000）；商譽絕不可迴轉，有固定耐用年限的無形資產（如專利權、特許權）可迴轉，但上限為「若未認列減損、依原條件攤銷至迴轉日的帳面價值」",
+      "減損 17,391；商譽與專利權皆不可迴轉",
+      "不需認列減損，因為使用價值高於帳面價值"
+    ],
+    correct:1,
+    explain:"這題把 0610 申論的第四階段與 0603 的第 9 個考點串起來。<br><span class='key'>可回收金額 ＝ 取「公允價值減處分成本」與「使用價值」兩者較高者 ＝ max(150,000, 200,000) ＝ 200,000</span>。<br>減損損失 ＝ 217,391 − 200,000 ＝ <span class='key'>17,391 元</span>。<br>迴轉規定的分野：<span class='key'>商譽減損絕不可迴轉（無例外）</span>；<span class='key'>有固定耐用年限、可攤銷的無形資產（專利權、特許權）可迴轉</span>，但<span class='key'>只能恢復到「假設當初沒有減損」的帳面價值，不能超過</span>。<br>口訣：<span class='key'>商譽減損入地獄，無法回頭。</span>"
+  },
+  {
+    sec:"整合", secCls:"sMix", level:"整合",
+    q:"毛利法的「倖存存貨用售價」、CVP 的「邊際貢獻不是售價」、EPS 的「綜合損益不是淨利」——這三個陷阱的共同本質是什麼？",
+    data:"0603 毛利法：3 萬（售價）→ 必須 × 成本率還原<br>0610 CVP：40 元（邊際貢獻）→ 必須 ＋ 變動成本<br>0610 EPS：100 萬（綜合損益）→ 必須 − OCI",
+    options:[
+      "三者都是計算太複雜導致的失誤",
+      "三者都是「口徑錯置」——題目給的數字與答案要求的口徑不同，中途停手或直接套用就會失分",
+      "三者都是因為公式背錯",
+      "三者都屬於申論題型，選擇題不會考"
+    ],
+    correct:1,
+    explain:"三個陷阱長得完全不同，但本質是同一個：<span class='key'>「題目給你的口徑」≠「答案要的口徑」</span>。<br><span class='key'>毛利法</span>——給你售價，要的是成本。<br><span class='key'>CVP</span>——算出邊際貢獻，要的是售價。<br><span class='key'>EPS</span>——給你綜合損益，要的是本期淨利。<br>所以考場上的固定動作只有一個：<span class='key'>算完之後回頭讀一次題目，確認「它問的到底是哪個數字」</span>。<br>這也解釋了為什麼選項裡一定會放中途答案（2.1萬 vs 3萬、40 vs 100、100萬 vs 80萬）——<span class='key'>出題老師就是在等你中途停手。</span>"
+  }
+];
+
+let current = 0;
+let score = 0;
+const wrongList = [];
+const secStats = {};
+questions.forEach(q => { if(!secStats[q.sec]) secStats[q.sec] = {total:0, right:0}; secStats[q.sec].total++; });
+
+const quizArea = document.getElementById('quizArea');
+const progressFill = document.getElementById('progressFill');
+const progressText = document.getElementById('progressText');
+
+function renderQuiz(){
+  quizArea.innerHTML = '';
+  wrongList.length = 0;
+  Object.keys(secStats).forEach(k => secStats[k].right = 0);
+
+  questions.forEach((item, idx) => {
+    const card = document.createElement('div');
+    card.className = 'card' + (idx === current ? ' active' : '');
+    card.id = 'card-' + idx;
+
+    const topline = document.createElement('div');
+    topline.className = 'topline';
+    const qnum = document.createElement('span');
+    qnum.className = 'qnum';
+    qnum.textContent = `Q${idx+1} / ${questions.length}`;
+    const badges = document.createElement('span');
+    badges.className = 'badges';
+    const secTag = document.createElement('span');
+    secTag.className = 'sec ' + item.secCls;
+    secTag.textContent = item.sec;
+    const lv = document.createElement('span');
+    lv.className = 'level';
+    lv.textContent = item.level;
+    badges.appendChild(secTag);
+    badges.appendChild(lv);
+    topline.appendChild(qnum);
+    topline.appendChild(badges);
+    card.appendChild(topline);
+
+    const qtext = document.createElement('div');
+    qtext.className = 'qtext';
+    qtext.textContent = item.q;
+    card.appendChild(qtext);
+
+    if(item.data){
+      const db = document.createElement('div');
+      db.className = 'databox';
+      db.innerHTML = item.data;
+      card.appendChild(db);
+    }
+
+    const optsWrap = document.createElement('div');
+    optsWrap.className = 'options';
+    item.options.forEach((optText, oIdx) => {
+      const btn = document.createElement('button');
+      btn.className = 'opt';
+      btn.textContent = optText;
+      btn.onclick = () => selectAnswer(idx, oIdx);
+      optsWrap.appendChild(btn);
+    });
+    card.appendChild(optsWrap);
+
+    const explain = document.createElement('div');
+    explain.className = 'explain';
+    explain.id = 'explain-' + idx;
+    explain.innerHTML = item.explain;
+    card.appendChild(explain);
+
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'nextBtn';
+    nextBtn.id = 'next-' + idx;
+    nextBtn.textContent = idx === questions.length - 1 ? '查看結果' : '下一題 →';
+    nextBtn.onclick = () => goNext(idx);
+    card.appendChild(nextBtn);
+
+    quizArea.appendChild(card);
+  });
+  updateProgress();
+}
+
+function updateProgress(){
+  progressFill.style.width = (current / questions.length * 100) + '%';
+  progressText.textContent = `${current} / ${questions.length}`;
+}
+
+function selectAnswer(qIdx, oIdx){
+  const card = document.getElementById('card-' + qIdx);
+  const opts = card.querySelectorAll('.opt');
+  const item = questions[qIdx];
+
+  opts.forEach((o, i) => {
+    o.classList.add('disabled');
+    if(i === item.correct) o.classList.add('correct');
+    if(i === oIdx && oIdx !== item.correct) o.classList.add('wrong');
+  });
+
+  if(oIdx === item.correct){
+    score++;
+    secStats[item.sec].right++;
+  }else{
+    wrongList.push(`Q${qIdx+1}（${item.sec}·${item.level}）`);
+  }
+
+  document.getElementById('explain-' + qIdx).classList.add('show');
+  document.getElementById('next-' + qIdx).classList.add('show');
+}
+
+function goNext(qIdx){
+  document.getElementById('card-' + qIdx).classList.remove('active');
+  current++;
+  if(current < questions.length){
+    const nextCard = document.getElementById('card-' + current);
+    nextCard.classList.add('active');
+    nextCard.scrollIntoView({behavior:'smooth', block:'start'});
+    updateProgress();
+  }else{
+    progressFill.style.width = '100%';
+    progressText.textContent = `${questions.length} / ${questions.length}`;
+    showResult();
+  }
+}
+
+function showResult(){
+  const resultBox = document.getElementById('resultBox');
+  resultBox.classList.add('show');
+  document.getElementById('scoreText').textContent = `${score} / ${questions.length}`;
+
+  const secBox = document.getElementById('secScore');
+  secBox.innerHTML = '';
+  const secNames = {"0603":"0603 十大考點","0610":"0610 EPS·CVP·申論","0617":"0617 金融資產·現金流","整合":"跨堂整合"};
+  Object.keys(secStats).forEach(k => {
+    const d = document.createElement('div');
+    d.innerHTML = `${secNames[k] || k}<b>${secStats[k].right} / ${secStats[k].total}</b>`;
+    secBox.appendChild(d);
+  });
+
+  let subLabel = '', msg = '';
+  const pct = score / questions.length;
+  if(pct === 1){
+    subLabel = '滿分';
+    msg = '三堂課的計算流程與陷阱全數掌握，包含最容易全盤皆輸的申論四階段與 FVTPL／FVTOCI 分流。<br><br><b>下一步練習：</b>把「十大陷阱速查表」蓋起來默寫一次「錯誤直覺 → 正確處理」。考場上真正決勝的不是會不會算，而是<b>看到題目的瞬間，腦中有沒有自動跳出那個陷阱警報</b>。';
+  }else if(pct >= 0.84){
+    subLabel = '掌握良好';
+    msg = '主要考點已經穩了。回頭把答錯的題目重算一次，特別留意三個最高頻失分點：<b>① 綜合損益要先扣 OCI 才是 EPS 分子</b>；<b>② 算出邊際貢獻 40 元不是答案，要再加變動成本</b>；<b>③ 第二年評價要用上年底公允價值，不是原始成本</b>。';
+  }else if(pct >= 0.64){
+    subLabel = '基礎及格';
+    msg = '觀念大致有，但計算步驟還不夠熟練。建議先把最下方的「關鍵答案數字」表格遮住，逐題重算一次——這些都是課堂題目的標準答案，算得出來代表流程真的通了。<br><br>特別提醒：0610 的申論題<b>第一階段入帳成本算錯，後面三階段全部 0 分</b>，那三個不計入的項目（訓練費、拆除費、修理費）務必背熟。';
+  }else{
+    subLabel = '需要重新複習';
+    msg = '建議依序重讀三份一頁式教材，先抓住每堂課的核心原則：<br><b>0603</b>——庫藏股交易不進損益表；商譽減損入地獄，無法回頭。<br><b>0610</b>——EPS 分子要先扣 OCI；CVP 算到邊際貢獻還沒結束；DDB 不考慮殘值。<br><b>0617</b>——手續費 FVTPL 列費用、FVTOCI 入成本；股利一律進本期損益；收到股利是營業、支付股利是籌資。';
+  }
+  if(wrongList.length){
+    msg += '<br><br><b>建議複習題號：</b>' + wrongList.join('、');
+  }
+  document.getElementById('scoreSub').textContent = subLabel;
+  document.getElementById('resultMsg').innerHTML = msg;
+}
+
+function restartQuiz(){
+  current = 0;
+  score = 0;
+  document.getElementById('resultBox').classList.remove('show');
+  renderQuiz();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+renderQuiz();
+</script>
+</body>
+</html>
