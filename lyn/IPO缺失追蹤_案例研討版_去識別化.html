@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IPO 上櫃輔導缺失追蹤｜案例研討版</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#10243A; --ink-2:#3A5062; --ink-3:#6C8095;
+  --paper:#E9EDF1; --card:#FFFFFF; --line:#C6D0DA; --line-soft:#E2E8ED;
+  --red:#A8221B; --red-soft:#FBEDEC;
+  --amber:#96610A; --amber-soft:#FDF3E2;
+  --green:#0F5A44; --green-soft:#E9F3EF;
+  --violet:#4B3A78; --violet-soft:#F0EDF7;
+  --serif:"Noto Serif TC",Songti TC,serif;
+  --sans:"Noto Sans TC",-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px 96px}
+
+header{border-bottom:3px double var(--ink);padding:44px 0 22px;margin-bottom:34px}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;color:var(--ink-3);text-transform:uppercase;margin-bottom:14px}
+h1{font-family:var(--serif);font-weight:900;font-size:clamp(28px,4.4vw,44px);line-height:1.24;margin:0 0 10px;letter-spacing:-.01em}
+h1 small{display:block;font-size:.44em;font-weight:500;color:var(--ink-2);letter-spacing:.02em;margin-top:10px}
+.source{font-size:13px;color:var(--ink-3);font-family:var(--mono);line-height:1.9}
+
+.deid{border:1px solid var(--line);background:#F7F9FB;padding:18px 22px;margin-top:24px;font-size:13px;line-height:1.75}
+.deid h4{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ink-2);margin:0 0 10px;font-weight:600}
+.deid .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px 28px}
+.deid code{font-family:var(--mono);font-size:12px;background:#fff;border:1px solid var(--line-soft);padding:1px 5px}
+.deid .warn{margin-top:12px;padding-top:12px;border-top:1px dotted var(--line);color:var(--red)}
+
+.meters{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:24px}
+.meter{background:var(--card);padding:18px 20px}
+.meter .lbl{font-size:11.5px;letter-spacing:.1em;color:var(--ink-3);font-family:var(--mono);margin-bottom:6px}
+.meter .val{font-family:var(--serif);font-weight:900;font-size:30px;line-height:1;letter-spacing:-.02em}
+.meter .val.warn{color:var(--red)}
+.meter .val.recon{color:var(--violet)}
+.meter .sub{font-size:12.5px;color:var(--ink-2);margin-top:6px}
+
+.sec-head{display:flex;align-items:baseline;gap:16px;margin:56px 0 20px;padding-bottom:10px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.sec-head h2{font-family:var(--serif);font-size:23px;font-weight:700;margin:0}
+.sec-head .note{font-size:13px;color:var(--ink-3)}
+
+.item{background:var(--card);border:1px solid var(--line);margin-bottom:18px;overflow:hidden}
+.item .railtop{height:4px;background:var(--red)}
+.item[data-risk="中高"] .railtop{background:var(--amber)}
+.ihead{display:grid;grid-template-columns:64px 1fr auto;gap:20px;padding:22px 24px 18px;border-bottom:1px solid var(--line-soft);align-items:start}
+.rank{font-family:var(--serif);font-weight:900;font-size:46px;line-height:.9;letter-spacing:-.04em}
+.rank em{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;color:var(--ink-3);margin-top:6px}
+.ititle{font-family:var(--serif);font-size:21px;font-weight:700;line-height:1.4;margin:0 0 10px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--mono);font-size:11px;border:1px solid var(--line);padding:3px 8px;color:var(--ink-2);background:#F7F9FB}
+.tag.risk{border-color:var(--red);color:var(--red);background:var(--red-soft);font-weight:600}
+.tag.risk.mid{border-color:var(--amber);color:var(--amber);background:var(--amber-soft)}
+.tag.who{background:#fff;border-style:dashed}
+.stamp{border:2px solid var(--red);color:var(--red);font-family:var(--mono);font-weight:600;font-size:11px;letter-spacing:.04em;padding:6px 10px;transform:rotate(-6deg);white-space:nowrap;text-align:center;line-height:1.4;box-shadow:inset 0 0 0 1px var(--red)}
+.stamp b{display:block;font-size:17px;font-weight:600}
+.stamp.ontime{border-color:var(--green);color:var(--green);box-shadow:inset 0 0 0 1px var(--green);transform:rotate(-3deg)}
+
+.ibody{display:grid;grid-template-columns:1.05fr 1fr}
+.pane{padding:20px 24px}
+.pane+.pane{border-left:1px solid var(--line-soft)}
+.pane h4,.upstream h4{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ink-3);margin:0 0 12px;font-weight:400}
+.facts{list-style:none;margin:0;padding:0}
+.facts li{display:flex;justify-content:space-between;gap:14px;align-items:baseline;padding:7px 0;border-bottom:1px dotted var(--line);font-size:13.5px}
+.facts li:last-child{border-bottom:none}
+.facts .k{color:var(--ink-2);flex:1}
+.facts .v{font-family:var(--mono);font-size:13px;text-align:right;font-weight:600;white-space:nowrap}
+.facts .v.neg{color:var(--red)}
+.block{background:var(--red-soft);border-left:3px solid var(--red);padding:12px 14px;font-size:13.5px;margin-top:16px}
+.block b{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--red);display:block;margin-bottom:4px;font-weight:600}
+.checks{list-style:none;margin:0;padding:0}
+.checks li{display:flex;gap:10px;padding:7px 0;font-size:13.5px;align-items:flex-start}
+.checks input{margin:5px 0 0;accent-color:var(--ink);width:15px;height:15px;flex:none;cursor:pointer}
+.checks label{cursor:pointer}
+.checks li.done label{text-decoration:line-through;color:var(--ink-3)}
+.prog{margin-top:16px;display:flex;align-items:center;gap:10px}
+.bar{flex:1;height:6px;background:var(--line-soft);position:relative}
+.bar i{position:absolute;inset:0 auto 0 0;background:var(--green);width:0;transition:width .3s ease}
+.prog span{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);white-space:nowrap}
+
+.upstream{padding:20px 24px;border-top:1px solid var(--line-soft);background:#FAFBFC}
+.upstream h4 span{color:var(--ink-2);letter-spacing:.02em;font-size:12px}
+.up{display:grid;grid-template-columns:112px 1fr auto;gap:14px;align-items:baseline;padding:8px 0;border-bottom:1px dotted var(--line);font-size:13.5px}
+.up:last-child{border-bottom:none}
+.up .ref{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);font-weight:600}
+.up .txt em{font-style:normal;display:block;color:var(--ink-3);font-size:12.5px;margin-top:2px}
+.pill{font-family:var(--mono);font-size:10.5px;padding:2px 8px;border:1px solid;white-space:nowrap}
+.pill.ok{color:var(--green);border-color:#A9CFC1;background:var(--green-soft)}
+.pill.wait{color:var(--amber);border-color:#E0C58C;background:var(--amber-soft)}
+.pill.none{color:var(--red);border-color:#E5B4B0;background:var(--red-soft)}
+.pill.later{color:var(--ink-3);border-color:var(--line);background:#F2F5F7}
+.pill.conf{color:var(--violet);border-color:#BFB2DE;background:var(--violet-soft)}
+
+.deadline{padding:12px 24px;border-top:1px solid var(--line-soft);background:#F2F5F7;font-size:13px;font-family:var(--mono);color:var(--ink-2)}
+.deadline b{color:var(--ink);font-weight:600}
+
+.recon{border:2px solid var(--violet);background:var(--card)}
+.recon-head{background:var(--violet);color:#fff;padding:16px 24px}
+.recon-head h3{font-family:var(--serif);font-size:19px;margin:0 0 4px;font-weight:700}
+.recon-head p{margin:0;font-size:13px;opacity:.88}
+.buckets{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--line-soft)}
+.bucket{background:var(--card);padding:20px 22px}
+.bucket .n{font-family:var(--serif);font-size:38px;font-weight:900;line-height:1;color:var(--violet);letter-spacing:-.03em}
+.bucket .n small{font-family:var(--mono);font-size:12px;font-weight:400;color:var(--ink-3);margin-left:6px}
+.bucket h5{font-size:15px;font-weight:700;margin:10px 0 6px}
+.bucket p{margin:0;font-size:13px;color:var(--ink-2);line-height:1.65}
+.bucket .todo{margin-top:12px;padding-top:12px;border-top:1px dotted var(--line);font-size:12.5px}
+.bucket .todo b{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--violet);display:block;margin-bottom:4px}
+
+.revlist{padding:20px 24px;border-top:1px solid var(--line-soft)}
+.revlist h4{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ink-3);margin:0 0 4px;font-weight:400}
+.revlist .cap{font-size:13px;color:var(--ink-2);margin-bottom:14px}
+.rev{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:8px 0;border-bottom:1px dotted var(--line);font-size:13.5px}
+.rev:last-child{border-bottom:none}
+.rev .ref{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);font-weight:600}
+.rev em{font-style:normal;color:var(--red);display:block;font-size:12.5px;margin-top:2px}
+
+.others{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.oth{background:var(--card);border:1px solid var(--line);padding:20px 22px;border-top:3px solid var(--ink-3)}
+.oth h3{font-family:var(--serif);font-size:17px;margin:0 0 4px;font-weight:700;line-height:1.4}
+.oth .clause{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-bottom:14px}
+.oth .why{font-size:13.5px;color:var(--ink-2);padding-bottom:14px;border-bottom:1px dotted var(--line)}
+.oth .why b,.oth .act b{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ink-3);display:block;margin-bottom:5px;font-weight:400}
+.oth .act{font-size:13.5px;padding:14px 0;border-bottom:1px dotted var(--line)}
+.oth .act b{color:var(--green)}
+.oth .fact{font-size:12.5px;color:var(--ink-3);padding-top:14px;line-height:1.65}
+
+.cleared{background:var(--green-soft);border:1px solid #BFDBD0;padding:18px 22px;margin-top:16px}
+.cleared h4{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--green);margin:0 0 12px;font-weight:600}
+.cleared ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.cleared li{font-size:13.5px;display:flex;gap:10px;align-items:baseline}
+.cleared li::before{content:"✓";color:var(--green);font-family:var(--mono);font-weight:600;flex:none}
+
+.tl{border-left:2px solid var(--ink);margin-left:8px;padding-left:0}
+.tl li{list-style:none;position:relative;padding:0 0 26px 26px}
+.tl li::before{content:"";position:absolute;left:-7px;top:7px;width:12px;height:12px;background:var(--card);border:2px solid var(--ink);border-radius:50%}
+.tl li.hot::before{background:var(--red);border-color:var(--red)}
+.tl li.end::before{background:var(--ink)}
+.tl .when{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);font-weight:600}
+.tl li.hot .when{color:var(--red)}
+.tl .what{font-size:14.5px;margin-top:2px}
+
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-3);font-family:var(--mono);line-height:1.8}
+
+@media (max-width:820px){
+  .ibody{grid-template-columns:1fr}
+  .pane+.pane{border-left:none;border-top:1px solid var(--line-soft)}
+  .ihead{grid-template-columns:44px 1fr;gap:14px;padding:18px}
+  .rank{font-size:34px}
+  .stamp{grid-column:1/-1;justify-self:start;margin-top:6px}
+  .up{grid-template-columns:1fr;gap:4px}
+  .up .pill{justify-self:start}
+  .rev{grid-template-columns:1fr;gap:2px}
+}
+@media print{body{background:#fff}.item,.oth,.recon{break-inside:avoid}header{padding-top:0}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">興櫃公司上櫃輔導 · 缺失追蹤方法論 · 案例研討版</div>
+  <h1>前五大優先議題
+    <small>每題向上追到卡住它的資料項 — 缺失、上游卡點、責任職能三層對齊</small>
+  </h1>
+  <div class="source">
+    案例背景:興櫃食品生技業 A 公司,含 3 家合併子公司,目標於 <b>T</b> 月遞送上櫃申請<br>
+    缺失來源:輔導券商查核會議紀錄(T−11 月)　上游資料狀態:券商資料需求追蹤表(不宜條款查核需求 149 項)
+  </div>
+
+  <div class="deid">
+    <h4>去識別化對照原則</h4>
+    <div class="cols">
+      <div><code>A 公司</code> 申請公司　<code>B／C／D</code> 合併子公司</div>
+      <div><code>E／F</code> 關係企業(出租方)　<code>G</code> 共用場所之關係企業</div>
+      <div><code>甲／乙／丙董事</code> 個別董事　<code>職稱</code> 取代所有人名</div>
+      <div><code>T</code> 目標遞件月　<code>T−n</code> 相對月份,不用絕對日期</div>
+      <div><code>南部廠區／北部辦公室</code> 取代具體地點</div>
+      <div>公開可查數值(治理評鑑分數、持股比例)已模糊為區間</div>
+    </div>
+    <div class="warn">提醒:去識別化不等於不可還原。產業別 × 興櫃身分 × 遞件時程 × 廠區土地態樣的組合仍具指向性,對外使用前請評估受眾範圍。本版本亦不解除任何保密或忠實義務。</div>
+  </div>
+
+  <div class="meters">
+    <div class="meter"><div class="lbl">距遞件</div><div class="val">T−8 月</div><div class="sub">案例觀察時點</div></div>
+    <div class="meter"><div class="lbl">已逾期承諾</div><div class="val warn">4 / 5</div><div class="sub">查核會議承諾之改善時點</div></div>
+    <div class="meter"><div class="lbl">最近死線</div><div class="val" style="font-size:24px">T−7 月</div><div class="sub">當季自編財報提交會計師</div></div>
+    <div class="meter"><div class="lbl">待與券商對帳</div><div class="val recon">93</div><div class="sub">狀態認定不一致或未確認</div></div>
+    <div class="meter"><div class="lbl">整體完成度</div><div class="val" id="totalPct">0%</div><div class="sub"><span id="totalDone">0</span> / <span id="totalAll">0</span> 項行動</div></div>
+  </div>
+</header>
+
+<div class="sec-head">
+  <h2>前五大議題</h2>
+  <div class="note">關鍵事實 · 目前卡點 · 下一步 · 上游卡住它的資料項</div>
+</div>
+<div id="items"></div>
+
+<div class="sec-head">
+  <h2>券商對帳區</h2>
+  <div class="note">下次券商會議的完整議程,不需另外準備</div>
+</div>
+<div class="recon">
+  <div class="recon-head">
+    <h3>93 項狀態尚未與券商校準</h3>
+    <p>公司內部追蹤表與券商認列之間存在三類落差。在對過之前,任何完成率都不可引用。</p>
+  </div>
+  <div class="buckets">
+    <div class="bucket">
+      <div class="n">51<small>／149 項</small></div>
+      <h5>灰色地帶</h5>
+      <p>公司已蓋核對戳記,但券商進度追蹤欄位仍為空白。可能是已交而券商未回覆,也可能是交付未被認可。</p>
+      <div class="todo"><b>要做的事</b>逐項請券商回覆「認列／退回／補件」,退回者當場確認補件內容與期限。</div>
+    </div>
+    <div class="bucket">
+      <div class="n">17<small>／149 項</small></div>
+      <h5>逆向落差</h5>
+      <p>券商已認列「已提供」,但公司自己的備註仍寫著待補、待交或需另補。券商以為結案,公司知道沒完。</p>
+      <div class="todo"><b>要做的事</b>主動揭露,不要等券商查到。這類項目若在送件前才被發現,傷的是信任而不只是進度。</div>
+    </div>
+    <div class="bucket">
+      <div class="n">25<small>／149 項</small></div>
+      <h5>延後提供假設</h5>
+      <p>備註為「待確認是否於正式送件時間再行提供」。這不是進度,是假設 — 若券商未書面同意,會在送件前集中到期。</p>
+      <div class="todo"><b>要做的事</b>請券商就這 25 項出具書面確認,並反推各自的實際準備起始日。</div>
+    </div>
+  </div>
+  <div class="revlist">
+    <h4>逆向落差明細</h4>
+    <div class="cap">券商欄位已標「已提供」,公司備註仍有未完成事項 — 這 17 項建議在下次會議主動提出。</div>
+    <div id="revlist"></div>
+  </div>
+</div>
+
+<div class="sec-head">
+  <h2>其他</h2>
+  <div class="note">重要但不進前五,理由與會計線仍須執行的動作</div>
+</div>
+<div class="others" id="others"></div>
+
+<div class="cleared">
+  <h4>已解除 / 接近解除 — 不需再佔用戰力</h4>
+  <ul>
+    <li>公司章程獨立董事席次(不宜第八款)— 股東會已通過修訂,待取得核准函;變更事項登記表已同步更新</li>
+    <li>永續發展實務守則 — 董事會已通過,永續長任命案接續提報</li>
+    <li>IFRS 10 集團母公司認定 — 會計師已回覆無須合併;兩家關係企業加計個人持股合計逾半數,持續留意即可</li>
+  </ul>
+</div>
+
+<div class="sec-head">
+  <h2>倒推時程</h2>
+  <div class="note">真正的死線在 T−7 月,不是 T</div>
+</div>
+<ul class="tl">
+  <li class="hot"><div class="when">T − 7 月</div><div class="what"><b>當季自編財報模擬提交會計師</b> — 議題 4 的第一次正式驗收</div></li>
+  <li class="hot"><div class="when">T − 7 月前</div><div class="what">關係人交易清單全面盤點完成;倉儲承租補洽會計師複核並重提董事會</div></li>
+  <li><div class="when">T − 6 ~ 4 月</div><div class="what">交際費、佣金管理辦法經董事會通過(需留 2 季執行紀錄)+ 利益返還入帳</div></li>
+  <li><div class="when">T − 6 ~ 4 月</div><div class="what">基層員工調薪方案經董事會,當年度平均薪資須達 1.3 倍</div></li>
+  <li><div class="when">T − 3 月</div><div class="what">年報查核同步檢視自編能力;股本形成資料須全數到位</div></li>
+  <li class="end"><div class="when">T</div><div class="what"><b>遞件</b></div></li>
+</ul>
+
+<footer>
+  責任界線提醒:議題 1 涉及董事個人資金流向。會計主管的角色是完整呈現事實(金額、憑證缺口、收付款人不一致)並書面提報審計委員會與內部稽核,實質判斷屬審計委員會與獨立董事職權。中性 · 完整 · 留痕。<br>
+  本頁為去識別化之案例研討版本,數值經模糊化處理,不得作為任何個案之財務或法律結論引用。
+</footer>
+
+</div>
+
+<script>
+const DATA = [
+  {
+    rank:1, risk:"高", late:"約 2 個月",
+    title:"交際費與佣金 — 資金流向與經營者誠信",
+    clause:"不宜條款以外之重要事項",
+    owner:"會計主管、財務主管", broker:"券商承辦",
+    promiseLabel:"承諾提供佣金明細與訂定交際費辦法｜T−10 月",
+    facts:[
+      {k:"甲董事單筆交際費請款", v:"18,050 元"},
+      {k:"實際取具發票金額", v:"10,080 元", neg:true},
+      {k:"外部憑證缺口", v:"7,970 元", neg:true},
+      {k:"款項匯入乙董事帳戶(請款人≠收款人)", v:"14,707 元", neg:true},
+      {k:"另筆交際費(董事親屬婚宴送禮)", v:"104,500 元", neg:true},
+      {k:"佣金管理辦法", v:"尚未訂定", neg:true}
+    ],
+    block:"最近二年度通路佣金明細(對象、外部合約、內部簽呈、每筆計算資料)與交際費明細至今未提供,券商無從抽核、無法判斷交易合理性與必要性。",
+    next:[
+      "最近三年度交際費與佣金逐筆清查,產出缺憑證清單",
+      "訂定佣金管理辦法、交際費管理辦法,提董事會通過",
+      "與業務無直接關係之支出完成利益返還並入帳",
+      "建立付款控制點:請款人與收款人一致、現金支付一律取得簽收",
+      "事實整理後書面提報審計委員會與內部稽核,留存時間戳"
+    ],
+    upNote:"交際費在資料需求表中無獨立項目 — 它的入口是「營業費用-其他費用」明細帳,出口是誠信原則聲明書。",
+    upstream:[
+      {ref:"第一款 #18", txt:"所有科目明細帳及科目餘額表", sub:"明細帳已提供至當年度上半年;科目餘額表母子公司待補", st:"wait"},
+      {ref:"第一款 #19", txt:"「營業費用-其他費用」「佣金」「權利金」科目明細帳", sub:"僅註記「同 #18」,未就交際費單獨整理", st:"none"},
+      {ref:"第十二款 #4", txt:"佣金支付 7 子項(辦法／明細帳／合約／walkthrough／訪談／效益／收受者聲明書)", sub:"佣金管理辦法待提供;合約彙總表僅涵蓋部分年度", st:"none"},
+      {ref:"第一款 #12", txt:"現行有效契約彙總表(含佣金)", sub:"已提供", st:"ok"},
+      {ref:"第七款 #4", txt:"未違反誠信原則聲明書 + 附表", sub:"延後至送件前提供 — 交際費結論未定前簽不下去", st:"later"}
+    ],
+    deadline:"T−6 至 T−4 月董事會通過兩套辦法,並保留至少 2 季乾淨執行紀錄"
+  },
+  {
+    rank:2, risk:"高", late:"約 3 個月",
+    title:"關係人交易定價合理性與取處準則違規",
+    clause:"不宜第四款、第二款",
+    owner:"公司治理、財務主管", broker:"券商承辦",
+    promiseLabel:"承諾執行倉儲承租之利益返還｜T−11 月",
+    facts:[
+      {k:"向關係企業 E／F 承租倉儲單價", v:"3,500 元/坪"},
+      {k:"出租方取得成本", v:"1,475 元/坪"},
+      {k:"價差(須依取處 17、18 條返還)", v:"2,025 元/坪", neg:true},
+      {k:"董事會通過承租時", v:"未洽會計師複核", neg:true},
+      {k:"北部辦公室出租關係人", v:"3,000 元/坪"},
+      {k:"該區域租金行情", v:"1,100～1,600 元/坪", neg:true},
+      {k:"前一年度部分期間租金", v:"無合約", neg:true}
+    ],
+    block:"券商援引公司自訂關係人交易規章第八條,要求全面盤點是否尚有需經董事會決議之關係人交易,原訂期限已過仍未取得清單 — 清單不出來,後續抽核全部卡住。",
+    next:[
+      "倉儲承租補洽會計師複核並具體表示意見,重提董事會補正程序",
+      "計算價差利益返還金額並完成入帳",
+      "北部辦公室出租提出定價依據(坪數或人數比例),補簽前期合約",
+      "依內部規章完成關係人交易全面清單,由獨立董事代表簽約",
+      "專利權案:網頁與包裝完成移除,或補足使用之緣由與必要性說明"
+    ],
+    upNote:"「移轉訂價報告及轉撥計價政策待提供」是兩筆訂價講不出依據的根本原因 — 政策訂出來,兩筆訂價就有框架。",
+    upstream:[
+      {ref:"第四款 #2", txt:"關係人書面制度、交易明細帳、交易合約、移轉訂價報告及轉撥計價政策", sub:"制度與合約已提供;移轉訂價報告及轉撥計價政策待提供", st:"none"},
+      {ref:"第四款 #1", txt:"依 IFRS 之關係人名單", sub:"待提供", st:"none"},
+      {ref:"第四款 #11", txt:"最近五年度不動產交易明細及相關資料", sub:"明細已提供;契約、評估資料、鑑價報告、資金流程待補", st:"conf"},
+      {ref:"第四款 #10", txt:"取得或處分資產交易明細(含公告、董事會記錄、鑑價報告、專家意見)", sub:"已提供至前一年度 — 倉儲承租之取處程序將在此驗收", st:"ok"},
+      {ref:"第一款 #23", txt:"專利權、商標權及著作權彙總明細表及證書", sub:"彙總表已提交;證書影本待補", st:"wait"},
+      {ref:"第一款 #24", txt:"專利權代辦公司費用彙總明細", sub:"尚未提供", st:"none"}
+    ],
+    deadline:"T−7 月前清單完成並補正程序,否則影響財報揭露與抽核時程"
+  },
+  {
+    rank:3, risk:"高", late:"約 2 個月",
+    title:"股本形成與轉投資完整資料(遞件硬門檻)",
+    clause:"不宜條款以外之重要事項",
+    owner:"財務主管", broker:"券商承辦",
+    promiseLabel:"承諾提供股本形成全套資料｜T−10 月",
+    facts:[
+      {k:"要求文件類別", v:"5 類"},
+      {k:"設立時董事會議事錄", v:"待補"},
+      {k:"相關傳票及憑證", v:"待補"},
+      {k:"設立登記卡", v:"待補"},
+      {k:"歷次增減資董事會議事錄", v:"待補"},
+      {k:"實際取得家數", v:"4 家中僅 1 家", neg:true}
+    ],
+    block:"合併個體含母公司及 3 家子公司。文件年代久遠、原經辦多已離職,且會計人員仍在陸續離職 — 越晚調閱,能找回的比例越低,最後只能靠切結書與專案處理。",
+    next:[
+      "建立「轉投資公司 × 5 類文件」矩陣,標示已取得／缺件／替代方案",
+      "缺件即刻啟動主管機關調閱與稅捐機關傳票調檔",
+      "先與券商釐清第五款 #1 的認定落差,再談後續補件",
+      "填寫重要轉投資事業及重大投資案分析表",
+      "每週更新完成率並主動回報券商,取代被動被追"
+    ],
+    upNote:"這題有全表最嚴重的認定矛盾:公司自評「皆已提供」,會議紀錄卻記載僅取得 1 家。對帳前不要投入補件人力。",
+    upstream:[
+      {ref:"第五款 #1", txt:"增資(盈轉、資轉、現增)之董事會／股東會議事錄、核准函、資金運用季報表", sub:"公司備註「皆已提供」,券商欄位空白 — 與會議紀錄直接衝突", st:"conf"},
+      {ref:"附表 S4-1", txt:"重要轉投資事業及重大投資案分析表", sub:"整張表格空白未填", st:"none"},
+      {ref:"第八款 #2", txt:"董事、10% 股東、總經理及三親等內親屬之轉投資明細", sub:"待提供", st:"none"},
+      {ref:"第八款 #8", txt:"股東名冊電子檔", sub:"待提供", st:"none"},
+      {ref:"第一款 #8", txt:"公司成立至今之變更事項登記表(含核准函)", sub:"已提供至最新修章 — 股本形成的骨幹已在手上", st:"ok"}
+    ],
+    deadline:"T−3 月年報查核前須全數到位,缺一份即無法遞件"
+  },
+  {
+    rank:4, risk:"高", late:null,
+    title:"財務報告編製能力與會計人力",
+    clause:"不宜第六款 · 編製能力評估",
+    owner:"會計主管", broker:"券商承辦",
+    promiseLabel:"當季模擬財報提交會計師｜T−7 月",
+    facts:[
+      {k:"前一年度財報原訂董事會日", v:"3/31"},
+      {k:"實際通過日(人力不足致延宕)", v:"4/21", neg:true},
+      {k:"每月財務檢核表主要資料提供時點", v:"次月 25 日前後", neg:true},
+      {k:"當季模擬提交會計師", v:"T−7 月"},
+      {k:"年報查核同步驗收自編", v:"T−3 月"},
+      {k:"須併同經董事會之議案", v:"5 案"}
+    ],
+    block:"券商手上已有「做不到期限」的實證,不需推論。五案須經董事會:內控聲明書、上櫃公司財報編製能力說明評估、送件當季及次一季財務預測、會計師內控專審案、修訂章程。",
+    next:[
+      "補實會計人力,並提出編制配置說明以對應內控專審",
+      "結帳日程表前移:財檢表主要資料提前至次月 10 日前",
+      "當季自編合併財報(含附註、關係人揭露、現金流量)於 T−7 月前完成",
+      "補齊財報調整分錄、試算表與合併沖銷表 — 這是自編能力的直接證據",
+      "確認會計主管代理人資格並補送相關證明",
+      "五項董事會議案排入年度議程並確認排程"
+    ],
+    upNote:"券商評估「編製能力」看的不是財報結果,是如何從試算表走到合併財報。調整分錄與合併沖銷表不交,這題無從評起。",
+    upstream:[
+      {ref:"第一款 #16", txt:"個體及合併財報、稅簽報告、財報調整分錄、試算表、合併沖銷表", sub:"財稅報已提供至前一年度年報;財報調整分錄、合併沖銷表待提供", st:"none"},
+      {ref:"第一款 #18", txt:"所有科目明細帳及科目餘額表", sub:"科目餘額表母子公司待補", st:"wait"},
+      {ref:"第六款 #7–#9", txt:"會計主管及代理人之學經歷、進修證明、主管機關申報", sub:"主管資料已提供;代理人資格待補", st:"wait"},
+      {ref:"第六款 #10", txt:"會計主管及代理人聲明書", sub:"延後至送件時提供", st:"later"},
+      {ref:"第六款 #15", txt:"申請年度前後之內部稽核底稿、稽核報告、缺失追蹤", sub:"已完成至當年度上半年", st:"wait"},
+      {ref:"第一款 #22", txt:"核閱最近二年度及申請年度會計師查核工作底稿", sub:"延後至送件時安排", st:"later"}
+    ],
+    deadline:"T−7 月 — 全表最緊的死線"
+  },
+  {
+    rank:5, risk:"中高", late:"約 2 個月",
+    title:"基層員工薪資未達 1.3 倍與章程盈餘提撥條款",
+    clause:"不宜條款以外之重要事項",
+    owner:"財務主管、人資", broker:"券商承辦",
+    promiseLabel:"承諾提供改善方案初稿｜T−10 月",
+    facts:[
+      {k:"前一年度基層員工平均月薪", v:"約 3.3 萬元"},
+      {k:"基本工資 1.3 倍門檻", v:"約 3.7 萬元"},
+      {k:"每人每月缺口", v:"約 3,400 元", neg:true},
+      {k:"法令依據", v:"金管會函釋"},
+      {k:"章程盈餘提撥條款", v:"尚未訂明", neg:true}
+    ],
+    block:"章程修訂走股東會即可,但實質調薪需要預算、董事會決議與人資定義基層員工範圍並納入內控制度。審查看的是送件前年度的實際數字,不是改善計畫。",
+    next:[
+      "以薪資級距(而非職稱)定義基層員工範圍,提董事會決議",
+      "試算調薪成本對當年度損益之影響並納入預算",
+      "薪資清冊補提供至最近年度 — 券商底稿目前停在兩年前",
+      "章程增訂盈餘提撥條款,排入當年度股東會",
+      "將定期評估機制寫入內部控制制度,留下評估文件"
+    ],
+    upNote:"券商手上的薪資底稿比爭議點還舊 — 兩年前的清冊無法佐證最近年度的平均薪資。",
+    upstream:[
+      {ref:"第三款 #20", txt:"最近一年度及申請年度各 1 個月薪資清冊、立帳與付款傳票、付款憑證", sub:"券商已認列,惟公司備註「需另補」,實際僅至兩年前", st:"conf"},
+      {ref:"第三款 #21", txt:"抽核 3 名員工聘用、出缺勤、加班資料並核至勞健保投保級距", sub:"同上 — 資料期間過舊", st:"conf"},
+      {ref:"第三款 #22", txt:"銀行薪資轉帳明細,核對與薪資清冊相符", sub:"同上 — 資料期間過舊", st:"conf"},
+      {ref:"第八款 #15", txt:"歷年公司章程", sub:"欄位空白,狀態未載", st:"none"},
+      {ref:"第一款 #8", txt:"變更事項登記表(含核准函)", sub:"已提供至最新修章", st:"ok"}
+    ],
+    deadline:"T−6 至 T−4 月定案,使當年度實際數字達標"
+  }
+];
+
+const REVERSE = [
+  {ref:"第一款 #4", txt:"法律顧問／委任律師名單、訴訟案件說明及判決書", gap:"顧問律師與事務所名稱待補;判決書待補"},
+  {ref:"第一款 #7", txt:"違法受罰事件彙總表", gap:"當年度待補"},
+  {ref:"第一款 #9", txt:"最近三年度及送件年度股東會議事錄與彙總表", gap:"3 年度股東會彙總表待交"},
+  {ref:"第一款 #10", txt:"董事會議事錄與彙總表(含出席率)", gap:"3 年度董事會彙總表待交"},
+  {ref:"第一款 #11", txt:"功能性委員會議事錄與彙總表", gap:"3 年度功能性委員會彙總表待交"},
+  {ref:"第一款 #20", txt:"投保明細、保單、合約及保險費明細帳", gap:"待確認目前已提供之內容"},
+  {ref:"第二款 #2", txt:"銀行借款額度及動用額度明細表及合約", gap:"合約版本涵蓋期間需確認是否為最新"},
+  {ref:"第三款 #8", txt:"職工福利委員會核准函、章程、名冊、會議紀錄", gap:"待確認最新資料"},
+  {ref:"第三款 #9", txt:"職福會相關文件(續)", gap:"待確認最新資料"},
+  {ref:"第三款 #10", txt:"人事相關管理辦法及工作規則核備函", gap:"待確認最新資料"},
+  {ref:"第三款 #12", txt:"勞工相關文件", gap:"待確認最新資料"},
+  {ref:"第三款 #13", txt:"勞工相關文件(續)", gap:"待確認最新資料"},
+  {ref:"第三款 #20", txt:"薪資清冊及付款憑證", gap:"資料期間僅至兩年前、需另補"},
+  {ref:"第三款 #21", txt:"抽核 3 名員工聘用及出缺勤資料", gap:"資料期間僅至兩年前、需另補"},
+  {ref:"第三款 #22", txt:"銀行薪資轉帳明細", gap:"資料期間僅至兩年前、需另補"},
+  {ref:"第四款 #11", txt:"最近五年度不動產交易明細及相關資料", gap:"契約、評估資料、鑑價報告、資金流程待補"},
+  {ref:"第六款 #3", txt:"備抵呆帳提列政策、信用額度管理、帳齡分析表", gap:"應收帳款提列政策待補;帳齡分析表缺一期"}
+];
+
+const OTHERS = [
+  {
+    title:"南部廠區違建與國有地使用",
+    clause:"不宜第三款",
+    why:"否決風險其實高於前五任何一題 — 廠房部分坐落國有農牧用地無法取得工廠登記、部分房舍無使用執照,屬結構性問題,遞件前不可能取得土地合法性。不進前五的原因是主導權在廠務、法務與建築師,不在會計線。",
+    act:"閒置資產減損評估與財報揭露;存貨盤點清冊標示庫位;確認停用區域確實未放置存貨;原物料擺放位置是否符合存貨管理政策。這條線與既有的存貨異常是同一條。",
+    fact:"券商實地複盤時發現顯示停用中之區域尚未完全停用、原物料放置於廠區空地;因未提供存貨擺放一覽表,盤點當日無法確認停用區域未放存貨。存放位置之回覆已逾期。"
+  },
+  {
+    title:"勞資會議、工作規則、職安與安衛守則",
+    clause:"不宜第三款",
+    why:"問題實質難看,但性質是程序補正 — 人資一次到位即可解決,不需要佔用會計線的戰力。只需確認完成時點,不介入執行。",
+    act:"僅追蹤:工作規則修訂經勞資會議通過後函報主管機關核備、安衛工作守則核備完成、分支據點設置職安業務主管並申報上課證明。注意第三款有 5 項券商已認列但備註仍寫「待確認最新資料」。",
+    fact:"連續三季勞資會議之報告事項與討論事項完全相同;同日連開四場,間隔 2～6 分鐘、每場開會 5～6 分鐘;工作規則核備停留在 4 年前;安衛守則核備年度分別為 20 餘年前與 8 年前。"
+  },
+  {
+    title:"公司治理評鑑分數",
+    clause:"不宜條款以外之重要事項",
+    why:"缺口不小,但這是可預測、可規劃的填空題,主要靠公司網站更新與 ESG 報告書,屬排工而非解題。放進前五會排擠真正無法補救的項目。",
+    act:"提供財務資訊、股東權益與資訊揭露構面所需之佐證資料;確認年報揭露欄位與評鑑指標對齊。",
+    fact:"初版得分低於 15 分,預計送件前可提升至 50 分區間;送件門檻須達 60 分,缺口約 10 分以上,後續待網站更新與 ESG 報告完成。"
+  }
+];
+
+const PILL = {ok:["ok","券商已認列"], wait:["wait","已交待認列"], none:["none","尚未提供"], later:["later","延後提供"], conf:["conf","狀態矛盾"]};
+
+let allBoxes=0;
+const itemsEl=document.getElementById("items");
+DATA.forEach((d,idx)=>{
+  const stamp = d.late
+    ? `<div class="stamp">逾期<b>${d.late}</b></div>`
+    : `<div class="stamp ontime">尚未到期<b>T−7 月</b></div>`;
+  const facts=d.facts.map(f=>`<li><span class="k">${f.k}</span><span class="v${f.neg?" neg":""}">${f.v}</span></li>`).join("");
+  const checks=d.next.map((n,i)=>{allBoxes++;return `<li><input type="checkbox" id="c${idx}-${i}"><label for="c${idx}-${i}">${n}</label></li>`;}).join("");
+  const ups=d.upstream.map(u=>{
+    const [cls,label]=PILL[u.st];
+    return `<div class="up"><div class="ref">${u.ref}</div><div class="txt">${u.txt}<em>${u.sub}</em></div><span class="pill ${cls}">${label}</span></div>`;
+  }).join("");
+  const el=document.createElement("article");
+  el.className="item"; el.dataset.risk=d.risk;
+  el.innerHTML=`
+    <div class="railtop"></div>
+    <div class="ihead">
+      <div class="rank">${d.rank}<em>PRIORITY</em></div>
+      <div>
+        <h3 class="ititle">${d.title}</h3>
+        <div class="tags">
+          <span class="tag risk${d.risk==="中高"?" mid":""}">否決風險 ${d.risk}</span>
+          <span class="tag">${d.clause}</span>
+          <span class="tag who">主責 ${d.owner}</span>
+          <span class="tag who">${d.broker}</span>
+          <span class="tag">${d.promiseLabel}</span>
+        </div>
+      </div>
+      ${stamp}
+    </div>
+    <div class="ibody">
+      <div class="pane">
+        <h4>關鍵事實</h4>
+        <ul class="facts">${facts}</ul>
+        <div class="block"><b>目前卡點</b>${d.block}</div>
+      </div>
+      <div class="pane">
+        <h4>下一步</h4>
+        <ul class="checks" data-list="${idx}">${checks}</ul>
+        <div class="prog"><div class="bar"><i data-bar="${idx}"></i></div><span data-pct="${idx}">0 / ${d.next.length}</span></div>
+      </div>
+    </div>
+    <div class="upstream"><h4>上游卡點　<span>${d.upNote}</span></h4>${ups}</div>
+    <div class="deadline">死線　<b>${d.deadline}</b></div>`;
+  itemsEl.appendChild(el);
+});
+document.getElementById("totalAll").textContent=allBoxes;
+
+document.getElementById("revlist").innerHTML=REVERSE.map(r=>
+  `<div class="rev"><div class="ref">${r.ref}</div><div>${r.txt}<em>${r.gap}</em></div></div>`).join("");
+
+const othersEl=document.getElementById("others");
+OTHERS.forEach(o=>{
+  const el=document.createElement("article"); el.className="oth";
+  el.innerHTML=`<h3>${o.title}</h3><div class="clause">${o.clause}</div>
+    <div class="why"><b>為什麼不進前五</b>${o.why}</div>
+    <div class="act"><b>會計線仍須做的事</b>${o.act}</div>
+    <div class="fact">${o.fact}</div>`;
+  othersEl.appendChild(el);
+});
+
+const KEY="ipo-case-top5-v1";
+let state={};
+async function load(){
+  try{const r=await window.storage.get(KEY); if(r&&r.value) state=JSON.parse(r.value);}catch(e){state={};}
+  document.querySelectorAll('.checks input').forEach(cb=>{
+    if(state[cb.id]){cb.checked=true;cb.closest("li").classList.add("done");}
+  });
+  refresh();
+}
+async function save(){try{await window.storage.set(KEY,JSON.stringify(state));}catch(e){}}
+function refresh(){
+  let done=0;
+  DATA.forEach((d,idx)=>{
+    const boxes=document.querySelector(`[data-list="${idx}"]`).querySelectorAll("input");
+    const n=[...boxes].filter(b=>b.checked).length; done+=n;
+    document.querySelector(`[data-bar="${idx}"]`).style.width=(n/boxes.length*100)+"%";
+    document.querySelector(`[data-pct="${idx}"]`).textContent=`${n} / ${boxes.length}`;
+  });
+  document.getElementById("totalDone").textContent=done;
+  document.getElementById("totalPct").textContent=Math.round(done/allBoxes*100)+"%";
+}
+document.addEventListener("change",e=>{
+  if(e.target.matches('.checks input')){
+    e.target.closest("li").classList.toggle("done",e.target.checked);
+    state[e.target.id]=e.target.checked; save(); refresh();
+  }
+});
+load();
+</script>
+</body>
+</html>
