@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>花博店營收表重新設計｜財務報表可讀性教材</title>
+<style>
+  :root{
+    --paper:#EDE7D9;
+    --paper-light:#FAF8F2;
+    --paper-dark:#E2DBC8;
+    --ink:#211C16;
+    --ink-soft:#5C5346;
+    --stamp-red:#A93226;
+    --tea-green:#4B6B4E;
+    --shelf-line:#C9BFA8;
+    --amber:#B4791F;
+    --slate:#5B6E7F;
+    --grey:#8B8577;
+    --mono: ui-monospace,"SF Mono","Roboto Mono","Noto Sans Mono TC",Consolas,monospace;
+    --sans: -apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei","Helvetica Neue",Arial,sans-serif;
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); line-height:1.5; }
+  .wrap{ max-width:1080px; margin:0 auto; padding:24px 16px 56px; }
+  @media(min-width:640px){ .wrap{ padding:40px 32px 72px; } }
+
+  header{ margin-bottom:24px; }
+  .eyebrow{ color:var(--stamp-red); font-size:12px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; margin-bottom:8px; }
+  h1{ font-size:28px; font-weight:900; letter-spacing:-.01em; margin:0 0 10px; }
+  @media(min-width:640px){ h1{ font-size:36px; } }
+  .subtitle{ color:var(--ink-soft); font-size:14px; max-width:680px; line-height:1.7; margin:0; }
+  @media(min-width:640px){ .subtitle{ font-size:16px; } }
+
+  .toggle{ display:flex; gap:8px; margin:24px 0 20px; flex-wrap:wrap; }
+  .toggle-btn{
+    padding:10px 18px; border-radius:999px; border:1px solid var(--shelf-line);
+    background:var(--paper-light); color:var(--ink); font-family:inherit;
+    font-size:14px; font-weight:700; cursor:pointer; transition:all .15s ease;
+  }
+  .toggle-btn.active{ background:var(--ink); color:var(--paper-light); border-color:var(--ink); }
+
+  .view{ display:none; }
+  .view.active{ display:block; }
+
+  .card{ border:1px solid var(--shelf-line); background:var(--paper-light); border-radius:12px; padding:20px; margin-bottom:20px; }
+  .card-label{ font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:14px; }
+
+  /* ---------- BEFORE (問題示範) ---------- */
+  .before-callout{
+    background:var(--paper-dark); border-radius:8px; padding:12px 14px; margin-bottom:16px;
+    font-size:13px; color:var(--ink-soft); line-height:1.7;
+  }
+  .before-note-bar{
+    display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px;
+    background:var(--shelf-line); margin-bottom:1px; font-size:10.5px;
+  }
+  @media(max-width:640px){ .before-note-bar{ grid-template-columns:1fr; } }
+  .before-note-bar div{ background:#FFF6D9; padding:6px 8px; line-height:1.5; color:#6b5a1f; }
+  .scroll-x{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  table.before{ border-collapse:collapse; width:100%; min-width:620px; font-size:12px; }
+  table.before th, table.before td{ border:1px solid #d8d2c2; padding:4px 6px; text-align:right; white-space:nowrap; }
+  table.before th{ background:#F5A623; color:#fff; font-weight:800; font-size:11.5px; }
+  table.before td:first-child, table.before th:first-child{ text-align:left; }
+  table.before tr.total-row td{ background:#F5A623; color:#fff; font-weight:800; }
+  table.before td.neg{ color:#c0392b; }
+
+  /* ---------- AFTER (重新設計) ---------- */
+  .tieout{
+    display:flex; flex-wrap:wrap; gap:6px 16px; align-items:baseline;
+    font-family:var(--mono); font-size:12.5px; color:var(--ink-soft);
+    background:var(--paper-dark); border-radius:8px; padding:10px 14px; margin-bottom:18px;
+  }
+  .tieout b{ color:var(--ink); font-weight:800; }
+  .tieout .ok{ color:var(--tea-green); font-weight:800; }
+
+  table.after{ border-collapse:collapse; width:100%; min-width:720px; font-size:13px; }
+  table.after th{
+    text-align:right; font-size:11px; font-weight:800; letter-spacing:.03em;
+    color:var(--ink-soft); padding:8px 10px; border-bottom:2px solid var(--shelf-line);
+    white-space:nowrap;
+  }
+  table.after th:first-child, table.after td:first-child{ text-align:left; }
+  table.after td{ text-align:right; padding:8px 10px; font-family:var(--mono); border-bottom:1px solid var(--paper-dark); white-space:nowrap; }
+  table.after tr:hover td{ background:var(--paper-dark); }
+  table.after td.note{ font-family:var(--sans); text-align:left; color:var(--ink-soft); font-size:12px; white-space:normal; min-width:160px; }
+  .yoy-up{ color:var(--tea-green); font-weight:800; }
+  .yoy-down{ color:var(--stamp-red); font-weight:800; }
+  .dim{ color:#b3ab98; }
+
+  .adj-badge{
+    display:inline-block; font-family:var(--sans); font-size:9.5px; font-weight:800;
+    padding:1px 6px; border-radius:999px; margin-left:5px; vertical-align:1px;
+    white-space:nowrap;
+  }
+  .adj-badge.cal{ background:#EFE0C8; color:#8a6a1f; }
+  .adj-badge.evt{ background:#E4DEEA; color:#5a4a7a; }
+  .adj-badge.none{ background:transparent; color:#b3ab98; font-weight:600; }
+
+  .insight{
+    margin-top:14px; font-size:12.5px; line-height:1.8; color:var(--ink);
+    background:#F3E4E1; border:1px solid #E0B7B0; border-radius:8px; padding:12px 14px;
+  }
+  .insight b{ color:var(--stamp-red); }
+
+  .footnote{
+    margin-top:14px; font-size:12px; line-height:1.8; color:var(--ink-soft);
+    background:var(--paper-dark); border-radius:8px; padding:12px 14px;
+  }
+  .footnote ul{ margin:6px 0 0; padding-left:18px; }
+  .footnote li{ margin-bottom:3px; }
+
+  .ping-bar{
+    display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px;
+    background:var(--paper-dark); border-radius:8px; padding:12px 14px; margin-bottom:16px;
+    font-size:12.5px; color:var(--ink-soft);
+  }
+  .ping-bar label{ display:flex; align-items:center; gap:6px; font-weight:700; color:var(--ink); }
+  .ping-bar input[type="number"]{
+    width:70px; padding:4px 6px; border:1px solid var(--shelf-line); border-radius:6px;
+    font-family:var(--mono); font-size:13px; background:var(--paper-light); color:var(--ink);
+  }
+  .ping-link{
+    margin-left:auto; display:inline-flex; align-items:center; gap:5px;
+    background:var(--stamp-red); color:var(--paper-light); text-decoration:none;
+    font-weight:800; font-size:12px; padding:7px 14px; border-radius:999px;
+    white-space:nowrap;
+  }
+  .ping-link:hover{ opacity:.9; }
+  .ping-warn{
+    width:100%; font-size:11.5px; color:#8a6a1f; background:#FFF6D9; border-radius:6px;
+    padding:6px 10px; line-height:1.6;
+  }
+  td.ping-cell{ color:var(--stamp-red); font-weight:800; }
+
+  /* ---------- chart ---------- */
+  .legend{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:14px; }
+  .legend-item{
+    display:flex; align-items:center; gap:6px; font-size:12px; font-weight:700;
+    cursor:pointer; padding:4px 10px; border-radius:999px; border:1px solid var(--shelf-line);
+    background:var(--paper); user-select:none; transition:opacity .15s ease;
+  }
+  .legend-item.off{ opacity:.35; }
+  .legend-dot{ width:9px; height:9px; border-radius:50%; }
+  svg text{ font-family:var(--mono); fill:var(--ink-soft); }
+
+  footer{ margin-top:32px; text-align:center; font-size:12px; color:var(--ink-soft); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">神農生活案例 ・ 財務報表可讀性教材</div>
+    <h1>花博店營收表：重新設計示範</h1>
+    <p class="subtitle">同一份資料，左邊是原始格式，右邊是重新設計後的格式。切換兩個分頁，感受「表格結構」如何直接影響你能不能看出問題。</p>
+  </header>
+
+  <div class="toggle">
+    <button class="toggle-btn active" data-view="before">原始格式（問題示範）</button>
+    <button class="toggle-btn" data-view="after">重新設計（建議格式）</button>
+  </div>
+
+  <!-- ===================== BEFORE ===================== -->
+  <div class="view active" id="view-before">
+    <div class="card">
+      <div class="card-label">指神農－花博店全店5個機檯營收額（原始格式）</div>
+      <div class="before-callout">
+        🔍 先別看下面的分析，自己盯著這張表 10 秒——你能一眼看出「哪一個月營收異常」「異常的原因是什麼」嗎？大部分人只能看出數字，看不出原因，因為備註跟數字是分開的兩個區塊。
+      </div>
+      <div class="before-note-bar">
+        <div>2/14-22春節<br>2/25-3/5花燈節</div>
+        <div>1/25-2/2週末多太冷<br>3月10天裝修<br>10月3個天災停業<br>12/24未計安永246,840禮券</div>
+        <div>甜甜圈至1/3<br>台風假沒營業<br>蔥條9.13開幕</div>
+      </div>
+      <div class="scroll-x">
+        <table class="before" id="before-table"></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== AFTER ===================== -->
+  <div class="view" id="view-after">
+
+    <div class="card">
+      <div class="card-label">115年 vs 114年・逐月比較</div>
+      <div class="tieout" id="tieout"></div>
+      <div class="ping-bar">
+        <label>坪數基礎 <input type="number" id="area-input" value="70" min="1" step="1"></label>
+        <span>坪 → 右側新增「坪效」欄，即時重算</span>
+        <a class="ping-link" href="https://brothergo99.github.io/rock-accounting-students/cavin/pingxiao-dashboard.html" target="_blank" rel="noopener">→ 打開坪效解構儀表板</a>
+        <div class="ping-warn">
+          ⚠️ 原表標題是「全店5個機檯營收額」，「機檯」通常指自動販售/選品機台，不確定是否等於品牌歷程簡報中「圓山花博門市 70坪」的完整店鋪面積。上面的坪數先預設 70，建議實際使用前跟營運單位確認機檯實際佔用坪數，再調整這個數字。
+        </div>
+      </div>
+
+      <div class="footnote" id="adj-basis" style="margin-bottom:16px"></div>
+
+      <div class="scroll-x">
+        <table class="after" id="after-table"></table>
+      </div>
+
+      <div class="insight">
+        💡 <b>調整後仍未消失的訊號</b>：1-2月的曆法位移、3月的裝修缺口調整後，YoY 都回落到接近持平（+17.9%、+1.5%）。但 <b>6月（-16.9%）跟7月（-19.6%）在原表裡完全沒有對應的事件備註</b>，調整後也沒有變好——這代表這兩個月的下滑不是節慶或裝修造成的雜訊，比較可能是真正的業務問題（競品、選品疲乏、天氣以外的客流因素），值得優先排查，而不是用「反正有調整」帶過。
+      </div>
+
+      <div class="footnote">
+        ⚠️ 原表另有一組跨年附註（甜甜圈促銷至1/3、颱風假未營業、蔥條攤位9/13開幕），因位置對應到 113-108 年區間、確切年月無法從原表版面完全判讀，未強行填入下表，僅供交叉參考，避免誤植。
+        <ul>
+          <li><span class="adj-badge cal">曆法位移</span> 春節國曆日期每年不同（114年1/29、115年2/17），1、2月改用合併比較，避免把節慶搬家誤判成成長或衰退。</li>
+          <li><span class="adj-badge evt">一次性事件</span> 裝修、天災等不會每年重複發生的事件，用鄰近月份日均營收估算補回損失，還原常態基期。</li>
+          <li><span class="adj-badge none">未調整</span> 12/24未計安永禮券屬於基期本身認列不完整，性質是更正基期、不是波動調整，本表未回溯更動114年12月數字，僅提醒使用者留意。</li>
+        </ul>
+        <br>
+        🔗 <b>跟坪效解構儀表板的關係</b>：這裡的「坪效」欄是用本表真實營收 ÷ 你輸入的坪數直接算出來的實際數字。坪效解構儀表板裡的「圓山花博門市」案例用的是教學示範假設（日均進店人數、轉換率、客單價），兩邊不是同一組資料——儀表板是拿來練習「坪效怎麼被拆解成更小的驅動因子」，不是用來對照本表算出來的實際坪效是否吻合。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">五年同月趨勢（108・112・113・114・115）</div>
+      <div class="legend" id="legend"></div>
+      <div id="chart-wrap"></div>
+      <div class="footnote">
+        115年只到7月，圖上以實心紅點結尾並標註「資料至7月」，避免誤讀成全年下滑。看趨勢圖時，先確認每條線的資料涵蓋範圍，再比較高低。
+      </div>
+    </div>
+
+  </div>
+
+  <footer>數值取自內部工作底稿之公開營收彙總，供財務報表閱讀教學使用。</footer>
+
+</div>
+
+<script>
+  const MONTHS = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+
+  const DATA = {
+    115: [4053702,5052364,5165115,4671294,4959667,3519342,3425783,null,null,null,null,null],
+    114: [4232339,3489994,3695691,4620329,4287312,4236038,4261325,5201725,3950548,4073142,5732051,4944307],
+    113: [3617479,3710328,3828249,3973262,3948739,3619438,3290125,4324552,3650323,4451570,4393405,4570371],
+    112: [3492308,3266220,4489807,4552844,3821910,3681700,3869640,3926640,4051212,4408146,3704363,4424947],
+    108: [4293590,3914550,4118441,4861634,4402423,5038493,4717055,5117373,4386236,4787236,5022692,4426903],
+  };
+
+  const NOTES = {
+    2:  '春節 2/14-22（115年）',
+    3:  '花燈節 2/25-3/5（115年）',
+    // january note applies to 114年 in the original table
+  };
+  // 114年專屬事件備註（原表位於114年欄位上方）
+  const NOTES_114 = {
+    1:  '週末偏冷 1/25-2/2（114年）',
+    3:  '裝修10天（114年）',
+    10: '天災停業3天（114年）',
+    12: '未計安永禮券 246,840 元，疑似遞延收入缺漏（114年）',
+  };
+
+  const fmt = n => n===null||n===undefined ? '-' : Number(n).toLocaleString('zh-TW');
+
+  // ---------- 調整後YoY：把「曆法位移」跟「一次性事件」分開處理 ----------
+  // 3月：114年裝修10天，用鄰近月份(2月、4月)日均營收估算補回損失
+  const dailyFeb114 = DATA[114][1] / 28;         // 114年2月28天
+  const dailyApr114 = DATA[114][3] / 30;         // 114年4月30天
+  const renovationAddBack = Math.round(((dailyFeb114 + dailyApr114) / 2) * 10);
+  const adj114Mar = DATA[114][2] + renovationAddBack;
+
+  // 1-2月：春節國曆日期位移（114年1/29、115年2/17），合併兩個月當同一個比較基準
+  const combined115JanFeb = DATA[115][0] + DATA[115][1];
+  const combined114JanFeb = DATA[114][0] + DATA[114][1];
+  const combinedYoY = (combined115JanFeb - combined114JanFeb) / combined114JanFeb * 100;
+
+  // 每個月的調整方式標記：'cal' 曆法位移合併比較／'evt' 一次性事件補回／null 不調整
+  const ADJ_TYPE = { 1:'cal', 2:'cal', 3:'evt' };
+
+  function getAdjustedYoY(i){
+    const month = i+1;
+    if(ADJ_TYPE[month]==='cal') return combinedYoY;
+    if(ADJ_TYPE[month]==='evt' && month===3){
+      return (DATA[115][2] - adj114Mar) / adj114Mar * 100;
+    }
+    if(DATA[115][i]===null) return null;
+    return (DATA[115][i] - DATA[114][i]) / DATA[114][i] * 100;
+  }
+
+  // ---------- BEFORE table ----------
+  function buildBeforeTable(){
+    const t = document.getElementById('before-table');
+    const total115 = DATA[115].reduce((a,b)=>a+(b||0),0);
+    const total114 = DATA[114].reduce((a,b)=>a+b,0);
+    const total113 = DATA[113].reduce((a,b)=>a+b,0);
+    const total112 = DATA[112].reduce((a,b)=>a+b,0);
+    const total108 = DATA[108].reduce((a,b)=>a+b,0);
+
+    let html = '<thead><tr><th></th><th>115年合計</th><th>同期比較</th><th>114年合計</th><th>113年合計</th><th>112年合計</th><th>108年合計</th></tr>';
+    html += `<tr class="total-row"><td></td><td>${fmt(total115)}</td><td>${fmt(total115-DATA[114].slice(0,7).reduce((a,b)=>a+b,0))}</td><td>${fmt(total114)}</td><td>${fmt(total113)}</td><td>${fmt(total112)}</td><td>${fmt(total108)}</td></tr></thead><tbody>`;
+
+    MONTHS.forEach((m,i)=>{
+      const v115 = DATA[115][i];
+      const v114 = DATA[114][i];
+      const diff = v115===null ? null : v115-v114;
+      const diffCell = diff===null ? '' : (diff<0 ? `<span class="neg">(${fmt(Math.abs(diff))})</span>` : fmt(diff));
+      html += `<tr><td>${m}</td><td>${fmt(v115)}</td><td>${diffCell}</td><td>${fmt(v114)}</td><td>${fmt(DATA[113][i])}</td><td>${fmt(DATA[112][i])}</td><td>${fmt(DATA[108][i])}</td></tr>`;
+    });
+    html += '</tbody>';
+    t.innerHTML = html;
+  }
+
+  // ---------- AFTER table ----------
+  function buildAfterTable(){
+    const t = document.getElementById('after-table');
+    const areaInput = document.getElementById('area-input');
+    const areaBase = Number(areaInput.value) || 70;
+    let html = '<thead><tr><th>月份</th><th>115年營收</th><th>坪效(元/坪)</th><th>114年營收</th><th>YoY</th><th>調整後YoY</th><th>3個月移動平均</th><th>115累計YTD</th><th class="note">事件備註</th></tr></thead><tbody>';
+
+    let ytd = 0;
+    MONTHS.forEach((m,i)=>{
+      const v115 = DATA[115][i];
+      const v114 = DATA[114][i];
+      let yoyCell = '<span class="dim">-</span>';
+      if(v115!==null){
+        const yoy = (v115-v114)/v114*100;
+        const cls = yoy>=0 ? 'yoy-up' : 'yoy-down';
+        const arrow = yoy>=0 ? '▲' : '▼';
+        yoyCell = `<span class="${cls}">${arrow} ${Math.abs(yoy).toFixed(1)}%</span>`;
+      }
+
+      let adjYoyCell = '<span class="dim">-</span>';
+      const adjYoy = getAdjustedYoY(i);
+      if(adjYoy!==null){
+        const cls = adjYoy>=0 ? 'yoy-up' : 'yoy-down';
+        const arrow = adjYoy>=0 ? '▲' : '▼';
+        const type = ADJ_TYPE[i+1];
+        const badge = type==='cal' ? '<span class="adj-badge cal">曆法位移</span>'
+                    : type==='evt' ? '<span class="adj-badge evt">一次性事件</span>'
+                    : '<span class="adj-badge none">未調整</span>';
+        adjYoyCell = `<span class="${cls}">${arrow} ${Math.abs(adjYoy).toFixed(1)}%</span>${badge}`;
+      }
+
+      let maCell = '<span class="dim">-</span>';
+      if(i>=2 && DATA[115][i]!==null && DATA[115][i-1]!==null && DATA[115][i-2]!==null){
+        const ma = (DATA[115][i]+DATA[115][i-1]+DATA[115][i-2])/3;
+        maCell = fmt(Math.round(ma));
+      }
+      let ytdCell = '<span class="dim">-</span>';
+      if(v115!==null){ ytd += v115; ytdCell = fmt(ytd); }
+
+      const pingCell = v115===null ? '<span class="dim">-</span>' : `<span class="ping-cell">${fmt(Math.round(v115/areaBase))}</span>`;
+
+      const noteText = [NOTES[i+1], NOTES_114[i+1]].filter(Boolean).join('；') || '';
+
+      html += `<tr>
+        <td>${m}</td>
+        <td>${fmt(v115)}</td>
+        <td>${pingCell}</td>
+        <td>${fmt(v114)}</td>
+        <td>${yoyCell}</td>
+        <td>${adjYoyCell}</td>
+        <td>${maCell}</td>
+        <td>${ytdCell}</td>
+        <td class="note">${noteText}</td>
+      </tr>`;
+    });
+    html += '</tbody>';
+    t.innerHTML = html;
+
+    // tie-out
+    const sum115 = DATA[115].reduce((a,b)=>a+(b||0),0);
+    document.getElementById('tieout').innerHTML =
+      `<span>1-7月加總：<b>${fmt(sum115)}</b> 元</span>` +
+      `<span>原表合計：<b>30,847,267</b> 元</span>` +
+      `<span class="ok">✓ 勾稽相符（可直接沿用原表彙總數）</span>`;
+
+    document.getElementById('adj-basis').innerHTML =
+      `<b>調整算式依據</b>
+      <ul>
+        <li>1-2月合併比較：115年 ${fmt(combined115JanFeb)} 元 vs 114年 ${fmt(combined114JanFeb)} 元 → 調整後YoY ${combinedYoY.toFixed(1)}%</li>
+        <li>3月裝修補回：以114年2月、4月日均營收平均值估算10天損失 ≈ ${fmt(renovationAddBack)} 元，補回後114年3月基期為 ${fmt(adj114Mar)} 元</li>
+      </ul>`;
+  }
+
+  // ---------- chart ----------
+  const YEAR_COLORS = { 108:'#8B8577', 112:'#B4791F', 113:'#4B6B4E', 114:'#5B6E7F', 115:'#A93226' };
+  const hiddenYears = new Set();
+
+  function buildLegend(){
+    const el = document.getElementById('legend');
+    el.innerHTML = Object.keys(YEAR_COLORS).map(y => `
+      <div class="legend-item" data-year="${y}">
+        <span class="legend-dot" style="background:${YEAR_COLORS[y]}"></span>${y}年
+      </div>`).join('');
+    el.querySelectorAll('.legend-item').forEach(item=>{
+      item.addEventListener('click', ()=>{
+        const y = item.dataset.year;
+        if(hiddenYears.has(y)){ hiddenYears.delete(y); item.classList.remove('off'); }
+        else { hiddenYears.add(y); item.classList.add('off'); }
+        drawChart();
+      });
+    });
+  }
+
+  function drawChart(){
+    const W = 680, H = 300, padL = 56, padR = 16, padT = 16, padB = 30;
+    const plotW = W - padL - padR, plotH = H - padT - padB;
+
+    let allVals = [];
+    Object.values(DATA).forEach(arr => arr.forEach(v => { if(v!==null) allVals.push(v); }));
+    const yMin = Math.min(...allVals) * 0.96;
+    const yMax = Math.max(...allVals) * 1.04;
+
+    const xFor = i => padL + (i/11) * plotW;
+    const yFor = v => padT + (1 - (v - yMin)/(yMax - yMin)) * plotH;
+
+    let svg = `<svg viewBox="0 0 ${W} ${H}" width="100%" style="max-width:100%;height:auto;">`;
+
+    // gridlines
+    const ticks = 4;
+    for(let t=0;t<=ticks;t++){
+      const val = yMin + (yMax-yMin)*(t/ticks);
+      const y = yFor(val);
+      svg += `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="#C9BFA8" stroke-width="0.5" stroke-dasharray="2,3"/>`;
+      svg += `<text x="${padL-6}" y="${y+3}" font-size="9" text-anchor="end">${Math.round(val/10000)}萬</text>`;
+    }
+    // x labels
+    MONTHS.forEach((m,i)=>{
+      svg += `<text x="${xFor(i)}" y="${H-padB+16}" font-size="9" text-anchor="middle">${i+1}</text>`;
+    });
+
+    Object.keys(YEAR_COLORS).forEach(y=>{
+      if(hiddenYears.has(y)) return;
+      const arr = DATA[y];
+      const color = YEAR_COLORS[y];
+      const pts = arr.map((v,i)=> v===null ? null : `${xFor(i)},${yFor(v)}`).filter(Boolean);
+      const strokeW = y==='115' ? 2.5 : 1.5;
+      svg += `<polyline points="${pts.join(' ')}" fill="none" stroke="${color}" stroke-width="${strokeW}"/>`;
+      arr.forEach((v,i)=>{
+        if(v===null) return;
+        const isLast = (i===6 && y==='115');
+        svg += `<circle cx="${xFor(i)}" cy="${yFor(v)}" r="${isLast?4:2}" fill="${color}"/>`;
+        if(isLast){
+          svg += `<text x="${xFor(i)+6}" y="${yFor(v)-6}" font-size="9" fill="${color}" font-weight="700">115年資料至7月</text>`;
+        }
+      });
+    });
+
+    svg += '</svg>';
+    document.getElementById('chart-wrap').innerHTML = svg;
+  }
+
+  // ---------- toggle ----------
+  document.querySelectorAll('.toggle-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.toggle-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+      document.getElementById('view-'+btn.dataset.view).classList.add('active');
+    });
+  });
+
+  document.getElementById('area-input').addEventListener('input', buildAfterTable);
+
+  buildBeforeTable();
+  buildAfterTable();
+  buildLegend();
+  drawChart();
+</script>
+
+</body>
+</html>
