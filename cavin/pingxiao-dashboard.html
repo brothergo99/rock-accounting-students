@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>坪效解構儀表板｜神農生活案例教材</title>
+<style>
+  :root{
+    --paper:#EDE7D9;
+    --paper-light:#FAF8F2;
+    --paper-dark:#E2DBC8;
+    --ink:#211C16;
+    --ink-soft:#5C5346;
+    --stamp-red:#A93226;
+    --tea-green:#4B6B4E;
+    --shelf-line:#C9BFA8;
+    --amber:#B4791F;
+    --mono: ui-monospace, "SF Mono", "Roboto Mono", "Noto Sans Mono TC", Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", "Helvetica Neue", Arial, sans-serif;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.5;
+  }
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:24px 16px 48px;
+  }
+  @media(min-width:640px){ .wrap{ padding:40px 32px 64px; } }
+
+  header{ margin-bottom:28px; }
+  .eyebrow{
+    color:var(--stamp-red);
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    margin-bottom:8px;
+  }
+  h1{
+    font-size:30px;
+    font-weight:900;
+    letter-spacing:-0.01em;
+    margin:0 0 10px;
+  }
+  @media(min-width:640px){ h1{ font-size:38px; } }
+  .subtitle{
+    color:var(--ink-soft);
+    font-size:14px;
+    max-width:640px;
+    line-height:1.7;
+    margin:0;
+  }
+  @media(min-width:640px){ .subtitle{ font-size:16px; } }
+
+  .tabs{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:20px;
+  }
+  .tab-btn{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:9px 16px;
+    border-radius:999px;
+    border:1px solid var(--shelf-line);
+    background:var(--paper-light);
+    color:var(--ink);
+    font-size:14px;
+    font-weight:700;
+    font-family:inherit;
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .tab-btn:hover{ filter:brightness(0.97); }
+  .tab-dot{
+    width:8px; height:8px; border-radius:50%;
+    background:currentColor;
+    opacity:0.55;
+  }
+
+  .case-desc{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    border:1px solid var(--shelf-line);
+    background:var(--paper-light);
+    color:var(--ink-soft);
+    border-radius:12px;
+    padding:16px;
+    margin-bottom:28px;
+    font-size:14px;
+    line-height:1.7;
+  }
+  .desc-icon-dot{
+    width:10px; height:10px; border-radius:50%;
+    margin-top:6px; flex-shrink:0;
+  }
+  .case-desc b{ color:var(--ink); }
+
+  .grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+  @media(min-width:1024px){
+    .grid{ grid-template-columns: 3fr 2fr; align-items:start; }
+  }
+
+  .left-col{ display:flex; flex-direction:column; gap:20px; }
+
+  .card{
+    border:1px solid var(--shelf-line);
+    background:var(--paper-light);
+    border-radius:12px;
+    padding:20px;
+  }
+  .card-label{
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:16px;
+  }
+
+  .driver-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:12px;
+    margin-bottom:12px;
+  }
+  @media(min-width:640px){
+    .driver-grid{ grid-template-columns:repeat(3,1fr); }
+  }
+  .driver-card{
+    border:1px solid var(--shelf-line);
+    background:var(--paper);
+    border-radius:10px;
+    padding:12px;
+  }
+  .driver-title{
+    font-size:12px;
+    font-weight:800;
+    color:var(--ink-soft);
+    margin-bottom:6px;
+  }
+  .driver-value{
+    font-family:var(--mono);
+    font-size:22px;
+    font-weight:900;
+    margin-bottom:12px;
+  }
+  .driver-value .unit{
+    font-family:var(--sans);
+    font-size:12px;
+    font-weight:400;
+    color:var(--ink-soft);
+    margin-left:4px;
+  }
+
+  .slider-row{ margin-bottom:8px; }
+  .slider-row:last-child{ margin-bottom:0; }
+  .slider-labels{
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-bottom:4px;
+  }
+  .slider-labels .val{
+    font-family:var(--mono);
+    font-weight:700;
+    color:var(--ink);
+  }
+  input[type="range"]{
+    width:100%;
+    accent-color:var(--stamp-red);
+    cursor:pointer;
+    height:20px;
+  }
+
+  .days-row{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    margin:14px 0;
+  }
+  @media(min-width:640px){
+    .days-row{ flex-direction:row; justify-content:center; gap:16px; }
+  }
+  .times-sign{ font-size:20px; font-weight:900; color:var(--ink-soft); }
+  .days-slider-wrap{ width:100%; max-width:280px; }
+
+  .arrow-down{
+    text-align:center;
+    font-size:22px;
+    color:var(--shelf-line);
+    margin:8px 0;
+  }
+
+  .result-box{
+    background:var(--ink);
+    color:var(--paper-light);
+    border-radius:10px;
+    padding:18px;
+    text-align:center;
+  }
+  .result-label{
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    opacity:0.7;
+    margin-bottom:4px;
+  }
+  .result-value{
+    font-family:var(--mono);
+    font-size:32px;
+    font-weight:900;
+  }
+  @media(min-width:640px){ .result-value{ font-size:38px; } }
+  .result-value .unit{
+    font-family:var(--sans);
+    font-size:15px;
+    font-weight:400;
+    opacity:0.7;
+  }
+  .result-sub{
+    font-family:var(--mono);
+    font-size:11px;
+    opacity:0.6;
+    margin-top:4px;
+  }
+
+  .bar-row{ margin-bottom:12px; }
+  .bar-row:last-child{ margin-bottom:0; }
+  .bar-label{
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-bottom:4px;
+    gap:8px;
+  }
+  .bar-name{ font-weight:600; color:var(--ink); }
+  .bar-value{ font-family:var(--mono); flex-shrink:0; }
+  .bar-track{
+    height:10px;
+    border-radius:999px;
+    background:var(--paper-dark);
+    overflow:hidden;
+  }
+  .bar-fill{
+    height:100%;
+    border-radius:999px;
+    transition:width .25s ease;
+  }
+  .compare-note{
+    margin-top:16px;
+    font-size:12px;
+    line-height:1.7;
+    background:var(--paper-dark);
+    color:var(--ink-soft);
+    border-radius:8px;
+    padding:12px;
+  }
+
+  .right-col{ position:relative; }
+  @media(min-width:1024px){
+    .right-col{ position:sticky; top:20px; }
+  }
+  .receipt{
+    position:relative;
+    background:var(--paper-light);
+    padding:24px 24px 40px;
+    box-shadow:0 4px 16px rgba(33,28,22,0.12);
+    clip-path:polygon(0% 0%,100% 0%,100% 97%,95% 100%,90% 97%,85% 100%,80% 97%,75% 100%,70% 97%,65% 100%,60% 97%,55% 100%,50% 97%,45% 100%,40% 97%,35% 100%,30% 97%,25% 100%,20% 97%,15% 100%,10% 97%,5% 100%,0% 97%);
+  }
+  .receipt-head{ text-align:center; margin-bottom:14px; }
+  .receipt-head .tiny{ font-size:11px; letter-spacing:0.1em; color:var(--ink-soft); }
+  .receipt-head .name{ font-size:16px; font-weight:900; margin-top:4px; }
+  .receipt-head .tag{ font-size:11px; color:var(--ink-soft); margin-top:2px; }
+  .receipt hr{
+    border:none;
+    border-top:1px dashed var(--shelf-line);
+    margin:12px 0;
+  }
+  .receipt-row{
+    display:flex;
+    justify-content:space-between;
+    font-family:var(--mono);
+    font-size:13.5px;
+    margin-bottom:6px;
+  }
+  .receipt-row span:first-child{ color:var(--ink-soft); }
+  .receipt-row span:last-child{ font-weight:700; }
+  .receipt-total{
+    display:flex;
+    justify-content:space-between;
+    font-family:var(--mono);
+    margin-bottom:4px;
+  }
+  .receipt-total.big{ font-size:16px; }
+  .receipt-total .lbl{ font-weight:700; color:var(--ink-soft); }
+  .receipt-total.big .lbl{ color:var(--ink); }
+  .receipt-total .amt{ font-weight:900; color:var(--stamp-red); }
+  .stamp{
+    position:absolute;
+    top:16px; right:20px;
+    transform:rotate(-10deg);
+    border:2px solid var(--stamp-red);
+    color:var(--stamp-red);
+    border-radius:6px;
+    padding:2px 8px;
+    font-size:11px;
+    font-weight:900;
+    letter-spacing:2px;
+    opacity:0.75;
+  }
+
+  footer{
+    margin-top:32px;
+    text-align:center;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">神農生活門市案例 ・ 坪效教學工具</div>
+    <h1>坪效解構儀表板</h1>
+    <p class="subtitle">坪效 ＝ 客流密度 × 轉換率 × 客單價 × 營業天數。拖動滑桿看每個驅動因子如何撐起最終數字——這是零售版的杜邦分析。</p>
+  </header>
+
+  <div class="tabs" id="tabs">
+    <button class="tab-btn" data-case="direct"><span class="tab-dot" style="color:#4B6B4E"></span>直營店</button>
+    <button class="tab-btn" data-case="license"><span class="tab-dot" style="color:#B4791F"></span>授權加盟</button>
+    <button class="tab-btn" data-case="popup"><span class="tab-dot" style="color:#A93226"></span>快閃店</button>
+    <button class="tab-btn" data-case="custom"><span class="tab-dot" style="color:#5C5346"></span>自訂情境</button>
+  </div>
+
+  <div class="case-desc">
+    <div class="desc-icon-dot" id="desc-icon-dot"></div>
+    <div>
+      <b id="desc-name"></b>（<span id="desc-tag"></span>・<span id="desc-area"></span>坪） —
+      <span id="desc-note"></span>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="left-col">
+
+      <div class="card">
+        <div class="card-label">驅動因子拆解</div>
+
+        <div class="driver-grid">
+          <div class="driver-card">
+            <div class="driver-title">客流密度</div>
+            <div class="driver-value"><span id="density-display">0</span><span class="unit">人/坪/天</span></div>
+            <div class="slider-row">
+              <div class="slider-labels"><span>日均進店人數</span><span class="val" id="footfall-value">0 人</span></div>
+              <input type="range" id="footfall-slider" min="50" max="1500" step="10">
+            </div>
+            <div class="slider-row">
+              <div class="slider-labels"><span>坪數</span><span class="val" id="area-value">0 坪</span></div>
+              <input type="range" id="area-slider" min="20" max="150" step="5">
+            </div>
+          </div>
+
+          <div class="driver-card">
+            <div class="driver-title">轉換率</div>
+            <div class="driver-value"><span id="conversion-display">0</span><span class="unit">%</span></div>
+            <div class="slider-row">
+              <div class="slider-labels"><span>成交轉換率</span><span class="val" id="conversion-value">0 %</span></div>
+              <input type="range" id="conversion-slider" min="5" max="60" step="1">
+            </div>
+          </div>
+
+          <div class="driver-card">
+            <div class="driver-title">客單價</div>
+            <div class="driver-value"><span id="ticket-display">0</span><span class="unit">元</span></div>
+            <div class="slider-row">
+              <div class="slider-labels"><span>平均客單價</span><span class="val" id="ticket-value">0 元</span></div>
+              <input type="range" id="ticket-slider" min="50" max="800" step="10">
+            </div>
+          </div>
+        </div>
+
+        <div class="days-row">
+          <span class="times-sign">×</span>
+          <div class="days-slider-wrap">
+            <div class="slider-labels"><span>營業天數</span><span class="val" id="days-value">0 天</span></div>
+            <input type="range" id="days-slider" min="20" max="31" step="1">
+          </div>
+        </div>
+
+        <div class="arrow-down">↓</div>
+
+        <div class="result-box">
+          <div class="result-label">月坪效</div>
+          <div class="result-value"><span id="result-pingxiao">0</span><span class="unit"> 元/坪</span></div>
+          <div class="result-sub">月營收 <span id="result-revenue">0</span> 元 ÷ <span id="result-area">0</span> 坪</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">三種展店模式・坪效對照</div>
+        <div id="comparison-bars"></div>
+        <div class="compare-note">
+          ⚠️ 快閃店坪效常是三者最高，但那是世博人流的曝光紅利，不是可複製的零售能力。分析時先按「零售效率型」「合資分潤型」「曝光導流型」分組，再比較，不要直接比大小。
+        </div>
+      </div>
+
+    </div>
+
+    <div class="right-col">
+      <div class="receipt">
+        <div class="stamp">已核算</div>
+        <div class="receipt-head">
+          <div class="tiny">神農生活・坪效試算單</div>
+          <div class="name" id="r-store-name"></div>
+          <div class="tag" id="r-store-tag"></div>
+        </div>
+        <hr>
+        <div class="receipt-row"><span>坪數</span><span id="r-area"></span></div>
+        <div class="receipt-row"><span>日均進店人數</span><span id="r-footfall"></span></div>
+        <div class="receipt-row"><span>客流密度</span><span id="r-density"></span></div>
+        <div class="receipt-row"><span>轉換率</span><span id="r-conversion"></span></div>
+        <div class="receipt-row"><span>客單價</span><span id="r-ticket"></span></div>
+        <div class="receipt-row"><span>營業天數</span><span id="r-days"></span></div>
+        <hr>
+        <div class="receipt-total"><span class="lbl">月營收</span><span class="amt" id="r-revenue" style="color:var(--ink)"></span></div>
+        <div class="receipt-total big"><span class="lbl">月坪效</span><span class="amt" id="r-pingxiao"></span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>數值為教學示範情境，非公司實際財報數字。案例背景取自品牌歷程簡報中之公開門市資訊。</footer>
+
+</div>
+
+<script>
+  const CASES = [
+    { id:'direct', label:'直營店', name:'圓山花博門市', tag:'都會零售型', area:70, footfall:380, conversion:28, ticket:320, days:30, colorHex:'#4B6B4E', note:'品牌創始店，集結台灣農、漁、牧食材，屬常態零售，坪效可視為經營效率的基準線。' },
+    { id:'license', label:'授權加盟', name:'花蓮理想 PARRK', tag:'合資休憩型', area:120, footfall:260, conversion:22, ticket:420, days:30, colorHex:'#B4791F', note:'與理想大地合資的百坪複合門市，坪效受地緣及合資損益拆分影響，不宜直接對比都會店。' },
+    { id:'popup', label:'快閃店', name:'大阪世博 Tech World 館', tag:'曝光導流型', area:50, footfall:1200, conversion:18, ticket:250, days:30, colorHex:'#A93226', note:'世博展期人流紅利推升坪效數字，但屬不可複製的行銷曝光型投資，須另立 KPI 評估，不能只看坪效。' },
+    { id:'custom', label:'自訂情境', name:'練習用情境', tag:'由你設定', area:60, footfall:300, conversion:25, ticket:300, days:30, colorHex:'#5C5346', note:'拖動下方滑桿，練習自行設計一個情境，觀察坪效如何隨假設變動。' },
+  ];
+
+  let caseId = 'direct';
+  let inputs = {};
+
+  function fmt(n, digits){
+    digits = digits || 0;
+    return Number(n).toLocaleString('zh-TW', { maximumFractionDigits:digits, minimumFractionDigits:digits });
+  }
+
+  function loadCase(id){
+    const c = CASES.find(x => x.id === id);
+    caseId = id;
+    inputs = { area:c.area, footfall:c.footfall, conversion:c.conversion, ticket:c.ticket, days:c.days };
+    syncSliders();
+    updateTabs();
+    updateCaseDesc();
+    updateAll();
+  }
+
+  function syncSliders(){
+    document.getElementById('footfall-slider').value = inputs.footfall;
+    document.getElementById('area-slider').value = inputs.area;
+    document.getElementById('conversion-slider').value = inputs.conversion;
+    document.getElementById('ticket-slider').value = inputs.ticket;
+    document.getElementById('days-slider').value = inputs.days;
+  }
+
+  function updateTabs(){
+    document.querySelectorAll('.tab-btn').forEach(btn=>{
+      const id = btn.dataset.case;
+      const c = CASES.find(x=>x.id===id);
+      if(id===caseId){
+        btn.style.backgroundColor = c.colorHex;
+        btn.style.color = '#FAF8F2';
+        btn.style.borderColor = c.colorHex;
+      }else{
+        btn.style.backgroundColor = '#FAF8F2';
+        btn.style.color = '#211C16';
+        btn.style.borderColor = '#C9BFA8';
+      }
+    });
+  }
+
+  function updateCaseDesc(){
+    const c = CASES.find(x=>x.id===caseId);
+    document.getElementById('desc-name').textContent = c.name;
+    document.getElementById('desc-tag').textContent = c.tag;
+    document.getElementById('desc-area').textContent = c.area;
+    document.getElementById('desc-note').textContent = c.note;
+    document.getElementById('desc-icon-dot').style.backgroundColor = c.colorHex;
+  }
+
+  function updateAll(){
+    const density = inputs.footfall / inputs.area;
+    const revenue = inputs.footfall * (inputs.conversion/100) * inputs.ticket * inputs.days;
+    const pingxiao = revenue / inputs.area;
+
+    document.getElementById('footfall-value').textContent = fmt(inputs.footfall) + ' 人';
+    document.getElementById('area-value').textContent = fmt(inputs.area) + ' 坪';
+    document.getElementById('conversion-value').textContent = inputs.conversion + ' %';
+    document.getElementById('ticket-value').textContent = fmt(inputs.ticket) + ' 元';
+    document.getElementById('days-value').textContent = inputs.days + ' 天';
+
+    document.getElementById('density-display').textContent = density.toFixed(1);
+    document.getElementById('conversion-display').textContent = inputs.conversion;
+    document.getElementById('ticket-display').textContent = fmt(inputs.ticket);
+
+    document.getElementById('result-pingxiao').textContent = fmt(pingxiao);
+    document.getElementById('result-revenue').textContent = fmt(revenue);
+    document.getElementById('result-area').textContent = inputs.area;
+
+    const c = CASES.find(x=>x.id===caseId);
+    document.getElementById('r-store-name').textContent = c.name;
+    document.getElementById('r-store-tag').textContent = c.tag;
+    document.getElementById('r-area').textContent = fmt(inputs.area) + ' 坪';
+    document.getElementById('r-footfall').textContent = fmt(inputs.footfall) + ' 人';
+    document.getElementById('r-density').textContent = density.toFixed(1) + ' 人/坪/天';
+    document.getElementById('r-conversion').textContent = inputs.conversion + ' %';
+    document.getElementById('r-ticket').textContent = fmt(inputs.ticket) + ' 元';
+    document.getElementById('r-days').textContent = inputs.days + ' 天';
+    document.getElementById('r-revenue').textContent = fmt(revenue) + ' 元';
+    document.getElementById('r-pingxiao').textContent = fmt(pingxiao) + ' 元/坪';
+
+    updateComparison(pingxiao);
+  }
+
+  function updateComparison(currentPingxiao){
+    const data = CASES.filter(c=>c.id!=='custom').map(c=>{
+      const isActive = c.id===caseId;
+      const use = isActive ? inputs : c;
+      const rev = use.footfall * (use.conversion/100) * use.ticket * use.days;
+      const px = rev / use.area;
+      return Object.assign({}, c, { pingxiao:px, isActive:isActive });
+    });
+    const maxVal = Math.max.apply(null, data.map(d=>d.pingxiao).concat([currentPingxiao]));
+    const container = document.getElementById('comparison-bars');
+    container.innerHTML = data.map(function(d){
+      const activeTag = d.isActive ? ' <span style="color:'+d.colorHex+'">← 目前調整中</span>' : '';
+      const widthPct = Math.max(4, (d.pingxiao / maxVal) * 100);
+      return '<div class="bar-row">'
+        + '<div class="bar-label"><span class="bar-name">'+d.label+'・'+d.name+activeTag+'</span>'
+        + '<span class="bar-value">'+fmt(d.pingxiao)+' 元/坪</span></div>'
+        + '<div class="bar-track"><div class="bar-fill" style="width:'+widthPct+'%;background:'+d.colorHex+';"></div></div>'
+        + '</div>';
+    }).join('');
+  }
+
+  document.getElementById('footfall-slider').addEventListener('input', function(e){ inputs.footfall = Number(e.target.value); updateAll(); });
+  document.getElementById('area-slider').addEventListener('input', function(e){ inputs.area = Number(e.target.value); updateAll(); });
+  document.getElementById('conversion-slider').addEventListener('input', function(e){ inputs.conversion = Number(e.target.value); updateAll(); });
+  document.getElementById('ticket-slider').addEventListener('input', function(e){ inputs.ticket = Number(e.target.value); updateAll(); });
+  document.getElementById('days-slider').addEventListener('input', function(e){ inputs.days = Number(e.target.value); updateAll(); });
+
+  document.querySelectorAll('.tab-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){ loadCase(btn.dataset.case); });
+  });
+
+  loadCase('direct');
+</script>
+
+</body>
+</html>
