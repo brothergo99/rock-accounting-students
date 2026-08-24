@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>0823 好書分享 · 破壞性創新×Scott Anthony×玉山論壇×AI原生領導力×JTBD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --pu:#581c87;--pu2:#faf5ff;--pu3:#d8b4fe;--pu4:#9333ea;--pu5:#a855f7;
+  --cy:#164e63;--cy2:#ecfeff;--cy3:#a5f3fc;--cy4:#0891b2;--cy5:#22d3ee;
+  --gr:#14532d;--gr2:#f0fdf4;--gr3:#86efac;--gr4:#16a34a;--gr5:#22c55e;
+  --am:#92400e;--am2:#fffbeb;--am3:#fde68a;--am4:#d97706;--am5:#f59e0b;
+  --ro:#9f1239;--ro2:#fff1f2;--ro3:#fecdd3;--ro4:#e11d48;
+  --sl:#1e293b;--sl2:#f8fafc;--sl3:#cbd5e1;--sl4:#475569;
+  --night:#06060f;--night2:#0d0a1a;
+  --bg:#faf5ff;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--night);line-height:1.7}
+
+.page-header{background:linear-gradient(150deg,#06060f,#0d0a1a,#04060e,#080510);padding:36px 50px 28px;position:relative;overflow:hidden;border-bottom:3px solid var(--pu5)}
+.ph-g1{position:absolute;top:-60px;right:-40px;width:260px;height:260px;background:radial-gradient(circle,rgba(168,85,247,.22),transparent 65%);pointer-events:none}
+.ph-g2{position:absolute;bottom:-30px;left:-20px;width:180px;height:180px;background:radial-gradient(circle,rgba(34,211,238,.13),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(216,180,254,.6);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(14px,2.1vw,21px);font-weight:900;color:#fff;line-height:1.28;margin-bottom:4px}
+.ph-title em{color:var(--pu5);font-style:normal}
+.ph-title em2{color:var(--cy5);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.38);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mc{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(168,85,247,.15);color:var(--pu5);border:1px solid rgba(168,85,247,.3)}
+.mc-c{background:rgba(34,211,238,.13);color:var(--cy5);border-color:rgba(34,211,238,.28)}
+.mc-g{background:rgba(34,197,94,.12);color:var(--gr5);border-color:rgba(34,197,94,.28)}
+.mc-a{background:rgba(245,158,11,.13);color:var(--am5);border-color:rgba(245,158,11,.28)}
+
+.container{max-width:1100px;margin:0 auto;padding:26px 26px}
+.section{margin-bottom:22px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--pu4);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--night);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--pu3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-32{display:grid;grid-template-columns:1.25fr 1fr;gap:13px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-32{grid-template-columns:1fr}}
+
+.card-pu{background:var(--pu2);border:1.5px solid var(--pu3);border-radius:10px;padding:14px}
+.card-cy{background:var(--cy2);border:1.5px solid var(--cy3);border-radius:10px;padding:14px}
+.card-gr{background:var(--gr2);border:1.5px solid var(--gr3);border-radius:10px;padding:14px}
+.card-am{background:var(--am2);border:1.5px solid var(--am3);border-radius:10px;padding:14px}
+.card-ro{background:var(--ro2);border:1.5px solid var(--ro3);border-radius:10px;padding:14px}
+.card-sl{background:var(--sl2);border:1.5px solid var(--sl3);border-radius:10px;padding:14px}
+.card-dark{background:var(--night);border:none;border-radius:10px;padding:14px}
+.card-pu h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--pu)}
+.card-cy h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--cy)}
+.card-gr h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--gr)}
+.card-am h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--am)}
+.card-ro h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--ro)}
+.card-sl h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--sl)}
+.card-dark h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--pu5)}
+.card-pu p,.card-pu li{color:var(--pu);font-size:12.5px;line-height:1.85}
+.card-cy p,.card-cy li{color:var(--cy);font-size:12.5px;line-height:1.85}
+.card-gr p,.card-gr li{color:var(--gr);font-size:12.5px;line-height:1.85}
+.card-am p,.card-am li{color:var(--am);font-size:12.5px;line-height:1.85}
+.card-ro p,.card-ro li{color:var(--ro);font-size:12.5px;line-height:1.85}
+.card-sl p,.card-sl li{color:var(--sl);font-size:12.5px;line-height:1.85}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8);font-size:12.5px;line-height:1.85}
+ul{padding-left:15px}
+ul li{margin-bottom:3px}
+
+/* Quote */
+.quote{background:linear-gradient(135deg,var(--night),var(--night2));border-radius:10px;padding:14px 20px;position:relative;overflow:hidden;margin-bottom:20px}
+.qm{font-family:'Playfair Display',serif;font-size:72px;color:rgba(168,85,247,.07);position:absolute;top:-10px;left:8px;line-height:1}
+.qt{font-size:13px;color:rgba(255,255,255,.88);line-height:1.65;position:relative;z-index:1}
+.qt em{color:var(--pu5);font-style:normal;font-weight:700}
+.qt em2{color:var(--cy5);font-style:normal;font-weight:700}
+.qs{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.35);margin-top:6px;position:relative;z-index:1}
+
+/* 雙軌對比表 */
+.compare-table{width:100%;border-collapse:collapse;font-size:12px;margin:8px 0}
+.compare-table th{padding:7px 10px;font-size:11.5px;font-weight:700;text-align:left}
+.compare-table td{padding:7px 10px;border-top:1px solid var(--pu3);font-size:12px;line-height:1.7;vertical-align:top}
+.compare-table .col-s{background:rgba(88,28,135,.06);color:var(--pu)}
+.compare-table .col-d{background:rgba(34,211,238,.06);color:var(--cy)}
+.compare-table .row-lbl{color:var(--sl4);font-size:11.5px;font-weight:700;background:var(--sl2);white-space:nowrap}
+.th-s{background:rgba(88,28,135,.12);color:var(--pu4)}
+.th-d{background:rgba(34,211,238,.12);color:var(--cy4)}
+.th-lbl{background:var(--sl3);color:var(--sl)}
+
+/* JTBD流程 */
+.jtbd-flow{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin:8px 0}
+.jtbd-box{border-radius:7px;padding:8px 10px;flex:1;min-width:80px;text-align:center}
+.jtbd-arrow{color:rgba(168,85,247,.3);font-size:20px;flex-shrink:0}
+
+/* AI對比 */
+.ai-vs{display:flex;gap:7px;margin:8px 0}
+.ai-side{flex:1;border-radius:7px;padding:9px 11px}
+
+/* 案例標籤 */
+.case-tag{display:inline-flex;gap:5px;align-items:center;background:rgba(168,85,247,.12);border-radius:5px;padding:3px 10px;font-size:11.5px;font-weight:700;color:var(--pu4);margin:3px 2px}
+
+.page-footer{background:var(--night);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--pu5)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-g1"></div>
+  <div class="ph-g2"></div>
+  <div class="ph-eyebrow">0823 · 好書分享 · 玉山銀行大師論壇特輯 · Scott Anthony（克里斯汀生嫡傳弟子）× 破壞性創新</div>
+  <div class="ph-title"><em>「把複雜變簡單，把昂貴變普及」</em>——<br>破壞性創新的本質，以及<em2>AI原生領導力</em2>如何成為每個人的護城河</div>
+  <div class="ph-sub">破壞性 vs 維持性創新雙軌對比 × 數據攸關性×及時V1.0決策 × 創意→創新影響力跨度 × JTBD用途理論 × AI原生每日耗盡用量 × 亞洲成功案例陷阱</div>
+  <div class="ph-meta">
+    <span class="mc">2026.08.23</span>
+    <span class="mc">好書分享</span>
+    <span class="mc mc-c">Scott Anthony×玉山論壇</span>
+    <span class="mc mc-g">破壞性創新×JTBD</span>
+    <span class="mc mc-a">AI原生領導力×Claude</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 金句 -->
+  <div class="quote">
+    <div class="qm">"</div>
+    <div class="qt">「<em>在數據叫你不要行動時採取行動</em>——這才是顛覆者與追隨者的分水嶺。<br>
+    當所有財務報表都整齊劃一地支持某一擴張行動時，競爭對手早已看見同樣的藍海，這時投入往往已是紅海。<br>
+    真正的破壞性創新，隱藏在數據「看起來不具備獲利吸引力」的初期——<em2>及時行動的勇氣，才是最稀缺的競爭資產。</em2>」</div>
+    <div class="qs">Rock 老師 · 蕭啟漢 · 0823 好書分享 · 玉山銀行大師論壇 × Scott Anthony 破壞性創新 × AI原生領導力</div>
+  </div>
+
+  <!-- SECTION 1: 核心理論框架 -->
+  <div class="section">
+    <div class="section-label">Part 1 · 破壞性創新 vs 維持性創新 · 攸關性×忠實表達×及時決策</div>
+    <div class="section-title">破壞性創新不是「做得更好」，而是「做得不同」——競爭基準的根本性重設</div>
+    <div class="grid-32">
+      <div class="card-pu">
+        <h3>⚡ 雙軌創新對比：策略基因的本質差異</h3>
+        <table class="compare-table">
+          <tr>
+            <th class="th-lbl">策略指標</th>
+            <th class="th-s">維持性創新</th>
+            <th class="th-d">破壞性創新</th>
+          </tr>
+          <tr>
+            <td class="row-lbl">目標客戶</td>
+            <td class="col-s">現有主流客戶（高毛利、高品質需求）</td>
+            <td class="col-d">非消費群或被低估的低端市場</td>
+          </tr>
+          <tr>
+            <td class="row-lbl">技術方向</td>
+            <td class="col-s">優化現有性能、追求極致規格</td>
+            <td class="col-d">簡化、普及化、低成本化</td>
+          </tr>
+          <tr>
+            <td class="row-lbl">競爭基準</td>
+            <td class="col-s">傳統指標優勢對抗（效能、速度）</td>
+            <td class="col-d">重新定義價值（便利性、民主化）</td>
+          </tr>
+          <tr>
+            <td class="row-lbl">成功關鍵</td>
+            <td class="col-s">資源投入多寡與技術研發深度</td>
+            <td class="col-d">運作模式的根本性創新與靈活性</td>
+          </tr>
+        </table>
+        <div style="background:rgba(88,28,135,.1);border-radius:7px;padding:9px 12px;margin-top:9px">
+          <div style="font-size:12px;font-weight:700;color:var(--pu4);margin-bottom:3px">核心精髓：「把複雜變簡單，把昂貴變普及」</div>
+          <div style="font-size:12.5px;color:var(--pu);line-height:1.75">破壞性創新發生在主流業者「<strong>過度服務（Overserved）</strong>」現有客戶時——創新者提供「<strong>足夠好（Good Enough）</strong>」且更便宜、更便捷的方案，吸納被市場排擠的非消費群，讓少數人擁有的稀缺能力變為大眾普及工具，徹底摧毀既有競爭門檻。</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <div class="card-dark">
+          <h3>📊 數據決策的「攸關性 vs 忠實表達」</h3>
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <div style="background:rgba(34,211,238,.1);border-radius:6px;padding:8px 11px">
+              <div style="font-size:12px;font-weight:700;color:var(--cy5);margin-bottom:2px">忠實表達：精確但遲緩</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.65">為了追求100%準確等到每月20號才產出月結報表——當信號確認時，先機早已消失。</div>
+            </div>
+            <div style="background:rgba(168,85,247,.12);border-radius:6px;padding:8px 11px;border:1px solid rgba(168,85,247,.25)">
+              <div style="font-size:12px;font-weight:700;color:var(--pu5);margin-bottom:2px">攸關性：及時的V1.0初稿</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.65"><strong style="color:#fff">「可供討論的及時初稿」</strong>價值遠高於三週後的完美廢紙。不完美的數據×當下的決窗＝破壞先機。</div>
+            </div>
+            <div style="background:rgba(245,158,11,.1);border-radius:6px;padding:8px 11px">
+              <div style="font-size:12px;font-weight:700;color:var(--am5);margin-bottom:2px">⚠️ 過度審計 = 隱形戰略癱瘓</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.65">真正的破壞性創新隱藏在「數據尚不支持」的階段。CFO的進化：從把關者→戰略觸發者。</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-cy">
+          <h3>💡 創意 vs 創新：影響力才是唯一標準</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px">
+            <div style="background:rgba(8,145,178,.08);border-radius:6px;padding:8px 10px;text-align:center">
+              <div style="font-size:14px;font-weight:900;font-family:'Playfair Display',serif;color:var(--cy4);margin-bottom:3px">創意</div>
+              <div style="font-size:12px;color:var(--cy);line-height:1.6">存在於腦海中、未經市場驗證的新穎點子。只屬於創意人本身。</div>
+            </div>
+            <div style="background:rgba(8,145,178,.13);border-radius:6px;padding:8px 10px;text-align:center;border:1px solid var(--cy3)">
+              <div style="font-size:14px;font-weight:900;font-family:'Playfair Display',serif;color:var(--cy4);margin-bottom:3px">創新</div>
+              <div style="font-size:12px;color:var(--cy);line-height:1.6">引發<strong>行為改變</strong>、產生<strong>實質影響力</strong>的點子。觸達他人，改變世界。</div>
+            </div>
+          </div>
+          <div style="font-size:12.5px;color:var(--cy);line-height:1.75;background:rgba(8,145,178,.07);border-radius:6px;padding:7px 10px">課程教案再精妙，若未引發學生決策改變 = 個人創意。當概念轉化為學生的產業競爭力、改變其背後企業的經營邏輯 = 才具備創新的重量。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: JTBD + 多維案例 -->
+  <div class="section">
+    <div class="section-label">Part 2 · JTBD用途理論×多維案例 · iPhone×Kodak×無人機×上海照片×群聯×台積電</div>
+    <div class="section-title">「顧客僱用產品來完成任務」——案例印證：從軍事不對稱作戰到個人AI實踐</div>
+    <div class="grid-3">
+
+      <!-- JTBD -->
+      <div class="card-pu">
+        <h3>🎯 JTBD：用途理論的職涯攻擊性</h3>
+        <div style="font-size:12.5px;color:var(--pu);line-height:1.75;margin-bottom:8px">顧客並非購買產品，而是「<strong>僱用</strong>」它來達成某個特定任務。這個邏輯套用到職涯，具有顛覆性的攻擊力。</div>
+
+        <div class="jtbd-flow">
+          <div class="jtbd-box" style="background:rgba(88,28,135,.1)">
+            <div style="font-size:11.5px;font-weight:700;color:var(--pu4);margin-bottom:3px">❌ 傳統求職</div>
+            <div style="font-size:11.5px;color:var(--pu)">「我想找工作，我有哪些技能？」問題在自己身上</div>
+          </div>
+          <div class="jtbd-arrow">→</div>
+          <div class="jtbd-box" style="background:rgba(88,28,135,.15);border:1.5px solid var(--pu3)">
+            <div style="font-size:11.5px;font-weight:700;color:var(--pu4);margin-bottom:3px">✅ JTBD思維</div>
+            <div style="font-size:11.5px;color:var(--pu)">「經營者有哪些未解決的任務需要我完成？」問題在對方身上</div>
+          </div>
+        </div>
+
+        <div style="background:rgba(88,28,135,.08);border-radius:7px;padding:9px 11px;margin-top:6px">
+          <div style="font-size:12px;font-weight:700;color:var(--pu4);margin-bottom:3px">職業球員面試哲學</div>
+          <div style="font-size:12.5px;color:var(--pu);line-height:1.75">頂尖球員不看重零碎福利，只關心兩件事：「<strong>一年能達成多少目標</strong>」＋「<strong>對應的年薪酬勞</strong>」。<br>面試直問：「你需要我完成什麼任務？哪些問題是長期未解決的？」<br>→ 從勞動力提供者晉升為<strong>價值合夥人</strong>。</div>
+        </div>
+
+        <div style="background:rgba(88,28,135,.06);border-radius:7px;padding:8px 11px;margin-top:6px">
+          <div style="font-size:12px;font-weight:700;color:var(--pu4);margin-bottom:2px">亞洲企業的成功案例陷阱</div>
+          <div style="font-size:12.5px;color:var(--pu);line-height:1.75">「找一個成功案例給我看」看似理性，實則平庸——<strong>當你找到案例時，破壞先機早已消失</strong>。矽谷第一反應：Welcome！鼓勵嘗試×修正×共榮。</div>
+        </div>
+      </div>
+
+      <!-- 產業顛覆案例 -->
+      <div class="card-am">
+        <h3>💥 產業顛覆：三大經典案例</h3>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <div style="background:rgba(146,64,14,.1);border-radius:7px;padding:9px 11px">
+            <div style="font-size:12px;font-weight:700;color:var(--am4);margin-bottom:3px">📱 iPhone × Kodak：跨界殺手邏輯</div>
+            <div style="font-size:12.5px;color:var(--am);line-height:1.75">手機品牌沒有開發更好的底片，而是重新定義「<strong>記錄與分享</strong>」的需求，徹底瓦解底片產業。<br><strong>取代你的通常不是原本的競爭對手。</strong></div>
+          </div>
+          <div style="background:rgba(146,64,14,.08);border-radius:7px;padding:9px 11px">
+            <div style="font-size:12px;font-weight:700;color:var(--am4);margin-bottom:3px">🚁 無人機：極致不對稱作戰</div>
+            <div style="font-size:12.5px;color:var(--am);line-height:1.75">數萬美元無人機衝撞數百萬美元軍事資產——極高效率的「<strong>資源對抗</strong>」邏輯，是軍事領域的破壞性創新，讓弱者擁有對抗強者的武器。</div>
+          </div>
+          <div style="background:rgba(146,64,14,.1);border-radius:7px;padding:9px 11px">
+            <div style="font-size:12px;font-weight:700;color:var(--am4);margin-bottom:3px">📸 上海證照：AI讓稀缺能力普及化</div>
+            <div style="font-size:12.5px;color:var(--am);line-height:1.75">手機拍照→AI調整→便利商店列印，跳過傳統照相館繁瑣流程與高昂費用。用極低工具成本換取高價值專業產出——<strong>資源交換的最佳示範。</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 清晰度 + AI原生 -->
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <div class="card-sl">
+          <h3>🔬 「清晰度」是競爭優勢：兩大案例</h3>
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <div style="background:rgba(30,41,59,.07);border-radius:6px;padding:8px 11px">
+              <div style="font-size:12px;font-weight:700;color:var(--sl);margin-bottom:3px">群聯電子董事長：殘酷優先級</div>
+              <div style="font-size:12.5px;color:var(--sl4);line-height:1.75">對談邏輯極度簡練，永遠只有兩問：<strong>「這能賺錢嗎？」「要投入多少資源？」</strong>無論問題多複雜，始終過濾雜訊、抓住獲利主軸。</div>
+            </div>
+            <div style="background:rgba(30,41,59,.07);border-radius:6px;padding:8px 11px">
+              <div style="font-size:12px;font-weight:700;color:var(--sl);margin-bottom:3px">台積電×南丁格爾：視覺化決策</div>
+              <div style="font-size:12.5px;color:var(--sl4);line-height:1.75">台積電用晶圓代工降低IC設計門檻；南丁格爾的「<strong>玫瑰圖</strong>」讓決策者一眼看懂生命代價。<br>→ <strong>清晰度本身就是競爭優勢。</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-dark">
+          <h3>🤖 AI原生領導力：每日耗盡用量</h3>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="background:rgba(168,85,247,.12);border-radius:6px;padding:8px 11px;border:1px solid rgba(168,85,247,.25)">
+              <div style="font-size:12px;font-weight:700;color:var(--pu5);margin-bottom:2px">什麼是AI原生？</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.65">不是偶爾使用，而是將Claude + Cursor視為<strong style="color:#fff">「系統性夥伴」</strong>，觀察每日用量並對觸頂（Usage Limit）感到焦慮——試圖挑戰工具的產出上限。</div>
+            </div>
+            <div style="background:rgba(34,211,238,.08);border-radius:6px;padding:8px 11px">
+              <div style="font-size:12px;font-weight:700;color:var(--cy5);margin-bottom:2px">非線性學習速度</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.65">半個月內從零掌握上市公司會計、公司治理、股務等多重專業。<strong style="color:#fff">六週具備傳統需十年累積的職能廣度。</strong></div>
+            </div>
+            <div style="background:rgba(255,255,255,.06);border-radius:6px;padding:8px 11px">
+              <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.7);margin-bottom:2px">知識塔取代靜態PPT</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.65">AI將複雜業務邏輯、財報數據直接建構成網頁「知識模組」，能在一夜之間理順事業部主管十幾年講不清楚的業務邏輯。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: 生命格局 + 總結 -->
+  <div class="section">
+    <div class="section-label">Part 3 · AI原生×生命平衡×順勢而為 · HYROX×0050×破壞性創新內化</div>
+    <div class="section-title">破壞性創新不是教科書教條，而是追求極限、順勢而為的人生命題</div>
+    <div class="grid-2">
+      <div class="card-gr">
+        <h3>🏃 AI 工具 vs 人類溝通主導權</h3>
+        <div class="ai-vs">
+          <div class="ai-side" style="background:rgba(22,163,74,.08)">
+            <div style="font-size:12px;font-weight:700;color:var(--gr4);margin-bottom:5px">AI能做的</div>
+            <ul style="font-size:12px;color:var(--gr)">
+              <li>圖表與簡報秒速生成</li>
+              <li>資料錄入與排版自動化</li>
+              <li>跨領域知識快速截取</li>
+              <li>複雜數據視覺化輸出</li>
+            </ul>
+          </div>
+          <div class="ai-side" style="background:rgba(168,85,247,.1);border:1.5px solid var(--pu3)">
+            <div style="font-size:12px;font-weight:700;color:var(--pu4);margin-bottom:5px">人類永遠主導的</div>
+            <ul style="font-size:12px;color:var(--pu)">
+              <li><strong>要講什麼故事</strong></li>
+              <li><strong>重點放哪一行</strong></li>
+              <li><strong>哪個數字深埋後頁</strong></li>
+              <li><strong>策略意圖的設定</strong></li>
+            </ul>
+          </div>
+        </div>
+        <div style="background:rgba(22,163,74,.1);border-radius:7px;padding:9px 11px;margin-top:4px">
+          <div style="font-size:12px;font-weight:700;color:var(--gr4);margin-bottom:3px">傳統 70% 低效時間的重塑</div>
+          <div style="font-size:12.5px;color:var(--gr);line-height:1.75">傳統分析中70%時間浪費在資料錄入與排版。AI原生領導者的任務：將這些低效工作交給AI，把人腦的頻寬解放給「策略判斷」與「商業對話」——這才是真正的生產力革命。</div>
+        </div>
+      </div>
+
+      <div class="card-dark">
+        <h3>🌊 順勢而為：破壞性創新的人生哲學</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:9px">
+          <div style="background:rgba(168,85,247,.1);border-radius:7px;padding:9px 11px">
+            <div style="font-size:12px;font-weight:700;color:var(--pu5);margin-bottom:3px">🏋️ HYROX：生命活力的底蘊</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.75);line-height:1.7">在繁忙的數位轉型教學中仍挑戰新加坡HYROX賽事——對身體極限的追求，正是支撐高產出所需的<strong style="color:#fff">生命能量</strong>。效率是為了換取更有意義的生活。</div>
+          </div>
+          <div style="background:rgba(34,211,238,.1);border-radius:7px;padding:9px 11px">
+            <div style="font-size:12px;font-weight:700;color:var(--cy5);margin-bottom:3px">📈 抱緊0050：宏觀順勢</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.75);line-height:1.7">如同理財中跟隨台灣產業整體上升趨勢，在技術巨變浪潮中，掌握破壞性創新工具＋AI原生思維，是在<strong style="color:#fff">重塑個人與企業的生命格局</strong>。</div>
+          </div>
+        </div>
+        <div style="background:rgba(168,85,247,.08);border-radius:7px;padding:10px 13px;border:1px solid rgba(168,85,247,.2)">
+          <div style="font-size:12px;font-weight:700;color:var(--pu5);margin-bottom:5px">🎯 Rock老師總結：AI時代的唯一護城河</div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <div style="font-size:12.5px;color:rgba(255,255,255,.85);line-height:1.75">• 學習速度 = 唯一的護城河</div>
+            <div style="font-size:12.5px;color:rgba(255,255,255,.85);line-height:1.75">• 每日耗盡AI工具用量限制 = AI原生實踐起點</div>
+            <div style="font-size:12.5px;color:rgba(255,255,255,.85);line-height:1.75">• 入場券NT$2,280不昂貴——錯過「弱信號」的戰略誤判才真正昂貴</div>
+            <div style="font-size:12.5px;color:var(--pu5);font-weight:700;margin-top:3px">• 玉山論壇2,000人中有人在睡翻，你在記筆記——<span style="color:var(--cy5)">這就是代差的起點。</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 老師 · 蕭啟漢 · 好書分享 · 0823</div>
+  <div class="ft-note">玉山銀行大師論壇 × Scott Anthony 破壞性創新 × JTBD用途理論 × AI原生領導力×Claude×Cursor × 亞洲成功案例陷阱 × 順勢而為×HYROX×0050</div>
+</div>
+
+</body>
+</html>
