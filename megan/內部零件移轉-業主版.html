@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>帳是平的，帳是錯的｜兩家公司共用零件的內部移轉</title>
+<meta name="description" content="數量對、借貸平、錢有收、發票有開——為什麼這筆帳還是錯的？寫給經營者的一堂課。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1A2740;
+  --ink-soft:#4A5568;
+  --paper:#F4F2EC;
+  --paper-deep:#EBE7DC;
+  --seal:#B93327;
+  --ledger:#3D6B57;
+  --carbon:#E8D6D1;
+  --rule:#CFC9B8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-weight:400;
+  line-height:1.95;
+  letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:740px;margin:0 auto;padding:0 24px}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+
+/* ---------- eyebrow / labels ---------- */
+.eyebrow{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink-soft);display:flex;align-items:center;gap:12px;
+}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--rule)}
+.eyebrow b{font-weight:600;color:var(--seal)}
+
+/* ---------- hero ---------- */
+.hero{padding:72px 0 8px;border-bottom:1px solid var(--rule)}
+.hero h1{
+  font-weight:900;font-size:clamp(2.1rem,7vw,3.4rem);
+  line-height:1.28;letter-spacing:-.02em;margin:26px 0 20px;
+}
+.hero h1 .strike{
+  position:relative;white-space:nowrap;
+}
+.hero h1 .strike::after{
+  content:"";position:absolute;left:-2%;right:-2%;top:52%;
+  height:5px;background:var(--seal);transform:scaleX(0);transform-origin:left;
+  animation:strike .5s cubic-bezier(.6,0,.3,1) 2.5s forwards;
+}
+@keyframes strike{to{transform:scaleX(1)}}
+.lede{font-size:1.06rem;color:var(--ink-soft);max-width:34em}
+
+/* ---------- check panel (signature) ---------- */
+.panel{
+  margin:44px 0 64px;background:#fff;
+  border:1px solid var(--rule);
+  box-shadow:6px 6px 0 var(--paper-deep);
+}
+.panel-hd{
+  font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ink-soft);
+  padding:14px 22px;border-bottom:1px solid var(--rule);
+  display:flex;justify-content:space-between;gap:10px;
+}
+.row{
+  display:flex;align-items:baseline;gap:14px;
+  padding:13px 22px;border-bottom:1px dashed var(--rule);
+  opacity:0;animation:in .45s ease forwards;
+}
+.row:nth-of-type(1){animation-delay:.35s}
+.row:nth-of-type(2){animation-delay:.85s}
+.row:nth-of-type(3){animation-delay:1.35s}
+.row:nth-of-type(4){animation-delay:1.85s}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.mark{
+  font-family:"IBM Plex Mono",monospace;font-weight:600;
+  color:var(--ledger);font-size:1.15rem;line-height:1;flex:none;width:1.2em;
+}
+.row .txt{font-weight:500;font-size:1rem}
+.row .note{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:.82rem;color:var(--ink-soft);flex:none}
+.verdict{
+  display:flex;align-items:center;gap:16px;padding:22px;
+  background:var(--carbon);border-top:1px solid var(--rule);
+  opacity:0;animation:in .45s ease forwards 2.35s;
+}
+.verdict .mark{color:var(--seal)}
+.verdict .txt{font-weight:900;font-size:1.3rem;letter-spacing:-.01em}
+.seal{
+  margin-left:auto;flex:none;border:2px solid var(--seal);color:var(--seal);
+  font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.14em;
+  padding:6px 10px;transform:rotate(-6deg);opacity:.85;
+}
+
+/* ---------- sections ---------- */
+section{padding:56px 0;border-bottom:1px solid var(--rule)}
+h2{font-weight:900;font-size:clamp(1.35rem,4.4vw,1.85rem);line-height:1.45;letter-spacing:-.015em;margin:22px 0 18px}
+h3{font-weight:700;font-size:1.05rem;margin:34px 0 10px}
+p{margin:0 0 16px;max-width:36em}
+p.tight{margin-bottom:8px}
+strong{font-weight:700;background:linear-gradient(transparent 62%,var(--carbon) 62%)}
+
+/* ---------- case card ---------- */
+.case{
+  background:#fff;border-left:4px solid var(--ink);
+  padding:22px 24px;margin:8px 0 26px;
+}
+.case p{margin:0 0 6px;font-size:1.02rem}
+.case p:last-child{margin:0}
+.num{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:1.08em}
+
+/* ---------- pull quote ---------- */
+.pull{
+  margin:34px 0;padding:24px 26px;background:var(--ink);color:var(--paper);
+  font-weight:700;font-size:1.12rem;line-height:1.75;
+}
+.pull span{color:#F0B7B0}
+
+/* ---------- ledger table ---------- */
+.tbl{width:100%;border-collapse:collapse;margin:22px 0 10px;background:#fff;font-size:.95rem}
+.tbl th,.tbl td{border:1px solid var(--rule);padding:12px 14px;text-align:left;vertical-align:top}
+.tbl th{background:var(--paper-deep);font-weight:700;font-size:.85rem;letter-spacing:.04em}
+.tbl td.entry{font-family:"IBM Plex Mono",monospace;font-size:.88rem;line-height:1.85;white-space:nowrap}
+.bad{color:var(--seal);font-weight:600}
+.good{color:var(--ledger);font-weight:600}
+.cap{font-size:.85rem;color:var(--ink-soft);margin-top:4px}
+
+/* ---------- fail conditions ---------- */
+.fails{list-style:none;margin:20px 0 6px}
+.fails li{padding:16px 0;border-top:1px dashed var(--rule)}
+.fails li:last-child{border-bottom:1px dashed var(--rule)}
+.fails .k{font-weight:700;display:block;margin-bottom:2px}
+.fails .v{color:var(--ink-soft);font-size:.97rem}
+
+/* ---------- ask cards ---------- */
+.ask{background:var(--ink);color:var(--paper);margin-top:0}
+.ask h2{color:#fff}
+.ask p{color:#C8CEDC}
+.ask .eyebrow{color:#8792AC}
+.ask .eyebrow::after{background:#3A4A6B}
+.ask .eyebrow b{color:#F0B7B0}
+ol.qs{list-style:none;counter-reset:q;margin:26px 0 0}
+ol.qs li{
+  counter-increment:q;position:relative;padding:18px 0 18px 54px;
+  border-top:1px solid #35455F;font-weight:500;font-size:1.04rem;line-height:1.7;
+}
+ol.qs li:last-child{border-bottom:1px solid #35455F}
+ol.qs li::before{
+  content:counter(q,decimal-leading-zero);position:absolute;left:0;top:20px;
+  font-family:"IBM Plex Mono",monospace;font-size:.85rem;color:#F0B7B0;letter-spacing:.08em;
+}
+
+footer{padding:44px 0 64px;font-size:.88rem;color:var(--ink-soft)}
+footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule)}
+footer a:hover{border-color:var(--ink)}
+a:focus-visible,li:focus-visible{outline:2px solid var(--seal);outline-offset:3px}
+
+@media (max-width:600px){
+  .row{flex-wrap:wrap}
+  .row .note{margin-left:1.9em;width:100%}
+  .tbl td.entry{white-space:normal}
+  .seal{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .row,.verdict{opacity:1}
+  .hero h1 .strike::after{transform:scaleX(1)}
+}
+@media print{
+  body{background:#fff}
+  .row,.verdict{opacity:1;animation:none}
+  .panel{box-shadow:none}
+  .pull,.ask{background:#fff;color:#000;border:1px solid #999}
+  .ask h2,.ask p,ol.qs li{color:#000}
+  section{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><b>案例</b><span>兩家公司共用零件的內部移轉</span></div>
+    <h1>帳是平的，<br><span class="strike">帳是對的</span></h1>
+    <p class="lede">數量對得起來、借貸平衡、錢確實收到、統一發票也開了。四件事都成立，這筆帳仍然是錯的——而且錯的地方，你永遠不會在報表上看到。</p>
+
+    <div class="panel">
+      <div class="panel-hd"><span>自我檢核</span><span>A公司 → B公司</span></div>
+      <div class="row"><span class="mark">✓</span><span class="txt">庫存數量對得起來</span><span class="note">3,000 − 200 − 200 = 2,600</span></div>
+      <div class="row"><span class="mark">✓</span><span class="txt">借貸兩邊平衡</span><span class="note">試算表無誤差</span></div>
+      <div class="row"><span class="mark">✓</span><span class="txt">錢確實收到了</span><span class="note">B公司已付款</span></div>
+      <div class="row"><span class="mark">✓</span><span class="txt">統一發票有開立</span><span class="note">銷項已申報</span></div>
+      <div class="verdict"><span class="mark">✕</span><span class="txt">這筆帳還是錯的</span><span class="seal">待查核</span></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow"><b>事實</b><span>先看清楚發生了什麼</span></div>
+    <h2>把數字縮到一顆零件</h2>
+    <div class="case">
+      <p>你開了兩家公司，<strong>A公司</strong>和<strong>B公司</strong>。</p>
+      <p>A公司向供應商買了 <span class="num">1</span> 顆零件，付了 <span class="num">13</span> 元。</p>
+      <p>這顆零件給 B公司 用掉了，B公司付給 A公司 <span class="num">12</span> 元。</p>
+    </div>
+    <p>會計人員的處理是：A公司把這顆零件從庫存轉出，<strong>認列為 A公司的費用</strong>。B公司付的 12 元進來，沖掉一部分。</p>
+    <p>數量沒錯、錢也收了。問題在於——費用是「付出去而沒有回報」。這裡有回報，B公司付了錢，而且這顆零件是在 <strong>B公司的產品裡</strong>被用掉、賣給 B公司的客戶。</p>
+    <p class="tight">這不是費用，這是一筆<strong>賠 1 元的買賣</strong>。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow"><b>誤會一</b><span>「反正都是我的公司」</span></div>
+    <h2>你有一家事業，但你有兩張稅單</h2>
+    <p>老闆腦中只有一盤生意，這很正常。但法律上，A公司和 B公司是兩個獨立的納稅人、兩套帳、兩份財報。國稅局不會因為老闆是同一個人，就把兩張稅單合起來看。</p>
+    <div class="pull">如果 B公司明天要賣掉，<span>這筆費用還算數嗎？</span></div>
+    <p>這一問通常就夠了。當兩家公司必須各自站著見人的那一天，「反正都是自己的」這句話會一秒失效——而那一天通常不是你挑的。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow"><b>誤會二</b><span>「A公司虧的就是B公司賺的」</span></div>
+    <h2>「整體沒差」是結果，不是理由</h2>
+    <p>在股東利益上，這句話有可能是對的：A公司少賺 1 元、B公司多賺 1 元，同一個老闆，淨效果為零。</p>
+    <p>問題是它在三種情況下會失效。這三種你自己對照看有沒有中：</p>
+    <ul class="fails">
+      <li><span class="k">其中一家有外部股東</span><span class="v">B公司如果有 30% 是別人的，你每移轉 1 元，就有 0.3 元是無償送給別人的。</span></li>
+      <li><span class="k">國稅局只調整少報的那一家</span><span class="v">補稅和罰款落在 A公司，B公司要退稅得另外申請、還有時效限制，而罰款不會退。稅上從來不是零和。</span></li>
+      <li><span class="k">有人只看單一家公司的財報</span><span class="v">銀行審貸、投資人盡職調查、要賣掉其中一家——他們看的是那一家的數字，不是你腦中的合計數。</span></li>
+    </ul>
+    <p style="margin-top:22px">結果剛好中性，不代表過程正確。這兩件事要分開。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow"><b>代價</b><span>你真正損失的東西</span></div>
+    <h2>錢沒有消失，但問題消失了</h2>
+    <p>這 1 元不會不見，它一定會落在某個科目裡。差別在於——<strong>它落在你看得到的地方，還是看不到的地方</strong>。</p>
+
+    <table class="tbl">
+      <thead><tr><th style="width:34%">A公司的處理方式</th><th>1 元差價最後躺在哪裡</th></tr></thead>
+      <tbody>
+        <tr><td class="entry bad">記成「費用」<br>（現行）</td><td>混在營業費用裡，和水電、文具、雜支放在一起。金額小、科目雜，<strong>沒有任何人會發現</strong>。三年後才爆出來。</td></tr>
+        <tr><td class="entry good">記成「銷貨」<br>（正確）</td><td>變成毛損，直接反映在<strong>毛利率</strong>上。你每個月看報表都會看到那條線在往下掉，會問「為什麼」。</td></tr>
+      </tbody>
+    </table>
+    <p class="cap">還有一個線索：記成費用時，B公司付進來的那 12 元，其實找不到一個正當的科目可以掛。一個分錄如果有一邊寫不出科目，代表交易的認定本身就錯了。</p>
+
+    <h3>誰該賺集中採購的那筆錢？</h3>
+    <p>A公司一次買 3,000 顆才拿到 13 元。B公司如果自己去買 200 顆，供應商會報幾塊？如果是 15 元，那「按成本轉給 B公司」等於 A公司把自己談來的議價成果無償送出去。</p>
+    <p>而且 A公司還額外扛了資金積壓、倉儲、呆滯報廢、最低採購量的風險。<strong>風險在 A公司，好處在 B公司。</strong></p>
+
+    <h3>你會據此做出什麼決定？</h3>
+    <p>B公司某條產品線的零件成本被低估，毛利看起來 12%、實際只有 9%——然後你決定加碼投產。你比較兩家公司的績效、決定誰的主管該加薪。你據此對客戶報價，以為還有讓價空間。</p>
+    <p>1 元的差價不會弄垮公司，<strong>用錯的數字做的決定會</strong>。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow"><b>破口</b><span>為什麼罵人沒有用</span></div>
+    <h2>一個價格，有兩個來源</h2>
+    <p>這次的導火線是供應商漲價、B公司的採購單價格沒同步更新。多數老闆的反應是「叫他下次記得改」。</p>
+    <p>沒有用。真正的原因是<strong>同一個價格有兩個維護點</strong>：一個在 A公司的進貨成本，一個在 B公司的採購單。只要有兩個來源，就一定會有不同步的那一天。這不是誰不用心，是制度設計必然失效。</p>
+    <div class="pull">要修的不是這次的價格，<span>是「價格有兩個來源」這件事。</span></div>
+    <p>而且這種錯誤<strong>盤點查不出來</strong>——數量永遠是對的，錯的是金額和科目。你唯一會發現它的時機，是有外人來翻帳的時候：會計師查核、國稅局書面審查、聯貸審查、盡職調查、或是你要把其中一家賣掉。</p>
+    <p>平常都沒事。一有事，全部一次翻出來。</p>
+  </div>
+</section>
+
+<section class="ask">
+  <div class="wrap">
+    <div class="eyebrow"><b>行動</b><span>回去問你的財務主管</span></div>
+    <h2>五個問題</h2>
+    <p>你不需要懂分錄，也不需要自己查帳。這五個問題問完，你就知道公司現在的狀況在哪一格。</p>
+    <ol class="qs">
+      <li>兩家公司之間的移轉，我們的訂價依據是什麼？有沒有寫下來？</li>
+      <li>這個價格多久更新一次？誰負責？漏了誰會知道？</li>
+      <li>公司申報的銷售額，和帳上的營業收入對得起來嗎？差多少？</li>
+      <li>我們現在的存貨單位成本，跟最近一次進價差多少？</li>
+      <li>如果國稅局問「為什麼是這個價格」，我們拿得出東西嗎？</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p style="max-width:34em">本頁為教學案例，數字經簡化，不構成個案的會計或稅務意見。實際處理請依貴公司的交易架構與適用法令個別判斷。</p>
+    <p class="mono" style="font-size:.8rem;letter-spacing:.1em;margin-top:18px">ROCK 會計家教</p>
+  </div>
+</footer>
+
+</body>
+</html>
