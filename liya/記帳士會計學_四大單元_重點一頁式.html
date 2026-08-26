@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>記帳士會計學考前衝刺 — 四大核心單元重點一頁式</title>
+<style>
+  :root{
+    --bg:#0f1115;
+    --card:#171a21;
+    --card2:#1e222b;
+    --line:#262b35;
+    --accent:#ff8a3d;
+    --accent2:#4fd1c5;
+    --blue:#7dd3fc;
+    --purple:#a78bfa;
+    --gold:#fbbf24;
+    --good:#4ade80;
+    --bad:#f87171;
+    --text:#e8eaed;
+    --sub:#9aa1ab;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:radial-gradient(circle at 20% -8%, #26314a 0%, var(--bg) 45%);
+    color:var(--text);
+    padding:26px 16px 60px;
+    line-height:1.75;
+  }
+  .wrap{max-width:900px;margin:0 auto;}
+
+  header{margin-bottom:32px;}
+  .tag{
+    display:inline-block;font-size:12px;letter-spacing:1px;color:var(--accent);
+    background:rgba(255,138,61,.12);border:1px solid rgba(255,138,61,.35);
+    padding:4px 11px;border-radius:999px;margin-bottom:14px;
+  }
+  h1{font-size:29px;line-height:1.38;margin:0 0 12px;letter-spacing:.5px;}
+  h1 em{font-style:normal;color:var(--accent);}
+  .sub{color:var(--sub);font-size:14.5px;margin:0;line-height:1.85;}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px;}
+  .chip{font-size:11.5px;color:var(--sub);background:var(--card);border:1px solid var(--line);padding:4px 10px;border-radius:999px;}
+  .chip.hl{color:var(--accent2);border-color:rgba(79,209,197,.4);background:rgba(79,209,197,.08);}
+
+  /* 導覽 */
+  .nav{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:20px;}
+  @media(max-width:700px){.nav{grid-template-columns:repeat(2,1fr);}}
+  .nav a{
+    text-decoration:none;background:var(--card);border:1px solid var(--line);
+    border-radius:12px;padding:12px 10px;text-align:center;display:block;transition:.15s;
+  }
+  .nav a:hover{border-color:var(--accent2);}
+  .nav a b{display:block;font-size:13.5px;color:var(--text);}
+  .nav a span{font-size:11px;color:var(--sub);}
+  .nav a.n1 b{color:var(--blue);}
+  .nav a.n2 b{color:var(--accent2);}
+  .nav a.n3 b{color:var(--accent);}
+  .nav a.n4 b{color:var(--gold);}
+
+  section{margin-bottom:40px;scroll-margin-top:16px;}
+  .sec-label{font-size:11.5px;letter-spacing:2px;color:var(--sub);text-transform:uppercase;margin-bottom:8px;font-weight:700;}
+  h2{font-size:21px;margin:0 0 18px;line-height:1.5;padding-bottom:12px;border-bottom:1px solid var(--line);}
+  h3{font-size:16px;margin:0 0 10px;color:var(--accent2);}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px;}
+  .grid{display:grid;gap:14px;}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  @media(max-width:700px){.g3,.g2{grid-template-columns:1fr;}}
+
+  .card .ico{font-size:22px;margin-bottom:6px;}
+  .card h4{font-size:15.5px;margin:0 0 8px;}
+  .card p{font-size:13.5px;color:#c7cdd5;margin:0;line-height:1.85;}
+  .card p + p{margin-top:9px;}
+  .card small{display:block;font-size:12px;color:var(--sub);margin-top:9px;line-height:1.8;}
+  .card b{color:var(--text);}
+
+  .eq{
+    background:#12151b;border:1px solid var(--line);border-radius:12px;
+    padding:18px 16px;text-align:center;font-size:17px;font-weight:800;
+    line-height:1.9;margin-bottom:14px;font-variant-numeric:tabular-nums;
+  }
+  .eq span{color:var(--accent);}
+  .eq .cap{display:block;font-size:12px;color:var(--sub);font-weight:400;margin-top:9px;line-height:1.85;}
+
+  .quote{
+    background:linear-gradient(135deg, rgba(255,138,61,.10), rgba(79,209,197,.06));
+    border:1px solid rgba(255,138,61,.3);border-radius:14px;padding:20px;
+    font-size:15px;line-height:1.95;font-weight:600;
+  }
+  .quote .lbl{display:block;font-size:11px;letter-spacing:2px;color:var(--accent);font-weight:700;margin-bottom:9px;}
+
+  table{width:100%;border-collapse:collapse;font-size:12.8px;background:var(--card);border-radius:12px;overflow:hidden;}
+  th,td{padding:10px 11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--sub);font-weight:600;font-size:12px;}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent);white-space:nowrap;}
+  td.hot{color:var(--accent2);font-weight:600;}
+  td.dim{color:var(--sub);}
+  tr:last-child td{border-bottom:none;}
+
+  ul.list{margin:0;padding-left:18px;font-size:13.5px;color:#c7cdd5;line-height:1.95;}
+  ul.list li{margin-bottom:7px;}
+  ul.list b{color:var(--text);}
+
+  /* 解題步驟 */
+  .steps{counter-reset:s;}
+  .step{
+    display:flex;gap:12px;padding:11px 0;border-bottom:1px dashed #2a303b;
+  }
+  .step:last-child{border-bottom:none;}
+  .step .n{
+    flex:0 0 24px;height:24px;border-radius:7px;background:rgba(79,209,197,.14);
+    color:var(--accent2);font-size:12px;font-weight:800;display:flex;
+    align-items:center;justify-content:center;margin-top:3px;
+  }
+  .step .b{font-size:13.5px;color:#c7cdd5;line-height:1.85;}
+  .step .b b{color:var(--text);}
+  .step .calc{
+    display:block;margin-top:5px;background:#12151b;border:1px solid var(--line);
+    border-radius:8px;padding:8px 11px;font-size:12.5px;color:var(--accent2);
+    font-variant-numeric:tabular-nums;
+  }
+
+  .warn{background:#12151b;border:1px solid rgba(248,113,113,.3);border-radius:12px;padding:15px;}
+  .warn .h{font-size:14px;font-weight:700;color:var(--bad);margin-bottom:7px;}
+  .warn p{font-size:13px;color:#c7cdd5;margin:0;line-height:1.85;}
+
+  .ok{background:#12151b;border:1px solid rgba(74,222,128,.3);border-radius:12px;padding:15px;}
+  .ok .h{font-size:14px;font-weight:700;color:var(--good);margin-bottom:7px;}
+  .ok p{font-size:13px;color:#c7cdd5;margin:0;line-height:1.85;}
+
+  .sowhat{
+    background:linear-gradient(135deg, rgba(167,139,250,.10), transparent);
+    border:1px solid rgba(167,139,250,.3);border-radius:12px;padding:15px;margin-top:14px;
+  }
+  .sowhat .h{font-size:13.5px;font-weight:700;color:var(--purple);margin-bottom:7px;}
+  .sowhat p{font-size:13px;color:#c7cdd5;margin:0;line-height:1.85;}
+  .sowhat ul{margin:7px 0 0;padding-left:18px;font-size:13px;color:#c7cdd5;line-height:1.9;}
+
+  /* 時間軸 */
+  .tl{
+    display:flex;align-items:stretch;gap:0;background:#12151b;border:1px solid var(--line);
+    border-radius:12px;overflow:hidden;margin:12px 0;
+  }
+  .tl div{flex:1;padding:14px 12px;text-align:center;font-size:12.5px;}
+  .tl .x{background:rgba(255,138,61,.10);border-right:1px solid var(--line);}
+  .tl .y{background:rgba(79,209,197,.08);}
+  .tl b{display:block;font-size:13.5px;margin-bottom:4px;}
+  .tl .x b{color:var(--accent);}
+  .tl .y b{color:var(--accent2);}
+  .tl span{color:var(--sub);font-size:11.5px;}
+
+  .checklist{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 18px;}
+  .ck{display:flex;gap:13px;padding:12px 0;border-bottom:1px solid var(--line);}
+  .ck:last-child{border-bottom:none;}
+  .ck .n{
+    flex:0 0 26px;height:26px;border-radius:8px;background:rgba(255,138,61,.14);
+    color:var(--accent);font-size:12.5px;font-weight:800;display:flex;
+    align-items:center;justify-content:center;margin-top:2px;
+  }
+  .ck .t{font-size:14.5px;font-weight:700;margin-bottom:4px;}
+  .ck .d{font-size:13px;color:#c7cdd5;line-height:1.85;}
+
+  footer{margin-top:30px;text-align:center;color:#5a606b;font-size:11.5px;line-height:2;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="tag">記帳士會計學 · 考前衝刺</span>
+    <h1>會計不是死背公式<br>而是理解<em>商業事實如何轉化為數字</em></h1>
+    <p class="sub">四大核心單元重點手冊：會計調整 × 銀行存款調節表 × 毛利率法 × 年數合計法</p>
+    <div class="chips">
+      <span class="chip hl">權責發生制</span>
+      <span class="chip hl">T 字帳解題法</span>
+      <span class="chip">五大金鑰公式</span>
+      <span class="chip">三大常犯錯誤</span>
+      <span class="chip">歷屆考題實戰</span>
+      <span class="chip">Rock 會計家教</span>
+    </div>
+
+    <nav class="nav">
+      <a href="#p1" class="n1"><b>Part 1</b><span>會計調整</span></a>
+      <a href="#p2" class="n2"><b>Part 2</b><span>銀行調節表</span></a>
+      <a href="#p3" class="n3"><b>Part 3</b><span>毛利率法</span></a>
+      <a href="#p4" class="n4"><b>Part 4</b><span>年數合計法</span></a>
+    </nav>
+  </header>
+
+  <!-- ============ 前言 ============ -->
+  <section>
+    <div class="sec-label">Strategy · 衝刺心法</div>
+    <h2>🎯 為什麼會計學是記帳士考試的「戰略性關鍵」</h2>
+
+    <div class="grid g2">
+      <div class="warn">
+        <div class="h">⚠ 容錯率極低</div>
+        <p>會計學的邏輯極其嚴密——<b>一個數字算錯，整題分錄可能全軍覆沒</b>。它不像法規科目可以靠部分記憶拿分。</p>
+      </div>
+      <div class="ok">
+        <div class="h">✅ 但它是最強的盾牌</div>
+        <p>只要掌握核心邏輯，<b>題目看懂、分錄寫對</b>，這門課就是你<b>拉高總分、對抗法規科目變數</b>的最強武器。</p>
+      </div>
+    </div>
+
+    <div class="quote" style="margin-top:16px;">
+      <span class="lbl">核心心法</span>
+      會計不是死背公式，而是理解<b style="color:var(--accent2);">「商業事實」如何轉化為「數字資訊」</b>。<br><br>
+      掌握基礎會計程序就像打好地基——<b>如果你的調整分錄不對，後續的結帳、編表全都是錯誤的連鎖反應。</b>
+    </div>
+  </section>
+
+  <!-- ============ Part 1 ============ -->
+  <section id="p1">
+    <div class="sec-label">Part 1 · 權責發生的基石</div>
+    <h2>📋 會計調整 Adjustment Entries</h2>
+
+    <p style="font-size:13.5px;color:#c7cdd5;margin:0 0 16px;">
+      會計調整是期末程序中最重要的靈魂，本質在於實踐<b>權責發生制（應計基礎）</b>，確保收益與費損<b>精確歸屬於正確的會計期間</b>。沒有調整，財務報表就像沒對焦的相機，無法真實表達損益。
+    </p>
+
+    <div class="grid g2">
+      <div class="card" style="border-left:3px solid var(--blue);">
+        <div class="ico">⏳</div>
+        <h4>應計項目 Accrued — 先有事實，後有現金</h4>
+        <p>指<b>損益已經發生，但錢還沒收或還沒付</b>。生命週期三階段：</p>
+        <ul class="list" style="margin-top:8px;">
+          <li><b>期中：</b>通常<b>無須做分錄</b>（每日認列薪資太繁瑣）</li>
+          <li><b>期末（考試重點）：</b>把「已發生未入帳」抓出來<br>
+            ├ <b>應收收入：</b>借 應收收入（資產↑）／貸 收入（收益↑）<br>
+            └ <b>應付費用：</b>借 費用（費損↑）／貸 應付費用（負債↑）</li>
+          <li><b>後續：</b>結轉本期損益，次年初轉回或於實際支付時沖銷</li>
+        </ul>
+      </div>
+
+      <div class="card" style="border-left:3px solid var(--accent2);">
+        <div class="ico">📅</div>
+        <h4>遞延項目 Deferred — 先有現金，後有事實</h4>
+        <p>指<b>已收付現金，但損益尚未完全實現</b>。關鍵是<b>畫時間軸</b>。以 10/1 支付一年租金為例：</p>
+        <div class="tl">
+          <div class="x"><b>區塊 X · 已過期</b><span>10/1 – 12/31（3 個月）<br>→ 當年「費用」</span></div>
+          <div class="y"><b>區塊 Y · 未過期</b><span>次年 1/1 起（9 個月）<br>→「預付費用」資產</span></div>
+        </div>
+        <small>🔑 <b>解題第一步：先確認題目用哪種方法</b>——<b>記實轉虛</b>（初始借記預付費用）→ 調整目標是把<b>已過期 X</b> 轉為費用；<b>記虛轉實</b>（初始借記費用）→ 調整目標是把<b>未過期 Y 救回來</b>轉為資產。<b>兩者方向完全相反。</b></small>
+      </div>
+    </div>
+
+    <h3 style="margin-top:22px;">用品盤存：資產法 vs 費用法 對照</h3>
+    <table>
+      <tr><th style="width:16%;">處理方法</th><th>初始購買分錄（購入 100）</th><th>期末調整邏輯</th><th>調整分錄（期末剩 30）</th></tr>
+      <tr>
+        <td><b>資產法</b><br><span style="font-size:11px;color:var(--sub);">記實</span></td>
+        <td class="dim">借：用品盤存 100<br>貸：現金 100</td>
+        <td>帳上<b>全是資產</b>，要<b>轉出已使用的 70</b></td>
+        <td class="hot">借：文具用品 <b>70</b><br>貸：用品盤存 <b>70</b></td>
+      </tr>
+      <tr>
+        <td><b>費用法</b><br><span style="font-size:11px;color:var(--sub);">記虛</span></td>
+        <td class="dim">借：文具用品 100<br>貸：現金 100</td>
+        <td>帳上<b>全是費用</b>，要<b>救回未使用的 30</b></td>
+        <td class="hot">借：用品盤存 <b>30</b><br>貸：文具用品 <b>30</b></td>
+      </tr>
+    </table>
+
+    <div class="sowhat">
+      <div class="h">💭 「所以呢？」— 若漏計應付薪資（負債）</div>
+      <ul>
+        <li><b>費用低估</b> → 損益表上的淨利會<b>虛增</b></li>
+        <li><b>負債低估</b> → 資產負債表上負債太少，<b>流動比率看起來比實際更好</b></li>
+      </ul>
+      <p style="margin-top:8px;">這就是為什麼<b>審計師和會計師最看重調整分錄</b>——它直接影響決策者的判斷。</p>
+    </div>
+
+    <h3 style="margin-top:22px;">📝 歷屆考題實戰</h3>
+
+    <div class="card">
+      <h4>第一題：薪資費用推導（應付項目）</h4>
+      <p><b>題目：</b>X5 年 9 月薪資費用 $40,000。8/31 應付薪資餘額 $7,980，9/30 應付薪資餘額 $8,730。求 9 月實際支付之薪資現金。</p>
+      <table style="margin:12px 0;">
+        <tr><th>應付薪資（負債帳戶）</th><th class="num">借方（支付/減少）</th><th class="num">貸方（認列/增加）</th></tr>
+        <tr><td class="dim">期初餘額 8/31</td><td class="num"></td><td class="num">7,980</td></tr>
+        <tr><td class="dim">本期認列（9 月費用）</td><td class="num"></td><td class="num">40,000</td></tr>
+        <tr><td class="dim">支付現金 X</td><td class="num">(39,250)</td><td class="num"></td></tr>
+        <tr><td class="dim">期末餘額 9/30</td><td class="num"></td><td class="num">8,730</td></tr>
+      </table>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><div class="b">期初欠員工 $7,980，九月又發生 $40,000 的工作量（費用）</div></div>
+        <div class="step"><div class="n">2</div><div class="b">如果完全不付錢，九月底應該欠員工 $47,980</div></div>
+        <div class="step"><div class="n">3</div><div class="b">但題目說九月底只欠 8,730，代表中間付掉了現金<span class="calc">47,980 − 8,730 ＝ 39,250 ✅</span></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4>第二題：應付費用辨析</h4>
+      <p><b>題目：</b>下列哪一項屬於應付費用調整？(A) 應收利息　(B) 應付租金　(C) 預付保險費　(D) 折舊</p>
+      <ul class="list" style="margin-top:10px;">
+        <li><b>(A)</b> 借：應收利息／貸：利息收入 → 這是<b>應收收入</b></li>
+        <li style="color:var(--good);"><b>(B) ✅ 正確答案</b> — 借：租金支出／貸：應付租金，標準的「已發生、未支付」</li>
+        <li><b>(C)</b> 這是<b>遞延項目</b>，處理「已付錢、未過期」的資產轉費用</li>
+        <li><b>(D)</b> 這是<b>估計項目</b>，處理長期資產的成本分攤</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ Part 2 ============ -->
+  <section id="p2">
+    <div class="sec-label">Part 2 · 現金管理的核心</div>
+    <h2>🏦 銀行存款調節表 Bank Reconciliation</h2>
+
+    <p style="font-size:13.5px;color:#c7cdd5;margin:0 0 16px;">
+      這就像會計界的<b>偵探工作</b>。編製目的不只是對帳，更是為了<b>發現錯誤、防範舞弊</b>。實務中公司帳與銀行帳永遠不會一樣，因為存在<b>時間差</b>與<b>人為錯誤</b>。
+    </p>
+
+    <div class="eq">
+      公司 ± 差異　＝　銀行 ± 差異　＝　<span>正確餘額</span>
+      <span class="cap">建議別死背調節表格式——<b>直接畫一個大 T 字，左邊「公司」、右邊「銀行」</b></span>
+    </div>
+
+    <div class="grid g2">
+      <div class="card" style="border-left:3px solid var(--blue);">
+        <h4>① 公司帳載餘額 Book Balance</h4>
+        <p><b style="color:var(--good);">加項：</b>銀行代收票據（託收票據）、利息收入<br>
+        <span style="font-size:12px;color:var(--sub);">→ 銀行已收到，但還沒通知公司</span></p>
+        <p><b style="color:var(--bad);">減項：</b>銀行手續費、NSF 退票、代扣費用<br>
+        <span style="font-size:12px;color:var(--sub);">→ NSF＝客戶存款不足，銀行把之前給你的錢扣掉</span></p>
+        <p><b style="color:var(--accent);">錯誤更正：</b>若公司把支出 $100 記成 $1,000，需<b>加回 $900</b></p>
+      </div>
+
+      <div class="card" style="border-left:3px solid var(--accent2);">
+        <h4>② 銀行對帳單餘額 Bank Balance</h4>
+        <p><b style="color:var(--good);">加項：</b>在途存款 Deposit in Transit<br>
+        <span style="font-size:12px;color:var(--sub);">→ 你錢投進去了，銀行還沒入帳</span></p>
+        <p><b style="color:var(--bad);">減項：</b>未兌現支票 Outstanding Checks<br>
+        <span style="font-size:12px;color:var(--sub);">→ 你支票開給廠商了，但廠商還沒去領</span></p>
+        <div class="warn" style="margin-top:12px;">
+          <div class="h">🚨 大陷阱：保付支票 Certified Checks</div>
+          <p><b>不可以列入未兌現支票減項！</b>因為銀行在保證時<b>已經把錢扣走了，不存在時間差</b>。<br><b style="color:var(--bad);">考場口訣：看到保付支票，直接畫掉，不予理會。</b></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sowhat">
+      <div class="h">💭 「所以呢？」— 為什麼只有公司端要做調整分錄？</div>
+      <p>因為<b>我們管不到銀行的帳，只能修自己的帳</b>。銀行端的在途存款與未兌現支票會隨時間自然消化。<br>若漏計「銀行手續費」，會導致：</p>
+      <ul>
+        <li><b>資產高估</b>——帳面現金比實際多</li>
+        <li><b>費用低估</b>——營業費用太少，淨利虛胖</li>
+        <li><b>比率誤導</b>——流動比率因現金虛高而產生錯誤的財務警訊</li>
+      </ul>
+    </div>
+
+    <h3 style="margin-top:22px;">📝 歷屆考題實戰</h3>
+
+    <div class="card">
+      <h4>第一題：逆推未兌現支票</h4>
+      <p><b>數據：</b>公司帳 $8,000、銀行帳 $7,500。在途存款 $600、NSF 退票 $300、手續費 $100。求未兌現支票。</p>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><div class="b"><b>先從公司端求正確餘額</b><span class="calc">8,000 − 300（退票）− 100（手續費）＝ 7,600</span></div></div>
+        <div class="step"><div class="n">2</div><div class="b"><b>關鍵邏輯：兩邊的「正確餘額」一定要相等</b>，所以銀行端調整後也必須是 7,600</div></div>
+        <div class="step"><div class="n">3</div><div class="b"><b>公式推導</b><span class="calc">7,500（銀行）＋ 600（在途）− X（未兌現）＝ 7,600<br>8,100 − X ＝ 7,600 → X ＝ 500 ✅</span></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4>第二題：推算調整前公司餘額</h4>
+      <p><b>數據：</b>銀行餘額 $553,000、在途 $62,600、未兌現 $42,900。公司端有退票 $12,400、手續費 $1,800。求調整前公司帳餘額。</p>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><div class="b"><b>從銀行端求正確餘額</b><span class="calc">553,000 ＋ 62,600 − 42,900 ＝ 572,700</span></div></div>
+        <div class="step"><div class="n">2</div><div class="b"><b>回推公司帳 X</b><span class="calc">X − 12,400（退票）− 1,800（手續費）＝ 572,700</span></div></div>
+        <div class="step"><div class="n">3</div><div class="b"><b>計算</b><span class="calc">X ＝ 572,700 ＋ 12,400 ＋ 1,800 ＝ 586,900 ✅</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Part 3 ============ -->
+  <section id="p3">
+    <div class="sec-label">Part 3 · 存貨估計的黃金邏輯</div>
+    <h2>🔥 毛利率法 Gross Profit Method</h2>
+
+    <p style="font-size:13.5px;color:#c7cdd5;margin:0 0 16px;">
+      使用時機有兩個：<b>① 突發事件</b>（火災燒掉倉庫，無法盤點）；<b>② 編製期中報表</b>（如季報，為節省成本而不進行實地盤點）。
+    </p>
+
+    <div class="eq">
+      銷貨毛利率　G　＝　<span>R ÷ (1 ＋ R)</span>
+      <span class="cap">成本加成 25% → 25% ÷ 1.25 ＝ <b style="color:var(--accent2);">毛利率 20%</b><br>
+      因為<b>加成以「成本」為分母，毛利以「銷貨」為分母</b></span>
+    </div>
+
+    <h3>五大解題步驟</h3>
+    <div class="card">
+      <div class="steps">
+        <div class="step"><div class="n">1</div><div class="b"><b>轉換毛利率（最重要！）</b>看到「成本加成」先轉毛利率，直接拿加成率去乘就整題錯</div></div>
+        <div class="step"><div class="n">2</div><div class="b"><b>求銷貨淨額</b>＝ 銷貨收入 − 銷貨退回（現銷與賒銷都要算進去）</div></div>
+        <div class="step"><div class="n">3</div><div class="b"><b>計算估計銷貨成本</b><span class="calc">銷貨淨額 × (1 − 銷貨毛利率)</span></div></div>
+        <div class="step"><div class="n">4</div><div class="b"><b>計算估計期末存貨</b><span class="calc">期初存貨 ＋ 進貨淨額 − 銷貨成本</span></div></div>
+        <div class="step"><div class="n">5</div><div class="b"><b>計算存貨損失</b><span class="calc">估計存貨 − 殘值 − 安全商品</span></div></div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:20px;">安全商品 Safe Goods 鑑定準則</h3>
+    <p style="font-size:13px;color:var(--sub);margin:0 0 12px;">判準：<b style="color:var(--text);">貨權屬於我，但貨不在被燒的倉庫裡</b></p>
+    <div class="grid g3">
+      <div class="ok">
+        <div class="h">📦 FOB 起運點在途進貨</div>
+        <p>賣家已出貨，<b>貨權屬於我，但還在路上沒被燒</b>。</p>
+      </div>
+      <div class="ok">
+        <div class="h">🚚 FOB 目的地在途銷貨</div>
+        <p>我已出貨但還沒到客戶手上，<b>貨權仍屬我，但在路上沒被燒</b>。</p>
+      </div>
+      <div class="ok">
+        <div class="h">🏪 寄銷品</div>
+        <p>貨放在別人的商店裡賣，<b>當然安全</b>。</p>
+      </div>
+    </div>
+
+    <div class="sowhat">
+      <div class="h">💭 「所以呢？」— 沒扣安全商品的後果</div>
+      <p>災損會被<b>嚴重高估</b>。這在<b>保險理賠上是詐欺</b>，在會計考試上則是<b>把送分題變扣分題</b>。<br>請務必細讀題目中關於「在途」的貿易條件。</p>
+    </div>
+
+    <h3 style="margin-top:22px;">📝 歷屆考題實戰</h3>
+
+    <div class="grid g2">
+      <div class="card">
+        <h4>第一題：標準火災損失</h4>
+        <p style="font-size:12.5px;color:var(--sub);">期初 $50,000、進貨 $180,000、銷貨 $200,000、成本加成 25%、殘值 $15,000</p>
+        <div class="steps" style="margin-top:8px;">
+          <div class="step"><div class="n">1</div><div class="b">毛利率<span class="calc">25% ÷ 1.25 ＝ 20%</span></div></div>
+          <div class="step"><div class="n">2</div><div class="b">銷貨成本<span class="calc">200,000 × (1 − 20%) ＝ 160,000</span></div></div>
+          <div class="step"><div class="n">3</div><div class="b">估計存貨<span class="calc">50,000 ＋ 180,000 − 160,000 ＝ 70,000</span></div></div>
+          <div class="step"><div class="n">4</div><div class="b">火災損失<span class="calc">70,000 − 15,000 ＝ 55,000 ✅</span></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h4>第二題：綜合災害進階題</h4>
+        <p style="font-size:12.5px;color:var(--sub);">存貨 $50,000、進貨 $360,000、進退 $6,000、進費 $2,500、現銷 $230,000、賒銷 $250,000、毛利率 25%、安全商品 $22,000、殘值 $8,500</p>
+        <div class="steps" style="margin-top:8px;">
+          <div class="step"><div class="n">1</div><div class="b">銷貨淨額<span class="calc">230,000 ＋ 250,000 ＝ 480,000</span></div></div>
+          <div class="step"><div class="n">2</div><div class="b">估計銷貨成本<span class="calc">480,000 × (1 − 25%) ＝ 360,000</span></div></div>
+          <div class="step"><div class="n">3</div><div class="b">估計存貨（<b>進費要加、進退要減</b>）<span class="calc">50,000 ＋ (360,000 − 6,000 ＋ 2,500) − 360,000 ＝ 46,500</span></div></div>
+          <div class="step"><div class="n">4</div><div class="b">損失金額<span class="calc">46,500 − 22,000（安全）− 8,500（殘值）＝ 16,000 ✅</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Part 4 ============ -->
+  <section id="p4">
+    <div class="sec-label">Part 4 · 折舊計算的高階應用</div>
+    <h2>📉 年數合計法 SYD Method</h2>
+
+    <p style="font-size:13.5px;color:#c7cdd5;margin:0 0 16px;">
+      SYD 屬於<b>加速折舊法</b>。為什麼要加速？因為許多資產（電腦、機器）<b>初期效率最高、產出的收入最多</b>，根據<b>配合原則</b>，初期就應該攤提較多折舊。
+    </p>
+
+    <div class="eq">
+      分母　＝　<span>n(n＋1) ÷ 2</span>　　·　　分子　＝　<span>剩餘耐用年限</span>
+      <span class="cap">耐用 5 年 → 1+2+3+4+5 ＝ <b>15</b>　｜　耐用 8 年 → 8×9÷2 ＝ <b>36</b><br>
+      分子第一年是 n，最後一年是 1，<b>逐年遞減</b></span>
+    </div>
+
+    <div class="card" style="border-left:3px solid var(--bad);">
+      <h4>🔥 魔王關卡：跨會計年度（年中購入）</h4>
+      <p>資產若在 10/1 購入，它的<b>「折舊年度」與「會計年度」對不上</b>。必須用<b>時間段比例法</b>，把第 1 折舊年（A）與第 2 折舊年（B）拆開：</p>
+      <ul class="list" style="margin-top:8px;">
+        <li><b>X1 年：</b>只拿 A 的 <b>3 個月</b></li>
+        <li><b>X2 年：</b>拿 A 剩下的 <b>9 個月</b>，再加上 B 的前 <b>3 個月</b></li>
+      </ul>
+      <small style="color:var(--accent);">📌 金鑰公式④：折舊 ＝（折舊年 A × 權重）＋（折舊年 B × 權重）</small>
+    </div>
+
+    <h3 style="margin-top:20px;">三大折舊方法對抗表</h3>
+    <table>
+      <tr><th style="width:24%;">方法</th><th>計算基礎</th><th>特殊規定</th></tr>
+      <tr><td><b>直線法</b></td><td class="hot">(成本 − 殘值) × 1/n</td><td class="dim">每期金額完全相同</td></tr>
+      <tr><td><b>年數合計法 SYD</b></td><td class="hot">(成本 − 殘值) × 變動率</td><td class="dim">分子遞減，金額逐年下降</td></tr>
+      <tr><td><b>倍數餘額遞減法 DDB</b></td><td class="hot">期初帳面價值 × (2/n)</td><td style="color:var(--bad);font-weight:600;">初期不扣殘值，但帳面價值不可低於殘值</td></tr>
+    </table>
+
+    <div class="sowhat">
+      <div class="h">💭 「所以呢？」— 折舊法對盈餘與稅務的影響</div>
+      <p>在資產年輕時採用 SYD，會讓報表利潤看起來<b>較低</b>，但這能<b>節省早期的所得稅支出</b>（加速折舊的節稅效益）。<br>這正是<b>會計師在幫企業做稅務規劃時常用的工具</b>。</p>
+    </div>
+
+    <h3 style="margin-top:22px;">📝 歷屆考題實戰</h3>
+
+    <div class="card">
+      <h4>第一題：跨年度 SYD 計算</h4>
+      <p><b>數據：</b>10/1 購入 30 萬設備，殘值 3 萬，耐用 8 年</p>
+      <div class="steps" style="margin-top:8px;">
+        <div class="step"><div class="n">1</div><div class="b">分母<span class="calc">8 × 9 ÷ 2 ＝ 36</span></div></div>
+        <div class="step"><div class="n">2</div><div class="b">第 1 折舊年額 A<span class="calc">(300,000 − 30,000) × 8/36 ＝ 60,000</span></div></div>
+        <div class="step"><div class="n">3</div><div class="b">第 2 折舊年額 B<span class="calc">(300,000 − 30,000) × 7/36 ＝ 52,500</span></div></div>
+        <div class="step"><div class="n">4</div><div class="b"><b>X1 年折舊（僅 3 個月）</b><span class="calc">60,000 × 3/12 ＝ 15,000 ✅</span></div></div>
+        <div class="step"><div class="n">5</div><div class="b"><b>X2 年折舊（完整 12 個月，橫跨兩個折舊年度）</b><span class="calc">60,000 × 9/12（A 的剩餘）＝ 45,000<br>52,500 × 3/12（B 的開始）＝ 13,125<br>合計 ＝ 58,125 ✅</span></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4>第二題：三法綜合比較</h4>
+      <p><b>數據：</b>4/1 購入 $10,000 設備，耐用 5 年，殘值 $1,000（當年度使用 9 個月）</p>
+      <table style="margin-top:12px;">
+        <tr><th>方法</th><th>計算式</th><th class="num">當年度折舊</th></tr>
+        <tr><td><b>直線法</b></td><td class="dim">(10,000 − 1,000) ÷ 5 × 9/12</td><td class="num">1,350</td></tr>
+        <tr><td><b>年數合計法</b></td><td class="dim">(10,000 − 1,000) × 5/15 × 9/12</td><td class="num">2,250</td></tr>
+        <tr><td><b>DDB 法</b></td><td class="dim"><b style="color:var(--bad);">10,000（不扣殘值）</b> × 2/5 × 9/12</td><td class="num">3,000</td></tr>
+      </table>
+      <small style="color:var(--bad);margin-top:10px;display:block;">⚠️ <b>最關鍵的差異：DDB 初期不扣殘值</b>，直接用期初帳面價值乘折舊率。殘值只在最後當作停止折舊的下限。先扣殘值再算會得到 2,700 這個錯誤答案。</small>
+    </div>
+  </section>
+
+  <!-- ============ 結語 ============ -->
+  <section>
+    <div class="sec-label">Final Check · 五五三原則</div>
+    <h2>✅ 考前最後衝刺清單</h2>
+
+    <h3>五大金鑰公式</h3>
+    <div class="checklist">
+      <div class="ck">
+        <div class="n">①</div>
+        <div>
+          <div class="t">毛利率轉換　G ＝ R ÷ (1＋R)</div>
+          <div class="d">看到「<b>成本加成</b>」就先轉毛利率。成本加成 25% → 毛利率 20%。</div>
+        </div>
+      </div>
+      <div class="ck">
+        <div class="n">②</div>
+        <div>
+          <div class="t">SYD 分母　n(n＋1) ÷ 2</div>
+          <div class="d">5 年 → 15；8 年 → 36。常考數字直接記熟。</div>
+        </div>
+      </div>
+      <div class="ck">
+        <div class="n">③</div>
+        <div>
+          <div class="t">銀行調節　公司 ± 差異 ＝ 銀行 ± 差異 ＝ 正確餘額</div>
+          <div class="d">只要有一端資料完整，<b>先算出正確餘額，再回推另一端的缺口</b>。所有逆推題都是這個套路。</div>
+        </div>
+      </div>
+      <div class="ck">
+        <div class="n">④</div>
+        <div>
+          <div class="t">跨年折舊　＝（折舊年 A × 權重）＋（折舊年 B × 權重）</div>
+          <div class="d">年中購入時，<b>每個完整會計年度都橫跨兩個折舊年度</b>。記住「A 的剩餘 ＋ B 的開始」。</div>
+        </div>
+      </div>
+      <div class="ck">
+        <div class="n">⑤</div>
+        <div>
+          <div class="t">DDB 折舊　＝ 期初帳面價值 × (2 ÷ 耐用年限)</div>
+          <div class="d"><b>初期不扣殘值</b>——這是三法中最反直覺、也最常錯的一點。</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:24px;">三大常犯錯誤（考前一分鐘再看一次）</h3>
+    <div class="grid g3">
+      <div class="warn">
+        <div class="h">☐ 用品盤存</div>
+        <p>搞混「已使用」與「未使用」的金額。<br><b style="color:var(--good);">資產法調已用、費用法調未用。</b></p>
+      </div>
+      <div class="warn">
+        <div class="h">☐ 銀行對帳</div>
+        <p>誤把「保付支票」計入未兌現。<br><b style="color:var(--good);">看到保付支票直接畫掉，不予理會！</b></p>
+      </div>
+      <div class="warn">
+        <div class="h">☐ 薪資推導</div>
+        <p>方向記反。<br><b style="color:var(--good);">應付薪資增加＝現金付得少；減少＝現金付得多。</b></p>
+      </div>
+    </div>
+
+    <div class="quote" style="margin-top:20px;">
+      <span class="lbl">考場心法</span>
+      這四大單元看似獨立，但核心都是為了<b style="color:var(--accent2);">「正確評價資產」與「精確衡量損益」</b>。<br><br>
+      在考場上，遇到不會的題目<b>先不要慌</b>——試著<b>畫出 T 字帳或時間軸</b>，答案往往就在邏輯推導中。<br><br>
+      會計學這條路沒有捷徑，只有<b>「理解」加上「大量的練習」</b>。<br>
+      <span style="color:var(--accent);">我們執照榜單上見。</span>
+    </div>
+  </section>
+
+  <footer>
+    Rock 會計家教 · 蕭啟漢<br>
+    記帳士會計學考前衝刺 · 四大核心單元重點手冊
+  </footer>
+
+</div>
+</body>
+</html>
