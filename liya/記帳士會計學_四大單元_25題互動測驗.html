@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>記帳士會計學考前衝刺 — 四大單元 25 題互動測驗</title>
+<style>
+  :root{
+    --bg:#0f1115;
+    --card:#171a21;
+    --card2:#1e222b;
+    --line:#262b35;
+    --accent:#ff8a3d;
+    --accent2:#4fd1c5;
+    --blue:#7dd3fc;
+    --purple:#a78bfa;
+    --gold:#fbbf24;
+    --good:#4ade80;
+    --bad:#f87171;
+    --text:#e8eaed;
+    --sub:#9aa1ab;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:radial-gradient(circle at 20% -10%, #26314a 0%, var(--bg) 45%);
+    color:var(--text);
+    padding:24px 16px 60px;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{margin-bottom:22px;}
+  .tag{
+    display:inline-block;font-size:12px;letter-spacing:1px;color:var(--accent);
+    background:rgba(255,138,61,.12);border:1px solid rgba(255,138,61,.35);
+    padding:4px 10px;border-radius:999px;margin-bottom:12px;
+  }
+  h1{font-size:25px;line-height:1.45;margin:0 0 8px;}
+  .desc{color:var(--sub);font-size:14px;margin:0;line-height:1.75;}
+  .meta{color:var(--sub);font-size:12px;margin-top:10px;line-height:1.7;}
+
+  .progress-bar{height:6px;background:var(--line);border-radius:999px;overflow:hidden;margin:20px 0 10px;}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%;transition:width .4s ease;}
+  .progress-text{text-align:right;font-size:11.5px;color:var(--sub);margin-bottom:22px;}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 20px;margin-bottom:18px;display:none;}
+  .card.active{display:block;}
+  .topline{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+  .qnum{font-size:12px;color:var(--sub);font-weight:700;letter-spacing:1px;}
+  .badges{display:flex;gap:6px;}
+  .sec{font-size:11px;padding:2px 9px;border-radius:999px;font-weight:600;}
+  .sec.p1{color:var(--blue);border:1px solid rgba(125,211,252,.4);background:rgba(125,211,252,.1);}
+  .sec.p2{color:var(--accent2);border:1px solid rgba(79,209,197,.4);background:rgba(79,209,197,.1);}
+  .sec.p3{color:var(--accent);border:1px solid rgba(255,138,61,.4);background:rgba(255,138,61,.1);}
+  .sec.p4{color:var(--gold);border:1px solid rgba(251,191,36,.4);background:rgba(251,191,36,.1);}
+  .sec.mix{color:var(--purple);border:1px solid rgba(167,139,250,.4);background:rgba(167,139,250,.1);}
+  .level{font-size:11px;color:var(--sub);border:1px solid #333a46;padding:2px 9px;border-radius:999px;}
+
+  .qtext{font-size:17px;line-height:1.65;margin:0 0 14px;font-weight:600;}
+  .databox{
+    background:#12151b;border:1px solid var(--line);border-radius:10px;
+    padding:12px 14px;margin-bottom:16px;font-size:13px;line-height:2;color:#c3c9d1;
+    font-variant-numeric:tabular-nums;
+  }
+  .databox b{color:var(--accent);}
+
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt{
+    text-align:left;background:var(--card2);border:1px solid #2c313c;color:var(--text);
+    padding:13px 16px;border-radius:10px;font-size:14.5px;cursor:pointer;transition:all .15s ease;line-height:1.55;
+  }
+  .opt:hover{border-color:var(--accent2);}
+  .opt.correct{background:rgba(74,222,128,.14);border-color:var(--good);color:#c6f6d5;}
+  .opt.wrong{background:rgba(248,113,113,.14);border-color:var(--bad);color:#fecaca;}
+  .opt.disabled{cursor:default;pointer-events:none;opacity:.78;}
+
+  .explain{
+    margin-top:16px;padding:14px 16px;background:#12151b;border-left:3px solid var(--accent2);
+    border-radius:8px;font-size:13.5px;line-height:1.95;color:#d4d8dd;display:none;
+  }
+  .explain.show{display:block;}
+  .explain .key{color:var(--accent);font-weight:700;}
+  .explain .trap{color:var(--bad);font-weight:700;}
+
+  .nextBtn{
+    margin-top:18px;display:none;background:var(--accent);color:#1a1000;font-weight:700;
+    border:none;padding:11px 22px;border-radius:999px;font-size:14px;cursor:pointer;
+  }
+  .nextBtn.show{display:inline-block;}
+
+  .result{display:none;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:34px 22px;}
+  .result.show{display:block;}
+  .result .center{text-align:center;}
+  .result .score{font-size:46px;font-weight:800;margin:6px 0;color:var(--accent);}
+  .result .label{color:var(--sub);font-size:13px;}
+  .secscore{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:22px 0 4px;}
+  .secscore div{
+    background:#12151b;border:1px solid var(--line);border-radius:10px;
+    padding:10px 14px;font-size:12.5px;color:var(--sub);min-width:120px;text-align:center;
+  }
+  .secscore div b{display:block;font-size:19px;color:var(--text);margin-top:4px;font-variant-numeric:tabular-nums;}
+  .result .msg{margin:22px auto 0;max-width:580px;font-size:14.5px;line-height:1.9;color:#d4d8dd;text-align:left;}
+  .retryBtn{margin:24px auto 0;display:block;background:transparent;border:1px solid var(--accent2);color:var(--accent2);padding:9px 22px;border-radius:999px;cursor:pointer;font-size:13.5px;}
+
+  .quicktable{margin-top:40px;}
+  .quicktable h2{font-size:15px;color:var(--accent2);margin-bottom:12px;}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;background:var(--card);border-radius:12px;overflow:hidden;}
+  th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--sub);font-weight:600;}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent);}
+  tr:last-child td{border-bottom:none;}
+
+  footer{margin-top:36px;text-align:center;color:#5a606b;font-size:11.5px;line-height:2;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="tag">記帳士會計學 · 考前衝刺測驗</span>
+    <h1>四大核心單元 25 題<br>會計調整 × 銀行調節 × 毛利率法 × 年數合計法</h1>
+    <p class="desc">每題附題設數據與完整推導，答完顯示分區得分與錯題複習清單。會計學容錯率低——一個數字錯，整題分錄全軍覆沒；但只要邏輯通了，它就是拉高總分、對抗法規科目變數的最強盾牌。</p>
+    <div class="meta">Rock 會計家教 · 蕭啟漢</div>
+  </header>
+
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-text" id="progressText">0 / 25</div>
+
+  <div id="quizArea"></div>
+
+  <div class="result" id="resultBox">
+    <div class="center">
+      <div class="label">測驗完成</div>
+      <div class="score" id="scoreText">0 / 25</div>
+      <div class="label" id="scoreSub"></div>
+    </div>
+    <div class="secscore" id="secScore"></div>
+    <div class="msg" id="resultMsg"></div>
+    <button class="retryBtn" onclick="restartQuiz()">重新測驗</button>
+  </div>
+
+  <div class="quicktable">
+    <h2>🔑 五大金鑰公式</h2>
+    <table>
+      <tr><th>編號</th><th>公式</th><th>使用時機</th></tr>
+      <tr><td>①</td><td><b>毛利率轉換 G ＝ R ÷ (1＋R)</b></td><td>看到「成本加成」就先轉毛利率</td></tr>
+      <tr><td>②</td><td><b>SYD 分母 ＝ n(n＋1) ÷ 2</b></td><td>年數合計法，8 年 → 36</td></tr>
+      <tr><td>③</td><td><b>公司 ± 差異 ＝ 銀行 ± 差異 ＝ 正確餘額</b></td><td>銀行存款調節表，兩端必相等</td></tr>
+      <tr><td>④</td><td><b>折舊 ＝（折舊年 A × 權重）＋（折舊年 B × 權重）</b></td><td>年中購入的跨年度折舊</td></tr>
+      <tr><td>⑤</td><td><b>DDB ＝ 期初帳面價值 × (2 ÷ n)</b></td><td>倍數餘額遞減法，<b>初期不扣殘值</b></td></tr>
+    </table>
+  </div>
+
+  <div class="quicktable">
+    <h2>⚠️ 三大常犯錯誤</h2>
+    <table>
+      <tr><th>項目</th><th>錯誤直覺</th><th>正確處理</th></tr>
+      <tr><td>用品盤存</td><td>搞混「已使用」與「未使用」</td><td><b>資產法調已用、費用法調未用</b></td></tr>
+      <tr><td>銀行對帳</td><td>把保付支票當未兌現支票</td><td><b>看到保付支票直接畫掉，不予理會</b></td></tr>
+      <tr><td>薪資推導</td><td>方向記反</td><td><b>應付薪資增加＝現金付得少；減少＝付得多</b></td></tr>
+    </table>
+  </div>
+
+  <div class="quicktable">
+    <h2>🧮 課堂關鍵答案數字</h2>
+    <table>
+      <tr><th>題型</th><th>單元</th><th class="num">答案</th></tr>
+      <tr><td>9 月實際支付薪資現金</td><td>會計調整</td><td class="num">39,250</td></tr>
+      <tr><td>逆推未兌現支票</td><td>銀行調節</td><td class="num">500</td></tr>
+      <tr><td>推算調整前公司帳餘額</td><td>銀行調節</td><td class="num">586,900</td></tr>
+      <tr><td>標準火災損失</td><td>毛利率法</td><td class="num">55,000</td></tr>
+      <tr><td>綜合災害估計存貨</td><td>毛利率法</td><td class="num">46,500</td></tr>
+      <tr><td>綜合災害損失金額</td><td>毛利率法</td><td class="num">16,000</td></tr>
+      <tr><td>X1 年折舊（10/1 購入，3 個月）</td><td>年數合計法</td><td class="num">15,000</td></tr>
+      <tr><td>X2 年折舊（跨兩個折舊年度）</td><td>年數合計法</td><td class="num">58,125</td></tr>
+      <tr><td>三法比較：直線 / SYD / DDB</td><td>年數合計法</td><td class="num">1,350 / 2,250 / 3,000</td></tr>
+    </table>
+  </div>
+
+  <footer>
+    記帳士會計學考前衝刺 · 四大核心單元<br>
+    教材來源：會計調整｜銀行存款調節表｜毛利率法｜年數合計法
+  </footer>
+</div>
+
+<script>
+const questions = [
+  /* ===== Part 1 會計調整 ===== */
+  {
+    sec:"會計調整", secCls:"p1", level:"觀念",
+    q:"「應計項目（Accrued Items）」與「遞延項目（Deferred Items）」的本質差異是什麼？",
+    data:"應計 → ?｜遞延 → ?",
+    options:[
+      "應計＝先有現金後有事實；遞延＝先有事實後有現金",
+      "應計＝先有事實後有現金（損益已發生但錢未收付）；遞延＝先有現金後有事實（已收付現金但損益尚未完全實現）",
+      "兩者相同，只是科目名稱不同",
+      "應計只用於費用，遞延只用於收入"
+    ],
+    correct:1,
+    explain:"<span class='key'>應計＝先有事實，後有現金</span>——員工已經上班（事實）但還沒發薪（現金），所以期末要把「已發生但未入帳」的損益抓出來。<br><span class='key'>遞延＝先有現金，後有事實</span>——10/1 先付了一年租金（現金），但服務還沒享受完（事實），所以要用時間軸切出已過期與未過期。<br>會計調整的本質是實踐<span class='key'>權責發生制（應計基礎）</span>，確保收益與費損<span class='key'>精確歸屬於正確的會計期間</span>。"
+  },
+  {
+    sec:"會計調整", secCls:"p1", level:"計算",
+    q:"X5 年 9 月薪資費用 $40,000。8/31 應付薪資餘額 $7,980，9/30 應付薪資餘額 $8,730。9 月實際支付的薪資現金是多少？",
+    data:"期初欠 <b>7,980</b> ＋ 本期認列 <b>40,000</b> ＝ 若不付錢應欠 <b>47,980</b><br>但期末只欠 <b>8,730</b>",
+    options:["40,000","39,250","47,980","40,750"],
+    correct:1,
+    explain:"47,980 − 8,730 ＝ <span class='key'>39,250</span>。<br>畫出應付薪資的 T 字帳最清楚：<span class='key'>貸方（增加）＝期初 7,980 ＋ 本期費用 40,000</span>；<span class='key'>借方（減少）＝支付現金 X</span>；<span class='key'>期末餘額 8,730</span>。<br>方向口訣：<span class='key'>應付薪資增加 ＝ 現金付得少；應付薪資減少 ＝ 現金付得多</span>。這題應付從 7,980 增加到 8,730（增加 750），所以付出的現金比費用少 750 → 40,000 − 750 ＝ 39,250。"
+  },
+  {
+    sec:"會計調整", secCls:"p1", level:"辨析",
+    q:"下列哪一項屬於「應付費用」調整？",
+    data:"(A) 應收利息　(B) 應付租金　(C) 預付保險費　(D) 折舊",
+    options:[
+      "(A) 應收利息",
+      "(B) 應付租金",
+      "(C) 預付保險費",
+      "(D) 折舊"
+    ],
+    correct:1,
+    explain:"<span class='key'>(B) 應付租金</span>才是標準的「已發生、未支付」——借：租金支出／貸：應付租金。<br>其餘三項各屬不同類型：<br><span class='key'>(A) 應收利息</span>——借：應收利息／貸：利息收入，這是<span class='key'>應收收入</span>而非應付費用。<br><span class='key'>(C) 預付保險費</span>——屬<span class='key'>遞延項目</span>，處理的是「已付錢、未過期」的資產轉費用。<br><span class='key'>(D) 折舊</span>——屬<span class='key'>估計項目</span>，處理的是長期資產的成本分攤。<br>四個選項剛好對應調整分錄的四種類型，這題是在測分類能力。"
+  },
+  {
+    sec:"會計調整", secCls:"p1", level:"陷阱",
+    q:"10/1 支付一年期租金。若採「記虛轉實」（初始借記費用），期末調整的目標是什麼？",
+    data:"時間軸：10/1 ─────── 12/31 ─────── 次年 9/30<br>區塊 X（已過期 3 個月）｜區塊 Y（未過期 9 個月）",
+    options:[
+      "把「已過期（X）」的部分轉為費用",
+      "把「未過期（Y）」的 9 個月「救回來」，轉為資產（預付費用）",
+      "把全部金額都轉為資產",
+      "不需調整，因為已經記為費用"
+    ],
+    correct:1,
+    explain:"判斷關鍵是<span class='key'>「初始記在哪一邊，就從那一邊往回調」</span>：<br><span class='key'>記實轉虛（先記資產）</span>——帳上全是資產，調整目標是把<span class='key'>已過期（X）的部分轉為費用</span>。<br><span class='key'>記虛轉實（先記費用）</span>——帳上全是費用，調整目標是把<span class='key'>未過期（Y）的部分救回來，轉為資產</span>。<br><span class='trap'>兩種方法的調整方向完全相反，看錯題目就整題錯。</span>解題時第一件事永遠是：<span class='key'>先確認題目用的是哪一種方法。</span>"
+  },
+  {
+    sec:"會計調整", secCls:"p1", level:"計算",
+    q:"購入文具用品 $100，期末盤點剩 $30。採「資產法」與「費用法」的調整分錄金額分別是多少？",
+    data:"已使用 ＝ 100 − 30 ＝ <b>70</b>｜未使用 ＝ <b>30</b>",
+    options:[
+      "資產法調 30；費用法調 70",
+      "資產法調 70（借：文具用品 70／貸：用品盤存 70）；費用法調 30（借：用品盤存 30／貸：文具用品 30）",
+      "兩者都調 100",
+      "兩者都調 70"
+    ],
+    correct:1,
+    explain:"口訣：<span class='key'>資產法調「已用」、費用法調「未用」</span>。<br><span class='key'>資產法（記實）</span>——初始借記用品盤存 100，帳上<span class='key'>全是資產</span>，所以要<span class='key'>轉出已使用的 70</span>。<br><span class='key'>費用法（記虛）</span>——初始借記文具用品 100，帳上<span class='key'>全是費用</span>，所以要<span class='key'>救回未使用的 30</span>。<br><span class='trap'>這是考生最常犯的錯誤之一：把 70 與 30 對調。</span>記住「帳上是什麼，就調另一個」就不會錯。"
+  },
+  {
+    sec:"會計調整", secCls:"p1", level:"影響",
+    q:"若期末漏計「應付薪資」（負債），對財務報表會產生什麼連鎖影響？",
+    data:"漏做：借 薪資費用／貸 應付薪資",
+    options:[
+      "費用高估、負債高估，淨利虛減",
+      "費用低估 → 淨利虛增；負債低估 → 流動比率看起來比實際更好",
+      "只影響損益表，不影響資產負債表",
+      "只影響資產負債表，不影響損益表"
+    ],
+    correct:1,
+    explain:"漏計應付薪資會造成<span class='key'>雙重誤導</span>：<br><span class='key'>① 費用低估 → 損益表淨利虛增</span>；<br><span class='key'>② 負債低估 → 流動負債太少 → 流動比率（流動資產 ÷ 流動負債）看起來比實際更好</span>。<br>這正是<span class='key'>審計師與會計師最看重調整分錄的原因</span>——它直接影響決策者的判斷。<br>核心觀念：<span class='key'>調整分錄不對，後續的結帳與編表全都是錯誤的連鎖反應。</span>"
+  },
+
+  /* ===== Part 2 銀行存款調節表 ===== */
+  {
+    sec:"銀行調節", secCls:"p2", level:"分類",
+    q:"「公司帳載餘額（Book Balance）」端的調整項目，加項與減項分別包含哪些？",
+    data:"為什麼公司端要調整？因為<b>我們管不到銀行的帳，只能修自己的帳</b>",
+    options:[
+      "加項：在途存款；減項：未兌現支票",
+      "加項：銀行代收票據（託收票據）、利息收入；減項：銀行手續費、NSF 退票、代扣費用",
+      "加項：銀行手續費；減項：利息收入",
+      "公司端不需要任何調整"
+    ],
+    correct:1,
+    explain:"<span class='key'>公司端加項</span>——銀行代收票據（託收票據）、利息收入。這些是<span class='key'>銀行已收到，但還沒通知公司</span>。<br><span class='key'>公司端減項</span>——銀行手續費、<span class='key'>NSF 退票</span>（客戶存款不足，銀行把之前給你的錢扣掉）、代扣費用。<br><span class='key'>錯誤更正</span>——若公司把支出 $100 記成 $1,000，需<span class='key'>加回 $900</span>。<br><span class='trap'>在途存款與未兌現支票是「銀行端」的項目，不要放錯邊。</span>"
+  },
+  {
+    sec:"銀行調節", secCls:"p2", level:"分類",
+    q:"「銀行對帳單餘額（Bank Balance）」端的加項與減項分別是什麼？",
+    data:"兩者的共同本質：<b>時間差</b>",
+    options:[
+      "加項：利息收入；減項：手續費",
+      "加項：在途存款（錢投進去了、銀行還沒入帳）；減項：未兌現支票（支票開出了、廠商還沒去領）",
+      "加項：未兌現支票；減項：在途存款",
+      "加項：NSF 退票；減項：代收票據"
+    ],
+    correct:1,
+    explain:"<span class='key'>銀行端加項＝在途存款（Deposit in Transit）</span>——你錢已經投進去了，但銀行還沒入帳，所以銀行的數字偏小，要加回來。<br><span class='key'>銀行端減項＝未兌現支票（Outstanding Checks）</span>——你支票開給廠商了，但廠商還沒去領，所以銀行的數字偏大，要扣掉。<br>建議解法：<span class='key'>不要死背調節表格式，直接畫一個大 T 字，左邊「公司」、右邊「銀行」</span>，項目往哪邊放一目了然。"
+  },
+  {
+    sec:"銀行調節", secCls:"p2", level:"陷阱",
+    q:"編製銀行存款調節表時，「保付支票（Certified Checks）」應如何處理？",
+    data:"保付＝銀行已經<b>保證付款</b>",
+    options:[
+      "列為銀行端減項，與未兌現支票相同",
+      "不可列入未兌現支票減項——因為銀行在保證時已把錢扣走，不存在時間差；看到保付支票直接畫掉不予理會",
+      "列為公司端減項",
+      "列為銀行端加項"
+    ],
+    correct:1,
+    explain:"這是本單元的<span class='key'>大陷阱</span>。未兌現支票之所以要當減項，是因為<span class='key'>存在「銀行還沒扣款」的時間差</span>；但<span class='key'>保付支票在銀行保證的當下就已經把錢扣走了，時間差根本不存在</span>。<br>考場口訣：<span class='key'>看到「保付支票」四個字，直接畫掉，不予理會。</span><br><span class='trap'>把它算進未兌現支票，整題就錯。</span>"
+  },
+  {
+    sec:"銀行調節", secCls:"p2", level:"計算",
+    q:"公司帳 $8,000、銀行帳 $7,500。在途存款 $600、NSF 退票 $300、手續費 $100。未兌現支票是多少？",
+    data:"Step 1 公司端正確餘額：8,000 − 300 − 100 ＝ <b>7,600</b><br>Step 2 銀行端也必須等於 <b>7,600</b><br>Step 3 7,500 ＋ 600 − X ＝ 7,600",
+    options:["300","500","600","1,100"],
+    correct:1,
+    explain:"8,100 − X ＝ 7,600 → <span class='key'>X ＝ 500</span>。<br>解題關鍵是<span class='key'>「兩邊的正確餘額一定要相等」</span>——這就是金鑰公式③：<span class='key'>公司 ± 差異 ＝ 銀行 ± 差異 ＝ 正確餘額</span>。<br>只要有一端資料完整，就能<span class='key'>先算出正確餘額，再回推另一端的缺口</span>。這類逆推題全部都是同一個套路。"
+  },
+  {
+    sec:"銀行調節", secCls:"p2", level:"計算",
+    q:"銀行餘額 $553,000、在途存款 $62,600、未兌現支票 $42,900。公司端有 NSF 退票 $12,400、手續費 $1,800。調整前的公司帳餘額是多少？",
+    data:"Step 1 銀行端正確餘額：553,000 ＋ 62,600 − 42,900 ＝ <b>572,700</b><br>Step 2 X − 12,400 − 1,800 ＝ 572,700",
+    options:["572,700","586,900","558,500","598,700"],
+    correct:1,
+    explain:"X ＝ 572,700 ＋ 12,400 ＋ 1,800 ＝ <span class='key'>586,900</span>。<br>與前一題是<span class='key'>同一個公式的反向運用</span>：先從資料完整的銀行端算出正確餘額 572,700，再回推公司端。<br><span class='trap'>注意方向：公司端的退票與手續費原本是「減項」，所以回推調整前餘額時要「加回去」。</span>方向搞反就會得到 558,500 這個誘餌答案。"
+  },
+  {
+    sec:"銀行調節", secCls:"p2", level:"影響",
+    q:"若公司漏計「銀行手續費」，會造成什麼影響？為什麼銀行端不需要做調整分錄？",
+    data:"銀行手續費屬於<b>公司端減項</b>",
+    options:[
+      "資產低估、費用高估；銀行端也需要調整分錄",
+      "資產高估（帳面現金比實際多）、費用低估（淨利虛胖）、流動比率因現金虛高而誤導；銀行端不需調整，因為我們管不到銀行的帳，只能修自己的帳",
+      "只影響現金餘額，不影響任何比率",
+      "不影響財報，只是對帳作業的差異"
+    ],
+    correct:1,
+    explain:"漏計手續費的三重影響：<span class='key'>① 資產高估——帳面現金比實際多</span>；<span class='key'>② 費用低估——營業費用太少，淨利虛胖</span>；<span class='key'>③ 比率誤導——流動比率因現金虛高而產生錯誤的財務警訊</span>。<br>至於<span class='key'>為什麼只有公司端要做調整分錄</span>：因為<span class='key'>我們管不到銀行的帳，只能修自己的帳</span>。銀行端的在途存款與未兌現支票會隨時間自然消化，不需要我們入帳。<br>銀行調節表的目的不只是對帳，更是<span class='key'>發現錯誤、防範舞弊</span>。"
+  },
+
+  /* ===== Part 3 毛利率法 ===== */
+  {
+    sec:"毛利率法", secCls:"p3", level:"觀念",
+    q:"毛利率法（Gross Profit Method）通常用在什麼情況？",
+    data:"存貨估計技術",
+    options:[
+      "年度決算時取代實地盤點",
+      "① 突發事件（如火災燒掉倉庫）② 編製期中報表（如季報）時，為節省成本而不進行實地盤點",
+      "只用於製造業的在製品評價",
+      "用於計算存貨跌價損失"
+    ],
+    correct:1,
+    explain:"兩個典型使用時機：<span class='key'>① 突發事件</span>——倉庫失火，存貨已經燒掉，無法盤點，只能用估計；<span class='key'>② 期中報表</span>——季報若每季都做實地盤點成本太高，因此採用估計技術。<br>它是一種<span class='key'>「估計」而非「精算」</span>的方法，所以年度決算仍應以實地盤點為準。"
+  },
+  {
+    sec:"毛利率法", secCls:"p3", level:"計算",
+    q:"題目給「成本加成 25%」，對應的銷貨毛利率是多少？為什麼？",
+    data:"G ＝ R ÷ (1 ＋ R)",
+    options:[
+      "25%，兩者相同",
+      "20%（25% ÷ 1.25）——因為加成是以「成本」為分母，毛利是以「銷貨」為分母",
+      "33.3%（25% ÷ 0.75）",
+      "12.5%（25% ÷ 2）"
+    ],
+    correct:1,
+    explain:"25% ÷ 1.25 ＝ <span class='key'>20%</span>。<br>核心原理是<span class='key'>分母不同</span>：<span class='key'>成本加成率的分母是「成本」，銷貨毛利率的分母是「銷貨」</span>。假設成本 100、加成 25% → 售價 125 → 毛利 25 → 毛利率 ＝ 25 ÷ 125 ＝ 20%。<br>這是<span class='key'>金鑰公式①：G ＝ R ÷ (1＋R)</span>。<br><span class='trap'>考試最愛考成本加成，看到「加成」兩個字就先轉換成毛利率，直接把 25% 拿去乘就整題錯。</span>"
+  },
+  {
+    sec:"毛利率法", secCls:"p3", level:"計算",
+    q:"期初 $50,000、進貨 $180,000、銷貨 $200,000、成本加成 25%、殘值 $15,000。火災損失是多少？",
+    data:"① 毛利率 ＝ 25% ÷ 1.25 ＝ <b>20%</b><br>② 銷貨成本 ＝ 200,000 × (1 − 20%) ＝ <b>160,000</b><br>③ 估計存貨 ＝ 50,000 ＋ 180,000 − 160,000 ＝ <b>70,000</b>",
+    options:["70,000","55,000","85,000","40,000"],
+    correct:1,
+    explain:"70,000 − 15,000（殘值）＝ <span class='key'>55,000</span>。<br>標準四步驟走完即可：<span class='key'>轉毛利率 → 算銷貨成本 → 倒推估計存貨 → 扣殘值與安全商品</span>。<br>提醒：<span class='trap'>第一步沒把成本加成 25% 轉成毛利率 20%，後面全錯。</span>這題沒有安全商品，所以只扣殘值。"
+  },
+  {
+    sec:"毛利率法", secCls:"p3", level:"計算",
+    q:"存貨 $50,000、進貨 $360,000、進退 $6,000、進費 $2,500、現銷 $230,000、賒銷 $250,000、毛利率 25%。估計期末存貨是多少？",
+    data:"① 銷貨淨額 ＝ 230,000 ＋ 250,000 ＝ <b>480,000</b><br>② 估計銷貨成本 ＝ 480,000 × (1 − 25%) ＝ <b>360,000</b><br>③ 進貨淨額 ＝ 360,000 − 6,000 ＋ 2,500 ＝ ?",
+    options:["46,500","56,500","50,000","40,000"],
+    correct:0,
+    explain:"進貨淨額 ＝ 360,000 − 6,000（進退）＋ 2,500（進費）＝ <span class='key'>356,500</span><br>估計存貨 ＝ 50,000 ＋ 356,500 − 360,000 ＝ <span class='key'>46,500</span><br>兩個容易失分的地方：<span class='key'>① 現銷與賒銷都要計入銷貨淨額</span>；<span class='key'>② 進貨費用要「加」、進貨退出要「減」</span>——進費是取得存貨的必要成本，屬於存貨成本的一部分。<br>本題毛利率已直接給 25%，不需再轉換。"
+  },
+  {
+    sec:"毛利率法", secCls:"p3", level:"計算",
+    q:"承上題，估計存貨 $46,500，另有安全商品 $22,000、殘值 $8,500。實際損失金額是多少？",
+    data:"損失 ＝ 估計存貨 − 安全商品 − 殘值",
+    options:["46,500","16,000","24,500","38,000"],
+    correct:1,
+    explain:"46,500 − 22,000 − 8,500 ＝ <span class='key'>16,000</span>。<br><span class='key'>安全商品與殘值都要扣</span>——安全商品根本不在倉庫、沒被燒；殘值是燒剩下還有價值的部分。<br><span class='trap'>沒扣安全商品會讓災損被嚴重高估——這在保險理賠上是詐欺，在考試上則是把送分題變成扣分題。</span>"
+  },
+  {
+    sec:"毛利率法", secCls:"p3", level:"辨析",
+    q:"火災發生時，下列哪一組全部屬於「安全商品（Safe Goods）」？",
+    data:"判準：<b>貨權屬於我，但不在被燒的倉庫裡</b>",
+    options:[
+      "FOB 目的地在途進貨、FOB 起運點在途銷貨、代銷品",
+      "FOB 起運點在途進貨、FOB 目的地在途銷貨、寄銷品",
+      "所有在途商品都屬於安全商品",
+      "只有寄銷品屬於安全商品"
+    ],
+    correct:1,
+    explain:"三種安全商品的判準都是<span class='key'>「貨權屬於我，但貨不在倉庫」</span>：<br><span class='key'>FOB 起運點在途進貨</span>——賣家已出貨，<span class='key'>貨權屬於我，但還在路上沒被燒</span>。<br><span class='key'>FOB 目的地在途銷貨</span>——我已出貨但還沒到客戶手上，<span class='key'>貨權仍屬我，但在路上沒被燒</span>。<br><span class='key'>寄銷品</span>——貨放在別人的商店裡賣，<span class='key'>當然安全</span>。<br><span class='trap'>選項 A 的兩種 FOB 條件方向都相反，貨權根本不屬於我，自然也不會出現在我的存貨裡。務必細讀題目中的貿易條件。</span>"
+  },
+
+  /* ===== Part 4 年數合計法 ===== */
+  {
+    sec:"年數合計法", secCls:"p4", level:"觀念",
+    q:"年數合計法屬於「加速折舊法」。為什麼要加速？其節稅效益是什麼？",
+    data:"配合原則（Matching Principle）",
+    options:[
+      "為了讓資產早點折完，方便汰換設備",
+      "因為許多資產（電腦、機器）初期效率最高、產出收入最多，依配合原則初期就該攤提較多折舊；同時初期利潤看起來較低，能節省早期的所得稅支出",
+      "因為稅法強制規定所有資產都要加速折舊",
+      "為了讓報表利潤看起來更高"
+    ],
+    correct:1,
+    explain:"理論基礎是<span class='key'>配合原則</span>：<span class='key'>資產初期效率最高、產出收入最多，所以初期就該攤提較多折舊</span>，讓費用與收入配合。<br>實務效益是<span class='key'>加速折舊的節稅效果</span>：資產年輕時採 SYD 會讓報表利潤看起來較低，<span class='key'>能節省早期的所得稅支出</span>——這正是會計師幫企業做稅務規劃時常用的工具。"
+  },
+  {
+    sec:"年數合計法", secCls:"p4", level:"計算",
+    q:"耐用年限 8 年，SYD 的分母是多少？第一年與最後一年的分子分別是多少？",
+    data:"分母 ＝ n(n＋1) ÷ 2",
+    options:[
+      "分母 8；分子第一年 1、最後一年 8",
+      "分母 36；分子第一年 8、最後一年 1（分子＝剩餘耐用年限，逐年遞減）",
+      "分母 45；分子第一年 9、最後一年 1",
+      "分母 16；分子固定為 8"
+    ],
+    correct:1,
+    explain:"分母 ＝ 8 × 9 ÷ 2 ＝ <span class='key'>36</span>（即 1＋2＋…＋8，代表耐用年限的總和）。<br>分子 ＝ <span class='key'>剩餘耐用年限</span>，第一年是 n（8），最後一年是 1，<span class='key'>逐年遞減</span>——這就是折舊金額逐年下降的原因。<br>這是<span class='key'>金鑰公式②</span>，5 年是 15、8 年是 36，常考的數字建議直接記熟。"
+  },
+  {
+    sec:"年數合計法", secCls:"p4", level:"計算",
+    q:"10/1 購入 30 萬設備，殘值 3 萬、耐用 8 年，採 SYD。X1 年（當年度）折舊為多少？",
+    data:"可折舊金額 ＝ 300,000 − 30,000 ＝ <b>270,000</b>｜分母 <b>36</b><br>第 1 折舊年額 A ＝ 270,000 × 8/36 ＝ <b>60,000</b>",
+    options:["60,000","15,000","45,000","20,000"],
+    correct:1,
+    explain:"60,000 × <span class='key'>3/12</span> ＝ <span class='key'>15,000</span>。<br>10/1 購入代表 X1 年只使用了 <span class='key'>10、11、12 三個月</span>，所以第 1 折舊年額只能認列四分之一。<br><span class='trap'>直接把 60,000 全額認列是最常見的錯誤</span>——年中購入一定要乘上月份權重。"
+  },
+  {
+    sec:"年數合計法", secCls:"p4", level:"魔王",
+    q:"承上題，X2 年（完整會計年度）的折舊為多少？",
+    data:"第 1 折舊年額 A ＝ <b>60,000</b>（尚餘 9 個月）<br>第 2 折舊年額 B ＝ 270,000 × 7/36 ＝ <b>52,500</b>（起始 3 個月）",
+    options:["52,500","58,125","60,000","45,000"],
+    correct:1,
+    explain:"60,000 × 9/12 ＝ 45,000（A 的剩餘）<br>52,500 × 3/12 ＝ 13,125（B 的開始）<br>合計 ＝ <span class='key'>58,125</span><br>這是本單元的<span class='key'>魔王關卡</span>：資產 10/1 購入，<span class='key'>「折舊年度」與「會計年度」對不上</span>，所以每一個完整會計年度都要<span class='key'>橫跨兩個折舊年度</span>。<br>這就是<span class='key'>金鑰公式④：折舊 ＝（折舊年 A × 權重）＋（折舊年 B × 權重）</span>。只要記住「一個會計年度＝A 的剩餘 ＋ B 的開始」，流程就固定了。"
+  },
+  {
+    sec:"年數合計法", secCls:"p4", level:"比較",
+    q:"4/1 購入 $10,000 設備，耐用 5 年、殘值 $1,000。直線法、SYD、DDB 的當年度折舊分別是多少？",
+    data:"當年度使用 <b>9 個月</b>｜可折舊金額（直線與 SYD）＝ <b>9,000</b><br>DDB 折舊率 ＝ 2 ÷ 5 ＝ <b>40%</b>",
+    options:[
+      "1,350 / 2,250 / 2,700",
+      "1,350 / 2,250 / 3,000",
+      "1,800 / 3,000 / 4,000",
+      "1,350 / 3,000 / 3,000"
+    ],
+    correct:1,
+    explain:"<span class='key'>直線法</span>：(10,000 − 1,000) ÷ 5 × 9/12 ＝ <span class='key'>1,350</span><br><span class='key'>年數合計法</span>：(10,000 − 1,000) × 5/15 × 9/12 ＝ <span class='key'>2,250</span><br><span class='key'>DDB 法</span>：<span class='key'>10,000（不扣殘值）</span> × 2/5 × 9/12 ＝ <span class='key'>3,000</span><br><span class='trap'>最關鍵的差異：DDB 初期「不扣殘值」，直接用期初帳面價值乘折舊率</span>——殘值只在最後當作停止折舊的下限（帳面價值不可低於殘值）。<br>選項 A 的 2,700 就是「先扣殘值再算 DDB」的錯誤答案。"
+  },
+
+  /* ===== 整合 ===== */
+  {
+    sec:"整合", secCls:"mix", level:"整合",
+    q:"「三大常犯錯誤」中，用品盤存、保付支票、薪資推導三者的正確處理原則分別是什麼？",
+    data:"考前最後一分鐘檢查清單",
+    options:[
+      "資產法調未用、保付支票列減項、應付薪資增加代表付得多",
+      "資產法調已用／費用法調未用；保付支票直接畫掉不予理會；應付薪資增加＝現金付得少，減少＝現金付得多",
+      "三者都需要追溯調整前期",
+      "三者都不影響財務報表"
+    ],
+    correct:1,
+    explain:"三個高頻失分點的正確處理：<br><span class='key'>① 用品盤存</span>——<span class='key'>資產法調「已使用」、費用法調「未使用」</span>。判準是「帳上原本記在哪一邊，就調另一邊」。<br><span class='key'>② 保付支票</span>——<span class='key'>看到就直接畫掉，不予理會</span>。因為銀行保證時已扣款，不存在時間差。<br><span class='key'>③ 薪資推導</span>——<span class='key'>應付薪資增加 ＝ 現金付得少；減少 ＝ 付得多</span>。<br>這三題共同的特徵是：<span class='trap'>都不難算，但方向記反就是零分。</span>"
+  },
+  {
+    sec:"整合", secCls:"mix", level:"整合",
+    q:"四大單元看似獨立，但核心是同一件事。這個共同的核心是什麼？考場上遇到不會的題目該怎麼辦？",
+    data:"會計調整｜銀行調節｜毛利率法｜年數合計法",
+    options:[
+      "核心是背熟公式；遇到不會的題目就跳過",
+      "核心都是為了「正確評價資產」與「精確衡量損益」；遇到不會的題目，先畫出 T 字帳或時間軸，答案往往就在邏輯推導中",
+      "核心是稅務規劃；遇到不會的題目就猜 B",
+      "四者沒有共同核心，只能分開記憶"
+    ],
+    correct:1,
+    explain:"四大單元的共同核心是<span class='key'>「正確評價資產」與「精確衡量損益」</span>：<br><span class='key'>會計調整</span>——讓損益歸屬到正確期間。<br><span class='key'>銀行調節</span>——讓現金這項資產的帳面金額正確。<br><span class='key'>毛利率法</span>——在無法盤點時估出存貨的正確價值。<br><span class='key'>年數合計法</span>——讓長期資產的成本合理分攤到各期。<br>考場心法：<span class='key'>遇到不會的題目先不要慌，試著畫出 T 字帳或時間軸，答案往往就在邏輯推導中</span>。<br>最後記住：<span class='key'>會計不是死背公式，而是理解「商業事實」如何轉化為「數字資訊」。</span>"
+  }
+];
+
+let current = 0;
+let score = 0;
+const wrongList = [];
+const secStats = {};
+questions.forEach(q => { if(!secStats[q.sec]) secStats[q.sec] = {total:0, right:0}; secStats[q.sec].total++; });
+
+const quizArea = document.getElementById('quizArea');
+const progressFill = document.getElementById('progressFill');
+const progressText = document.getElementById('progressText');
+
+function renderQuiz(){
+  quizArea.innerHTML = '';
+  wrongList.length = 0;
+  Object.keys(secStats).forEach(k => secStats[k].right = 0);
+
+  questions.forEach((item, idx) => {
+    const card = document.createElement('div');
+    card.className = 'card' + (idx === current ? ' active' : '');
+    card.id = 'card-' + idx;
+
+    const topline = document.createElement('div');
+    topline.className = 'topline';
+    const qnum = document.createElement('span');
+    qnum.className = 'qnum';
+    qnum.textContent = `Q${idx+1} / ${questions.length}`;
+    const badges = document.createElement('span');
+    badges.className = 'badges';
+    const secTag = document.createElement('span');
+    secTag.className = 'sec ' + item.secCls;
+    secTag.textContent = item.sec;
+    const lv = document.createElement('span');
+    lv.className = 'level';
+    lv.textContent = item.level;
+    badges.appendChild(secTag);
+    badges.appendChild(lv);
+    topline.appendChild(qnum);
+    topline.appendChild(badges);
+    card.appendChild(topline);
+
+    const qtext = document.createElement('div');
+    qtext.className = 'qtext';
+    qtext.textContent = item.q;
+    card.appendChild(qtext);
+
+    if(item.data){
+      const db = document.createElement('div');
+      db.className = 'databox';
+      db.innerHTML = item.data;
+      card.appendChild(db);
+    }
+
+    const optsWrap = document.createElement('div');
+    optsWrap.className = 'options';
+    item.options.forEach((optText, oIdx) => {
+      const btn = document.createElement('button');
+      btn.className = 'opt';
+      btn.textContent = optText;
+      btn.onclick = () => selectAnswer(idx, oIdx);
+      optsWrap.appendChild(btn);
+    });
+    card.appendChild(optsWrap);
+
+    const explain = document.createElement('div');
+    explain.className = 'explain';
+    explain.id = 'explain-' + idx;
+    explain.innerHTML = item.explain;
+    card.appendChild(explain);
+
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'nextBtn';
+    nextBtn.id = 'next-' + idx;
+    nextBtn.textContent = idx === questions.length - 1 ? '查看結果' : '下一題 →';
+    nextBtn.onclick = () => goNext(idx);
+    card.appendChild(nextBtn);
+
+    quizArea.appendChild(card);
+  });
+  updateProgress();
+}
+
+function updateProgress(){
+  progressFill.style.width = (current / questions.length * 100) + '%';
+  progressText.textContent = `${current} / ${questions.length}`;
+}
+
+function selectAnswer(qIdx, oIdx){
+  const card = document.getElementById('card-' + qIdx);
+  const opts = card.querySelectorAll('.opt');
+  const item = questions[qIdx];
+
+  opts.forEach((o, i) => {
+    o.classList.add('disabled');
+    if(i === item.correct) o.classList.add('correct');
+    if(i === oIdx && oIdx !== item.correct) o.classList.add('wrong');
+  });
+
+  if(oIdx === item.correct){
+    score++;
+    secStats[item.sec].right++;
+  }else{
+    wrongList.push(`Q${qIdx+1}（${item.sec}·${item.level}）`);
+  }
+
+  document.getElementById('explain-' + qIdx).classList.add('show');
+  document.getElementById('next-' + qIdx).classList.add('show');
+}
+
+function goNext(qIdx){
+  document.getElementById('card-' + qIdx).classList.remove('active');
+  current++;
+  if(current < questions.length){
+    const nextCard = document.getElementById('card-' + current);
+    nextCard.classList.add('active');
+    nextCard.scrollIntoView({behavior:'smooth', block:'start'});
+    updateProgress();
+  }else{
+    progressFill.style.width = '100%';
+    progressText.textContent = `${questions.length} / ${questions.length}`;
+    showResult();
+  }
+}
+
+function showResult(){
+  const resultBox = document.getElementById('resultBox');
+  resultBox.classList.add('show');
+  document.getElementById('scoreText').textContent = `${score} / ${questions.length}`;
+
+  const secBox = document.getElementById('secScore');
+  secBox.innerHTML = '';
+  Object.keys(secStats).forEach(k => {
+    const d = document.createElement('div');
+    d.innerHTML = `${k}<b>${secStats[k].right} / ${secStats[k].total}</b>`;
+    secBox.appendChild(d);
+  });
+
+  let subLabel = '', msg = '';
+  const pct = score / questions.length;
+  if(pct === 1){
+    subLabel = '滿分';
+    msg = '四大單元的計算流程與陷阱全數掌握。<br><br><b>考前最後動作：</b>把「五大金鑰公式」與「三大常犯錯誤」蓋起來默寫一次。考場上真正決勝的不是會不會算，而是<b>看到題目的瞬間，腦中有沒有自動跳出那個陷阱警報</b>——成本加成要先轉毛利率、保付支票直接畫掉、DDB 初期不扣殘值。';
+  }else if(pct >= 0.84){
+    subLabel = '掌握良好';
+    msg = '主要考點已經穩了。回頭把答錯的題目重算一次，特別留意三個最高頻失分點：<b>① 成本加成 25% 要先轉成毛利率 20%</b>；<b>② 資產法調已用、費用法調未用</b>；<b>③ DDB 初期不扣殘值</b>。';
+  }else if(pct >= 0.64){
+    subLabel = '基礎及格';
+    msg = '觀念大致有，但計算步驟還不夠熟練。建議先把最下方的「課堂關鍵答案數字」表格遮住，逐題重算一次——這些都是歷屆考題的標準答案，算得出來代表流程真的通了。<br><br>特別提醒：<b>年中購入的跨年度 SYD（58,125 那題）</b>是本次難度最高的一題，務必反覆練到不用思考就能拆出「A 的剩餘 ＋ B 的開始」。';
+  }else{
+    subLabel = '需要重新複習';
+    msg = '建議依序重讀四大單元，先抓住每個單元的核心原則：<br><b>會計調整</b>——應計是先有事實後有現金，遞延是先有現金後有事實。<br><b>銀行調節</b>——公司 ± 差異 ＝ 銀行 ± 差異 ＝ 正確餘額。<br><b>毛利率法</b>——看到成本加成就先轉毛利率 G ＝ R ÷ (1＋R)。<br><b>年數合計法</b>——分母 n(n＋1)÷2，年中購入要拆兩段。';
+  }
+  if(wrongList.length){
+    msg += '<br><br><b>建議複習題號：</b>' + wrongList.join('、');
+  }
+  document.getElementById('scoreSub').textContent = subLabel;
+  document.getElementById('resultMsg').innerHTML = msg;
+}
+
+function restartQuiz(){
+  current = 0;
+  score = 0;
+  document.getElementById('resultBox').classList.remove('show');
+  renderQuiz();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+renderQuiz();
+</script>
+</body>
+</html>
