@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NVIDIA Q2 FY2027 財報拆解 · 佳汝 0827</title>
+<style>
+  :root{
+    --bg:#0f1115;
+    --card:#171a21;
+    --card2:#1e222b;
+    --line:#262b35;
+    --accent:#ff8a3d;
+    --accent2:#4fd1c5;
+    --blue:#7dd3fc;
+    --purple:#a78bfa;
+    --gold:#fbbf24;
+    --good:#4ade80;
+    --bad:#f87171;
+    --text:#e8eaed;
+    --sub:#9aa1ab;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:radial-gradient(circle at 20% -8%, #26314a 0%, var(--bg) 45%);
+    color:var(--text);
+    padding:26px 16px 60px;
+    line-height:1.75;
+  }
+  .wrap{max-width:900px;margin:0 auto;}
+
+  header{margin-bottom:30px;}
+  .tag{
+    display:inline-block;font-size:12px;letter-spacing:1px;color:var(--accent);
+    background:rgba(255,138,61,.12);border:1px solid rgba(255,138,61,.35);
+    padding:4px 11px;border-radius:999px;margin-bottom:14px;
+  }
+  h1{font-size:28px;line-height:1.4;margin:0 0 12px;letter-spacing:.5px;}
+  h1 em{font-style:normal;color:var(--accent);}
+  .sub{color:var(--sub);font-size:14.5px;margin:0;line-height:1.85;}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px;}
+  .chip{font-size:11.5px;color:var(--sub);background:var(--card);border:1px solid var(--line);padding:4px 10px;border-radius:999px;}
+  .chip.hl{color:var(--accent2);border-color:rgba(79,209,197,.4);background:rgba(79,209,197,.08);}
+
+  /* 儀表板 */
+  .dash{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:20px;}
+  @media(max-width:760px){.dash{grid-template-columns:repeat(2,1fr);}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 12px;text-align:center;}
+  .kpi .v{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.3;}
+  .kpi .v.o{color:var(--accent);}
+  .kpi .v.t{color:var(--accent2);}
+  .kpi .v.b{color:var(--blue);}
+  .kpi .v.g{color:var(--gold);}
+  .kpi .l{font-size:11.5px;color:var(--text);margin-top:5px;font-weight:600;}
+  .kpi .n{font-size:11px;color:var(--sub);margin-top:3px;}
+
+  section{margin-bottom:38px;}
+  .sec-label{font-size:11.5px;letter-spacing:2px;color:var(--sub);text-transform:uppercase;margin-bottom:8px;font-weight:700;}
+  h2{font-size:21px;margin:0 0 18px;line-height:1.5;padding-bottom:12px;border-bottom:1px solid var(--line);}
+  h3{font-size:16px;margin:0 0 10px;color:var(--accent2);}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px;}
+  .grid{display:grid;gap:14px;}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  @media(max-width:700px){.g3,.g2{grid-template-columns:1fr;}}
+
+  .card .ico{font-size:20px;margin-bottom:6px;}
+  .card h4{font-size:15.5px;margin:0 0 8px;}
+  .card p{font-size:13.5px;color:#c7cdd5;margin:0;line-height:1.85;}
+  .card p + p{margin-top:9px;}
+  .card small{display:block;font-size:12px;color:var(--sub);margin-top:9px;line-height:1.8;}
+  .card b{color:var(--text);}
+
+  .eq{
+    background:#12151b;border:1px solid var(--line);border-radius:12px;
+    padding:18px 16px;text-align:center;font-size:16px;font-weight:700;
+    line-height:1.9;margin-bottom:14px;font-variant-numeric:tabular-nums;
+  }
+  .eq span{color:var(--accent);}
+  .eq .cap{display:block;font-size:12px;color:var(--sub);font-weight:400;margin-top:9px;line-height:1.85;}
+
+  .quote{
+    background:linear-gradient(135deg, rgba(255,138,61,.10), rgba(79,209,197,.06));
+    border:1px solid rgba(255,138,61,.3);border-radius:14px;padding:20px;
+    font-size:14.5px;line-height:1.95;font-weight:600;
+  }
+  .quote .lbl{display:block;font-size:11px;letter-spacing:2px;color:var(--accent);font-weight:700;margin-bottom:9px;}
+
+  table{width:100%;border-collapse:collapse;font-size:12.8px;background:var(--card);border-radius:12px;overflow:hidden;}
+  th,td{padding:10px 11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--sub);font-weight:600;font-size:12px;}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent);white-space:nowrap;}
+  td.n2{text-align:right;font-variant-numeric:tabular-nums;color:#c7cdd5;white-space:nowrap;}
+  td.dim{color:var(--sub);}
+  tr:last-child td{border-bottom:none;}
+  tr.total td{background:rgba(255,138,61,.08);font-weight:700;}
+
+  ul.list{margin:0;padding-left:18px;font-size:13.5px;color:#c7cdd5;line-height:1.95;}
+  ul.list li{margin-bottom:7px;}
+  ul.list b{color:var(--text);}
+
+  .steps .step{display:flex;gap:12px;padding:11px 0;border-bottom:1px dashed #2a303b;}
+  .steps .step:last-child{border-bottom:none;}
+  .steps .n{
+    flex:0 0 24px;height:24px;border-radius:7px;background:rgba(79,209,197,.14);
+    color:var(--accent2);font-size:12px;font-weight:800;display:flex;
+    align-items:center;justify-content:center;margin-top:3px;
+  }
+  .steps .b{font-size:13.5px;color:#c7cdd5;line-height:1.85;}
+  .steps .b b{color:var(--text);}
+  .steps .calc{
+    display:block;margin-top:5px;background:#12151b;border:1px solid var(--line);
+    border-radius:8px;padding:8px 11px;font-size:12.5px;color:var(--accent2);
+    font-variant-numeric:tabular-nums;
+  }
+
+  .warn{background:#12151b;border:1px solid rgba(248,113,113,.3);border-radius:12px;padding:15px;}
+  .warn .h{font-size:14px;font-weight:700;color:var(--bad);margin-bottom:7px;}
+  .warn p{font-size:13px;color:#c7cdd5;margin:0;line-height:1.85;}
+
+  .ok{background:#12151b;border:1px solid rgba(74,222,128,.3);border-radius:12px;padding:15px;}
+  .ok .h{font-size:14px;font-weight:700;color:var(--good);margin-bottom:7px;}
+  .ok p{font-size:13px;color:#c7cdd5;margin:0;line-height:1.85;}
+
+  .link{
+    background:linear-gradient(135deg, rgba(167,139,250,.10), transparent);
+    border:1px solid rgba(167,139,250,.3);border-radius:12px;padding:15px;margin-top:14px;
+  }
+  .link .h{font-size:13.5px;font-weight:700;color:var(--purple);margin-bottom:7px;}
+  .link p{font-size:13px;color:#c7cdd5;margin:0;line-height:1.85;}
+
+  /* 營收長條 */
+  .bar{margin-bottom:12px;}
+  .bar .bl{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px;}
+  .bar .bl b{color:var(--text);}
+  .bar .bl span{color:var(--sub);font-variant-numeric:tabular-nums;}
+  .bar .track{height:9px;background:#12151b;border-radius:999px;overflow:hidden;border:1px solid var(--line);}
+  .bar .fill{height:100%;border-radius:999px;}
+
+  .bottomline{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 18px;}
+  .bl-item{display:flex;gap:13px;padding:12px 0;border-bottom:1px solid var(--line);}
+  .bl-item:last-child{border-bottom:none;}
+  .bl-item .n{
+    flex:0 0 26px;height:26px;border-radius:8px;background:rgba(255,138,61,.14);
+    color:var(--accent);font-size:12.5px;font-weight:800;display:flex;
+    align-items:center;justify-content:center;margin-top:2px;
+  }
+  .bl-item .t{font-size:14.5px;font-weight:700;margin-bottom:4px;}
+  .bl-item .d{font-size:13px;color:#c7cdd5;line-height:1.85;}
+
+  .disclaimer{
+    margin-top:26px;padding:13px 15px;background:#12151b;border:1px solid rgba(248,113,113,.28);
+    border-radius:10px;font-size:12px;color:var(--sub);line-height:1.9;
+  }
+  footer{margin-top:22px;text-align:center;color:#5a606b;font-size:11.5px;line-height:2;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="tag">課後複習一頁式 · 佳汝</span>
+    <h1>營收翻倍的同時<br>營業現金流卻<em>掉了一半</em></h1>
+    <p class="sub">NVIDIA 2027 會計年度第二季（截至 2026/7/26）財報拆解<br>主表看規模，附註看戰略</p>
+    <div class="chips">
+      <span class="chip">2026.08.27</span>
+      <span class="chip hl">算力即營收</span>
+      <span class="chip hl">GAAP &gt; Non-GAAP</span>
+      <span class="chip">DSO 45→60 天</span>
+      <span class="chip">附註裡的承諾</span>
+      <span class="chip">Rock 老師</span>
+    </div>
+
+    <div class="dash">
+      <div class="kpi"><div class="v o">$962.21億</div><div class="l">單季營收</div><div class="n">YoY +106%｜QoQ +18%</div></div>
+      <div class="kpi"><div class="v t">75.0%</div><div class="l">毛利率</div><div class="n">去年同期 72.4%</div></div>
+      <div class="kpi"><div class="v b">$240.77億</div><div class="l">營業現金流</div><div class="n">上季 $503.44億</div></div>
+      <div class="kpi"><div class="v g">$2,790億</div><div class="l">供應鏈採購承諾</div><div class="n">上季 $1,190億</div></div>
+    </div>
+  </header>
+
+  <!-- ============ 1. 營收結構 ============ -->
+  <section>
+    <div class="sec-label">Part 1 · 營收結構</div>
+    <h2>📊 $962 億營收，92.5% 來自同一個板塊</h2>
+
+    <p style="font-size:13.5px;color:#c7cdd5;margin:0 0 16px;">
+      單季營收 <b>$962.21 億</b>，年增 <b>106%</b>、季增 <b>18%</b>（上季 $816.15 億，單季淨增約 $150 億）。在年營收數千億美元的規模上還能翻倍，而且<b>連續四季 YoY 成長加速</b>——這是判讀這份財報的起點。
+    </p>
+
+    <div class="card">
+      <h3>營收拆解</h3>
+      <div class="bar">
+        <div class="bl"><b>數據中心 Data Center</b><span>$890.23億　佔 92.5%　YoY +117%</span></div>
+        <div class="track"><div class="fill" style="width:92.5%;background:linear-gradient(90deg,var(--accent),#ffb37d);"></div></div>
+      </div>
+      <div class="bar">
+        <div class="bl"><b>邊緣計算與圖形 Edge Computing</b><span>$71.98億　佔 7.5%　YoY +27%</span></div>
+        <div class="track"><div class="fill" style="width:7.5%;background:var(--blue);"></div></div>
+      </div>
+      <small>邊緣計算的成長主要來自 Blackwell 工作站；但<b>消費者 PC 市場受高昂的記憶體與系統價格壓抑</b>，稍微拖累了表現。</small>
+    </div>
+
+    <h3 style="margin-top:20px;">數據中心內部：兩類客戶的消長</h3>
+    <table>
+      <tr><th>客戶類型</th><th class="num">本季營收</th><th class="n2">佔 DC 比重</th><th class="n2">YoY</th><th class="n2">QoQ</th></tr>
+      <tr><td><b>超大型雲端服務商</b><br><span style="font-size:11px;color:var(--sub);">Hyperscale</span></td><td class="num">$487.10億</td><td class="n2">54.7%</td><td class="n2">+102%</td><td class="n2">+13%</td></tr>
+      <tr><td><b>AI 雲、工業與企業</b><br><span style="font-size:11px;color:var(--sub);">ACIE</span></td><td class="num">$403.13億</td><td class="n2">45.3%</td><td class="n2" style="color:var(--accent2);font-weight:700;">+138%</td><td class="n2" style="color:var(--accent2);font-weight:700;">+25%</td></tr>
+    </table>
+
+    <div class="card" style="margin-top:14px;border-left:3px solid var(--accent2);">
+      <h4>🔍 讀附註才看得到的細節：客戶重分類</h4>
+      <p>本季有一家客戶<b>從 ACIE 重分類到 Hyperscale</b>，並<b>追溯調整了前期數據</b>。這代表該客戶的業務模式已經改變，具備了超大型雲端服務商的特徵。</p>
+      <p>ACIE 成長 138% 的動能，主要來自<b>主權 AI（Sovereign AI）、原生 AI 新創與企業端的算力建置需求</b>。</p>
+      <small>💡 <b>分析提醒：</b>看到分部營收成長率異常時，先確認<b>分類口徑有沒有改過</b>。口徑變了，成長率就不是同一個基礎的比較——這與我們在 0507 談的「比較基準」是同一件事。</small>
+    </div>
+
+    <div class="card" style="border-left:3px solid var(--purple);">
+      <h4>🌏 中國市場：已從財測中歸零</h4>
+      <p>本季出貨到中國的數據中心 Hopper 產品，佔總數據中心營收比例<b>低於 1%</b>；第三季展望中<b>完全沒有假設任何來自中國的數據中心算力營收</b>。</p>
+      <p>換句話說：<b>這份成績單與下一季的財測，都不包含中國</b>。美國、歐洲、日本、韓國的需求已足以支撐。</p>
+    </div>
+  </section>
+
+  <!-- ============ 2. 獲利 ============ -->
+  <section>
+    <div class="sec-label">Part 2 · 獲利品質</div>
+    <h2>🔄 反常訊號：GAAP 淨利竟然高於 Non-GAAP</h2>
+
+    <p style="font-size:13.5px;color:#c7cdd5;margin:0 0 16px;">
+      一般美股財報中，Non-GAAP 因為剔除了股權激勵、無形資產攤銷等非現金支出，<b>獲利數字通常比 GAAP 好看</b>。這季 NVIDIA 反過來——這正是值得停下來追查的地方。
+    </p>
+
+    <table>
+      <tr><th>項目</th><th class="num">GAAP</th><th class="num">Non-GAAP</th></tr>
+      <tr><td><b>淨利</b></td><td class="num">$596.88億</td><td class="num">$539.54億</td></tr>
+      <tr><td><b>稀釋後 EPS</b></td><td class="num">$2.46</td><td class="num">$2.22</td></tr>
+      <tr><td><b>毛利率</b></td><td class="num">75.0%</td><td class="num">75.0%</td></tr>
+    </table>
+
+    <div class="card" style="margin-top:14px;border-left:3px solid var(--accent);">
+      <h3>差額從哪裡來？答案在「其他收益」</h3>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><div class="b">GAAP 其他收益（Other income, net）本季高達 <b>$77.73 億</b></div></div>
+        <div class="step"><div class="n">2</div><div class="b">其中 <b>$77.71 億</b>來自<b>股權證券的淨收益</b>（Net gains from equity securities）——NVIDIA 對 AI 新創與基礎建設公司的投資，本季發生大額評價重估或處分收益</div></div>
+        <div class="step"><div class="n">3</div><div class="b">這筆收益<b>屬於非經常性、與賣晶片的主業無關</b>，因此在計算 Non-GAAP 時被<b>剔除</b>，並做相應稅務調整<span class="calc">GAAP　＝　本業 ＋ 投資收益 $77.71億　→　$596.88億<br>Non-GAAP ＝ 只看本業（剔除投資收益）　→　$539.54億</span></div></div>
+      </div>
+      <small>📌 <b>判讀方向：</b>這不是財報變差，而是<b>Non-GAAP 這次反而更貼近本業真實獲利</b>。要衡量核心賺錢能力，這季應該看 Non-GAAP。</small>
+    </div>
+
+    <div class="grid g2">
+      <div class="ok">
+        <div class="h">✅ 毛利率穩在 75.0%</div>
+        <p>與上季持平，較去年同期的 72.4% / 72.5% 提升約 2.5 個百分點。公司說明主因是 <b>Blackwell Ultra 的產品組合優化</b>。<br><br>高硬體成分的伺服器架構產品能維持 75% 毛利率，反映的是<b>對供應鏈與客戶的定價權</b>。</p>
+      </div>
+      <div class="card" style="margin:0;border-left:3px solid var(--gold);">
+        <h4>⚖️ 會計政策變更：SBC 不再剔除</h4>
+        <p>自 <b>Q1 FY27 起</b>，NVIDIA 的 Non-GAAP 指標<b>不再排除股權激勵費用（SBC）</b>，並追溯調整了歷史數據。本季 SBC 為 <b>$20.27 億</b>。</p>
+        <p>過去許多科技公司會把 SBC 從 Non-GAAP 扣掉讓利潤好看。改為正面認列後，<b>Non-GAAP 的獲利品質更純粹</b>。</p>
+        <small>這也呼應我們在 0611 談過的原則：<b>經常性發生的項目，就不該當作「一次性」剔除</b>。</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. 現金流 ============ -->
+  <section>
+    <div class="sec-label">Part 3 · 現金流照妖鏡</div>
+    <h2>💧 賺這麼多，為什麼營業現金流掉了一半？</h2>
+
+    <div class="eq">
+      營業現金流　<span>$240.77億</span>　（上季 $503.44億　去年同期 $153.65億）
+      <span class="cap">比去年同期成長，但比上一季大幅下滑——這是這份財報最需要拆解的一格</span>
+    </div>
+
+    <div class="grid g2">
+      <div class="card" style="border-left:3px solid var(--accent);">
+        <h4>① 應收帳款大增 → 現金卡在客戶端</h4>
+        <table style="margin:10px 0;">
+          <tr><td class="dim">本季末餘額</td><td class="num">$630.59億</td></tr>
+          <tr><td class="dim">上季末餘額</td><td class="n2">$384.66億</td></tr>
+          <tr><td class="dim">現金流量表上的流出</td><td class="num">$223.46億</td></tr>
+          <tr><td class="dim">DSO 變現天數</td><td class="num">45 → 60 天</td></tr>
+        </table>
+        <p><b>原因：</b>與部分<b>投資級（Investment-grade）客戶</b>簽署大型、跨季度合約，並給予<b>較寬鬆的延長付款條件</b>。</p>
+        <small>📌 <b>判讀：</b>對方信用評等極佳，倒帳風險低。這比較接近<b>大客戶議價與商務條款的調整</b>，而非收款能力惡化。但 DSO 拉長 15 天是實質變化，<b>下一季要看它能不能回穩</b>。</small>
+      </div>
+
+      <div class="card" style="border-left:3px solid var(--accent2);">
+        <h4>② 存貨大增 → 為 Vera Rubin 備料</h4>
+        <table style="margin:10px 0;">
+          <tr><td class="dim">本季末餘額</td><td class="num">$315.75億</td></tr>
+          <tr><td class="dim">上季末餘額</td><td class="n2">$214.03億</td></tr>
+          <tr><td class="dim">現金流量表上的流出</td><td class="num">$57.84億</td></tr>
+        </table>
+        <p><b>原因：</b>全新的 <b>Vera Rubin 平台</b>即將於第三季出貨，公司正在拉貨、備料與封裝準備。</p>
+        <small>📌 <b>判讀：</b>備貨與滯銷在當下長得一樣，<b>只有下一期的數字能區分</b>。若 Vera Rubin 出貨順利，這批存貨會在 Q3 轉為現金流入；若存貨持續攀升，就要重新評估。</small>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px;">
+      <h3>三項因素合計吃掉本季現金流</h3>
+      <ul class="list">
+        <li>應收帳款增加 → 流出 <b>$223.46 億</b></li>
+        <li>存貨增加 → 流出 <b>$57.84 億</b></li>
+        <li>支付較高的所得稅</li>
+      </ul>
+      <p style="margin-top:10px;">三者的共同性質是<b>為了擴張而發生的資金調度</b>，不是本業獲利能力衰退。但要注意：<b>「良性」與「警訊」的差別只在後續能否收回</b>，所以下一季的追蹤才是關鍵。</p>
+    </div>
+
+    <h3 style="margin-top:20px;">整體財務實力</h3>
+    <div class="dash">
+      <div class="kpi"><div class="v t">$566億</div><div class="l">現金與債券投資</div><div class="n">上季 $503億</div></div>
+      <div class="kpi"><div class="v o">$213.41億</div><div class="l">自由現金流 FCF</div><div class="n">本季</div></div>
+      <div class="kpi"><div class="v b">$260億</div><div class="l">股東回饋</div><div class="n">回購 ＋ 現金股利</div></div>
+      <div class="kpi"><div class="v g">$250億</div><div class="l">本季發行債券</div><div class="n">無擔保高級債券</div></div>
+    </div>
+
+    <div class="link">
+      <div class="h">🔗 接回 0603：現金流量表是損益表的照妖鏡</div>
+      <p>新星網的教訓是<b>「帳面賺 9,000 萬、營業現金流 −1 億」＝ 錢卡在存貨與應收</b>。NVIDIA 這季的形狀類似，但性質不同：<b>營業現金流仍是正的 $241 億、且高於去年同期</b>，同時手上有 $566 億現金。<br><br>
+      <b>判準不變：帳面與現金背離時，要追出是哪一格造成的，再判斷那一格是良性擴張還是失血。</b>這季追出來的是應收與存貨，兩者都指向未來的出貨——但也都要用下一季來驗證。</p>
+    </div>
+  </section>
+
+  <!-- ============ 4. 附註 ============ -->
+  <section>
+    <div class="sec-label">Part 4 · 附註裡的戰略</div>
+    <h2>📎 財報的精華不在主表，在承諾與擔保</h2>
+
+    <h3>① 供應鏈採購承諾：$1,190 億 → $2,790 億</h3>
+    <div class="card">
+      <p>單季增加約 <b>$1,600 億</b>的採購承諾，財報明確說明<b>主要用於採購記憶體</b>。</p>
+      <p>這裡的記憶體指的是 <b>HBM（高頻寬記憶體）</b>——AI 晶片效能的關鍵瓶頸，目前全球產能極度稀缺。用長期合約把上游產能鎖住，<b>等於同時處理了兩件事：確保自己的供給，以及壓縮競爭對手可取得的產能</b>。</p>
+      <small>📌 這是資產負債表上看不到、但實質決定未來兩三年競爭格局的一筆數字。</small>
+    </div>
+
+    <h3 style="margin-top:20px;">未來承諾總覽（截至 2026/7/26）</h3>
+    <table>
+      <tr><th>項目</th><th class="num">未來總額</th></tr>
+      <tr><td>供應鏈與產能 Supply and capacity</td><td class="num">$2,790億</td></tr>
+      <tr><td>雲端服務合約 Cloud service agreements</td><td class="num">$290億</td></tr>
+      <tr><td>尚未開始的數據中心租賃</td><td class="num">$250億</td></tr>
+      <tr><td>股權投資項目</td><td class="num">$250億</td></tr>
+      <tr><td>資本支出 Capital expenditures</td><td class="num">$80億</td></tr>
+      <tr class="total"><td><b>總承諾金額</b></td><td class="num">$3,660億</td></tr>
+    </table>
+    <small style="display:block;color:var(--sub);font-size:12px;margin-top:8px;">若加計額外的 AI 雲合約與第三方租賃，整體承諾超過 <b>$4,220 億</b>。</small>
+
+    <h3 style="margin-top:24px;">② $1,050 億信用擔保：一筆值得完整拆解的安排</h3>
+    <div class="card" style="border-left:3px solid var(--gold);">
+      <p>NVIDIA 於 <b>2026 年 8 月</b>簽署擔保協議，為 <b>SB Energy</b> 在俄亥俄州 <b>PORTS-Pike 科技園區</b>建置的 <b>4.25 GW 數據中心</b>項目，提供上限 <b>$1,050 億</b>的信用支持與租賃擔保。該園區將<b>獨家租賃給 OpenAI</b> 運行 NVIDIA 的 AI 基礎設施。</p>
+
+      <h4 style="margin-top:16px;">為什麼要這樣做？</h4>
+      <p>目前 AI 算力競賽最稀缺的不是技術，而是<b>土地、電力與基礎建設</b>。許多 AI 模型公司技術很強，但<b>資產負債表與信用評等不足以支撐數百億美元的基礎建設融資</b>。</p>
+
+      <div class="steps" style="margin-top:12px;">
+        <div class="step"><div class="n">1</div><div class="b">NVIDIA 向 SB Energy 提供擔保：<b>若承租方未付租金，由 NVIDIA 補足</b></div></div>
+        <div class="step"><div class="n">2</div><div class="b">有 NVIDIA 的信用背書，SB Energy 得以取得融資，加速建置 4.25 GW 園區</div></div>
+        <div class="step"><div class="n">3</div><div class="b">園區獨家租給 OpenAI，且合約規定<b>必須全部部署 NVIDIA 硬體</b></div></div>
+      </div>
+
+      <h4 style="margin-top:16px;">NVIDIA 換到什麼</h4>
+      <ul class="list">
+        <li><b>前期基礎設施銷售</b>——直接向園區銷售硬體</li>
+        <li><b>潛在營收分成</b>——滿足特定條件時，可參與該 AI 雲向第三方客戶收取營收的分成</li>
+        <li><b>鎖定長期銷售</b>——園區全面部署後，<b>每一代架構可容納約 150 萬顆 GPU</b>，折合約 <b>$1,500 至 $2,000 億</b>營收；<b>20 年租期會經歷多次晶片升級週期</b></li>
+      </ul>
+
+      <div class="warn" style="margin-top:14px;">
+        <div class="h">⚠ 需要持續追蹤的另一面</div>
+        <p>擔保是<b>或有負債</b>——只在承租方違約時才會實現，但它<b>確實佔用了 NVIDIA 的信用額度</b>。要觀察的是：這筆擔保是否影響信用評等，或對未來現金流形成排擠。<br><br>另外，這個結構<b>把 NVIDIA 的營收與單一客戶的長期履約能力綁在一起</b>——順風時是護城河，逆風時就是集中度風險。<b>PORTS-Pike 預計 2029 財年開始啟用第一階段</b>，時間拉得很長。</p>
+      </div>
+    </div>
+
+    <div class="link">
+      <div class="h">🔗 接回 0611：先看 KAM 與附註，不要只看損益表</div>
+      <p>奕力的案例教我們：<b>IPO 前的損益表本來就是準備好的，真正的訊息密度在會計師被迫誠實揭露的地方</b>。<br><br>
+      NVIDIA 這份財報也一樣——主表告訴你它賺得多快，<b>但「$2,790 億採購承諾」與「$1,050 億擔保」才說明了它打算怎麼贏</b>。這兩筆都不在資產負債表的主要科目裡。</p>
+    </div>
+  </section>
+
+  <!-- ============ 5. 產品線 ============ -->
+  <section>
+    <div class="sec-label">Part 5 · 產品線</div>
+    <h2>🔧 Blackwell 之後：Vera Rubin 已開始量產出貨</h2>
+
+    <p style="font-size:13.5px;color:#c7cdd5;margin:0 0 16px;">
+      新一代 <b>Vera Rubin 平台</b>已於 8 月初開始量產出貨——這正是本季存貨大增的原因。以下是本季揭露的新增長引擎：
+    </p>
+
+    <div class="grid g3">
+      <div class="card">
+        <div class="ico">🧠</div>
+        <h4>NVIDIA Vera CPU</h4>
+        <p>專為 <b>AI 代理（AI Agents）</b>設計的第一款 CPU，已獲多家科技巨頭採用。</p>
+      </div>
+      <div class="card">
+        <div class="ico">⚡</div>
+        <h4>Groq 3 LPX</h4>
+        <p>全新量產的<b>交互式 AI 推理加速器</b>，主打推理速度。</p>
+      </div>
+      <div class="card">
+        <div class="ico">🔐</div>
+        <h4>Vera BlueField-4 STX</h4>
+        <p>具備<b>晶片級安全防護</b>的 AI 工廠儲存處理器。</p>
+      </div>
+      <div class="card">
+        <div class="ico">🌐</div>
+        <h4>Cosmos 3</h4>
+        <p>全球首款<b>完全開源</b>的物理 AI 前沿多模態大模型。</p>
+      </div>
+      <div class="card">
+        <div class="ico">🤖</div>
+        <h4>Isaac GR00T</h4>
+        <p>人形機器人參考設計，基於 <b>Jetson Thor</b> 晶片。</p>
+      </div>
+      <div class="card">
+        <div class="ico">💻</div>
+        <h4>RTX Spark</h4>
+        <p>與微軟合作，具備 <b>1 Petaflop</b> 算力，切入 Windows AI PC。</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px;">
+      <p>產品線的延伸方向很清楚：<b>從雲端超算 → AI 代理 → 推理加速 → 物理 AI 與機器人</b>。這解釋了為什麼營收結構會從「顯卡公司」轉為「數據中心佔 92.5%」——而下一步是把同一套架構往邊緣與實體世界推。</p>
+    </div>
+  </section>
+
+  <!-- ============ 6. 展望 ============ -->
+  <section>
+    <div class="sec-label">Part 6 · 下一季看什麼</div>
+    <h2>🔭 Q3 FY27 指引與三個追蹤指標</h2>
+
+    <div class="dash">
+      <div class="kpi"><div class="v o">$1,080億</div><div class="l">預期營收</div><div class="n">±2%｜首度突破千億</div></div>
+      <div class="kpi"><div class="v t">74.0%</div><div class="l">預期毛利率</div><div class="n">±50 個基點</div></div>
+      <div class="kpi"><div class="v b">$90億</div><div class="l">Non-GAAP 營業費用</div><div class="n">GAAP 約 $92億</div></div>
+      <div class="kpi"><div class="v g">2029 FY</div><div class="l">PORTS-Pike 首階段</div><div class="n">預計啟用時間</div></div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h3>三個必須驗證的指標</h3>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><div class="b"><b>毛利率是否守住 74%。</b>指引較本季的 75.0% 回落約 1 個百分點，公司說明是 Vera Rubin 與 Blackwell 的<b>混合出貨</b>所致。新品初期毛利較低是常態，但<b>回落幅度是否如預期</b>要驗證。</div></div>
+        <div class="step"><div class="n">2</div><div class="b"><b>DSO 能否從 60 天回穩，存貨能否去化。</b>$315.75 億存貨若隨 Vera Rubin 順利出貨，Q3 會轉為現金流入；<b>若 DSO 繼續拉長、存貨繼續累積，就要重新評估這是擴張還是積壓</b>。</div></div>
+        <div class="step"><div class="n">3</div><div class="b"><b>$1,050 億擔保的後續。</b>觀察是否影響信用評等、或對現金流形成排擠。以目前的獲利能力來看壓力有限，但這是<b>一筆要看 20 年的安排</b>。</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 收斂 ============ -->
+  <section>
+    <div class="sec-label">Bottom Line · 帶走這五件事</div>
+    <h2>📌 這份財報教我們的判讀方法</h2>
+
+    <div class="bottomline">
+      <div class="bl-item">
+        <div class="n">①</div>
+        <div>
+          <div class="t">看到分部成長率異常，先確認口徑有沒有改</div>
+          <div class="d">ACIE 成長 138% 很亮眼，但同一季有客戶從 ACIE 重分類到 Hyperscale 並追溯調整。<b>口徑變了，成長率就不是同一個基礎的比較。</b></div>
+        </div>
+      </div>
+      <div class="bl-item">
+        <div class="n">②</div>
+        <div>
+          <div class="t">GAAP 高於 Non-GAAP 時，去找非經常性收益</div>
+          <div class="d">差額幾乎全部來自 <b>$77.71 億股權投資收益</b>。這季要衡量本業，反而該看 Non-GAAP——<b>哪個數字更貼近真實，取決於中間夾了什麼。</b></div>
+        </div>
+      </div>
+      <div class="bl-item">
+        <div class="n">③</div>
+        <div>
+          <div class="t">現金流下滑要追出是哪一格造成的</div>
+          <div class="d">$241 億 vs 上季 $503 億，追下去是<b>應收 +$223 億、存貨 +$58 億</b>。兩者都指向未來出貨，但<b>「良性擴張」與「積壓失血」在當下長得一樣，只有下一期能區分。</b></div>
+        </div>
+      </div>
+      <div class="bl-item">
+        <div class="n">④</div>
+        <div>
+          <div class="t">主表看規模，附註看戰略</div>
+          <div class="d"><b>$2,790 億採購承諾</b>鎖住 HBM 產能、<b>$1,050 億擔保</b>鎖住 20 年的客戶升級週期——這兩筆都不在主要科目裡，卻決定未來幾年的競爭格局。</div>
+        </div>
+      </div>
+      <div class="bl-item">
+        <div class="n">⑤</div>
+        <div>
+          <div class="t">護城河與集中度風險，往往是同一件事的兩面</div>
+          <div class="d">用信用擔保綁定客戶、用長約鎖住產能，順風時是壁壘；<b>但也意味著把自己的營收與少數對手方的長期履約能力綁在一起。</b>兩面都要記在同一頁上。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quote" style="margin-top:18px;">
+      <span class="lbl">一句話總結</span>
+      營收翻倍、毛利率 75%、現金 $566 億——主表告訴你它<b>賺得多快</b>；<br>
+      $2,790 億承諾與 $1,050 億擔保——附註告訴你它<b style="color:var(--accent2);">打算怎麼贏</b>。<br><br>
+      兩者都要看，才算讀完這份財報。
+    </div>
+  </section>
+
+  <div class="disclaimer">
+    ⚠ <b>免責聲明：</b>本頁為課後複習教材整理，數據引自 NVIDIA 2027 會計年度第二季（截至 2026 年 7 月 26 日）財報與相關揭露，<b>僅供教學與財報判讀練習之用，非投資建議</b>。實際數字請以公司正式公告之財務報告與 SEC 申報文件為準。金額均為美元。
+  </div>
+
+  <footer>
+    Rock 會計家教 · 蕭啟漢<br>
+    佳汝 · 課後複習一頁式 · 2026.08.27
+  </footer>
+
+</div>
+</body>
+</html>
