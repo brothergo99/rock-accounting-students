@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>On Holding AG｜2026 年第二季財報解讀</title>
+<meta name="description" content="On Holding AG 2026 年第二季及上半年財務結果一頁式解讀。資料來源：官方新聞稿與 Form 6-K Exhibit 99.2。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#ffffff;
+  --ink:#000000;
+  --muted:#6e6e6e;
+  --hair:#e3e3e0;
+  --fill:#f4f4f2;
+  --col:760px;
+  --wide:1000px;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Archivo","Noto Sans TC",-apple-system,"Segoe UI",sans-serif;
+  font-size:16px;line-height:1.75;
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;
+  letter-spacing:-0.005em;
+}
+.col{max-width:var(--col);margin:0 auto;padding:0 24px;}
+.wide{max-width:var(--wide);margin:0 auto;padding:0 24px;}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--hair);}
+.nav .inner{max-width:1280px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:28px;}
+.wordmark{font-weight:700;font-size:22px;letter-spacing:-0.04em;text-decoration:none;color:var(--ink);}
+.nav ul{list-style:none;display:flex;gap:22px;margin:0;padding:0;flex-wrap:wrap;font-size:13.5px;}
+.nav a{color:var(--muted);text-decoration:none;padding-bottom:2px;border-bottom:1px solid transparent;}
+.nav a:hover,.nav a:focus-visible{color:var(--ink);border-bottom-color:var(--ink);}
+
+/* hero band */
+.hero{background:var(--ink);color:var(--paper);padding:96px 0 100px;}
+.hero h1{font-size:clamp(38px,6.2vw,62px);font-weight:500;letter-spacing:-0.035em;line-height:1.05;margin:0;}
+.hero p{margin:20px 0 0;color:#c9c9c6;font-size:16px;max-width:58ch;}
+
+/* article head */
+.backlink{display:inline-block;margin:56px 0 34px;font-size:13.5px;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:2px;}
+h2.title{font-size:clamp(24px,3.4vw,32px);font-weight:600;letter-spacing:-0.025em;line-height:1.24;margin:0 0 12px;}
+.stamp{font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin:0 0 40px;}
+
+/* rings list (On style hollow bullets) */
+ul.rings{list-style:none;margin:0;padding:0;}
+ul.rings li{position:relative;padding-left:26px;margin-bottom:22px;}
+ul.rings li::before{content:"";position:absolute;left:0;top:0.62em;width:9px;height:9px;border:1px solid var(--ink);border-radius:50%;}
+
+/* sections */
+section{padding:64px 0;border-top:1px solid var(--hair);}
+section:first-of-type{border-top:none;}
+h3{font-size:clamp(20px,2.6vw,26px);font-weight:600;letter-spacing:-0.022em;margin:0 0 10px;}
+h4{font-size:15px;font-weight:600;margin:36px 0 12px;}
+.lede{color:var(--muted);margin:0 0 28px;max-width:64ch;}
+p{max-width:66ch;}
+.fine{font-size:13.5px;color:var(--muted);max-width:70ch;}
+
+/* weekly social cards */
+.weekly{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--hair);border:1px solid var(--hair);}
+.weekly a{background:var(--paper);padding:26px 22px;text-decoration:none;color:var(--ink);display:block;}
+.weekly a:hover,.weekly a:focus-visible{background:var(--fill);}
+.weekly .d{font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);}
+.weekly .h{font-size:17px;font-weight:600;letter-spacing:-0.022em;margin:10px 0 8px;line-height:1.4;}
+.weekly p{font-size:13.5px;color:var(--muted);margin:0;max-width:none;}
+.weekly .go{display:inline-block;margin-top:16px;font-size:13px;border-bottom:1px solid var(--ink);padding-bottom:2px;}
+
+/* metric strip */
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--hair);border:1px solid var(--hair);}
+.strip div{background:var(--paper);padding:22px 20px;}
+.strip b{display:block;font-size:clamp(26px,3.6vw,34px);font-weight:600;letter-spacing:-0.03em;line-height:1.1;}
+.strip span{display:block;font-size:13px;color:var(--muted);margin-top:8px;}
+.strip em{display:block;font-style:normal;font-size:13px;margin-top:2px;}
+
+/* tables */
+.scroll{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:14.5px;}
+caption{text-align:left;font-size:13px;color:var(--muted);padding-bottom:10px;}
+th,td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--hair);white-space:nowrap;}
+th:first-child,td:first-child{text-align:left;padding-left:0;white-space:normal;}
+th:last-child,td:last-child{padding-right:0;}
+thead th{font-weight:500;color:var(--muted);font-size:12.5px;border-bottom:1px solid var(--ink);}
+tbody tr:last-child td{border-bottom:1px solid var(--ink);}
+tr.total td{font-weight:600;}
+tr.sub td:first-child{padding-left:18px;color:var(--muted);}
+td.cc{background:var(--fill);font-weight:500;}
+
+/* inverted feature block */
+.feature{background:var(--ink);color:var(--paper);padding:72px 0;}
+.feature h3{color:var(--paper);}
+.feature .lede{color:#b9b9b6;}
+.feature table th{color:#9d9d9a;border-bottom-color:#3a3a38;}
+.feature table td{border-bottom-color:#2a2a28;}
+.feature table tbody tr:last-child td{border-bottom-color:#7a7a78;}
+.feature table td.cc{background:#181816;}
+.feature .fine{color:#9d9d9a;}
+.implied{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:#2a2a28;border:1px solid #2a2a28;margin:32px 0 20px;}
+.implied div{background:var(--ink);padding:24px 20px;}
+.implied b{display:block;font-size:clamp(28px,4vw,38px);font-weight:600;letter-spacing:-0.03em;line-height:1.1;}
+.implied span{display:block;font-size:13px;color:#9d9d9a;margin-top:8px;}
+
+/* mix bar */
+.mixbar{display:flex;height:38px;border:1px solid var(--ink);margin-top:16px;}
+.mixbar i{display:flex;align-items:center;justify-content:center;font-style:normal;font-size:13px;font-weight:500;}
+.mixbar .a{background:var(--ink);color:var(--paper);}
+.mixbar .b{background:var(--paper);}
+.mixnote{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);margin-top:8px;}
+
+/* ladder */
+.ladder{border-top:1px solid var(--ink);margin-top:24px;}
+.rung{display:grid;grid-template-columns:minmax(170px,1.2fr) 3fr minmax(90px,auto);gap:20px;align-items:center;padding:18px 0;border-bottom:1px solid var(--hair);}
+.rung .nm{font-size:14.5px;font-weight:500;}
+.rung .nm em{display:block;font-style:normal;font-size:12.5px;color:var(--muted);font-weight:400;margin-top:2px;}
+.track{background:var(--fill);height:14px;}
+.track i{display:block;height:100%;background:var(--ink);}
+.rung .vl{text-align:right;font-weight:600;font-size:17px;}
+
+/* timeline */
+ol.tl{list-style:none;margin:24px 0 0;padding:0;border-top:1px solid var(--ink);}
+ol.tl li{display:grid;grid-template-columns:minmax(108px,auto) 1fr;gap:20px;padding:15px 0;border-bottom:1px solid var(--hair);align-items:baseline;}
+ol.tl time{font-weight:600;font-size:13.5px;}
+ol.tl p{margin:0;font-size:14.5px;max-width:none;}
+
+/* kv */
+dl.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:0 40px;border-top:1px solid var(--ink);margin:24px 0 0;}
+dl.kv div{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--hair);font-size:14.5px;}
+dl.kv dt{color:var(--muted);margin:0;}
+dl.kv dd{margin:0;font-weight:600;text-align:right;}
+
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:44px;}
+.quote{border-left:2px solid var(--ink);padding-left:20px;margin:30px 0;}
+.quote p{margin:0;font-size:16px;}
+.quote cite{display:block;font-style:normal;font-size:13px;color:var(--muted);margin-top:10px;}
+
+footer{background:var(--fill);padding:48px 0 72px;font-size:13px;color:var(--muted);}
+footer a{color:var(--ink);}
+footer p{max-width:74ch;}
+
+@media (max-width:640px){
+  .hero{padding:64px 0 68px;}
+  .rung{grid-template-columns:1fr auto;}
+  .rung .track{grid-column:1 / -1;}
+  ol.tl li{grid-template-columns:1fr;gap:2px;}
+  .nav ul{gap:14px;}
+}
+@media print{
+  .nav{display:none;}
+  .hero,.feature{background:#fff;color:#000;}
+  .hero p,.feature .lede,.feature .fine{color:#444;}
+  .implied div{background:#fff;}
+  .implied b,.implied span{color:#000;}
+  section{page-break-inside:avoid;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="inner">
+    <a class="wordmark" href="#top">On</a>
+    <ul>
+      <li><a href="#highlights">重點</a></li>
+      <li><a href="#growth">成長還原</a></li>
+      <li><a href="#mix">營收結構</a></li>
+      <li><a href="#outlook">財測</a></li>
+      <li><a href="#leverage">通路槓桿</a></li>
+      <li><a href="#margin">利潤與費用</a></li>
+      <li><a href="#cash">現金流</a></li>
+      <li><a href="#accounting">會計事項</a></li>
+      <li><a href="#sources">來源</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="col">
+    <h1>2026 年第二季<br>財務結果解讀</h1>
+    <p>淨銷貨 CHF 850.3 百萬元，固定匯率成長 21.6%。直營通路占比創第二季新高 45.7%，毛利率 65.4%。以下就官方揭露數字，拆解成長的來源與品質。</p>
+  </div>
+</header>
+
+<div class="col">
+  <a class="backlink" href="#sources">查看資料來源</a>
+  <h2 class="title">On Reports Results for the Second Quarter and Six-Month Period Ended June 30, 2026</h2>
+  <p class="stamp">August 11, 2026</p>
+</div>
+
+<div class="wide" id="weekly" style="margin-bottom:8px;">
+  <p class="fine" style="margin:0 0 14px;">本週三則分享的完整版本，各自對應下方一個段落。</p>
+  <div class="weekly">
+    <a href="#mix">
+      <span class="d">第一則</span>
+      <span class="h">鞋類貢獻 75.9%，配件只有 6.7%</span>
+      <p>本季營收增加 101.1，拆開看貢獻度就會發現：配件成長 88.3% 很漂亮，但那是基期小。高成長率不等於高貢獻度。</p>
+      <span class="go">看營收結構拆解</span>
+    </a>
+    <a href="#growth">
+      <span class="d">第二則</span>
+      <span class="h">356.5% 與 28.7%，是兩個世界</span>
+      <p>把去年同期那筆 139.9 的外幣兌換損失拿掉，淨利成長 356.5% 就回到營業利益成長 28.7%。撥開迷霧的第一步，是回到營業層次。</p>
+      <span class="go">看成長還原</span>
+    </a>
+    <a href="#leverage">
+      <span class="d">第三則</span>
+      <span class="h">通路別的混合毛利率</span>
+      <p>把混合商品損益兩平點的商品別換成通路別。直營占比從 41.1% 升到 45.7%，毛利率就跟著墊高——但墊高多少，可以算。</p>
+      <span class="go">看通路組合槓桿</span>
+    </a>
+  </div>
+</div>
+
+<!-- 1. 重點 -->
+<section id="highlights">
+  <div class="col">
+    <ul class="rings">
+      <li>淨銷貨年增 13.5% 至 CHF 850.3 百萬元，固定匯率基礎成長 21.6%。成長由直營通路帶動，該通路成長 26.0%、固定匯率 34.3%，且在每一個區域都超出預期。直營占比達第二季新高 45.7%，全球品牌知名度升至 30%。</li>
+      <li>亞太區再次貢獻全球淨銷貨逾 20%，動能來自日本、南韓與大中華區。服飾類成長 47.7%、固定匯率 56.2%。公司近期於聖保羅與哥本哈根開出首家門市。</li>
+      <li>毛利率達 65.4%，年增 3.9 個百分點，且是在完全吸收美國進口關稅上升、未認列任何關稅退稅的前提下達成。調整後 EBITDA 利潤率 19.8%，金額 CHF 168.1 百萬元。淨利率 12.3%，期末現金增至 CHF 1,205.6 百萬元。</li>
+      <li>公司預期 2026 全年固定匯率淨銷貨成長落在 20% 出頭區間，並上調全年毛利率預期至至少 65.0%，維持調整後 EBITDA 利潤率 19.5% 至 20.0%。此財測不含下半年預期可收到的關稅退稅利益。</li>
+    </ul>
+
+    <div class="quote">
+      <p>「我們正在證明，一個品牌可以在不犧牲高端定位的前提下達到全球規模。」</p>
+      <cite>David Allemann，創辦人暨共同執行長</cite>
+    </div>
+  </div>
+
+  <div class="wide" style="margin-top:44px;">
+    <div class="strip">
+      <div><b>850.3</b><span>淨銷貨</span><em>+13.5%，固定匯率 +21.6%</em></div>
+      <div><b>65.4%</b><span>毛利率</span><em>前期 61.5%</em></div>
+      <div><b>119.4</b><span>營業利益</span><em>+28.7%</em></div>
+      <div><b>105.0</b><span>本期淨利</span><em>前期虧損 40.9</em></div>
+      <div><b>19.8%</b><span>調整後 EBITDA 利潤率</span><em>前期 18.2%</em></div>
+    </div>
+    <p class="fine" style="margin-top:12px;">單位：CHF 百萬元，除百分比外。</p>
+  </div>
+</section>
+
+<!-- 2. 成長還原 -->
+<section id="growth">
+  <div class="col">
+    <h3>先拆匯兌，再談成長</h3>
+    <p class="lede">帳面淨利成長 356.5%，但這個數字的分母是去年同期一筆 139.9 的外幣兌換損失。把匯兌拿掉，本季真實的擴張幅度是三成，不是三倍。</p>
+
+    <div class="ladder">
+      <div class="rung">
+        <div class="nm">本期淨利<em>105.0 相對 前期 (40.9)</em></div>
+        <div class="track"><i style="width:100%"></i></div>
+        <div class="vl">+356.5%</div>
+      </div>
+      <div class="rung">
+        <div class="nm">剔除匯兌後稅前損益<em>122.4 相對 92.6，依揭露數推算</em></div>
+        <div class="track"><i style="width:9%"></i></div>
+        <div class="vl">+32.2%</div>
+      </div>
+      <div class="rung">
+        <div class="nm">營業利益<em>119.4 相對 92.8</em></div>
+        <div class="track"><i style="width:8.1%"></i></div>
+        <div class="vl">+28.7%</div>
+      </div>
+    </div>
+
+    <p style="margin-top:26px;">半年度的落差更極端：淨利成長 1,221.5%，營業利益成長 39.5%。差額全部來自匯兌科目由 (154.4) 翻正為 2.9，與本業無關。做趨勢比較時，應改看營業利益成長率、固定匯率營收成長率與調整後 EBITDA 利潤率。</p>
+  </div>
+
+  <div class="wide" style="margin-top:36px;">
+    <div class="scroll">
+      <table>
+        <caption>綜合損益重點，CHF 百萬元</caption>
+        <thead><tr><th>科目</th><th>26 Q2</th><th>25 Q2</th><th>變動</th><th>26 H1</th><th>25 H1</th><th>變動</th></tr></thead>
+        <tbody>
+          <tr><td>淨銷貨</td><td>850.3</td><td>749.2</td><td>+13.5%</td><td>1,682.2</td><td>1,475.8</td><td>+14.0%</td></tr>
+          <tr><td>銷貨成本</td><td>(294.6)</td><td>(288.4)</td><td>+2.1%</td><td>(592.2)</td><td>(579.7)</td><td>+2.1%</td></tr>
+          <tr><td>毛利</td><td>555.7</td><td>460.8</td><td>+20.6%</td><td>1,090.0</td><td>896.1</td><td>+21.6%</td></tr>
+          <tr class="sub"><td>毛利率</td><td>65.4%</td><td>61.5%</td><td>+3.9pp</td><td>64.8%</td><td>60.7%</td><td>+4.1pp</td></tr>
+          <tr><td>營業費用</td><td>(436.3)</td><td>(368.0)</td><td>+18.5%</td><td>(853.2)</td><td>(726.3)</td><td>+17.5%</td></tr>
+          <tr><td>營業利益</td><td>119.4</td><td>92.8</td><td>+28.7%</td><td>236.9</td><td>169.8</td><td>+39.5%</td></tr>
+          <tr><td>財務損益淨額</td><td>6.3</td><td>(140.1)</td><td>—</td><td>4.9</td><td>(153.2)</td><td>—</td></tr>
+          <tr class="sub"><td>其中 外幣兌換損益</td><td>3.3</td><td>(139.9)</td><td>—</td><td>2.9</td><td>(154.4)</td><td>—</td></tr>
+          <tr><td>稅前損益</td><td>125.7</td><td>(47.3)</td><td>—</td><td>241.8</td><td>16.6</td><td>—</td></tr>
+          <tr><td>所得稅</td><td>(20.7)</td><td>6.4</td><td>—</td><td>(33.5)</td><td>(0.8)</td><td>—</td></tr>
+          <tr class="total"><td>本期淨利</td><td>105.0</td><td>(40.9)</td><td>+356.5%</td><td>208.3</td><td>15.8</td><td>+1221.5%</td></tr>
+          <tr class="sub"><td>淨利率</td><td>12.3%</td><td>(5.5)%</td><td>—</td><td>12.4%</td><td>1.1%</td><td>—</td></tr>
+          <tr class="sub"><td>基本每股盈餘 A 股 CHF</td><td>0.31</td><td>(0.12)</td><td>—</td><td>0.63</td><td>0.05</td><td>—</td></tr>
+          <tr class="sub"><td>調整後基本每股盈餘 A 股 CHF</td><td>0.35</td><td>(0.09)</td><td>—</td><td>0.72</td><td>0.12</td><td>—</td></tr>
+          <tr><td>調整後 EBITDA</td><td>168.1</td><td>136.1</td><td>+23.5%</td><td>342.3</td><td>256.1</td><td>+33.7%</td></tr>
+          <tr class="sub"><td>調整後 EBITDA 利潤率</td><td>19.8%</td><td>18.2%</td><td>+1.6pp</td><td>20.3%</td><td>17.4%</td><td>+2.9pp</td></tr>
+          <tr><td>有效稅率</td><td>16.5%</td><td>13.5%</td><td>+3.0pp</td><td>13.9%</td><td>5.1%</td><td>+8.8pp</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fine" style="margin-top:12px;">有效稅率上升主因是去年同期存貨未實現利益沖銷產生遞延所得稅利益、稅務優惠效果與前期調整，屬基期因素。</p>
+  </div>
+</section>
+
+<!-- 3. 營收結構 -->
+<section id="mix">
+  <div class="col">
+    <h3>營收結構：成長來自哪裡</h3>
+    <p class="lede">報導成長率與固定匯率成長率之間有 8.1 個百分點的落差，全部來自換算，不是需求。看結構時請以灰底的固定匯率欄為準。</p>
+  </div>
+
+  <div class="wide">
+    <div class="split">
+      <div>
+        <h4>銷售通路</h4>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>26 Q2</th><th>金額</th><th>成長</th><th>固定匯率</th></tr></thead>
+            <tbody>
+              <tr><td>直營 DTC</td><td>388.4</td><td>+26.0%</td><td class="cc">+34.3%</td></tr>
+              <tr><td>批發</td><td>461.9</td><td>+4.8%</td><td class="cc">+12.7%</td></tr>
+              <tr class="total"><td>合計</td><td>850.3</td><td>+13.5%</td><td class="cc">+21.6%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mixbar" role="img" aria-label="2026 年第二季直營通路占淨銷貨 45.7%，批發通路占 54.3%">
+          <i class="a" style="flex:0 0 45.7%">直營 45.7%</i>
+          <i class="b" style="flex:0 0 54.3%">批發 54.3%</i>
+        </div>
+        <div class="mixnote"><span>前期 41.1%</span><span>前期 58.9%</span></div>
+        <p class="fine" style="margin-top:14px;">批發成長趨緩是公司為維護全價紀律，在促銷激烈市場中主動控制出貨的結果，美洲尤其明顯。公司明確表示下半年會繼續這麼做。</p>
+      </div>
+
+      <div>
+        <h4>地理區域</h4>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>26 Q2</th><th>金額</th><th>成長</th><th>固定匯率</th><th>占比</th></tr></thead>
+            <tbody>
+              <tr><td>美洲</td><td>451.6</td><td>+4.5%</td><td class="cc">+13.0%</td><td>53.1%</td></tr>
+              <tr><td>歐非中東</td><td>228.2</td><td>+15.4%</td><td class="cc">+20.5%</td><td>26.8%</td></tr>
+              <tr><td>亞太</td><td>170.5</td><td>+43.1%</td><td class="cc">+54.7%</td><td>20.0%</td></tr>
+              <tr class="total"><td>合計</td><td>850.3</td><td>+13.5%</td><td class="cc">+21.6%</td><td>100%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="fine" style="margin-top:14px;">亞太占比自 15.9% 升至 20.0%，由日本、南韓與大中華區帶動。美洲報導成長僅 4.5%，但固定匯率仍有 13.0%——差距來自換算，不是市場轉弱。</p>
+      </div>
+    </div>
+
+    <h4 style="margin-top:44px;">產品類別</h4>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>26 Q2</th><th>金額</th><th>成長</th><th>固定匯率</th><th>占比</th><th>對本季營收增量之貢獻</th></tr></thead>
+        <tbody>
+          <tr><td>鞋類</td><td>781.6</td><td>+10.9%</td><td class="cc">+18.9%</td><td>91.9%</td><td>75.9%</td></tr>
+          <tr><td>服飾</td><td>54.2</td><td>+47.7%</td><td class="cc">+56.2%</td><td>6.4%</td><td>17.3%</td></tr>
+          <tr><td>配件</td><td>14.5</td><td>+88.3%</td><td class="cc">+102.2%</td><td>1.7%</td><td>6.7%</td></tr>
+          <tr class="total"><td>合計</td><td>850.3</td><td>+13.5%</td><td class="cc">+21.6%</td><td>100%</td><td>100%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fine" style="margin-top:12px;">最右欄依增量金額推算，非公司揭露。服飾成長 47.7% 亮眼，但基期小，對整體營收增量的貢獻僅 17.3%——高成長率不等於高貢獻度。</p>
+  </div>
+</section>
+
+<!-- 4. 財測（重點區塊，反白） -->
+<div class="feature" id="outlook">
+  <div class="col">
+    <h3>財測本身就透露了下半年會放緩</h3>
+    <p class="lede">公司給出的三項全年財測，如果各自對照上半年實績並回推下半年，會得到一組公司沒有明講的數字。</p>
+  </div>
+  <div class="wide">
+    <div class="scroll">
+      <table>
+        <caption style="color:#9d9d9a;">2026 全年財測與上半年實績對照</caption>
+        <thead><tr><th>項目</th><th>26 H1 實績</th><th>全年財測</th><th>隱含下半年（推算）</th></tr></thead>
+        <tbody>
+          <tr><td>淨銷貨成長，固定匯率</td><td>+24.0%</td><td>20% 出頭區間</td><td class="cc">約 +18%</td></tr>
+          <tr><td>毛利率</td><td>64.8%</td><td>至少 65.0%</td><td class="cc">至少約 65.2%</td></tr>
+          <tr><td>調整後 EBITDA 利潤率</td><td>20.3%</td><td>19.5% 至 20.0%</td><td class="cc">約 19.2%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="implied">
+      <div><b>約 −6pp</b><span>營收成長由上半年 24.0% 收斂至下半年約 18%</span></div>
+      <div><b>約 −1.1pp</b><span>調整後 EBITDA 利潤率自上半年 20.3% 回落</span></div>
+      <div><b>+27.9</b><span>第三季將認列的關稅退稅，不含在上述財測中</span></div>
+    </div>
+
+    <p class="fine">隱含下半年數字依上半年實績、全年財測中值與上半年占全年營收約 48% 之假設回推，非公司揭露。營收放緩主要來自公司主動控制批發出貨；利潤率回落則來自展店與品牌投入的持續加碼。值得注意的是，全年財測明確排除下半年預期可收到的關稅退稅，因此第三季認列的約 27.9 屬於財測之外的上檔空間。</p>
+  </div>
+</div>
+
+<!-- 5. 通路槓桿 -->
+<section id="leverage">
+  <div class="col">
+    <h3>把混合商品損益兩平點的商品別，換成通路別</h3>
+    <p class="lede">課堂上算混合商品損益兩平點時，用的是加權平均邊際貢獻率：各商品的邊際貢獻率沒變，光是銷售組合改變，平均值就會移動。同一個結構套在通路上，就能解釋這季的毛利率。</p>
+
+    <p>混合毛利率的算式是一樣的：</p>
+    <p style="font-weight:600;">總毛利率 ＝ 直營占比 × 直營毛利率 ＋ 批發占比 × 批發毛利率</p>
+    <p>兩個通路自己的毛利率都不動，只要占比往毛利高的那一邊移動，總毛利率就會上升。這一季直營占比從 41.1% 升到 45.7%，移動了 4.6 個百分點。</p>
+    <p>組合效果的大小，等於<strong>占比移動幅度 × 兩通路毛利率差距</strong>。移動幅度是已知的 4.6pp，差距則沒有揭露——所以正確的作法不是猜一個數字，而是做敏感度分析。</p>
+  </div>
+
+  <div class="wide" style="margin-top:32px;">
+    <div class="scroll">
+      <table>
+        <caption>通路組合對毛利率的貢獻：敏感度分析（推算）</caption>
+        <thead><tr><th>假設兩通路毛利率差距</th><th>組合效果</th><th>占本季毛利率增幅 3.9pp 之比重</th></tr></thead>
+        <tbody>
+          <tr><td>10 個百分點</td><td>+0.46pp</td><td class="cc">12%</td></tr>
+          <tr><td>15 個百分點</td><td>+0.69pp</td><td class="cc">18%</td></tr>
+          <tr><td>20 個百分點</td><td>+0.92pp</td><td class="cc">24%</td></tr>
+          <tr><td>25 個百分點</td><td>+1.15pp</td><td class="cc">29%</td></tr>
+          <tr><td>30 個百分點</td><td>+1.38pp</td><td class="cc">35%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fine" style="margin-top:12px;">計算式：4.6pp × 差距。此為靜態組合效果，假設兩通路各自毛利率不變；實務上兩者本身也在變動，因此只是近似的分離。公司未揭露分通路毛利率。</p>
+  </div>
+
+  <div class="col" style="margin-top:34px;">
+    <h4>這張表要讀出來的三件事</h4>
+    <ul class="rings">
+      <li>不管差距抓多少，通路組合大約解釋本季毛利率增幅的四分之一上下，不會是全部。其餘來自運費等營運效率、高端定價與有利匯率——這正是公司自己列出的另外三項驅動因子。</li>
+      <li>組合效果是<strong>結構性</strong>的。公司明講下半年直營會繼續大幅超越批發，所以這一格會繼續往上墊。相對地，匯兌是波動項，方向隨時會反過來。一樣是讓數字變好看的因素，一個要留著看趨勢，一個要拿掉。</li>
+      <li>但結構有代價。直營占比上升的同時，銷售費用率也從 8.1% 升到 9.5%，因為展店的人事與折舊跟著進來。<strong>毛利率往上、費用率也往上，是同一個決策的兩面。</strong>只看毛利率會漏掉一半。</li>
+    </ul>
+    <p class="fine">延伸練習：若已知某季直營毛利率 72%、批發毛利率 55%，且目標總毛利率 66%，反解所需的直營占比。這就是把損益兩平點的解法反過來用。</p>
+  </div>
+</section>
+
+<!-- 6. 利潤與費用 -->
+<section id="margin">
+  <div class="col">
+    <h3>毛利率 +3.9pp，費用率同步上升 2.2pp</h3>
+    <p class="lede">公司揭露的毛利率驅動因子有四項：運費等營運效率改善、直營占比提高、高端品牌定價、有利匯率。四者合計足以抵銷美國進口關稅上升的衝擊。揭露只給了排序，沒有給金額。</p>
+  </div>
+
+  <div class="wide">
+    <div class="scroll">
+      <table>
+        <caption>營業費用結構，占淨銷貨百分比</caption>
+        <thead><tr><th>項目</th><th>26 Q2 金額</th><th>25 Q2 金額</th><th>26 Q2 占比</th><th>25 Q2 占比</th><th>變動</th></tr></thead>
+        <tbody>
+          <tr><td>配送費用</td><td>(84.7)</td><td>(85.3)</td><td>10.0%</td><td>11.4%</td><td>−1.4pp</td></tr>
+          <tr><td>銷售費用</td><td>(81.1)</td><td>(60.8)</td><td>9.5%</td><td>8.1%</td><td>+1.4pp</td></tr>
+          <tr><td>行銷費用</td><td>(118.8)</td><td>(89.7)</td><td>14.0%</td><td>12.0%</td><td>+2.0pp</td></tr>
+          <tr><td>股份基礎給付</td><td>(12.2)</td><td>(10.9)</td><td>1.4%</td><td>1.5%</td><td>−0.1pp</td></tr>
+          <tr><td>管理費用</td><td>(139.5)</td><td>(121.3)</td><td>16.4%</td><td>16.2%</td><td>+0.2pp</td></tr>
+          <tr class="total"><td>合計</td><td>(436.3)</td><td>(368.0)</td><td>51.3%</td><td>49.1%</td><td>+2.2pp</td></tr>
+          <tr class="sub"><td>排除股份基礎給付後</td><td>(424.1)</td><td>(357.1)</td><td>49.9%</td><td>47.7%</td><td>+2.2pp</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fine" style="margin-top:12px;">配送費用率降 1.4pp，幾乎被行銷費用率升 2.0pp 抵銷。銷售費用率升 1.4pp 來自直營店擴張的人事與折舊，這部分具剛性——展店不停，費用率就降不回去。這正是毛利率創新高、但營業利益成長率遠低於毛利成長率的原因。</p>
+
+    <h4>調整後指標的加回項，值得逐項檢驗</h4>
+    <div class="scroll">
+      <table>
+        <caption>調整後 EBITDA 調節表，26 Q2</caption>
+        <thead><tr><th>項目</th><th>金額</th><th>評價</th></tr></thead>
+        <tbody>
+          <tr><td>本期淨利</td><td>105.0</td><td>—</td></tr>
+          <tr class="sub"><td>加回 所得稅</td><td>20.7</td><td>標準</td></tr>
+          <tr class="sub"><td>加回 財務收支淨額</td><td>(3.0)</td><td>標準</td></tr>
+          <tr class="sub"><td>加回 外幣兌換損益</td><td>(3.3)</td><td>合理，本案已證明其扭曲性</td></tr>
+          <tr class="sub"><td>加回 折舊與攤銷</td><td>36.5</td><td>零售模式資本密集，加回會低估真實成本</td></tr>
+          <tr class="sub"><td>加回 股份基礎給付</td><td>12.2</td><td>非現金但具經常性，且稀釋股東權益</td></tr>
+          <tr class="total"><td>調整後 EBITDA</td><td>168.1</td><td>利潤率 19.8%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fine" style="margin-top:12px;">股份基礎給付上半年累計 33.5、年化逾 60；折舊攤銷因展店持續上升，本季 36.5、年增 12.6%。非 IFRS 指標本身不是問題，加回項的一致性與可持續性才是判斷標準。公司亦明確揭露無法提供前瞻性調整後 EBITDA 與 IFRS 淨利的調節表。</p>
+  </div>
+</section>
+
+<!-- 6. 現金流 -->
+<section id="cash">
+  <div class="col">
+    <h3>營運現金流 255.0，其中 94.6 來自營運資金變動</h3>
+    <p class="lede">上半年營運活動現金流入自 89.1 增至 255.0。公司揭露的兩大來源中，營運資金變動貢獻 94.6，占全部流入的 37%。這部分現金流不可重複產生。</p>
+  </div>
+
+  <div class="wide">
+    <div class="split">
+      <div>
+        <div class="scroll">
+          <table>
+            <caption>現金流量彙總，上半年</caption>
+            <thead><tr><th>項目</th><th>26 H1</th><th>25 H1</th></tr></thead>
+            <tbody>
+              <tr><td>營業活動</td><td>255.0</td><td>89.1</td></tr>
+              <tr class="sub"><td>其中 淨利加回非現金項目</td><td>+76.0</td><td>—</td></tr>
+              <tr class="sub"><td>其中 營運資金變動</td><td>+94.6</td><td>—</td></tr>
+              <tr><td>投資活動</td><td>(47.2)</td><td>(29.4)</td></tr>
+              <tr><td>籌資活動</td><td>(43.3)</td><td>(37.0)</td></tr>
+              <tr><td>匯率影響數</td><td>21.1</td><td>(100.3)</td></tr>
+              <tr class="total"><td>期末現金</td><td>1,205.6</td><td>846.6</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="scroll">
+          <table>
+            <caption>淨營運資金，相對 2025 年 12 月 31 日</caption>
+            <thead><tr><th>項目</th><th>26/6/30</th><th>25/12/31</th><th>變動</th></tr></thead>
+            <tbody>
+              <tr><td>應收帳款</td><td>374.0</td><td>305.4</td><td>+22.5%</td></tr>
+              <tr><td>存貨</td><td>472.9</td><td>419.8</td><td>+12.7%</td></tr>
+              <tr><td>應付帳款</td><td>(211.0)</td><td>(154.8)</td><td>+36.3%</td></tr>
+              <tr class="total"><td>淨營運資金</td><td>635.9</td><td>570.3</td><td>+11.5%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="fine" style="margin-top:14px;">存貨成長 12.7% 低於營收成長 14.0%，庫存管理確實有效率。但應收帳款成長 22.5% 高於營收，應付帳款成長 36.3% 遠高於存貨——收現轉慢與付款轉慢同時發生。</p>
+      </div>
+    </div>
+    <div class="col" style="padding-left:0;padding-right:0;margin-top:8px;">
+      <p>新聞稿以「強勁的現金轉換」形容本季表現。這個說法成立，但應付帳款只能延長一次。若下一季帳期回歸常態、營運資金貢獻歸零，真實的現金產生能力約在 160 上下。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7. 會計事項 -->
+<section id="accounting">
+  <div class="col">
+    <h3>兩項必須讀懂的會計事項</h3>
+    <p class="lede">這兩件事不影響本季營運，卻決定了報表怎麼讀，以及第三季會出現什麼一次性項目。</p>
+  </div>
+
+  <div class="wide">
+    <div class="split">
+      <div>
+        <h4>功能性貨幣自瑞郎改為美元</h4>
+        <p>自 2026 年 1 月 1 日起，母公司 On Holding AG 與主要交易個體 On AG 的功能性貨幣由 CHF 改為 USD，採推延適用，不重編前期。集團表達貨幣仍維持 CHF。</p>
+        <dl class="kv">
+          <div><dt>損益表匯兌波動</dt><dd>大幅收斂</dd></div>
+          <div><dt>Q2 外幣兌換損益</dt><dd>3.3（前期 −139.9）</dd></div>
+          <div><dt>波動改落在</dt><dd>其他綜合損益</dd></div>
+          <div><dt>權益「其他準備」</dt><dd>(12.0)，年初 (46.6)</dd></div>
+        </dl>
+        <p class="fine" style="margin-top:14px;">公司說明 OCI 波動性上升，容易被誤讀為產生損失。實際上本期其他準備由 (46.6) 改善至 (12.0)，正向變動 34.6。換算調整不流經損益、不影響每股盈餘與營運現金流，僅影響權益總額。</p>
+      </div>
+
+      <div>
+        <h4>IEEPA 關稅退稅：或有資產與期後事項</h4>
+        <ol class="tl">
+          <li><time>2026/02/20</time><p>美國最高法院判定 IEEPA 關稅無效，海關 2 月 24 日停止課徵。</p></li>
+          <li><time>2026/04/20</time><p>美國海關開放電子退稅申請系統。</p></li>
+          <li><time>2026/06/30</time><p>累計已繳 55.6，其中 52.7 已送件。因未達「幾乎確定」門檻，本期不認列任何退稅。</p></li>
+          <li><time>2026/08/11</time><p>已收到約 27.9。屬不調整事項，僅揭露，於第三季認列。</p></li>
+        </ol>
+        <p class="fine" style="margin-top:14px;">認列方式：對應已售存貨部分沖減銷貨成本，對應在手存貨部分沖減存貨。公司揭露多數與已售存貨有關，因此第三季毛利率會被一次性墊高，做趨勢分析時必須剔除。另 2026 年 7 月美國已依 1974 年貿易法第 301 條加徵額外關稅，公司預期產品稅負將因此上升。</p>
+      </div>
+    </div>
+
+    <h4 style="margin-top:44px;">資產負債表：看起來零負債，但要看表外</h4>
+    <dl class="kv">
+      <div><dt>現金及約當現金</dt><dd>1,205.6（年初 1,019.9）</dd></div>
+      <div><dt>權益總額</dt><dd>1,911.4（年初 1,632.4）</dd></div>
+      <div><dt>聯貸額度</dt><dd>700，2028/7/7 到期，未動用</dd></div>
+      <div><dt>已質押應收帳款</dt><dd>312.8，占應收 83.6%</dd></div>
+      <div><dt>已質押存貨</dt><dd>342.2，占存貨 72.4%</dd></div>
+      <div><dt>保證及信用狀</dt><dd>163.2（年初 153.2）</dd></div>
+      <div><dt>租賃承諾</dt><dd>230.3（年初 153.8）</dd></div>
+      <div><dt>未折現租賃負債</dt><dd>672.4（年初 615.6）</dd></div>
+    </dl>
+    <p class="fine" style="margin-top:14px;">租賃承諾大增來自全球直營店擴張與亞太新倉庫規劃。設質比率為依揭露數推算。討論題：帳上現金 1,205.6、未折現租賃負債 672.4、主要流動資產已設質，「淨現金部位」該怎麼定義？股權分析與信用分析在這題上會得出不同答案。</p>
+  </div>
+</section>
+
+<!-- 8. 結論 -->
+<section>
+  <div class="col">
+    <h3>五句話帶走</h3>
+    <ul class="rings">
+      <li>淨利成長 356.5% 是基期效果，本業成長約三成。看營業利益，不看淨利。</li>
+      <li>直營占比升至 45.7%，是毛利率衝上 65.4% 的結構性主因，這條線可以延續到下半年。</li>
+      <li>批發成長趨緩是主動選擇的結果，不是需求問題，但公司說下半年還會繼續這麼做。</li>
+      <li>財測回推顯示下半年固定匯率成長約 18%、調整後 EBITDA 利潤率約 19.2%，兩者都低於上半年。</li>
+      <li>第三季會出現約 27.9 的關稅退稅一次性利益，且不含在財測內，比較趨勢時要拿掉。</li>
+    </ul>
+  </div>
+</section>
+
+<footer id="sources">
+  <div class="col">
+    <p><strong style="color:#000;">資料來源</strong><br>
+    On Holding AG 官方新聞稿「On Reports Results for the Second Quarter and Six-Month Period Ended June 30, 2026」，2026 年 8 月 11 日；以及同日提交美國證券交易委員會之 Form 6-K, Exhibit 99.2「管理階層對財務狀況與經營結果之討論與分析」。期間財務報表依 IFRS 及 IAS 34 編製，未經查核。</p>
+    <p style="margin-top:16px;">所有金額單位為瑞士法郎百萬元，除每股盈餘與百分比外。標示為「推算」之項目係依公司揭露數字計算，非公司原始揭露，包括：剔除匯兌後之稅前成長率、各產品類別對營收增量之貢獻度、資產設質比率、以及由全年財測回推之下半年隱含數字。</p>
+    <p style="margin-top:16px;">本頁為財務報表分析教學用途整理，非投資建議，亦不得取代原始申報文件。原文請見 <a href="https://www.sec.gov">www.sec.gov</a> 與公司投資人關係網站。新聞稿含前瞻性陳述，實際結果可能與之有重大差異。</p>
+  </div>
+</footer>
+
+</body>
+</html>
