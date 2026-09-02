@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>記帳士 Day 09｜獨資、合夥及財務報表分析</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F7F8F5;
+  --paper-2:#EFF1EC;
+  --ink:#1B2A33;
+  --ink-soft:#4A5A63;
+  --rule:#C6CFC9;
+  --rule-soft:#DDE2DC;
+  --ledger:#1F5B4E;
+  --ledger-tint:#E7F0EC;
+  --redink:#B03A2E;
+  --red-tint:#F7E9E7;
+  --mark:#FFF3C4;
+  --max:74rem;
+  --serif:"Noto Serif TC",Georgia,"Songti TC","PMingLiU",serif;
+  --sans:"Noto Sans TC",-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:16.5px;line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(1rem,4vw,3rem)}
+h1,h2,h3,h4{font-family:var(--serif);line-height:1.35;margin:0}
+p{margin:0 0 .9em}
+ul,ol{margin:0 0 1em;padding-left:1.35em}
+li{margin:.3em 0}
+b,strong{font-weight:700}
+a{color:var(--ledger)}
+.num{font-variant-numeric:tabular-nums}
+
+/* ── 頁首：帳簿抬頭 ───────────────────────── */
+header.masthead{
+  border-bottom:3px double var(--ink);
+  background:linear-gradient(180deg,#fff 0%,var(--paper) 100%);
+  padding:2.6rem 0 1.4rem;
+}
+.mast-row{display:flex;flex-wrap:wrap;align-items:flex-end;gap:1rem 2rem;justify-content:space-between}
+.mast-day{
+  font-family:var(--serif);font-weight:900;
+  font-size:clamp(2.1rem,5.5vw,3.4rem);letter-spacing:.02em;
+}
+.mast-day small{
+  display:block;font-family:var(--sans);font-weight:500;
+  font-size:.92rem;letter-spacing:.22em;color:var(--ink-soft);
+  margin-bottom:.35rem;
+}
+.freq{
+  display:inline-flex;align-items:baseline;gap:.45rem;
+  border:1px solid var(--ledger);color:var(--ledger);
+  background:var(--ledger-tint);padding:.3rem .8rem;border-radius:2px;
+  font-size:.9rem;font-weight:700;
+}
+.mast-note{max-width:52ch;color:var(--ink-soft);font-size:.95rem;margin:.9rem 0 0}
+
+/* ── 落點分析（帳列式） ─────────────────────── */
+.scoreboard{margin:2.2rem 0 0;border-top:1px solid var(--rule);padding-top:1.2rem}
+.sb-title{font-size:1rem;font-weight:700;font-family:var(--serif);margin-bottom:.2rem}
+.sb-sub{font-size:.85rem;color:var(--ink-soft);margin-bottom:.9rem}
+table.ledger{width:100%;border-collapse:collapse;font-size:.94rem}
+table.ledger th,table.ledger td{padding:.42rem .6rem;border-bottom:1px solid var(--rule-soft)}
+table.ledger thead th{
+  border-bottom:1px solid var(--ink);font-family:var(--serif);
+  font-weight:700;font-size:.88rem;text-align:right;
+}
+table.ledger thead th:first-child{text-align:left}
+table.ledger td:first-child,table.ledger th:first-child{text-align:left}
+table.ledger td{text-align:right;font-variant-numeric:tabular-nums}
+table.ledger tr.total td{
+  border-top:1px solid var(--ink);border-bottom:3px double var(--ink);
+  font-weight:700;
+}
+table.ledger tr.focus td{background:var(--mark)}
+.dash{color:#9AA6A0}
+
+/* ── 導覽 ───────────────────────────────── */
+nav.toc{
+  position:sticky;top:0;z-index:30;background:rgba(247,248,245,.94);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--rule);
+}
+nav.toc ul{display:flex;gap:0;list-style:none;margin:0;padding:0;overflow-x:auto}
+nav.toc a{
+  display:block;white-space:nowrap;padding:.75rem .95rem;
+  font-size:.88rem;text-decoration:none;color:var(--ink-soft);
+  border-bottom:2px solid transparent;
+}
+nav.toc a:hover,nav.toc a:focus-visible{color:var(--ledger);border-bottom-color:var(--ledger)}
+
+/* ── 區塊 ───────────────────────────────── */
+section{padding:3rem 0 .5rem;border-top:1px solid var(--rule-soft)}
+section:first-of-type{border-top:none}
+.sec-head{display:flex;align-items:baseline;gap:.8rem;margin-bottom:1.4rem}
+.sec-head h2{font-size:clamp(1.4rem,3vw,1.9rem);font-weight:700}
+.sec-head .tag{
+  font-size:.78rem;color:var(--ink-soft);border:1px solid var(--rule);
+  padding:.1rem .5rem;border-radius:2px;white-space:nowrap;
+}
+h3{font-size:1.12rem;margin:1.9rem 0 .6rem;font-weight:700}
+h3::before{content:"";display:inline-block;width:.42rem;height:.42rem;
+  background:var(--ledger);margin-right:.55rem;vertical-align:.18em}
+h4{font-size:1rem;margin:1.2rem 0 .4rem;color:var(--ledger)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(19rem,1fr));gap:0 2.6rem}
+.measure{max-width:72ch}
+
+/* ── 重點強調 ──────────────────────────── */
+mark{background:var(--mark);padding:0 .12em}
+.must{
+  display:inline-block;background:var(--redink);color:#fff;
+  font-size:.72rem;font-weight:700;padding:.05rem .42rem;
+  border-radius:2px;vertical-align:.14em;margin-left:.4rem;letter-spacing:.05em;
+}
+.callout{
+  border-left:3px solid var(--redink);background:var(--red-tint);
+  padding:.85rem 1.1rem;margin:1.1rem 0;font-size:.95rem;
+}
+.callout .h{font-weight:700;color:var(--redink);display:block;margin-bottom:.2rem}
+.rule-box{
+  border:1px solid var(--rule);background:#fff;padding:1rem 1.15rem;margin:1.1rem 0;
+}
+.rule-box .h{font-family:var(--serif);font-weight:700;margin-bottom:.5rem}
+
+/* ── 分錄（借貸兩欄） ───────────────────── */
+table.je{
+  width:100%;max-width:34rem;border-collapse:collapse;
+  font-variant-numeric:tabular-nums;font-size:.95rem;margin:.7rem 0 1.2rem;
+  background:#fff;border:1px solid var(--rule-soft);
+}
+table.je caption{
+  caption-side:top;text-align:left;font-size:.85rem;color:var(--ink-soft);
+  padding:.35rem .6rem;background:var(--paper-2);border-bottom:1px solid var(--rule-soft);
+}
+table.je td{padding:.3rem .7rem;border:none}
+table.je td.dr{padding-left:.9rem}
+table.je td.cr{padding-left:3rem;color:var(--ledger)}
+table.je td.amt{text-align:right;width:8.5rem}
+
+/* ── 公式（真分數） ─────────────────────── */
+.formula-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1px;background:var(--rule-soft);border:1px solid var(--rule-soft);margin:1rem 0}
+.fcard{background:#fff;padding:.95rem 1.05rem}
+.fcard .fname{font-weight:700;font-size:.95rem;margin-bottom:.5rem}
+.fcard .fnote{font-size:.83rem;color:var(--ink-soft);margin-top:.5rem;line-height:1.6}
+.frac{display:inline-flex;flex-direction:column;text-align:center;vertical-align:middle;margin:0 .15em}
+.frac>span:first-child{border-bottom:1.5px solid var(--ink);padding:0 .35em .1em}
+.frac>span:last-child{padding:.1em .35em 0}
+.eq{display:flex;align-items:center;flex-wrap:wrap;gap:.3em;font-size:.95rem;font-variant-numeric:tabular-nums}
+
+/* ── 時間軸：營業週期 ───────────────────── */
+.cycle{border:1px solid var(--rule);background:#fff;padding:1.1rem 1.15rem;margin:1.1rem 0;overflow-x:auto}
+.cycle svg{display:block;min-width:34rem;width:100%;height:auto}
+
+/* ── 計算器 ─────────────────────────────── */
+.calc{
+  border:2px solid var(--ledger);background:#fff;margin:1.6rem 0;
+}
+.calc-head{background:var(--ledger);color:#fff;padding:.7rem 1.1rem;font-family:var(--serif);font-weight:700}
+.calc-head span{display:block;font-family:var(--sans);font-weight:400;font-size:.83rem;opacity:.85}
+.calc-body{padding:1.1rem}
+.calc-mode{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.calc-mode button{
+  font:inherit;font-size:.9rem;padding:.4rem .9rem;cursor:pointer;
+  border:1px solid var(--rule);background:var(--paper-2);color:var(--ink-soft);border-radius:2px;
+}
+.calc-mode button[aria-pressed="true"]{background:var(--ledger);color:#fff;border-color:var(--ledger)}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:.8rem}
+.field label{display:block;font-size:.83rem;color:var(--ink-soft);margin-bottom:.2rem}
+.field input{
+  width:100%;font:inherit;font-size:.95rem;font-variant-numeric:tabular-nums;
+  padding:.45rem .6rem;border:1px solid var(--rule);border-radius:2px;background:var(--paper);
+  color:var(--ink);
+}
+.field input:focus-visible{outline:2px solid var(--ledger);outline-offset:1px}
+.calc-out{margin-top:1.1rem;border-top:1px solid var(--rule);padding-top:.9rem;font-size:.95rem}
+.verdict{font-weight:700;font-family:var(--serif);font-size:1.05rem;margin-bottom:.5rem}
+.verdict.to-old{color:var(--ledger)}
+.verdict.to-new{color:var(--redink)}
+.verdict.none{color:var(--ink-soft)}
+
+/* ── 練習題 ─────────────────────────────── */
+.qbank{counter-reset:q}
+.q{border:1px solid var(--rule);background:#fff;margin:1rem 0;padding:1rem 1.15rem}
+.q-head{display:flex;gap:.6rem;align-items:baseline;margin-bottom:.6rem}
+.q-no{
+  font-family:var(--serif);font-weight:900;color:var(--ledger);
+  font-size:1.05rem;min-width:1.8rem;
+}
+.q-src{margin-left:auto;font-size:.78rem;color:var(--ink-soft);white-space:nowrap}
+.q-stem{font-size:.98rem}
+.opts{list-style:none;margin:.7rem 0 0;padding:0;display:grid;gap:.35rem}
+.opts button{
+  width:100%;text-align:left;font:inherit;font-size:.94rem;cursor:pointer;
+  border:1px solid var(--rule-soft);background:var(--paper);color:var(--ink);
+  padding:.45rem .75rem;border-radius:2px;
+}
+.opts button:hover{border-color:var(--ledger)}
+.opts button:focus-visible{outline:2px solid var(--ledger);outline-offset:1px}
+.opts button.right{background:var(--ledger-tint);border-color:var(--ledger);font-weight:700}
+.opts button.wrong{background:var(--red-tint);border-color:var(--redink);text-decoration:line-through}
+.opts button[disabled]{cursor:default}
+.sol{
+  margin-top:.8rem;border-left:3px solid var(--ledger);background:var(--ledger-tint);
+  padding:.7rem 1rem;font-size:.93rem;
+}
+.sol .h{font-weight:700;color:var(--ledger);margin-bottom:.25rem}
+.sol[hidden]{display:none}
+.reveal{
+  font:inherit;font-size:.86rem;margin-top:.7rem;cursor:pointer;
+  background:none;border:1px solid var(--rule);color:var(--ink-soft);
+  padding:.3rem .8rem;border-radius:2px;
+}
+.reveal:hover{border-color:var(--ledger);color:var(--ledger)}
+.calcsteps{font-variant-numeric:tabular-nums;font-size:.92rem}
+.calcsteps div{padding:.1rem 0}
+
+/* 計分列 */
+.scorebar{
+  position:sticky;bottom:0;z-index:20;background:var(--ink);color:#fff;
+  display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+  padding:.6rem clamp(1rem,4vw,3rem);font-size:.9rem;
+}
+.scorebar b{font-variant-numeric:tabular-nums;font-size:1.05rem}
+.scorebar button{
+  margin-left:auto;font:inherit;font-size:.85rem;cursor:pointer;
+  background:none;border:1px solid rgba(255,255,255,.4);color:#fff;
+  padding:.28rem .8rem;border-radius:2px;
+}
+.scorebar button:hover{background:rgba(255,255,255,.12)}
+
+footer{padding:2.5rem 0 3.5rem;border-top:3px double var(--ink);margin-top:3rem;
+  font-size:.86rem;color:var(--ink-soft)}
+
+@media print{
+  nav.toc,.scorebar,.reveal,.calc-mode,.q-src{display:none!important}
+  .sol[hidden]{display:block!important}
+  body{font-size:11pt;background:#fff}
+  .q,.rule-box,table.je{break-inside:avoid}
+  section{padding-top:1.2rem}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="mast-row">
+      <div>
+        <div class="mast-day"><small>記帳士｜會計學概要</small>Day 09　獨資、合夥及財務報表分析</div>
+      </div>
+      <div class="freq">出題頻率　B　中</div>
+    </div>
+    <p class="mast-note">本單元兩條主線：獨資與合夥會計主要考<b>合夥人入夥與退夥</b>，財務報表分析主要考<b>公式的背誦與代入</b>。兩者都是「規則清楚、失分多半來自代錯數字」的題型。</p>
+
+    <div class="scoreboard">
+      <div class="sb-title">近三年命題落點（會計學概要）</div>
+      <div class="sb-sub">灰底為本單元範圍。申論題共 50 分、選擇題共 50 分。</div>
+      <table class="ledger">
+        <thead>
+          <tr><th>內容</th><th>112 年</th><th>113 年</th><th>114 年</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>現金及約當現金</td><td>5</td><td>17.5</td><td>5</td></tr>
+          <tr><td>應收帳款</td><td>2.5</td><td>2.5</td><td>5</td></tr>
+          <tr><td>存貨</td><td>10</td><td>28</td><td>34.5</td></tr>
+          <tr><td>不動產、廠房及設備</td><td>22</td><td>5</td><td>20</td></tr>
+          <tr><td>負債與投資</td><td>27</td><td>12.5</td><td>25.5</td></tr>
+          <tr><td>業主權益</td><td>2.5</td><td>10</td><td class="dash">—</td></tr>
+          <tr><td>保留盈餘及每股盈餘</td><td>2.5</td><td>5</td><td>2.5</td></tr>
+          <tr class="focus"><td>獨資、合夥會計</td><td>7.5</td><td>2.5</td><td>5</td></tr>
+          <tr><td>現金流量表</td><td>18.5</td><td>5</td><td>2.5</td></tr>
+          <tr class="focus"><td>財務報表分析</td><td>2.5</td><td>12</td><td class="dash">—</td></tr>
+          <tr class="total"><td>本單元小計</td><td>10</td><td>14.5</td><td>5</td></tr>
+        </tbody>
+      </table>
+      <p class="mast-note">三年平均約 <b>9.8 分</b>。分數不算高，但公式題屬於「送分或全錯」，投報率高於同等時數投在存貨或不動產。</p>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="章節導覽">
+  <div class="wrap">
+    <ul>
+      <li><a href="#s1">獨資</a></li>
+      <li><a href="#s2">合夥特徵</a></li>
+      <li><a href="#s3">損益分配</a></li>
+      <li><a href="#s4">入夥</a></li>
+      <li><a href="#s5">退夥</a></li>
+      <li><a href="#s6">紅利計算器</a></li>
+      <li><a href="#s7">財報公式</a></li>
+      <li><a href="#s8">綜合範例</a></li>
+      <li><a href="#s9">選擇題</a></li>
+      <li><a href="#s10">計算題</a></li>
+      <li><a href="#s11">易錯清單</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ═══ 1 獨資 ═══ -->
+<section id="s1">
+  <div class="sec-head"><h2>一、獨資組織</h2><span class="tag">觀念題</span></div>
+  <div class="measure">
+    <ul>
+      <li>一人出資經營，<b>非獨立之法律個體</b>；企業本身不具享受權利、負擔義務的能力。</li>
+      <li>對外事務以業主名義為之，<mark>業主的責任不以出資額為限</mark>——<b>對企業債務負無限清償責任</b>。</li>
+      <li>經營結果所致之損益由業主個人獨享獨擔。</li>
+    </ul>
+    <div class="callout">
+      <span class="h">考點提醒</span>
+      「非法律個體」與「非會計個體」不同。獨資<b>仍是獨立的會計個體</b>，帳務上要與業主個人財產分開，這是實體慣例（entity assumption）的直接應用。選項若說「獨資非會計個體」即為錯。
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 2 合夥特徵 ═══ -->
+<section id="s2">
+  <div class="sec-head"><h2>二、合夥組織的四項特徵</h2><span class="tag">觀念題</span></div>
+  <div class="cols measure">
+    <div>
+      <h4>1　合夥財產公司共有</h4>
+      <p>合夥人以現金或其他資產投入後，該等資產即為<b>全體合夥人共有</b>。合夥結束時，依合夥契約及法律規定進行清算與分配剩餘財產。</p>
+      <h4>2　合夥人共享利益</h4>
+      <p>損益依契約約定比例分配；<mark>契約未約定分配比例者，按各合夥人出資額之比例分配</mark>。</p>
+    </div>
+    <div>
+      <h4>3　非獨立法律個體</h4>
+      <p>與獨資相同，合夥非獨立之法律個體。</p>
+      <h4>4　無限連帶責任</h4>
+      <p>合夥人對合夥債務負<b>無限連帶責任</b>——債權人可就任一合夥人之個人財產求償全額。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 3 損益分配 ═══ -->
+<section id="s3">
+  <div class="sec-head"><h2>三、合夥損益之分配</h2><span class="tag">計算題核心</span></div>
+
+  <h3>分配方式一：依約定比例</h3>
+  <div class="measure">
+    <p>結帳分錄的固定型態：</p>
+    <table class="je">
+      <caption>年度結帳｜有淨利時</caption>
+      <tr><td class="dr">本期損益</td><td class="amt">XXX</td><td class="amt"></td></tr>
+      <tr><td class="cr">　合夥人資本</td><td class="amt"></td><td class="amt">XXX</td></tr>
+    </table>
+    <div class="rule-box">
+      <div class="h">範例｜甲、乙約定 2 : 3 分配，X8 年度淨利 $600,000</div>
+      <div class="calcsteps">
+        <div>甲君分得：$600,000 × 2/5 ＝ <b>$240,000</b></div>
+        <div>乙君分得：$600,000 × 3/5 ＝ <b>$360,000</b></div>
+      </div>
+      <table class="je">
+        <caption>X8 年 12 月 31 日</caption>
+        <tr><td class="dr">本期損益</td><td class="amt">600,000</td><td class="amt"></td></tr>
+        <tr><td class="cr">　甲君資本</td><td class="amt"></td><td class="amt">240,000</td></tr>
+        <tr><td class="cr">　乙君資本</td><td class="amt"></td><td class="amt">360,000</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h3>分配方式二：依資本額比例</h3>
+  <div class="measure">
+    <p>資本額比例可用期初餘額、期末餘額為準，但<mark>最合理的方式是依「加權平均資本額」比例分配</mark>。考題若未指明而問「最合理」，選加權平均。</p>
+    <div class="callout">
+      <span class="h">最容易錯的一步</span>
+      計算加權平均資本額時，<b>只計入增資與提取（資本性變動）</b>。合夥人代墊水電費、暫付款等<b>不影響</b>平均資本額的計算。這是講義原題刻意埋的陷阱。
+    </div>
+    <div class="rule-box">
+      <div class="h">範例｜X8 年初甲 $176,000、乙 $220,000</div>
+      <p style="font-size:.93rem">甲於 3/1 增資 $24,000；乙於 6/30 提取 $20,000；甲於 12/31 墊付水電費 $2,000。淨利 $600,000。</p>
+      <div class="calcsteps">
+        <div>甲平均資本：$176,000 × 2/12 ＋ ($176,000 ＋ $24,000) × 10/12 ＝ <b>$196,000</b></div>
+        <div>乙平均資本：$220,000 × 6/12 ＋ ($220,000 － $20,000) × 6/12 ＝ <b>$210,000</b></div>
+        <div>分配比例：196,000 : 210,000 ＝ <b>14 : 15</b></div>
+        <div>甲分得：$600,000 × 14/29 ＝ <b>$289,655</b>　｜　乙分得：$600,000 × 15/29 ＝ <b>$310,345</b></div>
+        <div style="color:var(--redink)">12/31 墊付之 $2,000 不參與平均資本額計算。</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>分配方式三：薪資 → 利息 → 餘額<span class="must">必考</span></h3>
+  <div class="measure">
+    <p>三段式分配的順序固定：<b>先分薪資，再按資本額計息，最後餘額依約定比例分配</b>。餘額可能是負數，負數照樣分——這是最常見的失分點。</p>
+    <div class="rule-box">
+      <div class="h">範例｜薪資甲 $240,000、乙 $180,000；平均資本額 10% 利息；餘額平均分配</div>
+      <p style="font-size:.93rem">承前例，甲平均資本 $196,000、乙 $210,000。分別計算淨利 $600,000 與 $300,000 兩種情況。</p>
+
+      <h4 style="margin-top:1rem">(一) 淨利 $600,000</h4>
+      <table class="ledger" style="max-width:38rem">
+        <thead><tr><th>分配項目</th><th>甲君</th><th>乙君</th><th>小計</th><th>未分配淨利</th></tr></thead>
+        <tbody>
+          <tr><td>淨利</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td>600,000</td></tr>
+          <tr><td>薪資</td><td>240,000</td><td>180,000</td><td>420,000</td><td>180,000</td></tr>
+          <tr><td>利息</td><td>19,600</td><td>21,000</td><td>40,600</td><td>139,400</td></tr>
+          <tr><td>餘額</td><td>69,700</td><td>69,700</td><td>139,400</td><td>0</td></tr>
+          <tr class="total"><td>合計</td><td>329,300</td><td>270,700</td><td>600,000</td><td>0</td></tr>
+        </tbody>
+      </table>
+
+      <h4 style="margin-top:1.2rem">(二) 淨利 $300,000　<span style="color:var(--redink);font-size:.85rem">餘額為負</span></h4>
+      <table class="ledger" style="max-width:38rem">
+        <thead><tr><th>分配項目</th><th>甲君</th><th>乙君</th><th>小計</th><th>未分配淨利</th></tr></thead>
+        <tbody>
+          <tr><td>淨利</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td>300,000</td></tr>
+          <tr><td>薪資</td><td>240,000</td><td>180,000</td><td>420,000</td><td>(120,000)</td></tr>
+          <tr><td>利息</td><td>19,600</td><td>21,000</td><td>40,600</td><td>(160,600)</td></tr>
+          <tr><td>餘額</td><td>(80,300)</td><td>(80,300)</td><td>(160,600)</td><td>0</td></tr>
+          <tr class="total"><td>合計</td><td>179,300</td><td>120,700</td><td>300,000</td><td>0</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:.9rem;color:var(--ink-soft);margin-top:.6rem">利息：$196,000 × 10% ＝ $19,600；$210,000 × 10% ＝ $21,000。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 4 入夥 ═══ -->
+<section id="s4">
+  <div class="sec-head"><h2>四、新合夥人入夥</h2><span class="tag">必考</span></div>
+  <p class="measure">入夥只有兩條路，判斷方向的問題是：<b>錢付給誰？</b> 付給舊合夥人個人，合夥組織的帳只是換名字；付給合夥組織，資產與權益才會同時增加。</p>
+
+  <h3>路徑一：購買舊合夥人之權益</h3>
+  <div class="measure">
+    <p>新合夥人交付現金或其他資產<b>向舊合夥人購買</b>其在合夥組織之權益，屬<b>新舊合夥人間之交易</b>。</p>
+    <div class="callout">
+      <span class="h">關鍵結論</span>
+      <mark>不論成交金額若干，均不影響合夥組織之資產與負債，亦不影響權益總額。</mark>會計處理僅需將舊合夥人之資本轉至新合夥人名下即可。成交價高於或低於帳面權益，都不入帳。
+    </div>
+    <div class="rule-box">
+      <div class="h">範例｜A 商店甲 $530,000、乙 $470,000</div>
+      <p style="font-size:.93rem">(一) 丙以現金 $150,000 及公允價值 $350,000 之設備購買乙君<b>全部</b>權益</p>
+      <table class="je">
+        <tr><td class="dr">乙君資本</td><td class="amt">470,000</td><td class="amt"></td></tr>
+        <tr><td class="cr">　丙君資本</td><td class="amt"></td><td class="amt">470,000</td></tr>
+      </table>
+      <p style="font-size:.93rem">(二) 丙以現金 $250,000 購買乙君<b>二分之一</b>權益</p>
+      <table class="je">
+        <tr><td class="dr">乙君資本</td><td class="amt">235,000</td><td class="amt"></td></tr>
+        <tr><td class="cr">　丙君資本</td><td class="amt"></td><td class="amt">235,000</td></tr>
+      </table>
+      <p style="font-size:.93rem">(三) 丙以現金 $250,000 分別向甲、乙各購買<b>四分之一</b>權益</p>
+      <table class="je">
+        <tr><td class="dr">甲君資本　$530,000 × 1/4</td><td class="amt">132,500</td><td class="amt"></td></tr>
+        <tr><td class="dr">乙君資本　$470,000 × 1/4</td><td class="amt">117,500</td><td class="amt"></td></tr>
+        <tr><td class="cr">　丙君資本</td><td class="amt"></td><td class="amt">250,000</td></tr>
+      </table>
+      <p style="font-size:.9rem;color:var(--redink)">三種情況下，丙支付的現金 $250,000 都不出現在合夥帳上。</p>
+    </div>
+  </div>
+
+  <h3>路徑二：投入新資本<span class="must">必考</span></h3>
+  <div class="measure">
+    <p>新合夥人以現金或其他資產投入<b>合夥組織</b>以取得權益，屬<b>新合夥人與合夥組織之交易</b>，使合夥淨資產與資本總額<b>同時增加</b>。但基於某些原因，取得之權益金額與投入淨資產之價值未必相等。</p>
+
+    <div class="formula-grid">
+      <div class="fcard">
+        <div class="fname">1　權益 ＝ 投入額</div>
+        <div class="fnote">淨資產增加，新合夥人資本同額增加。無紅利，處理最單純。</div>
+      </div>
+      <div class="fcard">
+        <div class="fname" style="color:var(--ledger)">2　權益 &lt; 投入額</div>
+        <div class="fnote">原合夥組織淨資產價值低估、或有未入帳商譽。新合夥人少得之權益，視為<b>新合夥人給舊合夥人之紅利</b>，按舊合夥人<b>損益分配比例</b>增加其資本。</div>
+      </div>
+      <div class="fcard">
+        <div class="fname" style="color:var(--redink)">3　權益 &gt; 投入額</div>
+        <div class="fnote">原合夥淨資產高估、或新合夥人聲望足以增加獲利能力。新合夥人多得之權益，視為<b>舊合夥人給新合夥人之紅利</b>，按舊合夥人<b>損益分配比例</b>減少其資本。</div>
+      </div>
+    </div>
+
+    <div class="rule-box">
+      <div class="h">範例｜A 商店甲 $530,000、乙 $470,000，損益平分</div>
+
+      <p style="font-size:.93rem;margin-top:.8rem"><b>(一) 丙投入現金 $500,000 取得三分之一權益</b></p>
+      <div class="calcsteps">
+        <div>丙資本：($530,000 ＋ $470,000 ＋ $500,000) × 1/3 ＝ $500,000</div>
+        <div>＝ 投入金額，無紅利。</div>
+      </div>
+      <table class="je">
+        <tr><td class="dr">現金</td><td class="amt">500,000</td><td class="amt"></td></tr>
+        <tr><td class="cr">　丙君資本</td><td class="amt"></td><td class="amt">500,000</td></tr>
+      </table>
+
+      <p style="font-size:.93rem"><b>(二) 丙投入現金 $500,000 取得四分之一權益</b>　<span style="color:var(--ledger)">紅利給舊合夥人</span></p>
+      <div class="calcsteps">
+        <div>丙資本：$1,500,000 × 1/4 ＝ $375,000　&lt;　投入 $500,000</div>
+        <div>紅利 $125,000，甲、乙各得 $125,000 × 1/2 ＝ $62,500</div>
+      </div>
+      <table class="je">
+        <tr><td class="dr">現金</td><td class="amt">500,000</td><td class="amt"></td></tr>
+        <tr><td class="cr">　甲君資本</td><td class="amt"></td><td class="amt">62,500</td></tr>
+        <tr><td class="cr">　乙君資本</td><td class="amt"></td><td class="amt">62,500</td></tr>
+        <tr><td class="cr">　丙君資本</td><td class="amt"></td><td class="amt">375,000</td></tr>
+      </table>
+
+      <p style="font-size:.93rem"><b>(三) 丙投入現金 $200,000 取得四分之一權益</b>　<span style="color:var(--redink)">紅利給新合夥人</span></p>
+      <div class="calcsteps">
+        <div>丙資本：($200,000 ＋ $470,000 ＋ $530,000) × 1/4 ＝ $300,000　&gt;　投入 $200,000</div>
+        <div>紅利 $100,000，甲、乙各給 $50,000</div>
+      </div>
+      <table class="je">
+        <tr><td class="dr">現金</td><td class="amt">200,000</td><td class="amt"></td></tr>
+        <tr><td class="dr">甲君資本</td><td class="amt">50,000</td><td class="amt"></td></tr>
+        <tr><td class="dr">乙君資本</td><td class="amt">50,000</td><td class="amt"></td></tr>
+        <tr><td class="cr">　丙君資本</td><td class="amt"></td><td class="amt">300,000</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 5 退夥 ═══ -->
+<section id="s5">
+  <div class="sec-head"><h2>五、舊合夥人退夥</h2><span class="tag">必考</span></div>
+  <p class="measure">退夥的邏輯與入夥完全對稱，只是紅利方向反過來。判斷點：<b>取回的淨資產，比退夥時的資本餘額多還是少？</b></p>
+
+  <div class="formula-grid">
+    <div class="fcard">
+      <div class="fname">1　取回 ＝ 資本餘額</div>
+      <div class="fnote">合夥資本減少、淨資產減少相同金額，無紅利。</div>
+    </div>
+    <div class="fcard">
+      <div class="fname" style="color:var(--redink)">2　取回 &gt; 資本餘額</div>
+      <div class="fnote">差額視為<b>其他合夥人給退夥人之紅利</b>，按其他合夥人<b>相對損益分配比例</b>分配，<b>減少</b>其他合夥人之資本。</div>
+    </div>
+    <div class="fcard">
+      <div class="fname" style="color:var(--ledger)">3　取回 &lt; 資本餘額</div>
+      <div class="fnote">差額視為<b>退夥人給其他合夥人之紅利</b>，按其他合夥人<b>相對損益分配比例</b>分配，<b>增加</b>其他合夥人之資本。</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="h">「相對」兩個字是關鍵</span>
+    分攤紅利時，分母是<b>剩餘合夥人的比例合計</b>，不是原來的 100%。例：甲乙丙損益比 4 : 4 : 2，乙退夥後，甲丙的相對比例是 4 : 2（分母 6），不是 4 : 2（分母 10）。這一步算錯，整題就錯。
+  </div>
+
+  <div class="rule-box measure">
+    <div class="h">範例｜X9 年初 A 商店甲 $600,000、乙 $500,000、丙 $400,000，損益比 4 : 4 : 2</div>
+    <p style="font-size:.93rem">乙君退出合夥。甲、丙之相對比例為 4 : 2。</p>
+
+    <p style="font-size:.93rem"><b>(一) 取回現金 $500,000</b>（等於資本餘額）</p>
+    <table class="je">
+      <tr><td class="dr">乙君資本</td><td class="amt">500,000</td><td class="amt"></td></tr>
+      <tr><td class="cr">　現金</td><td class="amt"></td><td class="amt">500,000</td></tr>
+    </table>
+
+    <p style="font-size:.93rem"><b>(二) 取回現金 $584,000</b>（大於資本餘額，甲丙給乙紅利 $84,000）</p>
+    <div class="calcsteps">
+      <div>甲君給乙君：$84,000 × 4/6 ＝ $56,000　｜　丙君給乙君：$84,000 × 2/6 ＝ $28,000</div>
+    </div>
+    <table class="je">
+      <tr><td class="dr">甲君資本</td><td class="amt">56,000</td><td class="amt"></td></tr>
+      <tr><td class="dr">乙君資本</td><td class="amt">500,000</td><td class="amt"></td></tr>
+      <tr><td class="dr">丙君資本</td><td class="amt">28,000</td><td class="amt"></td></tr>
+      <tr><td class="cr">　現金</td><td class="amt"></td><td class="amt">584,000</td></tr>
+    </table>
+
+    <p style="font-size:.93rem"><b>(三) 取回現金 $440,000</b>（小於資本餘額，乙給甲丙紅利 $60,000）</p>
+    <div class="calcsteps">
+      <div>乙君給甲君：$60,000 × 4/6 ＝ $40,000　｜　乙君給丙君：$60,000 × 2/6 ＝ $20,000</div>
+    </div>
+    <table class="je">
+      <tr><td class="dr">乙君資本</td><td class="amt">500,000</td><td class="amt"></td></tr>
+      <tr><td class="cr">　甲君資本</td><td class="amt"></td><td class="amt">40,000</td></tr>
+      <tr><td class="cr">　丙君資本</td><td class="amt"></td><td class="amt">20,000</td></tr>
+      <tr><td class="cr">　現金</td><td class="amt"></td><td class="amt">440,000</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ═══ 6 計算器 ═══ -->
+<section id="s6">
+  <div class="sec-head"><h2>六、紅利方向計算器</h2><span class="tag">自我驗算</span></div>
+  <p class="measure">入夥與退夥算錯，八成是紅利方向或分母抓錯。輸入數字，先自己算一次，再對照。</p>
+
+  <div class="calc">
+    <div class="calc-head">入夥／退夥紅利判斷<span>依講義規則計算，比例可填任意正整數或小數</span></div>
+    <div class="calc-body">
+      <div class="calc-mode" role="group" aria-label="選擇情境">
+        <button type="button" id="mode-in" aria-pressed="true">新合夥人投入新資本</button>
+        <button type="button" id="mode-out" aria-pressed="false">舊合夥人退夥</button>
+      </div>
+
+      <div class="fields" id="fields-in">
+        <div class="field"><label for="i-old">舊合夥人資本總額</label><input id="i-old" type="number" inputmode="decimal" value="1000000"></div>
+        <div class="field"><label for="i-inv">新合夥人投入金額</label><input id="i-inv" type="number" inputmode="decimal" value="500000"></div>
+        <div class="field"><label for="i-pct">取得權益（%）</label><input id="i-pct" type="number" inputmode="decimal" value="25"></div>
+        <div class="field"><label for="i-ratio">舊合夥人損益比（逗號分隔）</label><input id="i-ratio" type="text" value="1,1"></div>
+      </div>
+
+      <div class="fields" id="fields-out" hidden>
+        <div class="field"><label for="o-cap">退夥人資本餘額</label><input id="o-cap" type="number" inputmode="decimal" value="500000"></div>
+        <div class="field"><label for="o-cash">退夥取回淨資產</label><input id="o-cash" type="number" inputmode="decimal" value="584000"></div>
+        <div class="field"><label for="o-ratio">其餘合夥人損益比（逗號分隔）</label><input id="o-ratio" type="text" value="4,2"></div>
+      </div>
+
+      <div class="calc-out" id="calc-out" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 7 財報公式 ═══ -->
+<section id="s7">
+  <div class="sec-head"><h2>七、財務報表分析公式速查</h2><span class="tag">背誦題</span></div>
+
+  <h3>短期償債能力</h3>
+  <div class="formula-grid">
+    <div class="fcard"><div class="fname">營運資金</div><div class="eq">流動資產 － 流動負債</div><div class="fnote">絕對金額，不是比率，不同規模公司間不可直接比較。</div></div>
+    <div class="fcard"><div class="fname">流動比率</div><div class="eq"><span class="frac"><span>流動資產</span><span>流動負債</span></span></div><div class="fnote">「待出售非流動資產」是<b>流動資產</b>之會計項目。</div></div>
+    <div class="fcard"><div class="fname">速動比率（酸性測試比率）</div><div class="eq"><span class="frac"><span>速動資產</span><span>流動負債</span></span></div><div class="fnote">速動資產 ＝ 現金 ＋ 短期投資 ＋ 應收帳款 ＋ 應收票據<br>或 ＝ 流動資產 － 存貨 － 預付費用 － 待出售非流動資產</div></div>
+  </div>
+
+  <h3>經營效能（週轉率）</h3>
+  <div class="formula-grid">
+    <div class="fcard"><div class="fname">總資產週轉率</div><div class="eq"><span class="frac"><span>銷貨淨額</span><span>平均總資產</span></span>（次）</div><div class="fnote">平均總資產 ＝（期初 ＋ 期末）÷ 2</div></div>
+    <div class="fcard"><div class="fname">應收帳款週轉率</div><div class="eq"><span class="frac"><span>賒銷淨額</span><span>平均應收帳款</span></span>（次）</div><div class="fnote">分子是<b>賒銷</b>淨額，不是銷貨總額。題目給銷貨折扣、折讓要先扣除。</div></div>
+    <div class="fcard"><div class="fname">存貨週轉率</div><div class="eq"><span class="frac"><span>銷貨成本</span><span>平均存貨</span></span>（次）</div><div class="fnote">分子是<b>銷貨成本</b>，不是銷貨收入。這是最高頻的代錯點。</div></div>
+    <div class="fcard"><div class="fname">應付帳款週轉率</div><div class="eq"><span class="frac"><span>進貨</span><span>平均應付帳款</span></span>（次）</div><div class="fnote">分子是<b>進貨</b>，不是銷貨成本。</div></div>
+  </div>
+
+  <h3>營業週期與淨營業週期</h3>
+  <div class="cycle">
+    <svg viewBox="0 0 660 150" role="img" aria-label="營業週期＝平均銷售期間加平均收款期間；淨營業週期再減平均付款期間">
+      <line x1="40" y1="70" x2="620" y2="70" stroke="#1B2A33" stroke-width="1.5"/>
+      <g stroke="#1B2A33" stroke-width="1.5">
+        <line x1="40" y1="58" x2="40" y2="82"/><line x1="330" y1="58" x2="330" y2="82"/><line x1="620" y1="58" x2="620" y2="82"/>
+      </g>
+      <g font-family="Noto Sans TC,sans-serif" font-size="13" fill="#1B2A33" text-anchor="middle">
+        <text x="40" y="100">存貨</text><text x="330" y="100">應收帳款</text><text x="620" y="100">現金</text>
+        <text x="185" y="40" font-weight="700">平均銷售期間</text>
+        <text x="475" y="40" font-weight="700">平均收款期間</text>
+        <text x="185" y="22" font-size="12" fill="#4A5A63">365 ÷ 存貨週轉率</text>
+        <text x="475" y="22" font-size="12" fill="#4A5A63">365 ÷ 應收帳款週轉率</text>
+      </g>
+      <g stroke="#1F5B4E" stroke-width="1.5" fill="none">
+        <path d="M40 122 H 260"/><path d="M40 116 v12"/><path d="M260 116 v12"/>
+      </g>
+      <text x="150" y="140" font-family="Noto Sans TC,sans-serif" font-size="12" fill="#1F5B4E" text-anchor="middle">減：平均付款期間 ＝ 365 ÷ 應付帳款週轉率</text>
+    </svg>
+  </div>
+  <div class="measure">
+    <p><b>營業週期</b> ＝ 平均銷售期間 ＋ 平均收款期間</p>
+    <p><b>淨營業週期</b> ＝ 平均銷售期間 ＋ 平均收款期間 － 平均付款期間</p>
+    <div class="callout">
+      <span class="h">分辨兩者</span>
+      題目問「營業週期」不減付款期間；問「淨營業週期」或「現金循環週期」才減。114 年考題就是靠這兩個名詞區分答案。
+    </div>
+  </div>
+
+  <h3>資本結構與長期償債能力</h3>
+  <div class="formula-grid">
+    <div class="fcard"><div class="fname">負債比率</div><div class="eq"><span class="frac"><span>負債總額</span><span>資產總額</span></span></div></div>
+    <div class="fcard"><div class="fname">權益比率</div><div class="eq"><span class="frac"><span>權益總額</span><span>資產總額</span></span></div><div class="fnote">權益比率愈高，對長期債權人保障愈大。</div></div>
+    <div class="fcard"><div class="fname">利息保障倍數</div><div class="eq"><span class="frac"><span>息稅前盈餘</span><span>利息費用</span></span>（倍）</div><div class="fnote">息稅前盈餘 ＝ 稅前純益 ＋ 利息費用</div></div>
+  </div>
+
+  <h3>獲利能力</h3>
+  <div class="formula-grid">
+    <div class="fcard"><div class="fname">總資產報酬率</div><div class="eq"><span class="frac"><span>本期純益 ＋ 利息費用 ×（1－稅率）</span><span>平均總資產</span></span></div><div class="fnote">利息費用要<b>加回並乘以稅後係數</b>。漏掉稅盾是最常見錯誤。</div></div>
+    <div class="fcard"><div class="fname">長期資金報酬率</div><div class="eq"><span class="frac"><span>本期純益 ＋ 長期負債 ×（1－稅率）</span><span>平均長期資金</span></span></div><div class="fnote">長期資金 ＝ 總資產 － 流動負債 － 長期負債 ＋ 股東權益</div></div>
+    <div class="fcard"><div class="fname">股東權益報酬率</div><div class="eq"><span class="frac"><span>本期純益</span><span>平均股東權益</span></span></div></div>
+    <div class="fcard"><div class="fname">普通股權益報酬率</div><div class="eq"><span class="frac"><span>本期純益 － 特別股股利</span><span>平均普通股權益</span></span></div></div>
+  </div>
+
+  <h3>投資與市價比率</h3>
+  <div class="formula-grid">
+    <div class="fcard"><div class="fname">投資報酬率</div><div class="eq"><span class="frac"><span>每股盈餘</span><span>每股市價</span></span></div></div>
+    <div class="fcard"><div class="fname">本益比（價格盈餘比）</div><div class="eq"><span class="frac"><span>每股市價</span><span>每股盈餘</span></span></div></div>
+    <div class="fcard"><div class="fname">現金股利收益率（殖利率）</div><div class="eq"><span class="frac"><span>每股股利</span><span>每股市價</span></span></div></div>
+    <div class="fcard"><div class="fname">本利比</div><div class="eq"><span class="frac"><span>每股市價</span><span>每股股利</span></span></div></div>
+    <div class="fcard"><div class="fname">股利支付率</div><div class="eq"><span class="frac"><span>每股股利</span><span>每股盈餘</span></span></div></div>
+  </div>
+  <div class="callout measure">
+    <span class="h">四個比率兩兩互為倒數</span>
+    投資報酬率 ↔ 本益比；現金股利收益率 ↔ 本利比。記一半就好，考場上倒過來寫。
+  </div>
+</section>
+
+<!-- ═══ 8 綜合範例 ═══ -->
+<section id="s8">
+  <div class="sec-head"><h2>八、綜合範例：甲公司 X9 年度</h2><span class="tag">一題吃六個公式</span></div>
+  <div class="measure">
+    <div class="rule-box">
+      <div class="h">已知資料</div>
+      <table class="ledger" style="max-width:32rem">
+        <thead><tr><th>比較資產負債表</th><th>1/1</th><th>12/31</th></tr></thead>
+        <tbody>
+          <tr><td>現金</td><td>180,000</td><td>240,000</td></tr>
+          <tr><td>備供出售金融資產</td><td>160,000</td><td>120,000</td></tr>
+          <tr><td>應收帳款</td><td>280,000</td><td>200,000</td></tr>
+          <tr><td>存貨</td><td>520,000</td><td>560,000</td></tr>
+          <tr><td>固定資產</td><td>1,320,000</td><td>1,680,000</td></tr>
+          <tr class="total"><td>資產總額</td><td>2,460,000</td><td>2,800,000</td></tr>
+          <tr><td>應付帳款</td><td>120,000</td><td>380,000</td></tr>
+          <tr><td>應付費用</td><td>60,000</td><td>40,000</td></tr>
+          <tr><td>應付公司債（5%）</td><td>400,000</td><td>320,000</td></tr>
+          <tr><td>普通股本（面額 $10）</td><td>1,200,000</td><td>1,200,000</td></tr>
+          <tr><td>保留盈餘</td><td>680,000</td><td>860,000</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:.93rem;margin-top:.8rem">綜合損益表：銷貨收入（均為賒銷）$3,200,000；本期進貨（均為賒購）$2,000,000；銷貨成本 $1,960,000；營業費用 $640,000；營業淨利 $600,000；利息費用 $20,000；稅前淨利 $580,000；所得稅（17%）$98,600；本期淨利 $481,400。每股市價 $40，一年以 365 天計。</p>
+    </div>
+
+    <div class="rule-box">
+      <div class="h">解答</div>
+      <div class="calcsteps">
+        <div><b>(一) 應收帳款週轉率</b></div>
+        <div>平均應收帳款：($280,000 ＋ $200,000) ÷ 2 ＝ $240,000</div>
+        <div>$3,200,000 ÷ $240,000 ＝ <b>13.33 次</b></div>
+        <div style="height:.5rem"></div>
+        <div><b>(二) 存貨週轉率</b></div>
+        <div>平均存貨：($520,000 ＋ $560,000) ÷ 2 ＝ $540,000</div>
+        <div>$1,960,000 ÷ $540,000 ＝ <b>3.63 次</b></div>
+        <div style="height:.5rem"></div>
+        <div><b>(三) 淨營業週期</b></div>
+        <div>平均應付帳款：($120,000 ＋ $380,000) ÷ 2 ＝ $250,000；應付帳款週轉率 $2,000,000 ÷ $250,000 ＝ 8 次</div>
+        <div>平均銷售期間 365 ÷ 3.63 ＝ 100.55 天</div>
+        <div>平均收款期間 365 ÷ 13.33 ＝ 27.38 天</div>
+        <div>平均付款期間 365 ÷ 8 ＝ 45.63 天</div>
+        <div>100.55 ＋ 27.38 － 45.63 ＝ <b>82.30 天</b></div>
+        <div style="height:.5rem"></div>
+        <div><b>(四) 總資產報酬率</b></div>
+        <div>平均總資產：($2,460,000 ＋ $2,800,000) ÷ 2 ＝ $2,630,000</div>
+        <div>[$481,400 ＋ $20,000 ×（1－17%）] ÷ $2,630,000 ＝ $498,000 ÷ $2,630,000 ＝ <b>18.94%</b></div>
+        <div style="height:.5rem"></div>
+        <div><b>(五) 利息保障倍數</b></div>
+        <div>息稅前盈餘：$580,000 ＋ $20,000 ＝ $600,000</div>
+        <div>$600,000 ÷ $20,000 ＝ <b>30 倍</b></div>
+        <div style="height:.5rem"></div>
+        <div><b>(六) 本益比</b></div>
+        <div>流通股數：$1,200,000 ÷ $10 ＝ 120,000 股；每股盈餘 $481,400 ÷ 120,000 ＝ $4.01</div>
+        <div>$40 ÷ $4.01 ＝ <b>9.98</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 9 選擇題 ═══ -->
+<section id="s9">
+  <div class="sec-head"><h2>九、選擇題練習</h2><span class="tag">點選作答，即時判分</span></div>
+  <div class="qbank" id="qbank"></div>
+</section>
+
+<!-- ═══ 10 計算題 ═══ -->
+<section id="s10">
+  <div class="sec-head"><h2>十、計算題練習</h2><span class="tag">先算再對答案</span></div>
+
+  <div class="q">
+    <div class="q-head"><span class="q-no">壹</span><div class="q-stem"><b>加權平均資本額與三段式分配</b></div></div>
+    <div class="q-stem measure">
+      <p>甲、乙合夥經營。X8 年初資本額分別為 $240,000 與 $180,000。甲於 4/1 增資 $60,000，乙於 10/1 提取 $30,000，乙於 12/20 代墊運費 $3,000。合夥契約約定：先給甲君薪資 $150,000、乙君薪資 $90,000，再按<b>加權平均資本額</b>計息 8%，餘額按 3 : 2 分配。</p>
+      <p>試作：(一) 計算兩人加權平均資本額；(二) 淨利為 $420,000 時之損益分配表；(三) 淨利為 $200,000 時之損益分配表。</p>
+    </div>
+    <button class="reveal" type="button">顯示解答</button>
+    <div class="sol" hidden>
+      <div class="h">解答</div>
+      <div class="calcsteps">
+        <div><b>(一)</b> 甲：$240,000 × 3/12 ＋ $300,000 × 9/12 ＝ $60,000 ＋ $225,000 ＝ <b>$285,000</b></div>
+        <div>乙：$180,000 × 9/12 ＋ $150,000 × 3/12 ＝ $135,000 ＋ $37,500 ＝ <b>$172,500</b></div>
+        <div style="color:var(--redink)">12/20 代墊運費 $3,000 不計入平均資本額。</div>
+        <div>利息：甲 $285,000 × 8% ＝ $22,800；乙 $172,500 × 8% ＝ $13,800；合計 $36,600</div>
+        <div style="height:.5rem"></div>
+        <div><b>(二) 淨利 $420,000</b></div>
+        <div>薪資合計 $240,000 → 未分配 $180,000</div>
+        <div>利息合計 $36,600 → 未分配 $143,400</div>
+        <div>餘額：甲 $143,400 × 3/5 ＝ $86,040；乙 × 2/5 ＝ $57,360</div>
+        <div>甲合計 $150,000 ＋ $22,800 ＋ $86,040 ＝ <b>$258,840</b></div>
+        <div>乙合計 $90,000 ＋ $13,800 ＋ $57,360 ＝ <b>$161,160</b>　（驗算：合計 $420,000 ✓）</div>
+        <div style="height:.5rem"></div>
+        <div><b>(三) 淨利 $200,000</b></div>
+        <div>$200,000 － $240,000 － $36,600 ＝ 餘額 <b>($76,600)</b></div>
+        <div>甲 ($76,600) × 3/5 ＝ ($45,960)；乙 × 2/5 ＝ ($30,640)</div>
+        <div>甲合計 $150,000 ＋ $22,800 － $45,960 ＝ <b>$126,840</b></div>
+        <div>乙合計 $90,000 ＋ $13,800 － $30,640 ＝ <b>$73,160</b>　（驗算：合計 $200,000 ✓）</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><span class="q-no">貳</span><div class="q-stem"><b>入夥三情境分錄</b></div></div>
+    <div class="q-stem measure">
+      <p>B 商店合夥人甲、乙資本餘額分別為 $600,000 與 $400,000，損益分配比例 3 : 2。丁君擬入夥，試就下列三種獨立情況分別作分錄：</p>
+      <p>(一) 丁以現金 $300,000 向甲君購買其二分之一權益。<br>
+         (二) 丁投入現金 $500,000，取得合夥 40% 權益。<br>
+         (三) 丁投入現金 $200,000，取得合夥 25% 權益。</p>
+    </div>
+    <button class="reveal" type="button">顯示解答</button>
+    <div class="sol" hidden>
+      <div class="h">解答</div>
+      <div class="calcsteps">
+        <div><b>(一)</b> 新舊合夥人間之交易，不影響合夥資產與權益總額。</div>
+        <div>甲君資本 $600,000 × 1/2 ＝ $300,000</div>
+        <div>借：甲君資本 300,000　／　貸：丁君資本 300,000</div>
+        <div style="color:var(--redink)">丁支付之 $300,000 不入合夥帳。</div>
+        <div style="height:.6rem"></div>
+        <div><b>(二)</b> 丁資本：($600,000 ＋ $400,000 ＋ $500,000) × 40% ＝ $600,000 &gt; 投入 $500,000</div>
+        <div>紅利 $100,000 由舊合夥人給丁，按 3 : 2 減少資本：甲 $60,000、乙 $40,000</div>
+        <div>借：現金 500,000；甲君資本 60,000；乙君資本 40,000　／　貸：丁君資本 600,000</div>
+        <div style="height:.6rem"></div>
+        <div><b>(三)</b> 丁資本：($600,000 ＋ $400,000 ＋ $200,000) × 25% ＝ $300,000 &gt; 投入 $200,000</div>
+        <div>紅利 $100,000 由舊合夥人給丁：甲 $60,000、乙 $40,000</div>
+        <div>借：現金 200,000；甲君資本 60,000；乙君資本 40,000　／　貸：丁君資本 300,000</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><span class="q-no">參</span><div class="q-stem"><b>財務比率綜合計算</b></div></div>
+    <div class="q-stem measure">
+      <p>丙公司 X5 年度：銷貨收入 $2,600,000（均為賒銷）、銷貨退回 $100,000、銷貨折扣 $50,000；銷貨成本 $1,500,000；本期進貨 $1,560,000（均為賒購）；利息費用 $50,000；稅前淨利 $450,000；所得稅率 20%。</p>
+      <p>期初：應收帳款 $260,000、存貨 $230,000、應付帳款 $180,000、資產總額 $3,400,000。<br>
+         期末：應收帳款 $240,000、存貨 $270,000、應付帳款 $210,000、資產總額 $3,800,000。</p>
+      <p>普通股 200,000 股流通在外，每股市價 $45。一年以 365 天計，四捨五入至小數第二位。</p>
+      <p>試計算：(一) 應收帳款週轉率　(二) 存貨週轉率　(三) 淨營業週期　(四) 總資產報酬率　(五) 利息保障倍數　(六) 每股盈餘與本益比。</p>
+    </div>
+    <button class="reveal" type="button">顯示解答</button>
+    <div class="sol" hidden>
+      <div class="h">解答</div>
+      <div class="calcsteps">
+        <div>賒銷淨額：$2,600,000 － $100,000 － $50,000 ＝ $2,450,000</div>
+        <div>本期淨利：$450,000 ×（1 － 20%）＝ $360,000</div>
+        <div style="height:.5rem"></div>
+        <div><b>(一)</b> 平均應收帳款 ($260,000 ＋ $240,000) ÷ 2 ＝ $250,000</div>
+        <div>　　$2,450,000 ÷ $250,000 ＝ <b>9.80 次</b></div>
+        <div><b>(二)</b> 平均存貨 ($230,000 ＋ $270,000) ÷ 2 ＝ $250,000</div>
+        <div>　　$1,500,000 ÷ $250,000 ＝ <b>6.00 次</b></div>
+        <div><b>(三)</b> 平均應付帳款 ($180,000 ＋ $210,000) ÷ 2 ＝ $195,000；應付帳款週轉率 $1,560,000 ÷ $195,000 ＝ 8 次</div>
+        <div>　　銷售期間 365 ÷ 6 ＝ 60.83 天；收款期間 365 ÷ 9.8 ＝ 37.24 天；付款期間 365 ÷ 8 ＝ 45.63 天</div>
+        <div>　　60.83 ＋ 37.24 － 45.63 ＝ <b>52.44 天</b></div>
+        <div><b>(四)</b> 平均總資產 ($3,400,000 ＋ $3,800,000) ÷ 2 ＝ $3,600,000</div>
+        <div>　　[$360,000 ＋ $50,000 × 0.8] ÷ $3,600,000 ＝ $400,000 ÷ $3,600,000 ＝ <b>11.11%</b></div>
+        <div><b>(五)</b> 息稅前盈餘 $450,000 ＋ $50,000 ＝ $500,000；$500,000 ÷ $50,000 ＝ <b>10 倍</b></div>
+        <div><b>(六)</b> 每股盈餘 $360,000 ÷ 200,000 股 ＝ $1.80；本益比 $45 ÷ $1.80 ＝ <b>25.00</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 11 易錯 ═══ -->
+<section id="s11">
+  <div class="sec-head"><h2>十一、進考場前最後十條</h2><span class="tag">易錯清單</span></div>
+  <div class="cols measure">
+    <div>
+      <ol>
+        <li>合夥契約<b>未約定</b>損益比例 → 按<b>出資額</b>比例分配。</li>
+        <li>資本額比例的「最合理」方式 → <b>加權平均</b>。</li>
+        <li>代墊費用、暫付款<b>不影響</b>加權平均資本額。</li>
+        <li>三段式分配：薪資 → 利息 → 餘額，<b>餘額為負也照分</b>。</li>
+        <li>向舊合夥人<b>購買</b>權益 → 合夥資產、負債、權益總額<b>全部不變</b>。</li>
+      </ol>
+    </div>
+    <div>
+      <ol start="6">
+        <li>投入新資本：<b>取得 &lt; 投入 → 紅利給舊；取得 &gt; 投入 → 紅利給新。</b></li>
+        <li>退夥：<b>取回 &gt; 資本 → 其他人給紅利；取回 &lt; 資本 → 退夥人給紅利。</b></li>
+        <li>分攤紅利用<b>相對</b>損益比，分母是剩餘合夥人比例合計。</li>
+        <li>存貨週轉率分子是<b>銷貨成本</b>；應付帳款週轉率分子是<b>進貨</b>。</li>
+        <li>總資產報酬率的利息費用要<b>乘（1－稅率）</b>再加回。</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="scorebar" id="scorebar">
+  <span>選擇題進度</span>
+  <b><span id="sc-done">0</span> / <span id="sc-total">0</span></b>
+  <span>答對 <b id="sc-right">0</b> 題</span>
+  <button type="button" id="sc-reset">重新作答</button>
+</div>
+
+<footer class="wrap">
+  <p>Day 09｜獨資、合夥及財務報表分析．單頁複習講義</p>
+  <p>本頁為個人複習用整理，數字依講義與歷屆試題核算。列印時解答會自動全部展開。</p>
+</footer>
+
+<script>
+/* ════════ 紅利計算器 ════════ */
+(function(){
+  const $=id=>document.getElementById(id);
+  const out=$('calc-out');
+  let mode='in';
+
+  const fmt=n=>{
+    if(!isFinite(n)) return '—';
+    const s=Math.abs(n).toLocaleString('en-US',{maximumFractionDigits:2});
+    return (n<0?'('+s+')':'$'+s);
+  };
+  const parseRatio=str=>str.split(/[,，\s:：]+/).map(Number).filter(v=>isFinite(v)&&v>0);
+
+  function setMode(m){
+    mode=m;
+    $('mode-in').setAttribute('aria-pressed',m==='in');
+    $('mode-out').setAttribute('aria-pressed',m==='out');
+    $('fields-in').hidden=(m!=='in');
+    $('fields-out').hidden=(m!=='out');
+    calc();
+  }
+
+  function calc(){
+    if(mode==='in'){
+      const old=+$('i-old').value, inv=+$('i-inv').value, pct=+$('i-pct').value/100;
+      const r=parseRatio($('i-ratio').value);
+      if(!isFinite(old)||!isFinite(inv)||!(pct>0)||pct>=1||!r.length){
+        out.innerHTML='<p class="verdict none">請確認輸入：權益須介於 0% 與 100% 之間，損益比至少一個正數。</p>';return;
+      }
+      const total=old+inv, cap=total*pct, diff=cap-inv, sum=r.reduce((a,b)=>a+b,0);
+      let html='<div class="calcsteps">';
+      html+='<div>合夥淨資產總額：'+fmt(old)+' ＋ '+fmt(inv)+' ＝ <b>'+fmt(total)+'</b></div>';
+      html+='<div>新合夥人資本：'+fmt(total)+' × '+($('i-pct').value)+'% ＝ <b>'+fmt(cap)+'</b></div>';
+      html+='</div>';
+      if(Math.abs(diff)<0.005){
+        out.innerHTML='<p class="verdict none">取得權益等於投入金額，無紅利。</p>'+html+
+          '<div class="calcsteps"><div>借：現金 '+fmt(inv)+'　／　貸：新合夥人資本 '+fmt(cap)+'</div></div>';
+        return;
+      }
+      const toOld = diff<0;
+      const bonus=Math.abs(diff);
+      let lines='<div class="calcsteps"><div>紅利金額：'+fmt(bonus)+'，按舊合夥人損益比 '+r.join(' : ')+' 分配</div>';
+      r.forEach((v,i)=>{
+        lines+='<div>　舊合夥人 '+(i+1)+'：'+fmt(bonus)+' × '+v+'/'+sum+' ＝ <b>'+fmt(bonus*v/sum)+'</b>'+(toOld?'（資本增加）':'（資本減少）')+'</div>';
+      });
+      lines+='</div>';
+      out.innerHTML='<p class="verdict '+(toOld?'to-old':'to-new')+'">'+
+        (toOld?'取得權益 &lt; 投入金額 → 紅利給<b>舊</b>合夥人':'取得權益 &gt; 投入金額 → 紅利給<b>新</b>合夥人')+
+        '</p>'+html+lines;
+    }else{
+      const cap=+$('o-cap').value, cash=+$('o-cash').value;
+      const r=parseRatio($('o-ratio').value);
+      if(!isFinite(cap)||!isFinite(cash)||!r.length){
+        out.innerHTML='<p class="verdict none">請確認輸入：金額須為數字，損益比至少一個正數。</p>';return;
+      }
+      const diff=cash-cap, sum=r.reduce((a,b)=>a+b,0);
+      let html='<div class="calcsteps"><div>退夥人資本餘額：<b>'+fmt(cap)+'</b>　｜　取回淨資產：<b>'+fmt(cash)+'</b></div></div>';
+      if(Math.abs(diff)<0.005){
+        out.innerHTML='<p class="verdict none">取回金額等於資本餘額，無紅利。</p>'+html+
+          '<div class="calcsteps"><div>借：退夥人資本 '+fmt(cap)+'　／　貸：現金 '+fmt(cash)+'</div></div>';
+        return;
+      }
+      const toLeaver = diff>0;
+      const bonus=Math.abs(diff);
+      let lines='<div class="calcsteps"><div>紅利金額：'+fmt(bonus)+'，按其餘合夥人<b>相對</b>損益比 '+r.join(' : ')+'（分母 '+sum+'）分配</div>';
+      r.forEach((v,i)=>{
+        lines+='<div>　其餘合夥人 '+(i+1)+'：'+fmt(bonus)+' × '+v+'/'+sum+' ＝ <b>'+fmt(bonus*v/sum)+'</b>'+(toLeaver?'（資本減少）':'（資本增加）')+'</div>';
+      });
+      lines+='</div>';
+      out.innerHTML='<p class="verdict '+(toLeaver?'to-new':'to-old')+'">'+
+        (toLeaver?'取回 &gt; 資本餘額 → 其餘合夥人<b>給</b>退夥人紅利':'取回 &lt; 資本餘額 → 退夥人<b>給</b>其餘合夥人紅利')+
+        '</p>'+html+lines;
+    }
+  }
+
+  $('mode-in').addEventListener('click',()=>setMode('in'));
+  $('mode-out').addEventListener('click',()=>setMode('out'));
+  document.querySelectorAll('#fields-in input,#fields-out input').forEach(el=>el.addEventListener('input',calc));
+  calc();
+})();
+
+/* ════════ 選擇題 ════════ */
+const QUESTIONS=[
+ {src:'114 考題',
+  stem:'甲公司本年度的銷貨收入與去年相當，但期末應收帳款與存貨均大幅增加。根據財務報表分析基本原則，下列哪一項最合理地解釋這一情況？',
+  opts:['公司收現能力提升，且銷貨暢旺造成庫存不足',
+        '公司現況變壞，且存貨周轉速度下降',
+        '公司提高銷貨價格，導致應收帳款與庫存增加',
+        '公司應收帳款與存貨同時增加，代表獲利穩定且現金流改善'],
+  ans:1,
+  sol:'銷貨收入與去年相當但期末應收帳款大幅增加，代表<b>收現速度變慢</b>；銷貨收入相當但期末存貨大幅增加，代表<b>存貨週轉速度下降</b>。兩者都是惡化訊號，選 (B)。'},
+
+ {src:'112 考題',
+  stem:'甲公司 X1 年的銷貨毛利率 40%、淨利率 20%、資產報酬率 10%；X1 年初存貨 $77,750、應收帳款 $106,000；X1 年底存貨 $70,750、應收帳款 $114,000、資產總額 $2,016,000；X1 年間銷貨收入 $1,050,000、銷貨折扣 $20,000、銷貨運費 $12,000、銷貨折讓 $40,000。均為賒銷，一年 365 天，四捨五入至小數點第二位。甲公司 X1 年的營業週期為多少天？',
+  opts:['81.26 天','86.19 天','88.18 天','88.23 天'],
+  ans:1,
+  sol:'銷貨淨額 ＝ $1,050,000 － $20,000 － $40,000 ＝ $990,000（<span style="color:var(--redink)">銷貨運費是費用，不減銷貨</span>）。<br>銷貨成本 ＝ $990,000 ×（1－40%）＝ $594,000；平均存貨 ($77,750＋$70,750)÷2 ＝ $74,250；存貨週轉率 ＝ 8。<br>平均應收帳款 ($106,000＋$114,000)÷2 ＝ $110,000；應收帳款週轉率 ＝ $990,000 ÷ $110,000 ＝ 9。<br>營業週期 ＝ 365÷8 ＋ 365÷9 ＝ 45.63 ＋ 40.56 ＝ <b>86.19 天</b>。'},
+
+ {src:'112 考題',
+  stem:'承上題，甲公司 X1 年初的資產總額為多少金額？',
+  opts:['$1,896,000','$1,932,000','$1,944,000','$2,184,000'],
+  ans:2,
+  sol:'本期純益 ＝ $990,000 × 20% ＝ $198,000。<br>資產報酬率：$198,000 ÷ [(期初資產 ＋ $2,016,000) ÷ 2] ＝ 10% → 平均資產 ＝ $1,980,000。<br>期初資產 ＝ $1,980,000 × 2 － $2,016,000 ＝ <b>$1,944,000</b>。'},
+
+ {src:'106 記帳士改編',
+  stem:'馬、陳、李三人合夥，資本額分別為 $370,000、$332,000、$128,000，損益比 50% : 40% : 10%。蔡君以現金 $190,000 投入合夥組織，取得新合夥組織 20% 之權益及損益分配權。依紅利法計算，陳君之資本額為何？',
+  opts:['$326,400','$332,000','$337,600','$340,000'],
+  ans:0,
+  sol:'蔡君資本 ＝ ($370,000＋$332,000＋$128,000＋$190,000) × 20% ＝ $204,000 &gt; 投入 $190,000。<br>紅利 $14,000 由舊合夥人給蔡君，陳君分擔 $14,000 × 40% ＝ $5,600。<br>陳君資本 ＝ $332,000 － $5,600 ＝ <b>$326,400</b>。'},
+
+ {src:'觀念題',
+  stem:'新合夥人以現金向舊合夥人購買其在合夥組織之權益，下列敘述何者正確？',
+  opts:['合夥組織之資產增加，權益總額不變',
+        '合夥組織之資產、負債及權益總額均不受影響',
+        '成交價高於帳面權益時，差額應認列為商譽',
+        '成交價低於帳面權益時，差額應按舊合夥人損益比分配'],
+  ans:1,
+  sol:'此為<b>新舊合夥人間之交易</b>，現金流向舊合夥人個人而非合夥組織，故不論成交金額若干，均<b>不影響合夥組織之資產、負債與權益總額</b>；會計處理僅需將舊合夥人資本轉列新合夥人名下。'},
+
+ {src:'觀念題',
+  stem:'合夥契約中若未規定損益分配比例，則應如何分配？',
+  opts:['按合夥人人數平均分配','按各合夥人出資額之比例分配','按加權平均資本額比例分配','由執行業務之合夥人決定'],
+  ans:1,
+  sol:'合夥契約<b>未約定</b>損益分配比例者，按各合夥人<b>出資額</b>之比例分配。注意與「依資本額比例分配時，最合理的方式為加權平均」是兩個不同的問題。'},
+
+ {src:'觀念題',
+  stem:'下列關於獨資組織之敘述，何者錯誤？',
+  opts:['非獨立之法律個體','業主對企業債務負無限清償責任','一切對外事務以業主名義為之','非獨立之會計個體，帳務可與業主個人財產合併'],
+  ans:3,
+  sol:'獨資雖<b>非法律個體</b>，但仍是<b>獨立的會計個體</b>，帳務必須與業主個人財產分開，這是實體慣例的直接應用。(D) 為錯誤敘述。'},
+
+ {src:'計算題',
+  stem:'甲、乙合夥，資本額分別為 $300,000、$200,000，損益比 3 : 2。丙投入現金 $250,000 取得合夥 40% 權益。丙君之資本額及紅利歸屬為何？',
+  opts:['資本 $250,000，無紅利','資本 $300,000，舊合夥人給丙紅利 $50,000',
+        '資本 $250,000，丙給舊合夥人紅利 $50,000','資本 $300,000，丙給舊合夥人紅利 $50,000'],
+  ans:1,
+  sol:'丙資本 ＝ ($300,000＋$200,000＋$250,000) × 40% ＝ $300,000 &gt; 投入 $250,000。<br>取得權益大於投入，紅利 $50,000 由<b>舊合夥人給新合夥人</b>，按 3 : 2 減少資本：甲 $30,000、乙 $20,000。'},
+
+ {src:'計算題',
+  stem:'甲、乙、丙合夥資本額分別為 $400,000、$300,000、$300,000，損益比 5 : 3 : 2。丙君退夥取回現金 $260,000，則甲君資本額變為多少？',
+  opts:['$360,000','$375,000','$400,000','$425,000'],
+  ans:3,
+  sol:'取回 $260,000 &lt; 資本餘額 $300,000，差額 $40,000 為<b>退夥人給其餘合夥人之紅利</b>。<br>甲、乙<b>相對</b>損益比為 5 : 3（分母 8）：甲得 $40,000 × 5/8 ＝ $25,000。<br>甲君資本 ＝ $400,000 ＋ $25,000 ＝ <b>$425,000</b>。'},
+
+ {src:'公式題',
+  stem:'下列比率之計算，何者正確？',
+  opts:['存貨週轉率 ＝ 銷貨收入 ÷ 平均存貨',
+        '應付帳款週轉率 ＝ 銷貨成本 ÷ 平均應付帳款',
+        '應收帳款週轉率 ＝ 賒銷淨額 ÷ 平均應收帳款',
+        '總資產週轉率 ＝ 銷貨成本 ÷ 平均總資產'],
+  ans:2,
+  sol:'(A) 分子應為<b>銷貨成本</b>；(B) 分子應為<b>進貨</b>；(D) 分子應為<b>銷貨淨額</b>。只有 (C) 正確。這四個分子的區辨是本單元最高頻的送分／送死點。'},
+
+ {src:'公式題',
+  stem:'某公司流動比率 2.5、速動比率 1.2，流動負債 $400,000。則存貨、預付費用及待出售非流動資產合計為多少？',
+  opts:['$400,000','$480,000','$520,000','$560,000'],
+  ans:2,
+  sol:'流動資產 ＝ 2.5 × $400,000 ＝ $1,000,000；速動資產 ＝ 1.2 × $400,000 ＝ $480,000。<br>差額 ＝ $1,000,000 － $480,000 ＝ <b>$520,000</b>。<br>或直接：(2.5 － 1.2) × $400,000 ＝ $520,000。'},
+
+ {src:'公式題',
+  stem:'乙公司本期純益 $800,000、利息費用 $100,000、所得稅率 20%、平均總資產 $10,000,000。其總資產報酬率為何？',
+  opts:['8.00%','8.80%','9.00%','10.00%'],
+  ans:1,
+  sol:'總資產報酬率 ＝ [本期純益 ＋ 利息費用 ×（1－稅率）] ÷ 平均總資產<br>＝ [$800,000 ＋ $100,000 × 0.8] ÷ $10,000,000 ＝ $880,000 ÷ $10,000,000 ＝ <b>8.8%</b>。<br><span style="color:var(--redink)">選 (C) 9% 者是漏乘稅後係數，直接加回全額利息。</span>'},
+
+ {src:'公式題',
+  stem:'丙公司本期純益 $3,000,000、特別股股利 $200,000、流通在外普通股 600,000 股、每股市價 $56。其本益比約為多少？',
+  opts:['11.20','12.00','15.00','18.67'],
+  ans:1,
+  sol:'每股盈餘 ＝ ($3,000,000 － $200,000) ÷ 600,000 股 ＝ $4.67<br>本益比 ＝ $56 ÷ $4.67 ＝ <b>約 12.00</b>。<br><span style="color:var(--redink)">選 (A) 者是忘記扣除特別股股利。</span>'},
+
+ {src:'公式題',
+  stem:'下列何組比率互為倒數關係？',
+  opts:['流動比率與速動比率','負債比率與權益比率','本益比與投資報酬率','存貨週轉率與應收帳款週轉率'],
+  ans:2,
+  sol:'本益比 ＝ 每股市價 ÷ 每股盈餘；投資報酬率 ＝ 每股盈餘 ÷ 每股市價，兩者互為倒數。<br>另一組倒數關係是<b>本利比</b>（每股市價 ÷ 每股股利）與<b>現金股利收益率</b>（每股股利 ÷ 每股市價）。<br>(B) 負債比率 ＋ 權益比率 ＝ 1，是互補不是倒數。'},
+
+ {src:'公式題',
+  stem:'丁公司平均銷售期間 72 天、平均收款期間 45 天、平均付款期間 30 天。其營業週期與淨營業週期分別為多少天？',
+  opts:['117 天、87 天','87 天、117 天','102 天、72 天','147 天、117 天'],
+  ans:0,
+  sol:'營業週期 ＝ 平均銷售期間 ＋ 平均收款期間 ＝ 72 ＋ 45 ＝ <b>117 天</b>（<span style="color:var(--redink)">不減付款期間</span>）。<br>淨營業週期 ＝ 117 － 30 ＝ <b>87 天</b>。'}
+];
+
+(function(){
+  const bank=document.getElementById('qbank');
+  const letters=['(A)','(B)','(C)','(D)'];
+  const total=QUESTIONS.length;
+  let done=0,right=0;
+  document.getElementById('sc-total').textContent=total;
+
+  QUESTIONS.forEach((q,qi)=>{
+    const card=document.createElement('div');
+    card.className='q';
+    const head=document.createElement('div');
+    head.className='q-head';
+    head.innerHTML='<span class="q-no">'+(qi+1)+'</span><div class="q-stem">'+q.stem+'</div><span class="q-src">'+q.src+'</span>';
+    card.appendChild(head);
+
+    const ul=document.createElement('ul');
+    ul.className='opts';
+    q.opts.forEach((o,oi)=>{
+      const li=document.createElement('li');
+      const b=document.createElement('button');
+      b.type='button';
+      b.textContent=letters[oi]+' '+o;
+      b.addEventListener('click',()=>{
+        if(card.dataset.answered) return;
+        card.dataset.answered='1';
+        done++; if(oi===q.ans) right++;
+        [...ul.querySelectorAll('button')].forEach((x,xi)=>{
+          x.disabled=true;
+          if(xi===q.ans) x.classList.add('right');
+          else if(xi===oi) x.classList.add('wrong');
+        });
+        sol.hidden=false;
+        update();
+      });
+      li.appendChild(b); ul.appendChild(li);
+    });
+    card.appendChild(ul);
+
+    const sol=document.createElement('div');
+    sol.className='sol'; sol.hidden=true;
+    sol.innerHTML='<div class="h">解析｜答案 '+letters[q.ans]+'</div>'+q.sol;
+    card.appendChild(sol);
+
+    const rv=document.createElement('button');
+    rv.className='reveal'; rv.type='button'; rv.textContent='直接看解析';
+    rv.addEventListener('click',()=>{sol.hidden=!sol.hidden; rv.textContent=sol.hidden?'直接看解析':'收合解析';});
+    card.appendChild(rv);
+
+    bank.appendChild(card);
+  });
+
+  function update(){
+    document.getElementById('sc-done').textContent=done;
+    document.getElementById('sc-right').textContent=right;
+  }
+  document.getElementById('sc-reset').addEventListener('click',()=>{
+    done=0;right=0;update();
+    document.querySelectorAll('#qbank .q').forEach(c=>{
+      delete c.dataset.answered;
+      c.querySelectorAll('.opts button').forEach(b=>{b.disabled=false;b.classList.remove('right','wrong');});
+      const s=c.querySelector('.sol'); s.hidden=true;
+      const r=c.querySelector('.reveal'); r.textContent='直接看解析';
+    });
+    document.getElementById('s9').scrollIntoView();
+  });
+})();
+
+/* ════════ 計算題解答展開 ════════ */
+document.querySelectorAll('#s10 .reveal').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const sol=btn.nextElementSibling;
+    sol.hidden=!sol.hidden;
+    btn.textContent=sol.hidden?'顯示解答':'收合解答';
+  });
+});
+</script>
+</body>
+</html>
