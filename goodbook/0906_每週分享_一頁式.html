@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>0906 每週分享 · On昂跑2026 Q2深度解析×瑞士精品邏輯×撥開財務迷霧×運動精品化終局</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --lm:#365314;--lm2:#f7fee7;--lm3:#d9f99d;--lm4:#65a30d;--lm5:#a3e635;
+  --co:#7c2d12;--co2:#fff7ed;--co3:#fed7aa;--co4:#ea580c;--co5:#fb923c;
+  --sk:#1e3a5f;--sk2:#eff6ff;--sk3:#bfdbfe;--sk4:#2563eb;--sk5:#60a5fa;
+  --vi:#4c1d95;--vi2:#f5f3ff;--vi3:#c4b5fd;--vi4:#7c3aed;
+  --sl:#1e293b;--sl2:#f8fafc;--sl3:#cbd5e1;--sl4:#475569;
+  --night:#06100a;--night2:#0a1810;
+  --bg:#f4f9f1;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--night);line-height:1.7}
+
+.page-header{background:linear-gradient(150deg,#06100a,#0a1810,#040c06,#080e08);padding:36px 50px 28px;position:relative;overflow:hidden;border-bottom:3px solid var(--lm4)}
+.ph-g1{position:absolute;top:-60px;right:-40px;width:280px;height:280px;background:radial-gradient(circle,rgba(163,230,53,.18),transparent 65%);pointer-events:none}
+.ph-g2{position:absolute;bottom:-30px;left:-20px;width:200px;height:200px;background:radial-gradient(circle,rgba(251,146,60,.1),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(163,230,53,.55);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(14px,2.1vw,21px);font-weight:900;color:#fff;line-height:1.28;margin-bottom:4px}
+.ph-title em{color:var(--lm5);font-style:normal}
+.ph-title em2{color:var(--co5);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.38);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mc{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(163,230,53,.14);color:var(--lm5);border:1px solid rgba(163,230,53,.28)}
+.mc-o{background:rgba(251,146,60,.12);color:var(--co5);border-color:rgba(251,146,60,.28)}
+.mc-b{background:rgba(96,165,250,.11);color:var(--sk5);border-color:rgba(96,165,250,.25)}
+.mc-v{background:rgba(196,181,253,.12);color:var(--vi3);border-color:rgba(196,181,253,.28)}
+
+.container{max-width:1100px;margin:0 auto;padding:26px 26px}
+.section{margin-bottom:22px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--lm4);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--night);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--lm3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-32{display:grid;grid-template-columns:1.3fr 1fr;gap:13px}
+.grid-23{display:grid;grid-template-columns:1fr 1.4fr;gap:13px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-32,.grid-23{grid-template-columns:1fr}}
+
+.card-lm{background:var(--lm2);border:1.5px solid var(--lm3);border-radius:10px;padding:14px}
+.card-co{background:var(--co2);border:1.5px solid var(--co3);border-radius:10px;padding:14px}
+.card-sk{background:var(--sk2);border:1.5px solid var(--sk3);border-radius:10px;padding:14px}
+.card-vi{background:var(--vi2);border:1.5px solid var(--vi3);border-radius:10px;padding:14px}
+.card-sl{background:var(--sl2);border:1.5px solid var(--sl3);border-radius:10px;padding:14px}
+.card-dark{background:var(--night);border:none;border-radius:10px;padding:14px}
+.card-lm h3,.card-co h3,.card-sk h3,.card-vi h3,.card-sl h3,.card-dark h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px}
+.card-lm h3{color:var(--lm)}
+.card-co h3{color:var(--co)}
+.card-sk h3{color:var(--sk)}
+.card-vi h3{color:var(--vi)}
+.card-sl h3{color:var(--sl)}
+.card-dark h3{color:var(--lm5)}
+.card-lm p,.card-lm li{color:var(--lm);font-size:12.5px;line-height:1.85}
+.card-co p,.card-co li{color:var(--co);font-size:12.5px;line-height:1.85}
+.card-sk p,.card-sk li{color:var(--sk);font-size:12.5px;line-height:1.85}
+.card-vi p,.card-vi li{color:var(--vi);font-size:12.5px;line-height:1.85}
+.card-sl p,.card-sl li{color:var(--sl);font-size:12.5px;line-height:1.85}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.82);font-size:12.5px;line-height:1.85}
+ul{padding-left:15px}
+ul li{margin-bottom:3px}
+
+/* Quote */
+.quote{background:linear-gradient(135deg,var(--night),var(--night2));border-radius:10px;padding:14px 20px;position:relative;overflow:hidden;margin-bottom:20px}
+.qm{font-family:'Playfair Display',serif;font-size:72px;color:rgba(163,230,53,.06);position:absolute;top:-10px;left:8px;line-height:1}
+.qt{font-size:13px;color:rgba(255,255,255,.88);line-height:1.65;position:relative;z-index:1}
+.qt em{color:var(--lm5);font-style:normal;font-weight:700}
+.qt em2{color:var(--co5);font-style:normal;font-weight:700}
+.qt em3{color:var(--vi3);font-style:normal;font-weight:700}
+.qs{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.35);margin-top:6px;position:relative;z-index:1}
+
+/* 大數字 KPI */
+.kpi-row{display:flex;flex-wrap:wrap;gap:8px;margin:9px 0}
+.kpi{display:flex;flex-direction:column;align-items:center;border-radius:8px;padding:8px 14px;flex:1;min-width:90px}
+.kpi-v{font-family:'DM Mono',monospace;font-size:18px;font-weight:700;line-height:1}
+.kpi-l{font-size:10.5px;margin-top:3px}
+.kpi-lm{background:rgba(54,83,20,.1);border:1.5px solid var(--lm3)}
+.kpi-lm .kpi-v{color:var(--lm4)}
+.kpi-lm .kpi-l{color:var(--lm)}
+.kpi-co{background:rgba(234,88,12,.08);border:1.5px solid var(--co3)}
+.kpi-co .kpi-v{color:var(--co4)}
+.kpi-co .kpi-l{color:var(--co)}
+.kpi-sk{background:rgba(37,99,235,.08);border:1.5px solid var(--sk3)}
+.kpi-sk .kpi-v{color:var(--sk4)}
+.kpi-sk .kpi-l{color:var(--sk)}
+.kpi-ro{background:rgba(220,38,38,.08);border:1.5px dashed #fecaca}
+.kpi-ro .kpi-v{color:#dc2626}
+.kpi-ro .kpi-l{color:#991b1b}
+
+/* 品牌矩陣表 */
+.brand-table{width:100%;border-collapse:collapse;font-size:12px}
+.brand-table th{padding:7px 9px;text-align:left;font-size:11px;font-weight:700}
+.brand-table td{padding:7px 9px;border-top:1px dashed rgba(101,163,13,.15);vertical-align:top}
+
+/* 迷霧解碼 */
+.fog-step{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px dashed rgba(101,163,13,.12)}
+.fog-step:last-child{border-bottom:none}
+.fog-n{font-family:'DM Mono',monospace;font-size:11px;font-weight:700;background:var(--lm4);color:#fff;border-radius:4px;padding:2px 7px;flex-shrink:0;margin-top:2px}
+.fog-body{font-size:12.5px;line-height:1.8;flex:1}
+
+/* 場景卡 */
+.scene{background:rgba(54,83,20,.06);border-left:3px solid var(--lm4);border-radius:0 8px 8px 0;padding:9px 12px;margin:6px 0}
+
+.page-footer{background:var(--night);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--lm5)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-g1"></div>
+  <div class="ph-g2"></div>
+  <div class="ph-eyebrow">0906 · 每週分享 · 蕭啟漢 Rock · On昂跑2026 Q2財報深度解析×瑞士精品邏輯×撥開財務迷霧</div>
+  <div class="ph-title"><em>「不折不扣，才是最貴的品牌護城河」</em>——<br>On昂跑 2026 Q2：毛利率65.4%×<em2>淨利3.56倍迷霧×真實28.7%本業韌性</em2>×瑞士精品邏輯×Nike崩潰對照×運動精品化終局</div>
+  <div class="ph-sub">三場Hyrox×澀谷馬拉松店×微風南山3公里試跑×DTC直營護城河 × 毛利65.4%（非線性：營收+13.5% vs 成本+2.1%）× 1.399億CHF外幣損失迷霧×真實28.7% × Lululemon vs Nike對照 × EPS最大化展望 × Hyrox/LVMH運動精品化終局</div>
+  <div class="ph-meta">
+    <span class="mc">2026.09.06</span>
+    <span class="mc">每週分享</span>
+    <span class="mc mc-o">On昂跑×瑞士精品邏輯</span>
+    <span class="mc mc-b">毛利65.4%×DTC×定價紀律</span>
+    <span class="mc mc-v">財務迷霧×品牌矩陣×Hyrox/LVMH</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 金句 -->
+  <div class="quote">
+    <div class="qm">"</div>
+    <div class="qt">「真正的商業洞察，絕對不是坐在冷氣房裡看數字就能產生的。當你穿著On跑了3公里，身體記住那個<em>雲端腳感</em>，你就理解了65.4%毛利率的底層邏輯——那不是成本管理，是<em2>消費者心甘情願被吃掉消費者剩餘</em2>。<br>而當媒體寫著「淨利暴增3.56倍」，專業分析師的第一反應是：你在衝三小？<em3>去年1.399億瑞郎的外幣黑洞，才是這個數字的真相。</em3>」</div>
+    <div class="qs">Rock 蕭啟漢 · 0906 每週分享 · On昂跑2026 Q2深度解析</div>
+  </div>
+
+  <!-- SECTION 1: 微觀體悟 + 損益表解密 -->
+  <div class="section">
+    <div class="section-label">Part 1 · 微觀體悟×損益表解密 · 從三場Hyrox到65.4%毛利率的底層邏輯</div>
+    <div class="section-title">財務人的第一手驗證：在澀谷與微風南山「看穿」On的品牌定力</div>
+    <div class="grid-32">
+
+      <!-- 左側: 微觀體悟 -->
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <div class="card-lm">
+          <h3>🏃 三場Hyrox×兩個現場：微觀驗證宏觀財務</h3>
+          <div class="scene">
+            <div style="font-size:11.5px;font-weight:700;color:var(--lm4);margin-bottom:3px">📍 日本澀谷馬拉松店（2026年8月）</div>
+            <div style="font-size:12.5px;color:var(--lm);line-height:1.75">外國遊客與資深跑者絡繹不絕，半數人指名試穿On。日圓貶值＋退稅後有匯差——但On<strong>沒有因此降價，連一折優惠都沒有</strong>。消費者唯一能享受的「便宜」，是匯率給的，不是品牌讓步的。<br>→ <strong style="color:var(--lm4)">全球定價紀律：守住品牌尊嚴，不讓匯率波動演變成削價競爭的破口。</strong></div>
+          </div>
+          <div class="scene">
+            <div style="font-size:11.5px;font-weight:700;color:var(--lm4);margin-bottom:3px">📍 台北微風南山Cloudmonster 3快閃（試跑3公里）</div>
+            <div style="font-size:12.5px;color:var(--lm);line-height:1.75">換上新鞋，打開運動APP跑完3公里，才換取品牌小禮物。現場定價<strong>NT$6,280，一毛錢都不折。</strong><br>學生問：「跑完有折價券嗎？」→ 完全沒有。<br>→ <strong style="color:var(--lm4)">體驗吃掉消費者剩餘：讓你的身體記住腳感，再讓你說服自己「值得」。</strong></div>
+          </div>
+          <div style="background:rgba(54,83,20,.09);border-radius:7px;padding:9px 12px;margin-top:3px;font-size:12.5px;color:var(--lm);line-height:1.75">
+            最終：Rock透過朋友VIP生日七折，一口氣包色買了深色×白色兩雙。這張「七折」之所以珍貴，正因On從不隨意打折——<strong>稀缺感讓折扣券本身也成了奢侈品。</strong><br>補充：<em style="font-style:normal;color:var(--lm4)">「跑者是防水的（Runners are waterproof）」</em>——無論晴雨，跑者都出門，所以需要黑白兩雙。
+          </div>
+        </div>
+
+        <div class="card-co">
+          <h3>💡 So What? 微觀驗證宏觀的邏輯</h3>
+          <p>DTC直營通路策略 + 強大定價權（Pricing Power）→ 成功避開零售業最怕的「經銷商清庫存大賽」。當消費者在快閃店跑了3公里卻還甘願付原價，這就是<strong>品牌價值已超越產品本身</strong>。這種「不折」的紀律，直接支撐了損益表上的驚人毛利。</p>
+        </div>
+      </div>
+
+      <!-- 右側: 損益表 KPI -->
+      <div class="card-dark">
+        <h3>📊 2026 Q2 損益表：四個關鍵數字</h3>
+        <div class="kpi-row">
+          <div class="kpi kpi-lm">
+            <span class="kpi-v">65.4%</span>
+            <span class="kpi-l">毛利率<br>（去年61.5%）</span>
+          </div>
+          <div class="kpi kpi-co">
+            <span class="kpi-v">+13.5%</span>
+            <span class="kpi-l">營收成長YoY<br>（固定匯率）</span>
+          </div>
+          <div class="kpi kpi-lm" style="background:rgba(163,230,53,.08);">
+            <span class="kpi-v">+2.1%</span>
+            <span class="kpi-l">銷貨成本增幅<br>（vs 營收13.5%）</span>
+          </div>
+          <div class="kpi kpi-co" style="background:rgba(234,88,12,.12);">
+            <span class="kpi-v">+28.7%</span>
+            <span class="kpi-l">營業利益成長<br>（真實本業）</span>
+          </div>
+        </div>
+
+        <div style="background:rgba(163,230,53,.08);border-radius:8px;padding:10px 12px;margin:9px 0;border:1px solid rgba(163,230,53,.2)">
+          <div style="font-size:12px;font-weight:700;color:var(--lm5);margin-bottom:5px">🔑 最關鍵的非線性關係</div>
+          <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:7px;flex-wrap:wrap">
+            <div style="text-align:center;background:rgba(163,230,53,.15);border-radius:6px;padding:6px 14px">
+              <div style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--lm5)">+13.5%</div>
+              <div style="font-size:11px;color:rgba(255,255,255,.6)">營收成長</div>
+            </div>
+            <div style="font-size:20px;color:rgba(255,255,255,.2)">vs</div>
+            <div style="text-align:center;background:rgba(251,146,60,.12);border-radius:6px;padding:6px 14px">
+              <div style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--co5)">+2.1%</div>
+              <div style="font-size:11px;color:rgba(255,255,255,.6)">成本增幅</div>
+            </div>
+          </div>
+          <div style="font-size:12.5px;color:rgba(255,255,255,.82);line-height:1.75">
+            在一般企業，增加營收通常伴隨等比例的變動成本。On這個差距的唯一解釋：<strong style="color:var(--lm5)">它賣得更貴了，且賣得更多了——不是靠Cost Down，是靠定價權。</strong><br>
+            鞋類佔整體營收75.9%，依然守住NT$6,280+的高單價位階。這3.9個百分點的毛利躍進，是消費者對「瑞士工藝」的溢價買單。
+          </div>
+        </div>
+
+        <div style="background:rgba(163,230,53,.07);border-radius:7px;padding:9px 12px;font-size:12.5px;color:rgba(255,255,255,.8);line-height:1.75">
+          <strong style="color:var(--lm5)">DTC比例提升的財務邏輯：</strong><br>
+          透過直營把原本要給經銷商的30-40%利潤空間，<strong style="color:var(--co5)">牢牢守在自己口袋裡</strong>。在零售寒冬中，能擁有65.4%毛利率，就像擁有一層厚實防寒衣。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: 財務迷霧 + 品牌矩陣 -->
+  <div class="section">
+    <div class="section-label">Part 2 · 撥開財務迷霧×瑞士精品品牌矩陣 · 淨利3.56倍的虛與實×On vs 同業對照</div>
+    <div class="section-title">「你在衝三小？」——專業分析師拆解財報迷霧的三步驟</div>
+    <div class="grid-23">
+
+      <!-- 迷霧解碼 -->
+      <div class="card-lm">
+        <h3>🌫️ 淨利「暴增3.56倍」：四步拆解</h3>
+        <div style="display:flex;gap:8px;margin-bottom:9px;flex-wrap:wrap">
+          <div class="kpi kpi-ro" style="flex:1">
+            <span class="kpi-v" style="font-size:21px">×3.56</span>
+            <span class="kpi-l">GAAP淨利成長<br>（標題殺人）</span>
+          </div>
+          <div style="display:flex;align-items:center;color:var(--lm3);font-size:20px">≠</div>
+          <div class="kpi kpi-lm" style="flex:1">
+            <span class="kpi-v" style="font-size:21px">+28.7%</span>
+            <span class="kpi-l">營業利益成長<br>（本業真實）</span>
+          </div>
+        </div>
+
+        <div class="fog-step" style="padding-top:0">
+          <span class="fog-n">Step 1</span>
+          <div class="fog-body" style="color:var(--lm)">
+            <strong style="color:var(--lm4)">去年（2025 Q2）有1.399億瑞郎（CHF）外幣兌換損失</strong><br>
+            On以瑞士法郎記帳，去年上半年美元劇烈波動，產生巨額匯兌損失——這是「非經常性、不可控」的一次性事件。
+          </div>
+        </div>
+        <div class="fog-step">
+          <span class="fog-n">Step 2</span>
+          <div class="fog-body" style="color:var(--lm)">
+            <strong style="color:var(--lm4)">超低基期造成今年百分比誇張</strong><br>
+            去年數字被匯率「砸爛」後，今年回歸正常即顯現出356.5%。賣鞋又不是賣AI晶片，暴利式跳躍本身就是警訊。
+          </div>
+        </div>
+        <div class="fog-step">
+          <span class="fog-n">Step 3</span>
+          <div class="fog-body" style="color:var(--lm)">
+            <strong style="color:var(--lm4)">盯住營業利益（Operating Profit）才是真理</strong><br>
+            剔除匯率干擾後：+28.7%。這代表每賣出一雙鞋、一件運動服，都能穩定貢獻更多利潤——這才是核心肌肉。
+          </div>
+        </div>
+        <div class="fog-step">
+          <span class="fog-n">地緣</span>
+          <div class="fog-body" style="color:var(--lm)">
+            <strong style="color:var(--lm4)">現在做生意要看川普大的臉色</strong><br>
+            關稅不確定性使外幣兌換損失成為所有跨國企業的最大雜訊源，尤其瑞郎計價的On特別敏感。
+          </div>
+        </div>
+
+        <div style="background:rgba(54,83,20,.1);border-radius:7px;padding:9px 11px;margin-top:5px;font-size:12.5px;color:var(--lm);line-height:1.7">
+          ✅ <strong>分析師的結論</strong>：28.7%雖不如356%奪目，但這是長線資本市場願意給予高估值的真正基礎——健康、可持續、排除噪音後的「核心成長引擎」。
+        </div>
+      </div>
+
+      <!-- 品牌矩陣 -->
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <div class="card-dark">
+          <h3>🏆 瑞士精品邏輯 vs 同業品牌矩陣</h3>
+          <div style="font-size:11.5px;color:rgba(255,255,255,.45);margin-bottom:8px">瑞士品牌哲學：Rolex×百達翡麗從不追求規模，追求稀缺性與高淨值客群忠誠</div>
+          <table class="brand-table">
+            <tr style="background:rgba(163,230,53,.1)">
+              <th style="color:var(--lm5)">品牌</th>
+              <th style="color:var(--lm5)">營收成長</th>
+              <th style="color:var(--lm5)">現況</th>
+              <th style="color:var(--lm5)">核心威脅</th>
+            </tr>
+            <tr>
+              <td style="color:var(--lm5);font-weight:700">On昂跑</td>
+              <td style="color:var(--lm5);font-family:'DM Mono',monospace">約+20%</td>
+              <td style="color:rgba(255,255,255,.82);font-size:12px">精品化×不降價×維持稀缺性</td>
+              <td style="color:rgba(255,255,255,.6);font-size:11.5px">快速擴張中的品質控管</td>
+            </tr>
+            <tr>
+              <td style="color:var(--co5);font-weight:700">Lululemon</td>
+              <td style="color:#f87171;font-family:'DM Mono',monospace">-5%（衰退）</td>
+              <td style="color:rgba(255,255,255,.82);font-size:12px">門市過多→形象泛化→步入成熟期</td>
+              <td style="color:rgba(255,255,255,.6);font-size:11.5px">Alo Yoga瓜分高端</td>
+            </tr>
+            <tr>
+              <td style="color:#f87171;font-weight:700">Nike</td>
+              <td style="color:#f87171;font-family:'DM Mono',monospace">全面崩潰</td>
+              <td style="color:rgba(255,255,255,.82);font-size:12px">依賴折扣清庫存，失去專業跑者認同</td>
+              <td style="color:rgba(255,255,255,.6);font-size:11.5px">品牌稀釋×創新停滯</td>
+            </tr>
+            <tr>
+              <td style="color:rgba(255,255,255,.55);font-weight:700">Adidas</td>
+              <td style="color:rgba(255,255,255,.55);font-family:'DM Mono',monospace">時尚板塊支撐</td>
+              <td style="color:rgba(255,255,255,.82);font-size:12px">復古鞋款熱賣但專業表現疲軟</td>
+              <td style="color:rgba(255,255,255,.6);font-size:11.5px">獲利能力不穩</td>
+            </tr>
+          </table>
+          <div style="background:rgba(163,230,53,.08);border-radius:6px;padding:8px 11px;margin-top:8px;font-size:12.5px;color:rgba(255,255,255,.82);line-height:1.7">
+            <strong style="color:var(--lm5)">Lululemon的警示：</strong><br>
+            當你在F45和大街上看到每個人都穿Lululemon，追求稀缺的高端客戶就轉向Alo Yoga。<strong style="color:var(--co5)">On正處於Lululemon當年最輝煌的上升期</strong>——問題是，他們有沒有Lululemon犯的同一個錯誤？
+          </div>
+        </div>
+
+        <div class="card-co">
+          <h3>🔭 展望：EPS最大化×運動精品化終局</h3>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="background:rgba(124,45,18,.07);border-radius:6px;padding:8px 11px">
+              <div style="font-size:12px;font-weight:700;color:var(--co4);margin-bottom:2px">⚡ EPS最大化策略（管理層信號）</div>
+              <div style="font-size:12.5px;color:var(--co);line-height:1.7">下半年營收預期趨於保守——但這反而令分析師安心。明確目標是讓美股EPS最大化：<strong>寧可少賣一雙鞋，也確保賣出的每一雙都是高毛利的。</strong>「保守營收、激進利潤」是上乘的商業決策。</div>
+            </div>
+            <div style="background:rgba(124,45,18,.07);border-radius:6px;padding:8px 11px">
+              <div style="font-size:12px;font-weight:700;color:var(--co4);margin-bottom:2px">🏅 Hyrox傳聞被LVMH收購——運動精品化終局</div>
+              <div style="font-size:12.5px;color:var(--co);line-height:1.7">如果Hyrox真被LVMH收購，運動將不再只是排汗——它徹底成為身份標籤。屆時On這種具備「精品基因」的品牌，門檻將更高。普通消費者感到「高不可攀」，但商業上這正是品牌進入<strong>「勞力士階段」</strong>的標誌。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: 洞見總結 -->
+  <div class="section">
+    <div class="section-label">Part 3 · 三層洞見總結 · 財務×品牌×投資者視角的整合</div>
+    <div class="section-title">撥開迷霧後的精品本質：一張地圖看懂On昂跑的護城河</div>
+    <div class="grid-3">
+      <div class="card-lm">
+        <h3>📐 財務視角：毛利率是底氣計</h3>
+        <p>65.4%毛利率的本質，不是成本管理的勝利，而是<strong>品牌定價能力</strong>的勝利。當你能讓消費者跑完3公里後心甘情願付原價，毛利率就是結果，而非原因。</p>
+        <div style="margin-top:8px;background:rgba(54,83,20,.08);border-radius:6px;padding:8px 11px;font-size:12px;color:var(--lm);line-height:1.7">
+          <strong>分析師追蹤指標：</strong><br>
+          • DTC佔比持續擴大 → 毛利率護城河深化<br>
+          • 庫存週轉率 → 確認未走向Lululemon的泛化陷阱<br>
+          • 成本vs營收的非線性比率 → 定價紀律是否持守
+        </div>
+      </div>
+      <div class="card-co">
+        <h3>🏔️ 品牌視角：稀缺性是定價之母</h3>
+        <p>Nike崩潰是因為「太大了」，大到必須取悅所有人，最終失去核心競爭力。On與Hoka的崛起，證明高端消費者不再迷信大商標，他們在乎<strong>「專業性」與「我不跟別人一樣」。</strong></p>
+        <div style="margin-top:8px;background:rgba(124,45,18,.08);border-radius:6px;padding:8px 11px;font-size:12px;color:var(--co);line-height:1.7">
+          <strong>「不折扣」即是「最好的折扣」</strong>：讓那少數幾次優惠（如VIP七折）顯得極其珍貴，本身就是維持品牌稀缺感的工具。
+        </div>
+      </div>
+      <div class="card-dark">
+        <h3>💰 投資視角：看穿迷霧的三把刀</h3>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="background:rgba(163,230,53,.1);border-radius:6px;padding:7px 10px;font-size:12px;color:rgba(255,255,255,.85);line-height:1.65">
+            <strong style="color:var(--lm5)">第一刀：剔除一次性因素</strong><br>
+            3.56倍是低基期×外幣損失的幻術，28.7%才是本業肌肉。
+          </div>
+          <div style="background:rgba(251,146,60,.1);border-radius:6px;padding:7px 10px;font-size:12px;color:rgba(255,255,255,.85);line-height:1.65">
+            <strong style="color:var(--co5)">第二刀：檢視非線性關係</strong><br>
+            收入增速遠超成本增速 = 定價權存在，不是財務工程。
+          </div>
+          <div style="background:rgba(163,230,53,.08);border-radius:6px;padding:7px 10px;font-size:12px;color:rgba(255,255,255,.85);line-height:1.65">
+            <strong style="color:var(--lm5)">第三刀：微觀驗證宏觀</strong><br>
+            澀谷排隊+微風南山不打折 = 財報數字背後有真實的品牌支撐。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 蕭啟漢 · 0906 每週分享</div>
+  <div class="ft-note">On昂跑2026 Q2 · 毛利65.4%×非線性（+13.5% vs +2.1%）× 淨利3.56倍迷霧×1.399億CHF外幣損失×真實28.7% × 澀谷×微風南山DTC×消費者剩餘 × On vs Lululemon vs Nike × EPS最大化×Hyrox/LVMH運動精品化終局</div>
+</div>
+
+</body>
+</html>
