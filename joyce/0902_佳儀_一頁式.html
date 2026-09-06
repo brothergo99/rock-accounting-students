@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>佳儀 0902 · Non-GAAP調整後指標×Gogoro四步解剖×On×Google×NVIDIA×財務梗解碼</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --em:#065f46;--em2:#ecfdf5;--em3:#6ee7b7;--em4:#059669;--em5:#34d399;
+  --ro:#991b1b;--ro2:#fff5f5;--ro3:#fecaca;--ro4:#dc2626;--ro5:#f87171;
+  --am:#92400e;--am2:#fffbeb;--am3:#fde68a;--am4:#d97706;--am5:#f59e0b;
+  --bl:#1e3a5f;--bl2:#eff6ff;--bl3:#bfdbfe;--bl4:#2563eb;
+  --vi:#4c1d95;--vi2:#f5f3ff;--vi3:#c4b5fd;--vi4:#7c3aed;
+  --sl:#1e293b;--sl2:#f8fafc;--sl3:#cbd5e1;--sl4:#475569;
+  --night:#070a0e;--night2:#0d1018;
+  --bg:#ecfdf5;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--night);line-height:1.7}
+
+.page-header{background:linear-gradient(150deg,#070a0e,#0d1018,#05090c,#080c10);padding:36px 50px 28px;position:relative;overflow:hidden;border-bottom:3px solid var(--em5)}
+.ph-g1{position:absolute;top:-60px;right:-40px;width:260px;height:260px;background:radial-gradient(circle,rgba(52,211,153,.2),transparent 65%);pointer-events:none}
+.ph-g2{position:absolute;bottom:-30px;left:-20px;width:180px;height:180px;background:radial-gradient(circle,rgba(248,113,113,.12),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(110,231,183,.6);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(14px,2.1vw,21px);font-weight:900;color:#fff;line-height:1.28;margin-bottom:4px}
+.ph-title em{color:var(--em5);font-style:normal}
+.ph-title em2{color:var(--ro5);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.38);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mc{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(52,211,153,.15);color:var(--em5);border:1px solid rgba(52,211,153,.3)}
+.mc-r{background:rgba(248,113,113,.14);color:var(--ro5);border-color:rgba(248,113,113,.3)}
+.mc-a{background:rgba(245,158,11,.13);color:var(--am5);border-color:rgba(245,158,11,.28)}
+.mc-v{background:rgba(124,58,237,.12);color:var(--vi3);border-color:rgba(124,58,237,.28)}
+
+.container{max-width:1100px;margin:0 auto;padding:26px 26px}
+.section{margin-bottom:22px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--em4);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--night);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--em3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-32{display:grid;grid-template-columns:1.2fr 1fr;gap:13px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-32{grid-template-columns:1fr}}
+
+.card-em{background:var(--em2);border:1.5px solid var(--em3);border-radius:10px;padding:14px}
+.card-ro{background:var(--ro2);border:1.5px solid var(--ro3);border-radius:10px;padding:14px}
+.card-am{background:var(--am2);border:1.5px solid var(--am3);border-radius:10px;padding:14px}
+.card-bl{background:var(--bl2);border:1.5px solid var(--bl3);border-radius:10px;padding:14px}
+.card-vi{background:var(--vi2);border:1.5px solid var(--vi3);border-radius:10px;padding:14px}
+.card-sl{background:var(--sl2);border:1.5px solid var(--sl3);border-radius:10px;padding:14px}
+.card-dark{background:var(--night);border:none;border-radius:10px;padding:14px}
+.card-em h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--em)}
+.card-ro h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--ro)}
+.card-am h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--am)}
+.card-bl h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--bl)}
+.card-vi h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--vi)}
+.card-sl h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--sl)}
+.card-dark h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--em5)}
+.card-em p,.card-em li{color:var(--em);font-size:12.5px;line-height:1.85}
+.card-ro p,.card-ro li{color:var(--ro);font-size:12.5px;line-height:1.85}
+.card-am p,.card-am li{color:var(--am);font-size:12.5px;line-height:1.85}
+.card-bl p,.card-bl li{color:var(--bl);font-size:12.5px;line-height:1.85}
+.card-vi p,.card-vi li{color:var(--vi);font-size:12.5px;line-height:1.85}
+.card-sl p,.card-sl li{color:var(--sl);font-size:12.5px;line-height:1.85}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8);font-size:12.5px;line-height:1.85}
+ul{padding-left:15px}
+ul li{margin-bottom:3px}
+
+/* Quote */
+.quote{background:linear-gradient(135deg,var(--night),var(--night2));border-radius:10px;padding:14px 20px;position:relative;overflow:hidden;margin-bottom:20px}
+.qm{font-family:'Playfair Display',serif;font-size:72px;color:rgba(52,211,153,.07);position:absolute;top:-10px;left:8px;line-height:1}
+.qt{font-size:13px;color:rgba(255,255,255,.88);line-height:1.65;position:relative;z-index:1}
+.qt em{color:var(--em5);font-style:normal;font-weight:700}
+.qt em2{color:var(--ro5);font-style:normal;font-weight:700}
+.qs{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.35);margin-top:6px;position:relative;z-index:1}
+
+/* Gogoro 四步調整 */
+.adj-step{display:flex;gap:9px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed rgba(5,150,105,.15)}
+.adj-step:last-child{border-bottom:none}
+.adj-n{font-family:'DM Mono',monospace;font-size:11px;font-weight:700;background:var(--em4);color:#fff;border-radius:4px;padding:2px 8px;flex-shrink:0;margin-top:2px}
+.adj-body{font-size:12.5px;line-height:1.8;flex:1}
+
+/* 數字轉換 */
+.num-transform{display:flex;align-items:center;gap:6px;margin:5px 0;flex-wrap:wrap}
+.nt-from{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;padding:4px 10px;border-radius:5px}
+.nt-op{font-size:11px;color:var(--sl4);flex-shrink:0}
+.nt-to{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;padding:4px 10px;border-radius:5px}
+.nt-arrow{color:rgba(5,150,105,.4);font-size:18px}
+
+/* 三案例對比 */
+.case-header{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;border-radius:4px;padding:3px 10px;display:inline-flex;margin-bottom:7px}
+.reveal-row{display:flex;gap:6px;align-items:center;margin:6px 0;flex-wrap:wrap}
+.rv-gaap{border-radius:6px;padding:7px 10px;text-align:center;flex:1}
+.rv-adj{border-radius:6px;padding:7px 10px;text-align:center;flex:1;border:1.5px solid}
+.rv-val{font-family:'DM Mono',monospace;font-size:16px;font-weight:700;line-height:1.1}
+.rv-lbl{font-size:10.5px;margin-top:2px}
+.rv-arrow{color:rgba(0,0,0,.2);font-size:20px;flex-shrink:0}
+
+.page-footer{background:var(--night);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--em5)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-g1"></div>
+  <div class="ph-g2"></div>
+  <div class="ph-eyebrow">0902 · 佳儀 · 課後複習 · Non-GAAP調整後財務指標×看穿財務包裝×核心營運能力還原</div>
+  <div class="ph-title"><em>「撥開財報迷霧，看見本業真實面貌」</em>——<br>Gogoro四步調整術 × On的3.56倍假象 × Google 9元EPS迷思 × <em2>NVIDIA罕見反向Non-GAAP</em2></div>
+  <div class="ph-sub">三大財報干擾源（一次性×匯率×非現金）× Gogoro FX還原×電池召回×SPAC公允價值×Adj.EBITDA × On外匯28%真相 × Google未實現投資收益 × NVIDIA主動扣除投資收益的誠實底氣</div>
+  <div class="ph-meta">
+    <span class="mc">2026.09.02</span>
+    <span class="mc">佳儀</span>
+    <span class="mc mc-a">Non-GAAP×調整後指標</span>
+    <span class="mc mc-r">Gogoro×On×Google×NVIDIA</span>
+    <span class="mc mc-v">財務梗解碼×法說會包裝術</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 金句 -->
+  <div class="quote">
+    <div class="qm">"</div>
+    <div class="qt">「財務梗不是笑話，是財務人員<em>刻意設計的敘事橋段</em>——<br>當本業很壞，用一次性電池召回當藉口；當帳面暴增，分析師要主動拿掉外匯和未實現投資才看清本業。<br>學會了這些，你就不會被「<em2>淨利翻倍」或「EPS標破9元</em2>」的標題迷惑，而是像尋寶一樣找到那個數字背後的真實故事。」</div>
+    <div class="qs">Rock 老師 · 蕭啟漢 · 佳儀 0902 · Non-GAAP調整後指標 × Gogoro×On×Google×NVIDIA 財務梗解碼</div>
+  </div>
+
+  <!-- SECTION 1: 三大干擾源 + Gogoro -->
+  <div class="section">
+    <div class="section-label">Part 1 · 三大財報干擾源 + Gogoro四步調整解剖 · 為什麼需要Non-GAAP？</div>
+    <div class="section-title">GAAP報表不是謊言，但迷霧讓你看不見本業——Non-GAAP是撥霧的手電筒</div>
+    <div class="grid-32">
+
+      <!-- Gogoro 四步 -->
+      <div class="card-em">
+        <h3>🛵 Gogoro 四步調整術：完整解剖</h3>
+        <div style="font-size:11.5px;color:var(--em4);font-weight:700;margin-bottom:8px">2025 Q1 · 潤泰進駐後新管理層的法說會IR操作</div>
+
+        <div class="adj-step" style="padding-top:0">
+          <span class="adj-n">Step 1</span>
+          <div class="adj-body" style="color:var(--em)">
+            <strong style="color:var(--em4)">匯率還原（FX Constant Currency）：衰退8.7%→4.5%</strong><br>
+            <div class="num-transform" style="margin:5px 0">
+              <span class="nt-from" style="background:rgba(220,38,38,.1);color:var(--ro4)">$63,621K（-8.7%）</span>
+              <span class="nt-arrow">+$2,937K</span>
+              <span class="nt-to" style="background:rgba(5,150,105,.12);color:var(--em4)">$66,558K（-4.5%）</span>
+            </div>
+            台灣賣台幣、美股報美元→台幣貶值讓帳面縮水。排除匯率後，實質衰退只有4.5%。<br>
+            <strong>進一步拆解：換電服務+11.1%（核心訂閱）；硬體銷售-18%（大環境）</strong>——讓投資人盯住成長的那塊。
+          </div>
+        </div>
+
+        <div class="adj-step">
+          <span class="adj-n">Step 2</span>
+          <div class="adj-body" style="color:var(--em)">
+            <strong style="color:var(--em4)">毛利還原：電池召回一次性費用（Battery Upgrade Initiative）</strong><br>
+            <div class="num-transform">
+              <span class="nt-from" style="background:rgba(220,38,38,.1);color:var(--ro4)">毛利率4.9%</span>
+              <span class="nt-arrow">+$8,347K召回費</span>
+              <span class="nt-to" style="background:rgba(5,150,105,.12);color:var(--em4)">調整後18.2%</span>
+            </div>
+            三代電池不穩，全體動員召回升級，花費高達$8,347K（2025）。財務論述：「主動注重安全、非經常性」。<strong>加回後，2025毛利率（18%）&gt; 2024（15%），故事反轉成功。</strong>
+          </div>
+        </div>
+
+        <div class="adj-step">
+          <span class="adj-n">Step 3</span>
+          <div class="adj-body" style="color:var(--em)">
+            <strong style="color:var(--em4)">淨損還原：SPAC金融負債公允價值變動（Fair Value of Financial Liabilities）</strong><br>
+            2024年股價從$17跌至$1→原先高估的股權負債需迴轉→帳面認列<strong>$13,198K利益</strong>（但無現金！）<br>
+            此虛擬利益讓2024「看起來」只虧$13,000K；拿掉後2024實質虧$17,000K+。<br>
+            <strong>調整後：2025虧損$10,915K &lt; 2024虧損——本業已改善，2024才是最壞那年。</strong>
+          </div>
+        </div>
+
+        <div class="adj-step">
+          <span class="adj-n">Step 4</span>
+          <div class="adj-body" style="color:var(--em)">
+            <strong style="color:var(--em4)">Adj. EBITDA：還原折舊+排除公允價值</strong><br>
+            300萬顆電池折舊≈$20,000K/年（台幣6-7億），原始EBITDA含$13,198K虛擬利益，無法反映現金。<br>
+            <div class="num-transform">
+              <span class="nt-from" style="background:rgba(220,38,38,.1);color:var(--ro4)">2024 EBITDA $14,281K（含虛利）</span>
+              <span class="nt-arrow">→</span>
+              <span class="nt-to" style="background:rgba(5,150,105,.12);color:var(--em4)">Adj.$10,232K</span>
+            </div>
+            <div class="num-transform">
+              <span class="nt-from" style="background:rgba(220,38,38,.1);color:var(--ro4)">2025 EBITDA $6,673K（看似差）</span>
+              <span class="nt-arrow">→</span>
+              <span class="nt-to" style="background:rgba(5,150,105,.15);color:var(--em4);font-weight:700">Adj.$14,320K ✓</span>
+            </div>
+            <strong>調整後：2025 Adj.EBITDA 優於2024——本業現金創造能力其實在改善！</strong>
+          </div>
+        </div>
+
+        <div style="background:rgba(5,150,105,.08);border-radius:7px;padding:8px 11px;margin-top:4px;font-size:12px;color:var(--em4)">
+          ⭐ 佳儀的犀利洞見：「買車一定綁換電，只要舊用戶在，換電就會增加」→ 確實有破綻，但財務人員的工作就是呈現「已盡最大努力」的姿態。
+        </div>
+      </div>
+
+      <!-- 三大干擾源 -->
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <div class="card-dark">
+          <h3>🌫️ 三大財報干擾源</h3>
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <div style="background:rgba(220,38,38,.12);border-radius:6px;padding:8px 11px">
+              <div style="font-size:12px;font-weight:700;color:var(--ro5);margin-bottom:2px">① 一次性項目（One-time Items）</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.65">資產減損、重組費用、訴訟賠償、產品召回——今年特殊事件，明年毫無參考價值，必須排除才能看長期趨勢。</div>
+            </div>
+            <div style="background:rgba(245,158,11,.12);border-radius:6px;padding:8px 11px">
+              <div style="font-size:12px;font-weight:700;color:var(--am5);margin-bottom:2px">② 不可控外部因素（匯率FX）</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.65">跨國企業最大公敵——台幣貶值、瑞郎升值，讓換算後的數字失真。固定匯率（Constant Currency）還原才能看真實業績。</div>
+            </div>
+            <div style="background:rgba(52,211,153,.1);border-radius:6px;padding:8px 11px">
+              <div style="font-size:12px;font-weight:700;color:var(--em5);margin-bottom:2px">③ 非現金項目（Non-cash Items）</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.65">折舊攤銷、股權激勵（SBC）、未實現投資損益、公允價值變動——帳面認列但無現金流動。加回or扣除，才能看現金產出能力。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-am">
+          <h3>⚙️ GAAP vs Non-GAAP 核心邏輯</h3>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:8px">
+            <div style="background:rgba(146,64,14,.08);border-radius:6px;padding:7px 10px;font-size:12.5px;color:var(--am)">
+              <strong>GAAP報表</strong>：標準化、監管合規、歷史紀錄。但含一次性噪音，讓長期趨勢難辨。
+            </div>
+            <div style="background:rgba(146,64,14,.12);border-radius:6px;padding:7px 10px;font-size:12.5px;color:var(--am);border:1px solid var(--am3)">
+              <strong>Non-GAAP調整</strong>：剔除干擾，還原本業的核心營運健康度——既可以「美化」，也可以「揭露」。
+            </div>
+          </div>
+          <div style="background:rgba(146,64,14,.07);border-radius:6px;padding:8px 11px;font-size:12px;color:var(--am);line-height:1.75">
+            ⚠️ <strong>紅旗警示</strong>：若一家公司「連續三年加回一次性費用」，那就是「經常性費用」——調整是藉口，不是解釋。Non-GAAP的誠信底線，是調整必須<strong>可重複驗證、邏輯自洽</strong>。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: 三大案例 -->
+  <div class="section">
+    <div class="section-label">Part 2 · 三大案例解碼 · On昂跑3.56倍假象 × Google 9元EPS迷思 × NVIDIA罕見反向Non-GAAP</div>
+    <div class="section-title">三種「財務梗」的精彩演繹：同樣的調整邏輯，截然不同的使用場景</div>
+    <div class="grid-3">
+
+      <!-- On 昂跑 -->
+      <div class="card-ro">
+        <h3>👟 On（昂跑）：3.56倍背後是28%</h3>
+        <span class="case-header" style="background:rgba(220,38,38,.12);color:var(--ro4)">瑞士跑鞋品牌 · CHF記帳</span>
+        <div class="reveal-row">
+          <div class="rv-gaap" style="background:rgba(220,38,38,.1)">
+            <div class="rv-val" style="color:var(--ro4)">× 3.56倍</div>
+            <div class="rv-lbl" style="color:var(--ro)">GAAP淨利<br>（標題數字）</div>
+          </div>
+          <div class="rv-arrow">≠</div>
+          <div class="rv-adj" style="background:rgba(5,150,105,.1);border-color:var(--em3)">
+            <div class="rv-val" style="color:var(--em4)">+28%</div>
+            <div class="rv-lbl" style="color:var(--em)">營業利益YoY<br>（真實本業）</div>
+          </div>
+        </div>
+        <div style="background:rgba(159,18,57,.08);border-radius:7px;padding:9px 11px;margin-bottom:7px">
+          <div style="font-size:12px;font-weight:700;color:var(--ro4);margin-bottom:3px">為什麼暴增3.56倍？</div>
+          <div style="font-size:12.5px;color:var(--ro);line-height:1.75">去年同期，On認列了高達<strong>CHF 1.399億的外匯損失</strong>。原因：美金大幅貶值→瑞郎升值→換算後財務數字大幅減值。</div>
+        </div>
+        <div style="background:rgba(5,150,105,.08);border-radius:6px;padding:8px 11px;font-size:12.5px;color:var(--em);line-height:1.75">
+          這跟鞋子賣得好不好完全無關。<strong>排除外匯後的營業利益+28%，才是這家公司真實的本業擴張速度</strong>——非常優秀，但不是吸睛的「3.56倍」。被標題迷惑，就輸在分析的起點。
+        </div>
+      </div>
+
+      <!-- Google -->
+      <div class="card-bl">
+        <h3>🔍 Google：EPS 9元→本業2.85元</h3>
+        <span class="case-header" style="background:rgba(37,99,235,.12);color:var(--bl4)">Alphabet · 廣告+雲端本業</span>
+        <div class="reveal-row">
+          <div class="rv-gaap" style="background:rgba(220,38,38,.1)">
+            <div class="rv-val" style="color:var(--ro4)">$9+</div>
+            <div class="rv-lbl" style="color:var(--ro)">GAAP EPS<br>（市場歡欣）</div>
+          </div>
+          <div class="rv-arrow">→</div>
+          <div class="rv-adj" style="background:rgba(37,99,235,.1);border-color:var(--bl3)">
+            <div class="rv-val" style="color:var(--bl4)">$2.85</div>
+            <div class="rv-lbl" style="color:var(--bl)">核心本業EPS<br>（vs預期$2.89）</div>
+          </div>
+        </div>
+        <div style="background:rgba(30,58,138,.08);border-radius:7px;padding:9px 11px;margin-bottom:7px">
+          <div style="font-size:12px;font-weight:700;color:var(--bl4);margin-bottom:3px">虛胖的來源：未實現投資收益</div>
+          <div style="font-size:12.5px;color:var(--bl);line-height:1.75">Google手持大量私募股權（含SpaceX等）。估值上升時，即便<strong>尚未賣股變現（未實現）</strong>，會計準則仍要求認列在淨利中，將EPS虛胖至$9+。</div>
+        </div>
+        <div style="background:rgba(30,58,138,.07);border-radius:6px;padding:8px 11px;font-size:12.5px;color:var(--bl);line-height:1.75">
+          扣除非營運投資收益後，核心EPS僅$2.85，<strong>微幅低於預期$2.89</strong>——這就是財報公布後股價反跌的原因。機構分析師會撥開這層「投資迷霧」，散戶不會。
+        </div>
+      </div>
+
+      <!-- NVIDIA -->
+      <div class="card-vi">
+        <h3>🟢 NVIDIA：罕見「GAAP&gt;Non-GAAP」</h3>
+        <span class="case-header" style="background:rgba(124,58,237,.12);color:var(--vi4)">輝達 · AI晶片×底氣十足</span>
+        <div class="reveal-row">
+          <div class="rv-gaap" style="background:rgba(124,58,237,.1)">
+            <div class="rv-val" style="color:var(--vi4)">$5.96B</div>
+            <div class="rv-lbl" style="color:var(--vi)">GAAP淨利<br>（包含投資收益）</div>
+          </div>
+          <div class="rv-arrow">→</div>
+          <div class="rv-adj" style="background:rgba(124,58,237,.15);border-color:var(--vi3)">
+            <div class="rv-val" style="color:var(--vi4)">$5.39B</div>
+            <div class="rv-lbl" style="color:var(--vi)">Non-GAAP淨利<br>（主動扣除投資收益）</div>
+          </div>
+        </div>
+        <div style="background:rgba(76,29,149,.1);border-radius:7px;padding:9px 11px;margin-bottom:7px">
+          <div style="font-size:12px;font-weight:700;color:var(--vi4);margin-bottom:3px">為什麼Non-GAAP反而變少？（罕見！）</div>
+          <div style="font-size:12.5px;color:var(--vi);line-height:1.75">NVIDIA手持大量策略聯盟股票（Cloud服務商等），股價大漲產生巨額投資收益。<strong>NVIDIA主動把這些非本業利益「扣掉」</strong>，告訴市場：「我純晶片銷售的本業就有$5.39B。」</div>
+        </div>
+        <div style="background:rgba(76,29,149,.07);border-radius:6px;padding:8px 11px;font-size:12.5px;color:var(--vi);line-height:1.75">
+          更悍的是：NVIDIA<strong>不排除股權激勵費用</strong>——因為他們認為給員工優渥股權是常態，不是一次性。毛利率75%的底氣，讓他們不需要任何美化。<strong>誠實本身就是最強的財務梗。</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: 財務梗解碼框架 -->
+  <div class="section">
+    <div class="section-label">Part 3 · 財務梗解碼框架 · 四大案例共同邏輯總結</div>
+    <div class="section-title">看穿財務梗的尋寶地圖：同一個工具箱，用在不同方向</div>
+    <div class="grid-2">
+      <div class="card-dark">
+        <h3>🗺️ 財務梗解碼：投資人的兩道必問題</h3>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <div style="background:rgba(52,211,153,.1);border-radius:6px;padding:9px 12px;border:1px solid rgba(52,211,153,.2)">
+            <div style="font-size:12px;font-weight:700;color:var(--em5);margin-bottom:3px">當帳面數字「很差」時→問：加回了什麼？</div>
+            <div style="font-size:12.5px;color:rgba(255,255,255,.8);line-height:1.75">Gogoro：電池召回（一次性）+ 匯率（不可控）+ SPAC公允價值（非現金）<br>→ 加回後本業其實在改善。<strong style="color:var(--em5)">確認「加回項」是否真的一次性，還是習慣性藉口。</strong></div>
+          </div>
+          <div style="background:rgba(248,113,113,.1);border-radius:6px;padding:9px 12px;border:1px solid rgba(248,113,113,.2)">
+            <div style="font-size:12px;font-weight:700;color:var(--ro5);margin-bottom:3px">當帳面數字「暴增」時→問：混入了什麼？</div>
+            <div style="font-size:12.5px;color:rgba(255,255,255,.8);line-height:1.75">On：外匯損失消失（低基期）；Google：未實現投資收益混入EPS<br>→ 主動剝離非本業項目，還原真實成長率。<strong style="color:var(--ro5)">高標題數字往往隱藏低品質的增長來源。</strong></div>
+          </div>
+          <div style="background:rgba(245,158,11,.1);border-radius:6px;padding:9px 12px">
+            <div style="font-size:12px;font-weight:700;color:var(--am5);margin-bottom:3px">NVIDIA的反向示範：主動「扣除」是誠信信號</div>
+            <div style="font-size:12.5px;color:rgba(255,255,255,.8);line-height:1.75">調整不一定是為了美化——主動扣除投資收益，代表管理層對本業的絕對自信。<strong style="color:var(--am5)">最強的財務梗，是不需要任何梗。</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-em">
+        <h3>🔬 四案例調整技巧速查表</h3>
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:12px">
+            <tr style="background:rgba(5,150,105,.15)">
+              <th style="padding:6px 8px;text-align:left;color:var(--em4);font-size:11.5px">企業</th>
+              <th style="padding:6px 8px;text-align:left;color:var(--em4);font-size:11.5px">調整項目</th>
+              <th style="padding:6px 8px;text-align:left;color:var(--em4);font-size:11.5px">方向</th>
+            </tr>
+            <tr style="border-top:1px dashed var(--em3)">
+              <td style="padding:6px 8px;color:var(--em);font-weight:700">Gogoro</td>
+              <td style="padding:6px 8px;color:var(--em)">匯率FX、電池召回（一次性）、SPAC公允價值（非現金）、折舊（EBITDA）</td>
+              <td style="padding:6px 8px;color:var(--em4);font-weight:700">⬆️ 加回美化</td>
+            </tr>
+            <tr style="border-top:1px dashed var(--em3);background:rgba(5,150,105,.04)">
+              <td style="padding:6px 8px;color:var(--em);font-weight:700">On（昂跑）</td>
+              <td style="padding:6px 8px;color:var(--em)">剔除去年同期外匯損失（低基期效應）</td>
+              <td style="padding:6px 8px;color:var(--ro4);font-weight:700">⬇️ 剝離還原</td>
+            </tr>
+            <tr style="border-top:1px dashed var(--em3)">
+              <td style="padding:6px 8px;color:var(--em);font-weight:700">Google</td>
+              <td style="padding:6px 8px;color:var(--em)">未實現私募股權投資收益（SpaceX等）</td>
+              <td style="padding:6px 8px;color:var(--ro4);font-weight:700">⬇️ 剝離還原</td>
+            </tr>
+            <tr style="border-top:1px dashed var(--em3);background:rgba(5,150,105,.04)">
+              <td style="padding:6px 8px;color:var(--em);font-weight:700">NVIDIA</td>
+              <td style="padding:6px 8px;color:var(--em)">主動扣除策略股權投資收益（非本業）</td>
+              <td style="padding:6px 8px;color:var(--em4);font-weight:700">⬆️ 主動扣除</td>
+            </tr>
+          </table>
+        </div>
+        <div style="background:rgba(5,150,105,.1);border-radius:7px;padding:9px 11px;margin-top:9px">
+          <div style="font-size:12px;font-weight:700;color:var(--em4);margin-bottom:3px">佳儀 · 關鍵進化</div>
+          <div style="font-size:12.5px;color:var(--em);line-height:1.75">未來閱讀財報或商業新聞時，不再只看標題的「營收衰退」「淨利翻倍」——而是有意識地問：「這個數字裡面混了什麼？」具備這個提問習慣，就擁有了與多數人不同的商業洞察力。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 老師 · 蕭啟漢 · 佳儀 學員 · 0902</div>
+  <div class="ft-note">Non-GAAP調整後指標 × Gogoro四步（FX+電池召回+公允價值+Adj.EBITDA）× On外匯28%真相 × Google未實現投資EPS × NVIDIA罕見反向Non-GAAP × 財務梗解碼</div>
+</div>
+
+</body>
+</html>
