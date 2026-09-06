@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>April 0905 · 損益兩平老闆語言×預算時程藝術×醫療自費翻轉×On Running×Lululemon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --mg:#86198f;--mg2:#fdf4ff;--mg3:#f0abfc;--mg4:#a21caf;--mg5:#e879f9;
+  --am:#92400e;--am2:#fffbeb;--am3:#fde68a;--am4:#d97706;--am5:#f59e0b;
+  --te:#0f766e;--te2:#f0fdfa;--te3:#99f6e4;--te4:#0d9488;--te5:#2dd4bf;
+  --ro:#991b1b;--ro2:#fff5f5;--ro3:#fecaca;--ro4:#dc2626;--ro5:#f87171;
+  --sl:#1e293b;--sl2:#f8fafc;--sl3:#cbd5e1;--sl4:#475569;
+  --night:#08111e;--night2:#0e1a2c;
+  --bg:#f0f4f8;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--night);line-height:1.7}
+
+.page-header{background:linear-gradient(150deg,#08111e,#0e1a2c,#0a0f18,#06101a);padding:36px 50px 28px;position:relative;overflow:hidden;border-bottom:3px solid var(--mg4)}
+.ph-g1{position:absolute;top:-60px;right:-40px;width:260px;height:260px;background:radial-gradient(circle,rgba(232,121,249,.2),transparent 65%);pointer-events:none}
+.ph-g2{position:absolute;bottom:-30px;left:-20px;width:180px;height:180px;background:radial-gradient(circle,rgba(245,158,11,.12),transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.22em;color:rgba(240,171,252,.6);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(14px,2.1vw,21px);font-weight:900;color:#fff;line-height:1.28;margin-bottom:4px}
+.ph-title em{color:var(--mg5);font-style:normal}
+.ph-title em2{color:var(--am5);font-style:normal}
+.ph-sub{font-size:13px;color:rgba(255,255,255,.38);margin-top:5px}
+.ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.mc{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(232,121,249,.15);color:var(--mg5);border:1px solid rgba(232,121,249,.3)}
+.mc-a{background:rgba(245,158,11,.13);color:var(--am5);border-color:rgba(245,158,11,.28)}
+.mc-t{background:rgba(45,212,191,.11);color:var(--te5);border-color:rgba(45,212,191,.28)}
+.mc-r{background:rgba(248,113,113,.12);color:var(--ro5);border-color:rgba(248,113,113,.28)}
+
+.container{max-width:1100px;margin:0 auto;padding:26px 26px}
+.section{margin-bottom:22px}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--mg4);text-transform:uppercase;margin-bottom:5px}
+.section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--night);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--mg3)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-32{display:grid;grid-template-columns:1.25fr 1fr;gap:13px}
+.grid-23{display:grid;grid-template-columns:1fr 1.3fr;gap:13px}
+@media(max-width:720px){.grid-2,.grid-3,.grid-32,.grid-23{grid-template-columns:1fr}}
+
+.card-mg{background:var(--mg2);border:1.5px solid var(--mg3);border-radius:10px;padding:14px}
+.card-am{background:var(--am2);border:1.5px solid var(--am3);border-radius:10px;padding:14px}
+.card-te{background:var(--te2);border:1.5px solid var(--te3);border-radius:10px;padding:14px}
+.card-ro{background:var(--ro2);border:1.5px solid var(--ro3);border-radius:10px;padding:14px}
+.card-sl{background:var(--sl2);border:1.5px solid var(--sl3);border-radius:10px;padding:14px}
+.card-dark{background:var(--night);border:none;border-radius:10px;padding:14px}
+.card-mg h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--mg)}
+.card-am h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--am)}
+.card-te h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--te)}
+.card-ro h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--ro)}
+.card-sl h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--sl)}
+.card-dark h3{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;margin-bottom:7px;color:var(--mg5)}
+.card-mg p,.card-mg li{color:var(--mg);font-size:12.5px;line-height:1.85}
+.card-am p,.card-am li{color:var(--am);font-size:12.5px;line-height:1.85}
+.card-te p,.card-te li{color:var(--te);font-size:12.5px;line-height:1.85}
+.card-ro p,.card-ro li{color:var(--ro);font-size:12.5px;line-height:1.85}
+.card-sl p,.card-sl li{color:var(--sl);font-size:12.5px;line-height:1.85}
+.card-dark p,.card-dark li{color:rgba(255,255,255,.8);font-size:12.5px;line-height:1.85}
+ul{padding-left:15px}
+ul li{margin-bottom:3px}
+
+/* Quote */
+.quote{background:linear-gradient(135deg,var(--night),var(--night2));border-radius:10px;padding:14px 20px;position:relative;overflow:hidden;margin-bottom:20px}
+.qm{font-family:'Playfair Display',serif;font-size:72px;color:rgba(232,121,249,.07);position:absolute;top:-10px;left:8px;line-height:1}
+.qt{font-size:13px;color:rgba(255,255,255,.88);line-height:1.65;position:relative;z-index:1}
+.qt em{color:var(--mg5);font-style:normal;font-weight:700}
+.qt em2{color:var(--am5);font-style:normal;font-weight:700}
+.qt em3{color:var(--te5);font-style:normal;font-weight:700}
+.qs{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.35);margin-top:6px;position:relative;z-index:1}
+
+/* 損益兩平計算流 */
+.be-flow{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:9px 0}
+.be-box{border-radius:7px;padding:7px 12px;text-align:center;flex:1;min-width:80px}
+.be-val{font-family:'DM Mono',monospace;font-size:15px;font-weight:700;line-height:1}
+.be-lbl{font-size:10.5px;margin-top:2px}
+.be-op{font-size:17px;color:var(--mg3);flex-shrink:0}
+.be-eq{font-family:'DM Mono',monospace;font-size:21px;font-weight:700;color:var(--mg4);flex-shrink:0}
+
+/* 預算時程 Timeline */
+.timeline{position:relative;padding-left:0;list-style:none}
+.tl-item{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed rgba(134,25,143,.15)}
+.tl-item:last-child{border-bottom:none}
+.tl-date{font-family:'DM Mono',monospace;font-size:10.5px;font-weight:700;padding:4px 8px;border-radius:4px;flex-shrink:0;margin-top:2px;min-width:64px;text-align:center}
+.tl-body{font-size:12.5px;line-height:1.8;flex:1;color:var(--night)}
+
+/* On Running 財報 */
+.fin-row{display:flex;gap:8px;align-items:center;margin:6px 0;flex-wrap:wrap}
+.fin-b{border-radius:6px;padding:7px 11px;text-align:center;flex:1}
+.fin-v{font-family:'DM Mono',monospace;font-size:16px;font-weight:700;line-height:1.1}
+.fin-l{font-size:10.5px;margin-top:2px}
+.fin-arr{font-size:20px;color:rgba(0,0,0,.18);flex-shrink:0}
+
+/* KPI chips */
+.kpi{display:inline-flex;flex-direction:column;align-items:center;background:rgba(134,25,143,.08);border-radius:8px;padding:7px 13px;border:1px solid var(--mg3);margin:4px}
+.kpi-v{font-family:'DM Mono',monospace;font-size:17px;font-weight:700;color:var(--mg4);line-height:1}
+.kpi-l{font-size:10px;color:var(--mg);margin-top:2px}
+.kpi-a{background:rgba(245,158,11,.08);border-color:var(--am3)}
+.kpi-a .kpi-v{color:var(--am4)}
+.kpi-a .kpi-l{color:var(--am)}
+.kpi-t{background:rgba(13,148,136,.08);border-color:var(--te3)}
+.kpi-t .kpi-v{color:var(--te4)}
+.kpi-t .kpi-l{color:var(--te)}
+.kpi-r{background:rgba(220,38,38,.08);border-color:var(--ro3)}
+.kpi-r .kpi-v{color:var(--ro4)}
+.kpi-r .kpi-l{color:var(--ro)}
+
+.page-footer{background:var(--night);color:rgba(255,255,255,.5);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:28px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:13px;color:var(--mg5)}
+.ft-note{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="ph-g1"></div>
+  <div class="ph-g2"></div>
+  <div class="ph-eyebrow">0905 · April · 課後複習 · 損益兩平老闆語言×預算時程×醫療自費翻轉×On Running×Lululemon</div>
+  <div class="ph-title"><em>「財務分析的最終目的，是讓老闆對自己的決策有感」</em>——<br>從拆胎機一天4條回本×<em2>遠通電收說故事×醫療容量限制翻轉</em2>×On Running直營DTC吃掉消費者剩餘</div>
+  <div class="ph-sub">損益兩平從公式→老闆語言（拆胎機×一天N條） × 預算Kick-off 10/8→11/26董事會時程 × 醫療健保6:4翻轉×美光漲價思維 × On Running毛利率65%真相×Lululemon盛衰教訓</div>
+  <div class="ph-meta">
+    <span class="mc">2026.09.05</span>
+    <span class="mc">April</span>
+    <span class="mc mc-a">損益兩平×預算編製</span>
+    <span class="mc mc-t">醫療自費翻轉×客戶分層</span>
+    <span class="mc mc-r">On Running×Lululemon財報</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 金句 -->
+  <div class="quote">
+    <div class="qm">"</div>
+    <div class="qt">「老闆聽不懂『回收期』跟『NPV』——但他對<em>一天能不能賣4條輪胎</em>非常有感。財務人員的功課，是把公式翻譯成老闆能做決策的語言。<br>同樣的道理，預算不是喊數字，是大家對<em2>『一天到底可以做幾條』</em2>有共識之後，擠出來的可行承諾。<br>而品牌，是讓消費者<em3>心甘情願地被吃掉消費者剩餘</em3>——穿著On Running跑了3公里之後，你會說服自己5000元很值。」</div>
+    <div class="qs">Rock 老師 · 蕭啟漢 · April 學員 · 0905 · 損益兩平×預算時程×醫療翻轉×On Running×Lululemon</div>
+  </div>
+
+  <!-- SECTION 1: 損益兩平分析 + 預算編製 -->
+  <div class="section">
+    <div class="section-label">Part 1 · 損益兩平分析×預算編製 · 拆胎機案例→老闆能懂的財務語言</div>
+    <div class="section-title">用「一天幾條」讓老闆有感：損益兩平點翻譯工程</div>
+    <div class="grid-32">
+
+      <!-- 左側: 損益兩平計算流 -->
+      <div class="card-mg">
+        <h3>🔧 拆胎機投資評估：從公式到老闆語言</h3>
+        <div style="font-size:11.5px;color:var(--mg4);font-weight:700;margin-bottom:9px">機車行老闆的 CapEx 決策——變動成本法×邊際貢獻</div>
+
+        <!-- KPIs -->
+        <div style="display:flex;flex-wrap:wrap;gap:2px;margin-bottom:11px">
+          <span class="kpi"><span class="kpi-v">$60,000</span><span class="kpi-l">固定投資（拆胎機）</span></span>
+          <span class="kpi kpi-a"><span class="kpi-v">$1,500</span><span class="kpi-l">輪胎售價</span></span>
+          <span class="kpi kpi-r"><span class="kpi-v">$800</span><span class="kpi-l">變動成本（料+工）</span></span>
+          <span class="kpi kpi-t"><span class="kpi-v">$500</span><span class="kpi-l">邊際貢獻</span></span>
+        </div>
+
+        <!-- 計算流程 -->
+        <div style="background:rgba(134,25,143,.06);border-radius:8px;padding:10px 12px;margin-bottom:9px">
+          <div style="font-size:11.5px;font-weight:700;color:var(--mg4);margin-bottom:5px">STEP 1 · 損益兩平條數</div>
+          <div class="be-flow">
+            <div class="be-box" style="background:rgba(134,25,143,.1)">
+              <div class="be-val" style="color:var(--mg4)">$60,000</div>
+              <div class="be-lbl" style="color:var(--mg)">固定投資</div>
+            </div>
+            <div class="be-op">÷</div>
+            <div class="be-box" style="background:rgba(13,148,136,.1)">
+              <div class="be-val" style="color:var(--te4)">$500</div>
+              <div class="be-lbl" style="color:var(--te)">邊際貢獻</div>
+            </div>
+            <div class="be-op">=</div>
+            <div class="be-box" style="background:rgba(134,25,143,.18);border:1.5px solid var(--mg3)">
+              <div class="be-val" style="color:var(--mg4)">120條</div>
+              <div class="be-lbl" style="color:var(--mg)">回本條數</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:rgba(134,25,143,.06);border-radius:8px;padding:10px 12px;margin-bottom:9px">
+          <div style="font-size:11.5px;font-weight:700;color:var(--mg4);margin-bottom:5px">STEP 2 · 翻譯成老闆語言</div>
+          <div class="be-flow">
+            <div class="be-box" style="background:rgba(134,25,143,.1)">
+              <div class="be-val" style="color:var(--mg4)">120條</div>
+              <div class="be-lbl" style="color:var(--mg)">回本總量</div>
+            </div>
+            <div class="be-op">÷</div>
+            <div class="be-box" style="background:rgba(245,158,11,.1)">
+              <div class="be-val" style="color:var(--am4)">30天</div>
+              <div class="be-lbl" style="color:var(--am)">月營運天</div>
+            </div>
+            <div class="be-op">=</div>
+            <div class="be-box" style="background:rgba(134,25,143,.18);border:2px solid var(--mg4)">
+              <div class="be-val" style="color:var(--mg4);font-size:21px">一天4條</div>
+              <div class="be-lbl" style="color:var(--mg);font-weight:700">老闆立刻有感！</div>
+            </div>
+          </div>
+          <div style="font-size:12.5px;color:var(--mg);margin-top:7px;line-height:1.7">
+            生意好的大車行：「<strong>一天4條，輕鬆啊！買！</strong>」<br>
+            生意普的小車行：「<strong>一天4條…有點緊啊，再想想。</strong>」<br>
+            → 同一台機器，老闆自己對自己的生意有判斷，財務人員不用替他決定。
+          </div>
+        </div>
+
+        <!-- 期望獲利拉桿 -->
+        <div style="overflow-x:auto;margin-top:5px">
+          <table style="width:100%;border-collapse:collapse;font-size:11.5px">
+            <tr style="background:rgba(134,25,143,.15)">
+              <th style="padding:5px 8px;text-align:left;color:var(--mg4)">期望額外獲利</th>
+              <th style="padding:5px 8px;text-align:center;color:var(--mg4)">總需條數</th>
+              <th style="padding:5px 8px;text-align:center;color:var(--mg4)">一天需換</th>
+              <th style="padding:5px 8px;text-align:center;color:var(--mg4)">可行性</th>
+            </tr>
+            <tr style="border-top:1px dashed var(--mg3)">
+              <td style="padding:5px 8px;color:var(--mg);font-weight:700">+$100,000</td>
+              <td style="padding:5px 8px;text-align:center;color:var(--mg)">320條</td>
+              <td style="padding:5px 8px;text-align:center;color:var(--ro4);font-weight:700">10.7條 ⚠️</td>
+              <td style="padding:5px 8px;text-align:center;color:var(--ro4)">偏緊</td>
+            </tr>
+            <tr style="border-top:1px dashed var(--mg3);background:rgba(134,25,143,.04)">
+              <td style="padding:5px 8px;color:var(--mg);font-weight:700">+$60,000</td>
+              <td style="padding:5px 8px;text-align:center;color:var(--mg)">240條</td>
+              <td style="padding:5px 8px;text-align:center;color:var(--am4);font-weight:700">8條 🟡</td>
+              <td style="padding:5px 8px;text-align:center;color:var(--am4)">努力可達</td>
+            </tr>
+            <tr style="border-top:1px dashed var(--mg3)">
+              <td style="padding:5px 8px;color:var(--mg);font-weight:700">+$30,000</td>
+              <td style="padding:5px 8px;text-align:center;color:var(--mg)">180條</td>
+              <td style="padding:5px 8px;text-align:center;color:var(--te4);font-weight:700">6條 ✅</td>
+              <td style="padding:5px 8px;text-align:center;color:var(--te4)">相對舒適</td>
+            </tr>
+          </table>
+        </div>
+        <div style="background:rgba(134,25,143,.07);border-radius:7px;padding:8px 11px;margin-top:8px;font-size:12.5px;color:var(--mg);line-height:1.75">
+          ⭐ <strong>儀表板最大價值</strong>：讓老闆與主管在同一個數據基礎上，「理智地吵架」——目標是否合理、產能極限在哪、成本漲價怎麼吸收，全部視覺化討論。<strong>這就是在做預算。</strong>
+        </div>
+      </div>
+
+      <!-- 右側: 預算的三大核心功能 -->
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <div class="card-dark">
+          <h3>📋 預算的三大核心功能</h3>
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <div style="background:rgba(232,121,249,.1);border-radius:6px;padding:8px 11px;border:1px solid rgba(232,121,249,.2)">
+              <div style="font-size:12px;font-weight:700;color:var(--mg5);margin-bottom:2px">① 建立目標與壓力感</div>
+              <div style="font-size:12.5px;color:rgba(255,255,255,.8);line-height:1.7">「每天要換8條」比「今年要賺6萬」更讓員工有具體行動方向與危機感——喊業績目標不夠，要換算成<strong style="color:var(--mg5)">每人每日可執行的數字</strong>。</div>
+            </div>
+            <div style="background:rgba(245,158,11,.1);border-radius:6px;padding:8px 11px;border:1px solid rgba(245,158,11,.18)">
+              <div style="font-size:12px;font-weight:700;color:var(--am5);margin-bottom:2px">② 提供比較基礎（預算 vs 實績）</div>
+              <div style="font-size:12.5px;color:rgba(255,255,255,.8);line-height:1.7">YoY比較易受一次性因素影響；「<strong style="color:var(--am5)">實績 vs 預算」的差異分析</strong>更能找到真正的問題點——達標：技師服務好 or 旺季？未達：態度差 or 連日大雨？</div>
+            </div>
+            <div style="background:rgba(45,212,191,.09);border-radius:6px;padding:8px 11px">
+              <div style="font-size:12px;font-weight:700;color:var(--te5);margin-bottom:2px">③ 壓力測試（Stress Test）</div>
+              <div style="font-size:12.5px;color:rgba(255,255,255,.8);line-height:1.7">原料漲100元→邊際貢獻降至400→回本從120條→150條。即時試算<strong style="color:var(--te5)">吸收、共擔、轉嫁</strong>三種方案對業績的影響。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-am">
+          <h3>⏰ 預算好（有意義）的定義</h3>
+          <p>「大家真的做得到、不開玩笑」的數字。老闆憑空喊目標、員工沉默收下，是預算最常見的失敗模式。財務人員的功課是透過儀表板<strong>把可行性攤開在桌上討論</strong>，讓數字從上而下變得可辯證。</p>
+          <div style="background:rgba(146,64,14,.1);border-radius:6px;padding:8px 10px;margin-top:7px;font-size:12.5px;color:var(--am);line-height:1.7">
+            ⚠️ <strong>Rolling Forecast（9月警示）</strong>：年度過了75%（第三季末），若達成率只有55%，基本上已無法追趕——必須提前向董事會說明、找合理解釋，而不是硬撐到年底。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: 預算時程 + 遠通電收 -->
+  <div class="section">
+    <div class="section-label">Part 2 · 預算時程表 · 以終為始的倒推邏輯×遠通電收「說故事」案例</div>
+    <div class="section-title">九月是關鍵：從 Kick-off 到董事會拍板的五個里程碑</div>
+    <div class="grid-23">
+
+      <!-- 時程 -->
+      <div class="card-mg">
+        <h3>📅 上市櫃公司年度預算時程（以終為始）</h3>
+        <div style="font-size:11.5px;color:var(--mg4);margin-bottom:9px">目標：11月26日前董事會拍板 → 往回倒推</div>
+        <ul class="timeline">
+          <li class="tl-item">
+            <span class="tl-date" style="background:rgba(134,25,143,.15);color:var(--mg4)">10月8日</span>
+            <div class="tl-body">
+              <strong>🚀 預算 Kick-off 會議（最關鍵）</strong><br>
+              <span style="font-size:12px;color:var(--sl4)">各部門主管報告2027年要「做什麼新事」——數字前面必須先有<strong>故事（新梗）</strong>，才能讓成長目標可信。光說要成長20%，但沒有新方向，大家都知道你在瞎掰。</span>
+            </div>
+          </li>
+          <li class="tl-item">
+            <span class="tl-date" style="background:rgba(134,25,143,.12);color:var(--mg4)">10月22日</span>
+            <div class="tl-body">
+              <strong>📊 各部門交出第一版預算數字</strong><br>
+              <span style="font-size:12px;color:var(--sl4)">財務部彙整各部門數據，準備整合成全公司版本。</span>
+            </div>
+          </li>
+          <li class="tl-item">
+            <span class="tl-date" style="background:rgba(134,25,143,.1);color:var(--mg4)">11月5日</span>
+            <div class="tl-body">
+              <strong>🗣️ 全公司預算大會（吵架時間）</strong><br>
+              <span style="font-size:12px;color:var(--sl4)">完整版本出爐，各部門主管有兩週時間「理智地吵架」——產能夠嗎？目標合理嗎？現在吵，比董事會前夕崩潰好得多。</span>
+            </div>
+          </li>
+          <li class="tl-item">
+            <span class="tl-date" style="background:rgba(134,25,143,.08);color:var(--mg4)">11月19日</span>
+            <div class="tl-body">
+              <strong>✅ 全公司拍板最終版預算</strong><br>
+              <span style="font-size:12px;color:var(--sl4)">距董事會一週前，所有數字鎖定。不再改動。</span>
+            </div>
+          </li>
+          <li class="tl-item" style="border-bottom:none">
+            <span class="tl-date" style="background:rgba(134,25,143,.2);color:var(--mg4);font-weight:700">11月26日</span>
+            <div class="tl-body">
+              <strong>🏛️ 董事會提報拍板</strong><br>
+              <span style="font-size:12px;color:var(--sl4)">完成年度預算程序。</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 遠通電收說故事 -->
+      <div class="card-am">
+        <h3>🛣️ 遠通電收（FETC）「說故事」真實案例</h3>
+        <div style="font-size:11.5px;color:var(--am4);margin-bottom:9px">ETC高速公路收費→業績怎麼可能成長？——故事給了答案</div>
+        <div style="background:rgba(220,38,38,.07);border-radius:7px;padding:9px 11px;margin-bottom:8px">
+          <div style="font-size:12px;font-weight:700;color:var(--ro4);margin-bottom:3px">困境：傳統業務天花板</div>
+          <div style="font-size:12.5px;color:var(--am);line-height:1.7">高公局交通流量固定，ETC收費業務每年就是那樣。我們總不能預算裡寫「明年颱風少一點、大家多開車」？預算成長無從編起。</div>
+        </div>
+        <div style="background:rgba(146,64,14,.08);border-radius:7px;padding:9px 11px;margin-bottom:8px">
+          <div style="font-size:12px;font-weight:700;color:var(--am4);margin-bottom:3px">故事一：電子收費系統外銷海外</div>
+          <div style="font-size:12.5px;color:var(--am);line-height:1.7">邀請各國來台參訪「多車道自由流（MLFF）」系統→引導海外市場採購。從「預算裡的夢想」，三年後真的在<strong>泰國蓋高速公路ETC</strong>，海外營收突破百億。</div>
+        </div>
+        <div style="background:rgba(146,64,14,.08);border-radius:7px;padding:9px 11px;margin-bottom:8px">
+          <div style="font-size:12px;font-weight:700;color:var(--am4);margin-bottom:3px">故事二：uTagGo APP 停車生態系</div>
+          <div style="font-size:12.5px;color:var(--am);line-height:1.7">與城市車旅（台灣6-7成停車場）合作→持有eTag直接感應扣款，免下車過卡。<strong>以大量資金預購停車時數再轉賣給會員</strong>→初期平白多出1-2億營收，爆發性成長。</div>
+        </div>
+        <div style="background:rgba(13,148,136,.08);border-radius:7px;padding:9px 11px;font-size:12.5px;color:var(--te);line-height:1.7">
+          💡 <strong>核心啟示</strong>：「老狗變不出新把戲」是藉口。遠通總經理快80歲、遠東生技董事長78歲，每天都在想新點子。預算的「故事」必須夠有說服力，讓大家相信這次真的有新梗，不是假的。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: 醫療容量限制 + On Running/Lululemon -->
+  <div class="section">
+    <div class="section-label">Part 3 · 醫療自費翻轉×On Running×Lululemon · 容量限制→提高單價→吃掉消費者剩餘</div>
+    <div class="section-title">當「量」無法增加，「質」（單價/通路/體驗）就是唯一突破口</div>
+    <div class="grid-3">
+
+      <!-- 醫療自費翻轉 -->
+      <div class="card-te">
+        <h3>🏥 醫療產業：容量限制下的翻轉路徑</h3>
+        <div style="background:rgba(15,118,110,.08);border-radius:7px;padding:9px 11px;margin-bottom:8px">
+          <div style="font-size:12px;font-weight:700;color:var(--te4);margin-bottom:3px">核心限制：Capacity Constraints</div>
+          <div style="font-size:12.5px;color:var(--te);line-height:1.7">醫護配比固定×看診時間有限×掛號上限→業績天花板由產能決定，不是努力決定。健保給付價格固定，無法靠「量增」成長。</div>
+        </div>
+        <div style="display:flex;gap:8px;margin-bottom:8px">
+          <div style="flex:1;background:rgba(15,118,110,.07);border-radius:6px;padding:7px 10px;text-align:center">
+            <div style="font-size:11px;color:var(--te4);font-weight:700">既有診所</div>
+            <div style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--te)">6:4</div>
+            <div style="font-size:11px;color:var(--te)">健保:自費</div>
+          </div>
+          <div style="display:flex;align-items:center;font-size:18px;color:var(--te3)">→</div>
+          <div style="flex:1;background:rgba(13,148,136,.12);border-radius:6px;padding:7px 10px;text-align:center;border:1.5px solid var(--te3)">
+            <div style="font-size:11px;color:var(--te4);font-weight:700">板橋新診所</div>
+            <div style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--te4)">4:6</div>
+            <div style="font-size:11px;color:var(--te4)">健保:自費（翻轉！）</div>
+          </div>
+        </div>
+        <div style="font-size:12.5px;color:var(--te);line-height:1.75;margin-bottom:7px">
+          類比：<strong>美光（Micron）</strong>因產能受限5年未擴廠→AI需求爆發→直接測試最高願付價格拉高報價。<br>
+          核心邏輯一樣：<strong>當你的產品稀缺 + 消費者信任，就有定價能力。</strong>
+        </div>
+        <div style="background:rgba(13,148,136,.08);border-radius:6px;padding:8px 11px;font-size:12.5px;color:var(--te);line-height:1.7;border:1px solid var(--te3)">
+          📊 <strong>預算換算方式</strong>：每5個病人，至少1個選自費高毛利服務（20%配比）→這個目標具體可衡量，服務端也知道如何執行（例如：塗氟健保vs自費高效版的主動介紹）。
+        </div>
+      </div>
+
+      <!-- On Running -->
+      <div class="card-mg">
+        <h3>👟 On Running：三個財報解碼</h3>
+        <div style="background:rgba(134,25,143,.08);border-radius:7px;padding:9px 11px;margin-bottom:8px">
+          <div style="font-size:12px;font-weight:700;color:var(--mg4);margin-bottom:3px">① 淨利「3.56倍」的真相</div>
+          <div class="fin-row">
+            <div class="fin-b" style="background:rgba(220,38,38,.1)">
+              <div class="fin-v" style="color:var(--ro4)">×3.56倍</div>
+              <div class="fin-l" style="color:var(--ro)">GAAP淨利<br>（標題數字）</div>
+            </div>
+            <div class="fin-arr">≠</div>
+            <div class="fin-b" style="background:rgba(13,148,136,.1)">
+              <div class="fin-v" style="color:var(--te4)">+28%</div>
+              <div class="fin-l" style="color:var(--te)">營業利益<br>（真實本業）</div>
+            </div>
+          </div>
+          <div style="font-size:12px;color:var(--mg);line-height:1.65">去年鉅額瑞郎<strong>外匯損失（一次性）</strong>使低基期→今年比較基期失真。剔除後本業成長28%，依然優秀但不是3.56倍。</div>
+        </div>
+        <div style="background:rgba(134,25,143,.08);border-radius:7px;padding:9px 11px;margin-bottom:8px">
+          <div style="font-size:12px;font-weight:700;color:var(--mg4);margin-bottom:3px">② 毛利率61.5%→65% 的秘密</div>
+          <div style="font-size:12.5px;color:var(--mg);line-height:1.75">營收+13%，但銷貨成本只+2%——不是成本下降，是<strong>DTC直營通路配比提升</strong>。直營不打折，守住全額定價，利潤完全留在自己手裡，不讓給經銷商折扣。</div>
+        </div>
+        <div style="background:rgba(134,25,143,.08);border-radius:7px;padding:9px 11px">
+          <div style="font-size:12px;font-weight:700;color:var(--mg4);margin-bottom:3px">③ 體驗式行銷：吃掉消費者剩餘</div>
+          <div style="font-size:12.5px;color:var(--mg);line-height:1.75">現場提供跑鞋穿著跑3公里→身體記住「踩在雲端」的腳感→「$5000元很值！」從此心甘情願。Rock自己拿VIP七折，一次包色買兩雙。<br><strong>這就是測試到最高願付價格的品牌策略。</strong></div>
+        </div>
+      </div>
+
+      <!-- Lululemon + 總結 -->
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="card-ro">
+          <h3>🧘 Lululemon：盛衰的商業現實</h3>
+          <div style="font-size:12.5px;color:var(--ro);line-height:1.75;margin-bottom:7px">一開始靠高端×不打折×社群體驗崛起（策略與On Running如出一轍），但面臨新興競爭對手 <strong>Alo Yoga</strong> 的強力夾擊，品牌動能已見衰退。</div>
+          <div style="background:rgba(153,27,27,.08);border-radius:6px;padding:8px 11px;font-size:12.5px;color:var(--ro);line-height:1.7">
+            Q2時主動宣布「今年預算目標打不到」→策略性提前釋放壓力：差太多了，若Q3才承認，市場會質疑「你兩個月前為什麼沒發現？」→信譽更傷。<strong>不硬撐，是上市公司IR的誠信策略。</strong>
+          </div>
+        </div>
+        <div class="card-dark">
+          <h3>🔗 三主題共同邏輯</h3>
+          <div style="font-size:12.5px;color:rgba(255,255,255,.82);line-height:1.8">
+            產能受限（醫療×美光×遠通）→唯一出路是<strong style="color:var(--mg5)">提高單價或開發新品項</strong><br><br>
+            財報迷霧（On 3.56x）→永遠要<strong style="color:var(--am5)">剔除一次性因素看本業</strong><br><br>
+            品牌護城河（On DTC×體驗）→守住定價能力才能<strong style="color:var(--te5)">吃掉消費者剩餘</strong><br><br>
+            預算本質（拆胎機→一天4條）→把<strong style="color:var(--mg5)">公式翻譯成老闆能感知的語言</strong>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="ft-brand">Rock 老師 · 蕭啟漢 · April 學員 · 0905</div>
+  <div class="ft-note">損益兩平老闆語言（拆胎機×一天4條）× 預算Kick-off 10/8→11/26時程 × 遠通電收說故事 × 醫療容量限制×自費翻轉 × On Running DTC毛利65%×體驗吃掉消費者剩餘 × Lululemon盛衰</div>
+</div>
+
+</body>
+</html>
