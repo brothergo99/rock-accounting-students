@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>記帳士 Day 07｜保留盈餘及每股盈餘</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F7F8F5;--paper-2:#EFF1EC;--ink:#1B2A33;--ink-soft:#4A5A63;
+  --rule:#C6CFC9;--rule-soft:#DDE2DC;--ledger:#1F5B4E;--ledger-tint:#E7F0EC;
+  --redink:#B03A2E;--red-tint:#F7E9E7;--mark:#FFF3C4;--max:74rem;
+  --serif:"Noto Serif TC",Georgia,"Songti TC","PMingLiU",serif;
+  --sans:"Noto Sans TC",-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:16.5px;line-height:1.85;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(1rem,4vw,3rem)}
+h1,h2,h3,h4{font-family:var(--serif);line-height:1.35;margin:0}
+p{margin:0 0 .9em}ul,ol{margin:0 0 1em;padding-left:1.35em}li{margin:.3em 0}
+a{color:var(--ledger)}
+.num{font-variant-numeric:tabular-nums}
+
+header.masthead{border-bottom:3px double var(--ink);
+  background:linear-gradient(180deg,#fff 0%,var(--paper) 100%);padding:2.6rem 0 1.4rem}
+.mast-row{display:flex;flex-wrap:wrap;align-items:flex-end;gap:1rem 2rem;justify-content:space-between}
+.mast-day{font-family:var(--serif);font-weight:900;font-size:clamp(2.1rem,5.5vw,3.4rem);letter-spacing:.02em}
+.mast-day small{display:block;font-family:var(--sans);font-weight:500;font-size:.92rem;
+  letter-spacing:.22em;color:var(--ink-soft);margin-bottom:.35rem}
+.freq{display:inline-flex;align-items:baseline;gap:.45rem;border:1px solid var(--redink);
+  color:var(--redink);background:var(--red-tint);padding:.3rem .8rem;border-radius:2px;
+  font-size:.9rem;font-weight:700}
+.mast-note{max-width:54ch;color:var(--ink-soft);font-size:.95rem;margin:.9rem 0 0}
+
+.scoreboard{margin:2.2rem 0 0;border-top:1px solid var(--rule);padding-top:1.2rem}
+.sb-title{font-size:1rem;font-weight:700;font-family:var(--serif);margin-bottom:.2rem}
+.sb-sub{font-size:.85rem;color:var(--ink-soft);margin-bottom:.9rem}
+table.ledger{width:100%;border-collapse:collapse;font-size:.94rem}
+table.ledger th,table.ledger td{padding:.42rem .6rem;border-bottom:1px solid var(--rule-soft)}
+table.ledger thead th{border-bottom:1px solid var(--ink);font-family:var(--serif);
+  font-weight:700;font-size:.88rem;text-align:right}
+table.ledger thead th:first-child{text-align:left}
+table.ledger td:first-child,table.ledger th:first-child{text-align:left}
+table.ledger td{text-align:right;font-variant-numeric:tabular-nums}
+table.ledger tr.total td{border-top:1px solid var(--ink);border-bottom:3px double var(--ink);font-weight:700}
+table.ledger tr.focus td{background:var(--mark)}
+.dash{color:#9AA6A0}
+
+nav.toc{position:sticky;top:0;z-index:30;background:rgba(247,248,245,.94);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+nav.toc ul{display:flex;gap:0;list-style:none;margin:0;padding:0;overflow-x:auto}
+nav.toc a{display:block;white-space:nowrap;padding:.75rem .95rem;font-size:.88rem;
+  text-decoration:none;color:var(--ink-soft);border-bottom:2px solid transparent}
+nav.toc a:hover,nav.toc a:focus-visible{color:var(--ledger);border-bottom-color:var(--ledger)}
+
+section{padding:3rem 0 .5rem;border-top:1px solid var(--rule-soft)}
+section:first-of-type{border-top:none}
+.sec-head{display:flex;align-items:baseline;gap:.8rem;margin-bottom:1.4rem;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(1.4rem,3vw,1.9rem);font-weight:700}
+.sec-head .tag{font-size:.78rem;color:var(--ink-soft);border:1px solid var(--rule);
+  padding:.1rem .5rem;border-radius:2px;white-space:nowrap}
+h3{font-size:1.12rem;margin:1.9rem 0 .6rem;font-weight:700}
+h3::before{content:"";display:inline-block;width:.42rem;height:.42rem;background:var(--ledger);
+  margin-right:.55rem;vertical-align:.18em}
+h4{font-size:1rem;margin:1.2rem 0 .4rem;color:var(--ledger)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(19rem,1fr));gap:0 2.6rem}
+.measure{max-width:72ch}
+
+mark{background:var(--mark);padding:0 .12em}
+.must{display:inline-block;background:var(--redink);color:#fff;font-size:.72rem;font-weight:700;
+  padding:.05rem .42rem;border-radius:2px;vertical-align:.14em;margin-left:.4rem;letter-spacing:.05em}
+.callout{border-left:3px solid var(--redink);background:var(--red-tint);padding:.85rem 1.1rem;
+  margin:1.1rem 0;font-size:.95rem}
+.callout .h{font-weight:700;color:var(--redink);display:block;margin-bottom:.2rem}
+.rule-box{border:1px solid var(--rule);background:#fff;padding:1rem 1.15rem;margin:1.1rem 0}
+.rule-box .h{font-family:var(--serif);font-weight:700;margin-bottom:.5rem}
+
+table.je{width:100%;max-width:34rem;border-collapse:collapse;font-variant-numeric:tabular-nums;
+  font-size:.95rem;margin:.7rem 0 1.2rem;background:#fff;border:1px solid var(--rule-soft)}
+table.je caption{caption-side:top;text-align:left;font-size:.85rem;color:var(--ink-soft);
+  padding:.35rem .6rem;background:var(--paper-2);border-bottom:1px solid var(--rule-soft)}
+table.je td{padding:.3rem .7rem;border:none}
+table.je td.dr{padding-left:.9rem}
+table.je td.cr{padding-left:3rem;color:var(--ledger)}
+table.je td.amt{text-align:right;width:8.5rem}
+
+.formula-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1px;
+  background:var(--rule-soft);border:1px solid var(--rule-soft);margin:1rem 0}
+.fcard{background:#fff;padding:.95rem 1.05rem}
+.fcard .fname{font-weight:700;font-size:.95rem;margin-bottom:.5rem}
+.fcard .fnote{font-size:.83rem;color:var(--ink-soft);margin-top:.5rem;line-height:1.6}
+.frac{display:inline-flex;flex-direction:column;text-align:center;vertical-align:middle;margin:0 .15em}
+.frac>span:first-child{border-bottom:1.5px solid var(--ink);padding:0 .35em .1em}
+.frac>span:last-child{padding:.1em .35em 0}
+.eq{display:flex;align-items:center;flex-wrap:wrap;gap:.3em;font-size:.95rem;font-variant-numeric:tabular-nums}
+
+/* 保留盈餘 T 字帳 */
+.tacct{max-width:44rem;margin:1.1rem 0;background:#fff;border:1px solid var(--rule)}
+.tacct .cap{text-align:center;font-family:var(--serif);font-weight:700;padding:.6rem;
+  border-bottom:1px solid var(--ink)}
+.tacct .body{display:grid;grid-template-columns:1fr 1px 1fr}
+.tacct .side{padding:.8rem 1.1rem}
+.tacct .divider{background:var(--ink)}
+.tacct .sh{font-size:.85rem;font-weight:700;margin-bottom:.4rem;text-align:center}
+.tacct .minus .sh{color:var(--redink)}
+.tacct .plus .sh{color:var(--ledger)}
+.tacct ol{margin:0;padding-left:1.3em;font-size:.93rem}
+
+/* 計算器 */
+.calc{border:2px solid var(--ledger);background:#fff;margin:1.6rem 0}
+.calc-head{background:var(--ledger);color:#fff;padding:.7rem 1.1rem;font-family:var(--serif);font-weight:700}
+.calc-head span{display:block;font-family:var(--sans);font-weight:400;font-size:.83rem;opacity:.85}
+.calc-body{padding:1.1rem}
+.crow{display:flex;gap:.6rem;align-items:center;margin-bottom:.5rem;flex-wrap:wrap}
+.crow label{font-size:.83rem;color:var(--ink-soft)}
+.calc input,.calc select{font:inherit;font-size:.92rem;font-variant-numeric:tabular-nums;
+  padding:.35rem .5rem;border:1px solid var(--rule);border-radius:2px;background:var(--paper);color:var(--ink)}
+.calc input:focus-visible,.calc select:focus-visible{outline:2px solid var(--ledger);outline-offset:1px}
+.calc input[type=number]{width:8rem}
+#ev-table{width:100%;border-collapse:collapse;font-size:.92rem;margin:.8rem 0}
+#ev-table th{text-align:left;font-size:.8rem;color:var(--ink-soft);font-weight:500;
+  padding:.2rem .35rem;border-bottom:1px solid var(--rule-soft)}
+#ev-table td{padding:.25rem .35rem;vertical-align:middle}
+#ev-table select{width:100%;min-width:9rem}
+#ev-table input{width:100%}
+.xbtn{font:inherit;font-size:.9rem;line-height:1;cursor:pointer;background:none;
+  border:1px solid var(--rule);color:var(--ink-soft);padding:.32rem .55rem;border-radius:2px}
+.xbtn:hover{border-color:var(--redink);color:var(--redink)}
+.btnrow{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.4rem}
+.btnrow button{font:inherit;font-size:.86rem;cursor:pointer;padding:.35rem .85rem;border-radius:2px;
+  border:1px solid var(--rule);background:var(--paper-2);color:var(--ink)}
+.btnrow button:hover{border-color:var(--ledger);color:var(--ledger)}
+.btnrow button.primary{background:var(--ledger);color:#fff;border-color:var(--ledger)}
+.calc-out{margin-top:1.1rem;border-top:1px solid var(--rule);padding-top:.9rem;font-size:.94rem}
+.calc-out table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:.9rem}
+.calc-out th{text-align:right;font-size:.8rem;color:var(--ink-soft);font-weight:500;
+  padding:.25rem .5rem;border-bottom:1px solid var(--ink)}
+.calc-out th:first-child{text-align:left}
+.calc-out td{text-align:right;padding:.25rem .5rem;border-bottom:1px solid var(--rule-soft)}
+.calc-out td:first-child{text-align:left}
+.calc-out tr.total td{border-top:1px solid var(--ink);border-bottom:3px double var(--ink);font-weight:700}
+.warn{color:var(--redink);font-size:.9rem}
+
+/* 練習題 */
+.q{border:1px solid var(--rule);background:#fff;margin:1rem 0;padding:1rem 1.15rem}
+.q-head{display:flex;gap:.6rem;align-items:baseline;margin-bottom:.6rem}
+.q-no{font-family:var(--serif);font-weight:900;color:var(--ledger);font-size:1.05rem;min-width:1.8rem}
+.q-src{margin-left:auto;font-size:.78rem;color:var(--ink-soft);white-space:nowrap}
+.q-stem{font-size:.98rem}
+.opts{list-style:none;margin:.7rem 0 0;padding:0;display:grid;gap:.35rem}
+.opts button{width:100%;text-align:left;font:inherit;font-size:.94rem;cursor:pointer;
+  border:1px solid var(--rule-soft);background:var(--paper);color:var(--ink);
+  padding:.45rem .75rem;border-radius:2px}
+.opts button:hover{border-color:var(--ledger)}
+.opts button:focus-visible{outline:2px solid var(--ledger);outline-offset:1px}
+.opts button.right{background:var(--ledger-tint);border-color:var(--ledger);font-weight:700}
+.opts button.wrong{background:var(--red-tint);border-color:var(--redink);text-decoration:line-through}
+.opts button[disabled]{cursor:default}
+.sol{margin-top:.8rem;border-left:3px solid var(--ledger);background:var(--ledger-tint);
+  padding:.7rem 1rem;font-size:.93rem}
+.sol .h{font-weight:700;color:var(--ledger);margin-bottom:.25rem}
+.sol[hidden]{display:none}
+.reveal{font:inherit;font-size:.86rem;margin-top:.7rem;cursor:pointer;background:none;
+  border:1px solid var(--rule);color:var(--ink-soft);padding:.3rem .8rem;border-radius:2px}
+.reveal:hover{border-color:var(--ledger);color:var(--ledger)}
+.calcsteps{font-variant-numeric:tabular-nums;font-size:.92rem}
+.calcsteps div{padding:.1rem 0}
+
+.scorebar{position:sticky;bottom:0;z-index:20;background:var(--ink);color:#fff;
+  display:flex;align-items:center;gap:1rem;flex-wrap:wrap;padding:.6rem clamp(1rem,4vw,3rem);font-size:.9rem}
+.scorebar b{font-variant-numeric:tabular-nums;font-size:1.05rem}
+.scorebar button{margin-left:auto;font:inherit;font-size:.85rem;cursor:pointer;background:none;
+  border:1px solid rgba(255,255,255,.4);color:#fff;padding:.28rem .8rem;border-radius:2px}
+.scorebar button:hover{background:rgba(255,255,255,.12)}
+
+footer{padding:2.5rem 0 3.5rem;border-top:3px double var(--ink);margin-top:3rem;
+  font-size:.86rem;color:var(--ink-soft)}
+
+@media print{
+  nav.toc,.scorebar,.reveal,.q-src,.btnrow,.xbtn{display:none!important}
+  .sol[hidden]{display:block!important}
+  body{font-size:11pt;background:#fff}
+  .q,.rule-box,table.je,.tacct{break-inside:avoid}
+  section{padding-top:1.2rem}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="mast-row">
+      <div><div class="mast-day"><small>記帳士｜會計學概要</small>Day 07　保留盈餘及每股盈餘</div></div>
+      <div class="freq">出題頻率　A　高</div>
+    </div>
+    <p class="mast-note">保留盈餘看出公司累計尚未分配的獲利；每股盈餘則是投資人最關心的數字，因為它直接回答「每一股賺多少錢」。兩者共用同一組權益交易，所以考題常把它們綁在一起出。</p>
+
+    <div class="scoreboard">
+      <div class="sb-title">近三年命題落點（會計學概要）</div>
+      <div class="sb-sub">灰底為本單元範圍。申論題共 50 分、選擇題共 50 分，此處為兩者加總。</div>
+      <table class="ledger">
+        <thead><tr><th>內容</th><th>112 年</th><th>113 年</th><th>114 年</th></tr></thead>
+        <tbody>
+          <tr><td>現金及約當現金</td><td>5</td><td>17.5</td><td>5</td></tr>
+          <tr><td>應收帳款</td><td>2.5</td><td>2.5</td><td>5</td></tr>
+          <tr><td>存貨</td><td>10</td><td>28</td><td>34.5</td></tr>
+          <tr><td>不動產、廠房及設備</td><td>22</td><td>5</td><td>20</td></tr>
+          <tr><td>負債與投資</td><td>27</td><td>12.5</td><td>25.5</td></tr>
+          <tr><td>業主權益</td><td>2.5</td><td>10</td><td class="dash">—</td></tr>
+          <tr class="focus"><td>保留盈餘及每股盈餘</td><td>2.5</td><td>5</td><td>2.5</td></tr>
+          <tr><td>獨資、合夥會計</td><td>7.5</td><td>2.5</td><td>5</td></tr>
+          <tr><td>現金流量表</td><td>18.5</td><td>5</td><td>2.5</td></tr>
+          <tr><td>財務報表分析</td><td>2.5</td><td>12</td><td class="dash">—</td></tr>
+          <tr class="total"><td>本單元小計</td><td>2.5</td><td>5</td><td>2.5</td></tr>
+        </tbody>
+      </table>
+      <p class="mast-note"><b>三年平均 3.3 分，但三年全中，沒有一年缺席。</b>這是本科少數「配分不高卻穩定必考」的單元——投入報酬結構跟存貨那種大分題完全不同：這裡的分數靠一條公式加一張時間軸就能拿滿，而且錯了通常是整題錯。用兩小時把加權平均股數練熟，是全書 CP 值最高的兩小時之一。</p>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="章節導覽">
+  <div class="wrap">
+    <ul>
+      <li><a href="#s1">保留盈餘</a></li>
+      <li><a href="#s2">EPS 定義</a></li>
+      <li><a href="#s3">分子：特別股股利</a></li>
+      <li><a href="#s4">分母：加權平均股數</a></li>
+      <li><a href="#s5">股數計算器</a></li>
+      <li><a href="#s6">完整範例</a></li>
+      <li><a href="#s7">權益交易分錄</a></li>
+      <li><a href="#s8">兩個分母之爭</a></li>
+      <li><a href="#s9">選擇題</a></li>
+      <li><a href="#s10">計算題</a></li>
+      <li><a href="#s11">易錯清單</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ═══ 1 保留盈餘 ═══ -->
+<section id="s1">
+  <div class="sec-head"><h2>一、保留盈餘</h2><span class="tag">觀念題</span></div>
+  <div class="measure">
+    <p>保留盈餘或累積虧損，指由營業結果所產生之權益。經由綜合損益表計算出的<b>本期淨利（淨損）</b>，與其他影響保留盈餘的項目共同構成保留盈餘之內容。保留盈餘為資產負債表<b>股東權益</b>之一項。</p>
+  </div>
+
+  <div class="tacct">
+    <div class="cap">保留盈餘</div>
+    <div class="body">
+      <div class="side minus">
+        <div class="sh">（減少）</div>
+        <ol>
+          <li>本期淨損</li>
+          <li>前期損益調整</li>
+          <li>股利分配</li>
+          <li>庫藏股票交易</li>
+          <li>特別股之收回與轉換</li>
+        </ol>
+      </div>
+      <div class="divider"></div>
+      <div class="side plus">
+        <div class="sh">（增加）</div>
+        <ol>
+          <li>本期淨利</li>
+          <li>前期損益調整</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="measure">
+    <div class="callout">
+      <span class="h">前期損益調整為什麼兩邊都有</span>
+      更正前期錯誤時，方向取決於錯誤性質。<b>前期少計費用</b>（例如漏提折舊）→ 更正時保留盈餘<b>減少</b>；<b>前期多計費用</b>或漏計收入 → 保留盈餘<b>增加</b>。考題若只說「前期損益調整」而不說方向，是不完整的題目；實際考題一定會描述錯誤內容。
+    </div>
+    <div class="callout">
+      <span class="h">庫藏股票「交易」不等於「買回」</span>
+      買回庫藏股本身借記庫藏股票、貸記現金，<mark>不動保留盈餘</mark>。只有在<b>以低於取得成本出售</b>，且「資本公積—庫藏股票交易」餘額<b>不足沖抵</b>時，超過的部分才沖減保留盈餘。這是 111 年考題的關鍵一步，也是最多人漏掉的一步。
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 2 EPS 定義 ═══ -->
+<section id="s2">
+  <div class="sec-head"><h2>二、每股盈餘（EPS）定義</h2><span class="tag">觀念題</span></div>
+  <div class="cols measure">
+    <div>
+      <p>每股盈餘指每一普通股在某一報導期間所賺得的淨利或發生的淨損，通常作為評估公司獲利能力的指標，是財務報表使用者最關切的項目之一。</p>
+      <p>由於特別股每期所能賺得者通常為<b>固定金額</b>，故每股盈餘係針對<b>普通股</b>而言，對特別股並無特殊意義。每股盈餘分為<b>基本每股盈餘</b>與<b>稀釋每股盈餘</b>兩種，記帳士考科以基本每股盈餘為主。</p>
+    </div>
+    <div>
+      <div class="callout">
+        <span class="h">命題考點：分子是稅後</span>
+        計算每股盈餘時，分子之「本期淨利」為<b>稅後淨利</b>。但因為題目沒有特別股需要納所得稅，<mark>以題目所給的本期淨利為主</mark>——考題若直接給「本期淨利」，不必再自行乘稅後係數。
+      </div>
+    </div>
+  </div>
+
+  <div class="formula-grid">
+    <div class="fcard">
+      <div class="fname">基本每股盈餘<span class="must">必考</span></div>
+      <div class="eq"><span class="frac"><span>本期淨利 － 本期特別股股利</span><span>普通股加權平均流通在外股數</span></span></div>
+      <div class="fnote">分子必須自本期淨利中減除本期特別股股利，始得本期普通股賺得的淨利；分母則要按普通股實際流通在外情形計算全年流通在外的加權平均數。</div>
+    </div>
+  </div>
+  <p class="measure">整個單元的難度全部集中在這條公式的兩個位置：<b>分子減多少</b>（第三節）與<b>分母怎麼算</b>（第四節）。分開練，不要一起練。</p>
+</section>
+
+<!-- ═══ 3 分子 ═══ -->
+<section id="s3">
+  <div class="sec-head"><h2>三、分子：本期特別股股利要減多少</h2><span class="tag">送分或全錯</span></div>
+  <p class="measure">這一節只有三條規則，但每一條都被考過。決策順序：<b>先看是不是累積特別股，再看當年度有沒有宣告。</b></p>
+
+  <div class="formula-grid">
+    <div class="fcard">
+      <div class="fname" style="color:var(--redink)">累積特別股</div>
+      <div class="fnote"><b>當年度股利不論是否發放，均應自本期淨利（損）中減除。</b>若有積欠股利者，<mark>亦只減除當年度之特別股股利</mark>。</div>
+    </div>
+    <div class="fcard">
+      <div class="fname" style="color:var(--ledger)">非累積特別股</div>
+      <div class="fnote">僅有<b>當年度宣告發放</b>股利時才須自本期淨利（損）中減除。當年度未宣告即不減。</div>
+    </div>
+    <div class="fcard">
+      <div class="fname">過去年度積欠之股利</div>
+      <div class="fnote"><b>與本年度每股盈餘之計算無關。</b>積欠多少年、金額多大，都不影響本年度分子。</div>
+    </div>
+  </div>
+
+  <div class="callout measure">
+    <span class="h">110 年考題就靠這一條決勝</span>
+    不可轉換、累積特別股每年股利 $22,000，X9 年初已積欠 2 年尚未發放。X9 年中宣告特別股股利 $58,000、實際發放 $55,000。計算 X9 年 EPS 時應減除多少？<br>
+    答案是 <b>$22,000</b>——不是宣告的 $58,000，也不是發放的 $55,000。累積特別股只減<b>當年度應有</b>的股利，宣告或發放的金額中包含補發積欠部分，與本年度 EPS 無關。
+  </div>
+
+  <div class="rule-box measure">
+    <div class="h">特別股股利怎麼算金額</div>
+    <div class="calcsteps">
+      <div>特別股股利 ＝ 特別股股數 × <b>面額</b> × <b>股利率</b></div>
+      <div style="color:var(--redink)">注意是面額不是市價，也不是發行價。題目給「資本公積—特別股發行溢價」是來混淆的。</div>
+      <div style="height:.4rem"></div>
+      <div>例：20,000 股 × 面額 $100 × 6% ＝ <b>$120,000</b></div>
+      <div>例：8,000 股 × 面額 $50 × 8% ＝ <b>$32,000</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 4 分母 ═══ -->
+<section id="s4">
+  <div class="sec-head"><h2>四、分母：普通股加權平均流通在外股數</h2><span class="tag">必考核心</span></div>
+  <div class="measure">
+    <p>計算每股盈餘的第一步，就是算出普通股加權平均流通在外股數。<mark>請務必先將各期間流通在外股數以圖表列示</mark>，再逐段加權。用心算的失分率極高。</p>
+    <p><b>若有股票股利及股份分割，則應追溯至期初起算。</b></p>
+  </div>
+
+  <h3>兩類事件，兩種處理</h3>
+  <div class="formula-grid">
+    <div class="fcard">
+      <div class="fname" style="color:var(--ledger)">A 類：資金真的進出</div>
+      <div class="fnote">現金發行新股、合併增資發行、買回庫藏股、出售庫藏股。<br><b>從事件日起</b>按時間加權，<b>不追溯</b>。因為公司在該日之後才真正多（少）了那筆資金去賺錢。</div>
+    </div>
+    <div class="fcard">
+      <div class="fname" style="color:var(--redink)">B 類：只是把餅切更細</div>
+      <div class="fnote">股票股利、股份分割。<br><b>追溯至期初</b>，該事件<b>之前</b>的每一段都要乘上調整倍數。因為股東的實質權益完全沒變，只是股數變多，若不追溯會使前後期 EPS 不可比較。</div>
+    </div>
+  </div>
+
+  <div class="callout measure">
+    <span class="h">追溯的判準：這段期間是「在事件之前」嗎？</span>
+    某一段區間要不要乘調整倍數，只問一句話：<b>這段的起點，是不是在該股票股利／分割事件之前？</b>是 → 乘；否（起點就在事件當日或之後，股數已含調整）→ 不乘。<br>
+    兩個 B 類事件同時存在時，倍數<b>連乘</b>。例：5/1 發放 20% 股票股利、11/1 一股分割為二股，則 1/1～3/1 這段要乘 1.2 × 2 ＝ 2.4。
+  </div>
+
+  <div class="rule-box measure">
+    <div class="h">標準解題流程</div>
+    <ol>
+      <li>畫時間軸，標出每個事件日與該日<b>之後</b>的實際流通在外股數。</li>
+      <li>切成若干區間，寫下每區間的<b>實際流通在外股數</b>與<b>占全年比例</b>（幾個月 ÷ 12）。</li>
+      <li>逐段判斷是否需要<b>追溯調整</b>，列出倍數。</li>
+      <li>三者相乘得各段加權股數，加總。</li>
+      <li>算特別股股利，代入公式。</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═══ 5 計算器 ═══ -->
+<section id="s5">
+  <div class="sec-head"><h2>五、加權平均股數計算器</h2><span class="tag">自我驗算</span></div>
+  <p class="measure">先自己畫時間軸算一次，再用這個對答案。工具會把每一段的追溯倍數列出來，錯在哪一段一目了然。</p>
+
+  <div class="calc">
+    <div class="calc-head">普通股加權平均流通在外股數<span>事件依月份排序，股票股利與股份分割自動追溯至期初</span></div>
+    <div class="calc-body">
+      <div class="crow">
+        <label for="open-sh">期初（1/1）流通在外股數</label>
+        <input id="open-sh" type="number" inputmode="numeric" value="200000">
+        <label for="ni">本期淨利</label>
+        <input id="ni" type="number" inputmode="numeric" value="">
+        <label for="pd">本期應減除特別股股利</label>
+        <input id="pd" type="number" inputmode="numeric" value="">
+      </div>
+
+      <table id="ev-table">
+        <thead><tr><th style="width:6rem">月份</th><th>事件</th><th style="width:9rem">數值</th><th style="width:3rem"></th></tr></thead>
+        <tbody id="ev-body"></tbody>
+      </table>
+
+      <div class="btnrow">
+        <button type="button" id="add-ev">新增事件</button>
+        <button type="button" id="load-1">載入範例一</button>
+        <button type="button" id="load-2">載入 113 年考題</button>
+        <button type="button" id="clear-ev">清空</button>
+      </div>
+
+      <div class="calc-out" id="calc-out" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 6 完整範例 ═══ -->
+<section id="s6">
+  <div class="sec-head"><h2>六、完整範例</h2><span class="tag">一題含七個事件</span></div>
+
+  <h3>範例一：七個事件的加權平均</h3>
+  <div class="measure">
+    <div class="rule-box">
+      <div class="h">甲公司某年度普通股有關資料</div>
+      <ul style="font-size:.94rem">
+        <li>A. 1/1 普通股流通在外 200,000 股</li>
+        <li>B. 3/1 現金發行新股 60,000 股</li>
+        <li>C. 4/1 購回庫藏股 40,000 股</li>
+        <li>D. 5/1 發放股票股利 20%</li>
+        <li>E. 6/1 合併乙公司增資 30,000 股</li>
+        <li>F. 8/1 出售庫藏股 36,000 股</li>
+        <li>G. 11/1 將 1 股份分割成 2 股</li>
+      </ul>
+      <p style="font-size:.93rem;margin-top:.7rem">追溯倍數來源只有兩個：D（×1.2）與 G（×2）。</p>
+      <table class="ledger" style="max-width:44rem">
+        <thead><tr><th>流通在外期間</th><th>實際流通股數</th><th>占全年</th><th>追溯調整</th><th>加權股數</th></tr></thead>
+        <tbody>
+          <tr><td>1/1 ～ 3/1</td><td>200,000</td><td>2/12</td><td>×1.2 ×2</td><td>80,000</td></tr>
+          <tr><td>3/1 ～ 4/1</td><td>260,000</td><td>1/12</td><td>×1.2 ×2</td><td>52,000</td></tr>
+          <tr><td>4/1 ～ 5/1</td><td>220,000</td><td>1/12</td><td>×1.2 ×2</td><td>44,000</td></tr>
+          <tr><td>5/1 ～ 6/1</td><td>264,000</td><td>1/12</td><td>×2</td><td>44,000</td></tr>
+          <tr><td>6/1 ～ 8/1</td><td>294,000</td><td>2/12</td><td>×2</td><td>98,000</td></tr>
+          <tr><td>8/1 ～ 11/1</td><td>330,000</td><td>3/12</td><td>×2</td><td>165,000</td></tr>
+          <tr><td>11/1 ～ 12/31</td><td>660,000</td><td>2/12</td><td class="dash">—</td><td>110,000</td></tr>
+          <tr class="total"><td>合計</td><td></td><td></td><td></td><td>593,000</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:.9rem;color:var(--ink-soft);margin-top:.5rem">注意 5/1 之後的 264,000 股已經含了 20% 股票股利，所以該段只再乘 ×2；11/1 之後的 660,000 股兩個調整都含了，不再乘。</p>
+    </div>
+  </div>
+
+  <h3>範例二：加上特別股，算出 EPS</h3>
+  <div class="measure">
+    <div class="rule-box">
+      <div class="h">甲公司 X9 年</div>
+      <p style="font-size:.93rem">1/1 流通在外普通股 30,000 股，4/1 買回 6,000 股，9/1 現金增資發行 24,000 股。另有 6%、面額 $100 之<b>累積特別股</b> 20,000 股全年流通在外。X9 年度稅後淨利 $321,000。</p>
+      <table class="ledger" style="max-width:38rem">
+        <thead><tr><th>流通在外期間</th><th>實際流通股數</th><th>占全年</th><th>加權股數</th></tr></thead>
+        <tbody>
+          <tr><td>1/1 ～ 4/1</td><td>30,000</td><td>3/12</td><td>7,500</td></tr>
+          <tr><td>4/1 ～ 9/1</td><td>24,000</td><td>5/12</td><td>10,000</td></tr>
+          <tr><td>9/1 ～ 12/31</td><td>48,000</td><td>4/12</td><td>16,000</td></tr>
+          <tr class="total"><td>合計</td><td></td><td></td><td>33,500</td></tr>
+        </tbody>
+      </table>
+      <div class="calcsteps" style="margin-top:.7rem">
+        <div>特別股股利：20,000 股 × $100 × 6% ＝ $120,000</div>
+        <div>每股盈餘：($321,000 － $120,000) ÷ 33,500 股 ＝ <b>$6</b></div>
+      </div>
+      <p style="font-size:.93rem;margin-top:.8rem">綜合損益表表達：本期淨利 $321,000 之下另列一行「每股盈餘　$6」。<mark>每股盈餘須列示於綜合損益表之中</mark>，不是附註揭露。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 7 分錄 ═══ -->
+<section id="s7">
+  <div class="sec-head"><h2>七、權益交易分錄與保留盈餘結轉</h2><span class="tag">114 考題</span></div>
+  <div class="measure">
+    <div class="rule-box">
+      <div class="h">甲公司 X1 年初權益</div>
+      <p style="font-size:.93rem">普通股本（每股面值 $10）$200,000；資本公積—普通股股票溢價 $700,000；保留盈餘 $382,400。<br>
+      X1 年交易：4/1 以每股 $30 買回庫藏股 1,000 股；7/1 發行新股 5,000 股，每股 $40；8/15 宣告每股 $1.5 現金股利；9/1 以每股 $35 賣出庫藏股 600 股；10/1 發放 8/15 宣告之現金股利。本期淨利 $87,800。</p>
+    </div>
+
+    <table class="je"><caption>4/1　買回庫藏股　1,000 股 × $30</caption>
+      <tr><td class="dr">庫藏股票</td><td class="amt">30,000</td><td class="amt"></td></tr>
+      <tr><td class="cr">　現金</td><td class="amt"></td><td class="amt">30,000</td></tr></table>
+
+    <table class="je"><caption>7/1　發行新股　5,000 股 × $40</caption>
+      <tr><td class="dr">現金</td><td class="amt">200,000</td><td class="amt"></td></tr>
+      <tr><td class="cr">　普通股本　5,000 × $10</td><td class="amt"></td><td class="amt">50,000</td></tr>
+      <tr><td class="cr">　資本公積—普通股股票溢價</td><td class="amt"></td><td class="amt">150,000</td></tr></table>
+
+    <table class="je"><caption>8/15　宣告現金股利　流通股數 (20,000 − 1,000 + 5,000) = 24,000 股 × $1.5</caption>
+      <tr><td class="dr">保留盈餘</td><td class="amt">36,000</td><td class="amt"></td></tr>
+      <tr><td class="cr">　應付現金股利</td><td class="amt"></td><td class="amt">36,000</td></tr></table>
+
+    <table class="je"><caption>9/1　出售庫藏股　600 股，售價 $35、成本 $30</caption>
+      <tr><td class="dr">現金　600 × $35</td><td class="amt">21,000</td><td class="amt"></td></tr>
+      <tr><td class="cr">　庫藏股票　600 × $30</td><td class="amt"></td><td class="amt">18,000</td></tr>
+      <tr><td class="cr">　資本公積—庫藏股票交易</td><td class="amt"></td><td class="amt">3,000</td></tr></table>
+
+    <table class="je"><caption>10/1　發放現金股利</caption>
+      <tr><td class="dr">應付現金股利</td><td class="amt">36,000</td><td class="amt"></td></tr>
+      <tr><td class="cr">　現金</td><td class="amt"></td><td class="amt">36,000</td></tr></table>
+
+    <div class="callout">
+      <span class="h">宣告日才動保留盈餘</span>
+      現金股利在<b>宣告日</b>借記保留盈餘、貸記應付現金股利（負債）；<b>發放日</b>只是清償負債，<mark>不再動保留盈餘</mark>。把 10/1 也記成沖保留盈餘，會重複扣一次。
+    </div>
+
+    <div class="rule-box">
+      <div class="h">期末彙總</div>
+      <div class="calcsteps">
+        <div>普通股本：$200,000 ＋ $50,000 ＝ $250,000</div>
+        <div>資本公積—普通股股票溢價：$700,000 ＋ $150,000 ＝ $850,000</div>
+        <div>庫藏股票：$30,000 － $18,000 ＝ $12,000　<span style="color:var(--ink-soft)">（權益減項）</span></div>
+        <div>資本公積—庫藏股票交易：$3,000</div>
+        <div>保留盈餘：$382,400 － $36,000 ＋ $87,800 ＝ <b>$434,200</b></div>
+        <div>普通股股東權益：$250,000 ＋ $850,000 － $12,000 ＋ $3,000 ＋ $434,200 ＝ <b>$1,525,200</b></div>
+        <div style="height:.4rem"></div>
+        <div>普通股流通在外股數：$250,000 ÷ $10 － 1,000 ＋ 600 ＝ <b>24,600 股</b></div>
+        <div>每股帳面金額：$1,525,200 ÷ 24,600 ＝ <b>$62</b></div>
+        <div style="height:.4rem"></div>
+        <div>加權平均流通在外股數：</div>
+        <div>　20,000 × 3/12 ＋ 19,000 × 3/12 ＋ 24,000 × 2/12 ＋ 24,600 × 4/12</div>
+        <div>　＝ 5,000 ＋ 4,750 ＋ 4,000 ＋ 8,200 ＝ <b>21,950 股</b></div>
+        <div>每股盈餘：$87,800 ÷ 21,950 ＝ <b>$4</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 8 兩個分母 ═══ -->
+<section id="s8">
+  <div class="sec-head"><h2>八、兩個分母之爭：每股帳面金額 vs 每股盈餘</h2><span class="tag">老師叮嚀</span></div>
+  <p class="measure">同一題裡同時問「每股帳面金額」與「每股盈餘」，是拿來分辨誰真的懂的標準手法。114 年考題就是這樣出的：同一家公司，一個分母 24,600、一個分母 21,950。</p>
+
+  <div class="formula-grid">
+    <div class="fcard">
+      <div class="fname">每股帳面金額</div>
+      <div class="eq"><span class="frac"><span>普通股股東權益</span><span>普通股流通在外股數</span></span></div>
+      <div class="fnote">分母是<b>期末</b>實際流通在外的股數，是某一時點的存量概念。若公司有特別股，分子須先自權益總額扣除特別股權益。</div>
+    </div>
+    <div class="fcard">
+      <div class="fname">每股盈餘</div>
+      <div class="eq"><span class="frac"><span>本期淨利 － 本期特別股股利</span><span>普通股加權平均流通在外股數</span></span></div>
+      <div class="fnote">分母是<b>整年度</b>的加權平均數，是一段期間的流量概念。因為盈餘是整年賺的，要配上整年平均在外的股數。</div>
+    </div>
+  </div>
+  <div class="callout measure">
+    <span class="h">記法</span>
+    帳面金額是「資產負債表的東西」→ 用資產負債表日的<b>期末</b>股數。<br>
+    每股盈餘是「損益表的東西」→ 用涵蓋整個期間的<b>加權平均</b>股數。<br>
+    報表屬性決定分母，這條記住就不會拿錯。
+  </div>
+</section>
+
+<!-- ═══ 9 選擇題 ═══ -->
+<section id="s9">
+  <div class="sec-head"><h2>九、選擇題練習</h2><span class="tag">點選作答，即時判分</span></div>
+  <div id="qbank"></div>
+</section>
+
+<!-- ═══ 10 計算題 ═══ -->
+<section id="s10">
+  <div class="sec-head"><h2>十、計算題練習</h2><span class="tag">先算再對答案</span></div>
+
+  <div class="q">
+    <div class="q-head"><span class="q-no">壹</span><div class="q-stem"><b>六段區間、兩個追溯事件</b></div></div>
+    <div class="q-stem measure">
+      <p>丙公司 X5 年初普通股流通在外 150,000 股，年度中發生下列事項：</p>
+      <p>3/1 現金發行新股 30,000 股｜5/1 買回庫藏股 18,000 股｜7/1 發放 20% 股票股利｜9/1 出售庫藏股 6,000 股｜11/1 一股分割為二股</p>
+      <p>X5 年度稅後淨利 $4,800,000。另有<b>累積特別股</b> 10,000 股，面額 $50、股利率 6%，X5 年度未宣告發放。</p>
+      <p>試計算：(一) 普通股加權平均流通在外股數　(二) X5 年度基本每股盈餘（四捨五入至小數第二位）。</p>
+    </div>
+    <button class="reveal" type="button">顯示解答</button>
+    <div class="sol" hidden>
+      <div class="h">解答</div>
+      <div class="calcsteps">
+        <div>追溯倍數只有兩個：7/1 股票股利（×1.2）與 11/1 分割（×2）。</div>
+        <div style="height:.4rem"></div>
+        <div>1/1～3/1　150,000 × 2/12 × 1.2 × 2 ＝ 60,000</div>
+        <div>3/1～5/1　180,000 × 2/12 × 1.2 × 2 ＝ 72,000</div>
+        <div>5/1～7/1　162,000 × 2/12 × 1.2 × 2 ＝ 64,800</div>
+        <div>7/1～9/1　194,400 × 2/12 × 2 ＝ 64,800</div>
+        <div>9/1～11/1　200,400 × 2/12 × 2 ＝ 66,800</div>
+        <div>11/1～12/31　400,800 × 2/12 ＝ 66,800</div>
+        <div><b>(一) 合計 ＝ 395,200 股</b></div>
+        <div style="height:.5rem"></div>
+        <div>特別股股利：10,000 × $50 × 6% ＝ $30,000</div>
+        <div style="color:var(--redink)">累積特別股未宣告發放，仍須減除當年度股利。</div>
+        <div><b>(二)</b> ($4,800,000 － $30,000) ÷ 395,200 ＝ $4,770,000 ÷ 395,200 ＝ <b>$12.07</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><span class="q-no">貳</span><div class="q-stem"><b>庫藏股全流程與保留盈餘</b></div></div>
+    <div class="q-stem measure">
+      <p>丁公司 X3 年初權益：普通股本（面額 $10）$500,000、資本公積—普通股股票溢價 $300,000、保留盈餘 $420,000。無特別股。</p>
+      <p>X3 年交易：2/1 以每股 $18 買回庫藏股 4,000 股｜5/1 以每股 $22 出售庫藏股 1,500 股｜8/1 宣告普通股每股 $2 現金股利｜9/1 發放上述現金股利｜11/1 以每股 $13 出售庫藏股 1,000 股｜本期淨利 $150,000。</p>
+      <p>試作：(一) 各筆分錄　(二) X3 年底保留盈餘與權益總額　(三) 每股帳面金額。</p>
+    </div>
+    <button class="reveal" type="button">顯示解答</button>
+    <div class="sol" hidden>
+      <div class="h">解答</div>
+      <div class="calcsteps">
+        <div><b>(一)</b></div>
+        <div>2/1　庫藏股票 72,000 ／ 現金 72,000　（4,000 × $18）</div>
+        <div>5/1　現金 33,000 ／ 庫藏股票 27,000、資本公積—庫藏股票交易 6,000</div>
+        <div>　　　售價 1,500 × $22 ＝ $33,000；成本 1,500 × $18 ＝ $27,000</div>
+        <div>8/1　保留盈餘 95,000 ／ 應付現金股利 95,000</div>
+        <div>　　　流通股數 50,000 － 4,000 ＋ 1,500 ＝ 47,500 股 × $2</div>
+        <div>9/1　應付現金股利 95,000 ／ 現金 95,000　<span style="color:var(--redink)">（不動保留盈餘）</span></div>
+        <div>11/1　現金 13,000、資本公積—庫藏股票交易 5,000 ／ 庫藏股票 18,000</div>
+        <div>　　　成本 1,000 × $18 ＝ $18,000，售價 $13,000，差額 $5,000</div>
+        <div>　　　資本公積—庫藏股票交易餘額 $6,000 <b>足夠沖抵</b>，故不沖減保留盈餘</div>
+        <div style="height:.5rem"></div>
+        <div><b>(二)</b> 保留盈餘 ＝ $420,000 － $95,000 ＋ $150,000 ＝ <b>$475,000</b></div>
+        <div>　　庫藏股票餘額 ＝ (4,000 － 1,500 － 1,000) × $18 ＝ 1,500 股 × $18 ＝ $27,000</div>
+        <div>　　資本公積—庫藏股票交易 ＝ $6,000 － $5,000 ＝ $1,000</div>
+        <div>　　權益總額 ＝ $500,000 ＋ $300,000 ＋ $1,000 ＋ $475,000 － $27,000 ＝ <b>$1,249,000</b></div>
+        <div style="height:.5rem"></div>
+        <div><b>(三)</b> 流通在外股數 ＝ 50,000 － 1,500 ＝ 48,500 股</div>
+        <div>　　每股帳面金額 ＝ $1,249,000 ÷ 48,500 ＝ <b>$25.75</b></div>
+        <div style="color:var(--ink-soft)">若題目改問每股盈餘，分母要改用加權平均數，不是 48,500。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><span class="q-no">參</span><div class="q-stem"><b>兩類特別股併存</b></div></div>
+    <div class="q-stem measure">
+      <p>戊公司 X6 年度稅後淨利 $1,800,000。普通股本（面額 $10）X6 年初 $1,200,000；4/1 現金發行新股 30,000 股；10/1 買回庫藏股 24,000 股。</p>
+      <p>特別股兩類：<br>
+        甲類—<b>累積</b>特別股 8,000 股，面額 $100、股利率 5%，X6 年度<b>未</b>宣告發放，且積欠 X5 年度股利一年。<br>
+        乙類—<b>非累積</b>特別股 5,000 股，面額 $50、股利率 8%，X6 年度已宣告並發放。</p>
+      <p>試計算 X6 年度基本每股盈餘（四捨五入至小數第二位）。</p>
+    </div>
+    <button class="reveal" type="button">顯示解答</button>
+    <div class="sol" hidden>
+      <div class="h">解答</div>
+      <div class="calcsteps">
+        <div><b>分母</b>　普通股期初股數 ＝ $1,200,000 ÷ $10 ＝ 120,000 股</div>
+        <div>1/1～4/1　120,000 × 3/12 ＝ 30,000</div>
+        <div>4/1～10/1　150,000 × 6/12 ＝ 75,000</div>
+        <div>10/1～12/31　126,000 × 3/12 ＝ 31,500</div>
+        <div>加權平均 ＝ <b>136,500 股</b>　<span style="color:var(--ink-soft)">（無股票股利、無分割，全部不追溯）</span></div>
+        <div style="height:.5rem"></div>
+        <div><b>分子</b></div>
+        <div>甲類（累積）：8,000 × $100 × 5% ＝ $40,000　<span style="color:var(--redink)">未宣告仍須減除</span></div>
+        <div>　　積欠之 X5 年度股利與本年度 EPS <b>無關</b>，不加計。</div>
+        <div>乙類（非累積）：5,000 × $50 × 8% ＝ $20,000　<span style="color:var(--redink)">已宣告故須減除</span></div>
+        <div>應減除合計 ＝ $60,000</div>
+        <div style="height:.5rem"></div>
+        <div>每股盈餘 ＝ ($1,800,000 － $60,000) ÷ 136,500 ＝ $1,740,000 ÷ 136,500 ＝ <b>$12.75</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 11 易錯 ═══ -->
+<section id="s11">
+  <div class="sec-head"><h2>十一、進考場前最後十條</h2><span class="tag">易錯清單</span></div>
+  <div class="cols measure">
+    <div>
+      <ol>
+        <li>累積特別股：當年度股利<b>不論是否發放</b>均須減除。</li>
+        <li>非累積特別股：<b>只有當年度宣告</b>才減除。</li>
+        <li>過去年度<b>積欠</b>之特別股股利，與本年度 EPS <b>無關</b>。</li>
+        <li>特別股股利＝股數 × <b>面額</b> × 股利率，不是市價、不是發行價。</li>
+        <li>股票股利與股份分割<b>追溯至期初</b>；現金發行、庫藏股買賣<b>不追溯</b>。</li>
+      </ol>
+    </div>
+    <div>
+      <ol start="6">
+        <li>兩個追溯事件並存時，倍數<b>連乘</b>（如 ×1.2 × 2 ＝ 2.4）。</li>
+        <li>事件當日<b>之後</b>的股數已含調整，該段不再乘。</li>
+        <li>現金股利在<b>宣告日</b>沖保留盈餘，發放日只清償負債。</li>
+        <li>買回庫藏股<b>不動</b>保留盈餘；低價出售且資本公積<b>不足</b>時才沖。</li>
+        <li>每股帳面金額用<b>期末</b>股數，每股盈餘用<b>加權平均</b>股數。</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="scorebar">
+  <span>選擇題進度</span>
+  <b><span id="sc-done">0</span> / <span id="sc-total">0</span></b>
+  <span>答對 <b id="sc-right">0</b> 題</span>
+  <button type="button" id="sc-reset">重新作答</button>
+</div>
+
+<footer class="wrap">
+  <p>Day 07｜保留盈餘及每股盈餘．單頁複習講義</p>
+  <p>本頁為個人複習用整理，數字依講義與 110／111／113／114 年歷屆試題核算。列印時解答會自動全部展開。</p>
+</footer>
+
+<script>
+/* ════════ 加權平均股數計算器 ════════ */
+(function(){
+  const $=id=>document.getElementById(id);
+  const body=$('ev-body'), out=$('calc-out');
+  const TYPES=[
+    ['issue','現金發行新股（＋股數）'],
+    ['merge','合併增資發行（＋股數）'],
+    ['sell','出售庫藏股（＋股數）'],
+    ['buy','買回庫藏股（−股數）'],
+    ['div','發放股票股利（填 %）'],
+    ['split','股份分割（填倍數）']
+  ];
+  const fmtN=n=>Number(n.toFixed(2)).toLocaleString('en-US');
+
+  function addRow(month,type,val){
+    const tr=document.createElement('tr');
+    const tdM=document.createElement('td');
+    const im=document.createElement('input');
+    im.type='number';im.min=1;im.max=12;im.step=1;im.value=month||'';im.placeholder='1–12';
+    tdM.appendChild(im);
+
+    const tdT=document.createElement('td');
+    const sel=document.createElement('select');
+    TYPES.forEach(([v,l])=>{const o=document.createElement('option');o.value=v;o.textContent=l;sel.appendChild(o);});
+    sel.value=type||'issue';
+    tdT.appendChild(sel);
+
+    const tdV=document.createElement('td');
+    const iv=document.createElement('input');
+    iv.type='number';iv.step='any';iv.value=(val===undefined?'':val);
+    tdV.appendChild(iv);
+
+    const tdX=document.createElement('td');
+    const x=document.createElement('button');
+    x.type='button';x.className='xbtn';x.textContent='×';
+    x.setAttribute('aria-label','刪除此列');
+    x.addEventListener('click',()=>{tr.remove();calc();});
+    tdX.appendChild(x);
+
+    tr.append(tdM,tdT,tdV,tdX);
+    [im,sel,iv].forEach(el=>el.addEventListener('input',calc));
+    body.appendChild(tr);
+  }
+
+  function readEvents(){
+    const evs=[];
+    [...body.children].forEach(tr=>{
+      const m=parseFloat(tr.children[0].firstChild.value);
+      const t=tr.children[1].firstChild.value;
+      const v=parseFloat(tr.children[2].firstChild.value);
+      if(!isFinite(m)||m<1||m>12||!isFinite(v)) return;
+      evs.push({m:Math.round(m),t:t,v:v});
+    });
+    evs.sort((a,b)=>a.m-b.m);
+    return evs;
+  }
+
+  function calc(){
+    const open=parseFloat($('open-sh').value);
+    if(!isFinite(open)||open<=0){
+      out.innerHTML='<p class="warn">請輸入期初流通在外股數。</p>';return;
+    }
+    const evs=readEvents();
+    let cur=open,start=1,segs=[],mults=[],bad='';
+    evs.forEach(e=>{
+      if(e.m>start){segs.push({s:start,e:e.m,sh:cur});start=e.m;}
+      if(e.t==='issue'||e.t==='merge'||e.t==='sell') cur+=e.v;
+      else if(e.t==='buy') cur-=e.v;
+      else if(e.t==='div'){const f=1+e.v/100;cur*=f;mults.push({m:e.m,f:f,label:'×'+Number(f.toFixed(4))});}
+      else if(e.t==='split'){cur*=e.v;mults.push({m:e.m,f:e.v,label:'×'+e.v});}
+      if(cur<0) bad='流通在外股數出現負值，請檢查買回股數是否超過在外股數。';
+    });
+    segs.push({s:start,e:13,sh:cur});
+
+    let total=0;
+    const rows=segs.map(sg=>{
+      const ms=mults.filter(x=>x.m>sg.s);
+      const f=ms.reduce((a,b)=>a*b.f,1);
+      const w=sg.sh*(sg.e-sg.s)/12*f;
+      total+=w;
+      return {sg:sg,label:ms.length?ms.map(x=>x.label).join(' '):'—',w:w};
+    });
+
+    const mm=n=>n===13?'12/31':n+'/1';
+    let html='<table><thead><tr><th>流通在外期間</th><th>實際流通股數</th><th>占全年</th><th>追溯調整</th><th>加權股數</th></tr></thead><tbody>';
+    rows.forEach(r=>{
+      html+='<tr><td>'+mm(r.sg.s)+' ～ '+mm(r.sg.e)+'</td><td>'+fmtN(r.sg.sh)+
+            '</td><td>'+(r.sg.e-r.sg.s)+'/12</td><td>'+r.label+'</td><td>'+fmtN(r.w)+'</td></tr>';
+    });
+    html+='<tr class="total"><td>加權平均流通在外股數</td><td></td><td></td><td></td><td>'+fmtN(total)+'</td></tr>';
+    html+='</tbody></table>';
+
+    const ni=parseFloat($('ni').value), pd=parseFloat($('pd').value);
+    if(isFinite(ni)&&total>0){
+      const d=isFinite(pd)?pd:0;
+      const eps=(ni-d)/total;
+      html+='<div class="calcsteps" style="margin-top:.8rem"><div>每股盈餘 ＝ ('+
+            fmtN(ni)+(d?' － '+fmtN(d):'')+') ÷ '+fmtN(total)+
+            ' ＝ <b>$'+eps.toFixed(2)+'</b></div></div>';
+    }
+    if(bad) html+='<p class="warn">'+bad+'</p>';
+    out.innerHTML=html;
+  }
+
+  function load(rows,open,ni,pd){
+    body.innerHTML='';
+    $('open-sh').value=open;
+    $('ni').value=(ni===undefined?'':ni);
+    $('pd').value=(pd===undefined?'':pd);
+    rows.forEach(r=>addRow(r[0],r[1],r[2]));
+    calc();
+  }
+
+  $('add-ev').addEventListener('click',()=>{addRow('', 'issue','');});
+  $('clear-ev').addEventListener('click',()=>{body.innerHTML='';calc();});
+  $('load-1').addEventListener('click',()=>load(
+    [[3,'issue',60000],[4,'buy',40000],[5,'div',20],[6,'merge',30000],[8,'sell',36000],[11,'split',2]],
+    200000));
+  $('load-2').addEventListener('click',()=>load(
+    [[2,'split',3],[4,'div',20],[6,'issue',12000],[10,'buy',19200]],
+    72000,1000000,100000));
+  ['open-sh','ni','pd'].forEach(id=>$(id).addEventListener('input',calc));
+
+  load([[3,'issue',60000],[4,'buy',40000],[5,'div',20],[6,'merge',30000],[8,'sell',36000],[11,'split',2]],200000);
+})();
+
+/* ════════ 選擇題 ════════ */
+const QUESTIONS=[
+ {src:'110 考題',
+  stem:'假設甲公司不可轉換、累積特別股之每年股利為 $22,000，至 X9 年初積欠 2 年股利尚未發放。X9 年中，甲公司宣告特別股股利 $58,000，並發放特別股股利 $55,000。試問在計算 X9 年每股盈餘時，應減除之特別股股利為何？',
+  opts:['$22,000','$55,000','$58,000','$66,000'],ans:0,
+  sol:'發行<b>累積</b>特別股者，其當年度股利不論是否發放，均應自本期淨利（損）中減除；若有積欠股利者，亦只減除<b>當年度</b>之特別股股利，故為 $22,000。<br>宣告的 $58,000 與發放的 $55,000 都包含補發過去積欠的部分，<mark>過去年度積欠之股利與本年度每股盈餘之計算無關</mark>。'},
+
+ {src:'113 考題',
+  stem:'甲公司於 X4 年 1 月 1 日流通在外普通股 72,000 股。X4 年間普通股之交易如下：2/1 進行每股分割為 3 股；4/1 發放 20% 之股票股利；6/1 發行普通股 12,000 股；10/1 買回庫藏股票 19,200 股。該年度甲公司淨利 $1,000,000，累積特別股 100,000 股、每股股利 $1。X4 年度甲公司的基本每股盈餘約為多少？（四捨五入至小數第二位）',
+  opts:['$3.25','$2.44','$3.44','$4.43'],ans:2,
+  sol:'加權平均流通在外股數：<br>1/1～2/1　72,000 × 1/12 × 3 × 1.2 ＝ 21,600<br>2/1～4/1　216,000 × 2/12 × 1.2 ＝ 43,200<br>4/1～6/1　259,200 × 2/12 ＝ 43,200<br>6/1～10/1　271,200 × 4/12 ＝ 90,400<br>10/1～12/31　252,000 × 3/12 ＝ 63,000<br>合計 <b>261,400 股</b><br>特別股股利：100,000 × $1 ＝ $100,000<br>EPS ＝ ($1,000,000 － $100,000) ÷ 261,400 ＝ <b>$3.44</b>'},
+
+ {src:'111 考題',
+  stem:'甲公司 X1 年初權益：普通股本（面額 $10）$30,000、特別股本（面額 $20、股利率 6%）$60,000、資本公積—普通股發行溢價 $22,000、資本公積—特別股發行溢價 $45,000、保留盈餘 $110,000。X1 年交易：3/1 以每股 $21 買入 600 股庫藏股票；4/1 以每股 $23 賣出 300 股庫藏股票；7/1 宣告發放普通股每股 $3 現金股利與 $1 股票股利及特別股股利（普通股每股市價 $20）；11/1 以每股 $16 賣出 300 股庫藏股票；X1 年淨利 $28,500。X1 年保留盈餘的期末金額為多少？',
+  opts:['$120,500','$122,000','$123,200','$124,100'],ans:2,
+  sol:'流通股數：$30,000 ÷ $10 ＝ 3,000 股；3,000 － 600 ＋ 300 ＝ 2,700 股<br>7/1 宣告：普通股現金股利 2,700 × $3 ＝ $8,100；普通股股票股利 2,700 × $1 ＝ $2,700；特別股股利 $60,000 × 6% ＝ $3,600<br>11/1 出售庫藏股：成本 300 × $21 ＝ $6,300，售價 $4,800，差額 $1,500。先沖「資本公積—庫藏股票交易」餘額 $600，<b>不足部分 $900 沖減保留盈餘</b>。<br>期末保留盈餘 ＝ $110,000 － $8,100 － $2,700 － $3,600 － $900 ＋ $28,500 ＝ <b>$123,200</b>'},
+
+ {src:'觀念題',
+  stem:'下列何者<b>不會</b>影響保留盈餘之金額？',
+  opts:['更正前期漏提折舊之前期損益調整','宣告發放股票股利',
+        '以低於取得成本出售庫藏股票，且資本公積—庫藏股票交易餘額不足沖抵','以高於面額發行新股'],
+  ans:3,
+  sol:'(D) 溢價發行新股，借記現金、貸記普通股本與<b>資本公積—股票溢價</b>，屬<b>投入資本</b>之增加，與保留盈餘無關。<br>(A)(B)(C) 均為講義所列保留盈餘之變動因素。特別注意 (C)：庫藏股票「買回」本身不動保留盈餘，只有低價出售且資本公積不足沖抵時才沖減。'},
+
+ {src:'觀念題',
+  stem:'關於計算每股盈餘時特別股股利之處理，下列敘述何者<b>錯誤</b>？',
+  opts:['累積特別股當年度股利不論是否發放，均應自本期淨利中減除',
+        '非累積特別股僅於當年度宣告發放時才須減除',
+        '累積特別股若有積欠股利，應將積欠年度之股利一併自本期淨利中減除',
+        '過去年度積欠之股利與本年度每股盈餘之計算無關'],
+  ans:2,
+  sol:'(C) 錯誤。累積特別股若有積欠股利者，<mark>亦只減除當年度之特別股股利</mark>，積欠年度的部分屬過去年度，不影響本年度分子。(D) 為同一規則的另一種表述，是正確的。'},
+
+ {src:'觀念題',
+  stem:'計算普通股加權平均流通在外股數時，下列何種事件<b>應追溯至期初</b>調整？',
+  opts:['現金增資發行新股','合併他公司而增資發行新股','買回庫藏股票','股份分割'],
+  ans:3,
+  sol:'股票股利與股份分割<b>不涉及資金流入流出</b>，股東實質權益完全未變，只是股數變多，故須<b>追溯至期初</b>起算，使前後期每股盈餘具可比較性。<br>(A)(B)(C) 都造成公司資源實際增減，應<b>自事件日起</b>按時間加權，不追溯。'},
+
+ {src:'觀念題',
+  stem:'關於每股盈餘之敘述，下列何者正確？',
+  opts:['每股盈餘之分子應使用稅前淨利','每股盈餘對特別股股東具有重要評估意義',
+        '每股盈餘應列示於綜合損益表中','每股盈餘之分母應使用期末流通在外股數'],
+  ans:2,
+  sol:'(A) 分子為<b>稅後</b>淨利。<br>(B) 特別股每期所得通常為固定金額，故每股盈餘係針對<b>普通股</b>而言，對特別股並無特殊意義。<br>(D) 分母為<b>加權平均</b>流通在外股數；用期末股數的是「每股帳面金額」。<br>(C) 正確，每股盈餘須列示於綜合損益表本期淨利之下。'},
+
+ {src:'計算題',
+  stem:'乙公司 X1 年初流通在外普通股 60,000 股，7/1 現金增資發行 24,000 股，10/1 買回庫藏股票 12,000 股。X1 年度普通股加權平均流通在外股數為多少？',
+  opts:['69,000 股','72,000 股','60,000 股','84,000 股'],ans:0,
+  sol:'1/1～7/1　60,000 × 6/12 ＝ 30,000<br>7/1～10/1　84,000 × 3/12 ＝ 21,000<br>10/1～12/31　72,000 × 3/12 ＝ 18,000<br>合計 <b>69,000 股</b><br>本題無股票股利與股份分割，全部不追溯。'},
+
+ {src:'計算題',
+  stem:'丙公司 X2 年初流通在外普通股 100,000 股，4/1 發放 25% 股票股利，7/1 現金發行新股 30,000 股。X2 年度普通股加權平均流通在外股數為多少？',
+  opts:['122,500 股','140,000 股','145,000 股','155,000 股'],ans:1,
+  sol:'股票股利須追溯至期初，倍數 1.25。<br>1/1～4/1　100,000 × 3/12 × 1.25 ＝ 31,250<br>4/1～7/1　125,000 × 3/12 ＝ 31,250<br>7/1～12/31　155,000 × 6/12 ＝ 77,500<br>合計 <b>140,000 股</b><br><span style="color:var(--redink)">選 122,500 者是漏掉第一段的 ×1.25 追溯調整。</span>'},
+
+ {src:'計算題',
+  stem:'丁公司本期淨利 $2,400,000，普通股加權平均流通在外股數 200,000 股。另有<b>累積</b>特別股 5,000 股、面額 $100、股利率 8%，當年度<b>未</b>宣告發放。本期基本每股盈餘為多少？',
+  opts:['$11.80','$12.00','$11.60','$12.20'],ans:0,
+  sol:'累積特別股當年度股利<b>不論是否發放均須減除</b>：5,000 × $100 × 8% ＝ $40,000<br>EPS ＝ ($2,400,000 － $40,000) ÷ 200,000 ＝ <b>$11.80</b><br><span style="color:var(--redink)">選 $12.00 者是誤以為未宣告就不必減除——那是非累積特別股的規則。</span>'},
+
+ {src:'計算題',
+  stem:'承上題，若該特別股改為<b>非累積</b>特別股且當年度未宣告發放，其餘條件不變，則本期基本每股盈餘為多少？',
+  opts:['$11.80','$12.00','$11.60','$12.20'],ans:1,
+  sol:'非累積特別股<b>僅於當年度宣告發放時</b>才須自本期淨利中減除。本題未宣告，故不減。<br>EPS ＝ $2,400,000 ÷ 200,000 ＝ <b>$12.00</b><br>這一題與上一題並列，就是為了把兩條規則的差異釘在同一組數字上。'},
+
+ {src:'計算題',
+  stem:'戊公司以每股 $25 買回庫藏股票 1,000 股，其後以每股 $18 出售 400 股。出售前「資本公積—庫藏股票交易」餘額為 $1,500。此次出售應沖減保留盈餘多少？',
+  opts:['$0','$1,300','$2,800','$1,500'],ans:1,
+  sol:'成本 400 × $25 ＝ $10,000；售價 400 × $18 ＝ $7,200；差額 $2,800。<br>先沖「資本公積—庫藏股票交易」餘額 $1,500，<b>不足部分 $1,300 沖減保留盈餘</b>。<br>分錄：借 現金 7,200、資本公積—庫藏股票交易 1,500、保留盈餘 1,300 ／ 貸 庫藏股票 10,000'},
+
+ {src:'計算題',
+  stem:'己公司保留盈餘期初餘額 $500,000。本期淨利 $180,000；宣告現金股利 $60,000；宣告股票股利 $40,000；更正前期漏提折舊之前期損益調整 $25,000；庫藏股票交易沖減 $8,000。期末保留盈餘為多少？',
+  opts:['$547,000','$555,000','$587,000','$597,000'],ans:0,
+  sol:'$500,000 ＋ $180,000 － $60,000 － $40,000 － $25,000 － $8,000 ＝ <b>$547,000</b><br>漏提折舊代表<b>前期少計費用、多計盈餘</b>，更正時保留盈餘<b>減少</b>。<br><span style="color:var(--redink)">若把前期損益調整誤加為增加項，會得到 $597,000。方向要看錯誤性質。</span>'},
+
+ {src:'觀念題',
+  stem:'某公司同一年度之「每股帳面金額」與「每股盈餘」，其分母之差異為何？',
+  opts:['兩者相同，皆為期末流通在外股數',
+        '前者為期末流通在外股數，後者為加權平均流通在外股數',
+        '前者為加權平均流通在外股數，後者為期末流通在外股數',
+        '前者含特別股股數，後者不含'],
+  ans:1,
+  sol:'每股帳面金額是<b>資產負債表</b>的概念，用資產負債表日的<b>期末</b>流通在外股數；每股盈餘是<b>綜合損益表</b>的概念，涵蓋整個期間，故用<b>加權平均</b>流通在外股數。<br>114 年考題就在同一題中同時問這兩個數字，甲公司分別為 24,600 股與 21,950 股。'},
+
+ {src:'觀念題',
+  stem:'公司宣告並於次月發放現金股利，關於保留盈餘之影響，下列敘述何者正確？',
+  opts:['宣告日與發放日各沖減保留盈餘一次','僅於發放日沖減保留盈餘',
+        '僅於宣告日沖減保留盈餘，發放日僅清償負債','宣告日認列費用，發放日沖減保留盈餘'],
+  ans:2,
+  sol:'宣告日：借 保留盈餘／貸 應付現金股利（負債）。<br>發放日：借 應付現金股利／貸 現金——<b>只是清償負債，不再動保留盈餘</b>。<br>股利是盈餘分配，<b>不是費用</b>，故 (D) 亦錯。'}
+];
+
+(function(){
+  const bank=document.getElementById('qbank');
+  const letters=['(A)','(B)','(C)','(D)'];
+  let done=0,right=0;
+  document.getElementById('sc-total').textContent=QUESTIONS.length;
+
+  QUESTIONS.forEach((q,qi)=>{
+    const card=document.createElement('div');card.className='q';
+    const head=document.createElement('div');head.className='q-head';
+    head.innerHTML='<span class="q-no">'+(qi+1)+'</span><div class="q-stem">'+q.stem+'</div><span class="q-src">'+q.src+'</span>';
+    card.appendChild(head);
+
+    const ul=document.createElement('ul');ul.className='opts';
+    const sol=document.createElement('div');
+    sol.className='sol';sol.hidden=true;
+    sol.innerHTML='<div class="h">解析｜答案 '+letters[q.ans]+'</div>'+q.sol;
+
+    q.opts.forEach((o,oi)=>{
+      const li=document.createElement('li');
+      const b=document.createElement('button');b.type='button';
+      b.textContent=letters[oi]+' '+o;
+      b.addEventListener('click',()=>{
+        if(card.dataset.answered) return;
+        card.dataset.answered='1';done++;if(oi===q.ans) right++;
+        [...ul.querySelectorAll('button')].forEach((x,xi)=>{
+          x.disabled=true;
+          if(xi===q.ans) x.classList.add('right');
+          else if(xi===oi) x.classList.add('wrong');
+        });
+        sol.hidden=false;update();
+      });
+      li.appendChild(b);ul.appendChild(li);
+    });
+    card.appendChild(ul);card.appendChild(sol);
+
+    const rv=document.createElement('button');
+    rv.className='reveal';rv.type='button';rv.textContent='直接看解析';
+    rv.addEventListener('click',()=>{sol.hidden=!sol.hidden;rv.textContent=sol.hidden?'直接看解析':'收合解析';});
+    card.appendChild(rv);
+    bank.appendChild(card);
+  });
+
+  function update(){
+    document.getElementById('sc-done').textContent=done;
+    document.getElementById('sc-right').textContent=right;
+  }
+  document.getElementById('sc-reset').addEventListener('click',()=>{
+    done=0;right=0;update();
+    document.querySelectorAll('#qbank .q').forEach(c=>{
+      delete c.dataset.answered;
+      c.querySelectorAll('.opts button').forEach(b=>{b.disabled=false;b.classList.remove('right','wrong');});
+      c.querySelector('.sol').hidden=true;
+      c.querySelector('.reveal').textContent='直接看解析';
+    });
+    document.getElementById('s9').scrollIntoView();
+  });
+})();
+
+/* ════════ 計算題解答展開 ════════ */
+document.querySelectorAll('#s10 .reveal').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const sol=btn.nextElementSibling;
+    sol.hidden=!sol.hidden;
+    btn.textContent=sol.hidden?'顯示解答':'收合解答';
+  });
+});
+</script>
+</body>
+</html>
