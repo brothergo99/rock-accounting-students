@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>失控的焦慮世代 — 大重塑時代、四大傷害與五大解方</title>
+<style>
+  :root{
+    --bg:#0f1115;
+    --card:#171a21;
+    --card2:#1e222b;
+    --line:#262b35;
+    --accent:#ff8a3d;
+    --accent2:#4fd1c5;
+    --blue:#7dd3fc;
+    --pink:#f9a8d4;
+    --purple:#a78bfa;
+    --gold:#fbbf24;
+    --good:#4ade80;
+    --bad:#f87171;
+    --text:#e8eaed;
+    --sub:#9aa1ab;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:radial-gradient(circle at 20% -8%, #26314a 0%, var(--bg) 45%);
+    color:var(--text);
+    padding:26px 16px 60px;
+    line-height:1.75;
+  }
+  .wrap{max-width:900px;margin:0 auto;}
+
+  header{margin-bottom:28px;}
+  .tag{
+    display:inline-block;font-size:12px;letter-spacing:1px;color:var(--accent);
+    background:rgba(255,138,61,.12);border:1px solid rgba(255,138,61,.35);
+    padding:4px 11px;border-radius:999px;margin-bottom:14px;
+  }
+  h1{font-size:28px;line-height:1.4;margin:0 0 12px;letter-spacing:.5px;}
+  h1 em{font-style:normal;color:var(--accent);}
+  .sub{color:var(--sub);font-size:14.5px;margin:0;line-height:1.85;}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px;}
+  .chip{font-size:11.5px;color:var(--sub);background:var(--card);border:1px solid var(--line);padding:4px 10px;border-radius:999px;}
+  .chip.hl{color:var(--accent2);border-color:rgba(79,209,197,.4);background:rgba(79,209,197,.08);}
+
+  .nav{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-top:20px;}
+  @media(max-width:760px){.nav{grid-template-columns:repeat(3,1fr);}}
+  @media(max-width:480px){.nav{grid-template-columns:repeat(2,1fr);}}
+  .nav a{text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 8px;text-align:center;display:block;transition:.15s;}
+  .nav a:hover{border-color:var(--accent2);}
+  .nav a b{display:block;font-size:13px;color:var(--text);}
+  .nav a span{font-size:10.5px;color:var(--sub);}
+
+  section{margin-bottom:38px;scroll-margin-top:16px;}
+  .sec-label{font-size:11.5px;letter-spacing:2px;color:var(--sub);text-transform:uppercase;margin-bottom:8px;font-weight:700;}
+  h2{font-size:21px;margin:0 0 18px;line-height:1.5;padding-bottom:12px;border-bottom:1px solid var(--line);}
+  h3{font-size:16px;margin:0 0 10px;color:var(--accent2);}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px;}
+  .grid{display:grid;gap:14px;}
+  .g4{grid-template-columns:repeat(4,1fr);}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  @media(max-width:820px){.g4{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:700px){.g3,.g2{grid-template-columns:1fr;}}
+  @media(max-width:480px){.g4{grid-template-columns:1fr;}}
+
+  .card .ico{font-size:20px;margin-bottom:6px;}
+  .card h4{font-size:15.5px;margin:0 0 8px;}
+  .card p{font-size:13.5px;color:#c7cdd5;margin:0;line-height:1.85;}
+  .card p + p{margin-top:9px;}
+  .card small{display:block;font-size:12px;color:var(--sub);margin-top:9px;line-height:1.8;}
+  .card b{color:var(--text);}
+
+  .eq{
+    background:#12151b;border:1px solid var(--line);border-radius:12px;
+    padding:18px 16px;text-align:center;font-size:16px;font-weight:800;
+    line-height:1.9;margin-bottom:14px;
+  }
+  .eq span{color:var(--accent);}
+  .eq .cap{display:block;font-size:12px;color:var(--sub);font-weight:400;margin-top:9px;line-height:1.85;}
+
+  .quote{
+    background:linear-gradient(135deg, rgba(255,138,61,.10), rgba(79,209,197,.06));
+    border:1px solid rgba(255,138,61,.3);border-radius:14px;padding:20px;
+    font-size:14.5px;line-height:1.95;font-weight:600;
+  }
+  .quote .lbl{display:block;font-size:11px;letter-spacing:2px;color:var(--accent);font-weight:700;margin-bottom:9px;}
+  .quote .who{display:block;font-size:12px;color:var(--sub);font-weight:400;margin-top:10px;text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:12.8px;background:var(--card);border-radius:12px;overflow:hidden;}
+  th,td{padding:10px 11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--sub);font-weight:600;font-size:12px;}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:var(--bad);white-space:nowrap;}
+  td.n2{text-align:right;font-variant-numeric:tabular-nums;color:#c7cdd5;white-space:nowrap;}
+  td.dim{color:var(--sub);}
+  tr:last-child td{border-bottom:none;}
+
+  ul.list{margin:0;padding-left:18px;font-size:13.5px;color:#c7cdd5;line-height:1.95;}
+  ul.list li{margin-bottom:7px;}
+  ul.list b{color:var(--text);}
+
+  /* KPI */
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 12px;text-align:center;}
+  .stat .v{font-size:24px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.3;color:var(--bad);}
+  .stat .l{font-size:12.5px;color:var(--text);margin-top:6px;font-weight:600;}
+  .stat .n{font-size:11px;color:var(--sub);margin-top:4px;line-height:1.65;}
+
+  /* 對比 */
+  .vs{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:stretch;}
+  @media(max-width:700px){.vs{grid-template-columns:1fr;}}
+  .vsbox{border-radius:12px;padding:16px;}
+  .vsbox.old{background:#12151b;border:1px solid rgba(74,222,128,.3);}
+  .vsbox.new{background:#12151b;border:1px solid rgba(248,113,113,.3);}
+  .vsbox .h{font-size:14.5px;font-weight:700;margin-bottom:9px;}
+  .vsbox.old .h{color:var(--good);}
+  .vsbox.new .h{color:var(--bad);}
+  .vsbox p{font-size:13px;color:#c7cdd5;margin:0;line-height:1.85;}
+  .vsarr{display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:22px;font-weight:800;}
+
+  .warn{background:#12151b;border:1px solid rgba(248,113,113,.3);border-radius:12px;padding:15px;}
+  .warn .h{font-size:14px;font-weight:700;color:var(--bad);margin-bottom:7px;}
+  .warn p{font-size:13px;color:#c7cdd5;margin:0;line-height:1.85;}
+
+  .ok{background:#12151b;border:1px solid rgba(74,222,128,.3);border-radius:12px;padding:15px;}
+  .ok .h{font-size:14px;font-weight:700;color:var(--good);margin-bottom:7px;}
+  .ok p{font-size:13px;color:#c7cdd5;margin:0;line-height:1.85;}
+
+  /* 鉤癮循環 */
+  .hook{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;background:#12151b;border:1px solid var(--line);border-radius:12px;padding:16px 12px;}
+  .hook .node{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:11px 13px;text-align:center;min-width:118px;}
+  .hook .node b{display:block;font-size:13px;color:var(--accent);}
+  .hook .node span{font-size:11.5px;color:var(--sub);line-height:1.6;display:block;margin-top:3px;}
+  .hook .arw{color:var(--accent2);font-size:16px;font-weight:700;}
+
+  /* 解方 */
+  .sol{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;position:relative;overflow:hidden;}
+  .sol::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--good);}
+  .sol .sn{font-size:11px;letter-spacing:1.5px;color:var(--good);font-weight:700;margin-bottom:5px;}
+  .sol .st{font-size:15.5px;font-weight:800;margin-bottom:9px;}
+  .sol p{font-size:13px;color:#c7cdd5;margin:0;line-height:1.85;}
+  .sol p + p{margin-top:8px;}
+
+  .tw{
+    background:linear-gradient(135deg, rgba(167,139,250,.10), transparent);
+    border:1px solid rgba(167,139,250,.3);border-radius:12px;padding:15px;margin-top:14px;
+  }
+  .tw .h{font-size:13.5px;font-weight:700;color:var(--purple);margin-bottom:7px;}
+  .tw p{font-size:13px;color:#c7cdd5;margin:0;line-height:1.85;}
+  .tw ul{margin:7px 0 0;padding-left:18px;font-size:13px;color:#c7cdd5;line-height:1.9;}
+
+  .bottomline{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 18px;}
+  .bl-item{display:flex;gap:13px;padding:12px 0;border-bottom:1px solid var(--line);}
+  .bl-item:last-child{border-bottom:none;}
+  .bl-item .n{
+    flex:0 0 26px;height:26px;border-radius:8px;background:rgba(255,138,61,.14);
+    color:var(--accent);font-size:12.5px;font-weight:800;display:flex;
+    align-items:center;justify-content:center;margin-top:2px;
+  }
+  .bl-item .t{font-size:14.5px;font-weight:700;margin-bottom:4px;}
+  .bl-item .d{font-size:13px;color:#c7cdd5;line-height:1.85;}
+
+  .help{
+    margin-top:26px;padding:16px 18px;
+    background:linear-gradient(135deg, rgba(79,209,197,.10), rgba(74,222,128,.05));
+    border:1px solid rgba(79,209,197,.35);border-radius:14px;
+  }
+  .help .h{font-size:14.5px;font-weight:700;color:var(--accent2);margin-bottom:10px;}
+  .help table{background:transparent;font-size:13px;}
+  .help td{border-bottom:1px dashed #2a303b;padding:8px 6px;}
+  .help td:first-child{color:var(--text);font-weight:700;width:42%;}
+  .help td:last-child{color:#c7cdd5;}
+
+  .src{
+    margin-top:22px;padding:13px 15px;background:#12151b;border:1px solid var(--line);
+    border-radius:10px;font-size:12px;color:var(--sub);line-height:1.9;
+  }
+  footer{margin-top:20px;text-align:center;color:#5a606b;font-size:11.5px;line-height:2;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="tag">好書分享 · 青少年心理健康</span>
+    <h1>孩子不是不夠自律<br>而是<em>對手是一整支工程師團隊</em></h1>
+    <p class="sub">《失控的焦慮世代》The Anxious Generation｜Jonathan Haidt 著<br>整理自張修修頻道上、下集完整導讀</p>
+    <div class="chips">
+      <span class="chip">Jonathan Haidt · NYU Stern</span>
+      <span class="chip hl">大重塑時代 2010–2015</span>
+      <span class="chip hl">三大學習動機被劫持</span>
+      <span class="chip">四大傷害</span>
+      <span class="chip">五大解方</span>
+      <span class="chip">Rock 老師 讀書筆記</span>
+    </div>
+
+    <nav class="nav">
+      <a href="#p1"><b>Part 1</b><span>數據與大重塑</span></a>
+      <a href="#p2"><b>Part 2</b><span>三大動機被劫持</span></a>
+      <a href="#p3"><b>Part 3</b><span>四大傷害</span></a>
+      <a href="#p4"><b>Part 4</b><span>男孩與女孩</span></a>
+      <a href="#p5"><b>Part 5</b><span>五大解方</span></a>
+    </nav>
+  </header>
+
+  <!-- ============ 導言 ============ -->
+  <section>
+    <div class="sec-label">Premise · 這本書怎麼來的</div>
+    <h2>📖 一本「無心插柳」的書</h2>
+
+    <div class="grid g2">
+      <div class="card">
+        <h4>作者背景</h4>
+        <p><b>Jonathan Haidt（強納森·海特）</b>，紐約大學史登商學院道德領導力教授，國際知名社會心理學家。<b>學術論文引用數突破十萬次</b>，主要研究道德心理學——探究人類道德感的起源，協助不同立場的人互相理解與理性對話。</p>
+        <p>過去兩本代表作：<b>《好人總是自以為是》</b>（政治與宗教如何造成極端對立）、<b>《為什麼我們製造出玻璃心世代？》</b>（過度保護如何養出缺乏抗壓性的一代）。</p>
+      </div>
+      <div class="card">
+        <h4>本書的誕生</h4>
+        <p>海特原本要寫的是<b>「社群媒體如何造成國家分裂」</b>。但在研究青少年那一章時，<b>收集到的數據與現象太過驚人，因而決定獨立成書</b>。</p>
+        <p>核心指控是：社群媒體公司為了利潤極大化，<b>在青少年大腦發育最脆弱、最缺乏誘惑抵抗力的階段</b>，用演算法與機制誘發上癮，<b>對青春期大腦的神經連結造成不可逆的改變</b>。</p>
+        <small>這個議題的敏感度不低——張修修先前製作美國國會質詢五大社群平台 CEO 的影片時，就曾遭遇平台黃標。</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Part 1 ============ -->
+  <section id="p1">
+    <div class="sec-label">Part 1 · 數據</div>
+    <h2>📉 大重塑時代：2010–2015 那五年發生了什麼</h2>
+
+    <div class="card">
+      <h3>誰是 Z 世代</h3>
+      <p><b>1997 至 2012 年出生</b>，目前約 12 至 27 歲（國高中生、大學生與剛入職的新鮮人）。他們是歷史上<b>首批「數位原住民」</b>，平均在 <b>10 歲左右</b>拿到第一支智慧型手機，並開始頻繁使用 IG 或 TikTok。</p>
+    </div>
+
+    <div class="eq">
+      智慧型手機　＋　社群媒體　＋　<span>前置鏡頭</span>　＋　<span>行動網路飆速</span>
+      <span class="cap">2010 年 iPhone 4 開始配置前置相機——這個看似微小的硬體變化，是「大重塑時代」的關鍵扳機</span>
+    </div>
+
+    <div class="vs">
+      <div class="vsbox old">
+        <div class="h">🏃 以玩耍為主的童年</div>
+        <p>play-based childhood<br><br>在現實世界互動、跌倒、捉迷藏、桌遊。大腦在低風險環境中重複嘗試與失敗，鍛鍊四肢協調、反應速度與非語言觀察能力。</p>
+      </div>
+      <div class="vsarr">→</div>
+      <div class="vsbox new">
+        <div class="h">📱 以手機為主的童年</div>
+        <p>phone-based childhood<br><br>互動變成非肉身、非同步、一對多的淺薄連線。<b>大腦的神經連結被重新接線成不健康的狀態</b>，心理健康急速惡化。</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:24px;">🇹🇼 台灣的數據：不是別人家的問題</h3>
+    <p style="font-size:13px;color:var(--sub);margin:0 0 12px;">衛福部急診自我傷害統計，2009 → 2023 年</p>
+    <div class="grid g3">
+      <div class="stat">
+        <div class="v">3.8 倍</div>
+        <div class="l">15–24 歲女性</div>
+        <div class="n">自我傷害人數<br>2,697 人 → 一萬多人</div>
+      </div>
+      <div class="stat">
+        <div class="v">18 倍</div>
+        <div class="l">14 歲以下少女</div>
+        <div class="n">自我傷害人數<br>137 人 → 2,525 人</div>
+      </div>
+      <div class="stat">
+        <div class="v" style="color:var(--gold);">同步飆升</div>
+        <div class="l">男性趨勢</div>
+        <div class="n">人數相對較少<br>但曲線同樣顯著上升</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px;">
+      <h4>董氏基金會問卷調查</h4>
+      <p style="font-size:12.5px;color:var(--sub);">2021 年 9–11 月｜全台 41 所國高中｜2,607 份有效問卷</p>
+      <table style="margin-top:12px;">
+        <tr><th>觀察項目</th><th class="num">比例</th><th class="n2">對照組</th></tr>
+        <tr><td>假日每日上網超過 4 小時者，<b>有明顯憂鬱情緒且需專業協助</b></td><td class="num">30%</td><td class="n2 dim">—</td></tr>
+        <tr><td>過去一年曾遭霸凌者，<b>經常／總是情緒不穩、易怒或躁動</b></td><td class="num">31.3%</td><td class="n2">未受霸凌者 6.1%</td></tr>
+        <tr><td>過去一年曾遭霸凌者，<b>「總是」出現自我傷害想法</b></td><td class="num">17.2%</td><td class="n2">未受霸凌者 0.9%</td></tr>
+      </table>
+    </div>
+
+    <h3 style="margin-top:22px;">🔬 「只是相關，不是因果」？書中的三層回應</h3>
+    <div class="grid g2">
+      <div class="card">
+        <h4>① 隨機對照實驗（RCT）</h4>
+        <p>把學生隨機分兩組，一組禁用社群媒體、一組照常使用。結果一致：<b>禁用僅僅一個月，心理健康即顯著好轉</b>；<b>一恢復使用，狀況隨即下滑回原點</b>。</p>
+      </div>
+      <div class="card">
+        <h4>② 2021 年綜合文獻回顧</h4>
+        <p>納入 <b>36 項橫斷面研究</b>與 <b>6 項前瞻性佇列研究</b>。縱向數據證實社群媒體是導致<b>心理健康衰退與睡眠品質低落的直接危險因子</b>。</p>
+      </div>
+    </div>
+    <div class="card">
+      <h4>③ 跨國一致性</h4>
+      <p>美國、英國以及<b>北歐幸福國家</b>都呈現完全相同的飆升趨勢——這排除了「某國治安或特殊社會問題」的解釋。同一時間、同一模式、多國同步發生。</p>
+    </div>
+  </section>
+
+  <!-- ============ Part 2 ============ -->
+  <section id="p2">
+    <div class="sec-label">Part 2 · 機制</div>
+    <h2>🧠 大腦內建的三大學習動機，如何被逐一劫持</h2>
+
+    <div class="card">
+      <h3>先理解人類為什麼有漫長的童年</h3>
+      <p>黑猩猩幼兒的成長曲線平穩，但<b>人類幼兒在 2 歲左右生長速度會慢下來，直到青春期才再次快速生長</b>。從演化觀點看，人類保留一個「大腦發達但四肢脆弱」的漫長童年，是因為<b>智人在天擇中勝出靠的不是蠻力或速度，而是學習能力</b>——延長童年，才有足夠時間透過互動汲取祖先與社會累積的知識庫。</p>
+      <p>大腦結構約在 <b>5 歲</b>就已生長完成，之後的發育是<b>不斷建立有用的新神經連結、剪掉無用的舊連結</b>。為了塑造這些連結，大腦內建了三個強烈的學習動機——<b>而這三個動機在現代全部被劫持</b>。</p>
+    </div>
+
+    <!-- 動機一 -->
+    <div class="card" style="border-left:3px solid var(--blue);">
+      <h3>動機一：自由玩耍（Free Play）</h3>
+      <p>波士頓大學心理學家 <b>Peter Gray</b> 的定義：由參與者自由選擇與主導、<b>單純「為了玩而玩」</b>的活動，<b>絕非為了達成玩耍之外的功利目的</b>。</p>
+      <p>神經學機制：嘗試失敗時，大腦分泌<b>去甲腎上腺素與乙醯膽鹼</b>，提醒大腦專注修正錯誤——在爬高、跌倒、捉迷藏、桌遊的過程中鍛鍊能力。</p>
+
+      <h4 style="margin-top:16px;">健全自由玩耍的四大必備條件</h4>
+      <table style="margin-top:10px;">
+        <tr><th style="width:26%;">條件</th><th style="width:37%;">✅ 玩耍為主的童年</th><th style="width:37%;">❌ 手機為主的童年</th></tr>
+        <tr><td><b>肉身參與</b><br><span style="font-size:11px;color:var(--sub);">Physical presence</span></td><td class="dim">親身在現實物理世界互動</td><td style="color:var(--bad);">現實見面大幅減少</td></tr>
+        <tr><td><b>同步進行</b><br><span style="font-size:11px;color:var(--sub);">Synchronous</span></td><td class="dim">即時發生的互動與眼神交流</td><td style="color:var(--bad);">非同步的訊息往返</td></tr>
+        <tr><td><b>一對一或一對少數</b></td><td class="dim">深入且聚焦的社交連結</td><td style="color:var(--bad);">一對多的淺薄連線</td></tr>
+        <tr><td><b>加入／離開需付出情感成本</b></td><td class="dim">加入與退出都需要投入與調和</td><td style="color:var(--bad);"><b>零情感成本</b>——無聲無息地加入或退出群組</td></tr>
+      </table>
+      <small style="margin-top:12px;">🚫 <b>最關鍵的破壞：功利化。</b>在平台上發文與照片必須經過<b>精心挑選、修圖與佈局</b>，追求按讚與流量——這已經不是「為了玩而玩」，<b>直接破壞了自由玩耍的神經學習機制</b>。</small>
+    </div>
+
+    <!-- 動機二 -->
+    <div class="card" style="border-left:3px solid var(--accent2);">
+      <h3>動機二：調和能力（Attunement）</h3>
+      <p>在發展心理學與依附理論中，<b>調和</b>指的是透過調整與同步自己的動作及情感與他人互動，發展心理學家稱之為<b>「發球與回發球」（serve-and-return）</b>。</p>
+
+      <div class="grid g2" style="margin-top:14px;">
+        <div class="warn">
+          <div class="h">⚠ 照顧者這端斷線</div>
+          <p>若照顧者在與幼兒互動時<b>頻繁滑手機、心不在焉</b>，接不上發球，不僅阻礙孩子調和能力的發展，更會在孩子心中植入一個毒性信念：<b>「我比爸媽的手機還不重要」</b>——形成缺乏安全感的依附關係。</p>
+        </div>
+        <div class="warn">
+          <div class="h">⚠ 同儕這端也斷線</div>
+          <p>孩子長大後，調和能力需要在<b>肉身參與、即時同步</b>的自由玩耍中持續練習。但現代青少年<b>即使聚在一起也各自滑手機</b>，缺乏深度互動與協調練習——直接導致進入真實社會時<b>抗壓性低落、難以融入社交環境</b>。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 動機三 -->
+    <div class="card" style="border-left:3px solid var(--accent);">
+      <h3>動機三：社會學習（Social Learning）</h3>
+      <p>人類透過模仿進行社會學習。文化演化學者 <b>Rob Boyd 與 Pete Richerson</b> 指出，人類演化出兩種學習偏見策略——而這兩種策略都被社群媒體扭曲。</p>
+
+      <div class="grid g2" style="margin-top:14px;">
+        <div class="card" style="margin:0;background:#12151b;">
+          <h4>🐑 從眾偏見（Conformist Bias）</h4>
+          <p><b>演化邏輯：</b>在陌生或新環境中，跟隨大多數人的行為模式是最安全的策略。</p>
+          <p><b>被扭曲成：</b>現實中需要數週才能觀察出的群體規範，青少年在社群媒體上<b>一小時內就能瀏覽超過一千個數據點</b>，每篇貼文都附帶明確的按讚數與留言反饋。</p>
+          <small style="color:var(--bad);">📌 這使社群媒體成為<b>「史上最強大的從眾引擎」</b>——能在數小時內說服青少年何種言行才受歡迎。例如演算法大量推播極端瘦身圖片，使少女誤以為異常偏瘦才是正確標準，<b>家長極難勸阻</b>。</small>
+        </div>
+        <div class="card" style="margin:0;background:#12151b;">
+          <h4>👑 威望偏見（Prestige Bias）</h4>
+          <p><b>演化邏輯：</b>演化學者 <b>Joe Henrich</b> 指出，非人靈長類的階級由肉體強壯程度決定；<b>人類則會自願跟隨在特定有價值領域取得卓越成就</b>（打獵、說故事）的人，藉模仿強者提升生存率與聲望。</p>
+          <p><b>被扭曲成：</b>現代社群媒體把「威望」<b>簡化並量化為按讚數與追蹤人數</b>。</p>
+          <small style="color:var(--bad);">📌 欠缺判斷力的青少年，把演算法打造的網紅視為權威與偶像盲目模仿——<b>等於把大腦最強大的社會學習系統，對準了扭曲的模仿對象</b>。</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Part 3 ============ -->
+  <section id="p3">
+    <div class="sec-label">Part 3 · 傷害</div>
+    <h2>💥 殺手組合造成的四大傷害</h2>
+
+    <div class="card" style="border-left:3px solid var(--purple);">
+      <h4>先回應一個常見質疑：這不是「道德恐慌」嗎？</h4>
+      <p>每當新科技出現（電視、漫畫、電玩），長輩總會過度反應，心理學稱之為<b>道德恐慌（Moral Panic）</b>。但海特指出，這次有<b>本質上的不同</b>：</p>
+      <ul class="list" style="margin-top:8px;">
+        <li><b>空間與時間的無限延伸</b>——電視、漫畫、單機遊戲無法隨身攜帶，玩一兩小時就會疲勞，看完不會立刻重看；<b>智慧型手機把所有娛樂隨身化、行動化</b>。</li>
+        <li><b>極高濃度的時間侵佔</b>——演算法無所不用其極地吸引關注，使青春期孩子<b>每天看螢幕的時間高達 6 至 8 小時</b>。空閒時間被無縫填滿，<b>甚至沒在用手機時，思緒也隨時被懸絆</b>。</li>
+      </ul>
+    </div>
+
+    <div class="grid g2">
+      <div class="card" style="border-left:3px solid var(--bad);">
+        <div class="ico">👥</div>
+        <h4>傷害一：社交剝奪</h4>
+        <p><b>實體聚會急遽下滑：</b>十二年級學生表示「幾乎每天」與朋友實體相聚的比例，<b>在 2009 年後出現急遽下滑</b>。</p>
+        <p><b>聚會品質退化：</b>即使面對面，也經常各自拿出手機，缺乏深刻的即時互動。</p>
+        <p><b>家長也身陷其中：</b>皮尤研究中心 2020 年調查發現，<b>68% 的家長</b>表示在與孩子共處時，經常或有時因手機分心——而且<b>此比例在年輕及大學教育程度的家長中更高</b>。</p>
+      </div>
+
+      <div class="card" style="border-left:3px solid var(--bad);">
+        <div class="ico">😴</div>
+        <h4>傷害二：睡眠剝奪</h4>
+        <p>青春期孩子本身就有晚睡傾向，卻仍須早起上學。手機進入臥室後成為<b>睡眠的最大殺手</b>——深夜滑手機侵蝕睡眠時間，<b>螢幕藍光更抑制褪黑激素分泌</b>，破壞睡眠品質。</p>
+        <p><b>連鎖後果：</b>注意力、專注力、記憶力等<b>大腦執行功能大幅下降</b> → 學習表現惡化；肢體協調與決策能力降低 → 意外風險增加；全天處於<b>易怒、焦慮</b>狀態 → 破壞人際關係。長期更影響體重、免疫力與身高發育。</p>
+      </div>
+    </div>
+
+    <div class="card" style="border-left:3px solid var(--bad);">
+      <div class="ico">🔔</div>
+      <h4>傷害三：注意力碎片化</h4>
+      <p><b>一個 1961 年的預言：</b>黑色幽默小說家<b>馮內果（Kurt Vonnegut）</b>在《Harrison Bergeron》中，設想了一個強迫智力平等的社會——高智商者必須配戴由官方控制的耳機，<b>每 20 秒發出高分貝噪音以中斷思緒</b>。</p>
+      <p style="color:var(--accent);font-weight:700;">六十多年後，現代人自願戴上了這種「思緒中斷器」。</p>
+
+      <div class="grid g2" style="margin-top:14px;">
+        <div class="warn">
+          <div class="h">📊 每天 192 個通知</div>
+          <p>研究統計，攜帶智慧型手機的學生平均每天收到高達 <b>192 個通知</b>（Email、社群留言、新聞推播）。<br>若以醒著 16 小時計算，<b>平均每 5 分鐘思緒就被中斷一次</b>。</p>
+        </div>
+        <div class="warn">
+          <div class="h">🧪 手機只要「在」就會扣分</div>
+          <p>實驗把大學生隨機分三組做大腦功能測試：<b>手機放另一個房間 / 放口袋書包 / 放桌面</b>。<br>結果：<b>放另一個房間表現最好，放桌面最差</b>——證明即使不查看訊息，<b>只要手機在視覺範圍內，就會佔用大腦的認知資源</b>。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="border-left:3px solid var(--bad);">
+      <div class="ico">🪝</div>
+      <h4>傷害四：成癮與鉤癮效應</h4>
+      <p><b>成癮的定義：</b>明知某行為會帶來負面影響，<b>卻完全無法控制自己不去做</b>。</p>
+
+      <div class="quote" style="margin:14px 0;">
+        <span class="lbl">書中最令人心驚的一段</span>
+        海特 6 歲的女兒在車上打電玩時對他說：<br>
+        「爸爸，你能幫我把 iPad 拿走嗎？<b style="color:var(--accent);">我試著把眼睛挪開，但我做不到。</b>」
+      </div>
+
+      <p>紐約大學學生調查也顯示，幾乎所有人都把 Instagram 與 TikTok 票選為<b>「持續使用、卻希望它從未被發明」</b>的 App。</p>
+      <p><b>神經路徑的磨平：</b>動物學習依賴的是<b>磨平大腦路徑，而非理性思考</b>。每一次在觸控螢幕上無限滾動（doomscrolling），大腦的神經迴路都在被下意識地磨平與固定。</p>
+
+      <h4 style="margin-top:18px;">鉤癮模型（Hook Model）：矽谷用來設計產品的四步驟</h4>
+      <div class="hook" style="margin-top:10px;">
+        <div class="node"><b>① 外部觸發</b><span>Trigger<br>「有人評論了你的貼文」</span></div>
+        <div class="arw">→</div>
+        <div class="node"><b>② 行動</b><span>Action<br>多巴胺驅使你點開</span></div>
+        <div class="arw">→</div>
+        <div class="node"><b>③ 可變獎勵</b><span>Variable Reward<br>有時爆讚、有時冷清</span></div>
+        <div class="arw">→</div>
+        <div class="node"><b>④ 投入</b><span>Investment<br>繼續發文，期待下次中獎</span></div>
+        <div class="arw">↻</div>
+      </div>
+      <small style="margin-top:12px;">🔑 <b>第三步是整個模型的核心。</b>「不確定的獎勵」比「確定的獎勵」更容易誘發強烈成癮——這正是拉霸機的原理，只是現在裝進了每個孩子的口袋。</small>
+    </div>
+  </section>
+
+  <!-- ============ Part 4 ============ -->
+  <section id="p4">
+    <div class="sec-label">Part 4 · 性別差異</div>
+    <h2>👦👧 同一個殺手組合，兩種完全不同的傷法</h2>
+
+    <div class="eq">
+      <span>自主性（Agency）</span>　　vs　　<span>共融性（Communion）</span>
+      <span class="cap">個體化、擴展自我、展現能力　　｜　　融入群體、關懷、合作與同理<br>
+      男孩普遍更專注於追求<b>自主性</b>，女孩則更看重<b>共融性</b>——這個差異決定了傷害的形態</span>
+    </div>
+
+    <div class="vs" style="margin-top:18px;">
+      <div class="vsbox new" style="border-color:rgba(249,168,212,.4);">
+        <div class="h" style="color:var(--pink);">👧 女孩：重創與焦慮</div>
+        <p><b>爆發性的心理崩潰</b>——數據上呈現陡升的曲線，尤其是憂鬱、焦慮與自我傷害。</p>
+      </div>
+      <div class="vsarr">vs</div>
+      <div class="vsbox new" style="border-color:rgba(125,211,252,.4);">
+        <div class="h" style="color:var(--blue);">👦 男孩：退縮與避世</div>
+        <p><b>漸進式的慢性退縮</b>——沒有戲劇性的崩潰曲線，但一步步從現實世界撤退。</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:24px;">👧 女孩承受的四重打擊</h3>
+    <div class="grid g2">
+      <div class="card">
+        <h4>① 外表的社會比較與完美主義</h4>
+        <p>女孩的人氣與異性吸引力在傳統文化中<b>與外貌高度綁定</b>。以 IG 為首的平台充斥<b>精心修飾、濾鏡調校過</b>的照片與影片，使青春期女孩產生強烈的容貌焦慮與不切實際的美麗標準。</p>
+      </div>
+      <div class="card">
+        <h4>② 人際關係型攻擊與「社會死亡」</h4>
+        <p>男孩的攻擊多為肢體性；<b>女孩的攻擊則以破壞人際關係為主</b>（散布流言、離間朋友、排擠）。對重視共融性的女孩而言，這種「社會死亡」極為煎熬——而社群平台提供<b>匿名帳號與無死角的傳播場域</b>，使受害者無時無刻活在恐懼中。</p>
+      </div>
+      <div class="card">
+        <h4>③ 情緒與心理障礙的同儕傳染</h4>
+        <p>研究顯示，當一位女性患有憂鬱症時，其好友罹患憂鬱症的機率會<b>爆增 142%</b>（男性陷入憂鬱時則無顯著同儕傳染效應）。</p>
+        <p>加上演算法大量推播心理疾病短影音，甚至引發<b>「社交傳染病」</b>——例如網紅宣稱擁有多重人格，導致成千上萬追蹤者誤以為自己也有相同狀況。</p>
+      </div>
+      <div class="card" style="border-left:3px solid var(--bad);">
+        <h4>④ 更容易遭遇網路掠奪與性騷擾</h4>
+        <p>紀錄片《Childhood 2.0》指出，手機使孩子<b>直接暴露於全球的加害者面前</b>。臉書內部文件透露，其「你可能認識的人」功能導致了 <b>75% 的成年人與未成年人不當接觸</b>，但高層拒絕關閉該功能。</p>
+        <small style="color:var(--bad);">下方另闢專區說明<b>家長與孩子該認得的警訊</b>與求助管道。</small>
+      </div>
+    </div>
+
+    <!-- 網路誘騙警訊：以辨識與求助為導向 -->
+    <div class="card" style="margin-top:16px;border:1px solid rgba(248,113,113,.4);background:#12151b;">
+      <h3 style="color:var(--bad);">🛡 網路誘騙：家長與孩子該認得的警訊</h3>
+      <p>加害者的手法雖然千變萬化，但<b>底層的套路高度一致</b>，只要認得這個模式就能提早喊停：</p>
+      <div class="hook" style="margin:14px 0;">
+        <div class="node" style="min-width:130px;"><b>① 建立關係</b><span>假裝同齡、示好、<br>成為「唯一懂你的人」</span></div>
+        <div class="arw">→</div>
+        <div class="node" style="min-width:130px;"><b>② 要求隱私內容</b><span>用各種名目<br>索取私密照片或資訊</span></div>
+        <div class="arw">→</div>
+        <div class="node" style="min-width:130px;"><b>③ 取得後轉為脅迫</b><span>以公開或告知<br>家長師長為要挾</span></div>
+        <div class="arw">→</div>
+        <div class="node" style="min-width:130px;"><b>④ 持續勒索與掌控</b><span>要求更多，<br>使孩子陷入孤立</span></div>
+      </div>
+      <p><b>要教會孩子的三句話：</b></p>
+      <ul class="list" style="margin-top:8px;">
+        <li><b>「任何要求你拍私密照片的人，不管理由多合理、給什麼好處，都是壞人。」</b>——不論對方說是檢查、面試、交換點數還是感情證明。</li>
+        <li><b>「已經傳出去了也不是你的錯，而且一定還有救。」</b>加害者最有效的武器就是讓孩子相信「說出來會更慘」。</li>
+        <li><b>「無論發生什麼事，回家跟我說，我不會罵你。」</b>——這句話必須<b>在事情發生之前</b>就講過很多次。</li>
+      </ul>
+      <div class="tw" style="border-color:rgba(248,113,113,.35);background:linear-gradient(135deg, rgba(248,113,113,.08), transparent);">
+        <div class="h" style="color:var(--bad);">📞 台灣求助管道</div>
+        <ul>
+          <li><b>113 保護專線</b>——24 小時，兒少保護、性剝削通報</li>
+          <li><b>iWIN 網路內容防護機構</b>——不當內容檢舉與下架協助</li>
+          <li><b>110 / 165 反詐騙專線</b>——涉及脅迫勒索時報警</li>
+          <li><b>學校輔導室、社工</b>——校內第一線支援</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="margin-top:24px;">👦 男孩的隱性毀滅</h3>
+    <div class="grid g3">
+      <div class="card">
+        <h4>① 兩大原始動機被綁架</h4>
+        <p><b>戰爭動機</b>被第一人稱射擊遊戲與線上競技遊戲完全綁架；<b>性動機</b>則被隨手可得的網路色情內容綁架——<b>兩者都直接接管多巴胺迴路</b>。</p>
+      </div>
+      <div class="card">
+        <h4>② 虛擬風險替代實體冒險</h4>
+        <p>現實中，男孩需要<b>承擔實體風險、克服困難</b>來獲得地位與能力。但線上遊戲提供<b>零現實風險的征戰快感</b>，色情內容提供<b>無需冒著被拒絕風險</b>的滿足。</p>
+      </div>
+      <div class="card">
+        <h4>③ 從現實世界撤退</h4>
+        <p>當多巴胺迴路習慣了口袋裡快速取得的反饋，就<b>失去出門追求異性、工作與承擔風險的動力</b>——最終導致大量男性成為<b>尼特族</b>（不升學、不就業、不進修）或<b>繭居族</b>。</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px;border-left:3px solid var(--good);">
+      <h4>💪 一個真實的逆轉案例：張修修自己的故事</h4>
+      <p><b>沉底：</b>大學時沉迷《星海爭霸》，<b>被中央大學機械系退學</b>。</p>
+      <p><b>轉折：</b>四年後意識到再繼續下去將在現實中一敗塗地，<b>狠心把遊戲徹底刪除，之後再也不碰任何線上遊戲</b>，兩年後考上交大資工所。</p>
+      <p><b>重建：</b>把真實人生當成 RPG 來闖關——發起「環島走唱王計畫」，<b>19 天騎機車賣唱，花費 2.5 萬、賺得近 3 萬</b>。這場實體冒險建立起的自信，最終促成他完成<b>單車環遊世界、騎至南非好望角</b>的壯舉。</p>
+      <small style="color:var(--good);">📌 這個案例正好對應解方四：<b>虛擬世界給的成就感是借來的，實體世界的挫折與克服才會變成你的</b>。</small>
+    </div>
+  </section>
+
+  <!-- ============ Part 5 ============ -->
+  <section id="p5">
+    <div class="sec-label">Part 5 · 解方</div>
+    <h2>🌱 把「手機童年」逆轉回「玩耍童年」的五個行動</h2>
+
+    <p style="font-size:13.5px;color:#c7cdd5;margin:0 0 16px;">
+      在政府與立法機構正式對科技巨頭實施嚴格監管之前，<b>家長與老師必須主動採取行動</b>。以下五項按執行順序排列——注意第一項是關於<b>你自己</b>，不是關於孩子。
+    </p>
+
+    <div class="grid g2">
+      <div class="sol">
+        <div class="sn">SOLUTION 01</div>
+        <div class="st">家長自己先戒掉殺手組合</div>
+        <p><b>身教遠大於言教。</b>絕不在孩子面前無意識地滑手機。</p>
+        <p>具體做法：<b>關閉所有非必要通知、刪除會讓你下意識打開的 App</b>，讓智慧型手機重新回歸「工具」而非「注意力殺手」。</p>
+        <p>在孩子面前用手機查資料時，<b>主動向孩子說明用途</b>——讓孩子看見手機可以被有意識地使用。</p>
+      </div>
+
+      <div class="sol">
+        <div class="sn">SOLUTION 02</div>
+        <div class="st">盡量延遲接觸的時間</div>
+        <p><b>智慧型手機：</b>建議延遲至<b>高中一年級（約 15–16 歲）</b>，在此之前只提供無上網功能的功能型手機用於聯絡。</p>
+        <p><b>網路成年年齡：</b>呼籲設定為 <b>16 歲</b>，未滿 16 歲前禁止社群公司未經父母同意收集個資或開戶。</p>
+        <p><b>學習設備歸位：</b>需要線上學習或寫程式，用<b>家用桌上型電腦</b>即可——確保出門時專注於與實體世界互動。</p>
+      </div>
+
+      <div class="sol">
+        <div class="sn">SOLUTION 03</div>
+        <div class="st">以班級為單位集體禁用</div>
+        <p><b>這是五個解方中最關鍵、也最容易被忽略的一個。</b></p>
+        <p>單一學生的禁用<b>容易導致同儕排擠與孤立</b>，反而讓孩子付出代價。最有效的方法是<b>以「班級」或「學校」為單位</b>——由導師與家長群組共同觀看相關資訊、<b>達成親師共識</b>，集體規定在校期間禁用。</p>
+        <p style="color:var(--accent);font-weight:700;">一個人戒是犧牲，一群人一起戒才是解方。</p>
+      </div>
+
+      <div class="sol">
+        <div class="sn">SOLUTION 04</div>
+        <div class="st">多鼓勵實體活動與冒險</div>
+        <p>體育競賽、社團活動、幫忙打掃鄰居房屋賺零用錢、跑腿、志工服務——什麼都好，重點是<b>肉身參與</b>。</p>
+        <p>透過在實體世界中面對挑戰與挫折，<b>積累真實的經驗值與抗壓性</b>，建立穩固的自信心。這正是自由玩耍四大條件的實踐版本。</p>
+      </div>
+    </div>
+
+    <div class="sol" style="margin-top:14px;">
+      <div class="sn">SOLUTION 05</div>
+      <div class="st">當孩子的園丁，而不是木匠</div>
+      <p>引自教養經典《園丁與木匠》（The Gardener and the Carpenter）：</p>
+      <div class="vs" style="margin-top:14px;">
+        <div class="vsbox new">
+          <div class="h">🔨 木匠</div>
+          <p>處處下指導棋，試圖把孩子<b>雕刻塑造成家長心目中的特定形狀</b>。木頭沒有自己的方向，只有匠人的藍圖。</p>
+        </div>
+        <div class="vsarr">→</div>
+        <div class="vsbox old">
+          <div class="h">🌿 園丁</div>
+          <p>相信孩子<b>與生俱來的創造力與反脆弱力</b>。你要做的是提供<b>肥沃的土壤、愛與包容</b>，並打造一個穩固的<b>「安全基地」</b>——允許孩子在探索中跌倒與犯錯，並在他需要時給予支持。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 收斂 ============ -->
+  <section>
+    <div class="sec-label">Bottom Line · 帶走這五件事</div>
+    <h2>📌 這場分享的五個核心</h2>
+
+    <div class="bottomline">
+      <div class="bl-item">
+        <div class="n">①</div>
+        <div>
+          <div class="t">2010–2015 是一道清晰的分水嶺</div>
+          <div class="d">前置鏡頭 ＋ 行動網路飆速 ＋ 社群平台，把童年從「以玩耍為主」重塑成「以手機為主」。<b>美國、英國、北歐與台灣的數據曲線同時轉折</b>——這不是巧合。</div>
+        </div>
+      </div>
+      <div class="bl-item">
+        <div class="n">②</div>
+        <div>
+          <div class="t">被劫持的不是時間，是三個學習動機</div>
+          <div class="d"><b>自由玩耍</b>被功利化、<b>調和能力</b>失去練習場、<b>社會學習</b>對準了扭曲的模仿對象。傷害不在「花多少小時」，而在<b>大腦本來要靠這些動機長成什麼樣子</b>。</div>
+        </div>
+      </div>
+      <div class="bl-item">
+        <div class="n">③</div>
+        <div>
+          <div class="t">「不確定的獎勵」才是成癮的核心</div>
+          <div class="d">鉤癮模型四步驟中，<b>可變獎勵</b>是關鍵——有時爆讚、有時冷清，正是拉霸機的原理。<b>孩子不是不夠自律，而是對手是一整支頂尖工程師團隊。</b></div>
+        </div>
+      </div>
+      <div class="bl-item">
+        <div class="n">④</div>
+        <div>
+          <div class="t">同一個問題，男女要用不同的方式接住</div>
+          <div class="d">女孩面對的是<b>容貌焦慮、關係型攻擊、情緒傳染與網路掠奪</b>；男孩面對的是<b>從現實世界緩慢撤退</b>。前者需要陪伴與界線，後者需要重新找回實體世界的成就感。</div>
+        </div>
+      </div>
+      <div class="bl-item">
+        <div class="n">⑤</div>
+        <div>
+          <div class="t">一個人戒是犧牲，一群人一起戒才是解方</div>
+          <div class="d">五個解方裡，<b>「以班級為單位集體禁用」</b>最容易被跳過，卻最關鍵——因為它解決了單獨禁用會造成同儕孤立的根本問題。而第一個解方是<b>家長自己先戒</b>。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quote" style="margin-top:18px;">
+      <span class="lbl">給家長與老師的最後一句</span>
+      孩子對手機與社群媒體上癮，<b>絕不是家長教養失敗</b>。<br>
+      那是<b style="color:var(--accent2);">一個孩子，在對抗市值破兆的科技巨頭與頂尖工程師精心設計的演算法系統</b>。<br><br>
+      不需要過度自責——但也不能只是等待。<b>從你自己的手機開始，從一個班級開始。</b>
+    </div>
+  </section>
+
+  <!-- ============ 求助資源 ============ -->
+  <div class="help">
+    <div class="h">💚 如果你或身邊的孩子正在辛苦，這些管道隨時都在</div>
+    <table>
+      <tr><td>安心專線 <b>1925</b></td><td>24 小時免付費心理諮詢（依舊愛我）</td></tr>
+      <tr><td>生命線 <b>1995</b></td><td>24 小時協談專線</td></tr>
+      <tr><td>張老師專線 <b>1980</b></td><td>青少年與家庭輔導，依舊幫你</td></tr>
+      <tr><td>保護專線 <b>113</b></td><td>24 小時兒少保護、家暴與性剝削通報</td></tr>
+      <tr><td>學校輔導室</td><td>校內第一線支援，可要求安排晤談</td></tr>
+    </table>
+    <p style="font-size:12px;color:var(--sub);margin:10px 0 0;line-height:1.85;">
+      本頁引述的自我傷害統計，目的是說明趨勢的嚴重性。<b>如果閱讀過程中感到不適，請先暫停</b>。若孩子出現持續的情緒低落、睡眠改變或自我傷害的跡象，<b>請及早尋求專業協助——這不是家庭失敗，而是需要專業介入的健康議題</b>。
+    </p>
+  </div>
+
+  <div class="src">
+    📚 <b>資料來源：</b>《失控的焦慮世代》（The Anxious Generation），Jonathan Haidt 著。內容整理自張修修頻道上、下集導讀。<br>
+    文中引述之其他資料：Peter Gray（自由玩耍定義）、Rob Boyd &amp; Pete Richerson（學習偏見）、Joe Henrich（威望偏見）、Nir Eyal《鉤癮效應》、Kurt Vonnegut《Harrison Bergeron》、紀錄片《Childhood 2.0》、《園丁與木匠》、皮尤研究中心 2020 年調查、我國衛福部急診統計（2009–2023）、董氏基金會 2021 年問卷調查。<br>
+    本頁為個人閱讀筆記整理，僅供學習與分享用途；<b>相關統計數據請以原始出處與主管機關公告為準</b>。本頁不構成醫療或心理專業建議。
+  </div>
+
+  <footer>
+    Rock 會計家教 · 蕭啟漢<br>
+    好書分享一頁式 ·《失控的焦慮世代》
+  </footer>
+
+</div>
+</body>
+</html>
