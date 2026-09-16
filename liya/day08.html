@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>記帳士 Day 08｜現金流量表</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F7F8F5;--paper-2:#EFF1EC;--ink:#1B2A33;--ink-soft:#4A5A63;
+  --rule:#C6CFC9;--rule-soft:#DDE2DC;--ledger:#1F5B4E;--ledger-tint:#E7F0EC;
+  --redink:#B03A2E;--red-tint:#F7E9E7;--mark:#FFF3C4;--max:74rem;
+  --serif:"Noto Serif TC",Georgia,"Songti TC","PMingLiU",serif;
+  --sans:"Noto Sans TC",-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:16.5px;line-height:1.85;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(1rem,4vw,3rem)}
+h1,h2,h3,h4{font-family:var(--serif);line-height:1.35;margin:0}
+p{margin:0 0 .9em}ul,ol{margin:0 0 1em;padding-left:1.35em}li{margin:.3em 0}
+a{color:var(--ledger)}
+
+header.masthead{border-bottom:3px double var(--ink);
+  background:linear-gradient(180deg,#fff 0%,var(--paper) 100%);padding:2.6rem 0 1.4rem}
+.mast-row{display:flex;flex-wrap:wrap;align-items:flex-end;gap:1rem 2rem;justify-content:space-between}
+.mast-day{font-family:var(--serif);font-weight:900;font-size:clamp(2.1rem,5.5vw,3.4rem);letter-spacing:.02em}
+.mast-day small{display:block;font-family:var(--sans);font-weight:500;font-size:.92rem;
+  letter-spacing:.22em;color:var(--ink-soft);margin-bottom:.35rem}
+.freq{display:inline-flex;align-items:baseline;gap:.45rem;border:1px solid var(--redink);
+  color:var(--redink);background:var(--red-tint);padding:.3rem .8rem;border-radius:2px;
+  font-size:.9rem;font-weight:700}
+.mast-note{max-width:56ch;color:var(--ink-soft);font-size:.95rem;margin:.9rem 0 0}
+
+.scoreboard{margin:2.2rem 0 0;border-top:1px solid var(--rule);padding-top:1.2rem}
+.sb-title{font-size:1rem;font-weight:700;font-family:var(--serif);margin-bottom:.2rem}
+.sb-sub{font-size:.85rem;color:var(--ink-soft);margin-bottom:.9rem}
+table.ledger{width:100%;border-collapse:collapse;font-size:.94rem}
+table.ledger th,table.ledger td{padding:.42rem .6rem;border-bottom:1px solid var(--rule-soft)}
+table.ledger thead th{border-bottom:1px solid var(--ink);font-family:var(--serif);
+  font-weight:700;font-size:.88rem;text-align:right}
+table.ledger thead th:first-child{text-align:left}
+table.ledger td:first-child,table.ledger th:first-child{text-align:left}
+table.ledger td{text-align:right;font-variant-numeric:tabular-nums}
+table.ledger tr.total td{border-top:1px solid var(--ink);border-bottom:3px double var(--ink);font-weight:700}
+table.ledger tr.sub td{border-top:1px solid var(--rule);font-weight:700}
+table.ledger tr.focus td{background:var(--mark)}
+table.ledger td.txt,table.ledger th.txt{text-align:left}
+.dash{color:#9AA6A0}
+.scroll{overflow-x:auto}
+
+nav.toc{position:sticky;top:0;z-index:30;background:rgba(247,248,245,.94);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+nav.toc ul{display:flex;gap:0;list-style:none;margin:0;padding:0;overflow-x:auto}
+nav.toc a{display:block;white-space:nowrap;padding:.75rem .95rem;font-size:.88rem;
+  text-decoration:none;color:var(--ink-soft);border-bottom:2px solid transparent}
+nav.toc a:hover,nav.toc a:focus-visible{color:var(--ledger);border-bottom-color:var(--ledger)}
+
+section{padding:3rem 0 .5rem;border-top:1px solid var(--rule-soft)}
+section:first-of-type{border-top:none}
+.sec-head{display:flex;align-items:baseline;gap:.8rem;margin-bottom:1.4rem;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(1.4rem,3vw,1.9rem);font-weight:700}
+.sec-head .tag{font-size:.78rem;color:var(--ink-soft);border:1px solid var(--rule);
+  padding:.1rem .5rem;border-radius:2px;white-space:nowrap}
+h3{font-size:1.12rem;margin:1.9rem 0 .6rem;font-weight:700}
+h3::before{content:"";display:inline-block;width:.42rem;height:.42rem;background:var(--ledger);
+  margin-right:.55rem;vertical-align:.18em}
+h4{font-size:1rem;margin:1.2rem 0 .4rem;color:var(--ledger)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(19rem,1fr));gap:0 2.6rem}
+.measure{max-width:72ch}
+
+mark{background:var(--mark);padding:0 .12em}
+.must{display:inline-block;background:var(--redink);color:#fff;font-size:.72rem;font-weight:700;
+  padding:.05rem .42rem;border-radius:2px;vertical-align:.14em;margin-left:.4rem;letter-spacing:.05em}
+.callout{border-left:3px solid var(--redink);background:var(--red-tint);padding:.85rem 1.1rem;
+  margin:1.1rem 0;font-size:.95rem}
+.callout .h{font-weight:700;color:var(--redink);display:block;margin-bottom:.2rem}
+.rule-box{border:1px solid var(--rule);background:#fff;padding:1rem 1.15rem;margin:1.1rem 0}
+.rule-box .h{font-family:var(--serif);font-weight:700;margin-bottom:.5rem}
+
+table.je{width:100%;max-width:34rem;border-collapse:collapse;font-variant-numeric:tabular-nums;
+  font-size:.95rem;margin:.7rem 0 1.2rem;background:#fff;border:1px solid var(--rule-soft)}
+table.je caption{caption-side:top;text-align:left;font-size:.85rem;color:var(--ink-soft);
+  padding:.35rem .6rem;background:var(--paper-2);border-bottom:1px solid var(--rule-soft)}
+table.je td{padding:.3rem .7rem;border:none}
+table.je td.dr{padding-left:.9rem}
+table.je td.cr{padding-left:3rem;color:var(--ledger)}
+table.je td.amt{text-align:right;width:8.5rem}
+
+/* T 字帳 */
+.tt{max-width:26rem;margin:.9rem 0;font-variant-numeric:tabular-nums}
+.tt .cap{text-align:center;font-weight:700;font-size:.92rem;padding-bottom:.25rem;
+  border-bottom:1.5px solid var(--ink)}
+.tt .body{display:grid;grid-template-columns:1fr 1.5px 1fr;min-height:4.5rem}
+.tt .divider{background:var(--ink)}
+.tt .side{padding:.4rem .7rem;font-size:.9rem}
+.tt .side.r{text-align:right}
+.tt .side div{padding:.1rem 0}
+.tt .side .bal{border-top:1px solid var(--ink);margin-top:.25rem;padding-top:.2rem;font-weight:700}
+.tt .lbl{font-size:.82rem;color:var(--ink-soft)}
+
+.formula-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1px;
+  background:var(--rule-soft);border:1px solid var(--rule-soft);margin:1rem 0}
+.fcard{background:#fff;padding:.95rem 1.05rem}
+.fcard .fname{font-weight:700;font-size:.95rem;margin-bottom:.5rem}
+.fcard .fnote{font-size:.83rem;color:var(--ink-soft);margin-top:.5rem;line-height:1.6}
+.eq{font-size:.95rem;font-variant-numeric:tabular-nums}
+
+/* 計算器 */
+.calc{border:2px solid var(--ledger);background:#fff;margin:1.6rem 0}
+.calc-head{background:var(--ledger);color:#fff;padding:.7rem 1.1rem;font-family:var(--serif);font-weight:700}
+.calc-head span{display:block;font-family:var(--sans);font-weight:400;font-size:.83rem;opacity:.85}
+.calc-body{padding:1.1rem}
+.calc-mode{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.calc-mode button{font:inherit;font-size:.88rem;padding:.4rem .85rem;cursor:pointer;
+  border:1px solid var(--rule);background:var(--paper-2);color:var(--ink-soft);border-radius:2px}
+.calc-mode button[aria-pressed="true"]{background:var(--ledger);color:#fff;border-color:var(--ledger)}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:.8rem}
+.field label{display:block;font-size:.82rem;color:var(--ink-soft);margin-bottom:.2rem}
+.field input{width:100%;font:inherit;font-size:.94rem;font-variant-numeric:tabular-nums;
+  padding:.42rem .6rem;border:1px solid var(--rule);border-radius:2px;background:var(--paper);color:var(--ink)}
+.field input:focus-visible{outline:2px solid var(--ledger);outline-offset:1px}
+.btnrow{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem}
+.btnrow button{font:inherit;font-size:.85rem;cursor:pointer;padding:.33rem .8rem;border-radius:2px;
+  border:1px solid var(--rule);background:var(--paper-2);color:var(--ink)}
+.btnrow button:hover{border-color:var(--ledger);color:var(--ledger)}
+.calc-out{margin-top:1.1rem;border-top:1px solid var(--rule);padding-top:.9rem;font-size:.94rem}
+.result{font-family:var(--serif);font-weight:700;font-size:1.15rem;color:var(--ledger);
+  font-variant-numeric:tabular-nums;margin-bottom:.5rem}
+.warn{color:var(--redink);font-size:.9rem}
+
+/* 練習題 */
+.q{border:1px solid var(--rule);background:#fff;margin:1rem 0;padding:1rem 1.15rem}
+.q-head{display:flex;gap:.6rem;align-items:baseline;margin-bottom:.6rem}
+.q-no{font-family:var(--serif);font-weight:900;color:var(--ledger);font-size:1.05rem;min-width:1.8rem}
+.q-src{margin-left:auto;font-size:.78rem;color:var(--ink-soft);white-space:nowrap}
+.q-stem{font-size:.98rem}
+.opts{list-style:none;margin:.7rem 0 0;padding:0;display:grid;gap:.35rem}
+.opts button{width:100%;text-align:left;font:inherit;font-size:.94rem;cursor:pointer;
+  border:1px solid var(--rule-soft);background:var(--paper);color:var(--ink);
+  padding:.45rem .75rem;border-radius:2px}
+.opts button:hover{border-color:var(--ledger)}
+.opts button:focus-visible{outline:2px solid var(--ledger);outline-offset:1px}
+.opts button.right{background:var(--ledger-tint);border-color:var(--ledger);font-weight:700}
+.opts button.wrong{background:var(--red-tint);border-color:var(--redink);text-decoration:line-through}
+.opts button[disabled]{cursor:default}
+.sol{margin-top:.8rem;border-left:3px solid var(--ledger);background:var(--ledger-tint);
+  padding:.7rem 1rem;font-size:.93rem}
+.sol .h{font-weight:700;color:var(--ledger);margin-bottom:.25rem}
+.sol[hidden]{display:none}
+.reveal{font:inherit;font-size:.86rem;margin-top:.7rem;cursor:pointer;background:none;
+  border:1px solid var(--rule);color:var(--ink-soft);padding:.3rem .8rem;border-radius:2px}
+.reveal:hover{border-color:var(--ledger);color:var(--ledger)}
+.calcsteps{font-variant-numeric:tabular-nums;font-size:.92rem}
+.calcsteps div{padding:.1rem 0}
+
+.scorebar{position:sticky;bottom:0;z-index:20;background:var(--ink);color:#fff;
+  display:flex;align-items:center;gap:1rem;flex-wrap:wrap;padding:.6rem clamp(1rem,4vw,3rem);font-size:.9rem}
+.scorebar b{font-variant-numeric:tabular-nums;font-size:1.05rem}
+.scorebar button{margin-left:auto;font:inherit;font-size:.85rem;cursor:pointer;background:none;
+  border:1px solid rgba(255,255,255,.4);color:#fff;padding:.28rem .8rem;border-radius:2px}
+.scorebar button:hover{background:rgba(255,255,255,.12)}
+
+footer{padding:2.5rem 0 3.5rem;border-top:3px double var(--ink);margin-top:3rem;
+  font-size:.86rem;color:var(--ink-soft)}
+
+@media print{
+  nav.toc,.scorebar,.reveal,.q-src,.btnrow,.calc-mode{display:none!important}
+  .sol[hidden]{display:block!important}
+  body{font-size:11pt;background:#fff}
+  .q,.rule-box,table.je,.tt{break-inside:avoid}
+  section{padding-top:1.2rem}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="mast-row">
+      <div><div class="mast-day"><small>記帳士｜會計學概要</small>Day 08　現金流量表</div></div>
+      <div class="freq">出題頻率　A　高</div>
+    </div>
+    <p class="mast-note">企業之現金流量資訊，有助於財務報表使用者評估企業產生現金及約當現金之能力，及使用該等現金流量之需求。財務報表使用者在進行經濟決策時，需要評估企業產生現金及約當現金之能力，以及產生現金及約當現金之時間及確定性。</p>
+
+    <div class="scoreboard">
+      <div class="sb-title">近三年命題落點（會計學概要）</div>
+      <div class="sb-sub">灰底為本單元範圍。申論題共 50 分、選擇題共 50 分，此處為兩者加總。</div>
+      <table class="ledger">
+        <thead><tr><th>內容</th><th>112 年</th><th>113 年</th><th>114 年</th></tr></thead>
+        <tbody>
+          <tr><td>現金及約當現金</td><td>5</td><td>17.5</td><td>5</td></tr>
+          <tr><td>應收帳款</td><td>2.5</td><td>2.5</td><td>5</td></tr>
+          <tr><td>存貨</td><td>10</td><td>28</td><td>34.5</td></tr>
+          <tr><td>不動產、廠房及設備</td><td>22</td><td>5</td><td>20</td></tr>
+          <tr><td>負債與投資</td><td>27</td><td>12.5</td><td>25.5</td></tr>
+          <tr><td>業主權益</td><td>2.5</td><td>10</td><td class="dash">—</td></tr>
+          <tr><td>保留盈餘及每股盈餘</td><td>2.5</td><td>5</td><td>2.5</td></tr>
+          <tr><td>獨資、合夥會計</td><td>7.5</td><td>2.5</td><td>5</td></tr>
+          <tr class="focus"><td>現金流量表</td><td>18.5</td><td>5</td><td>2.5</td></tr>
+          <tr><td>財務報表分析</td><td>2.5</td><td>12</td><td class="dash">—</td></tr>
+          <tr class="total"><td>本單元小計</td><td>18.5</td><td>5</td><td>2.5</td></tr>
+        </tbody>
+      </table>
+      <p class="mast-note"><b>三年平均 8.7 分，但分布極不平均：112 年一出手就是 16 分申論題。</b>這是全書風險結構最特殊的單元——不出則已，一出就是整題大分。跟 Day 07 那種「每年穩定 2.5 分」剛好相反。<br>
+      對應策略也不同：Day 07 練熟公式就好，本單元<mark>必須整題寫過至少三次</mark>。只會背分類、沒實際編過表，遇到申論題會在考場上卡住十分鐘然後放棄。</p>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="章節導覽">
+  <div class="wrap">
+    <ul>
+      <li><a href="#s1">定義</a></li>
+      <li><a href="#s2">三大活動</a></li>
+      <li><a href="#s3">利息與股利</a></li>
+      <li><a href="#s4">間接法</a></li>
+      <li><a href="#s5">直接法</a></li>
+      <li><a href="#s6">收現付現計算器</a></li>
+      <li><a href="#s7">完整範例</a></li>
+      <li><a href="#s8">IAS 7</a></li>
+      <li><a href="#s9">非現金與自由現金流量</a></li>
+      <li><a href="#s10">選擇題</a></li>
+      <li><a href="#s11">計算題</a></li>
+      <li><a href="#s12">易錯清單</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ═══ 1 定義 ═══ -->
+<section id="s1">
+  <div class="sec-head"><h2>一、定義</h2><span class="tag">觀念題</span></div>
+  <div class="measure">
+    <p>現金流量係指現金之流入與流出，亦即收現付現之金額。現金流量表則彙總說明企業在特定期間因<b>營業、投資及籌資活動</b>所導致的現金流入或流出，以及現金餘額之增減。</p>
+    <div class="rule-box">
+      <div class="h">老師叮嚀</div>
+      <ol style="font-size:.94rem;margin:0">
+        <li>四個主要財務報表為<b>資產負債表、綜合損益表、現金流量表及權益變動表</b>。</li>
+        <li>現金流量表之編製，係將影響現金流量的項目按企業在特定期間之活動，區分為營業活動、投資活動及籌資活動的現金流量三類。</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 2 三大活動 ═══ -->
+<section id="s2">
+  <div class="sec-head"><h2>二、三大活動的分類</h2><span class="tag">必考</span></div>
+  <p class="measure">分類錯了，後面全部白算。先記住每一類的<b>判準</b>，再記例子——例子背不完，判準只有三條。</p>
+
+  <div class="formula-grid">
+    <div class="fcard">
+      <div class="fname" style="color:var(--ledger)">營業活動</div>
+      <div class="fnote">企業產生主要收入之活動及其他非屬投資或籌資之活動。<br>判準：<b>列入損益計算的交易</b>及其他現金流入或流出。<br>企業因交易目的而持有證券或放款，其性質與供出售而取得之存貨類似，因此取得或出售該等項目所產生之現金流量應分類為營業活動。</div>
+    </div>
+    <div class="fcard">
+      <div class="fname" style="color:var(--redink)">投資活動</div>
+      <div class="fnote">通常涉及「<b>與營業無關之流動資產</b>」及「<b>非流動資產</b>」之變動。<br>凡非屬交易目的之證券（透過損益按公允價值衡量之金融資產）的取得與處分、長期營業資產的取得與處分、保證金之存出與收回等均屬之。</div>
+    </div>
+    <div class="fcard">
+      <div class="fname">籌資活動</div>
+      <div class="fnote">企業籌資來源，通常涉及「<b>與營業無關之流動負債</b>」、「<b>非流動負債</b>」及「<b>本期損益以外權益項目</b>」之變動。<br>例如股東投入資本、發放現金股利、籌資性債務之舉借與償還及存入保證金之收取與返還等均屬之。</div>
+    </div>
+  </div>
+
+  <h3>活動別與現金流入流出對照</h3>
+  <div class="scroll">
+    <table class="ledger" style="min-width:42rem">
+      <thead><tr><th>活動別</th><th class="txt">現金流入</th><th class="txt">現金流出</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><b>營業活動</b></td>
+          <td class="txt">1. 本期淨利<br>2. 現金以外與營業有關之流動資產減少<br>3. 與營業有關之流動負債增加</td>
+          <td class="txt">1. 本期淨損<br>2. 現金以外與營業有關之流動資產增加<br>3. 與營業有關之流動負債減少</td>
+        </tr>
+        <tr>
+          <td><b>投資活動</b></td>
+          <td class="txt">1. 與營業無關之流動資產減少<br>2. 非流動資產減少</td>
+          <td class="txt">1. 與營業無關之流動資產增加<br>2. 非流動資產增加</td>
+        </tr>
+        <tr>
+          <td><b>籌資活動</b></td>
+          <td class="txt">1. 與營業無關之流動負債增加<br>2. 非流動負債增加<br>3. 權益（本期淨利除外）增加</td>
+          <td class="txt">1. 與營業無關之流動負債減少<br>2. 非流動負債減少<br>3. 權益（本期淨利除外）減少</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout measure">
+    <span class="h">這張表就是整個單元的骨架</span>
+    現金流量表本質上是把<b>資產負債表的每一個科目變動</b>歸到三類活動裡。所以檢查有沒有漏項，只要把比較資產負債表逐列掃過去，確認每一列都被歸類過即可。<mark>漏掉一列，表就不會平。</mark>
+  </div>
+
+  <div class="callout measure">
+    <span class="h">老師叮嚀：透過損益按公允價值衡量之金融資產</span>
+    此類金融資產乃<b>閒置資金之調度與控管</b>，屬於<b>營業活動</b>——不是投資活動。而「按攤銷後成本衡量之金融資產」則屬投資活動。兩個名字很像，分類完全不同，考題最愛在這裡設陷阱。
+  </div>
+</section>
+
+<!-- ═══ 3 利息與股利 ═══ -->
+<section id="s3">
+  <div class="sec-head"><h2>三、利息及股利的分類</h2><span class="tag">觀念題</span></div>
+  <p class="measure">這一節的關鍵字是<b>「亦得」</b>——準則給了彈性，所以正確答案通常是「兩種分類都可以」，而不是唯一一種。</p>
+
+  <div class="scroll">
+    <table class="ledger" style="min-width:40rem">
+      <thead><tr><th>項目</th><th class="txt">金融機構</th><th class="txt">其他企業</th></tr></thead>
+      <tbody>
+        <tr><td><b>支付之利息</b></td><td class="txt">通常分類為營業活動</td><td class="txt">營業活動（列入損益計算）<br><b>亦得</b>分類為<b>籌資</b>活動（取得財務資源之成本）</td></tr>
+        <tr><td><b>收取之利息</b></td><td class="txt">通常分類為營業活動</td><td class="txt">營業活動（列入損益計算）<br><b>亦得</b>分類為<b>投資</b>活動（投資之報酬）</td></tr>
+        <tr><td><b>收取之股利</b></td><td class="txt">通常分類為營業活動</td><td class="txt">營業活動（列入損益計算）<br><b>亦得</b>分類為<b>投資</b>活動（投資之報酬）</td></tr>
+        <tr class="focus"><td><b>支付之股利</b></td><td class="txt" colspan="2">分類為<b>籌資</b>活動（取得財務資源之成本）<br><b>亦得</b>分類為<b>營業</b>活動——為幫助報表使用者決定企業以營業活動現金流量支付股利之能力</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout measure">
+    <span class="h">記法：成本歸籌資，報酬歸投資</span>
+    <b>付出去的</b>（支付利息、支付股利）＝ 取得財務資源的<b>成本</b> → 可歸<b>籌資</b>。<br>
+    <b>收進來的</b>（收取利息、收取股利）＝ 投資的<b>報酬</b> → 可歸<b>投資</b>。<br>
+    四項的預設都可以是營業活動，因為它們都列入損益計算。唯一例外是<b>支付之股利</b>——股利不是費用、不進損益，所以預設是籌資活動。
+  </div>
+</section>
+
+<!-- ═══ 4 間接法 ═══ -->
+<section id="s4">
+  <div class="sec-head"><h2>四、間接法：四類調整項目</h2><span class="tag">必考核心</span></div>
+  <div class="measure">
+    <p>營業收入會產生現金流入，營業費用會產生現金流出。但因損益認列的時點（<b>應計基礎</b>）與現金收付的時點（<b>現金基礎</b>）可能不同，故須從綜合損益表的資料來求算由營業產生的現金流量。</p>
+    <p>間接法係以本期綜合損益表中之<b>本期淨利為基礎</b>，作必要之調整後計算當期營業活動之淨現金流量。調整項目有四類：</p>
+  </div>
+
+  <div class="formula-grid">
+    <div class="fcard">
+      <div class="fname">1　不影響現金流量之損益項目</div>
+      <div class="fnote">有些<b>費用</b>並不產生現金流出，故應將其自本期淨利<b>加回</b>——例如折舊費用、折耗及無形資產之攤銷。<br>另有些<b>收入</b>並不產生現金流入，故應將其自本期淨利<b>扣除</b>——例如採權益法認列之投資收益。</div>
+    </div>
+    <div class="fcard">
+      <div class="fname">2　與營業活動有關之流動資產及流動負債之變動</div>
+      <div class="fnote">資產<b>增加</b>→ 扣除；資產<b>減少</b>→ 加回。<br>負債<b>增加</b>→ 加回；負債<b>減少</b>→ 扣除。</div>
+    </div>
+    <div class="fcard">
+      <div class="fname">3　處分資產及清償債務之損益項目</div>
+      <div class="fnote">處分<b>利益</b>→ 扣除；處分<b>損失</b>→ 加回。<br>因為相關現金流量全額屬投資或籌資活動，損益只是帳面差額，不是營業現金流。</div>
+    </div>
+    <div class="fcard">
+      <div class="fname">4　收入、費用之金額與折溢價之攤銷而與現金流入不一致之項目</div>
+      <div class="fnote">例如應付公司債折價攤銷使利息費用大於實際付現，差額應加回。</div>
+    </div>
+  </div>
+
+  <div class="callout measure">
+    <span class="h">第 3 類的邏輯最容易被記反</span>
+    處分設備得款 $96,000、損失 $4,000。<b>投資活動</b>列入的是<mark>全額 $96,000</mark>，不是淨額、也不是損失。而損失 $4,000 只是帳面數字，根本沒有現金流出，所以要從淨利<b>加回</b>，避免重複計算。<br>
+    反過來，採權益法之投資所收到的現金股利，<b>因未認列為收入</b>（視為投資之減少）但有收到現金，故應自本期淨利<b>加回</b>。
+  </div>
+
+  <div class="rule-box measure">
+    <div class="h">加減方向速查</div>
+    <table class="ledger" style="max-width:34rem">
+      <thead><tr><th>項目</th><th>方向</th></tr></thead>
+      <tbody>
+        <tr><td>折舊、折耗、攤銷</td><td>＋ 加回</td></tr>
+        <tr><td>處分資產<b>損失</b></td><td>＋ 加回</td></tr>
+        <tr><td>處分資產<b>利益</b></td><td>－ 扣除</td></tr>
+        <tr><td>採權益法認列之投資收益</td><td>－ 扣除</td></tr>
+        <tr><td>應收帳款、存貨、預付費用<b>增加</b></td><td>－ 扣除</td></tr>
+        <tr><td>應收帳款、存貨、預付費用<b>減少</b></td><td>＋ 加回</td></tr>
+        <tr><td>應付帳款、應付費用、所得稅負債<b>增加</b></td><td>＋ 加回</td></tr>
+        <tr><td>應付帳款、應付費用、所得稅負債<b>減少</b></td><td>－ 扣除</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══ 5 直接法 ═══ -->
+<section id="s5">
+  <div class="sec-head"><h2>五、直接法：T 字帳求現金數</h2><span class="tag">114 考題</span></div>
+  <div class="measure">
+    <p>直接法係將綜合損益表上之各項收入與費用，個別調整有關之資產、負債等變動數，以收現數或付現數直接列示，<b>亦即將應計基礎之損益表改成現金基礎之損益表</b>。以 T 字帳的觀念去解，即可順利解題。</p>
+    <div class="callout">
+      <span class="h">命題考點</span>
+      採直接法編製營業費用之現金流量，<b>一定會出現在列項目</b>。114 年考題就是先用間接法算出營業活動現金流量，再回頭問直接法下的自客戶收現數與支付供應商及營業費用數——同一題兩種方法都要會。
+    </div>
+  </div>
+
+  <h3>四條公式</h3>
+  <div class="formula-grid">
+    <div class="fcard">
+      <div class="fname">自客戶收現數</div>
+      <div class="eq">期初應收帳款（總額）<br>＋ 銷貨收入<br>－ 沖銷之壞帳<br>－ 期末應收帳款（總額）</div>
+      <div class="fnote">用<b>總額</b>時要扣沖銷數；若題目給淨額，直接用淨額變動即可，不必再扣沖銷。兩種做法答案相同，但<mark>不能混用</mark>。</div>
+    </div>
+    <div class="fcard">
+      <div class="fname">支付供應商貨款</div>
+      <div class="eq">進貨 ＝ 銷貨成本 ＋ 期末存貨 － 期初存貨<br><br>付現 ＝ 期初應付帳款<br>　　　　＋ 進貨<br>　　　　－ 期末應付帳款</div>
+      <div class="fnote">兩段式：先由銷貨成本還原進貨，再由進貨還原付現。跳過第一段直接用銷貨成本算，是最常見的錯法。</div>
+    </div>
+    <div class="fcard">
+      <div class="fname">支付營業費用</div>
+      <div class="eq">現金性費用 ＝ 營業費用<br>　－ 折舊及攤銷<br>　－ 預期信用減損損失<br><br>付現 ＝ 現金性費用<br>　＋ 預付費用增加<br>　－ 應付費用增加</div>
+      <div class="fnote">先把<b>非現金費用</b>從營業費用中剔除，再調整預付與應付。折舊常混在營業費用裡，題目會用括號註明。</div>
+    </div>
+    <div class="fcard">
+      <div class="fname">支付所得稅</div>
+      <div class="eq">期初所得稅負債<br>＋ 所得稅費用<br>－ 期末所得稅負債</div>
+      <div class="fnote">IAS 7 格式下，支付之所得稅須<b>單獨揭露</b>，不併入營運產生之現金。</div>
+    </div>
+  </div>
+
+  <h3>T 字帳怎麼畫</h3>
+  <p class="measure">以應收帳款為例。不考慮現銷情況下，銷貨分錄為「借：應收帳款／貸：銷貨收入」，配合期初與期末應收帳款數，即可求出銷貨及應收帳款收現金額。</p>
+  <div class="tt">
+    <div class="cap">應收帳款</div>
+    <div class="body">
+      <div class="side">
+        <div>62,000 <span class="lbl">期初</span></div>
+        <div>2,000,000 <span class="lbl">銷貨</span></div>
+        <div class="bal">100,000 <span class="lbl">期末</span></div>
+      </div>
+      <div class="divider"></div>
+      <div class="side r">
+        <div>&nbsp;</div>
+        <div>1,962,000 <span class="lbl">收現</span></div>
+        <div class="bal">&nbsp;</div>
+      </div>
+    </div>
+  </div>
+  <p class="measure" style="font-size:.93rem">應收帳款收現數 ＝ $62,000 ＋ $2,000,000 － $100,000 ＝ <b>$1,962,000</b></p>
+</section>
+
+<!-- ═══ 6 計算器 ═══ -->
+<section id="s6">
+  <div class="sec-head"><h2>六、收現付現計算器</h2><span class="tag">自我驗算</span></div>
+  <p class="measure">直接法四條公式各有一個模式。自己畫完 T 字帳再用這個對答案，工具會把完整算式列出來，看得出錯在哪一項。每個模式都可載入 114 年考題的數字。</p>
+
+  <div class="calc">
+    <div class="calc-head">直接法：各項收現與付現數<span>依 T 字帳觀念計算，括號表示流出</span></div>
+    <div class="calc-body">
+      <div class="calc-mode" role="group" aria-label="選擇計算項目">
+        <button type="button" data-m="ar" aria-pressed="true">自客戶收現數</button>
+        <button type="button" data-m="ap" aria-pressed="false">支付供應商貨款</button>
+        <button type="button" data-m="op" aria-pressed="false">支付營業費用</button>
+        <button type="button" data-m="tx" aria-pressed="false">支付所得稅</button>
+      </div>
+
+      <div class="fields" id="f-ar">
+        <div class="field"><label for="ar-b">期初應收帳款（總額）</label><input id="ar-b" type="number" value="61000"></div>
+        <div class="field"><label for="ar-s">銷貨收入</label><input id="ar-s" type="number" value="583000"></div>
+        <div class="field"><label for="ar-w">本期沖銷之應收帳款</label><input id="ar-w" type="number" value="5000"></div>
+        <div class="field"><label for="ar-e">期末應收帳款（總額）</label><input id="ar-e" type="number" value="45000"></div>
+      </div>
+
+      <div class="fields" id="f-ap" hidden>
+        <div class="field"><label for="ap-cogs">銷貨成本</label><input id="ap-cogs" type="number" value="315000"></div>
+        <div class="field"><label for="ap-ib">期初存貨</label><input id="ap-ib" type="number" value="19000"></div>
+        <div class="field"><label for="ap-ie">期末存貨</label><input id="ap-ie" type="number" value="28000"></div>
+        <div class="field"><label for="ap-b">期初應付帳款</label><input id="ap-b" type="number" value="12000"></div>
+        <div class="field"><label for="ap-e">期末應付帳款</label><input id="ap-e" type="number" value="30000"></div>
+      </div>
+
+      <div class="fields" id="f-op" hidden>
+        <div class="field"><label for="op-t">營業費用總額</label><input id="op-t" type="number" value="168000"></div>
+        <div class="field"><label for="op-d">其中：折舊及攤銷</label><input id="op-d" type="number" value="51000"></div>
+        <div class="field"><label for="op-c">其中：預期信用減損損失</label><input id="op-c" type="number" value="4000"></div>
+        <div class="field"><label for="op-pb">期初預付費用</label><input id="op-pb" type="number" value="7500"></div>
+        <div class="field"><label for="op-pe">期末預付費用</label><input id="op-pe" type="number" value="13500"></div>
+        <div class="field"><label for="op-ab">期初應付費用</label><input id="op-ab" type="number" value="12000"></div>
+        <div class="field"><label for="op-ae">期末應付費用</label><input id="op-ae" type="number" value="15000"></div>
+      </div>
+
+      <div class="fields" id="f-tx" hidden>
+        <div class="field"><label for="tx-b">期初本期所得稅負債</label><input id="tx-b" type="number" value="13000"></div>
+        <div class="field"><label for="tx-x">所得稅費用</label><input id="tx-x" type="number" value="16000"></div>
+        <div class="field"><label for="tx-e">期末本期所得稅負債</label><input id="tx-e" type="number" value="9000"></div>
+      </div>
+
+      <div class="calc-out" id="calc-out" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 7 完整範例 ═══ -->
+<section id="s7">
+  <div class="sec-head"><h2>七、完整範例：甲公司 X9 年度</h2><span class="tag">整題示範</span></div>
+
+  <div class="measure">
+    <div class="rule-box">
+      <div class="h">資料</div>
+      <div class="scroll">
+      <table class="ledger" style="max-width:34rem">
+        <thead><tr><th>比較資產負債表</th><th>X9/12/31</th><th>X8/12/31</th></tr></thead>
+        <tbody>
+          <tr><td>現金</td><td>55,000</td><td>36,000</td></tr>
+          <tr><td>應收帳款</td><td>100,000</td><td>62,000</td></tr>
+          <tr><td>存貨</td><td>40,000</td><td>42,000</td></tr>
+          <tr><td>預付費用</td><td>12,000</td><td class="dash">—</td></tr>
+          <tr><td>按攤銷後成本衡量之金融資產</td><td>80,000</td><td>120,000</td></tr>
+          <tr><td>固定資產</td><td>630,000</td><td>300,000</td></tr>
+          <tr><td>累計折舊</td><td>(100,000)</td><td class="dash">—</td></tr>
+          <tr class="total"><td>資產總額</td><td>817,000</td><td>560,000</td></tr>
+          <tr><td>應付帳款</td><td>66,600</td><td>100,000</td></tr>
+          <tr><td>所得稅負債</td><td>20,400</td><td>17,000</td></tr>
+          <tr><td>長期借款</td><td>100,000</td><td class="dash">—</td></tr>
+          <tr><td>股本</td><td>400,000</td><td>300,000</td></tr>
+          <tr><td>資本公積</td><td>80,000</td><td>60,000</td></tr>
+          <tr><td>保留盈餘</td><td>150,000</td><td>83,000</td></tr>
+          <tr class="total"><td>負債及權益總額</td><td>817,000</td><td>560,000</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p style="font-size:.93rem;margin-top:.9rem">綜合損益表：銷貨收入 $2,000,000；銷貨成本 $(1,576,000)；銷貨毛利 $424,000；營業費用—折舊費用 $120,000、其他營業費用 $187,000，合計 $(307,000)；營業淨利 $117,000；利息費用 $(10,000)；利息收入 $12,000；處分投資利益 $5,000；處分設備損失 $(4,000)，營業外損益合計 $3,000；稅前淨利 $120,000；所得稅費用 $(20,400)；本期淨利 $99,600。</p>
+      <p style="font-size:.93rem">補充資料：(1) 出售二分之一按攤銷後成本衡量之金融資產，淨得現金 $45,000。(2) 年底處分部分設備得款 $96,000，其成本 $120,000、累計折舊 $20,000。(3) 發行面額 $10 之股票 10,000 股再加上現金 $330,000 換入設備一批，當時設備公允價值 $450,000。(4) 本年度折舊費用 $120,000。(5) 年中向銀行借款 $100,000。(6) 保留盈餘之變動除本期淨利外，餘為發放現金股利。</p>
+    </div>
+  </div>
+
+  <h3>(一) 營業活動 — 間接法</h3>
+  <div class="measure">
+    <table class="ledger" style="max-width:36rem">
+      <tbody>
+        <tr><td>本期淨利</td><td>99,600</td></tr>
+        <tr><td colspan="2" class="txt" style="color:var(--ink-soft);font-size:.88rem">調整項目</td></tr>
+        <tr><td>　折舊費用</td><td>120,000</td></tr>
+        <tr><td>　處分投資利益</td><td>(5,000)</td></tr>
+        <tr><td>　處分設備損失</td><td>4,000</td></tr>
+        <tr><td>　應收帳款增加</td><td>(38,000)</td></tr>
+        <tr><td>　存貨減少</td><td>2,000</td></tr>
+        <tr><td>　預付費用增加</td><td>(12,000)</td></tr>
+        <tr><td>　應付帳款減少</td><td>(33,400)</td></tr>
+        <tr class="sub"><td>　應付所得稅增加</td><td>3,400　　41,000</td></tr>
+        <tr class="total"><td>營業活動現金流入</td><td>140,600</td></tr>
+      </tbody>
+    </table>
+    <div class="calcsteps" style="margin-top:.6rem">
+      <div><b>A.</b> 本期淨利 $99,600 為營業活動現金流量第一項。</div>
+      <div><b>B.</b> 折舊費用 $120,000 不導致現金流出，應自本期淨利加回。</div>
+      <div><b>C.</b> 處分投資利益 $5,000，利益本身不導致營業現金流入，應自本期淨利扣除。</div>
+      <div><b>D.</b> 處分設備損失 $4,000，損失本身不導致營業現金流出，應自本期淨利加回。</div>
+      <div><b>E.</b> 應收帳款增加 $38,000，分錄為借：應收帳款、貸：銷貨收入，並非實際收到現金，不導致營業現金流入，應自本期淨利扣除。</div>
+      <div><b>F.</b> 存貨減少 $2,000，為出售舊有存貨所造成，導致營業現金流入，應自本期淨利加回。</div>
+      <div><b>G.</b> 預付費用增加 $12,000，分錄為借：預付費用、貸：現金，導致營業現金流出，應自本期淨利扣除。</div>
+      <div><b>H.</b> 應付帳款減少 $33,400，分錄為借：應付帳款、貸：現金，導致營業現金流出，應自本期淨利扣除。</div>
+      <div><b>I.</b> 所得稅負債增加 $3,400，不導致營業現金流出，應自本期淨利加回。</div>
+    </div>
+  </div>
+
+  <h3>(一續) 營業活動 — 直接法</h3>
+  <div class="measure">
+    <table class="ledger" style="max-width:34rem">
+      <tbody>
+        <tr><td>銷貨及應收帳款收現</td><td>1,962,000</td></tr>
+        <tr><td>進貨及應付帳款付現</td><td>(1,607,400)</td></tr>
+        <tr><td>營業費用付現</td><td>(199,000)</td></tr>
+        <tr><td>營業外收入收現</td><td>12,000</td></tr>
+        <tr><td>營業外支出付現</td><td>(10,000)</td></tr>
+        <tr><td>所得稅費用付現</td><td>(17,000)</td></tr>
+        <tr class="total"><td>營業活動現金流入</td><td>140,600</td></tr>
+      </tbody>
+    </table>
+    <div class="calcsteps" style="margin-top:.6rem">
+      <div><b>(1)</b> 銷貨收現：$62,000 ＋ $2,000,000 － $100,000 ＝ $1,962,000</div>
+      <div><b>(2)</b> 進貨 ＝ $40,000 ＋ $1,576,000 － $42,000 ＝ $1,574,000</div>
+      <div>　　應付帳款付現 ＝ $100,000 ＋ $1,574,000 － $66,600 ＝ $1,607,400</div>
+      <div><b>(3)</b> 營業費用付現 ＝ $187,000 ＋ $12,000 ＝ $199,000<span style="color:var(--ink-soft)">（折舊以外之營業費用，加預付費用增加數）</span></div>
+      <div><b>(4)</b> 處分投資利益本身不產生營業現金流入，故不考慮；本題僅考慮利息收入 $12,000。</div>
+      <div><b>(5)</b> 處分設備損失本身不產生營業現金流出，故不考慮；本題僅考慮利息費用 $10,000。</div>
+      <div><b>(6)</b> 所得稅付現 ＝ $17,000 ＋ $20,400 － $20,400 ＝ $17,000</div>
+    </div>
+  </div>
+
+  <h3>(二) 投資活動</h3>
+  <div class="measure">
+    <table class="ledger" style="max-width:34rem">
+      <tbody>
+        <tr><td>處分持有至到期日債券投資</td><td>45,000</td></tr>
+        <tr><td>購置設備</td><td>(330,000)</td></tr>
+        <tr><td>處分設備</td><td>96,000</td></tr>
+        <tr class="total"><td>投資活動之現金流出</td><td>(189,000)</td></tr>
+      </tbody>
+    </table>
+    <div class="rule-box">
+      <div class="h">設備與累計折舊分析</div>
+      <table class="ledger" style="max-width:32rem">
+        <thead><tr><th></th><th>設備</th><th>累計折舊</th></tr></thead>
+        <tbody>
+          <tr><td>期初餘額</td><td>300,000</td><td class="dash">—</td></tr>
+          <tr><td>本期增添</td><td>450,000</td><td class="dash">—</td></tr>
+          <tr><td>提列折舊</td><td class="dash">—</td><td>120,000</td></tr>
+          <tr><td>本期出售</td><td>(120,000)</td><td>(20,000)</td></tr>
+          <tr class="total"><td>期末餘額</td><td>630,000</td><td>100,000</td></tr>
+        </tbody>
+      </table>
+      <div class="calcsteps" style="margin-top:.6rem">
+        <div>本期增添設備 $450,000，其中 <b>$330,000 導致現金流出</b>；另 $120,000 係以發行普通股 10,000 股換入（股本 $100,000、資本公積 $20,000）。</div>
+        <div>該部分為<mark>不影響現金流量之投資與籌資活動</mark>，應於財務報表的其他部分（例如財務報表之附註）揭露。</div>
+        <div style="height:.4rem"></div>
+        <div>出售設備非流動資產之淨額減少 $100,000，其中得款 $96,000 列為投資活動之現金流入，處分損失 $4,000 則列為營業活動項下本期淨利之加項。</div>
+      </div>
+      <table class="je"><caption>處分設備分錄</caption>
+        <tr><td class="dr">現金</td><td class="amt">96,000</td><td class="amt"></td></tr>
+        <tr><td class="dr">累計折舊</td><td class="amt">20,000</td><td class="amt"></td></tr>
+        <tr><td class="dr">處分損失</td><td class="amt">4,000</td><td class="amt"></td></tr>
+        <tr><td class="cr">　設備</td><td class="amt"></td><td class="amt">120,000</td></tr></table>
+    </div>
+  </div>
+
+  <h3>(三) 籌資活動</h3>
+  <div class="measure">
+    <table class="ledger" style="max-width:34rem">
+      <tbody>
+        <tr><td>長期借款增加</td><td>100,000</td></tr>
+        <tr><td>發放現金股利</td><td>(32,600)</td></tr>
+        <tr class="total"><td>籌資活動之現金流入</td><td>67,400</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:.93rem">本期保留盈餘之變動除本期淨利外，即為現金股利之發放：</p>
+    <div class="tt">
+      <div class="cap">保留盈餘</div>
+      <div class="body">
+        <div class="side">
+          <div>&nbsp;</div>
+          <div>32,600 <span class="lbl">現金股利發放</span></div>
+          <div class="bal">&nbsp;</div>
+        </div>
+        <div class="divider"></div>
+        <div class="side r">
+          <div><span class="lbl">期初</span> 83,000</div>
+          <div><span class="lbl">本期淨利</span> 99,600</div>
+          <div class="bal"><span class="lbl">期末</span> 150,000</div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:.93rem">現金股利發放 ＝ $83,000 ＋ $99,600 － $150,000 ＝ <b>$32,600</b></p>
+  </div>
+
+  <h3>(四) 完整現金流量表</h3>
+  <div class="measure">
+    <table class="ledger" style="max-width:36rem">
+      <tbody>
+        <tr class="sub"><td colspan="2" class="txt">營業活動現金流量</td></tr>
+        <tr><td>　營業活動現金流入</td><td>140,600</td></tr>
+        <tr class="sub"><td colspan="2" class="txt">投資活動現金流量</td></tr>
+        <tr><td>　投資活動之現金流出</td><td>(189,000)</td></tr>
+        <tr class="sub"><td colspan="2" class="txt">籌資活動現金流量</td></tr>
+        <tr><td>　籌資活動之現金流入</td><td>67,400</td></tr>
+        <tr class="sub"><td>本期現金及約當現金增（減）數</td><td>19,000</td></tr>
+        <tr><td>加：期初現金及約當現金</td><td>36,000</td></tr>
+        <tr class="total"><td>期末現金及約當現金</td><td>55,000</td></tr>
+      </tbody>
+    </table>
+    <div class="rule-box">
+      <div class="h">現金流量資訊之補充揭露</div>
+      <table class="ledger" style="max-width:30rem">
+        <tbody>
+          <tr><td>本期利息收現數</td><td>12,000</td></tr>
+          <tr><td>本期利息付現數</td><td>10,000</td></tr>
+          <tr><td>本期所得稅付現數</td><td>17,000</td></tr>
+        </tbody>
+      </table>
+      <div class="h" style="margin-top:.9rem">不影響現金流量之投資及籌資活動</div>
+      <table class="ledger" style="max-width:30rem">
+        <tbody>
+          <tr><td>添購設備</td><td>450,000</td></tr>
+          <tr><td>發行股票交換</td><td>(120,000)</td></tr>
+          <tr class="total"><td>支付現金</td><td>330,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="rule-box">
+      <div class="h">老師叮嚀</div>
+      <ol style="font-size:.94rem;margin:0">
+        <li>只要將本期現金及約當現金增（減）數加上期初現金及約當現金，是否等於期末現金及約當現金，即可<b>檢查現金流量表有無錯誤</b>。</li>
+        <li>上述範例為間接法現金流量表之全貌，然直接法與間接法完整之現金流量表之差異<b>僅為營業活動現金流量部分</b>。</li>
+        <li>若採間接法則要揭露：本期利息收現數、本期利息付現數、本期所得稅付現數。</li>
+        <li>不論間接法或直接法編製現金流量表，<b>不影響現金流量之投資及籌資活動都需要揭露</b>。</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 8 IAS7 ═══ -->
+<section id="s8">
+  <div class="sec-head"><h2>八、國際會計準則第 7 號公報（IAS 7）</h2><span class="tag">新題型</span></div>
+  <div class="measure">
+    <p>依照 IAS 7 規定，利息及股利收付之現金流量與來自所得稅之現金流量均應單獨揭露。在編製間接法營業活動現金流量時，以<b>稅前淨利為起點項目</b>，且對利息、股利及所得稅自淨利中減除，再單獨列示收取利息、股利收付及所得稅費用付現，但最後產生之營業活動淨現金流入（出）數會相同。</p>
+    <p>依 IAS 7 方式編製營業活動現金流量時，將營業活動現金流量區分為「<b>營運產生</b>」及「<b>來自利息、股利及所得稅收付數產生</b>」之現金流量。</p>
+  </div>
+
+  <div class="cols measure">
+    <div>
+      <h4>直接法架構</h4>
+      <div class="calcsteps">
+        <div>　銷貨收現（自顧客收取之現金）</div>
+        <div>　進貨付現（支付供應商之現金）</div>
+        <div>－ 營業費用付現</div>
+        <div><b>＝ 營運產生之現金</b></div>
+        <div>＋ 收取利息</div>
+        <div>＋ 收取股利</div>
+        <div>－ 支付利息</div>
+        <div>－ 支付所得稅</div>
+        <div><b>＝ 營業活動之淨現金流量</b></div>
+      </div>
+    </div>
+    <div>
+      <h4>間接法架構</h4>
+      <div class="calcsteps">
+        <div>　本期<b>稅前</b>淨利</div>
+        <div>＋ 不動用現金之費用損失 － 不產生現金之收益</div>
+        <div>＋ 利息費用 － 利息收入 － 股利收入</div>
+        <div>＋ 非營業損失 － 非營業利益</div>
+        <div>＋（與營業有關之）資產減少、負債增加</div>
+        <div>－（與營業有關之）資產增加、負債減少</div>
+        <div><b>＝ 營運產生之現金</b></div>
+        <div>＋ 收取利息　＋ 收取股利</div>
+        <div>－ 支付利息　－ 支付所得稅</div>
+        <div><b>＝ 營業活動之淨現金流量</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout measure">
+    <span class="h">起點不同，終點相同</span>
+    傳統間接法起點是<b>本期淨利</b>（稅後）；IAS 7 間接法起點是<b>稅前淨利</b>，並把利息與所得稅先從調整項中「拉出來」單獨列示。<br>
+    甲公司範例：傳統法起點 $99,600、IAS 7 起點 $120,000，<mark>但兩者最終都得到 $140,600</mark>。考題若沒指明，看它給的起點數字就知道要用哪一種。
+  </div>
+
+  <div class="rule-box measure">
+    <div class="h">甲公司：依 IAS 7 格式編製之間接法營業活動現金流量</div>
+    <table class="ledger" style="max-width:36rem">
+      <tbody>
+        <tr><td>本期淨利（稅前）</td><td>120,000</td></tr>
+        <tr><td colspan="2" class="txt" style="color:var(--ink-soft);font-size:.88rem">調整項目</td></tr>
+        <tr><td>　折舊費用</td><td>120,000</td></tr>
+        <tr><td>　利息費用</td><td>10,000</td></tr>
+        <tr><td>　利息收入</td><td>(12,000)</td></tr>
+        <tr><td>　處分投資利益</td><td>(5,000)</td></tr>
+        <tr><td>　處分設備損失</td><td>4,000</td></tr>
+        <tr><td>　應收帳款增加</td><td>(38,000)</td></tr>
+        <tr><td>　存貨減少</td><td>2,000</td></tr>
+        <tr><td>　預付費用增加</td><td>(12,000)</td></tr>
+        <tr class="sub"><td>　應付帳款減少</td><td>(33,400)　　35,600</td></tr>
+        <tr class="sub"><td>營運產生之現金</td><td>155,600</td></tr>
+        <tr><td>　支付之利息</td><td>(10,000)</td></tr>
+        <tr><td>　收取之利息</td><td>12,000</td></tr>
+        <tr class="sub"><td>　支付之所得稅</td><td>(17,000)　(15,000)</td></tr>
+        <tr class="total"><td>營業活動現金流入</td><td>140,600</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:.9rem;color:var(--redink);margin-top:.6rem">注意：此表首列雖標「本期淨利」，數字 $120,000 實為<b>稅前</b>淨利。IAS 7 間接法的起點是稅前淨利，所得稅負債的變動也不再列於調整項，改為直接列示「支付之所得稅 $17,000」。</p>
+  </div>
+</section>
+
+<!-- ═══ 9 非現金與 FCF ═══ -->
+<section id="s9">
+  <div class="sec-head"><h2>九、非現金活動與自由現金流量</h2><span class="tag">送分題</span></div>
+
+  <h3>不影響現金流量之投資及籌資活動</h3>
+  <div class="measure">
+    <p>有些重大的投資與籌資活動完全不涉及現金收付，因此<b>不列入現金流量表本體</b>，但<mark>必須於附註揭露</mark>——不論採直接法或間接法都要揭露。常見者：</p>
+    <ul>
+      <li>發行股票交換設備、土地或其他非現金資產</li>
+      <li>發行公司債交換資產</li>
+      <li>以資產交換資產</li>
+      <li>將應付公司債轉換為普通股</li>
+      <li>資本公積或保留盈餘轉增資（發放股票股利）</li>
+    </ul>
+    <div class="callout">
+      <span class="h">部分現金、部分非現金要拆開</span>
+      甲公司範例中設備 $450,000 是<b>混合交易</b>：$330,000 付現 → 列<b>投資活動現金流出</b>；$120,000 發行股票交換 → 列<b>附註揭露</b>。<br>
+      整筆 $450,000 全列投資活動是錯的（現金流量表會不平）；整筆都只揭露也是錯的（少列 $330,000 流出）。
+    </div>
+  </div>
+
+  <h3>自由現金流量</h3>
+  <div class="formula-grid">
+    <div class="fcard">
+      <div class="fname">自由現金流量</div>
+      <div class="eq">營業活動之現金流量<br>－ 資本支出<br>－ 現金股利</div>
+      <div class="fnote">係指「營業活動之現金流量」減去「資本支出」及「現金股利」後之餘額。代表企業在維持既有營運規模並回饋股東後，真正可自由運用的現金。</div>
+    </div>
+    <div class="fcard">
+      <div class="fname">甲公司 X9 年度</div>
+      <div class="eq">$140,600 － $330,000 － $32,600<br>＝ <b style="color:var(--redink)">－$222,000</b></div>
+      <div class="fnote">資本支出取<b>實際付現</b>的 $330,000，不是設備總增添額 $450,000——非現金換入的部分沒有花錢。處分設備得款 $96,000 也不抵減資本支出。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 10 選擇題 ═══ -->
+<section id="s10">
+  <div class="sec-head"><h2>十、選擇題練習</h2><span class="tag">點選作答，即時判分</span></div>
+  <div id="qbank"></div>
+</section>
+
+<!-- ═══ 11 計算題 ═══ -->
+<section id="s11">
+  <div class="sec-head"><h2>十一、計算題練習</h2><span class="tag">整題手寫過三次</span></div>
+
+  <div class="q">
+    <div class="q-head"><span class="q-no">壹</span><div class="q-stem"><b>完整現金流量表（間接法＋直接法互相驗證）</b></div></div>
+    <div class="q-stem measure">
+      <p>乙公司 X3 年度資料如下。</p>
+      <div class="scroll">
+      <table class="ledger" style="max-width:32rem">
+        <thead><tr><th>比較資產負債表</th><th>X3 年底</th><th>X3 年初</th></tr></thead>
+        <tbody>
+          <tr><td>現金</td><td>52,000</td><td>45,000</td></tr>
+          <tr><td>應收帳款（總額）</td><td>92,000</td><td>75,000</td></tr>
+          <tr><td>備抵損失（貸餘）</td><td>(6,000)</td><td>(5,000)</td></tr>
+          <tr><td>存貨</td><td>68,000</td><td>80,000</td></tr>
+          <tr><td>預付費用</td><td>14,000</td><td>11,000</td></tr>
+          <tr><td>設備</td><td>540,000</td><td>420,000</td></tr>
+          <tr><td>累計折舊</td><td>(160,000)</td><td>(120,000)</td></tr>
+          <tr class="total"><td>資產總額</td><td>600,000</td><td>506,000</td></tr>
+          <tr><td>應付帳款</td><td>58,000</td><td>72,000</td></tr>
+          <tr><td>應付費用</td><td>22,000</td><td>18,000</td></tr>
+          <tr><td>本期所得稅負債</td><td>15,000</td><td>11,000</td></tr>
+          <tr><td>長期借款</td><td>150,000</td><td>200,000</td></tr>
+          <tr><td>股本</td><td>170,000</td><td>120,000</td></tr>
+          <tr><td>資本公積</td><td>70,000</td><td>40,000</td></tr>
+          <tr><td>保留盈餘</td><td>115,000</td><td>45,000</td></tr>
+          <tr class="total"><td>負債及權益總額</td><td>600,000</td><td>506,000</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p style="margin-top:.8rem">X3 年度綜合損益表：銷貨收入（全部賒銷）$900,000；銷貨成本 $(540,000)；營業費用（含折舊 $60,000 及預期信用減損損失 $8,000）$(210,000)；處分設備損失 $(5,000)；稅前淨利 $145,000；所得稅費用 $(35,000)；本期淨利 $110,000。</p>
+      <p>補充資料：(1) 本年度沖銷無法收回之應收帳款 $7,000。(2) 出售設備一批，成本 $80,000、累計折舊 $20,000，得款 $55,000。(3) 本期購置設備均以現金支付。(4) 償還長期借款 $50,000。(5) 發行新股取得現金。(6) 保留盈餘之變動除本期淨利外，餘為發放現金股利。</p>
+      <p>試作：(一) 間接法之營業活動現金流量　(二) 直接法之四項收現付現數並驗證　(三) 投資活動現金流量　(四) 籌資活動現金流量　(五) 現金增減數驗算　(六) 自由現金流量。</p>
+    </div>
+    <button class="reveal" type="button">顯示解答</button>
+    <div class="sol" hidden>
+      <div class="h">解答</div>
+      <div class="calcsteps">
+        <div><b>先做三張分析</b></div>
+        <div>備抵損失：$5,000 ＋ 提列 $8,000 － 沖銷 $7,000 ＝ $6,000 ✓</div>
+        <div>設備：$420,000 ＋ 增添 － $80,000 ＝ $540,000 → <b>本期增添 $200,000</b></div>
+        <div>累計折舊：$120,000 ＋ $60,000 － $20,000 ＝ $160,000 ✓</div>
+        <div>出售設備帳面 ＝ $80,000 － $20,000 ＝ $60,000，得款 $55,000，損失 $5,000 ✓</div>
+        <div style="height:.6rem"></div>
+
+        <div><b>(一) 間接法</b>　應收帳款淨額：期末 $86,000、期初 $70,000 → 增加 $16,000</div>
+        <div>本期淨利　110,000</div>
+        <div>　折舊費用　60,000</div>
+        <div>　處分設備損失　5,000</div>
+        <div>　應收帳款（淨額）增加　(16,000)</div>
+        <div>　存貨減少　12,000</div>
+        <div>　預付費用增加　(3,000)</div>
+        <div>　應付帳款減少　(14,000)</div>
+        <div>　應付費用增加　4,000</div>
+        <div>　所得稅負債增加　4,000　　調整合計 52,000</div>
+        <div><b>營業活動現金流入 ＝ $162,000</b></div>
+        <div style="color:var(--ink-soft)">用應收帳款淨額變動時，預期信用減損損失 $8,000 已隱含其中，<b>不可再單獨加回</b>，否則重複。</div>
+        <div style="height:.6rem"></div>
+
+        <div><b>(二) 直接法</b></div>
+        <div>自客戶收現 ＝ $75,000 ＋ $900,000 － $7,000 － $92,000 ＝ <b>$876,000</b></div>
+        <div>進貨 ＝ $540,000 ＋ $68,000 － $80,000 ＝ $528,000</div>
+        <div>支付供應商 ＝ $72,000 ＋ $528,000 － $58,000 ＝ <b>$542,000</b></div>
+        <div>現金性營業費用 ＝ $210,000 － $60,000 － $8,000 ＝ $142,000</div>
+        <div>支付營業費用 ＝ $142,000 ＋ $3,000（預付增） － $4,000（應付費用增） ＝ <b>$141,000</b></div>
+        <div>支付所得稅 ＝ $11,000 ＋ $35,000 － $15,000 ＝ <b>$31,000</b></div>
+        <div>驗證：$876,000 － $542,000 － $141,000 － $31,000 ＝ <b>$162,000</b> ✓ 與間接法相同</div>
+        <div style="height:.6rem"></div>
+
+        <div><b>(三) 投資活動</b></div>
+        <div>處分設備　55,000　｜　購置設備　(200,000)</div>
+        <div><b>投資活動之現金流出 ＝ $(145,000)</b></div>
+        <div style="height:.6rem"></div>
+
+        <div><b>(四) 籌資活動</b></div>
+        <div>發行新股 ＝ 股本增 $50,000 ＋ 資本公積增 $30,000 ＝ $80,000</div>
+        <div>償還長期借款 $(50,000)</div>
+        <div>現金股利 ＝ $45,000 ＋ $110,000 － $115,000 ＝ $(40,000)</div>
+        <div><b>籌資活動之現金流出 ＝ $(10,000)</b></div>
+        <div style="height:.6rem"></div>
+
+        <div><b>(五) 驗算</b>　$162,000 － $145,000 － $10,000 ＝ $7,000</div>
+        <div>期初現金 $45,000 ＋ $7,000 ＝ 期末現金 <b>$52,000</b> ✓</div>
+        <div style="height:.6rem"></div>
+
+        <div><b>(六) 自由現金流量</b> ＝ $162,000 － $200,000 － $40,000 ＝ <b style="color:var(--redink)">$(78,000)</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><span class="q-no">貳</span><div class="q-stem"><b>IAS 7 間接法＋直接法收現付現</b></div><span class="q-src">114 考題</span></div>
+    <div class="q-stem measure">
+      <p>甲公司 2024 及 2023 兩年底比較資產負債表中之相關資訊如下：</p>
+      <div class="scroll">
+      <table class="ledger" style="max-width:28rem">
+        <thead><tr><th></th><th>2024 年</th><th>2023 年</th></tr></thead>
+        <tbody>
+          <tr><td>應收帳款（總額）</td><td>45,000</td><td>61,000</td></tr>
+          <tr><td>備抵損失（貸餘）</td><td>10,000</td><td>11,000</td></tr>
+          <tr><td>存貨</td><td>28,000</td><td>19,000</td></tr>
+          <tr><td>預付費用</td><td>13,500</td><td>7,500</td></tr>
+          <tr><td>應付帳款</td><td>30,000</td><td>12,000</td></tr>
+          <tr><td>應付費用</td><td>15,000</td><td>12,000</td></tr>
+          <tr><td>本期所得稅負債</td><td>9,000</td><td>13,000</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p style="margin-top:.8rem">該公司 2024 年度中曾沖銷無法收回之應收帳款 $5,000。2024 年度綜合損益表：銷貨收入 $583,000；銷貨成本 $(315,000)；營業費用（含預期信用減損損失 $4,000 及折舊 $51,000）$(168,000)；處分不動產、廠房及設備利益 $33,000，合計 $(450,000)；稅前淨利 $133,000；所得稅費用 $(16,000)；本期淨利 $117,000。</p>
+      <p>試作：(一) 甲公司 2024 年度營業活動之現金流量金額。(二) 若採直接法編製現金流量表，試計算 1. 自客戶收現金額　2. 支付供應商貨款及營業費用數金額。</p>
+    </div>
+    <button class="reveal" type="button">顯示解答</button>
+    <div class="sol" hidden>
+      <div class="h">解答</div>
+      <div class="calcsteps">
+        <div><b>(一)</b>　本期稅前淨利　133,000</div>
+        <div>調整項目：折舊費用 51,000；處分不動產、廠房及設備利益 (33,000)　小計 <b>18,000</b></div>
+        <div>與營業活動相關之變動數：</div>
+        <div>　應收帳款減少　15,000　<span style="color:var(--ink-soft)">（淨額 $50,000 → $35,000）</span></div>
+        <div>　存貨增加　(9,000)</div>
+        <div>　預付費用增加　(6,000)</div>
+        <div>　應付帳款增加　18,000</div>
+        <div>　應付費用增加　3,000　　小計 <b>21,000</b></div>
+        <div><b>營運產生之現金　172,000</b></div>
+        <div>　支付所得稅 ＝ $13,000 ＋ $16,000 － $9,000 ＝ (20,000)</div>
+        <div><b>營業活動之現金流入 ＝ $152,000</b></div>
+        <div style="color:var(--redink)">起點是<b>稅前</b>淨利 $133,000，不是本期淨利 $117,000——因為所得稅要單獨列示。</div>
+        <div style="height:.6rem"></div>
+
+        <div><b>(二) 1.</b> 自客戶收現金額</div>
+        <div>$61,000 ＋ $583,000 － $5,000 － $45,000 ＝ <b>$594,000</b></div>
+        <div style="height:.4rem"></div>
+        <div><b>(二) 2.</b> 支付供應商貨款及營業費用數金額</div>
+        <div>本期進貨：$19,000 ＋ 進貨 － $28,000 ＝ $315,000 → 進貨 ＝ $324,000</div>
+        <div>支付供應商貨款 ＝ $12,000 ＋ $324,000 － $30,000 ＝ <b>$306,000</b></div>
+        <div style="height:.3rem"></div>
+        <div>現金性營業費用 ＝ $168,000 － $4,000 － $51,000 ＝ $113,000</div>
+        <div>預付費用付現金額 ＝ $13,500 － $7,500 ＝ $6,000</div>
+        <div>應付費用付現金額 ＝ $12,000 ＋ $113,000 － $15,000 ＝ $110,000</div>
+        <div>支付營業費用金額 ＝ $6,000 ＋ $110,000 ＝ <b>$116,000</b></div>
+        <div style="height:.4rem"></div>
+        <div>驗證：$594,000 － $306,000 － $116,000 － $20,000 ＝ <b>$152,000</b> ✓</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q">
+    <div class="q-head"><span class="q-no">參</span><div class="q-stem"><b>逆推：由現金流量表回推損益</b></div></div>
+    <div class="q-stem measure">
+      <p>丙公司 X5 年度營業活動現金流量（間接法）部分資料如下：本期淨利 $?；折舊費用 $45,000；處分設備利益 $(12,000)；應收帳款增加 $(28,000)；存貨減少 $16,000；應付帳款增加 $9,000；營業活動現金流入 $230,000。</p>
+      <p>另悉：本年度購置設備 $180,000、出售設備得款 $50,000、發放現金股利 $60,000、發行公司債 $100,000。</p>
+      <p>試求：(一) 本期淨利　(二) 投資活動現金流量　(三) 籌資活動現金流量　(四) 本期現金增減數　(五) 自由現金流量。</p>
+    </div>
+    <button class="reveal" type="button">顯示解答</button>
+    <div class="sol" hidden>
+      <div class="h">解答</div>
+      <div class="calcsteps">
+        <div><b>(一)</b> 調整項合計 ＝ $45,000 － $12,000 － $28,000 ＋ $16,000 ＋ $9,000 ＝ $30,000</div>
+        <div>本期淨利 ＝ $230,000 － $30,000 ＝ <b>$200,000</b></div>
+        <div style="height:.4rem"></div>
+        <div><b>(二)</b> 投資活動 ＝ $(180,000) ＋ $50,000 ＝ <b>$(130,000)</b></div>
+        <div style="color:var(--ink-soft)">出售設備列<b>全額得款 $50,000</b>，處分利益 $12,000 已在營業活動扣除，不重複。</div>
+        <div style="height:.4rem"></div>
+        <div><b>(三)</b> 籌資活動 ＝ $100,000 － $60,000 ＝ <b>$40,000</b></div>
+        <div style="height:.4rem"></div>
+        <div><b>(四)</b> 本期現金增加 ＝ $230,000 － $130,000 ＋ $40,000 ＝ <b>$140,000</b></div>
+        <div style="height:.4rem"></div>
+        <div><b>(五)</b> 自由現金流量 ＝ $230,000 － $180,000 － $60,000 ＝ <b style="color:var(--redink)">$(10,000)</b></div>
+        <div style="color:var(--ink-soft)">出售設備得款 $50,000 <b>不</b>抵減資本支出。自由現金流量的三個要素固定：營業活動現金流量、資本支出、現金股利。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 12 易錯 ═══ -->
+<section id="s12">
+  <div class="sec-head"><h2>十二、進考場前最後十二條</h2><span class="tag">易錯清單</span></div>
+  <div class="cols measure">
+    <div>
+      <ol>
+        <li>檢查表對不對只有一招：<b>本期增減數 ＋ 期初現金 ＝ 期末現金</b>。</li>
+        <li>直接法與間接法的差異<b>只在營業活動</b>，投資與籌資完全相同。</li>
+        <li>處分資產：<b>全額得款</b>列投資活動，<b>損益</b>反向調整營業活動。</li>
+        <li>處分<b>利益</b>扣除、處分<b>損失</b>加回，方向不要記反。</li>
+        <li>折舊、攤銷、折耗一律<b>加回</b>；採權益法投資收益<b>扣除</b>。</li>
+        <li>透過損益按公允價值衡量之金融資產屬<b>營業</b>活動；按攤銷後成本衡量者屬<b>投資</b>活動。</li>
+      </ol>
+    </div>
+    <div>
+      <ol start="7">
+        <li>支付股利預設為<b>籌資</b>活動；支付利息預設為<b>營業</b>（亦得籌資）。</li>
+        <li>混合交易要拆：付現部分入表，非現金部分入<b>附註</b>。</li>
+        <li>不影響現金流量之投資及籌資活動，<b>兩種方法都要揭露</b>。</li>
+        <li>間接法須揭露<b>利息收現數、利息付現數、所得稅付現數</b>。</li>
+        <li>IAS 7 間接法起點是<b>稅前</b>淨利，所得稅單獨列示。</li>
+        <li>自由現金流量 ＝ 營業活動現金流量 － <b>資本支出</b> － <b>現金股利</b>，出售資產得款不抵減。</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="scorebar">
+  <span>選擇題進度</span>
+  <b><span id="sc-done">0</span> / <span id="sc-total">0</span></b>
+  <span>答對 <b id="sc-right">0</b> 題</span>
+  <button type="button" id="sc-reset">重新作答</button>
+</div>
+
+<footer class="wrap">
+  <p>Day 08｜現金流量表．單頁複習講義</p>
+  <p>本頁為個人複習用整理，數字依講義與 114 年歷屆試題核算，直接法與間接法均已互相驗證。列印時解答會自動全部展開。</p>
+</footer>
+
+<script>
+/* ════════ 直接法收現付現計算器 ════════ */
+(function(){
+  const $=id=>document.getElementById(id);
+  const out=$('calc-out');
+  let mode='ar';
+  const MODES=['ar','ap','op','tx'];
+  const v=id=>{const x=parseFloat($(id).value);return isFinite(x)?x:NaN;};
+  const f=n=>Number(n.toFixed(2)).toLocaleString('en-US');
+  const money=n=>(n<0?'$('+f(-n)+')':'$'+f(n));
+
+  function setMode(m){
+    mode=m;
+    document.querySelectorAll('.calc-mode button').forEach(b=>
+      b.setAttribute('aria-pressed',b.dataset.m===m));
+    MODES.forEach(x=>{$('f-'+x).hidden=(x!==m);});
+    calc();
+  }
+
+  function calc(){
+    let html='';
+    if(mode==='ar'){
+      const b=v('ar-b'),s=v('ar-s'),w=v('ar-w'),e=v('ar-e');
+      if([b,s,w,e].some(isNaN)){out.innerHTML='<p class="warn">請填妥所有欄位。</p>';return;}
+      const r=b+s-w-e;
+      html='<div class="result">自客戶收現數　'+money(r)+'</div>'+
+        '<div class="calcsteps">'+
+        '<div>期初應收帳款（總額）　'+f(b)+'</div>'+
+        '<div>＋ 銷貨收入　'+f(s)+'</div>'+
+        '<div>－ 本期沖銷　'+f(w)+'</div>'+
+        '<div>－ 期末應收帳款（總額）　'+f(e)+'</div>'+
+        '<div><b>＝ '+f(r)+'</b></div></div>';
+      if(w>0) html+='<p style="font-size:.88rem;color:var(--ink-soft)">若題目改給應收帳款<b>淨額</b>，則直接用淨額變動，不再扣沖銷數，答案相同。</p>';
+    }
+    else if(mode==='ap'){
+      const c=v('ap-cogs'),ib=v('ap-ib'),ie=v('ap-ie'),b=v('ap-b'),e=v('ap-e');
+      if([c,ib,ie,b,e].some(isNaN)){out.innerHTML='<p class="warn">請填妥所有欄位。</p>';return;}
+      const pu=c+ie-ib, r=b+pu-e;
+      html='<div class="result">支付供應商貨款　'+money(-r)+'</div>'+
+        '<div class="calcsteps">'+
+        '<div><b>第一段：還原進貨</b></div>'+
+        '<div>銷貨成本 '+f(c)+' ＋ 期末存貨 '+f(ie)+' － 期初存貨 '+f(ib)+' ＝ <b>進貨 '+f(pu)+'</b></div>'+
+        '<div style="height:.4rem"></div>'+
+        '<div><b>第二段：還原付現</b></div>'+
+        '<div>期初應付帳款 '+f(b)+' ＋ 進貨 '+f(pu)+' － 期末應付帳款 '+f(e)+' ＝ <b>'+f(r)+'</b></div></div>';
+    }
+    else if(mode==='op'){
+      const t=v('op-t'),d=v('op-d'),cl=v('op-c'),pb=v('op-pb'),pe=v('op-pe'),ab=v('op-ab'),ae=v('op-ae');
+      if([t,d,cl,pb,pe,ab,ae].some(isNaN)){out.innerHTML='<p class="warn">請填妥所有欄位（沒有的項目請填 0）。</p>';return;}
+      const cash=t-d-cl, dp=pe-pb, da=ae-ab, r=cash+dp-da;
+      html='<div class="result">支付營業費用　'+money(-r)+'</div>'+
+        '<div class="calcsteps">'+
+        '<div><b>第一段：剔除非現金費用</b></div>'+
+        '<div>營業費用 '+f(t)+' － 折舊及攤銷 '+f(d)+' － 預期信用減損損失 '+f(cl)+' ＝ <b>現金性費用 '+f(cash)+'</b></div>'+
+        '<div style="height:.4rem"></div>'+
+        '<div><b>第二段：調整預付與應付</b></div>'+
+        '<div>預付費用'+(dp>=0?'增加':'減少')+' '+f(Math.abs(dp))+' → '+(dp>=0?'加':'減')+'</div>'+
+        '<div>應付費用'+(da>=0?'增加':'減少')+' '+f(Math.abs(da))+' → '+(da>=0?'減':'加')+'</div>'+
+        '<div>'+f(cash)+(dp>=0?' ＋ ':' － ')+f(Math.abs(dp))+(da>=0?' － ':' ＋ ')+f(Math.abs(da))+' ＝ <b>'+f(r)+'</b></div></div>';
+    }
+    else{
+      const b=v('tx-b'),x=v('tx-x'),e=v('tx-e');
+      if([b,x,e].some(isNaN)){out.innerHTML='<p class="warn">請填妥所有欄位。</p>';return;}
+      const r=b+x-e;
+      html='<div class="result">支付所得稅　'+money(-r)+'</div>'+
+        '<div class="calcsteps">'+
+        '<div>期初本期所得稅負債　'+f(b)+'</div>'+
+        '<div>＋ 所得稅費用　'+f(x)+'</div>'+
+        '<div>－ 期末本期所得稅負債　'+f(e)+'</div>'+
+        '<div><b>＝ '+f(r)+'</b></div></div>';
+    }
+    out.innerHTML=html;
+  }
+
+  document.querySelectorAll('.calc-mode button').forEach(b=>
+    b.addEventListener('click',()=>setMode(b.dataset.m)));
+  document.querySelectorAll('.calc input').forEach(el=>el.addEventListener('input',calc));
+  calc();
+})();
+
+/* ════════ 選擇題 ════════ */
+const QUESTIONS=[
+ {src:'114 考題',
+  stem:'甲公司 2024 年度：稅前淨利 $133,000、折舊 $51,000、處分不動產廠房及設備利益 $33,000；應收帳款淨額減少 $15,000、存貨增加 $9,000、預付費用增加 $6,000、應付帳款增加 $18,000、應付費用增加 $3,000；本期所得稅負債期初 $13,000、期末 $9,000，所得稅費用 $16,000。依 IAS 7 格式，2024 年度營業活動之現金流量為多少？',
+  opts:['$172,000','$152,000','$136,000','$192,000'],ans:1,
+  sol:'稅前淨利 $133,000<br>調整項目：＋折舊 $51,000 －處分利益 $33,000 ＝ $18,000<br>營業活動相關變動數：＋15,000 －9,000 －6,000 ＋18,000 ＋3,000 ＝ $21,000<br><b>營運產生之現金 ＝ $172,000</b><br>支付所得稅 ＝ $13,000 ＋ $16,000 － $9,000 ＝ $(20,000)<br><b>營業活動之現金流入 ＝ $152,000</b><br><span style="color:var(--redink)">選 $172,000 者是漏掉支付所得稅這一段——IAS 7 要單獨扣除。</span>'},
+
+ {src:'114 考題',
+  stem:'承上題，甲公司應收帳款（總額）期初 $61,000、期末 $45,000，2024 年度銷貨收入 $583,000，年度中沖銷無法收回之應收帳款 $5,000。採直接法時，自客戶收現金額為多少？',
+  opts:['$599,000','$594,000','$604,000','$589,000'],ans:1,
+  sol:'$61,000 ＋ $583,000 － $5,000 － $45,000 ＝ <b>$594,000</b><br>用<b>總額</b>計算時必須扣除沖銷數，因為沖銷分錄是「借：備抵損失／貸：應收帳款」，減少了應收帳款卻沒有收到現金。<br><span style="color:var(--redink)">選 $599,000 者是漏扣沖銷的 $5,000。</span>'},
+
+ {src:'114 考題',
+  stem:'承上題，存貨期初 $19,000、期末 $28,000，銷貨成本 $315,000；應付帳款期初 $12,000、期末 $30,000。採直接法時，支付供應商貨款金額為多少？',
+  opts:['$297,000','$306,000','$315,000','$324,000'],ans:1,
+  sol:'第一段還原進貨：$19,000 ＋ 進貨 － $28,000 ＝ $315,000 → 進貨 ＝ $324,000<br>第二段還原付現：$12,000 ＋ $324,000 － $30,000 ＝ <b>$306,000</b><br><span style="color:var(--redink)">選 $324,000 者只做了第一段就停手；選 $315,000 者直接把銷貨成本當付現數。</span>'},
+
+ {src:'觀念題',
+  stem:'下列何者應分類為<b>營業活動</b>之現金流量？',
+  opts:['取得按攤銷後成本衡量之金融資產所支付之現金',
+        '取得透過損益按公允價值衡量之金融資產所支付之現金',
+        '購置不動產、廠房及設備所支付之現金',
+        '存出保證金所支付之現金'],
+  ans:1,
+  sol:'透過損益按公允價值衡量之金融資產，乃<b>閒置資金之調度與控管</b>，屬於營業活動。企業因交易目的而持有證券，其性質與供出售而取得之存貨類似。<br>(A) 按攤銷後成本衡量之金融資產屬<b>投資</b>活動；(C)(D) 亦屬投資活動。<br><mark>兩個金融資產名稱很像，分類完全不同，是本單元最常見的陷阱。</mark>'},
+
+ {src:'觀念題',
+  stem:'依 IAS 7 之規定，對<b>金融機構以外</b>之企業而言，下列敘述何者<b>錯誤</b>？',
+  opts:['支付之利息得分類為籌資活動之現金流量','收取之股利得分類為投資活動之現金流量',
+        '支付之股利得分類為營業活動之現金流量','收取之利息必須分類為籌資活動之現金流量'],
+  ans:3,
+  sol:'(D) 錯誤。<b>收取</b>的利息為投資之報酬，得分類為<b>投資</b>活動，不是籌資活動。<br>記法：<b>付出去的是成本 → 可歸籌資；收進來的是報酬 → 可歸投資。</b><br>(C) 正確——支付之股利預設為籌資活動，但為幫助報表使用者決定企業以營業活動現金流量支付股利之能力，亦得分類為營業活動。'},
+
+ {src:'觀念題',
+  stem:'採間接法編製現金流量表時，下列何者應自本期淨利<b>加回</b>？',
+  opts:['處分設備利益','應收帳款增加','預付費用增加','應付帳款增加'],
+  ans:3,
+  sol:'負債增加代表尚未付現，故加回。<br>(A) 處分利益不導致營業現金流入，應扣除。<br>(B) 應收帳款增加代表賒銷未收現，應扣除。<br>(C) 預付費用增加代表已付現但未列費用，應扣除。<br>口訣：<b>資產增加減、負債增加加。</b>'},
+
+ {src:'觀念題',
+  stem:'甲公司以發行普通股 10,000 股（面額 $10）加上現金 $330,000，換入公允價值 $450,000 之設備一批。下列處理何者正確？',
+  opts:['投資活動現金流出 $450,000',
+        '投資活動現金流出 $330,000，另 $120,000 於附註揭露為不影響現金流量之投資及籌資活動',
+        '投資活動現金流出 $330,000，籌資活動現金流入 $120,000',
+        '全部 $450,000 於附註揭露，不列入現金流量表本體'],
+  ans:1,
+  sol:'混合交易必須拆開：<b>實際付現 $330,000</b> 列投資活動現金流出；<b>發行股票交換的 $120,000</b> 不涉及現金收付，列為「不影響現金流量之投資及籌資活動」於附註揭露。<br>(A)(D) 會使現金流量表不平；(C) 把非現金交易錯列為籌資活動現金流入。'},
+
+ {src:'觀念題',
+  stem:'關於不影響現金流量之投資及籌資活動，下列敘述何者正確？',
+  opts:['僅採直接法時需要揭露','僅採間接法時需要揭露',
+        '不論採直接法或間接法均需要揭露','金額重大時才需要揭露，否則免揭露'],
+  ans:2,
+  sol:'不論間接法或直接法編製現金流量表，<b>不影響現金流量之投資及籌資活動都需要揭露</b>。<br>另外，採<b>間接法</b>時還須額外揭露：本期利息收現數、本期利息付現數、本期所得稅付現數。'},
+
+ {src:'計算題',
+  stem:'乙公司應收帳款（總額）期初 $80,000、期末 $65,000，本期銷貨收入 $500,000（全部賒銷），本期沖銷無法收回之應收帳款 $3,000。採直接法時，自客戶收現數為多少？',
+  opts:['$512,000','$515,000','$509,000','$485,000'],ans:0,
+  sol:'$80,000 ＋ $500,000 － $3,000 － $65,000 ＝ <b>$512,000</b>'},
+
+ {src:'計算題',
+  stem:'丙公司存貨期初 $50,000、期末 $62,000，銷貨成本 $380,000；應付帳款期初 $45,000、期末 $38,000。採直接法時，支付供應商貨款為多少？',
+  opts:['$380,000','$392,000','$399,000','$385,000'],ans:2,
+  sol:'進貨 ＝ $380,000 ＋ $62,000 － $50,000 ＝ $392,000<br>付現 ＝ $45,000 ＋ $392,000 － $38,000 ＝ <b>$399,000</b><br>存貨增加代表多買了貨，應付帳款減少代表多付了錢，兩者都讓付現數大於銷貨成本。'},
+
+ {src:'計算題',
+  stem:'丁公司營業費用 $200,000（其中折舊 $35,000），預付費用期初 $8,000、期末 $12,000，應付費用期初 $15,000、期末 $10,000。採直接法時，支付營業費用金額為多少？',
+  opts:['$165,000','$169,000','$174,000','$200,000'],ans:2,
+  sol:'現金性費用 ＝ $200,000 － $35,000 ＝ $165,000<br>預付費用增加 $4,000 → 加；應付費用減少 $5,000 → 加<br>$165,000 ＋ $4,000 ＋ $5,000 ＝ <b>$174,000</b><br>兩項都是「多付了現金」，所以都加。'},
+
+ {src:'計算題',
+  stem:'戊公司所得稅費用 $60,000，本期所得稅負債期初 $18,000、期末 $25,000。本期支付所得稅為多少？',
+  opts:['$53,000','$60,000','$67,000','$43,000'],ans:0,
+  sol:'$18,000 ＋ $60,000 － $25,000 ＝ <b>$53,000</b><br>所得稅負債增加 $7,000，代表有 $7,000 的稅還沒繳，故付現數小於費用數。'},
+
+ {src:'計算題',
+  stem:'己公司出售設備一批，成本 $200,000、累計折舊 $140,000，出售得款 $75,000。關於現金流量表之表達，下列何者正確？',
+  opts:['投資活動現金流入 $75,000，營業活動加回處分利益 $15,000',
+        '投資活動現金流入 $75,000，營業活動扣除處分利益 $15,000',
+        '投資活動現金流入 $60,000，營業活動扣除處分利益 $15,000',
+        '投資活動現金流入 $15,000，營業活動加回帳面價值 $60,000'],
+  ans:1,
+  sol:'帳面價值 ＝ $200,000 － $140,000 ＝ $60,000；得款 $75,000 → 處分<b>利益</b> $15,000。<br>投資活動列<b>全額得款 $75,000</b>（不是淨額、不是利益）。<br>處分利益 $15,000 不屬營業活動現金流入，故自本期淨利<b>扣除</b>，避免重複計算。'},
+
+ {src:'計算題',
+  stem:'庚公司本年度營業活動現金流量 $800,000、購置設備 $500,000、出售設備得款 $120,000、發放現金股利 $150,000。其自由現金流量為多少？',
+  opts:['$150,000','$270,000','$300,000','$420,000'],ans:0,
+  sol:'自由現金流量 ＝ 營業活動之現金流量 － 資本支出 － 現金股利<br>＝ $800,000 － $500,000 － $150,000 ＝ <b>$150,000</b><br><span style="color:var(--redink)">出售設備得款 $120,000 <b>不</b>抵減資本支出。選 $270,000 者就是把它扣進去了。</span>'},
+
+ {src:'計算題',
+  stem:'辛公司保留盈餘期初 $200,000、期末 $260,000，本期淨利 $150,000，保留盈餘之變動除本期淨利外，餘為發放現金股利。本期發放現金股利為多少？',
+  opts:['$60,000','$90,000','$110,000','$150,000'],ans:1,
+  sol:'$200,000 ＋ $150,000 － 現金股利 ＝ $260,000<br>現金股利 ＝ <b>$90,000</b><br>這是現金流量表申論題的固定小步驟：題目通常不直接給現金股利，要用保留盈餘 T 字帳倒推。'},
+
+ {src:'觀念題',
+  stem:'檢查現金流量表是否正確，最直接的方法為何？',
+  opts:['營業活動現金流量是否等於本期淨利',
+        '本期現金及約當現金增減數加上期初現金，是否等於期末現金',
+        '投資活動與籌資活動現金流量是否互相抵銷',
+        '直接法與間接法之投資活動金額是否相同'],
+  ans:1,
+  sol:'只要將本期現金及約當現金增（減）數加上期初現金及約當現金，是否等於期末現金及約當現金，即可檢查現金流量表有無錯誤。<br>這也是申論題寫完後<b>一定要做</b>的最後一步——不平就代表有科目漏歸類，回頭掃比較資產負債表即可找到。'}
+];
+
+(function(){
+  const bank=document.getElementById('qbank');
+  const letters=['(A)','(B)','(C)','(D)'];
+  let done=0,right=0;
+  document.getElementById('sc-total').textContent=QUESTIONS.length;
+
+  QUESTIONS.forEach((q,qi)=>{
+    const card=document.createElement('div');card.className='q';
+    const head=document.createElement('div');head.className='q-head';
+    head.innerHTML='<span class="q-no">'+(qi+1)+'</span><div class="q-stem">'+q.stem+'</div><span class="q-src">'+q.src+'</span>';
+    card.appendChild(head);
+
+    const ul=document.createElement('ul');ul.className='opts';
+    const sol=document.createElement('div');
+    sol.className='sol';sol.hidden=true;
+    sol.innerHTML='<div class="h">解析｜答案 '+letters[q.ans]+'</div>'+q.sol;
+
+    q.opts.forEach((o,oi)=>{
+      const li=document.createElement('li');
+      const b=document.createElement('button');b.type='button';
+      b.textContent=letters[oi]+' '+o;
+      b.addEventListener('click',()=>{
+        if(card.dataset.answered) return;
+        card.dataset.answered='1';done++;if(oi===q.ans) right++;
+        [...ul.querySelectorAll('button')].forEach((x,xi)=>{
+          x.disabled=true;
+          if(xi===q.ans) x.classList.add('right');
+          else if(xi===oi) x.classList.add('wrong');
+        });
+        sol.hidden=false;update();
+      });
+      li.appendChild(b);ul.appendChild(li);
+    });
+    card.appendChild(ul);card.appendChild(sol);
+
+    const rv=document.createElement('button');
+    rv.className='reveal';rv.type='button';rv.textContent='直接看解析';
+    rv.addEventListener('click',()=>{sol.hidden=!sol.hidden;rv.textContent=sol.hidden?'直接看解析':'收合解析';});
+    card.appendChild(rv);
+    bank.appendChild(card);
+  });
+
+  function update(){
+    document.getElementById('sc-done').textContent=done;
+    document.getElementById('sc-right').textContent=right;
+  }
+  document.getElementById('sc-reset').addEventListener('click',()=>{
+    done=0;right=0;update();
+    document.querySelectorAll('#qbank .q').forEach(c=>{
+      delete c.dataset.answered;
+      c.querySelectorAll('.opts button').forEach(b=>{b.disabled=false;b.classList.remove('right','wrong');});
+      c.querySelector('.sol').hidden=true;
+      c.querySelector('.reveal').textContent='直接看解析';
+    });
+    document.getElementById('s10').scrollIntoView();
+  });
+})();
+
+/* ════════ 計算題解答展開 ════════ */
+document.querySelectorAll('#s11 .reveal').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const sol=btn.nextElementSibling;
+    sol.hidden=!sol.hidden;
+    btn.textContent=sol.hidden?'顯示解答':'收合解答';
+  });
+});
+</script>
+</body>
+</html>
