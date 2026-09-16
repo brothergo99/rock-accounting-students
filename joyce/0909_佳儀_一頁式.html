@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>從數字到現場語言 — 損益兩平點與 PDCA · 佳儀 0909</title>
+<style>
+  :root{
+    --bg:#0f1115;
+    --card:#171a21;
+    --card2:#1e222b;
+    --line:#262b35;
+    --accent:#ff8a3d;
+    --accent2:#4fd1c5;
+    --blue:#7dd3fc;
+    --purple:#a78bfa;
+    --gold:#fbbf24;
+    --good:#4ade80;
+    --bad:#f87171;
+    --text:#e8eaed;
+    --sub:#9aa1ab;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:radial-gradient(circle at 20% -8%, #26314a 0%, var(--bg) 45%);
+    color:var(--text);
+    padding:26px 16px 60px;
+    line-height:1.75;
+  }
+  .wrap{max-width:900px;margin:0 auto;}
+
+  header{margin-bottom:28px;}
+  .tag{
+    display:inline-block;font-size:12px;letter-spacing:1px;color:var(--accent);
+    background:rgba(255,138,61,.12);border:1px solid rgba(255,138,61,.35);
+    padding:4px 11px;border-radius:999px;margin-bottom:14px;
+  }
+  h1{font-size:28px;line-height:1.4;margin:0 0 12px;letter-spacing:.5px;}
+  h1 em{font-style:normal;color:var(--accent);}
+  .sub{color:var(--sub);font-size:14.5px;margin:0;line-height:1.85;}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px;}
+  .chip{font-size:11.5px;color:var(--sub);background:var(--card);border:1px solid var(--line);padding:4px 10px;border-radius:999px;}
+  .chip.hl{color:var(--accent2);border-color:rgba(79,209,197,.4);background:rgba(79,209,197,.08);}
+
+  .nav{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-top:20px;}
+  @media(max-width:760px){.nav{grid-template-columns:repeat(3,1fr);}}
+  @media(max-width:480px){.nav{grid-template-columns:repeat(2,1fr);}}
+  .nav a{text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 8px;text-align:center;display:block;transition:.15s;}
+  .nav a:hover{border-color:var(--accent2);}
+  .nav a b{display:block;font-size:13px;color:var(--text);}
+  .nav a span{font-size:10.5px;color:var(--sub);}
+
+  section{margin-bottom:38px;scroll-margin-top:16px;}
+  .sec-label{font-size:11.5px;letter-spacing:2px;color:var(--sub);text-transform:uppercase;margin-bottom:8px;font-weight:700;}
+  h2{font-size:21px;margin:0 0 18px;line-height:1.5;padding-bottom:12px;border-bottom:1px solid var(--line);}
+  h3{font-size:16px;margin:0 0 10px;color:var(--accent2);}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px;}
+  .grid{display:grid;gap:14px;}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  @media(max-width:700px){.g3,.g2{grid-template-columns:1fr;}}
+
+  .card .ico{font-size:20px;margin-bottom:6px;}
+  .card h4{font-size:15.5px;margin:0 0 8px;}
+  .card p{font-size:13.5px;color:#c7cdd5;margin:0;line-height:1.85;}
+  .card p + p{margin-top:9px;}
+  .card small{display:block;font-size:12px;color:var(--sub);margin-top:9px;line-height:1.8;}
+  .card b{color:var(--text);}
+
+  .eq{
+    background:#12151b;border:1px solid var(--line);border-radius:12px;
+    padding:18px 16px;text-align:center;font-size:16.5px;font-weight:800;
+    line-height:1.9;margin-bottom:14px;font-variant-numeric:tabular-nums;
+  }
+  .eq span{color:var(--accent);}
+  .eq .cap{display:block;font-size:12px;color:var(--sub);font-weight:400;margin-top:9px;line-height:1.85;}
+
+  .quote{
+    background:linear-gradient(135deg, rgba(255,138,61,.10), rgba(79,209,197,.06));
+    border:1px solid rgba(255,138,61,.3);border-radius:14px;padding:20px;
+    font-size:14.5px;line-height:1.95;font-weight:600;
+  }
+  .quote .lbl{display:block;font-size:11px;letter-spacing:2px;color:var(--accent);font-weight:700;margin-bottom:9px;}
+
+  table{width:100%;border-collapse:collapse;font-size:12.8px;background:var(--card);border-radius:12px;overflow:hidden;}
+  th,td{padding:10px 11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--sub);font-weight:600;font-size:12px;}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent);white-space:nowrap;}
+  td.n2{text-align:right;font-variant-numeric:tabular-nums;color:#c7cdd5;white-space:nowrap;}
+  td.dim{color:var(--sub);}
+  tr:last-child td{border-bottom:none;}
+  tr.hi td{background:rgba(74,222,128,.08);}
+
+  ul.list{margin:0;padding-left:18px;font-size:13.5px;color:#c7cdd5;line-height:1.95;}
+  ul.list li{margin-bottom:7px;}
+  ul.list b{color:var(--text);}
+
+  .steps .step{display:flex;gap:12px;padding:11px 0;border-bottom:1px dashed #2a303b;}
+  .steps .step:last-child{border-bottom:none;}
+  .steps .n{
+    flex:0 0 24px;height:24px;border-radius:7px;background:rgba(79,209,197,.14);
+    color:var(--accent2);font-size:12px;font-weight:800;display:flex;
+    align-items:center;justify-content:center;margin-top:3px;
+  }
+  .steps .b{font-size:13.5px;color:#c7cdd5;line-height:1.85;}
+  .steps .b b{color:var(--text);}
+  .steps .calc{
+    display:block;margin-top:5px;background:#12151b;border:1px solid var(--line);
+    border-radius:8px;padding:8px 11px;font-size:12.5px;color:var(--accent2);
+    font-variant-numeric:tabular-nums;
+  }
+
+  .warn{background:#12151b;border:1px solid rgba(248,113,113,.3);border-radius:12px;padding:15px;}
+  .warn .h{font-size:14px;font-weight:700;color:var(--bad);margin-bottom:7px;}
+  .warn p{font-size:13px;color:#c7cdd5;margin:0;line-height:1.85;}
+
+  .ok{background:#12151b;border:1px solid rgba(74,222,128,.3);border-radius:12px;padding:15px;}
+  .ok .h{font-size:14px;font-weight:700;color:var(--good);margin-bottom:7px;}
+  .ok p{font-size:13px;color:#c7cdd5;margin:0;line-height:1.85;}
+
+  .link{
+    background:linear-gradient(135deg, rgba(167,139,250,.10), transparent);
+    border:1px solid rgba(167,139,250,.3);border-radius:12px;padding:15px;margin-top:14px;
+  }
+  .link .h{font-size:13.5px;font-weight:700;color:var(--purple);margin-bottom:7px;}
+  .link p{font-size:13px;color:#c7cdd5;margin:0;line-height:1.85;}
+
+  /* 階梯 */
+  .rung{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:11px;position:relative;overflow:hidden;}
+  .rung::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;}
+  .rung.r1::before{background:var(--accent2);}
+  .rung.r2::before{background:var(--accent);}
+  .rung.r3::before{background:var(--gold);}
+  .rung .rh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:7px;}
+  .rung .rt{font-size:15.5px;font-weight:800;}
+  .rung.r1 .rt{color:var(--accent2);}
+  .rung.r2 .rt{color:var(--accent);}
+  .rung.r3 .rt{color:var(--gold);}
+  .rung .rn{font-size:13px;color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .rung p{font-size:13px;color:#c7cdd5;margin:0;line-height:1.85;}
+
+  /* PDCA */
+  .pdca{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+  @media(max-width:700px){.pdca{grid-template-columns:repeat(2,1fr);}}
+  .pd{background:#12151b;border:1px solid var(--line);border-radius:12px;padding:15px 12px;}
+  .pd .l{font-size:19px;font-weight:800;color:var(--accent2);letter-spacing:1px;}
+  .pd .t{font-size:13.5px;font-weight:700;margin:5px 0 6px;}
+  .pd p{font-size:12.5px;color:#c7cdd5;margin:0;line-height:1.8;}
+
+  /* 配比 */
+  .mixbar{height:11px;background:#12151b;border-radius:999px;overflow:hidden;border:1px solid var(--line);display:flex;margin-top:6px;}
+  .mixbar .lo{background:#64748b;}
+  .mixbar .hi{background:linear-gradient(90deg,var(--accent),#ffb37d);}
+
+  .fix{
+    background:linear-gradient(135deg, rgba(251,191,36,.10), transparent);
+    border:1px solid rgba(251,191,36,.35);border-radius:12px;padding:15px;margin-top:14px;
+  }
+  .fix .h{font-size:13.5px;font-weight:700;color:var(--gold);margin-bottom:7px;}
+  .fix p{font-size:12.5px;color:#c7cdd5;margin:0;line-height:1.85;}
+  .fix ul{margin:7px 0 0;padding-left:18px;font-size:12.5px;color:#c7cdd5;line-height:1.9;}
+
+  .bottomline{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 18px;}
+  .bl-item{display:flex;gap:13px;padding:12px 0;border-bottom:1px solid var(--line);}
+  .bl-item:last-child{border-bottom:none;}
+  .bl-item .n{
+    flex:0 0 26px;height:26px;border-radius:8px;background:rgba(255,138,61,.14);
+    color:var(--accent);font-size:12.5px;font-weight:800;display:flex;
+    align-items:center;justify-content:center;margin-top:2px;
+  }
+  .bl-item .t{font-size:14.5px;font-weight:700;margin-bottom:4px;}
+  .bl-item .d{font-size:13px;color:#c7cdd5;line-height:1.85;}
+
+  .disclaimer{
+    margin-top:26px;padding:13px 15px;background:#12151b;border:1px solid rgba(248,113,113,.28);
+    border-radius:10px;font-size:12px;color:var(--sub);line-height:1.9;
+  }
+  footer{margin-top:20px;text-align:center;color:#5a606b;font-size:11.5px;line-height:2;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="tag">課後複習一頁式 · 佳儀</span>
+    <h1>不要跟老闆講「120 條」<br>要講「<em>每人每天兩台車</em>」</h1>
+    <p class="sub">損益兩平點 × 皺眉頭測試 × PDCA 預算循環 × 銷售組合<br>用一台拆胎機，把財務數字翻譯成現場語言</p>
+    <div class="chips">
+      <span class="chip">2026.09.09</span>
+      <span class="chip hl">單位經濟學</span>
+      <span class="chip hl">皺眉頭測試</span>
+      <span class="chip">PDCA</span>
+      <span class="chip">可控 vs 不可控</span>
+      <span class="chip">Product Mix</span>
+      <span class="chip">Rock 老師</span>
+    </div>
+
+    <nav class="nav">
+      <a href="#p1"><b>Part 1</b><span>財務梗與拆解</span></a>
+      <a href="#p2"><b>Part 2</b><span>財富階梯</span></a>
+      <a href="#p3"><b>Part 3</b><span>損益兩平點</span></a>
+      <a href="#p4"><b>Part 4</b><span>PDCA 預算</span></a>
+      <a href="#p5"><b>Part 5</b><span>銷售組合</span></a>
+    </nav>
+  </header>
+
+  <!-- ============ Part 1 ============ -->
+  <section id="p1">
+    <div class="sec-label">Part 1 · 前情提要</div>
+    <h2>🎭 什麼是「財務梗」？</h2>
+
+    <div class="quote">
+      <span class="lbl">這堂課的起手式</span>
+      AI 時代，你不需要自己瞎猜——<b>重點是看懂別人怎麼拆解</b>。<br>
+      一聽到專有名詞或數字調整就能<b style="color:var(--accent2);">會心一笑</b>，這就是「財務梗」。
+    </div>
+
+    <p style="font-size:13.5px;color:#c7cdd5;margin:16px 0;">
+      不論站在公司內部財務人員、還是外部證券分析師的角度，<b>把財務數字「拆解」開來</b>都是必備技巧。最核心的一條原則是：<b>區分常態性與一次性／不可控項目</b>——排除匯率波動、一次性損益或非現金項目，才看得出真實營運能力。
+    </p>
+
+    <div class="grid g3">
+      <div class="card">
+        <div class="ico">👟</div>
+        <h4>On Running</h4>
+        <p>表面上淨利成長 <b>3.56 倍</b>，看起來很驚人。</p>
+        <p>但拆開來看，是因為<b>前一年度有一筆巨大的匯兌損失</b>造成低基期。排除這個一次性影響後，<b>實際常態成長約 26%</b>——這才是符合經營現況的數字。</p>
+      </div>
+      <div class="card">
+        <div class="ico">🔍</div>
+        <h4>Google（Alphabet）</h4>
+        <p>業外持有的<b>權益投資未實現損益太高</b>，高到甚至超越本業獲利。</p>
+        <p>分析時必須把業外損益排掉，<b>才看得清本業到底賺多少</b>。</p>
+      </div>
+      <div class="card">
+        <div class="ico">⚡</div>
+        <h4>NVIDIA</h4>
+        <p>黃仁勳很霸氣——<b>別人需要扣除的費用他不用扣，甚至還加回來</b>。</p>
+        <p>近期購買聯發科公司債，等於<b>注資給供應鏈與合作夥伴</b>，但前提是<b>綁定生態系</b>：夥伴必須使用 NVIDIA 晶片並租用其網路設備。這是典型的商業戰略綁定。</p>
+      </div>
+    </div>
+
+    <div class="link">
+      <div class="h">💡 關於「連結新聞與觀念」這件事</div>
+      <p>看到這類新聞開始<b>有反應、能理解背後的邏輯</b>，比答案對不對更重要。而且有個附帶效果：<b>當你開始點擊這些新聞，演算法就會持續推播相關文章</b>，這些知識會自然變成甩不掉的養分。</p>
+    </div>
+  </section>
+
+  <!-- ============ Part 2 ============ -->
+  <section id="p2">
+    <div class="sec-label">Part 2 · 書籍分享</div>
+    <h2>🪜 《財富階梯》：不同階段，該做完全不同的事</h2>
+
+    <p style="font-size:13.5px;color:#c7cdd5;margin:0 0 16px;">
+      Nick Maggiulli 的新書（《持續買進》同一作者）把<b>個人淨資產（總資產 − 總負債）</b>劃分成不同的「自由階梯」。台幣金額以約 1:30 換算。
+    </p>
+
+    <div class="rung r1">
+      <div class="rh">
+        <div class="rt">🍽 餐館自由</div>
+        <div class="rn">NT$300 萬 – 3,000 萬<br><span style="font-size:11px;color:var(--sub);font-weight:400;">（$10 萬 – $100 萬美元）</span></div>
+      </div>
+      <p>去一般餐廳用餐時，<b>基本上不太需要思考價格</b>。</p>
+    </div>
+
+    <div class="rung r2">
+      <div class="rh">
+        <div class="rt">✈️ 旅遊自由</div>
+        <div class="rn">NT$3,000 萬 – 3 億<br><span style="font-size:11px;color:var(--sub);font-weight:400;">（$100 萬 – $1,000 萬美元）</span></div>
+      </div>
+      <p>可以<b>自由選擇想去的旅遊地點與住宿品質</b>。</p>
+    </div>
+
+    <div class="rung r3">
+      <div class="rh">
+        <div class="rt">🏠 居住自由</div>
+        <div class="rn">NT$3 億以上<br><span style="font-size:11px;color:var(--sub);font-weight:400;">（$1,000 萬美元以上）</span></div>
+      </div>
+      <p>能夠<b>隨心所欲選擇居住的地方與房產</b>。</p>
+    </div>
+
+    <div class="card" style="margin-top:16px;border-left:3px solid var(--accent2);">
+      <h3>為什麼理財專家的建議常常互相矛盾？</h3>
+      <p>有人叫你持續買進 ETF、有人（如納瓦爾）倡導創業與投資，讓人懷疑是不是倖存者偏差。<b>這本書的貢獻是做了「分層」</b>——不同階梯本來就該用不同策略：</p>
+      <table style="margin-top:12px;">
+        <tr><th style="width:32%;">你現在的位置</th><th>核心策略</th></tr>
+        <tr>
+          <td><b style="color:var(--accent2);">餐館自由 → 旅遊自由</b></td>
+          <td><b>專注本業、提升薪水</b>，並把資金持續投入大盤指數或資產。這個階段鑽研複雜操作的效益，遠不如把薪水拉高。</td>
+        </tr>
+        <tr>
+          <td><b style="color:var(--gold);">要跨到居住自由</b><br><span style="font-size:11px;color:var(--sub);">NT$3 億以上</span></td>
+          <td>單靠本業薪水（即便年薪 300–400 萬）與常態投資，<b>等累積到 3 億時通常已經五、六十歲</b>。要實現跨階層的跳躍，<b>必須搭配創業或承擔資本槓桿</b>。</td>
+        </tr>
+      </table>
+      <small>📌 補充：《持續買進》非常強調 Data-driven。例如買房的前提是<b>預計在該處居住 10 年以上</b>，且要評估<b>資金鎖在房產的機會成本</b>。</small>
+    </div>
+  </section>
+
+  <!-- ============ Part 3 ============ -->
+  <section id="p3">
+    <div class="sec-label">Part 3 · 本日主軸</div>
+    <h2>🔧 一台拆胎機：從單位經濟學到「皺眉頭測試」</h2>
+
+    <div class="card">
+      <h3>情境設定</h3>
+      <p>你是一家機車行老闆，打算買一台生財器具——<b>拆胎機</b>。你最關心的問題只有一個：<b style="color:var(--accent);">這台機器投下去，到底什麼時候可以回收？什麼時候開始賺錢？</b></p>
+      <table style="margin-top:12px;">
+        <tr><th>參數</th><th class="num">金額</th></tr>
+        <tr><td>拆胎機設備成本</td><td class="num">$60,000</td></tr>
+        <tr><td>單條輪胎零售價</td><td class="num">$1,500</td></tr>
+        <tr><td>直接材料成本（進貨價）</td><td class="num">− $800</td></tr>
+        <tr><td>技師抽成／工資成本</td><td class="num">− $200</td></tr>
+      </table>
+    </div>
+
+    <div class="eq">
+      單條輪胎邊際貢獻　＝　1,500 − 800 − 200　＝　<span>$500</span>
+      <span class="cap">邊際貢獻<b>只考慮因賣出該單位而產生的變動成本</b>，不含店面房租、水電等固定費用<br>
+      ⚠️ 注意：<b>技師抽成也是變動成本</b>，漏扣就會算成 700</span>
+    </div>
+
+    <h3 style="margin-top:22px;">第一步：保本量，以及把它翻譯成現場語言</h3>
+    <div class="card">
+      <div class="steps">
+        <div class="step"><div class="n">1</div><div class="b"><b>單純回收設備成本</b><span class="calc">$60,000 ÷ $500 ＝ 120 條輪胎</span></div></div>
+        <div class="step"><div class="n">2</div><div class="b"><b>換算成每日目標</b>（假設一個月營業 30 天）<span class="calc">120 條 ÷ 30 天 ＝ 每日 4 條</span></div></div>
+        <div class="step"><div class="n">3</div><div class="b"><b>再翻譯一次成現場聽得懂的話</b><span class="calc">店裡有 2 位技師 → 每人每天換 2 條<br>一台機車有兩個輪胎 → <b>每人每天只要處理一台車</b></span></div></div>
+      </div>
+      <small style="color:var(--accent2);">🔑 <b>這一步才是重點。</b>「120 條」是抽象的，老闆聽不出感覺；<b>「每人每天一台車」老闆一秒就知道做不做得到</b>。財務人員的價值，有一半在這個翻譯動作上。</small>
+    </div>
+
+    <h3 style="margin-top:22px;">第二步：加上目標利潤，做「皺眉頭測試」</h3>
+    <p style="font-size:13.5px;color:#c7cdd5;margin:0 0 12px;">老闆買機器絕不只是為了保本，而是為了賺錢。但目標訂多高才對？<b>看他的表情</b>。</p>
+
+    <table>
+      <tr><th>情境</th><th class="num">需要總毛利</th><th class="num">月銷量</th><th class="num">每日</th><th style="width:30%;">現場反應</th></tr>
+      <tr>
+        <td><b>A｜目標月利潤 $100,000</b></td>
+        <td class="num">$160,000</td><td class="num">320 條</td><td class="num">約 11 條</td>
+        <td style="color:var(--bad);">😖 <b>直接皺眉頭</b>——超越現有客流量與產能負荷</td>
+      </tr>
+      <tr class="hi">
+        <td><b>B｜目標月利潤 $75,000</b></td>
+        <td class="num">$135,000</td><td class="num">270 條</td><td class="num">9 條</td>
+        <td style="color:var(--good);">🙂 <b>眉頭鬆開</b>——每位技師每日約 4.5 條，有挑戰但做得到</td>
+      </tr>
+    </table>
+
+    <div class="ok" style="margin-top:14px;">
+      <div class="h">✅ 什麼是「甜蜜點（Sweet Spot）」</div>
+      <p>不是財務算出來的最佳解，而是<b>「經營者自己點頭、而且眉頭不再皺」的那個數字</b>。<br>
+      太高 → 沒人相信，也沒人會去追；太低 → 沒有拉動力。<b>甜蜜點是唯一會被真正執行的目標。</b></p>
+    </div>
+
+    <h3 style="margin-top:22px;">第三步：把店面固定成本也算進來</h3>
+    <div class="card">
+      <p>若店面固定成本（房租、水電、行政薪資等）為 <b>$80,000／月</b>，加上 $100,000 的利潤目標：</p>
+      <div class="steps">
+        <div class="step"><div class="n">＝</div><div class="b"><span class="calc">($80,000 ＋ $100,000) ÷ $500 ＝ 360 條／月 → 每日 12 條</span></div></div>
+      </div>
+      <p style="margin-top:10px;"><b>但如果輪胎每日的物理極限就是 9 條呢？</b></p>
+      <p style="color:var(--accent);font-weight:700;">中間差額的 3 條利潤缺口，就必須靠其他高毛利項目補足——機油更換、零件升級、引擎維修。</p>
+      <small>📌 這就是「產能有天花板」時的標準解法：<b>不是硬衝數量，而是改變產品組合</b>。這條線索會延續到 Part 5。</small>
+    </div>
+
+    <h3 style="margin-top:22px;">第四步：成本上漲時，要吸收還是轉嫁？</h3>
+    <p style="font-size:13.5px;color:#c7cdd5;margin:0 0 12px;">假設因關稅或原料上漲，<b>輪胎進貨成本增加 $100（800 → 900）</b>。同樣以月利潤 $75,000 為目標：</p>
+
+    <table>
+      <tr><th>策略</th><th class="num">售價</th><th class="num">邊際貢獻</th><th class="num">達標所需月銷量</th><th class="num">每日</th></tr>
+      <tr><td class="dim">原始狀態（成本未漲）</td><td class="num">$1,500</td><td class="num">$500</td><td class="num">270 條</td><td class="num">9 條</td></tr>
+      <tr><td><b>① 吸收一半</b><br><span style="font-size:11px;color:var(--sub);">售價只漲 $50</span></td><td class="num">$1,550</td><td class="num" style="color:var(--bad);">$450</td><td class="num">300 條</td><td class="num" style="color:var(--bad);">10 條</td></tr>
+      <tr><td><b>② 完全轉嫁</b><br><span style="font-size:11px;color:var(--sub);">售價漲足 $100</span></td><td class="num">$1,600</td><td class="num">$500</td><td class="num">270 條</td><td class="num">9 條</td></tr>
+      <tr class="hi"><td><b>③ 轉嫁並微幅多漲</b></td><td class="num">$1,650</td><td class="num" style="color:var(--good);">$550</td><td class="num">245 條</td><td class="num" style="color:var(--good);">約 8 條</td></tr>
+    </table>
+
+    <div class="grid g2" style="margin-top:14px;">
+      <div class="warn">
+        <div class="h">😖 吸收一半的代價</div>
+        <p>看似替客人著想，實際上<b>每日要多賣 1 條才能回到原本的利潤</b>。而「每日多賣 1 條」對已經滿載的現場而言，可能根本做不到。</p>
+      </div>
+      <div class="ok">
+        <div class="h">🙂 微幅多漲的效果</div>
+        <p>售價漲到 $1,650，若維持原本<b>每日 9 條（270 條／月）</b>的節奏：<br>
+        <span style="font-variant-numeric:tabular-nums;">270 × $550 − $60,000 ＝ <b style="color:var(--good);">$88,500</b></span><br>
+        月利潤從 $75,000 一舉拉到<b>近 9 萬</b>。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Part 4 ============ -->
+  <section id="p4">
+    <div class="sec-label">Part 4 · 管理循環</div>
+    <h2>🔄 剛才那個「9 條」，其實就是一份預算</h2>
+
+    <div class="warn">
+      <div class="h">⚠ 中小企業預算編制的痛點</div>
+      <p>大多數中小企業<b>平常根本不做預算</b>，頂多有一份遙遠的年度計畫。<br>
+      做預算最怕<b>「喊口號」</b>——若目標與現場完全脫節，<b>大家根本不會去追蹤</b>。</p>
+    </div>
+
+    <div class="quote" style="margin-top:14px;">
+      <span class="lbl">這堂課最重要的一句</span>
+      剛才透過「皺眉頭測試」，<b>經營者自己認同「每日 9 條」是合理的目標</b>——<br>
+      恭喜，<b style="color:var(--accent2);">你已經幫公司編出了第一份真正能落地的預算（Plan）。</b><br><br>
+      預算不是財務部門算出來丟給現場的，<b>是現場自己點頭的那個數字</b>。
+    </div>
+
+    <h3 style="margin-top:22px;">PDCA 在財務管理上的應用</h3>
+    <div class="pdca">
+      <div class="pd">
+        <div class="l">P</div>
+        <div class="t">Plan 計畫</div>
+        <p>制定貼近現實的預算：<b>每日 9 條，每人約 4–5 條</b>。</p>
+      </div>
+      <div class="pd">
+        <div class="l">D</div>
+        <div class="t">Do 執行</div>
+        <p>現場執行與任務分派，<b>分配給 2 位技師</b>。</p>
+      </div>
+      <div class="pd">
+        <div class="l">C</div>
+        <div class="t">Check 檢核</div>
+        <p>財務人員<b>定期檢核實績與預算的差異</b>。</p>
+      </div>
+      <div class="pd">
+        <div class="l">A</div>
+        <div class="t">Act 行動</div>
+        <p>區分<b>可控／不可控</b>，只針對可控因素採取改善。</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:22px;">Act 的關鍵：先分清楚可控與不可控</h3>
+    <div class="grid g2">
+      <div class="card" style="border-left:3px solid var(--sub);">
+        <h4>🌧 不可控因素 → 應予以排除</h4>
+        <p><b>案例：</b>當月 30 天中有 10 天大下雨，騎車出門的人大幅減少，爆胎維修以外的常規保養停滯。</p>
+        <p><b style="color:var(--accent2);">財務判定：</b>若 30 天有 10 天下雨，<b>實際業績達到預算的 2/3（67%），心態上就應判定為「達標」</b>。</p>
+        <small style="color:var(--accent);">🚫 <b>不能因為不可控的天氣去懲罰團隊。</b>這跟 Part 1 分析財報時排除匯率、一次性損益，是完全相同的邏輯——只是換了個場景。</small>
+      </div>
+      <div class="card" style="border-left:3px solid var(--good);">
+        <h4>🔧 可控因素 → 改善的施力點</h4>
+        <ul class="list">
+          <li><b>價格結構</b>是否合理？</li>
+          <li><b>店面選址與宣傳</b>是否足夠？</li>
+          <li><b>技師服務態度與推銷技巧</b>是否需要改進？</li>
+        </ul>
+        <small style="color:var(--good);">✅ <b>只有在可控因素上檢討與調整，改善行動（Act）才有意義。</b>對著天氣開檢討會，只會消耗團隊的信任。</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Part 5 ============ -->
+  <section id="p5">
+    <div class="sec-label">Part 5 · 銷售組合</div>
+    <h2>📦 同樣的利潤目標，三種配比，三種命運</h2>
+
+    <p style="font-size:13.5px;color:#c7cdd5;margin:0 0 14px;">
+      現實中不會只賣一種輪胎。假設：<b>高價胎單條邊際貢獻 $1,000</b>、<b>平價胎單條 $300</b>，目標一樣是<b>總毛利 $160,000</b>（設備 $60,000 ＋ 利潤 $100,000）。
+    </p>
+
+    <div class="eq">
+      加權平均邊際貢獻　＝　（平價比例 × 300）＋（高價比例 × 1,000）
+      <span class="cap">月銷量 ＝ 目標總毛利 ÷ 加權平均邊際貢獻<br>
+      <b>配比一改，整張營運圖就全變了</b></span>
+    </div>
+
+    <div class="card">
+      <div class="rh" style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;">
+        <h4 style="margin:0;">配比 A｜90% 平價 ／ 10% 高價</h4>
+        <span style="font-size:13px;color:var(--bad);font-weight:700;">加權邊際貢獻 $370</span>
+      </div>
+      <div class="mixbar"><div class="lo" style="width:90%;"></div><div class="hi" style="width:10%;"></div></div>
+      <p style="margin-top:10px;">需賣 <b style="color:var(--bad);">433 條／月 → 每日 14 條</b>。</p>
+      <p><b style="color:var(--bad);">經營瓶頸：</b>這會直接撞上機車行的<b>拆胎機產能</b>與<b>技師工時</b>的物理牆。</p>
+      <small>就像記憶體大廠因前幾年未擴充產能，導致現在 AI 需求爆發時<b>有訂單卻做不出來</b>——<b>產能天花板是真實存在的牆，不是努力就能穿過去</b>。</small>
+    </div>
+
+    <div class="card">
+      <div class="rh" style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;">
+        <h4 style="margin:0;">配比 B｜20% 平價 ／ 80% 高價</h4>
+        <span style="font-size:13px;color:var(--gold);font-weight:700;">加權邊際貢獻 $860</span>
+      </div>
+      <div class="mixbar"><div class="lo" style="width:20%;"></div><div class="hi" style="width:80%;"></div></div>
+      <p style="margin-top:10px;">總銷量大幅降至 <b>187 條／月 → 每日約 6 條</b>。</p>
+      <p><b style="color:var(--gold);">經營瓶頸：</b>總量雖少，但高價胎<b>每月需賣 150 條（每日 5 條）</b>——<b>現場可能根本沒有那麼多高消費力的客群</b>。</p>
+      <small>數字上最漂亮的配比，不代表市場接得住。<b>需求端也是一道牆。</b></small>
+    </div>
+
+    <div class="card" style="border:1px solid rgba(74,222,128,.4);">
+      <div class="rh" style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;">
+        <h4 style="margin:0;color:var(--good);">配比 C｜50% 平價 ／ 50% 高價　⭐ 黃金配比</h4>
+        <span style="font-size:13px;color:var(--good);font-weight:700;">加權邊際貢獻 $650</span>
+      </div>
+      <div class="mixbar"><div class="lo" style="width:50%;"></div><div class="hi" style="width:50%;"></div></div>
+      <p style="margin-top:10px;">總銷量約 <b style="color:var(--good);">246 條／月 → 每日約 8 條</b>（4 條高價 ＋ 4 條平價）。</p>
+      <p><b style="color:var(--good);">現場分派：</b>2 位技師每人每天只要處理<b>「2 條高價胎 ＋ 2 條平價胎」</b>——<b>任務明確、易於激勵</b>。</p>
+      <small style="color:var(--good);">✅ 又回到 Part 3 的那個原則：<b>能不能執行，取決於能不能翻譯成現場聽得懂的一句話。</b></small>
+    </div>
+
+    <h3 style="margin-top:22px;">⚠️ 不做預算，庫存會自己形成惡性循環</h3>
+    <div class="card" style="border-left:3px solid var(--bad);">
+      <p style="font-size:15px;"><b>「資產放久了會變成什麼？」→「會壞掉，資產就變成壞資產了。」</b></p>
+      <div class="steps" style="margin-top:12px;">
+        <div class="step"><div class="n">1</div><div class="b">平時不跟著預算走，叫貨只會<b>「看上個月賣多少，下個月就叫多少」</b></div></div>
+        <div class="step"><div class="n">2</div><div class="b">習慣賣平價胎 → <b>倉庫堆滿平價胎</b></div></div>
+        <div class="step"><div class="n">3</div><div class="b">倉庫堆滿平價胎 → 老闆與技師出於<b>恐懼</b>就拼命推銷平價胎</div></div>
+        <div class="step"><div class="n">4</div><div class="b"><b style="color:var(--bad);">錯失高毛利客戶 → 回到第 1 步，循環加深</b></div></div>
+      </div>
+      <p style="margin-top:12px;"><b style="color:var(--good);">破解方式：</b>透過正確的混合銷售預算，<b>進適量的高價胎與平價胎</b>，並鼓勵技師<b>向有能力的客人介紹高價胎的抓地力與騎乘體驗</b>——讓經營進入健康的疊代。</p>
+    </div>
+  </section>
+
+  <!-- ============ AI 工具 ============ -->
+  <section>
+    <div class="sec-label">Extra · 工具與心法</div>
+    <h2>🤖 這套儀表板，是跟 AI 聊出來的</h2>
+
+    <div class="grid g2">
+      <div class="card">
+        <h4>💻 技術背景</h4>
+        <p>互動式儀表板用 <b>HTML / JavaScript</b> 撰寫，部署在 <b>GitHub Pages</b> 上——畫面美觀、擴充性高。</p>
+        <p><b>這些寫程式與部署的技巧，原本完全不會，全都是跟 AI 討論出來的。</b>關鍵不在會不會寫程式，而在<b>你知不知道自己想要什麼經營效果</b>。</p>
+        <small>在嶺東科技大學演講時，把儀表板投到電子白板上直接用手拉動數值——<b>讓現場每個人都能在自己的裝置上即時互動</b>，比投影片有效太多。</small>
+      </div>
+      <div class="card">
+        <h4>🪙 關於 AI Token 的使用習慣</h4>
+        <p>黃仁勳的說法是：<b>「合格的軟體工程師，每年使用的 AI Token 費用應該要達到自己年薪的三倍。」</b></p>
+        <p><b>實際操作：</b>早上九點開工，用 AI 進行財務資料收集、資產配置風控試算（模擬大漲大跌情境），<b>經常在中午前就把當日用量用到 90% 以上</b>。</p>
+        <small>當單一工具遇到瓶頸時，會<b>搭配 ChatGPT 與 Claude 互相對照解法</b>——例如讓一邊生成提示詞，再交給另一邊執行。</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 收斂 ============ -->
+  <section>
+    <div class="sec-label">Bottom Line · 帶走這五件事</div>
+    <h2>📌 這堂課的五個核心</h2>
+
+    <div class="bottomline">
+      <div class="bl-item">
+        <div class="n">①</div>
+        <div>
+          <div class="t">邊際貢獻只扣「因這一單位而發生」的成本</div>
+          <div class="d">1,500 − 800 − 200 ＝ 500。<b>技師抽成也是變動成本</b>，漏扣就算成 700，後面的保本量與目標銷量會全部偏掉。房租水電則不進來——它們不因多賣一條而改變。</div>
+        </div>
+      </div>
+      <div class="bl-item">
+        <div class="n">②</div>
+        <div>
+          <div class="t">算完數字才做了一半，翻譯才是另一半</div>
+          <div class="d">「120 條」老闆沒感覺，<b>「每人每天一台車」</b>他一秒判斷得出來。財務人員真正的價值，在於把抽象數字換成<b>現場能驗收的動作</b>。</div>
+        </div>
+      </div>
+      <div class="bl-item">
+        <div class="n">③</div>
+        <div>
+          <div class="t">預算不是算出來的，是「皺眉頭測試」測出來的</div>
+          <div class="d">目標訂太高沒人追、訂太低沒拉力。<b>經營者自己點頭、眉頭鬆開的那個數字，才是唯一會被執行的預算。</b>找到它，你就完成了 PDCA 的 P。</div>
+        </div>
+      </div>
+      <div class="bl-item">
+        <div class="n">④</div>
+        <div>
+          <div class="t">檢討前先分可控與不可控</div>
+          <div class="d">30 天有 10 天下雨，達成 67% 就該算<b>達標</b>。這跟分析財報時排除匯率與一次性損益<b>是同一套邏輯</b>——對著不可控因素開檢討會，只會消耗團隊信任。</div>
+        </div>
+      </div>
+      <div class="bl-item">
+        <div class="n">⑤</div>
+        <div>
+          <div class="t">產能有天花板時，改的是組合而不是數量</div>
+          <div class="d">90/10 撞產能牆、20/80 撞需求牆，<b>50/50 才落在兩道牆之間</b>。而且不做組合預算，庫存會自己形成「堆什麼就推什麼」的惡性循環。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quote" style="margin-top:18px;">
+      <span class="lbl">下課前的那句話</span>
+      財務分析真正的價值，<b>不是給老闆看一堆冰冷的數字表格</b>，<br>
+      而是進行一場 <b style="color:var(--accent2);">有溫度的商業對話</b>。
+    </div>
+  </section>
+
+  <div class="disclaimer">
+    ⚠ <b>免責聲明：</b>本頁為課後複習教材整理，文中個案數字（拆胎機、輪胎售價與成本、目標利潤等）皆為<b>教學用假設情境</b>，非真實企業財務資料。個股與產業案例僅供財報判讀說明之用，<b>非投資建議</b>。《財富階梯》之階層門檻為原著以美元計價、以美國家庭為樣本之統計，台幣金額係以約 1:30 換算之參考值；台灣讀者套用時須考慮房價所得比、稅制與社會保險制度之差異。
+  </div>
+
+  <footer>
+    Rock 會計家教 · 蕭啟漢<br>
+    佳儀 · 課後複習一頁式 · 2026.09.09
+  </footer>
+
+</div>
+</body>
+</html>
